@@ -1,0 +1,37 @@
+# Handing the Green Zone MO Guide over to Claude Code
+
+Version 7, 7 November 2026.
+
+Everything for the guide is in this folder: the source, the built app, its media, the poster, the explainer video and the notes. `CLAUDE.md` gives Claude Code your rules, how the app is built, how to test it and how to publish it. Claude Code reads that file by itself each time you start it in this folder, so you do not need to explain the project again.
+
+## Start Claude Code here
+
+1. In File Explorer, right-click the `Green Zone` folder and choose **Open in Terminal** (or run `cd "C:\Users\user\Green Zone"`).
+2. Run `claude`.
+3. The build needs Node.js 18 or later (`node -v` shows the version).
+4. Optional but useful: run `git init`, then ask Claude Code to make a first commit. You can then see and undo each change it makes.
+
+## First prompt to paste
+
+```
+Read CLAUDE.md and HANDOVER.md. In src, run npm install, npx playwright install chromium, then npm run all. Tell me in a few lines whether everything passed, what the app holds, and what is still open. Do not publish or change anything outside this folder.
+```
+
+## Prompts for the usual jobs
+
+- **Add a new memo:** "Add the memo in `<path to the PDF>` as a department note on `<pathway or rule>`, with its source and date. Run npm run all and show me the phone and desktop screenshots of that page."
+- **Fix a detail:** "On the IV antibiotics step, change `<old text>` to `<new text>`. Run the checks and show me the screenshot."
+- **Publish:** "Publish the current build to the live Green Zone MO Guide link." Claude Code will ask you to confirm first, as `CLAUDE.md` tells it to.
+- **Check a pathway against the ebook:** put the ebook PDF in this folder first, then "Check the dengue pathway against pages `<n>` to `<n>` of the ebook and list any difference. Do not change anything yet."
+
+## Where things stand
+
+- **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9, version 7. It is private until you share it from the page's Share menu. The QR code on poster sheet 1 opens this link, so colleagues can use it only after you share it.
+- **Waiting on you:** your review of version 7.
+- **Still to confirm with the department:** six details, listed at the end of `CLAUDE.md` and on the app's What's new page (EM Watch booking, the KK or GP redirect procedure, the EMACC SOP, four phone numbers, the MERS-CoV case definition and the snakebite guideline).
+- **Not yet read:** MO Drive folders 1 (Administration), 2 (Memo-memo, beyond the memos already used), 4 (Slides) and 6 (Interdepartment referral).
+- **Older pieces:** the poster and the explainer were made before version 7, so they do not show the triage course folder additions (one-way flow, down-triage, IV antibiotics without a bed, the delayed primary team, KK or GP redirect, orthopaedic referral and IPR).
+
+## If you move the folder
+
+Copy the whole `Green Zone` folder. `src/` is enough to rebuild the page, but the offline copy and the published page need the media in `app/` (`img`, `media`, `poster`, `clips`, `audio`).

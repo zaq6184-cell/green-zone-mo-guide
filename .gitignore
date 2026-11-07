@@ -1,0 +1,11 @@
+# Test dependencies and screenshots (src/.gitignore lists these too)
+node_modules/
+src/shots/
+
+# Operating-system files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Personal Claude Code settings
+.claude/settings.local.json

@@ -1,0 +1,11 @@
+# Keep LF line endings in every text file, as the build and the published page use them.
+# This overrides core.autocrlf, so a file Git restores is byte-identical to the one committed.
+* text=auto eol=lf
+
+# Media: never convert line endings or diff as text
+*.png binary
+*.webp binary
+*.jpg binary
+*.mp4 binary
+*.mp3 binary
+*.pdf binary
