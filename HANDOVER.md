@@ -30,6 +30,7 @@ Read CLAUDE.md and HANDOVER.md. In src, run npm install, npx playwright install 
 - **Version 8** (8 Nov 2026): the premium bento redesign, now live at the link above. Preview changes with `npm run serve` in `src`, or the `guide` server in the browser pane. Every later publish still needs your go-ahead.
 - **GitHub:** this folder is also at https://github.com/zaq6184-cell/green-zone-mo-guide, which is public. `git push` puts new commits there for anyone to see, so Claude asks you before every push.
 - **Web app on GitHub Pages:** https://zaq6184-cell.github.io/green-zone-mo-guide/ is the same app, public. It updates by itself when a new build is pushed to `main`.
+- **Moving tiles** (8 Nov 2026, live): glass sculptures made in Flow Studio move on the topic tiles and on Code Blue and Code Stroke, on phones too. Settings, Moving tiles turns them off.
 - **Day and night** (8 Nov 2026, live): a Day/Night switch at the top of the home screen. In night colours the tour plays night versions of both films and the poster page shows night versions of both sheets; the printed sheets keep the day colours. Dark mode's tile shadows now turn black, as DESIGN.md says.
 - **Waiting on you:** your review of version 7.
 - **Still to confirm with the department:** six details, listed at the end of `CLAUDE.md` and on the app's What's new page (EM Watch booking, the KK or GP redirect procedure, the EMACC SOP, four phone numbers, the MERS-CoV case definition and the snakebite guideline).

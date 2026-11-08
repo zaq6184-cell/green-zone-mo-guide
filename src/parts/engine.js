@@ -637,7 +637,7 @@ function zoneMap(anim){
   x.hidden = !s;
   x.innerHTML = s ? `<h3>${zSel + 1}. ${esc(s.title)}</h3><ul>${s.items.slice(0, 4).map(i => `<li>${esc(i)}</li>`).join('')}</ul><div class="links">${[...(s.note ? [[s.note.href, s.note.k]] : []), ...s.links].slice(0, 4).map(([h, t]) => `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}<a class="pill" href="#journey-${zSel + 1}">Watch this stop${svg('chev')}</a></div>` : '';
 }
-/* Tile media (8 Nov 2026): Flow Studio stills of each topic in jewel glass (tiles/<key>.webp) and their 4-second loops
+/* Tile media (8 Nov 2026): Flow Studio stills of each topic in jewel glass (tiles/<key>.webp) and their 7 to 8-second loops
    (tiles/<key>.mp4). A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on
    and motion is not reduced, and it pauses offscreen or when the page is hidden. */
 const TILE_STILLS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke']);

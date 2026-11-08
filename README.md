@@ -76,7 +76,7 @@ The two claude.ai links are private until you share them from the page's Share m
 ## Version history
 
 - **Public web app (8 Nov 2026):** the app on GitHub Pages. The QR code on poster sheet 1 and the app's Copy link now open it instead of the private claude.ai link.
-- **Moving tiles (8 Nov 2026, built, not yet published):** Flow Studio glass sculptures and loops on the topic tiles, Code Blue and Code Stroke, with the Moving tiles setting.
+- **Moving tiles (published 8 Nov 2026):** Flow Studio glass sculptures and loops on the topic tiles, Code Blue and Code Stroke, with the Moving tiles setting.
 - **Day and night (published 8 Nov 2026):** the home Day and Night switch, and night versions of both explainer films and both poster sheets. In dark mode the tile shadows now turn black instead of glowing.
 - **Version 8 (published 8 Nov 2026):** the premium bento redesign, the zone map, whole-pathway maps, visual tools and the first-shift intro, as above.
 - **Version 7 (7 Nov 2026):** the triage course folder documents and the new design, as above.
