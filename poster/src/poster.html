@@ -6,10 +6,16 @@
 <!--
   The two A3 wall-poster sheets of the Green Zone MO Guide, in the version 8 look (DESIGN.md).
   Each sheet is 1123 x 1587 CSS px, A3 portrait at 96 dpi. render.js turns this file into
-  ../sheet1-patient-flow.png, ../sheet2-pathways-referrals.png, ../green-zone-poster-A3.pdf
-  and the app's copies in ../../app/poster/. Edit this file, then run: node render.js
-  Print only, so there is one light theme. Every clinical line comes from the ebook, the
-  department documents named on the sheet, or src/parts (data2.js, data3.js, engine.js).
+  ../sheet1-patient-flow.png, ../sheet2-pathways-referrals.png, ../green-zone-poster-A3.pdf,
+  the night PNGs (the same names ending -night.png) and the app's copies in ../../app/poster/.
+  Edit this file, then run: node render.js
+  Two themes. Day is the printed sheet and the default. Night is the same sheets for screens and
+  the app's dark mode: the class "night" on <html> switches it (or open poster.html#night).
+  Night only redefines tokens, with the app's own dark values (src/parts/head.html), plus a few
+  hairlines; the jewel tiles, the flat outcome fills, the champagne notes and the white QR plate
+  are the same in both themes (DESIGN.md, The Two Theme Rule). Night is never printed.
+  Every clinical line comes from the ebook, the department documents named on the sheet, or
+  src/parts (data2.js, data3.js, engine.js).
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +34,7 @@
   --champ-1:#f2e2bb; --champ-2:#e3ca90;
   --b-admit:#c42a20; --b-observe:#f0ae1c; --b-discharge:#13834c; --b-refer:#5a44c4; --b-advice:#1b5daf;
   --on-emerald:#e6f3ec; --on-obsidian:#dfe9e3;
+  --sapphire-ink:var(--sapphire-1); --plum-ink:var(--plum-1); --halo:rgba(67,221,140,.26);
   --edge:rgba(255,255,255,.14);
   --sh-1:0 1px 2px rgba(15,26,21,.06);
   --sh-2:0 1px 2px rgba(15,26,21,.05),0 18px 34px -20px rgba(15,26,21,.42);
@@ -35,6 +42,26 @@
   --display:"Figtree","Atkinson Hyperlegible Next",system-ui,sans-serif;
   --body:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"Atkinson Hyperlegible Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+/* Night: the app's dark tokens. Jewel stops, the flat outcome fills (--b-*), champagne, gold-ink and the
+   on-jewel inks are not redefined, so they stay the same in both themes. The two jewels used as ink on a
+   surface (sapphire page numbers, plum rule icons) take the light tone of their own hue, as the app's dark
+   text tones do (sapphire: the app's dark advice tone, hue 257 to sapphire's 259; plum: built at oklch
+   .78 / .11 and .26 / .065, the app's text and soft levels). Shadows only darken: --shade turns every
+   tinted shadow black, because a shadow in a tile's own hue would light the dark ground (in the day it
+   is unset, so each shadow keeps its own colour, the fallback where it is used), and --sh-1 is a black
+   hairline where the app's dark value is a faint white ring. */
+:root.night{
+  color-scheme:dark;
+  --bg:#080d0b; --surface:#111a15; --surface-2:#15201a; --surface-3:#1b2821;
+  --ink:#e7f0eb; --ink-2:#c8d6cf; --muted:#94a79d; --line:#1f2c26; --line-2:#2c3c34;
+  --accent:#5fd297; --accent-soft:#12301f; --mint:#5be89d;
+  --sapphire-ink:#8ab7f5; --plum-ink:#da9fe3; --plum-soft:#331938; --halo:rgba(91,232,157,.26);
+  --shade:rgba(0,0,0,.85);
+  --edge:rgba(255,255,255,.1);
+  --sh-1:0 1px 2px rgba(0,0,0,.6);
+  --sh-2:0 18px 36px -18px rgba(0,0,0,.8);
+  background:#1b2821;
 }
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html{background:#d3dad6}
@@ -55,7 +82,7 @@ svg{display:block}
 
 /* ---------- Tiles: the jewel material, as in the app (no pointer light on paper) ---------- */
 .tile{position:relative;isolation:isolate;border-radius:28px;padding:18px 20px;color:#fff;min-width:0;
-  background:linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));box-shadow:0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px var(--t3)}
+  background:linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));box-shadow:0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px var(--shade,var(--t3))}
 .tile::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
   background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.12),transparent 55%),var(--grain);background-size:auto,180px 180px}
 .tile::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px var(--edge)}
@@ -74,14 +101,14 @@ svg{display:block}
 .ic{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:13px}
 .ic svg{width:21px;height:21px}
 .ic.glass{background:rgba(255,255,255,.16);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.26)}
-.ic.jw{background:linear-gradient(150deg,var(--t1),var(--t2));color:#fff;box-shadow:inset 0 0 0 1px var(--edge),0 8px 16px -10px var(--t3)}
+.ic.jw{background:linear-gradient(150deg,var(--t1),var(--t2));color:#fff;box-shadow:inset 0 0 0 1px var(--edge),0 8px 16px -10px var(--shade,var(--t3))}
 .ic.soft{background:var(--accent-soft);color:var(--accent)}
 .ic.k-discharge{background:var(--b-discharge);color:#fff}
 .ic.k-advice{background:var(--b-advice);color:#fff}
 .ic.k-refer{background:var(--b-refer);color:#fff}
-.ic.plum{background:var(--plum-soft);color:var(--plum-1)}
+.ic.plum{background:var(--plum-soft);color:var(--plum-ink)}
 .mark{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:14px;
-  background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 10px 20px -10px var(--emerald-3)}
+  background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 10px 20px -10px var(--shade,var(--emerald-3))}
 .mark svg{width:26px;height:26px}
 
 /* Footer: sources and the reference line */
@@ -117,7 +144,7 @@ svg{display:block}
 .stop{display:grid;place-items:center;width:60px;height:60px;margin-bottom:6px;border-radius:50%;background:var(--emerald-2);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.34)}
 .stop svg{width:28px;height:28px}
 .stop.n{font:700 24px/1 var(--mono)}
-.route .you .stop{background:var(--mint);color:var(--emerald-3);box-shadow:0 0 0 8px rgba(67,221,140,.26)}
+.route .you .stop{background:var(--mint);color:var(--emerald-3);box-shadow:0 0 0 8px var(--halo)}
 .route b{font:800 18px/1.15 var(--display);letter-spacing:-.01em;white-space:nowrap}
 .route li>span:last-child{color:var(--on-emerald);line-height:1.3}
 
@@ -178,7 +205,7 @@ svg{display:block}
 .intro{margin-top:8px;color:var(--muted)}
 .plist{list-style:none;margin-top:10px;columns:3;column-gap:26px}
 .plist li{display:flex;gap:10px;line-height:1.3;padding-bottom:3px;break-inside:avoid}
-.plist .pp{flex:0 0 52px;font:700 16px/1.3 var(--mono);color:var(--sapphire-1)}
+.plist .pp{flex:0 0 52px;font:700 16px/1.3 var(--mono);color:var(--sapphire-ink)}
 
 .emacc{padding:16px 0 2px}
 .emacc .tile-h{padding:0 20px;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
@@ -211,7 +238,7 @@ svg{display:block}
 .off::before{content:"";position:absolute;left:-21px;top:50%;width:13px;height:3px;margin-top:-1.5px;background:var(--b-admit)}
 .off::after{content:"";position:absolute;left:-9px;top:50%;margin-top:-6px;border-left:8px solid var(--b-admit);border-top:6px solid transparent;border-bottom:6px solid transparent}
 .off b{font:800 16px/1.3 var(--body)}
-.node.dc{background:var(--b-discharge);color:#fff;box-shadow:0 14px 26px -20px var(--b-discharge)}
+.node.dc{background:var(--b-discharge);color:#fff;box-shadow:0 14px 26px -20px var(--shade,var(--b-discharge))}
 .node.dc ul{color:#fff}
 .node.dc .go{background:#fff;color:var(--b-discharge)}
 .asthma .src{margin-top:12px}
@@ -219,7 +246,17 @@ svg{display:block}
 .refer{padding:16px 20px 18px}
 .rlist{margin-top:10px;padding-left:19px;display:grid;gap:5px;color:var(--ink-2)}
 .rlist b{color:var(--ink)}
+
+/* ================= Night: hairlines ================= */
+/* The dark --line is drawn for a phone held close; across a whole sheet it goes muddy. At night the table
+   rules, the number dividers and the asthma cards' rings use --line-2, and the table head steps up a surface. */
+:root.night .emacc th{background:var(--surface-3)}
+:root.night .emacc th,:root.night .emacc td,:root.night .nstrip li{border-color:var(--line-2)}
+:root.night .node:not(.dc){box-shadow:var(--sh-1),inset 0 0 0 1px var(--line-2)}
 </style>
+<script>/* Night preview in a browser: poster.html#night. render.js sets the class itself. */
+function setTheme() { document.documentElement.classList.toggle('night', location.hash === '#night'); }
+setTheme(); addEventListener('hashchange', setTheme);</script>
 </head>
 <body>
 

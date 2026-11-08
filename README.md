@@ -4,7 +4,7 @@ A guide for medical officers working in the Green Zone (MTS levels 4–5), Emerg
 
 ## Links
 
-- **Interactive app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 8 replaced version 7 at the same link on 8 Nov 2026).
+- **Interactive app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 8 replaced version 7 at the same link on 8 Nov 2026, and day and night was added the same day).
 - **Poster design canvas** (editable): https://claude.ai/artifact/5QaoLt2gwXut47WzhtprES
 
 Both links are private until you share them from the page's Share menu. The QR code on poster sheet 1 opens the app link, so colleagues can open it only after the app is shared with them.
@@ -21,8 +21,8 @@ Both links are private until you share them from the page's Share menu. The QR c
 | `app/clips/` | Six 8-second Flow Studio clips (1280×720): the hero loop and one for each stop of the patient journey. They are generated artwork with no text, logos or real people. |
 | `app/audio/` | The narration for each journey stop, cut from the explainer's narration. |
 | `flow-video/` | On the laptop only: the same six clips as they came from Flow Studio, at full quality. |
-| `video/` | The narrated explainer at 1080p and 720p in English, and in Bahasa Melayu (`-ms-`), `REVIEW.md` with how both were made and checked, and the HyperFrames projects `explainer/` (English, and the shared generator) and `explainer-ms/` (Malay). |
-| `poster/` | `green-zone-poster-A3.pdf` (two A3 pages, ready to print), a PNG of each sheet, and `src/` (`poster.html` and `render.js`, which rebuilds all seven poster files and refuses to write if anything overflows or the QR code differs). |
+| `video/` | The narrated explainer at 1080p and 720p in English, and in Bahasa Melayu (`-ms-`), each also in night colours (`-night-`), `REVIEW.md` with how they were made and checked, and the HyperFrames projects `explainer/` (English, and the shared generator), `explainer-ms/` (Malay), and `explainer-night/` and `explainer-ms-night/` (night). |
+| `poster/` | `green-zone-poster-A3.pdf` (two A3 pages, ready to print), a PNG of each sheet, a night PNG of each (for screens; the printed sheets stay in day colours), and `src/` (`poster.html` and `render.js`, which builds both themes, refuses to write if anything overflows or the QR code differs, and rewrites only the files that changed). |
 | `illustrations/` | The six Flow Studio illustrations (1376×768 PNG). |
 | `DRIVE-RUN-THROUGH.md` | Every subfolder of the MO Drive's 3. CLINICAL folder and the triage course folder documents: what went into the guide, what did not, and why. |
 | `RESEARCH.md` | What the research on point-of-care lookup and teaching video says, and how the app applies it. |
@@ -39,13 +39,14 @@ Both links are private until you share them from the page's Share menu. The QR c
 - **Quick sums:** shock index, pulse pressure and heart rate against the dengue discharge criteria, each drawn on a scale with those thresholds; child doses by weight (prednisolone, salbutamol MDI puffs, dexamethasone and nebulised adrenaline for croup, ORS); BMI on a scale with the 27.5 threshold, ideal and adjusted body weight. Nothing you type is saved.
 - **Numbers to know:** 14 extensions and lines in four groups, each with a copy button and a link to the rule it belongs to.
 - **Links you can send:** every pathway and every step has its own address, for example `#renal-colic`, `#gz-rules--ivab` or `#calc-kids`.
-- **Settings:** light, dark or the device's theme; standard or large text; journey clips on or off; clear your saved list and history.
+- **Day and night:** a switch at the top of the home screen turns the night colours on and off. In night colours the tour plays a night version of the film and the poster page shows night versions of the sheets.
+- **Settings:** light, dark or the device's theme (the same setting as the Day and Night switch; Auto follows the device again); standard or large text; journey clips on or off; clear your saved list and history.
 - **On a phone:** a floating tab bar (Home, Pathways, Search, Tools, Numbers). No video plays on the home screen, to save mobile data.
 
 **For learning and new staff**
 - **First-shift intro:** four quick screens with drawn, animated pictures: search, one question at a time, the one-way zone and the tools. The home screen offers it until you have seen it.
 - **The patient journey:** five stops, each with an 8-second clip, a Listen button for the narration, and links to the rules at that stop. Play all runs through them in order.
-- **The tour:** the 89-second explainer (rebuilt for version 8 in the new look, with the version 7 rules), in English or Bahasa Melayu (1:35) with the Narration switch under the video. Each language has 9 chapters, a clickable transcript, speeds from 0.75 to 1.5, and resume where you stopped.
+- **The tour:** the 89-second explainer (rebuilt for version 8 in the new look, with the version 7 rules), in English or Bahasa Melayu (1:35) with the Narration switch under the video, in day or night colours to match the guide. Each language has 9 chapters, a clickable transcript, speeds from 0.75 to 1.5, and resume where you stopped.
 - **Quiz:** 13 questions on the Green Zone rules and the department material, each with the reason and a link to the rule.
 - **What's new:** the triage course folder and MO Drive run-throughs, and what is still to confirm.
 - **Wall poster** and **Sources and about**.
@@ -71,6 +72,7 @@ Both links are private until you share them from the page's Share menu. The QR c
 
 ## Version history
 
+- **Day and night (published 8 Nov 2026):** the home Day and Night switch, and night versions of both explainer films and both poster sheets. In dark mode the tile shadows now turn black instead of glowing.
 - **Version 8 (published 8 Nov 2026):** the premium bento redesign, the zone map, whole-pathway maps, visual tools and the first-shift intro, as above.
 - **Version 7 (7 Nov 2026):** the triage course folder documents and the new design, as above.
 - **Version 6 (7 Nov 2026):** 11 topics from the MO Drive (EM Watch, admission to MAU, clinic referrals, the Yellow Zone flow, OSCC, blood tests, animal bites, infection alerts, trauma walk-ins, children in the ED, safe practice); the Asthma Zone flow from the 13 November 2025 memo; department notes on six pathways; search, saved and recent, the discharge safety check, quick sums, numbers, deep links, the phone tab bar, the journey clips and the quiz.

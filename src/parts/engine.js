@@ -65,7 +65,8 @@ const V8 = [
   ['Visual shift tools','A route meter for the discharge check, and gauges for the shock index, pulse pressure, heart rate and BMI, using the same thresholds as before.',[['#tools','Shift tools']]],
   ['First-shift intro','Four quick screens for a new MO or HO.',[['#intro','Open the intro']]],
   ['A new tour','The narrated explainer is rebuilt in the new look and now covers the version 7 rules: no repeat tests after secondary triage, down-triage only with the EP\'s permission, IV antibiotics on a CCA chair, and when the EP may decide the admission. It is also in Bahasa Melayu: switch the narration under the video.',[['#tour','Watch the tour']]],
-  ['The wall poster, redrawn','Both A3 sheets in the new look. Sheet 1 adds the four version 7 rules with their sources, and marks the three numbers still to confirm. Sheet 2 shows the Asthma Zone flow from the November 2025 memo.',[['#poster','Wall poster']]]
+  ['The wall poster, redrawn','Both A3 sheets in the new look. Sheet 1 adds the four version 7 rules with their sources, and marks the three numbers still to confirm. Sheet 2 shows the Asthma Zone flow from the November 2025 memo.',[['#poster','Wall poster']]],
+  ['Day and night','A switch on the home screen turns the night colours on and off. In night colours the tour plays a night version of the film, in English and in Bahasa Melayu, and the poster page shows night versions of both sheets. The sheets on the wall keep the day colours.',[['#home','Home'],['#tour','Watch the tour']]]
 ];
 
 /* The first-shift intro: four screens about using the guide, with a drawn picture each */
@@ -255,6 +256,8 @@ const ICONS = {
   volume:'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.2 6.3a8 8 0 0 1 0 11.4"/>',
   quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1.1.9-1.1 1.6v.4"/><path d="M12 16.8h.01"/>',
   spark:'<path d="M12 3.5 13.9 10.1 20.5 12 13.9 13.9 12 20.5 10.1 13.9 3.5 12 10.1 10.1z"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/>',
+  moon:'<path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7z"/>',
   poster:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M8.5 11h7M8.5 14.5h4"/>',
   info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6h.01"/>',
   sliders:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
@@ -416,6 +419,7 @@ IDX.push({href:'#calc-dengue', title:'Shock index and pulse pressure check', kin
 IDX.push({href:'#calc-kids', title:'Children\'s weight-based doses', kind:'Tool', meta:'Department posters', body:'Prednisolone 1 mg/kg; salbutamol MDI puffs; ipratropium; dexamethasone croup; nebulised adrenaline; ORS 10 ml/kg; moderate dehydration 75 ml/kg; paediatric dose calculator weight', ic:'calc', c:'c-breath'});
 IDX.push({href:'#calc-weight', title:'Adjusted body weight for obese patients', kind:'Tool', meta:'Ebook p31–32', body:'BMI over 27.5; ideal body weight; adjusted body weight; dengue fluid; obese', ic:'calc', c:'c-breath'});
 IDX.push({href:'#tour', title:'Tour: the Green Zone in 90 seconds', kind:'Video', meta:'Explainer, English and Bahasa Melayu', body:CAPTIONS.map(c => c[1]).join(' ') + ' Bahasa Melayu Malay BM ' + CAPTIONS_MS.map(c => c[1]).join(' '), ic:'play', c:'c-infect'});
+IDX.push({href:'#home', title:'Day and night colours', kind:'Setting', meta:'Switch on the home screen', body:'Night colours, night mode, dark mode, dark theme, day colours, light mode, screen too bright, night shift', ic:'moon', c:'c-meta'});
 IDX.push({href:'#quiz', title:`Quick check: ${QUIZ.length} questions`, kind:'Quiz', meta:'Self-test', body:QUIZ.map(q => q.q).join(' · '), ic:'quiz', c:'c-infect'});
 IDX.push({href:'#new', title:'What\'s new from the drives', kind:'Update', meta:'7 Nov 2026', body:[...DRIVE.map(d => d[0] + ' ' + d[2]), ...V7.map(d => d[0] + ' ' + d[1])].join(' · '), ic:'spark', c:'c-flow'});
 IDX.push({href:'#poster', title:'Wall poster, two A3 sheets', kind:'Poster', meta:'Print', body:'poster A3 sheet patient flow rules numbers pathways', ic:'poster', c:'c-prot'});
@@ -1054,13 +1058,16 @@ function stopVoice(){ voice.pause(); const cap = $('#jcap'); if (cap) cap.hidden
 function stopJourney(){ if (playAll) setPlayAll(false); stopVoice(); const v = $('#jclip'); if (v) v.pause(); }
 
 /* ================= Tour: language, chapters, transcript, speed, resume ================= */
-/* The explainer in English or Bahasa Melayu: each has its own film, cover, chapters, transcript and resume point */
+/* The explainer in English or Bahasa Melayu: each has its own film, cover, chapters, transcript and resume point.
+   Each film also has a night version (nsrc, ncover) with the same timings, played when the guide shows night colours. */
 const TOUR_LANGS = {
-  en:{src:'media/green-zone-explainer-720p.mp4', cover:'media/explainer-poster.webp', ch:CHAPTERS, cap:CAPTIONS, key:'gz-tour-pos',
+  en:{src:'media/green-zone-explainer-720p.mp4', cover:'media/explainer-poster.webp', nsrc:'media/green-zone-explainer-night-720p.mp4', ncover:'media/explainer-night-poster.webp', ch:CHAPTERS, cap:CAPTIONS, key:'gz-tour-pos',
       h:'The Green Zone <span>in 90 seconds</span>', d:'1 minute 29 seconds, narrated, with captions on screen. Jump to a chapter, or tap a line of the transcript to hear it.', resume:'Resume at '},
-  ms:{src:'media/green-zone-explainer-ms-720p.mp4', cover:'media/explainer-ms-poster.webp', ch:CHAPTERS_MS, cap:CAPTIONS_MS, key:'gz-tour-pos-ms',
+  ms:{src:'media/green-zone-explainer-ms-720p.mp4', cover:'media/explainer-ms-poster.webp', nsrc:'media/green-zone-explainer-ms-night-720p.mp4', ncover:'media/explainer-ms-night-poster.webp', ch:CHAPTERS_MS, cap:CAPTIONS_MS, key:'gz-tour-pos-ms',
       h:'Zon Hijau <span>dalam 2 minit</span>', d:'1 minit 35 saat, dengan narasi dan sari kata pada skrin. Pilih satu bab, atau ketik satu baris transkrip untuk mendengarnya.', resume:'Sambung pada '}
 };
+const film = T => night() ? {src:T.nsrc, cover:T.ncover} : {src:T.src, cover:T.cover};
+let tourTheme = () => {};
 function pauseTour(){ const v = $('#vid'); if (v && !v.paused) v.pause(); }
 function setupTour(){
   const v = $('#vid'); let retried = false, lastSave = 0, lastLn = -1, lastCh = -1;
@@ -1079,9 +1086,18 @@ function setupTour(){
     const pos = store.get(T.key, 0);
     if (pos > 3) sp.insertAdjacentHTML('beforeend', `<button type="button" data-t="${pos}" id="resume">${T.resume}${fmt(pos)}</button>`);
     lastLn = -1; lastCh = -1;
-    if (load){ v.pause(); retried = false; $('#vmsg').hidden = true; v.setAttribute('poster', T.cover); v.src = T.src; v.load(); }
+    if (load){ const f = film(T); v.pause(); retried = false; $('#vmsg').hidden = true; v.setAttribute('poster', f.cover); v.src = f.src; v.load(); }
   };
-  drawLang(L !== 'en');
+  drawLang(true);
+  /* Day or night changed: swap to the matching film, keeping the place and, if it was playing, playing on */
+  tourTheme = () => {
+    const f = film(TOUR_LANGS[L]); if (v.getAttribute('src') === f.src) return;
+    const t = v.currentTime || 0, playing = !v.paused && !v.ended;
+    retried = false; $('#vmsg').hidden = true;
+    v.setAttribute('poster', f.cover); v.src = f.src; v.load();
+    if (t > .5) v.addEventListener('loadedmetadata', () => { try { v.currentTime = t; } catch(e){} }, {once:true});
+    if (playing) v.play().catch(() => {});
+  };
   const seek = t => { const goTo = () => { try { v.currentTime = t; } catch(e){} v.play().catch(() => {}); }; if (v.readyState >= 1) goTo(); else { v.addEventListener('loadedmetadata', goTo, {once:true}); v.load(); } };
   $('#tourbox').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
@@ -1103,7 +1119,7 @@ function setupTour(){
     if (retried){ $('#vmsg').hidden = false; return; }
     retried = true;
     try {
-      const r = await fetch(TOUR_LANGS[L].src); if (!r.ok) throw new Error(r.status);
+      const r = await fetch(film(TOUR_LANGS[L]).src); if (!r.ok) throw new Error(r.status);
       v.src = URL.createObjectURL(await r.blob()); v.load(); v.play().catch(() => {});
     } catch(e){ $('#vmsg').hidden = false; }
   });
@@ -1177,10 +1193,12 @@ function renderAbout(){
 }
 
 /* ================= Poster sheets, full size ================= */
-let lbFrom = null;
+let lbFrom = null, lbI = 0;
+/* Sheet i, full size or thumbnail, in the colours on screen (night sheets when the guide is dark) */
+const sheetSrc = (i, thumb) => `poster/sheet${i}${night() ? '-night' : ''}${thumb ? '-thumb' : ''}.webp`;
 function openSheet(i){
-  lbFrom = document.activeElement;
-  $('#lbimg').src = `poster/sheet${i}.webp`;
+  lbFrom = document.activeElement; lbI = i;
+  $('#lbimg').src = sheetSrc(i, false);
   $('#lbimg').alt = i === 1 ? 'Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know' : 'Poster sheet 2: the 23 pathways, EMACC follow-up, Asthma Zone flow and referrals';
   $('#lbt').textContent = i === 1 ? 'Sheet 1 · Patient flow (A3)' : 'Sheet 2 · Pathways and referrals (A3)';
   $('#lbs').classList.remove('zoom'); $('#lbzoom').textContent = 'Zoom in';
@@ -1192,6 +1210,17 @@ function toggleZoom(){ const z = $('#lbs').classList.toggle('zoom'); $('#lbzoom'
 
 /* ================= Settings: theme, text size, clips, clear ================= */
 const HOST_THEME = document.documentElement.getAttribute('data-theme');
+/* Night colours on? An explicit theme on the page wins; with none, the device decides */
+const DARKQ = matchMedia('(prefers-color-scheme: dark)');
+function night(){ const t = document.documentElement.getAttribute('data-theme'); return t ? t === 'dark' : DARKQ.matches; }
+/* After any change of colours: the home switch, the poster sheets and the tour film follow */
+function themeChanged(){
+  const n = night();
+  $('#daynight').setAttribute('aria-checked', n);
+  $$('#v-poster [data-sheet] img').forEach(im => { const s = sheetSrc(im.closest('[data-sheet]').dataset.sheet, true); if (im.getAttribute('src') !== s) im.setAttribute('src', s); });
+  if (!$('#lb').hidden && lbI) $('#lbimg').src = sheetSrc(lbI, false);
+  tourTheme();
+}
 const prefs = {
   theme: store.get('gz-theme', 'auto'),
   size: store.get('gz-size', 'std'),
@@ -1203,6 +1232,7 @@ function applyPrefs(){
   if (prefs.theme === 'auto'){ if (HOST_THEME) r.setAttribute('data-theme', HOST_THEME); else r.removeAttribute('data-theme'); }
   else r.setAttribute('data-theme', prefs.theme);
   if (prefs.size === 'large') r.setAttribute('data-size', 'large'); else r.removeAttribute('data-size');
+  themeChanged();
 }
 function syncSettings(){
   [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
@@ -1370,6 +1400,13 @@ $$('[data-sheet]').forEach(b => b.addEventListener('click', () => openSheet(+b.d
 $('#lbclose').addEventListener('click', closeSheet);
 $('#lbzoom').addEventListener('click', toggleZoom);
 $('#lbimg').addEventListener('click', toggleZoom);
+
+/* Day and night: the home switch sets the theme the same way as Settings; Auto there follows the device again */
+$('#daynight').addEventListener('click', () => {
+  prefs.theme = night() ? 'light' : 'dark'; store.set('gz-theme', prefs.theme); applyPrefs();
+});
+const onDeviceTheme = () => { if (prefs.theme === 'auto' && !HOST_THEME) themeChanged(); };
+try { DARKQ.addEventListener('change', onDeviceTheme); } catch(e){ try { DARKQ.addListener(onDeviceTheme); } catch(e2){} }
 
 /* Settings */
 $('#settings').addEventListener('click', e => {

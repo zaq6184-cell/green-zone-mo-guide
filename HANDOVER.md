@@ -26,8 +26,9 @@ Read CLAUDE.md and HANDOVER.md. In src, run npm install, npx playwright install 
 
 ## Where things stand
 
-- **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9, version 8 (published 8 Nov 2026). It is private until you share it from the page's Share menu. The QR code on poster sheet 1 opens this link, so colleagues can use it only after you share it.
+- **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9, version 8 with day and night (published 8 Nov 2026). It is private until you share it from the page's Share menu. The QR code on poster sheet 1 opens this link, so colleagues can use it only after you share it.
 - **Version 8** (8 Nov 2026): the premium bento redesign, now live at the link above. Preview changes with `npm run serve` in `src`, or the `guide` server in the browser pane. Every later publish still needs your go-ahead.
+- **Day and night** (8 Nov 2026, live): a Day/Night switch at the top of the home screen. In night colours the tour plays night versions of both films and the poster page shows night versions of both sheets; the printed sheets keep the day colours. Dark mode's tile shadows now turn black, as DESIGN.md says.
 - **Waiting on you:** your review of version 7.
 - **Still to confirm with the department:** six details, listed at the end of `CLAUDE.md` and on the app's What's new page (EM Watch booking, the KK or GP redirect procedure, the EMACC SOP, four phone numbers, the MERS-CoV case definition and the snakebite guideline).
 - **Not yet read:** MO Drive folders 1 (Administration), 2 (Memo-memo, beyond the memos already used), 4 (Slides) and 6 (Interdepartment referral).

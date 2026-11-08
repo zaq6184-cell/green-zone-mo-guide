@@ -4,10 +4,10 @@ GOAL: a new MO finishes the film knowing the one-way route through the Green Zon
 
 OUTPUT: HyperFrames 0.9.22, 1920 × 1080, 30 fps, H.264 with AAC. Delivered as `video/green-zone-explainer-1080p.mp4` and a 1280 × 720 copy for the app (`app/media/green-zone-explainer-720p.mp4`).
 
-TIME: 88.9 s = 2666 frames in English, 112.9 s in Bahasa Melayu (`../explainer-ms`). The voice is the clock: ten clips (`assets/vo/s01.wav` … `s10.wav`), each scene opens 0.45 s before its clip (0.8 s for the first) and holds 0.5 s after it (2.4 s for the last). No music.
+TIME: 88.9 s = 2666 frames in English, 94.7 s = 2841 frames in Bahasa Melayu (`../explainer-ms`). The voice is the clock: ten clips (`assets/vo/s01.wav` … `s10.wav`), each scene opens 0.45 s before its clip (0.8 s for the first) and holds 0.5 s after it (2.4 s for the last). No music.
 
 LOOK: the app's version 8 world (see `../../DESIGN.md`).
-- Ground: pearl `#e9edeb` with a light from the upper left, `radial-gradient(130% 90% at 15% 0, #f3f6f4, transparent 55%)`. Never dark.
+- Ground: pearl `#e9edeb` with a light from the upper left, `radial-gradient(130% 90% at 15% 0, #f3f6f4, transparent 55%)`. Never dark, except in the night version that Krishna asked for on 8 Nov 2026: the same film on the app's dark tokens (`node work/build.cjs night`, see `../REVIEW.md`).
 - Jewel tiles by the app's fixed key: emerald for the zone, sapphire for a pathway, plum for a rule, teal for the discharge check, obsidian for the EP. Material: 150° gradient over the three stops, the app's SVG grain at 180 px, a 1.5 px inner edge at 14% white, a shadow tinted with the tile's deepest stop (0 44px 70px -40px). Radius 44 px on tiles, 36 px on white cards.
 - Outcomes stay flat (admit `#c42a20`, discharge `#13834c`, next step `#41544b`), as in the ebook.
 - Type: Figtree only (700, 800, 900 shipped in `assets/fonts`). Display 900 at 120–132 px with −0.035em tracking; scene titles 800 at 48–56 px; labels 700 at 34–40 px; nothing under 28 px. Atkinson Hyperlegible is not on this machine, so the video uses Figtree where the app uses Atkinson (noted in REVIEW.md).
@@ -34,6 +34,6 @@ SHOTS (scene-local times come from `work/timing.json`):
 
 CAPTIONS: burned in, one group at a time, 2–6 words, Figtree 700 at 48 px in ink on a white plate sized to the text, 70 px above the bottom edge; words turn from muted to ink as they are spoken. None over shot 10, where the words are the picture.
 
-BANNED: a dark ground; glow, bloom, particles; glass cards; serif display; mono labels, numbered labels, eyebrow lines; three equal cards in a row; everything centred; everything fading in at once; text that moves while it is read; corner labels and HUD decoration; any patient name, IC number or queue number; any clinical wording not in the app's data.
+BANNED: a dark ground (outside the night version); glow, bloom, particles; glass cards; serif display; mono labels, numbered labels, eyebrow lines; three equal cards in a row; everything centred; everything fading in at once; text that moves while it is read; corner labels and HUD decoration; any patient name, IC number or queue number; any clinical wording not in the app's data.
 
 QA: frames at each scene's middle and at each hero word; the outcome turn at 40.6 s; the dial at 74.3 s; the phone sheet at 360 px; `hyperframes check`; loudness about −16 LUFS, true peak −1 dBTP or lower.

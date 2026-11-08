@@ -1,11 +1,16 @@
 /* Writes index.html and compositions/*.html for the Green Zone explainer.
-   English: node work/build.cjs     reads work/timing.json,    writes this project (video/explainer)
-   Malay:   node work/build.cjs ms  reads work/ms/timing.json, writes ../explainer-ms
+   English: node work/build.cjs           reads work/timing.json,    writes this project (video/explainer)
+   Malay:   node work/build.cjs ms        reads work/ms/timing.json, writes ../explainer-ms
+   Night:   node work/build.cjs night     the same film in the app's dark colours, writes ../explainer-night
+            node work/build.cjs ms night  writes ../explainer-ms-night
+   A night film has the same timings and no audio: after the render its sound is copied from the day film.
    Every cue lands on the word that names it. Run from video/explainer. */
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..');
-const LANG = process.argv[2] === 'ms' ? 'ms' : 'en';
-const OUT = LANG === 'en' ? ROOT : path.resolve(ROOT, '../explainer-ms');
+const ARGS = process.argv.slice(2);
+const LANG = ARGS.includes('ms') ? 'ms' : 'en';
+const NIGHT = ARGS.includes('night');
+const OUT = path.resolve(ROOT, '..', 'explainer' + (LANG === 'ms' ? '-ms' : '') + (NIGHT ? '-night' : ''));
 const TDIR = LANG === 'en' ? __dirname : path.join(__dirname, 'ms');
 const T = JSON.parse(fs.readFileSync(path.join(TDIR, 'timing.json'), 'utf8'));
 const S = {}; T.scenes.forEach(s => { S[s.id] = s; });
@@ -64,6 +69,44 @@ const tr = t => { if (LANG === 'en') return t; if (MS[t] === undefined) throw ne
 /* Longer Malay lines get a little less type where a box is tight */
 const LCSS = LANG === 'ms' ? '#s07-abx h2{font-size:42px} #s09-stuck h2{font-size:56px} #s06-rule h2{font-size:52px}' : '';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* Colours written out as literals (GSAP from-values, SVG strokes, inline styles, the slip, the captions).
+   Day is the app's light theme and night its dark theme (src/parts/head.html). The jewel tiles and the five
+   flat outcome fills (--admit, --discharge, --neutral, --observe, --refer) are the same in both. */
+const PAL = NIGHT ? {
+  pearl:'#080d0b', pearl2:'#0c1310', surface:'#111a15', surface2:'#15201a', surface3:'#1b2821',
+  ink:'#e7f0eb', ink2:'#c8d6cf', muted:'#94a79d', faint:'#6b7e74', line:'#1f2c26', line2:'#2c3c34',
+  accent:'#5fd297', accent2:'#86e2b2', accentSoft:'#12301f', mint:'#5be89d', gold:'#e3c27a',
+  stroke:'#5fd297', strike:'#ff958d', bedX:'#94a79d',
+  plumIcon:'#c08fca', plumFill:'#8f4f9a', plumRing:'#c08fca', sapphire:'#8ab7f5',
+  slip:{bg:'#12301f', ring:'#24432f', lab:'#94c9aa', bar:'#2f5c44', q:'#b5dcc6', qRing:'#3a6b51', ck:'#13834c', ckRing:'#3a6b51',
+    shadow:'0 2px 6px rgba(0,0,0,.35),0 40px 70px -40px rgba(0,0,0,.9)'},
+  selBg:'#5fd297', selInk:'#03140b',
+  cap:{bg:'#15201a', ring:'#2c3c34', shadow:'0 2px 6px rgba(0,0,0,.4),0 26px 44px -26px rgba(0,0,0,.9)'},
+  ground:'radial-gradient(130% 90% at 15% 0%, #0f1813 0%, rgba(15,24,19,0) 55%), #080d0b'
+} : {
+  pearl:'#e9edeb', pearl2:'#e1e7e3', surface:'#ffffff', surface2:'#f5f7f6', surface3:'#ebefed',
+  ink:'#0f1a15', ink2:'#26352e', muted:'#53635b', faint:'#7b8a83', line:'#dbe2de', line2:'#c5cfc9',
+  accent:'#0b6b47', accent2:'#08513a', accentSoft:'#dcf1e5', mint:'#43dd8c', gold:'#d8b46a',
+  stroke:'#0a5a3b', strike:'#c42a20', bedX:'#41544b',
+  plumIcon:'var(--plum-1)', plumFill:'var(--plum-1)', plumRing:'#6a3473', sapphire:'var(--sapphire-1)',
+  slip:{bg:'#e4f4ea', ring:'#c4e2cf', lab:'#3d6b52', bar:'#9cc8ad', q:'#2c5a41', qRing:'#9cc8ad', ck:'#0d7049', ckRing:'#9cc8ad',
+    shadow:'0 2px 6px rgba(15,26,21,.06),0 40px 70px -40px rgba(6,61,40,.55)'},
+  selBg:'#0b6b47', selInk:'#ffffff',
+  cap:{bg:'#ffffff', ring:'#dbe2de', shadow:'0 2px 6px rgba(15,26,21,.08),0 26px 44px -26px rgba(15,26,21,.5)'},
+  ground:'radial-gradient(130% 90% at 15% 0%, #f3f6f4 0%, rgba(243,246,244,0) 55%), #e9edeb'
+};
+/* Night only: the dark tokens (made from PAL, so the GSAP from-values always match the CSS on frame 0),
+   and black shadows in place of the tinted ones, which would glow on a dark ground */
+const NIGHT_CSS = NIGHT ? `:root, #root{
+  --pearl:${PAL.pearl}; --pearl-2:${PAL.pearl2}; --surface:${PAL.surface}; --surface-2:${PAL.surface2}; --surface-3:${PAL.surface3};
+  --ink:${PAL.ink}; --ink-2:${PAL.ink2}; --muted:${PAL.muted}; --faint:${PAL.faint}; --line:${PAL.line}; --line-2:${PAL.line2};
+  --accent:${PAL.accent}; --accent-2:${PAL.accent2}; --accent-soft:${PAL.accentSoft}; --mint:${PAL.mint}; --gold:${PAL.gold};
+}
+.tile{box-shadow:0 2px 2px rgba(0,0,0,.25),0 44px 70px -40px rgba(0,0,0,.9),0 14px 26px -18px rgba(0,0,0,.6)}
+.t-obsidian::after{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2)}
+.card{box-shadow:0 2px 6px rgba(0,0,0,.35),0 40px 70px -42px rgba(0,0,0,.9),inset 0 0 0 1.5px var(--line-2)}
+` : '';
 
 /* The app's own pictograms (ICONS in src/parts/engine.js), 24 grid, stroke 2 */
 const ICON = {
@@ -130,7 +173,7 @@ function zoneMap(p, o){
     <div class="zm-stop" id="${p}-st${i}" style="left:${xs[i] - 150}px;top:${ty - d / 2}px">
       <div class="zw" style="width:${d}px;height:${d}px">
         <div class="zm-halo" id="${p}-h${i}" style="left:-16px;top:-16px;width:${d + 32}px;height:${d + 32}px;opacity:${o.lit && i === 1 ? 1 : 0}"></div>
-        <div class="disc zd${s.maybe ? ' maybe' : ''}" id="${p}-d${i}" style="width:${d}px;height:${d}px${o.lit && i === 1 ? ';background:#43dd8c;color:#063d28' : ''}">${ic(s.icon)}</div>
+        <div class="disc zd${s.maybe ? ' maybe' : ''}" id="${p}-d${i}" style="width:${d}px;height:${d}px${o.lit && i === 1 ? `;background:${PAL.mint};color:#063d28` : ''}">${ic(s.icon)}</div>
       </div>
       <b>${esc(tr(s.name))}</b><small>${esc(tr(s.sub))}</small>
     </div>`).join('');
@@ -159,17 +202,17 @@ const J = {
   fill:(sel, t, from, to, d) => `tl.fromTo("${sel}",{scaleX:${from}},{scaleX:${to},duration:${d},ease:"power1.inOut"${from === null ? '' : ''}},${r3(t)});`,
   set:(sel, t, props) => `tl.set("${sel}",${props},${r3(t)});`,
   moveX:(sel, t, from, to, d = .9) => `tl.fromTo("${sel}",{x:${from}},{x:${to},duration:${d},ease:"power2.inOut"},${r3(t)});`,
-  light:(p, i, t) => `tl.fromTo("#${p}-d${i}",{backgroundColor:"#0a5a3b",color:"#ffffff"},{backgroundColor:"#43dd8c",color:"#063d28",duration:.3,ease:"power1.out",immediateRender:false},${r3(t)});tl.fromTo("#${p}-h${i}",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.45,ease:"back.out(1.8)"},${r3(t)});`
+  light:(p, i, t) => `tl.fromTo("#${p}-d${i}",{backgroundColor:"#0a5a3b",color:"#ffffff"},{backgroundColor:"${PAL.mint}",color:"#063d28",duration:.3,ease:"power1.out",immediateRender:false},${r3(t)});tl.fromTo("#${p}-h${i}",{opacity:0,scale:.7},{opacity:1,scale:1,duration:.45,ease:"back.out(1.8)"},${r3(t)});`
 };
 
-function scene(id, css, html, js){
+function scene(id, css, html, js, ncss = ''){
   return `<template>
 <style>
 ${BASE_CSS}
-${PART_CSS}
+${PART_CSS}${NIGHT_CSS}
 #root{position:absolute;inset:0;overflow:hidden}
 ${css}
-${LCSS}
+${LCSS}${NIGHT ? ncss : ''}
 </style>
 <div id="root" data-composition-id="${id}" data-width="1920" data-height="1080">
 ${html}
@@ -239,7 +282,7 @@ const files = {};
     <p id="s02-note">${tr('Also the focused history and wound irrigation')}</p>
   </div>
   <div class="card" id="s02-no">
-    <svg id="s02-loop" viewBox="0 0 220 150"><path id="s02-lp" d="M190 120 C 190 40, 30 40, 30 104" stroke="#0a5a3b" stroke-width="10" pathLength="1" style="stroke-dasharray:1"/><path id="s02-la" d="M10 86 L30 112 L52 88" stroke="#0a5a3b" stroke-width="10" style="opacity:0"/><path id="s02-x" d="M40 20 L180 140" stroke="#c42a20" stroke-width="12" pathLength="1" style="stroke-dasharray:1"/></svg>
+    <svg id="s02-loop" viewBox="0 0 220 150"><path id="s02-lp" d="M190 120 C 190 40, 30 40, 30 104" stroke="${PAL.stroke}" stroke-width="10" pathLength="1" style="stroke-dasharray:1"/><path id="s02-la" d="M10 86 L30 112 L52 88" stroke="${PAL.stroke}" stroke-width="10" style="opacity:0"/><path id="s02-x" d="M40 20 L180 140" stroke="${PAL.strike}" stroke-width="12" pathLength="1" style="stroke-dasharray:1"/></svg>
     <h2 class="t-title" style="font-size:56px;margin-top:140px">${tr('No repeats')}</h2>
     <p id="s02-un" class="t-label" style="margin-top:12px;color:var(--ink-2)">${tr('Unless they were missed')}</p>
     <p id="s02-pr" class="t-small" style="margin-top:22px;color:var(--muted)">${tr('A later ECG is done in the Procedure Room.')}</p>
@@ -271,17 +314,17 @@ const files = {};
   #s03-mo b{font-weight:800;font-size:40px;margin-top:22px}
   #s03-mo small{font-weight:700;font-size:30px;color:var(--muted);margin-top:4px}
   #s03-d{background:var(--mint);color:var(--emerald-3);box-shadow:0 0 0 18px rgba(67,221,140,.24)}
-  #s03-slip{position:absolute;left:520px;top:150px;width:520px;height:700px;border-radius:30px;background:#e4f4ea;box-shadow:0 2px 6px rgba(15,26,21,.06),0 40px 70px -40px rgba(6,61,40,.55),inset 0 0 0 1.5px #c4e2cf;overflow:hidden}
+  #s03-slip{position:absolute;left:520px;top:150px;width:520px;height:700px;border-radius:30px;background:${PAL.slip.bg};box-shadow:${PAL.slip.shadow},inset 0 0 0 1.5px ${PAL.slip.ring};overflow:hidden}
   #s03-slip header{height:150px;padding:34px 40px;background:var(--emerald-1);color:#fff}
   #s03-slip header b{display:block;font-weight:900;font-size:50px;letter-spacing:-.02em}
   #s03-slip header small{font-weight:700;font-size:30px;opacity:.9}
-  #s03-slip .sl-lab{font-weight:700;font-size:30px;color:#3d6b52;margin:34px 40px 18px}
+  #s03-slip .sl-lab{font-weight:700;font-size:30px;color:${PAL.slip.lab};margin:34px 40px 18px}
   .sl-row{display:flex;align-items:center;gap:22px;margin:0 40px 26px}
   .sl-row .ck{width:50px;height:50px;border-radius:12px}
   .sl-row .ck-f{border-radius:12px}
-  .sl-bar{height:16px;border-radius:8px;background:#9cc8ad;transform-origin:0 50%}
-  #s03-q{position:absolute;left:40px;bottom:40px;display:flex;align-items:center;gap:16px;font-weight:800;font-size:30px;color:#2c5a41}
-  #s03-q i{display:block;width:150px;height:52px;border-radius:14px;box-shadow:inset 0 0 0 3px #9cc8ad}
+  .sl-bar{height:16px;border-radius:8px;background:${PAL.slip.bar};transform-origin:0 50%}
+  #s03-q{position:absolute;left:40px;bottom:40px;display:flex;align-items:center;gap:16px;font-weight:800;font-size:30px;color:${PAL.slip.q}}
+  #s03-q i{display:block;width:150px;height:52px;border-radius:14px;box-shadow:inset 0 0 0 3px ${PAL.slip.qRing}}
   #s03-path{position:absolute;left:1040px;top:470px;width:250px;height:60px}
   #s03-rbw{position:absolute;top:388px;${LANG === 'en' ? 'left:1092px' : 'left:1040px;width:250px;display:flex;justify-content:center'}}
   #s03-rb{position:relative;height:58px;padding:0 22px;border-radius:16px;font-weight:800;font-size:30px;display:flex;align-items:center}
@@ -300,10 +343,10 @@ const files = {};
   <div id="s03-slip">
     <header><b>${tr('Green slip')}</b><small>${tr('Slip hijau')}</small></header>
     <p class="sl-lab">${tr('Orders')}</p>
-    ${[0, 1, 2].map(i => `<div class="sl-row">${check('s03-k' + i, '--ckr:#9cc8ad;--ckc:#0d7049')}<div class="sl-bar" id="s03-b${i}" style="width:${[300, 240, 270][i]}px"></div></div>`).join('')}
+    ${[0, 1, 2].map(i => `<div class="sl-row">${check('s03-k' + i, `--ckr:${PAL.slip.ckRing};--ckc:${PAL.slip.ck}`)}<div class="sl-bar" id="s03-b${i}" style="width:${[300, 240, 270][i]}px"></div></div>`).join('')}
     <div id="s03-q">${tr('Queue no.')}<i></i></div>
   </div>
-  <svg id="s03-path" viewBox="0 0 250 60"><path id="s03-pl" d="M8 30 H 240" stroke="#0a5a3b" stroke-width="8" stroke-linecap="round" fill="none" pathLength="1" style="stroke-dasharray:1"/></svg>
+  <svg id="s03-path" viewBox="0 0 250 60"><path id="s03-pl" d="M8 30 H 240" stroke="${PAL.stroke}" stroke-width="8" stroke-linecap="round" fill="none" pathLength="1" style="stroke-dasharray:1"/></svg>
   <div id="s03-rbw"><div id="s03-rb" class="tile t-garnet">${tr('Red Box')}</div></div>
   <div class="tile t-emerald" id="s03-tr">
     <div class="disc">${ic('syringe')}</div>
@@ -326,7 +369,7 @@ const files = {};
     J.deal('#s03-tr', at(id, 10, .1)),
     `tl.fromTo("#s03-ring",{scale:.6,opacity:.9},{scale:1.7,opacity:0,duration:.6,ease:"power1.out"},${at(id, 12)});`,
     `tl.fromTo("#s03-ring",{scale:.6,opacity:.9},{scale:1.7,opacity:0,duration:.6,ease:"power1.out",immediateRender:false},${at(id, 12, .65)});`,
-    ...[0, 1, 2].map(i => `tl.fromTo("#s03-r${i} .dot",{backgroundColor:"rgba(255,255,255,0.3)"},{backgroundColor:"#43dd8c",duration:.25,immediateRender:false},${[at(id, 12), at(id, 17), at(id, 20, .35)][i]});`),
+    ...[0, 1, 2].map(i => `tl.fromTo("#s03-r${i} .dot",{backgroundColor:"rgba(255,255,255,0.3)"},{backgroundColor:"${PAL.mint}",duration:.25,immediateRender:false},${[at(id, 12), at(id, 17), at(id, 20, .35)][i]});`),
     ...[0, 1, 2].map(i => J.tick('s03-k' + i, at(id, 18) + i * .26))
   ];
   files[id] = scene(id, css, html, js);
@@ -344,9 +387,9 @@ const files = {};
   #s04-mo .t-src{position:absolute;left:48px;bottom:44px;right:48px}
   #s04-form{left:790px;top:170px;width:970px;height:690px;padding:48px 56px}
   #s04-form header{display:flex;align-items:center;gap:22px;padding-bottom:30px;border-bottom:2px solid var(--line)}
-  #s04-form header .ic{width:58px;height:58px;color:var(--plum-1)}
+  #s04-form header .ic{width:58px;height:58px;color:${PAL.plumIcon}}
   #s04-dt{margin-top:34px;height:96px;border-radius:24px;display:flex;align-items:center;gap:20px;padding:0 30px;background:var(--surface-2);box-shadow:inset 0 0 0 2px var(--line);font-weight:800;font-size:40px}
-  #s04-dt svg{width:44px;height:44px;color:var(--plum-1)}
+  #s04-dt svg{width:44px;height:44px;color:${PAL.plumIcon}}
   .f-row{display:flex;align-items:center;gap:26px;margin-top:34px;font-weight:800;font-size:40px}
   #s04-ppp{position:absolute;left:56px;right:56px;bottom:100px;font-weight:700;font-size:30px;color:var(--muted)}
   #s04-src{position:absolute;left:56px;right:56px;bottom:46px;color:var(--muted)}
@@ -356,8 +399,8 @@ const files = {};
   <div class="card" id="s04-form">
     <header>${ic('triage')}<h2 class="t-title">${tr('Triage form')}</h2></header>
     <div id="s04-dt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg>${tr('Down-triage')}</div>
-    <div class="f-row">${check('s04-c0', '--ckc:var(--plum-1)')}<span>${tr('The MO examined the patient properly first')}</span></div>
-    <div class="f-row">${check('s04-c1', '--ckc:var(--plum-1)')}<span>${tr('The MO documented it on this form')}</span></div>
+    <div class="f-row">${check('s04-c0', `--ckc:${PAL.plumFill}`)}<span>${tr('The MO examined the patient properly first')}</span></div>
+    <div class="f-row">${check('s04-c1', `--ckc:${PAL.plumFill}`)}<span>${tr('The MO documented it on this form')}</span></div>
     <p id="s04-ppp">${tr('The PPP makes sure it is documented.')}</p>
     <p id="s04-src" class="t-src">${tr('Source: memo HKL/JK/98/188/3(22)22, 4 Oct 2022')}</p>
   </div>
@@ -369,7 +412,7 @@ const files = {};
   const js = [
     J.deal('#s04-form', 0.05),
     J.deal('#s04-mo', at(id, 2, -.1)),
-    `tl.fromTo("#s04-dt",{boxShadow:"inset 0 0 0 2px #dbe2de"},{boxShadow:"inset 0 0 0 4px #6a3473",duration:.3,immediateRender:false},${at(id, 6)});`,
+    `tl.fromTo("#s04-dt",{boxShadow:"inset 0 0 0 2px ${PAL.line}"},{boxShadow:"inset 0 0 0 4px ${PAL.plumRing}",duration:.3,immediateRender:false},${at(id, 6)});`,
     J.tick('s04-c0', at(id, 10, .1)),
     J.tick('s04-c1', at(id, 15)),
     J.fade('#s04-ppp', at(id, 15, .35))
@@ -400,7 +443,7 @@ const files = {};
   #s05-route{left:1220px;top:350px;width:540px;height:520px;padding:44px 40px}
   #s05-route h3{font-weight:800;font-size:40px;margin-bottom:12px}
   .rt{display:flex;gap:18px;margin-top:22px}
-  .rt i{flex:none;width:16px;height:16px;margin-top:12px;border-radius:50%;background:var(--sapphire-1)}
+  .rt i{flex:none;width:16px;height:16px;margin-top:12px;border-radius:50%;background:${PAL.sapphire}}
   .rt span{font-weight:700;font-size:30px;line-height:1.25;color:var(--ink-2)}
   .rt b{font-weight:800;color:var(--accent)}
   `;
@@ -421,7 +464,7 @@ const files = {};
     <div class="rt" id="s05-r1"><i></i><span>Assess: history, examination, ECG</span></div>
     <div class="rt" id="s05-r2"><i></i><span>Any dangerous cause or high-risk factor? <b id="s05-r2b">None</b></span></div>
   </div>`;
-  const sel = (o, t) => `tl.fromTo("#s05-${o}",{backgroundColor:"#f5f7f6",color:"#0f1a15"},{backgroundColor:"#0b6b47",color:"#ffffff",duration:.22,immediateRender:false},${r3(t)});`;
+  const sel = (o, t) => `tl.fromTo("#s05-${o}",{backgroundColor:"${PAL.surface2}",color:"${PAL.ink}"},{backgroundColor:"${PAL.selBg}",color:"${PAL.selInk}",duration:.22,immediateRender:false},${r3(t)});`;
   const collapse = (s, t) => `tl.fromTo("${s}",{opacity:1,scale:1},{opacity:0,scale:.7,duration:.35,ease:"power2.in",immediateRender:false},${r3(t)});`;
   const swapT = at(id, 10, .15), outT = at(id, 17, .2);
   const js = [
@@ -444,7 +487,7 @@ const files = {};
     collapse('#s05-ka', r3(outT + .05)),
     `tl.fromTo("#s05-kd",{x:0},{x:-162,duration:.45,ease:"power3.inOut",immediateRender:false},${r3(outT + .3)});`
   ];
-  files[id] = scene(id, css, html, js);
+  files[id] = scene(id, css, html, js, '#s05-out{box-shadow:0 40px 70px -40px rgba(0,0,0,.9)}');
 }
 
 /* ===== s06 · Waiting for results: the CCA; never waits outside ===== */
@@ -481,7 +524,7 @@ const files = {};
     J.pop('#s06-c0', at(id, 10)), J.pop('#s06-c1', at(id, 11)), J.pop('#s06-c2', at(id, 15)),
     J.fade('#s06-in', at(id, 9, .3))
   ];
-  files[id] = scene(id, css, html, js);
+  files[id] = scene(id, css, html, js, '#s06-wait span{background:var(--surface);color:var(--accent);box-shadow:0 10px 24px -12px rgba(0,0,0,.6),inset 0 0 0 1.5px var(--line-2)}');
 }
 
 /* ===== s07 · IV antibiotics and no bed is free ===== */
@@ -498,7 +541,7 @@ const files = {};
   .bd b{font-weight:800;font-size:44px}
   #s07-none{position:absolute;right:48px;top:36px;height:60px;padding:0 24px;border-radius:18px;display:flex;align-items:center;background:var(--neutral);color:#fff;font-weight:800;font-size:30px}
   #s07-cca{left:160px;top:470px;width:620px;height:410px;padding:44px 48px}
-  #s07-cca .disc{width:110px;height:110px;background:#43dd8c;color:var(--emerald-3)}
+  #s07-cca .disc{width:110px;height:110px;background:${PAL.mint};color:var(--emerald-3)}
   #s07-cca .disc .ic{width:52%;height:52%}
   #s07-cca h2{font-weight:900;font-size:72px;letter-spacing:-.03em;margin-top:24px}
   #s07-cca p{font-weight:700;font-size:32px;margin-top:10px;opacity:.95}
@@ -512,7 +555,7 @@ const files = {};
   const html = `
   <div class="card" id="s07-board">
     <h2>${tr('A bed first')}</h2>
-    <div id="s07-beds">${beds.map((b, i) => `<div class="bd" id="s07-b${i}"><div class="bi">${ic('bed')}<svg class="x" viewBox="0 0 108 108"><path id="s07-x${i}" d="M14 94 94 14" stroke="#41544b" stroke-width="7" stroke-linecap="round" fill="none" pathLength="1" style="stroke-dasharray:1"/></svg></div><b>${b}</b></div>`).join('')}</div>
+    <div id="s07-beds">${beds.map((b, i) => `<div class="bd" id="s07-b${i}"><div class="bi">${ic('bed')}<svg class="x" viewBox="0 0 108 108"><path id="s07-x${i}" d="M14 94 94 14" stroke="${PAL.bedX}" stroke-width="7" stroke-linecap="round" fill="none" pathLength="1" style="stroke-dasharray:1"/></svg></div><b>${b}</b></div>`).join('')}</div>
     <span id="s07-none">${tr('No bed free')}</span>
   </div>
   <div class="tile t-emerald" id="s07-cca"><div class="disc">${ic('chair')}</div><h2>${tr('CCA chair')}</h2><p>${tr('Hand over to the HO in the CCA')}</p></div>
@@ -606,7 +649,7 @@ const files = {};
   #s09-stuck h2{font-weight:900;font-size:66px;letter-spacing:-.03em}
   #s09-stuck p{font-weight:700;font-size:34px;line-height:1.3;color:var(--muted);margin-top:18px}
   #s09-call{left:1000px;top:510px;width:760px;height:360px;padding:48px 52px}
-  #s09-call .disc{width:104px;height:104px;background:#43dd8c;color:var(--emerald-3)}
+  #s09-call .disc{width:104px;height:104px;background:${PAL.mint};color:var(--emerald-3)}
   #s09-call .disc .ic{width:48%;height:48%}
   #s09-call h2{font-weight:900;font-size:68px;line-height:1.02;letter-spacing:-.03em;margin-top:26px}
   `;
@@ -680,7 +723,7 @@ const capLines = [];
       capLines.push([r3(sc.start + sc.voLocal + ws[0].s), ws.map(w => w.w).join(' ')]);
       els.push(`<div class="cg clip" id="cg${n}" data-start="${start}" data-duration="${dur}"><div class="cgp" id="cgp${n}">${ws.map((w, k) => `<span id="cw${n}_${k}">${esc(w.w)}</span>`).join(' ')}</div></div>`);
       js.push(`tl.fromTo("#cgp${n}",{opacity:0,y:10},{opacity:1,y:0,duration:.14,ease:"power2.out"},${start});`);
-      ws.forEach((w, k) => js.push(`tl.fromTo("#cw${n}_${k}",{color:"#53635b"},{color:"#0f1a15",duration:.1},${r3(sc.start + sc.voLocal + w.s)});`));
+      ws.forEach((w, k) => js.push(`tl.fromTo("#cw${n}_${k}",{color:"${PAL.muted}"},{color:"${PAL.ink}",duration:.1},${r3(sc.start + sc.voLocal + w.s)});`));
       js.push(`tl.fromTo("#cgp${n}",{opacity:1},{opacity:0,duration:.12,ease:"power2.in",immediateRender:false},${r3(start + dur - .12)});`);
       n++;
     });
@@ -691,10 +734,10 @@ const capLines = [];
   }
   files.captions = `<template>
 <style>
-${BASE_CSS}
+${BASE_CSS}${NIGHT_CSS}
 #root{position:absolute;inset:0;pointer-events:none}
 .cg{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:0 200px 62px}
-.cgp{display:inline-block;max-width:1520px;padding:14px 32px 16px;border-radius:26px;background:#ffffff;font-family:'Figtree',sans-serif;font-weight:700;font-size:48px;line-height:1.2;text-align:center;color:#0f1a15;box-shadow:0 2px 6px rgba(15,26,21,.08),0 26px 44px -26px rgba(15,26,21,.5),inset 0 0 0 1.5px #dbe2de}
+.cgp{display:inline-block;max-width:1520px;padding:14px 32px 16px;border-radius:26px;background:${PAL.cap.bg};font-family:'Figtree',sans-serif;font-weight:700;font-size:48px;line-height:1.2;text-align:center;color:${PAL.ink};box-shadow:${PAL.cap.shadow},inset 0 0 0 1.5px ${PAL.cap.ring}}
 </style>
 <div id="root" data-composition-id="captions" data-width="1920" data-height="1080">
 ${els.join('\n')}
@@ -719,13 +762,13 @@ files.index = `<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>${tr('Green Zone explainer, version 8')}</title>
+    <title>${tr('Green Zone explainer, version 8')}${NIGHT ? ', night' : ''}</title>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
     <style>
-${BASE_CSS}
-      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #e9edeb; }
+${BASE_CSS}${NIGHT_CSS}
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: ${PAL.pearl}; }
       #root { position: relative; width: 100%; height: 100%; }
-      #ground { position: absolute; inset: 0; z-index: 0; background: radial-gradient(130% 90% at 15% 0%, #f3f6f4 0%, rgba(243,246,244,0) 55%), #e9edeb; }
+      #ground { position: absolute; inset: 0; z-index: 0; background: ${PAL.ground}; }
     </style>
   </head>
   <body>
@@ -733,7 +776,7 @@ ${BASE_CSS}
       <div id="ground"></div>
 ${hosts}
       <div id="captions" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="${total}" data-track-index="2" data-track-kind="captions" data-width="1920" data-height="1080" style="z-index:30"></div>
-${audio}
+${NIGHT ? '' : audio}
     </div>
     <script>
       window.__timelines = window.__timelines || {};
@@ -751,5 +794,5 @@ for (const [k, v] of Object.entries(files)){
 }
 /* For the app: chapters and transcript lines */
 const chapters = T.scenes.filter(s => s.chapter).map(s => [r3(s.start), s.chapter]);
-fs.writeFileSync(path.join(TDIR, 'app-tour.json'), JSON.stringify({duration:total, chapters, captions:capLines}, null, 1));
-console.log(LANG, 'wrote', Object.keys(files).length, 'files; duration', total, '; caption groups', capLines.length);
+if (!NIGHT) fs.writeFileSync(path.join(TDIR, 'app-tour.json'), JSON.stringify({duration:total, chapters, captions:capLines}, null, 1));
+console.log(LANG + (NIGHT ? ' night' : ''), 'wrote', Object.keys(files).length, 'files; duration', total, '; caption groups', capLines.length);

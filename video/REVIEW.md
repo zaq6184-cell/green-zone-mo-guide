@@ -117,3 +117,19 @@ To change a Malay line:
 4. Run `node work/timing.cjs ms` and `node work/build.cjs ms`.
 5. Check and render in `video/explainer-ms`.
 6. If the new wording moves a cue word, update `IDX.ms` in `work/build.cjs`.
+
+## Night versions (both languages)
+
+**Files:** `green-zone-explainer-night-1080p.mp4` (88.9 s, about 12.1 MB) and `green-zone-explainer-night-720p.mp4` (about 3.3 MB, in the app as `app/media/green-zone-explainer-night-720p.mp4` with the cover `app/media/explainer-night-poster.webp`), and the Malay pair `green-zone-explainer-ms-night-1080p.mp4` (94.7 s, about 12.9 MB) and `green-zone-explainer-ms-night-720p.mp4` (about 3.5 MB, cover `explainer-ms-night-poster.webp`). Made on 8 Nov 2026, when Krishna asked for day and night versions. The tour plays them whenever the guide shows night colours: the home Day and Night switch, Settings → Dark, or a dark device on Auto. The projects are `video/explainer-night/` and `video/explainer-ms-night/`.
+
+- **The same film in night colours:** the scenes, words, timings and narration are the day film's; only the colours change. `node work/build.cjs night` (and `ms night`) puts the app's dark tokens (from `src/parts/head.html`) on the ground, the cards, the text and the lines, and uses black shadows in place of the tinted ones, which would glow on a dark ground. The jewel tiles and the flat outcome colours stay as they are, as in the app. Every colour the generator writes out as a literal (the drawn arrows, the green slip, the chosen answer, the captions) comes from one palette, `PAL`, which also makes the night tokens, so the two cannot drift apart.
+- **What looks different:** the green slip is a dark green card instead of pale green paper; the struck loop arrow and the path to the Red Box are mint; the plum icons on the triage form are a lighter plum; the chosen answer in the syncope scene is mint with dark text, as the app shows a chosen option in dark colours; the captions sit on a dark plate.
+- **Sound:** a night film is rendered silent and then takes the day film's sound track unchanged (`-map 0:v -map 1:a -c copy`), so the narration is the same file: −16.0 LUFS (English) and −15.7 LUFS (Malay), true peak −1.8 dBFS. The frame counts match the day films exactly (2666 and 2841), so the words stay on their cues.
+- **Checks:** `hyperframes check` passes on both with the day films' notes (the long captions file, and in English three caption hand-off notes at 22.7 s), plus "film is silent", which is expected before the sound is added. Contrast passes on every sample (64 of 64 in English, 58 of 58 in Malay). Eleven frames, one or two per scene, were compared side by side with the day film: the layout is identical and only the colours move. Rebuilding the day films after the change wrote byte-identical files.
+- **Not checked:** played through with sound on a phone.
+
+To remake them after any change to the day films:
+1. In `video/explainer`: `node work/build.cjs night` and `node work/build.cjs ms night`.
+2. In `video/explainer-night` and `video/explainer-ms-night`: `npx --yes hyperframes@0.9.22 check`, then `npx --yes hyperframes@0.9.22 render --crf 20 -o work/render-1080.mp4`.
+3. Add the day film's sound, for example in `video`: `ffmpeg -i explainer-night/work/render-1080.mp4 -i green-zone-explainer-1080p.mp4 -map 0:v -map 1:a -c copy -movflags +faststart green-zone-explainer-night-1080p.mp4`.
+4. Make the 720p copy and the cover (the frame 0.9 s before the end) as for the day films, and copy both into `app/media/`.

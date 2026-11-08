@@ -1,0 +1,168 @@
+<template>
+<style>
+/* Green Zone explainer: the app's version 8 tokens and materials (from DESIGN.md) */
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+
+:root, #root{
+  --pearl:#e9edeb; --pearl-2:#e1e7e3; --surface:#ffffff; --surface-2:#f5f7f6; --surface-3:#ebefed;
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --faint:#7b8a83; --line:#dbe2de; --line-2:#c5cfc9;
+  --accent:#0b6b47; --accent-2:#08513a; --accent-soft:#dcf1e5; --mint:#43dd8c; --gold:#d8b46a; --gold-ink:#2a1f07;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334;
+  --garnet-1:#a52234; --garnet-2:#7e1626; --garnet-3:#560d19;
+  --obsidian-1:#27352e; --obsidian-2:#17211c; --obsidian-3:#0b110e;
+  --teal-1:#157481; --teal-2:#0f5a64; --teal-3:#093d45;
+  --admit:#c42a20; --discharge:#13834c; --neutral:#41544b; --observe:#f0ae1c; --refer:#5a44c4;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root h3,#root p{margin:0}
+
+/* Jewel tile: gradient, grain, inner edge, tinted shadow */
+.tile{position:absolute;border-radius:44px;overflow:hidden;isolation:isolate;color:#fff;
+  background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.14),transparent 55%),var(--grain),linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));
+  background-size:auto,180px 180px,auto;
+  box-shadow:0 2px 2px rgba(0,0,0,.05),0 44px 70px -40px var(--t3),0 14px 26px -18px rgba(15,26,21,.35)}
+.tile::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14)}
+.t-emerald{--t1:var(--emerald-1);--t2:var(--emerald-2);--t3:var(--emerald-3)}
+.t-sapphire{--t1:var(--sapphire-1);--t2:var(--sapphire-2);--t3:var(--sapphire-3)}
+.t-plum{--t1:var(--plum-1);--t2:var(--plum-2);--t3:var(--plum-3)}
+.t-garnet{--t1:var(--garnet-1);--t2:var(--garnet-2);--t3:var(--garnet-3)}
+.t-obsidian{--t1:var(--obsidian-1);--t2:var(--obsidian-2);--t3:var(--obsidian-3)}
+.t-teal{--t1:var(--teal-1);--t2:var(--teal-2);--t3:var(--teal-3)}
+
+/* White card */
+.card{position:absolute;background:var(--surface);border-radius:36px;color:var(--ink);
+  box-shadow:0 2px 6px rgba(15,26,21,.06),0 40px 70px -42px rgba(15,26,21,.5),inset 0 0 0 1.5px var(--line)}
+
+/* Icons */
+.ic{display:block;width:100%;height:100%}
+.disc{display:grid;place-items:center;border-radius:50%}
+
+/* Text roles */
+.t-title{font-weight:800;font-size:52px;line-height:1.08;letter-spacing:-.02em}
+.t-label{font-weight:700;font-size:38px;line-height:1.2}
+.t-small{font-weight:700;font-size:30px;line-height:1.25}
+.t-src{font-weight:700;font-size:28px;line-height:1.25;opacity:.8}
+
+/* Flat outcome chips (never a gradient) */
+.oc{display:inline-flex;align-items:center;gap:12px;height:58px;padding:0 24px;border-radius:29px;font-weight:800;font-size:32px;color:#fff;white-space:nowrap;overflow:hidden}
+.oc.k-admit{background:var(--admit)} .oc.k-discharge{background:var(--discharge)} .oc.k-neutral{background:var(--neutral)}
+
+
+.zm-h{position:absolute;left:44px;top:34px;display:flex;align-items:center;gap:18px}
+.zm-h b{font-weight:800;font-size:40px;letter-spacing:-.01em}
+.zm-tag{font-weight:800;font-size:28px;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:12px;background:rgba(255,255,255,.14)}
+.zm-base,.zm-fill{position:absolute;height:10px;border-radius:5px}
+.zm-base{background:rgba(255,255,255,.22)}
+.zm-fill{background:var(--mint);transform-origin:0 50%}
+.zm-stop{position:absolute;width:300px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.zm-stop b{font-weight:800;font-size:32px;line-height:1.1;margin-top:16px}
+.zm-stop small{font-weight:700;font-size:28px;line-height:1.15;margin-top:6px;opacity:.9}
+.zw{position:relative}
+.zd{position:relative;background:var(--emerald-2);box-shadow:inset 0 0 0 3px rgba(255,255,255,.34);color:#fff}
+.zd .ic{width:46%;height:46%}
+.zd.maybe{outline:3px dashed rgba(255,255,255,.55);outline-offset:7px}
+.zm-halo{position:absolute;border-radius:50%;background:rgba(67,221,140,.3)}
+.zm-tok{position:absolute;width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 0 0 7px rgba(255,255,255,.22),0 12px 20px -8px rgba(0,0,0,.55)}
+.zm-tok i{position:absolute;inset:14px;border-radius:50%;background:var(--emerald-1)}
+.ck{position:relative;flex:none;width:58px;height:58px;border-radius:50%;box-shadow:inset 0 0 0 3px var(--ckr,var(--line-2))}
+.ck-f{position:absolute;inset:0;border-radius:50%;background:var(--ckc,var(--discharge))}
+.ck svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--cks,#fff);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ck path{stroke-dasharray:1}
+.row{display:flex;align-items:center;gap:26px}
+.nb{white-space:nowrap}
+.chip{display:inline-flex;align-items:center;height:64px;padding:0 28px;border-radius:32px;font-weight:800;font-size:34px;white-space:nowrap}
+:root, #root{
+  --pearl:#080d0b; --pearl-2:#0c1310; --surface:#111a15; --surface-2:#15201a; --surface-3:#1b2821;
+  --ink:#e7f0eb; --ink-2:#c8d6cf; --muted:#94a79d; --faint:#6b7e74; --line:#1f2c26; --line-2:#2c3c34;
+  --accent:#5fd297; --accent-2:#86e2b2; --accent-soft:#12301f; --mint:#5be89d; --gold:#e3c27a;
+}
+.tile{box-shadow:0 2px 2px rgba(0,0,0,.25),0 44px 70px -40px rgba(0,0,0,.9),0 14px 26px -18px rgba(0,0,0,.6)}
+.t-obsidian::after{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2)}
+.card{box-shadow:0 2px 6px rgba(0,0,0,.35),0 40px 70px -42px rgba(0,0,0,.9),inset 0 0 0 1.5px var(--line-2)}
+
+#root{position:absolute;inset:0;overflow:hidden}
+
+  #s03-mo{position:absolute;left:160px;top:250px;width:300px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  #s03-mo b{font-weight:800;font-size:40px;margin-top:22px}
+  #s03-mo small{font-weight:700;font-size:30px;color:var(--muted);margin-top:4px}
+  #s03-d{background:var(--mint);color:var(--emerald-3);box-shadow:0 0 0 18px rgba(67,221,140,.24)}
+  #s03-slip{position:absolute;left:520px;top:150px;width:520px;height:700px;border-radius:30px;background:#12301f;box-shadow:0 2px 6px rgba(0,0,0,.35),0 40px 70px -40px rgba(0,0,0,.9),inset 0 0 0 1.5px #24432f;overflow:hidden}
+  #s03-slip header{height:150px;padding:34px 40px;background:var(--emerald-1);color:#fff}
+  #s03-slip header b{display:block;font-weight:900;font-size:50px;letter-spacing:-.02em}
+  #s03-slip header small{font-weight:700;font-size:30px;opacity:.9}
+  #s03-slip .sl-lab{font-weight:700;font-size:30px;color:#94c9aa;margin:34px 40px 18px}
+  .sl-row{display:flex;align-items:center;gap:22px;margin:0 40px 26px}
+  .sl-row .ck{width:50px;height:50px;border-radius:12px}
+  .sl-row .ck-f{border-radius:12px}
+  .sl-bar{height:16px;border-radius:8px;background:#2f5c44;transform-origin:0 50%}
+  #s03-q{position:absolute;left:40px;bottom:40px;display:flex;align-items:center;gap:16px;font-weight:800;font-size:30px;color:#b5dcc6}
+  #s03-q i{display:block;width:150px;height:52px;border-radius:14px;box-shadow:inset 0 0 0 3px #3a6b51}
+  #s03-path{position:absolute;left:1040px;top:470px;width:250px;height:60px}
+  #s03-rbw{position:absolute;top:388px;left:1040px;width:250px;display:flex;justify-content:center}
+  #s03-rb{position:relative;height:58px;padding:0 22px;border-radius:16px;font-weight:800;font-size:30px;display:flex;align-items:center}
+  #s03-tr{left:1290px;top:150px;width:470px;height:700px;padding:44px 44px}
+  #s03-tr .disc{width:104px;height:104px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 3px rgba(255,255,255,.3)}
+  #s03-tr .disc .ic{width:48%;height:48%}
+  #s03-tr h2{font-weight:800;font-size:50px;line-height:1.05;margin-top:26px}
+  #s03-tr .ppp{font-weight:700;font-size:32px;opacity:.9;margin-top:6px}
+  .tr-row{display:flex;align-items:flex-start;gap:20px;margin-top:30px;font-weight:700;font-size:34px;line-height:1.2}
+  .tr-row .dot{position:relative;flex:none;width:30px;height:30px;margin-top:6px;border-radius:50%;background:rgba(255,255,255,.3)}
+  #s03-ring{position:absolute;inset:-12px;border-radius:50%;box-shadow:0 0 0 4px var(--mint);opacity:0}
+  
+#s07-abx h2{font-size:42px} #s09-stuck h2{font-size:56px} #s06-rule h2{font-size:52px}
+</style>
+<div id="root" data-composition-id="s03" data-width="1920" data-height="1080">
+
+  <div id="s03-mo"><div class="zw" style="width:170px;height:170px"><div class="disc zd" id="s03-d" style="width:170px;height:170px"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10.5" r="2"/></svg></div></div><b>Anda, MO</b><small>Konsultasi</small></div>
+  <div class="zm-tok" id="s03-tok" style="left:287px;top:312px;z-index:2"><i></i></div>
+  <div id="s03-slip">
+    <header><b>Slip hijau</b><small>Slip rawatan</small></header>
+    <p class="sl-lab">Arahan</p>
+    <div class="sl-row"><div class="ck" id="s03-k0" style="--ckr:#3a6b51;--ckc:#13834c"><div class="ck-f" id="s03-k0-f"></div><svg viewBox="0 0 24 24"><path id="s03-k0-p" d="m6.6 12.4 3.6 3.6 7.2-7.4" pathLength="1"/></svg></div><div class="sl-bar" id="s03-b0" style="width:300px"></div></div><div class="sl-row"><div class="ck" id="s03-k1" style="--ckr:#3a6b51;--ckc:#13834c"><div class="ck-f" id="s03-k1-f"></div><svg viewBox="0 0 24 24"><path id="s03-k1-p" d="m6.6 12.4 3.6 3.6 7.2-7.4" pathLength="1"/></svg></div><div class="sl-bar" id="s03-b1" style="width:240px"></div></div><div class="sl-row"><div class="ck" id="s03-k2" style="--ckr:#3a6b51;--ckc:#13834c"><div class="ck-f" id="s03-k2-f"></div><svg viewBox="0 0 24 24"><path id="s03-k2-p" d="m6.6 12.4 3.6 3.6 7.2-7.4" pathLength="1"/></svg></div><div class="sl-bar" id="s03-b2" style="width:270px"></div></div>
+    <div id="s03-q">No. giliran<i></i></div>
+  </div>
+  <svg id="s03-path" viewBox="0 0 250 60"><path id="s03-pl" d="M8 30 H 240" stroke="#5fd297" stroke-width="8" stroke-linecap="round" fill="none" pathLength="1" style="stroke-dasharray:1"/></svg>
+  <div id="s03-rbw"><div id="s03-rb" class="tile t-garnet">Kotak Merah</div></div>
+  <div class="tile t-emerald" id="s03-tr">
+    <div class="disc"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><path d="m4 20 2.4-2.4M10 10.5l3.5 3.5"/></svg></div>
+    <h2>Bilik rawatan</h2><p class="ppp">PPP</p>
+    <div class="tr-row" id="s03-r0"><span class="dot"><span id="s03-ring"></span></span><span>Memanggil nombor giliran</span></div>
+    <div class="tr-row" id="s03-r1"><span class="dot"></span><span>Melaksanakan setiap arahan</span></div>
+    <div class="tr-row" id="s03-r2"><span class="dot"></span><span>Mencatat setiap satu</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s03-mo",{x:650,opacity:0,y:30},{x:650,opacity:1,y:0,duration:.45,ease:"power3.out"},0.05);
+  tl.fromTo("#s03-mo",{x:650},{x:0,duration:.6,ease:"power3.inOut",immediateRender:false},2.942);
+  tl.fromTo("#s03-tok",{x:390},{x:650,duration:2.457,ease:"power2.inOut"},0);
+  tl.fromTo("#s03-tok",{opacity:0},{opacity:1,duration:0.2,ease:"power1.out"},0);
+  tl.fromTo("#s03-tok",{opacity:1},{opacity:0,duration:.2,immediateRender:false},2.507);
+  tl.fromTo("#s03-d",{scale:1},{scale:1.1,duration:.16,ease:"power2.out",yoyo:true,repeat:1,immediateRender:false},2.457);
+  tl.fromTo("#s03-slip",{x:-140,rotation:-8,opacity:0},{x:0,rotation:-2,opacity:1,duration:.55,ease:"power3.out"},3.342);
+  tl.fromTo("#s03-b0",{scaleX:0},{scaleX:1,duration:.4,ease:"power2.out"},3.407);
+  tl.fromTo("#s03-b1",{scaleX:0},{scaleX:1,duration:.4,ease:"power2.out"},3.567);
+  tl.fromTo("#s03-b2",{scaleX:0},{scaleX:1,duration:.4,ease:"power2.out"},3.727);
+  tl.fromTo("#s03-pl",{strokeDashoffset:1},{strokeDashoffset:0,duration:0.45,ease:"power2.inOut"},4.407);
+  tl.fromTo("#s03-rb",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},4.607);
+  tl.fromTo("#s03-tr",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},4.597);
+  tl.fromTo("#s03-ring",{scale:.6,opacity:.9},{scale:1.7,opacity:0,duration:.6,ease:"power1.out"},5.007);
+  tl.fromTo("#s03-ring",{scale:.6,opacity:.9},{scale:1.7,opacity:0,duration:.6,ease:"power1.out",immediateRender:false},5.657);
+  tl.fromTo("#s03-r0 .dot",{backgroundColor:"rgba(255,255,255,0.3)"},{backgroundColor:"#5be89d",duration:.25,immediateRender:false},5.007);
+  tl.fromTo("#s03-r1 .dot",{backgroundColor:"rgba(255,255,255,0.3)"},{backgroundColor:"#5be89d",duration:.25,immediateRender:false},6.955);
+  tl.fromTo("#s03-r2 .dot",{backgroundColor:"rgba(255,255,255,0.3)"},{backgroundColor:"#5be89d",duration:.25,immediateRender:false},8.147);
+  tl.fromTo("#s03-k0-f",{scale:0},{scale:1,duration:.28,ease:"back.out(2.2)"},7.437);tl.fromTo("#s03-k0-p",{strokeDashoffset:1},{strokeDashoffset:0,duration:.3,ease:"power2.out"},7.537);
+  tl.fromTo("#s03-k1-f",{scale:0},{scale:1,duration:.28,ease:"back.out(2.2)"},7.697);tl.fromTo("#s03-k1-p",{strokeDashoffset:1},{strokeDashoffset:0,duration:.3,ease:"power2.out"},7.797);
+  tl.fromTo("#s03-k2-f",{scale:0},{scale:1,duration:.28,ease:"back.out(2.2)"},7.957);tl.fromTo("#s03-k2-p",{strokeDashoffset:1},{strokeDashoffset:0,duration:.3,ease:"power2.out"},8.057);
+  window.__timelines["s03"] = tl;
+})();
+</script>
+</template>

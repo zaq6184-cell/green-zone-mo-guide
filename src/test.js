@@ -3,7 +3,8 @@
    in light and dark, with reduced motion on the tablet. It fails on any console or page error, any
    sideways scroll, and any check below that does not hold. Screenshots go to the shots folder.
 
-   It is written for the version 8 markup (ids such as #bento, #zmap, #libgrid, #cur, #ptab, #pmap, #introbox, #gq). Change it with the shell.
+   It is written for the version 8 markup (ids such as #bento, #zmap, #daynight, #libgrid, #cur, #ptab, #pmap, #introbox, #gq). Change it with the shell.
+   The night poster sheets and night films must be in the site folder: the dark runs load them.
    Setup once: npm install, then npx playwright install chromium.
    Usage: node test.js [site folder, default ../app] [screenshot folder, default ./shots]     (npm test) */
 const { chromium } = require('playwright');
@@ -45,6 +46,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => document.querySelectorAll('#zmap [data-zs]').length) === 5, 'zone map shows five stops');
   ok(await p.evaluate(() => /5333/.test(document.querySelector('#kn-a').textContent)), 'Code Blue tile shows ext 5333');
   ok(await p.evaluate(() => document.querySelectorAll('#quick a .dots i').length) > 8, 'quick routes show how each can end');
+  ok(await p.evaluate(() => { const s = document.querySelector('#daynight'); return !!s && s.getAttribute('role') === 'switch' && s.getAttribute('aria-checked') === 'false' && s.querySelectorAll('svg.i').length === 2; }), 'home shows the Day and Night switch, set to day');
+  ok(await p.evaluate(() => document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-poster.webp'), 'in day colours the tour has the day film and cover');
+  ok(await p.evaluate(() => document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src') === 'poster/sheet1-thumb.webp'), 'in day colours the poster page has the day sheets');
   await p.screenshot({path:out + '/d-home.png'});
   await p.click('#zmap [data-zs="3"]'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => !document.querySelector('#zx').hidden && /CCA/.test(document.querySelector('#zx h3').textContent)), 'a zone stop opens its rules');
@@ -179,6 +183,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/d-settings.png'});
   await p.click('#st-theme [data-val="dark"]'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'dark', 'settings switch to dark');
+  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked')) === 'true', 'the home switch follows Settings');
   await p.keyboard.press('Escape'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => document.querySelector('#settings').hidden), 'Escape closes settings');
   await p.screenshot({path:out + '/d-home-dark.png'});
@@ -191,21 +196,36 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   const tour = await p.evaluate(() => ({ch:document.querySelectorAll('#chaps button').length, ln:document.querySelectorAll('#tscript li').length,
     src:document.querySelector('#vid').getAttribute('src'), last:(document.querySelector('#chaps button:last-child') || {}).textContent || ''}));
   ok(tour.ch === 9 && /When to call the EP/.test(tour.last), 'tour lists the 9 chapters of the version 8 explainer');
-  ok(tour.ln === 49 && tour.src === 'media/green-zone-explainer-720p.mp4', 'tour transcript has 49 timed lines and plays the 720p film');
+  ok(tour.ln === 49 && tour.src === 'media/green-zone-explainer-night-720p.mp4', 'tour transcript has 49 timed lines; in night colours it has the night film');
   await p.click('#tlang [data-lang="ms"]'); await p.waitForTimeout(200);
   const tms = await p.evaluate(() => ({src:document.querySelector('#vid').getAttribute('src'), cover:document.querySelector('#vid').getAttribute('poster'),
     ch:document.querySelectorAll('#chaps button').length, first:(document.querySelector('#chaps button') || {}).textContent || '', ln:document.querySelectorAll('#tscript li').length,
     h:document.querySelector('#tourh').textContent, lang:document.querySelector('#tscript').getAttribute('lang'), saved:localStorage.getItem('gz-tour-lang'),
     pressed:document.querySelector('#tlang [data-lang="ms"]').getAttribute('aria-pressed')}));
-  ok(tms.src === 'media/green-zone-explainer-ms-720p.mp4' && tms.cover === 'media/explainer-ms-poster.webp', 'tour switches to the Bahasa Melayu film and cover');
+  ok(tms.src === 'media/green-zone-explainer-ms-night-720p.mp4' && tms.cover === 'media/explainer-ms-night-poster.webp', 'tour switches to the Bahasa Melayu night film and cover');
   ok(tms.ch === 9 && /Baru di Zon Hijau/.test(tms.first) && tms.ln === 50 && tms.lang === 'ms' && /Zon Hijau/.test(tms.h), 'Malay chapters, transcript and heading');
   ok(tms.saved === '"ms"' && tms.pressed === 'true', 'the tour remembers the language');
   await p.screenshot({path:out + '/d-tour-ms-dark.png'});
   await p.click('#tlang [data-lang="en"]'); await p.waitForTimeout(200);
   const ten = await p.evaluate(() => ({src:document.querySelector('#vid').getAttribute('src'), ln:document.querySelectorAll('#tscript li').length}));
-  ok(ten.src === 'media/green-zone-explainer-720p.mp4' && ten.ln === 49, 'tour switches back to English');
+  ok(ten.src === 'media/green-zone-explainer-night-720p.mp4' && ten.ln === 49, 'tour switches back to English');
   await go(p, '#numbers', 400);
   await p.screenshot({path:out + '/d-numbers-dark.png'});
+  await go(p, '#poster', 400);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#v-poster [data-sheet] img')].map(i => i.getAttribute('src')).join(' ')) === 'poster/sheet1-night-thumb.webp poster/sheet2-night-thumb.webp', 'in night colours the poster page has the night sheets');
+  await p.click('#v-poster [data-sheet="2"]'); await p.waitForTimeout(500);
+  ok(await p.evaluate(() => document.querySelector('#lbimg').getAttribute('src')) === 'poster/sheet2-night.webp', 'a night sheet opens full size');
+  await p.screenshot({path:out + '/d-poster-dark.png'});
+  await p.keyboard.press('Escape'); await p.waitForTimeout(200);
+  await p.screenshot({path:out + '/d-poster-dark-page.png', fullPage:true});
+  // The home switch back to day
+  await go(p, '#home', 400);
+  await p.click('#daynight'); await p.waitForTimeout(400);
+  const day = await p.evaluate(() => ({theme:document.documentElement.dataset.theme, on:document.querySelector('#daynight').getAttribute('aria-checked'), saved:localStorage.getItem('gz-theme'),
+    src:document.querySelector('#vid').getAttribute('src'), cover:document.querySelector('#vid').getAttribute('poster'), thumb:document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src')}));
+  ok(day.theme === 'light' && day.on === 'false' && day.saved === '"light"', 'the home switch turns the day colours on and remembers it');
+  ok(day.src === 'media/green-zone-explainer-720p.mp4' && day.cover === 'media/explainer-poster.webp' && day.thumb === 'poster/sheet1-thumb.webp', 'day colours bring back the day film, cover and sheets');
+  await p.screenshot({path:out + '/d-home-day-again.png'});
   await p.evaluate(() => { localStorage.setItem('gz-theme', '"auto"'); });
 
   /* ---------- Phone, light ---------- */
@@ -216,6 +236,20 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => getComputedStyle(document.querySelector('#tabbar')).display) !== 'none', 'phone shows the tab bar');
   await p.screenshot({path:out + '/p-home.png'});
   await p.screenshot({path:out + '/p-home-full.png', fullPage:true});
+  const dn = await p.evaluate(() => {
+    const r = e => e.getBoundingClientRect(), s = r(document.querySelector('#daynight')), h1 = document.querySelector('#h-home'), g = document.createRange();
+    g.selectNodeContents(h1); const t = g.getBoundingClientRect(), sub = r(document.querySelector('.hello-sub'));
+    return {gap:Math.round(s.left - t.right), clear:Math.round(sub.top - s.bottom), right:Math.round(innerWidth - s.right), w:Math.round(s.width), h:Math.round(s.height), oneLine:t.height < parseFloat(getComputedStyle(h1).fontSize) * 1.6};
+  });
+  ok(dn.gap >= 4 && dn.clear >= -1 && dn.right >= 15 && dn.oneLine && dn.w >= 44, `phone: the switch sits beside a one-line title, clear of the greeting (${JSON.stringify(dn)})`);
+  await p.tap('#daynight'); await p.waitForTimeout(450);
+  const pn = await p.evaluate(() => ({theme:document.documentElement.dataset.theme, on:document.querySelector('#daynight').getAttribute('aria-checked'), saved:localStorage.getItem('gz-theme'),
+    src:document.querySelector('#vid').getAttribute('src'), thumb:document.querySelector('#v-poster [data-sheet="2"] img').getAttribute('src')}));
+  ok(pn.theme === 'dark' && pn.on === 'true' && pn.saved === '"dark"', 'phone: the home switch turns the night colours on and remembers it');
+  ok(pn.src === 'media/green-zone-explainer-night-720p.mp4' && pn.thumb === 'poster/sheet2-night-thumb.webp', 'night colours bring the night film and the night sheets');
+  await p.screenshot({path:out + '/p-home-night.png'});
+  await p.tap('#daynight'); await p.waitForTimeout(450);
+  ok(await p.evaluate(() => document.documentElement.dataset.theme === 'light' && document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4'), 'a second tap brings the day colours back');
   for (const v of VIEWS.slice(1)){
     await go(p, '#' + v);
     ok(await hscroll(p) <= 0, `phone #${v} no sideways scroll`);
@@ -267,6 +301,15 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   p = await mk({...phone, colorScheme:'dark'}, 'phone-dark');
   await p.goto(U, {waitUntil:'networkidle'}); await p.waitForTimeout(800);
   await p.screenshot({path:out + '/pd-home.png'});
+  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'true' && document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-night-720p.mp4' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-night-poster.webp'), 'on Auto, a dark phone gets the switch at night and the night film');
+  await go(p, '#tour', 400);
+  await p.screenshot({path:out + '/pd-tour.png'});
+  await go(p, '#poster', 400);
+  ok(await hscroll(p) <= 0, 'phone dark poster no sideways scroll');
+  await p.screenshot({path:out + '/pd-poster.png', fullPage:true});
+  await p.emulateMedia({colorScheme:'light'}); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4' && document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src') === 'poster/sheet1-thumb.webp'), 'on Auto, when the device turns light the switch, film and sheets follow');
+  await p.emulateMedia({colorScheme:'dark'}); await p.waitForTimeout(400);
   await go(p, '#referral-rules--ortho', 400);
   await p.screenshot({path:out + '/pd-run-ortho.png', fullPage:true});
   await go(p, '#journey', 400);

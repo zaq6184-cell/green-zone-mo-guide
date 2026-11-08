@@ -28,3 +28,11 @@ video/explainer-ms/work/
 video/explainer/work/ms/*-16k.wav
 video/explainer/work/ms/check.json
 video/explainer/work/build.pre-i18n.bak
+
+# Night explainer projects (made by video/explainer/work/build.cjs night): renders, review frames and scratch
+video/explainer-night/.hyperframes/
+video/explainer-night/renders/
+video/explainer-night/work/
+video/explainer-ms-night/.hyperframes/
+video/explainer-ms-night/renders/
+video/explainer-ms-night/work/

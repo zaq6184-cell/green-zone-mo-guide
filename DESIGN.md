@@ -332,7 +332,7 @@ A hybrid of tonal layering and soft, long shadows. The pearl ground sits lowest;
 - **Glass bar** (`0 0 0 1px line at 80%, 0 20px 40px -18px rgba(15,26,21,.5)`): the floating tab bar.
 
 ### Named Rules
-**The Tinted Shadow Rule.** A jewel surface casts a shadow in its own deepest stop, never in grey. Neutral surfaces use the sh-1 to sh-3 steps.
+**The Tinted Shadow Rule.** A jewel surface casts a shadow in its own deepest stop, never in grey. Neutral surfaces use the sh-1 to sh-3 steps. In dark themes every tinted shadow (jewel tiles, emerald buttons, outcome cards and verdicts) mixes to black through the shade-k token (0% in light, 100% in both dark blocks), so no shadow lights the dark ground; the night films and night poster sheets do the same.
 
 **The Ring Not Border Rule.** Surfaces are outlined with a 1 px inset ring (line on light surfaces, a white edge on jewels), not a CSS border, so the edge sits inside the radius and never shifts layout. Hover and focus thicken the ring to 1.5 or 2 px in the accent.
 
@@ -377,6 +377,7 @@ Tactile and quiet: white with a ring, the colour arrives on intent.
 - **Sidebar:** obsidian gradient from stop 1 to stop 3, light text, uppercase group heads, 44 px rows at 13 px corners; the current page gets white at 12% with a mint icon; counts in mono at 55%.
 - **Top bar (under 1100 px):** sticky, pearl at 84% with a 16 px blur and a hairline bottom line.
 - **Focus:** a 3 px mint outline offset 2 px on every focusable element.
+- **Day and night switch:** in the home header, a 64 by 36 px track on surface-3 with a line-2 ring, a sun and a moon at 18 px, and a 28 px knob that slides 28 px on the spring: white with an observe-amber sun by day, indigo-2 with a gold moon at night. It is labelled "Night colours" from 761 px; below that it sits beside the title, icons only. It sets the same theme as Settings, and the tour film and poster sheets follow it.
 
 ### Pathway Runner (signature)
 One question card at a time on a white 28 px card with a ghost card stacked behind it. Answer options are 60 px rows with a mono number key; the option the checklist suggests becomes an emerald gradient with a mint key. A route rail beside the card (a vertical emerald to teal line with circle stops, the current one ringed in mint) shows the answers given and how the pathway can end; under 980 px it becomes a horizontal trail and a segmented progress bar.

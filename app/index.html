@@ -32,6 +32,7 @@
   --sh-1:0 1px 2px rgba(15,26,21,.06);
   --sh-2:0 1px 2px rgba(15,26,21,.05),0 18px 34px -20px rgba(15,26,21,.42);
   --sh-3:0 2px 10px rgba(15,26,21,.08),0 36px 70px -28px rgba(15,26,21,.5);
+  --shade-k:0%; /* how far a tinted shadow (jewel, emerald button, outcome) mixes to black: none by day, all the way at night */
   --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
   --display:"Figtree","Atkinson Hyperlegible Next",system-ui,sans-serif;
   --body:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -46,7 +47,7 @@
   --admit:#ff958d; --admit-soft:#3a1715; --observe:#f3c55a; --observe-soft:#33270a; --discharge:#6edb9c; --discharge-soft:#10301f;
   --refer:#b3a9ff; --refer-soft:#211d48; --neutral:#afc0b7; --neutral-soft:#17231d; --advice:#8ab7f5; --advice-soft:#122339; --concern:#f293b9; --concern-soft:#381625;
   --mark:#5d4b0c; --scrim:rgba(0,0,0,.68); --edge:rgba(255,255,255,.1);
-  --sh-1:0 0 0 1px rgba(255,255,255,.02); --sh-2:0 18px 36px -18px rgba(0,0,0,.8); --sh-3:0 30px 64px -22px rgba(0,0,0,.9); color-scheme:dark}}
+  --sh-1:0 0 0 1px rgba(255,255,255,.02); --sh-2:0 18px 36px -18px rgba(0,0,0,.8); --sh-3:0 30px 64px -22px rgba(0,0,0,.9); --shade-k:100%; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#080d0b; --bg-2:#0c1310; --surface:#111a15; --surface-2:#15201a; --surface-3:#1b2821;
   --ink:#e7f0eb; --ink-2:#c8d6cf; --muted:#94a79d; --faint:#6b7e74; --line:#1f2c26; --line-2:#2c3c34;
@@ -54,7 +55,7 @@
   --admit:#ff958d; --admit-soft:#3a1715; --observe:#f3c55a; --observe-soft:#33270a; --discharge:#6edb9c; --discharge-soft:#10301f;
   --refer:#b3a9ff; --refer-soft:#211d48; --neutral:#afc0b7; --neutral-soft:#17231d; --advice:#8ab7f5; --advice-soft:#122339; --concern:#f293b9; --concern-soft:#381625;
   --mark:#5d4b0c; --scrim:rgba(0,0,0,.68); --edge:rgba(255,255,255,.1);
-  --sh-1:0 0 0 1px rgba(255,255,255,.02); --sh-2:0 18px 36px -18px rgba(0,0,0,.8); --sh-3:0 30px 64px -22px rgba(0,0,0,.9); color-scheme:dark}
+  --sh-1:0 0 0 1px rgba(255,255,255,.02); --sh-2:0 18px 36px -18px rgba(0,0,0,.8); --sh-3:0 30px 64px -22px rgba(0,0,0,.9); --shade-k:100%; color-scheme:dark}
 :root[data-size="large"]{font-size:112.5%}
 
 /* ---------- Base and browser surfaces ---------- */
@@ -82,7 +83,7 @@ button,.btn{font:700 .95rem/1.2 var(--body);cursor:pointer;border-radius:var(--r
 button:hover,.btn:hover{border-color:var(--accent)}
 button:active,.btn:active{transform:scale(.98)}
 button:disabled{opacity:.42;cursor:default;border-color:var(--line);transform:none}
-.primary{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-2));border-color:transparent;color:#fff;box-shadow:0 12px 24px -14px var(--emerald-3)}
+.primary{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-2));border-color:transparent;color:#fff;box-shadow:0 12px 24px -14px var(--emerald-3);box-shadow:0 12px 24px -14px color-mix(in srgb,var(--emerald-3),#000 var(--shade-k))}
 .primary:hover{border-color:transparent;filter:brightness(1.08)}
 .soft{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
 .soft:hover{border-color:var(--accent)}
@@ -110,10 +111,10 @@ button:disabled{opacity:.42;cursor:default;border-color:var(--line);transform:no
 
 /* ---------- Tiles: the premium material ---------- */
 .tile{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:12px;min-width:0;padding:18px;border:0;border-radius:var(--r-xl);color:var(--t-ink,#fff);text-align:left;text-decoration:none;font:inherit;
-  background:linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));box-shadow:0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px var(--t3);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+  background:linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));box-shadow:0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px var(--t3);box-shadow:0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px color-mix(in srgb,var(--t3),#000 var(--shade-k));transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
 .tile::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(280px circle at var(--mx,-400px) var(--my,-400px),rgba(255,255,255,.16),transparent 62%),radial-gradient(120% 85% at 0 0,rgba(255,255,255,.14),transparent 55%),var(--grain);background-size:auto,auto,180px 180px}
 .tile::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px var(--edge)}
-a.tile:hover,button.tile:hover{transform:translateY(-2px);box-shadow:0 1px 1px rgba(0,0,0,.05),0 28px 44px -24px var(--t3)}
+a.tile:hover,button.tile:hover{transform:translateY(-2px);box-shadow:0 1px 1px rgba(0,0,0,.05),0 28px 44px -24px var(--t3);box-shadow:0 1px 1px rgba(0,0,0,.05),0 28px 44px -24px color-mix(in srgb,var(--t3),#000 var(--shade-k))}
 a.tile:active,button.tile:active{transform:scale(.985)}
 .t-emerald{--t1:var(--emerald-1);--t2:var(--emerald-2);--t3:var(--emerald-3)}
 .t-sapphire{--t1:var(--sapphire-1);--t2:var(--sapphire-2);--t3:var(--sapphire-3)}
@@ -148,7 +149,7 @@ a.t-pearl:hover{box-shadow:var(--sh-3)}
 .scrim{position:fixed;inset:0;z-index:55;background:var(--scrim)}
 .side-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 4px 0}
 .brand{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;min-width:0}
-.mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;flex:none;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 10px 20px -10px var(--emerald-3)}
+.mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;flex:none;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 10px 20px -10px var(--emerald-3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 10px 20px -10px color-mix(in srgb,var(--emerald-3),#000 var(--shade-k))}
 .mark svg{width:25px;height:25px}
 .brand .bt{display:grid;line-height:1.1;min-width:0}
 .brand b{font:850 1.1rem/1.1 var(--display);letter-spacing:-.015em}
@@ -210,7 +211,7 @@ main{flex:1;outline:none}
   .tabbar a,.tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;padding:5px 2px;border:0;border-radius:19px;background:none;color:var(--muted);font:800 .72rem/1 var(--body);text-decoration:none}
   .tabbar svg{width:22px;height:22px}
   .tabbar [aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
-  .tabbar .fab span{display:grid;place-items:center;width:44px;height:44px;border-radius:16px;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:0 10px 20px -10px var(--emerald-3)}
+  .tabbar .fab span{display:grid;place-items:center;width:44px;height:44px;border-radius:16px;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:0 10px 20px -10px var(--emerald-3);box-shadow:0 10px 20px -10px color-mix(in srgb,var(--emerald-3),#000 var(--shade-k))}
   .tabbar .fab b{font:800 .7rem/1 var(--body);color:var(--muted)}
   .tabbar .fab{gap:2px}
 }
@@ -239,6 +240,23 @@ main{flex:1;outline:none}
 .hello-sub{margin:8px 0 0;font:700 .84rem/1.3 var(--body);color:var(--muted)}
 .hello .hs-s{display:none}
 @media (max-width:560px){.hello{margin:0 0 12px}.hello h1{font-size:1.75rem}.hello h1 span{display:inline}.hello .hs-l{display:none}.hello .hs-s{display:inline}.hello-sub{margin-top:5px}}
+/* Day and night: one switch in the home header. Below 761 px it sits beside the title, clear of the greeting line */
+.dn{flex:none;align-self:flex-end;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 0 0 12px;border:0;border-radius:22px;background:transparent;color:var(--muted);font:800 .84rem/1.2 var(--body)}
+.dn:hover{color:var(--ink)}
+.dn:hover .dn-t{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.dn-t{position:relative;display:block;flex:none;width:64px;height:36px;border-radius:18px;background:var(--surface-3);box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.dn-k{position:absolute;top:4px;left:4px;width:28px;height:28px;border-radius:50%;background:var(--surface);box-shadow:var(--sh-2),inset 0 0 0 1px var(--line)}
+.dn-i{position:absolute;top:9px;display:grid;width:18px;height:18px;color:var(--faint)}
+.dn-i svg.i{width:18px;height:18px}
+.dn-sun{left:9px}
+.dn-moon{right:9px}
+.dn[aria-checked="false"] .dn-sun{color:var(--observe)}
+.dn[aria-checked="true"] .dn-k{transform:translateX(28px);background:var(--indigo-2);box-shadow:var(--sh-2)}
+.dn[aria-checked="true"] .dn-moon{color:var(--gold)}
+@media (prefers-reduced-motion:no-preference){.dn-k{transition:transform .34s var(--spring),background-color .2s}}
+@media (max-width:760px){.hello{position:relative}.dn{position:absolute;right:0;top:0;min-height:36px;padding:0}.dn .dn-l{display:none}}
+@media (max-width:560px){.hello h1{padding-right:76px}.dn{top:-4px}}
+@media (max-width:374px){.hello h1{font-size:1.6rem;padding-right:72px}.dn{top:-5px}}
 .top:not(.has-title) .brand .bt{display:none}
 @media (max-width:760px){.zt .sub{display:none}}
 .searchbox{display:flex;align-items:center;gap:12px;width:100%;height:60px;padding:0 14px 0 18px;border-radius:20px;border:0;background:var(--surface);color:var(--muted);font:700 1.02rem/1.2 var(--body);text-align:left;justify-content:flex-start;box-shadow:var(--sh-2),inset 0 0 0 1px var(--line)}
@@ -380,12 +398,12 @@ main{flex:1;outline:none}
 .find input:focus{outline:none;box-shadow:var(--sh-2),inset 0 0 0 2px var(--accent)}
 .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,150px),1fr));gap:10px;margin:0 0 14px}
 .cats button{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-height:96px;padding:12px 13px;border:0;border-radius:20px;text-align:left;color:#fff;font:800 .9rem/1.2 var(--body);
-  background:linear-gradient(150deg,var(--t1),var(--t2) 60%,var(--t3));box-shadow:0 14px 26px -20px var(--t3);transition:transform .3s var(--ease),box-shadow .3s}
+  background:linear-gradient(150deg,var(--t1),var(--t2) 60%,var(--t3));box-shadow:0 14px 26px -20px var(--t3);box-shadow:0 14px 26px -20px color-mix(in srgb,var(--t3),#000 var(--shade-k));transition:transform .3s var(--ease),box-shadow .3s}
 .cats button::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(110% 80% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain);background-size:auto,180px 180px}
 .cats button svg{width:22px;height:22px}
 .cats button small{font:700 .72rem var(--mono);opacity:.82;margin-top:auto}
 .cats button:hover{transform:translateY(-2px)}
-.cats button[aria-pressed="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 14px 26px -18px var(--t3)}
+.cats button[aria-pressed="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 14px 26px -18px var(--t3);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 14px 26px -18px color-mix(in srgb,var(--t3),#000 var(--shade-k))}
 .cats button[aria-pressed="false"]{opacity:.9}
 .cats button[data-cat="all"]{--t1:var(--obsidian-1);--t2:var(--obsidian-2);--t3:var(--obsidian-3)}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
@@ -474,7 +492,7 @@ details.about .lead{margin:0;color:var(--muted)}
 .end{display:inline-flex;align-items:center;gap:7px;padding:6px 10px 6px 7px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font:800 .78rem/1 var(--body);color:var(--ink-2)}
 .end::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--oc)}
 .rail-p .ends{margin:14px 4px 0;padding-top:14px;border-top:1px solid var(--line)}
-.mapbtn{width:100%;margin-top:14px;justify-content:space-between;min-height:56px;padding:10px 14px;border:0;border-radius:18px;color:#fff;background:linear-gradient(150deg,var(--sapphire-1),var(--sapphire-3));box-shadow:0 14px 26px -18px var(--sapphire-3)}
+.mapbtn{width:100%;margin-top:14px;justify-content:space-between;min-height:56px;padding:10px 14px;border:0;border-radius:18px;color:#fff;background:linear-gradient(150deg,var(--sapphire-1),var(--sapphire-3));box-shadow:0 14px 26px -18px var(--sapphire-3);box-shadow:0 14px 26px -18px color-mix(in srgb,var(--sapphire-3),#000 var(--shade-k))}
 .mapbtn:hover{filter:brightness(1.1)}
 .mapbtn span{display:flex;align-items:center;gap:10px}
 .mapbtn small{font:700 .8rem var(--body);opacity:.85}
@@ -519,12 +537,12 @@ button.opt kbd{display:grid;place-items:center;width:36px;height:36px;min-width:
 button.opt .gt{width:20px;height:20px;margin-left:auto;color:var(--accent);transition:transform .2s var(--ease)}
 button.opt:hover{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
 button.opt:hover .gt{transform:translateX(4px)}
-button.opt.sugg{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:0 14px 26px -16px var(--emerald-3)}
+button.opt.sugg{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:0 14px 26px -16px var(--emerald-3);box-shadow:0 14px 26px -16px color-mix(in srgb,var(--emerald-3),#000 var(--shade-k))}
 button.opt.sugg kbd{background:var(--mint);color:var(--emerald-3);box-shadow:none}
 button.opt.sugg .gt{color:var(--mint)}
 @media (prefers-reduced-motion:no-preference){.cur-in{animation:deal .45s var(--ease)}@keyframes deal{from{opacity:0;transform:translateX(22px) rotate(.8deg)}to{opacity:1;transform:none}}}
 /* Outcome card */
-.res{position:relative;overflow:hidden;border-radius:var(--r-xl);background:var(--oc);color:var(--oi);box-shadow:0 22px 40px -26px var(--oc)}
+.res{position:relative;overflow:hidden;border-radius:var(--r-xl);background:var(--oc);color:var(--oi);box-shadow:0 22px 40px -26px var(--oc);box-shadow:0 22px 40px -26px color-mix(in srgb,var(--oc),#000 var(--shade-k))}
 .res-h{display:flex;align-items:center;gap:16px;padding:22px 22px 14px}
 .res-h .ic{width:58px;height:58px;border-radius:18px;background:rgba(255,255,255,.18);color:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
 .res-h .ic svg{width:28px;height:28px}
@@ -677,8 +695,8 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .dc-list small{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
 .dc-list.stop label:has(input:checked) small{color:var(--admit);font-weight:800}
 .verdict{margin-top:14px;padding:14px 16px;border-radius:18px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);font:850 1.05rem/1.3 var(--display)}
-.verdict.ok{background:var(--b-discharge);color:#fff;box-shadow:0 18px 30px -20px var(--b-discharge)}
-.verdict.stop{background:var(--b-admit);color:#fff;box-shadow:0 18px 30px -20px var(--b-admit)}
+.verdict.ok{background:var(--b-discharge);color:#fff;box-shadow:0 18px 30px -20px var(--b-discharge);box-shadow:0 18px 30px -20px color-mix(in srgb,var(--b-discharge),#000 var(--shade-k))}
+.verdict.stop{background:var(--b-admit);color:#fff;box-shadow:0 18px 30px -20px var(--b-admit);box-shadow:0 18px 30px -20px color-mix(in srgb,var(--b-admit),#000 var(--shade-k))}
 .verdict p{margin:6px 0 0;font:600 .9rem/1.45 var(--body)}
 .verdict a{color:inherit}
 .tool .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-top:14px;font-size:.8rem;color:var(--muted)}
@@ -811,7 +829,7 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .intro-index .tile{min-height:120px;justify-content:space-between;gap:10px;cursor:pointer}
 .intro-index b{font:900 1.6rem/1 var(--display)}
 .intro-index span{font:800 .95rem/1.25 var(--display)}
-.intro-index [aria-current="step"]{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 22px 38px -24px var(--t3)}
+.intro-index [aria-current="step"]{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 22px 38px -24px var(--t3);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 22px 38px -24px color-mix(in srgb,var(--t3),#000 var(--shade-k))}
 @media (max-width:760px){.intro-index{display:none}}
 .intro-steps{display:flex;gap:6px;list-style:none;margin:0;padding:0}
 .intro-steps li{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.2);transition:background-color .3s}
@@ -975,7 +993,8 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
     <main id="viewport" tabindex="-1">
       <!-- Home: the bento -->
       <section class="view" data-view="home" id="v-home" aria-labelledby="h-home"><div class="vw">
-        <header class="hello"><div><h1 id="h-home">Green Zone <span>MO Guide</span></h1><p class="hello-sub"><span id="greet">On shift</span><span class="hs-l"> · Emergency &amp; Trauma, Hospital Kuala Lumpur · MTS 4–5</span><span class="hs-s"> · ED HKL · MTS 4–5</span></p></div></header>
+        <header class="hello"><div><h1 id="h-home">Green Zone <span>MO Guide</span></h1><p class="hello-sub"><span id="greet">On shift</span><span class="hs-l"> · Emergency &amp; Trauma, Hospital Kuala Lumpur · MTS 4–5</span><span class="hs-s"> · ED HKL · MTS 4–5</span></p></div>
+          <button type="button" class="dn" id="daynight" role="switch" aria-checked="false" aria-label="Night colours"><span class="dn-l">Night colours</span><span class="dn-t" aria-hidden="true"><span class="dn-k"></span><span class="dn-i dn-sun" data-icon-in="sun"></span><span class="dn-i dn-moon" data-icon-in="moon"></span></span></button></header>
         <button type="button" class="searchbox" data-find id="herosearch"><span data-icon="search"></span><span>Symptom, rule, dose or number</span><kbd>/</kbd></button>
         <div class="bento" id="bento">
           <section class="tile t-emerald zt" aria-labelledby="h-zone">
@@ -1055,7 +1074,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
         <div data-lp="tour" hidden>
           <div class="tourbox tile t-obsidian" id="tourbox"><div class="tour-in">
             <div>
-              <video id="vid" controls playsinline preload="none" width="1280" height="720" poster="media/explainer-poster.webp" src="media/green-zone-explainer-720p.mp4" aria-describedby="vdesc"></video>
+              <video id="vid" controls playsinline preload="none" width="1280" height="720" aria-describedby="vdesc"></video>
               <div class="vmsg" id="vmsg" hidden>The video could not play in this browser. Try opening this guide in Chrome or Safari.</div>
               <div class="speeds" id="tlang" role="group" aria-label="Narration language"><span>Narration</span><button type="button" data-lang="en" aria-pressed="true" lang="en">English</button><button type="button" data-lang="ms" aria-pressed="false" lang="ms">Bahasa Melayu</button></div>
               <div class="chaps" id="chaps" aria-label="Chapters"></div>
@@ -1081,7 +1100,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Poster -->
       <section class="view" data-view="poster" id="v-poster" hidden aria-labelledby="h-post"><div class="vw">
         <header class="vhead"><div><h1 id="h-post">The wall poster</h1>
-          <p>Two A3 sheets for the Green Zone wall: the patient flow, rules and numbers on the first, and the pathways, EMACC, Asthma Zone and referrals on the second. Tap a sheet to read it full size.</p></div></header>
+          <p>Two A3 sheets for the Green Zone wall: the patient flow, rules and numbers on the first, and the pathways, EMACC, Asthma Zone and referrals on the second. Tap a sheet to read it full size. With night colours on, you see the night versions; the sheets on the wall keep the day colours.</p></div></header>
         <div class="sheets">
           <figure><button type="button" data-sheet="1" aria-label="Open sheet 1 full size"><img src="poster/sheet1-thumb.webp" width="560" height="791" loading="lazy" alt="Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know"></button><figcaption><b>Sheet 1</b> · Patient flow</figcaption></figure>
           <figure><button type="button" data-sheet="2" aria-label="Open sheet 2 full size"><img src="poster/sheet2-thumb.webp" width="560" height="791" loading="lazy" alt="Poster sheet 2: the 23 pathways, EMACC follow-up, Asthma Zone flow and referrals"></button><figcaption><b>Sheet 2</b> · Pathways and referrals</figcaption></figure>
@@ -2507,7 +2526,8 @@ const V8 = [
   ['Visual shift tools','A route meter for the discharge check, and gauges for the shock index, pulse pressure, heart rate and BMI, using the same thresholds as before.',[['#tools','Shift tools']]],
   ['First-shift intro','Four quick screens for a new MO or HO.',[['#intro','Open the intro']]],
   ['A new tour','The narrated explainer is rebuilt in the new look and now covers the version 7 rules: no repeat tests after secondary triage, down-triage only with the EP\'s permission, IV antibiotics on a CCA chair, and when the EP may decide the admission. It is also in Bahasa Melayu: switch the narration under the video.',[['#tour','Watch the tour']]],
-  ['The wall poster, redrawn','Both A3 sheets in the new look. Sheet 1 adds the four version 7 rules with their sources, and marks the three numbers still to confirm. Sheet 2 shows the Asthma Zone flow from the November 2025 memo.',[['#poster','Wall poster']]]
+  ['The wall poster, redrawn','Both A3 sheets in the new look. Sheet 1 adds the four version 7 rules with their sources, and marks the three numbers still to confirm. Sheet 2 shows the Asthma Zone flow from the November 2025 memo.',[['#poster','Wall poster']]],
+  ['Day and night','A switch on the home screen turns the night colours on and off. In night colours the tour plays a night version of the film, in English and in Bahasa Melayu, and the poster page shows night versions of both sheets. The sheets on the wall keep the day colours.',[['#home','Home'],['#tour','Watch the tour']]]
 ];
 
 /* The first-shift intro: four screens about using the guide, with a drawn picture each */
@@ -2697,6 +2717,8 @@ const ICONS = {
   volume:'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18.2 6.3a8 8 0 0 1 0 11.4"/>',
   quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1.1.9-1.1 1.6v.4"/><path d="M12 16.8h.01"/>',
   spark:'<path d="M12 3.5 13.9 10.1 20.5 12 13.9 13.9 12 20.5 10.1 13.9 3.5 12 10.1 10.1z"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.5 1.5M17.2 17.2l1.5 1.5M5.3 18.7l1.5-1.5M17.2 6.8l1.5-1.5"/>',
+  moon:'<path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a7 7 0 0 0 9.7 9.7z"/>',
   poster:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M8.5 11h7M8.5 14.5h4"/>',
   info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6h.01"/>',
   sliders:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
@@ -2858,6 +2880,7 @@ IDX.push({href:'#calc-dengue', title:'Shock index and pulse pressure check', kin
 IDX.push({href:'#calc-kids', title:'Children\'s weight-based doses', kind:'Tool', meta:'Department posters', body:'Prednisolone 1 mg/kg; salbutamol MDI puffs; ipratropium; dexamethasone croup; nebulised adrenaline; ORS 10 ml/kg; moderate dehydration 75 ml/kg; paediatric dose calculator weight', ic:'calc', c:'c-breath'});
 IDX.push({href:'#calc-weight', title:'Adjusted body weight for obese patients', kind:'Tool', meta:'Ebook p31–32', body:'BMI over 27.5; ideal body weight; adjusted body weight; dengue fluid; obese', ic:'calc', c:'c-breath'});
 IDX.push({href:'#tour', title:'Tour: the Green Zone in 90 seconds', kind:'Video', meta:'Explainer, English and Bahasa Melayu', body:CAPTIONS.map(c => c[1]).join(' ') + ' Bahasa Melayu Malay BM ' + CAPTIONS_MS.map(c => c[1]).join(' '), ic:'play', c:'c-infect'});
+IDX.push({href:'#home', title:'Day and night colours', kind:'Setting', meta:'Switch on the home screen', body:'Night colours, night mode, dark mode, dark theme, day colours, light mode, screen too bright, night shift', ic:'moon', c:'c-meta'});
 IDX.push({href:'#quiz', title:`Quick check: ${QUIZ.length} questions`, kind:'Quiz', meta:'Self-test', body:QUIZ.map(q => q.q).join(' · '), ic:'quiz', c:'c-infect'});
 IDX.push({href:'#new', title:'What\'s new from the drives', kind:'Update', meta:'7 Nov 2026', body:[...DRIVE.map(d => d[0] + ' ' + d[2]), ...V7.map(d => d[0] + ' ' + d[1])].join(' · '), ic:'spark', c:'c-flow'});
 IDX.push({href:'#poster', title:'Wall poster, two A3 sheets', kind:'Poster', meta:'Print', body:'poster A3 sheet patient flow rules numbers pathways', ic:'poster', c:'c-prot'});
@@ -3496,13 +3519,16 @@ function stopVoice(){ voice.pause(); const cap = $('#jcap'); if (cap) cap.hidden
 function stopJourney(){ if (playAll) setPlayAll(false); stopVoice(); const v = $('#jclip'); if (v) v.pause(); }
 
 /* ================= Tour: language, chapters, transcript, speed, resume ================= */
-/* The explainer in English or Bahasa Melayu: each has its own film, cover, chapters, transcript and resume point */
+/* The explainer in English or Bahasa Melayu: each has its own film, cover, chapters, transcript and resume point.
+   Each film also has a night version (nsrc, ncover) with the same timings, played when the guide shows night colours. */
 const TOUR_LANGS = {
-  en:{src:'media/green-zone-explainer-720p.mp4', cover:'media/explainer-poster.webp', ch:CHAPTERS, cap:CAPTIONS, key:'gz-tour-pos',
+  en:{src:'media/green-zone-explainer-720p.mp4', cover:'media/explainer-poster.webp', nsrc:'media/green-zone-explainer-night-720p.mp4', ncover:'media/explainer-night-poster.webp', ch:CHAPTERS, cap:CAPTIONS, key:'gz-tour-pos',
       h:'The Green Zone <span>in 90 seconds</span>', d:'1 minute 29 seconds, narrated, with captions on screen. Jump to a chapter, or tap a line of the transcript to hear it.', resume:'Resume at '},
-  ms:{src:'media/green-zone-explainer-ms-720p.mp4', cover:'media/explainer-ms-poster.webp', ch:CHAPTERS_MS, cap:CAPTIONS_MS, key:'gz-tour-pos-ms',
+  ms:{src:'media/green-zone-explainer-ms-720p.mp4', cover:'media/explainer-ms-poster.webp', nsrc:'media/green-zone-explainer-ms-night-720p.mp4', ncover:'media/explainer-ms-night-poster.webp', ch:CHAPTERS_MS, cap:CAPTIONS_MS, key:'gz-tour-pos-ms',
       h:'Zon Hijau <span>dalam 2 minit</span>', d:'1 minit 35 saat, dengan narasi dan sari kata pada skrin. Pilih satu bab, atau ketik satu baris transkrip untuk mendengarnya.', resume:'Sambung pada '}
 };
+const film = T => night() ? {src:T.nsrc, cover:T.ncover} : {src:T.src, cover:T.cover};
+let tourTheme = () => {};
 function pauseTour(){ const v = $('#vid'); if (v && !v.paused) v.pause(); }
 function setupTour(){
   const v = $('#vid'); let retried = false, lastSave = 0, lastLn = -1, lastCh = -1;
@@ -3521,9 +3547,18 @@ function setupTour(){
     const pos = store.get(T.key, 0);
     if (pos > 3) sp.insertAdjacentHTML('beforeend', `<button type="button" data-t="${pos}" id="resume">${T.resume}${fmt(pos)}</button>`);
     lastLn = -1; lastCh = -1;
-    if (load){ v.pause(); retried = false; $('#vmsg').hidden = true; v.setAttribute('poster', T.cover); v.src = T.src; v.load(); }
+    if (load){ const f = film(T); v.pause(); retried = false; $('#vmsg').hidden = true; v.setAttribute('poster', f.cover); v.src = f.src; v.load(); }
   };
-  drawLang(L !== 'en');
+  drawLang(true);
+  /* Day or night changed: swap to the matching film, keeping the place and, if it was playing, playing on */
+  tourTheme = () => {
+    const f = film(TOUR_LANGS[L]); if (v.getAttribute('src') === f.src) return;
+    const t = v.currentTime || 0, playing = !v.paused && !v.ended;
+    retried = false; $('#vmsg').hidden = true;
+    v.setAttribute('poster', f.cover); v.src = f.src; v.load();
+    if (t > .5) v.addEventListener('loadedmetadata', () => { try { v.currentTime = t; } catch(e){} }, {once:true});
+    if (playing) v.play().catch(() => {});
+  };
   const seek = t => { const goTo = () => { try { v.currentTime = t; } catch(e){} v.play().catch(() => {}); }; if (v.readyState >= 1) goTo(); else { v.addEventListener('loadedmetadata', goTo, {once:true}); v.load(); } };
   $('#tourbox').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
@@ -3545,7 +3580,7 @@ function setupTour(){
     if (retried){ $('#vmsg').hidden = false; return; }
     retried = true;
     try {
-      const r = await fetch(TOUR_LANGS[L].src); if (!r.ok) throw new Error(r.status);
+      const r = await fetch(film(TOUR_LANGS[L]).src); if (!r.ok) throw new Error(r.status);
       v.src = URL.createObjectURL(await r.blob()); v.load(); v.play().catch(() => {});
     } catch(e){ $('#vmsg').hidden = false; }
   });
@@ -3619,10 +3654,12 @@ function renderAbout(){
 }
 
 /* ================= Poster sheets, full size ================= */
-let lbFrom = null;
+let lbFrom = null, lbI = 0;
+/* Sheet i, full size or thumbnail, in the colours on screen (night sheets when the guide is dark) */
+const sheetSrc = (i, thumb) => `poster/sheet${i}${night() ? '-night' : ''}${thumb ? '-thumb' : ''}.webp`;
 function openSheet(i){
-  lbFrom = document.activeElement;
-  $('#lbimg').src = `poster/sheet${i}.webp`;
+  lbFrom = document.activeElement; lbI = i;
+  $('#lbimg').src = sheetSrc(i, false);
   $('#lbimg').alt = i === 1 ? 'Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know' : 'Poster sheet 2: the 23 pathways, EMACC follow-up, Asthma Zone flow and referrals';
   $('#lbt').textContent = i === 1 ? 'Sheet 1 · Patient flow (A3)' : 'Sheet 2 · Pathways and referrals (A3)';
   $('#lbs').classList.remove('zoom'); $('#lbzoom').textContent = 'Zoom in';
@@ -3634,6 +3671,17 @@ function toggleZoom(){ const z = $('#lbs').classList.toggle('zoom'); $('#lbzoom'
 
 /* ================= Settings: theme, text size, clips, clear ================= */
 const HOST_THEME = document.documentElement.getAttribute('data-theme');
+/* Night colours on? An explicit theme on the page wins; with none, the device decides */
+const DARKQ = matchMedia('(prefers-color-scheme: dark)');
+function night(){ const t = document.documentElement.getAttribute('data-theme'); return t ? t === 'dark' : DARKQ.matches; }
+/* After any change of colours: the home switch, the poster sheets and the tour film follow */
+function themeChanged(){
+  const n = night();
+  $('#daynight').setAttribute('aria-checked', n);
+  $$('#v-poster [data-sheet] img').forEach(im => { const s = sheetSrc(im.closest('[data-sheet]').dataset.sheet, true); if (im.getAttribute('src') !== s) im.setAttribute('src', s); });
+  if (!$('#lb').hidden && lbI) $('#lbimg').src = sheetSrc(lbI, false);
+  tourTheme();
+}
 const prefs = {
   theme: store.get('gz-theme', 'auto'),
   size: store.get('gz-size', 'std'),
@@ -3645,6 +3693,7 @@ function applyPrefs(){
   if (prefs.theme === 'auto'){ if (HOST_THEME) r.setAttribute('data-theme', HOST_THEME); else r.removeAttribute('data-theme'); }
   else r.setAttribute('data-theme', prefs.theme);
   if (prefs.size === 'large') r.setAttribute('data-size', 'large'); else r.removeAttribute('data-size');
+  themeChanged();
 }
 function syncSettings(){
   [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
@@ -3812,6 +3861,13 @@ $$('[data-sheet]').forEach(b => b.addEventListener('click', () => openSheet(+b.d
 $('#lbclose').addEventListener('click', closeSheet);
 $('#lbzoom').addEventListener('click', toggleZoom);
 $('#lbimg').addEventListener('click', toggleZoom);
+
+/* Day and night: the home switch sets the theme the same way as Settings; Auto there follows the device again */
+$('#daynight').addEventListener('click', () => {
+  prefs.theme = night() ? 'light' : 'dark'; store.set('gz-theme', prefs.theme); applyPrefs();
+});
+const onDeviceTheme = () => { if (prefs.theme === 'auto' && !HOST_THEME) themeChanged(); };
+try { DARKQ.addEventListener('change', onDeviceTheme); } catch(e){ try { DARKQ.addListener(onDeviceTheme); } catch(e2){} }
 
 /* Settings */
 $('#settings').addEventListener('click', e => {
