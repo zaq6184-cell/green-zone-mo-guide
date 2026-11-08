@@ -1,0 +1,263 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,080"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 80
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,080",
+				"to": "00:00:00,660"
+			},
+			"offsets": {
+				"from": 80,
+				"to": 660
+			},
+			"text": " Perlukan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,660",
+				"to": "00:00:01,490"
+			},
+			"offsets": {
+				"from": 660,
+				"to": 1490
+			},
+			"text": " antibiotik"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,490",
+				"to": "00:00:01,930"
+			},
+			"offsets": {
+				"from": 1490,
+				"to": 1930
+			},
+			"text": " IVA,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,930",
+				"to": "00:00:02,320"
+			},
+			"offsets": {
+				"from": 1930,
+				"to": 2320
+			},
+			"text": " tetapi"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,320",
+				"to": "00:00:02,650"
+			},
+			"offsets": {
+				"from": 2320,
+				"to": 2650
+			},
+			"text": " tiada"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,650",
+				"to": "00:00:03,000"
+			},
+			"offsets": {
+				"from": 2650,
+				"to": 3000
+			},
+			"text": " katil"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,000",
+				"to": "00:00:03,540"
+			},
+			"offsets": {
+				"from": 3000,
+				"to": 3540
+			},
+			"text": " kosong."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,380",
+				"to": "00:00:04,900"
+			},
+			"offsets": {
+				"from": 4380,
+				"to": 4900
+			},
+			"text": " Gunakan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,900",
+				"to": "00:00:05,330"
+			},
+			"offsets": {
+				"from": 4900,
+				"to": 5330
+			},
+			"text": " kerusi"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,330",
+				"to": "00:00:05,610"
+			},
+			"offsets": {
+				"from": 5330,
+				"to": 5610
+			},
+			"text": " di"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,610",
+				"to": "00:00:06,020"
+			},
+			"offsets": {
+				"from": 5610,
+				"to": 6020
+			},
+			"text": " CCA"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,020",
+				"to": "00:00:06,340"
+			},
+			"offsets": {
+				"from": 6020,
+				"to": 6340
+			},
+			"text": " dengan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,340",
+				"to": "00:00:06,670"
+			},
+			"offsets": {
+				"from": 6340,
+				"to": 6670
+			},
+			"text": " salah"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,670",
+				"to": "00:00:06,890"
+			},
+			"offsets": {
+				"from": 6670,
+				"to": 6890
+			},
+			"text": " satu"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,890",
+				"to": "00:00:07,300"
+			},
+			"offsets": {
+				"from": 6890,
+				"to": 7300
+			},
+			"text": " daripada"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,300",
+				"to": "00:00:07,560"
+			},
+			"offsets": {
+				"from": 7300,
+				"to": 7560
+			},
+			"text": " empat"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,560",
+				"to": "00:00:08,290"
+			},
+			"offsets": {
+				"from": 7560,
+				"to": 8290
+			},
+			"text": " antibiotik"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,290",
+				"to": "00:00:08,330"
+			},
+			"offsets": {
+				"from": 8290,
+				"to": 8330
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,330",
+				"to": "00:00:08,830"
+			},
+			"offsets": {
+				"from": 8330,
+				"to": 8830
+			},
+			"text": " dibenarkan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,830",
+				"to": "00:00:09,360"
+			},
+			"offsets": {
+				"from": 8830,
+				"to": 9360
+			},
+			"text": " sahaja."
+		}
+	]
+}

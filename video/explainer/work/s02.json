@@ -1,0 +1,274 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,110"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 110
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,110",
+				"to": "00:00:00,470"
+			},
+			"offsets": {
+				"from": 110,
+				"to": 470
+			},
+			"text": " Patients"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,470",
+				"to": "00:00:00,710"
+			},
+			"offsets": {
+				"from": 470,
+				"to": 710
+			},
+			"text": " move"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,710",
+				"to": "00:00:00,890"
+			},
+			"offsets": {
+				"from": 710,
+				"to": 890
+			},
+			"text": " one"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,890",
+				"to": "00:00:01,260"
+			},
+			"offsets": {
+				"from": 890,
+				"to": 1260
+			},
+			"text": " way."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,940",
+				"to": "00:00:02,070"
+			},
+			"offsets": {
+				"from": 1940,
+				"to": 2070
+			},
+			"text": " Secondary"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,070",
+				"to": "00:00:02,610"
+			},
+			"offsets": {
+				"from": 2070,
+				"to": 2610
+			},
+			"text": " triage"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,610",
+				"to": "00:00:02,970"
+			},
+			"offsets": {
+				"from": 2610,
+				"to": 2970
+			},
+			"text": " does"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,970",
+				"to": "00:00:03,220"
+			},
+			"offsets": {
+				"from": 2970,
+				"to": 3220
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,220",
+				"to": "00:00:03,920"
+			},
+			"offsets": {
+				"from": 3220,
+				"to": 3920
+			},
+			"text": " vital"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,920",
+				"to": "00:00:04,340"
+			},
+			"offsets": {
+				"from": 3920,
+				"to": 4340
+			},
+			"text": " signs,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,340",
+				"to": "00:00:04,620"
+			},
+			"offsets": {
+				"from": 4340,
+				"to": 4620
+			},
+			"text": " ECG"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,620",
+				"to": "00:00:04,900"
+			},
+			"offsets": {
+				"from": 4620,
+				"to": 4900
+			},
+			"text": " and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,900",
+				"to": "00:00:05,960"
+			},
+			"offsets": {
+				"from": 4900,
+				"to": 5960
+			},
+			"text": " dressing."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,360",
+				"to": "00:00:06,360"
+			},
+			"offsets": {
+				"from": 6360,
+				"to": 6360
+			},
+			"text": " Do"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,360",
+				"to": "00:00:06,470"
+			},
+			"offsets": {
+				"from": 6360,
+				"to": 6470
+			},
+			"text": " not"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,470",
+				"to": "00:00:06,820"
+			},
+			"offsets": {
+				"from": 6470,
+				"to": 6820
+			},
+			"text": " repeat"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,820",
+				"to": "00:00:07,080"
+			},
+			"offsets": {
+				"from": 6820,
+				"to": 7080
+			},
+			"text": " them"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,080",
+				"to": "00:00:07,530"
+			},
+			"offsets": {
+				"from": 7080,
+				"to": 7530
+			},
+			"text": " unless"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,530",
+				"to": "00:00:07,770"
+			},
+			"offsets": {
+				"from": 7530,
+				"to": 7770
+			},
+			"text": " they"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,770",
+				"to": "00:00:08,340"
+			},
+			"offsets": {
+				"from": 7770,
+				"to": 8340
+			},
+			"text": " were"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,340",
+				"to": "00:00:08,840"
+			},
+			"offsets": {
+				"from": 8340,
+				"to": 8840
+			},
+			"text": " missed."
+		}
+	]
+}

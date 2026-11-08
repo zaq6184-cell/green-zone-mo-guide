@@ -1,0 +1,263 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,060"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 60
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,060",
+				"to": "00:00:00,380"
+			},
+			"offsets": {
+				"from": 60,
+				"to": 380
+			},
+			"text": " waiting"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,380",
+				"to": "00:00:00,540"
+			},
+			"offsets": {
+				"from": 380,
+				"to": 540
+			},
+			"text": " for"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,540",
+				"to": "00:00:01,040"
+			},
+			"offsets": {
+				"from": 540,
+				"to": 1040
+			},
+			"text": " results,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,040",
+				"to": "00:00:01,580"
+			},
+			"offsets": {
+				"from": 1040,
+				"to": 1580
+			},
+			"text": " send"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,580",
+				"to": "00:00:01,610"
+			},
+			"offsets": {
+				"from": 1580,
+				"to": 1610
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,610",
+				"to": "00:00:02,200"
+			},
+			"offsets": {
+				"from": 1610,
+				"to": 2200
+			},
+			"text": " patient"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,200",
+				"to": "00:00:02,400"
+			},
+			"offsets": {
+				"from": 2200,
+				"to": 2400
+			},
+			"text": " to"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,400",
+				"to": "00:00:02,740"
+			},
+			"offsets": {
+				"from": 2400,
+				"to": 2740
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,740",
+				"to": "00:00:03,320"
+			},
+			"offsets": {
+				"from": 2740,
+				"to": 3320
+			},
+			"text": " CCA."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,320",
+				"to": "00:00:03,770"
+			},
+			"offsets": {
+				"from": 3320,
+				"to": 3770
+			},
+			"text": " The"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,770",
+				"to": "00:00:04,220"
+			},
+			"offsets": {
+				"from": 3770,
+				"to": 4220
+			},
+			"text": " elderly,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,220",
+				"to": "00:00:05,170"
+			},
+			"offsets": {
+				"from": 4220,
+				"to": 5170
+			},
+			"text": " ACS,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,170",
+				"to": "00:00:05,630"
+			},
+			"offsets": {
+				"from": 5170,
+				"to": 5630
+			},
+			"text": " or"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,630",
+				"to": "00:00:05,870"
+			},
+			"offsets": {
+				"from": 5630,
+				"to": 5870
+			},
+			"text": " anyone"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,870",
+				"to": "00:00:06,380"
+			},
+			"offsets": {
+				"from": 5870,
+				"to": 6380
+			},
+			"text": " needing"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,380",
+				"to": "00:00:06,730"
+			},
+			"offsets": {
+				"from": 6380,
+				"to": 6730
+			},
+			"text": " stat"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,730",
+				"to": "00:00:07,060"
+			},
+			"offsets": {
+				"from": 6730,
+				"to": 7060
+			},
+			"text": " drugs"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,060",
+				"to": "00:00:07,420"
+			},
+			"offsets": {
+				"from": 7060,
+				"to": 7420
+			},
+			"text": " never"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,420",
+				"to": "00:00:07,790"
+			},
+			"offsets": {
+				"from": 7420,
+				"to": 7790
+			},
+			"text": " waits"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,790",
+				"to": "00:00:08,500"
+			},
+			"offsets": {
+				"from": 7790,
+				"to": 8500
+			},
+			"text": " outside."
+		}
+	]
+}

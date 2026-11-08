@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=390">
+<title>The Hall Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@600;800&family=Atkinson+Hyperlegible+Next:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--news:#EEEDE6;--ink:#1A1A1A;--grey:#6F6E68;--spot:#0F6B45;--biro:#2140A8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:var(--news);color:var(--ink);font:400 14px/1.3 "Atkinson Hyperlegible Next",system-ui,sans-serif}
+header{display:flex;justify-content:space-between;align-items:flex-end;padding:14px 14px 8px;border-bottom:3px double var(--ink)}
+header b{font:800 30px/.9 "Sofia Sans Condensed";letter-spacing:-.01em}
+header small{font:600 11px "Sofia Sans Condensed";letter-spacing:.14em;text-align:right}
+.search{margin:10px 14px;height:48px;border:2px solid var(--ink);display:flex;align-items:center;gap:10px;padding:0 12px;color:var(--grey);font-size:16px}
+.map{margin:0 14px 12px;border:2px solid var(--ink);display:grid;grid-template-columns:1.1fr 1.2fr 1.3fr 1fr 1fr;height:108px;position:relative}
+.map div{border-right:2px solid var(--spot);padding:6px 5px;display:flex;flex-direction:column;justify-content:space-between}
+.map div:last-child{border-right:0}
+.map b{font:800 26px/1 "Sofia Sans Condensed";color:var(--spot)}
+.map span{font:600 11px/1.1 "Sofia Sans Condensed";letter-spacing:.06em}
+.map .ring{position:absolute;left:236px;top:2px;width:52px;height:52px;border:2.5px solid var(--biro);border-radius:50%;transform:rotate(-8deg)}
+.map .pen{position:absolute;left:258px;top:52px;width:2.5px;height:70px;background:var(--biro);transform:rotate(14deg);transform-origin:top}
+.lbl{display:flex;justify-content:space-between;margin:0 14px 6px;font:800 12px "Sofia Sans Condensed";letter-spacing:.14em}
+.lbl em{font-style:normal;color:var(--grey)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);margin:0 14px;border-top:1.5px solid var(--ink);border-left:1.5px solid var(--ink)}
+.c{border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);padding:6px 6px 7px;height:62px;position:relative}
+.c b{font:800 15px/1 "Sofia Sans Condensed";color:var(--spot)}
+.c p{font:600 12.5px/1.15 "Atkinson Hyperlegible Next";margin-top:3px}
+.c.saved:after{content:"";position:absolute;inset:3px;border:2px solid var(--biro);border-radius:48% 52% 45% 55%;transform:rotate(-3deg)}
+nav{position:fixed;left:0;right:0;bottom:0;height:64px;border-top:3px double var(--ink);background:var(--news);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;text-align:center;font:800 11px "Sofia Sans Condensed";letter-spacing:.12em}
+nav .on{color:var(--biro)}
+</style></head><body>
+<header><b>GREEN ZONE<br>CATALOGUE</b><small>MO GUIDE · ED HKL<br>38 ENTRIES · 2026</small></header>
+<div class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search, or tap a code on the map</div>
+<div class="map">
+ <div><b>A</b><span>TRIAGE</span></div>
+ <div><b>B</b><span>YOU, THE MO</span></div>
+ <div><b>C</b><span>TREATMENT ROOM</span></div>
+ <div><b>D</b><span>CCA</span></div>
+ <div><b>E</b><span>REVIEW</span></div>
+ <i class="ring"></i><i class="pen"></i>
+</div>
+<div class="lbl"><span>WHERE EACH RULE APPLIES</span><em>CIRCLED: SAVED</em></div>
+<div class="grid">
+ <div class="c"><b>A1</b><p>One-way flow</p></div>
+ <div class="c"><b>A2</b><p>Down-triage: MO only</p></div>
+ <div class="c"><b>B1</b><p>Renal colic</p></div>
+ <div class="c saved"><b>B2</b><p>Dengue fever</p></div>
+ <div class="c"><b>B3</b><p>Asthma Zone flow</p></div>
+ <div class="c"><b>B4</b><p>Ortho referral</p></div>
+ <div class="c"><b>C1</b><p>Slip hijau to the Red Box</p></div>
+ <div class="c saved"><b>D1</b><p>IV antibiotics, no bed</p></div>
+ <div class="c"><b>D2</b><p>Who never waits outside</p></div>
+ <div class="c"><b>E1</b><p>Reassess before discharge</p></div>
+ <div class="c"><b>E2</b><p>Admission to MAU</p></div>
+ <div class="c"><b>E3</b><p>EMACC follow-up</p></div>
+</div>
+<nav><div class="on">HOME</div><div>CATALOGUE</div><div>SEARCH</div><div>TOOLS</div><div>NUMBERS</div></nav>
+</body></html>

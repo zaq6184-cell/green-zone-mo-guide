@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "redesign-options",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".impeccable/serve-options.js"],
+      "port": 8770
+    },
+    {
+      "name": "guide",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["src/serve.js"],
+      "port": 8765
+    }
+  ]
+}

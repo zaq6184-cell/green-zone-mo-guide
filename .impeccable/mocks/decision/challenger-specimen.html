@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=390">
+<title>The Specimen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Atkinson+Hyperlegible+Next:wght@400;600&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F7F7F4;--ink:#111;--muted:#6A6A66;--rule:#D9D9D3;--zone:#0B7A4B;--admit:#D8352A;--obs:#E2A21B;--ref:#6B4FBF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:var(--paper);color:var(--ink);font:400 16px/1.35 "Atkinson Hyperlegible Next",system-ui,sans-serif}
+.mono{font-family:"Atkinson Hyperlegible Mono",monospace}
+header{height:46px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+header span{font:600 11px/1 "Atkinson Hyperlegible Mono";letter-spacing:.16em}
+header b{font:800 22px/1 Anybody;font-variation-settings:"wdth" 130;letter-spacing:-.01em}
+.search{padding:16px 16px 10px;border-bottom:2px solid var(--ink)}
+.search small{font:600 10px/1 "Atkinson Hyperlegible Mono";letter-spacing:.16em;color:var(--muted)}
+.search p{font:300 30px/1.1 Anybody;font-variation-settings:"wdth" 88;color:#9A9A94;margin-top:6px}
+.axis{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--rule)}
+.axis small{font:600 10px "Atkinson Hyperlegible Mono";letter-spacing:.14em;color:var(--muted)}
+.track{height:2px;background:var(--ink);position:relative}
+.track i{position:absolute;left:46%;top:-9px;width:20px;height:20px;border-radius:50%;background:var(--paper);border:2.5px solid var(--ink)}
+.axis output{font:600 11px "Atkinson Hyperlegible Mono"}
+.nums{display:grid;grid-template-columns:1fr 1fr}
+.n{padding:12px 16px 14px;border-bottom:1px solid var(--rule)}
+.n:nth-child(odd){border-right:1px solid var(--rule)}
+.n small{display:block;font:600 10px/1.3 "Atkinson Hyperlegible Mono";letter-spacing:.12em;color:var(--muted)}
+.n b{display:block;font:850 58px/1 Anybody;font-variation-settings:"wdth" 70;letter-spacing:-.02em;margin-top:4px}
+.n em{font:400 12px "Atkinson Hyperlegible Next";font-style:normal;color:var(--muted)}
+.route{padding:14px 16px;border-bottom:2px solid var(--ink)}
+.route small{font:600 10px "Atkinson Hyperlegible Mono";letter-spacing:.16em;color:var(--muted)}
+.route h2{font:700 40px/1 Anybody;font-variation-settings:"wdth" 75;margin:6px 0 8px;letter-spacing:-.01em}
+.route p{display:flex;align-items:center;gap:10px;font:600 15px "Atkinson Hyperlegible Next"}
+.route p i{width:22px;height:22px;border-radius:50%;border:3px solid var(--zone);box-shadow:0 0 0 3px var(--paper),0 0 0 4.5px var(--zone)}
+.idx{padding:10px 16px}
+.idx div{display:grid;grid-template-columns:34px 1fr auto;gap:8px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.idx span{font:600 12px "Atkinson Hyperlegible Mono";color:var(--muted)}
+.idx em{font:400 12px "Atkinson Hyperlegible Mono";font-style:normal;color:var(--muted)}
+nav{position:fixed;left:0;right:0;bottom:0;height:66px;background:var(--paper);border-top:2px solid var(--ink);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;text-align:center;font:600 10px "Atkinson Hyperlegible Mono";letter-spacing:.12em;color:var(--muted)}
+nav .on{color:var(--ink);text-decoration:underline 2px var(--zone);text-underline-offset:6px}
+</style></head><body>
+<header><b>Green Zone</b><span>MO GUIDE · ED HKL · AA</span></header>
+<div class="search"><small>SEARCH · PRESS /</small><p>Symptom, rule, dose…</p></div>
+<div class="axis"><small>READING</small><div class="track"><i></i></div><output>wght 460 · 18 px</output></div>
+<section class="nums">
+ <div class="n"><small>CODE BLUE</small><b>5333</b><em>Outside the ED</em></div>
+ <div class="n"><small>CODE STROKE</small><b>5999</b><em>Onset under 9 h</em></div>
+ <div class="n"><small>MAU MOBILE TEAM</small><b>6682</b><em>Or 6684, office hours</em></div>
+ <div class="n"><small>EMACC</small><b>7040</b><em>Follow-up clinic</em></div>
+</section>
+<section class="route"><small>LAST ROUTE · EBOOK p53–54</small><h2>Renal colic</h2><p><i></i>Ended in the green box: discharge</p></section>
+<section class="idx">
+ <div><span>01</span>Abdominal pain<em>p03</em></div>
+ <div><span>02</span>Acute coronary syndrome<em>p12–14</em></div>
+</section>
+<nav><div class="on">HOME</div><div>PATHWAYS</div><div>SEARCH</div><div>TOOLS</div><div>NUMBERS</div></nav>
+</body></html>

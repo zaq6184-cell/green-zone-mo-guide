@@ -1,0 +1,263 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,060"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 60
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,060",
+				"to": "00:00:00,190"
+			},
+			"offsets": {
+				"from": 60,
+				"to": 190
+			},
+			"text": " new"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,190",
+				"to": "00:00:00,320"
+			},
+			"offsets": {
+				"from": 190,
+				"to": 320
+			},
+			"text": " to"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,320",
+				"to": "00:00:00,510"
+			},
+			"offsets": {
+				"from": 320,
+				"to": 510
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,510",
+				"to": "00:00:00,840"
+			},
+			"offsets": {
+				"from": 510,
+				"to": 840
+			},
+			"text": " green"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,840",
+				"to": "00:00:01,260"
+			},
+			"offsets": {
+				"from": 840,
+				"to": 1260
+			},
+			"text": " zone,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,260",
+				"to": "00:00:01,590"
+			},
+			"offsets": {
+				"from": 1260,
+				"to": 1590
+			},
+			"text": " here"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,590",
+				"to": "00:00:01,910"
+			},
+			"offsets": {
+				"from": 1590,
+				"to": 1910
+			},
+			"text": " is"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,910",
+				"to": "00:00:02,030"
+			},
+			"offsets": {
+				"from": 1910,
+				"to": 2030
+			},
+			"text": " how"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,030",
+				"to": "00:00:02,190"
+			},
+			"offsets": {
+				"from": 2030,
+				"to": 2190
+			},
+			"text": " a"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,190",
+				"to": "00:00:02,720"
+			},
+			"offsets": {
+				"from": 2190,
+				"to": 2720
+			},
+			"text": " patient"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,720",
+				"to": "00:00:03,270"
+			},
+			"offsets": {
+				"from": 2720,
+				"to": 3270
+			},
+			"text": " moves"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,270",
+				"to": "00:00:03,690"
+			},
+			"offsets": {
+				"from": 3270,
+				"to": 3690
+			},
+			"text": " through"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,690",
+				"to": "00:00:04,140"
+			},
+			"offsets": {
+				"from": 3690,
+				"to": 4140
+			},
+			"text": " it"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,140",
+				"to": "00:00:04,220"
+			},
+			"offsets": {
+				"from": 4140,
+				"to": 4220
+			},
+			"text": " and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,220",
+				"to": "00:00:04,580"
+			},
+			"offsets": {
+				"from": 4220,
+				"to": 4580
+			},
+			"text": " what"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,580",
+				"to": "00:00:04,850"
+			},
+			"offsets": {
+				"from": 4580,
+				"to": 4850
+			},
+			"text": " you"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,850",
+				"to": "00:00:05,460"
+			},
+			"offsets": {
+				"from": 4850,
+				"to": 5460
+			},
+			"text": " decide"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,460",
+				"to": "00:00:05,670"
+			},
+			"offsets": {
+				"from": 5460,
+				"to": 5670
+			},
+			"text": " at"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,670",
+				"to": "00:00:06,100"
+			},
+			"offsets": {
+				"from": 5670,
+				"to": 6100
+			},
+			"text": " each"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,100",
+				"to": "00:00:06,480"
+			},
+			"offsets": {
+				"from": 6100,
+				"to": 6480
+			},
+			"text": " step."
+		}
+	]
+}

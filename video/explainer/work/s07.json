@@ -1,0 +1,263 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,390"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 390
+			},
+			"text": " Needs"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,390",
+				"to": "00:00:00,530"
+			},
+			"offsets": {
+				"from": 390,
+				"to": 530
+			},
+			"text": " IV"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,530",
+				"to": "00:00:01,390"
+			},
+			"offsets": {
+				"from": 530,
+				"to": 1390
+			},
+			"text": " antibiotics"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,390",
+				"to": "00:00:01,640"
+			},
+			"offsets": {
+				"from": 1390,
+				"to": 1640
+			},
+			"text": " and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,640",
+				"to": "00:00:01,780"
+			},
+			"offsets": {
+				"from": 1640,
+				"to": 1780
+			},
+			"text": " no"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,780",
+				"to": "00:00:02,000"
+			},
+			"offsets": {
+				"from": 1780,
+				"to": 2000
+			},
+			"text": " bed"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,000",
+				"to": "00:00:02,150"
+			},
+			"offsets": {
+				"from": 2000,
+				"to": 2150
+			},
+			"text": " is"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,150",
+				"to": "00:00:02,760"
+			},
+			"offsets": {
+				"from": 2150,
+				"to": 2760
+			},
+			"text": " free."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,160",
+				"to": "00:00:03,200"
+			},
+			"offsets": {
+				"from": 3160,
+				"to": 3200
+			},
+			"text": " Use"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,200",
+				"to": "00:00:03,210"
+			},
+			"offsets": {
+				"from": 3200,
+				"to": 3210
+			},
+			"text": " a"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,210",
+				"to": "00:00:03,550"
+			},
+			"offsets": {
+				"from": 3210,
+				"to": 3550
+			},
+			"text": " CCA"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,550",
+				"to": "00:00:04,060"
+			},
+			"offsets": {
+				"from": 3550,
+				"to": 4060
+			},
+			"text": " chair"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,060",
+				"to": "00:00:04,490"
+			},
+			"offsets": {
+				"from": 4060,
+				"to": 4490
+			},
+			"text": " with"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,490",
+				"to": "00:00:04,930"
+			},
+			"offsets": {
+				"from": 4490,
+				"to": 4930
+			},
+			"text": " one"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,930",
+				"to": "00:00:05,040"
+			},
+			"offsets": {
+				"from": 4930,
+				"to": 5040
+			},
+			"text": " of"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,040",
+				"to": "00:00:05,370"
+			},
+			"offsets": {
+				"from": 5040,
+				"to": 5370
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,370",
+				"to": "00:00:05,840"
+			},
+			"offsets": {
+				"from": 5370,
+				"to": 5840
+			},
+			"text": " four"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,840",
+				"to": "00:00:06,300"
+			},
+			"offsets": {
+				"from": 5840,
+				"to": 6300
+			},
+			"text": " allowed"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,300",
+				"to": "00:00:06,980"
+			},
+			"offsets": {
+				"from": 6300,
+				"to": 6980
+			},
+			"text": " antibiotics"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,980",
+				"to": "00:00:07,440"
+			},
+			"offsets": {
+				"from": 6980,
+				"to": 7440
+			},
+			"text": " only."
+		}
+	]
+}

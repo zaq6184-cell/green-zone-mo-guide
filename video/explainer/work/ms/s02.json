@@ -1,0 +1,252 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,060"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 60
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,060",
+				"to": "00:00:00,450"
+			},
+			"offsets": {
+				"from": 60,
+				"to": 450
+			},
+			"text": " Pesakit"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,450",
+				"to": "00:00:00,920"
+			},
+			"offsets": {
+				"from": 450,
+				"to": 920
+			},
+			"text": " bergerak"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,920",
+				"to": "00:00:01,560"
+			},
+			"offsets": {
+				"from": 920,
+				"to": 1560
+			},
+			"text": " sehala."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,160",
+				"to": "00:00:02,160"
+			},
+			"offsets": {
+				"from": 2160,
+				"to": 2160
+			},
+			"text": " Trias"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,160",
+				"to": "00:00:02,610"
+			},
+			"offsets": {
+				"from": 2160,
+				"to": 2610
+			},
+			"text": " sekunder"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,610",
+				"to": "00:00:03,110"
+			},
+			"offsets": {
+				"from": 2610,
+				"to": 3110
+			},
+			"text": " mengambil"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,110",
+				"to": "00:00:03,450"
+			},
+			"offsets": {
+				"from": 3110,
+				"to": 3450
+			},
+			"text": " tanda"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,450",
+				"to": "00:00:03,980"
+			},
+			"offsets": {
+				"from": 3450,
+				"to": 3980
+			},
+			"text": " vital,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,980",
+				"to": "00:00:04,510"
+			},
+			"offsets": {
+				"from": 3980,
+				"to": 4510
+			},
+			"text": " membuat"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,510",
+				"to": "00:00:04,810"
+			},
+			"offsets": {
+				"from": 4510,
+				"to": 4810
+			},
+			"text": " ECG"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,810",
+				"to": "00:00:04,960"
+			},
+			"offsets": {
+				"from": 4810,
+				"to": 4960
+			},
+			"text": " dan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,960",
+				"to": "00:00:05,760"
+			},
+			"offsets": {
+				"from": 4960,
+				"to": 5760
+			},
+			"text": " balutan."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,460",
+				"to": "00:00:06,460"
+			},
+			"offsets": {
+				"from": 6460,
+				"to": 6460
+			},
+			"text": " Jangan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,460",
+				"to": "00:00:06,910"
+			},
+			"offsets": {
+				"from": 6460,
+				"to": 6910
+			},
+			"text": " ulanginya,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,910",
+				"to": "00:00:07,320"
+			},
+			"offsets": {
+				"from": 6910,
+				"to": 7320
+			},
+			"text": " kecuali"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,320",
+				"to": "00:00:07,580"
+			},
+			"offsets": {
+				"from": 7320,
+				"to": 7580
+			},
+			"text": " jika"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,580",
+				"to": "00:00:07,780"
+			},
+			"offsets": {
+				"from": 7580,
+				"to": 7780
+			},
+			"text": " ada"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,780",
+				"to": "00:00:08,240"
+			},
+			"offsets": {
+				"from": 7780,
+				"to": 8240
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,240",
+				"to": "00:00:08,980"
+			},
+			"offsets": {
+				"from": 8240,
+				"to": 8980
+			},
+			"text": " tertinggal."
+		}
+	]
+}

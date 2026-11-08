@@ -1,0 +1,230 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,090"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 90
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,090",
+				"to": "00:00:00,570"
+			},
+			"offsets": {
+				"from": 90,
+				"to": 570
+			},
+			"text": " Untuk"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,570",
+				"to": "00:00:01,240"
+			},
+			"offsets": {
+				"from": 570,
+				"to": 1240
+			},
+			"text": " diagnosis,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,240",
+				"to": "00:00:01,610"
+			},
+			"offsets": {
+				"from": 1240,
+				"to": 1610
+			},
+			"text": " buka"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,610",
+				"to": "00:00:02,000"
+			},
+			"offsets": {
+				"from": 1610,
+				"to": 2000
+			},
+			"text": " laluan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,000",
+				"to": "00:00:03,160"
+			},
+			"offsets": {
+				"from": 2000,
+				"to": 3160
+			},
+			"text": " klinikalnya."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,640",
+				"to": "00:00:03,640"
+			},
+			"offsets": {
+				"from": 3640,
+				"to": 3640
+			},
+			"text": " Satu"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,640",
+				"to": "00:00:04,200"
+			},
+			"offsets": {
+				"from": 3640,
+				"to": 4200
+			},
+			"text": " soalan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,200",
+				"to": "00:00:04,210"
+			},
+			"offsets": {
+				"from": 4200,
+				"to": 4210
+			},
+			"text": " pada"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,210",
+				"to": "00:00:04,500"
+			},
+			"offsets": {
+				"from": 4210,
+				"to": 4500
+			},
+			"text": " satu"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,500",
+				"to": "00:00:05,060"
+			},
+			"offsets": {
+				"from": 4500,
+				"to": 5060
+			},
+			"text": " masa."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,780",
+				"to": "00:00:05,780"
+			},
+			"offsets": {
+				"from": 5780,
+				"to": 5780
+			},
+			"text": " Setiap"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,780",
+				"to": "00:00:05,870"
+			},
+			"offsets": {
+				"from": 5780,
+				"to": 5870
+			},
+			"text": " langkah"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,870",
+				"to": "00:00:06,410"
+			},
+			"offsets": {
+				"from": 5870,
+				"to": 6410
+			},
+			"text": " menunjukkan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,410",
+				"to": "00:00:06,920"
+			},
+			"offsets": {
+				"from": 6410,
+				"to": 6920
+			},
+			"text": " kesudahan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,920",
+				"to": "00:00:07,150"
+			},
+			"offsets": {
+				"from": 6920,
+				"to": 7150
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,150",
+				"to": "00:00:07,570"
+			},
+			"offsets": {
+				"from": 7150,
+				"to": 7570
+			},
+			"text": " masih"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,570",
+				"to": "00:00:08,100"
+			},
+			"offsets": {
+				"from": 7570,
+				"to": 8100
+			},
+			"text": " mungkin."
+		}
+	]
+}

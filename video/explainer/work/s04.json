@@ -1,0 +1,296 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,300"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 300
+			},
+			"text": " Only"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,300",
+				"to": "00:00:00,520"
+			},
+			"offsets": {
+				"from": 300,
+				"to": 520
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,520",
+				"to": "00:00:00,670"
+			},
+			"offsets": {
+				"from": 520,
+				"to": 670
+			},
+			"text": " EP"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,670",
+				"to": "00:00:00,890"
+			},
+			"offsets": {
+				"from": 670,
+				"to": 890
+			},
+			"text": " can"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,890",
+				"to": "00:00:01,260"
+			},
+			"offsets": {
+				"from": 890,
+				"to": 1260
+			},
+			"text": " allow"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,260",
+				"to": "00:00:01,330"
+			},
+			"offsets": {
+				"from": 1260,
+				"to": 1330
+			},
+			"text": " a"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,330",
+				"to": "00:00:01,650"
+			},
+			"offsets": {
+				"from": 1330,
+				"to": 1650
+			},
+			"text": " down"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,650",
+				"to": "00:00:02,340"
+			},
+			"offsets": {
+				"from": 1650,
+				"to": 2340
+			},
+			"text": " triage."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,100",
+				"to": "00:00:03,150"
+			},
+			"offsets": {
+				"from": 3100,
+				"to": 3150
+			},
+			"text": " Before"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,150",
+				"to": "00:00:03,210"
+			},
+			"offsets": {
+				"from": 3150,
+				"to": 3210
+			},
+			"text": " you"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,210",
+				"to": "00:00:03,590"
+			},
+			"offsets": {
+				"from": 3210,
+				"to": 3590
+			},
+			"text": " down"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,590",
+				"to": "00:00:04,380"
+			},
+			"offsets": {
+				"from": 3590,
+				"to": 4380
+			},
+			"text": " triage,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,380",
+				"to": "00:00:04,810"
+			},
+			"offsets": {
+				"from": 4380,
+				"to": 4810
+			},
+			"text": " examine"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,810",
+				"to": "00:00:04,990"
+			},
+			"offsets": {
+				"from": 4810,
+				"to": 4990
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,990",
+				"to": "00:00:05,420"
+			},
+			"offsets": {
+				"from": 4990,
+				"to": 5420
+			},
+			"text": " patient"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,420",
+				"to": "00:00:06,230"
+			},
+			"offsets": {
+				"from": 5420,
+				"to": 6230
+			},
+			"text": " properly,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,230",
+				"to": "00:00:06,410"
+			},
+			"offsets": {
+				"from": 6230,
+				"to": 6410
+			},
+			"text": " then"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,410",
+				"to": "00:00:07,160"
+			},
+			"offsets": {
+				"from": 6410,
+				"to": 7160
+			},
+			"text": " document"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,160",
+				"to": "00:00:07,320"
+			},
+			"offsets": {
+				"from": 7160,
+				"to": 7320
+			},
+			"text": " it"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,320",
+				"to": "00:00:07,500"
+			},
+			"offsets": {
+				"from": 7320,
+				"to": 7500
+			},
+			"text": " on"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,500",
+				"to": "00:00:07,780"
+			},
+			"offsets": {
+				"from": 7500,
+				"to": 7780
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,780",
+				"to": "00:00:08,370"
+			},
+			"offsets": {
+				"from": 7780,
+				"to": 8370
+			},
+			"text": " triage"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,370",
+				"to": "00:00:09,000"
+			},
+			"offsets": {
+				"from": 8370,
+				"to": 9000
+			},
+			"text": " form."
+		}
+	]
+}

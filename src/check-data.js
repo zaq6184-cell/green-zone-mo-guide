@@ -21,7 +21,7 @@ new Function('module', src)(m);
 const P = m.exports;
 
 /* Views of the app that a link may point to (see the route list at the top of engine.js) */
-const VIEWS = ['top', 'home', 'search', 'tour', 'video', 'journey', 'learn', 'rules', 'pathways', 'saved', 'quiz', 'numbers', 'tools', 'poster', 'new', 'about'];
+const VIEWS = ['top', 'home', 'search', 'tour', 'video', 'journey', 'learn', 'rules', 'pathways', 'saved', 'quiz', 'numbers', 'tools', 'poster', 'new', 'about', 'intro'];
 const okHref = h => {
   const x = h.slice(1);
   if (P[x]) return true;

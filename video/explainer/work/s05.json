@@ -1,0 +1,252 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,130"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 130
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,130",
+				"to": "00:00:00,210"
+			},
+			"offsets": {
+				"from": 130,
+				"to": 210
+			},
+			"text": " For"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,210",
+				"to": "00:00:00,420"
+			},
+			"offsets": {
+				"from": 210,
+				"to": 420
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,420",
+				"to": "00:00:01,210"
+			},
+			"offsets": {
+				"from": 420,
+				"to": 1210
+			},
+			"text": " diagnosis,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,210",
+				"to": "00:00:01,470"
+			},
+			"offsets": {
+				"from": 1210,
+				"to": 1470
+			},
+			"text": " open"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,470",
+				"to": "00:00:01,680"
+			},
+			"offsets": {
+				"from": 1470,
+				"to": 1680
+			},
+			"text": " its"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,680",
+				"to": "00:00:02,320"
+			},
+			"offsets": {
+				"from": 1680,
+				"to": 2320
+			},
+			"text": " pathway,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,320",
+				"to": "00:00:02,910"
+			},
+			"offsets": {
+				"from": 2320,
+				"to": 2910
+			},
+			"text": " one"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,910",
+				"to": "00:00:03,360"
+			},
+			"offsets": {
+				"from": 2910,
+				"to": 3360
+			},
+			"text": " question"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,360",
+				"to": "00:00:03,560"
+			},
+			"offsets": {
+				"from": 3360,
+				"to": 3560
+			},
+			"text": " at"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,560",
+				"to": "00:00:03,640"
+			},
+			"offsets": {
+				"from": 3560,
+				"to": 3640
+			},
+			"text": " a"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,640",
+				"to": "00:00:04,320"
+			},
+			"offsets": {
+				"from": 3640,
+				"to": 4320
+			},
+			"text": " time."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,740",
+				"to": "00:00:04,870"
+			},
+			"offsets": {
+				"from": 4740,
+				"to": 4870
+			},
+			"text": " Each"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,870",
+				"to": "00:00:04,960"
+			},
+			"offsets": {
+				"from": 4870,
+				"to": 4960
+			},
+			"text": " step"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,960",
+				"to": "00:00:05,360"
+			},
+			"offsets": {
+				"from": 4960,
+				"to": 5360
+			},
+			"text": " shows"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,360",
+				"to": "00:00:05,600"
+			},
+			"offsets": {
+				"from": 5360,
+				"to": 5600
+			},
+			"text": " how"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,600",
+				"to": "00:00:05,770"
+			},
+			"offsets": {
+				"from": 5600,
+				"to": 5770
+			},
+			"text": " it"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,770",
+				"to": "00:00:06,180"
+			},
+			"offsets": {
+				"from": 5770,
+				"to": 6180
+			},
+			"text": " can"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,180",
+				"to": "00:00:06,400"
+			},
+			"offsets": {
+				"from": 6180,
+				"to": 6400
+			},
+			"text": " still"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,400",
+				"to": "00:00:06,940"
+			},
+			"offsets": {
+				"from": 6400,
+				"to": 6940
+			},
+			"text": " end."
+		}
+	]
+}

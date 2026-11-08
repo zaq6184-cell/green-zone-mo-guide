@@ -1,0 +1,143 @@
+<template>
+<style>
+/* Green Zone explainer: the app's version 8 tokens and materials (from DESIGN.md) */
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+
+:root, #root{
+  --pearl:#e9edeb; --pearl-2:#e1e7e3; --surface:#ffffff; --surface-2:#f5f7f6; --surface-3:#ebefed;
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --faint:#7b8a83; --line:#dbe2de; --line-2:#c5cfc9;
+  --accent:#0b6b47; --accent-2:#08513a; --accent-soft:#dcf1e5; --mint:#43dd8c; --gold:#d8b46a; --gold-ink:#2a1f07;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334;
+  --garnet-1:#a52234; --garnet-2:#7e1626; --garnet-3:#560d19;
+  --obsidian-1:#27352e; --obsidian-2:#17211c; --obsidian-3:#0b110e;
+  --teal-1:#157481; --teal-2:#0f5a64; --teal-3:#093d45;
+  --admit:#c42a20; --discharge:#13834c; --neutral:#41544b; --observe:#f0ae1c; --refer:#5a44c4;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root h3,#root p{margin:0}
+
+/* Jewel tile: gradient, grain, inner edge, tinted shadow */
+.tile{position:absolute;border-radius:44px;overflow:hidden;isolation:isolate;color:#fff;
+  background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.14),transparent 55%),var(--grain),linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));
+  background-size:auto,180px 180px,auto;
+  box-shadow:0 2px 2px rgba(0,0,0,.05),0 44px 70px -40px var(--t3),0 14px 26px -18px rgba(15,26,21,.35)}
+.tile::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14)}
+.t-emerald{--t1:var(--emerald-1);--t2:var(--emerald-2);--t3:var(--emerald-3)}
+.t-sapphire{--t1:var(--sapphire-1);--t2:var(--sapphire-2);--t3:var(--sapphire-3)}
+.t-plum{--t1:var(--plum-1);--t2:var(--plum-2);--t3:var(--plum-3)}
+.t-garnet{--t1:var(--garnet-1);--t2:var(--garnet-2);--t3:var(--garnet-3)}
+.t-obsidian{--t1:var(--obsidian-1);--t2:var(--obsidian-2);--t3:var(--obsidian-3)}
+.t-teal{--t1:var(--teal-1);--t2:var(--teal-2);--t3:var(--teal-3)}
+
+/* White card */
+.card{position:absolute;background:var(--surface);border-radius:36px;color:var(--ink);
+  box-shadow:0 2px 6px rgba(15,26,21,.06),0 40px 70px -42px rgba(15,26,21,.5),inset 0 0 0 1.5px var(--line)}
+
+/* Icons */
+.ic{display:block;width:100%;height:100%}
+.disc{display:grid;place-items:center;border-radius:50%}
+
+/* Text roles */
+.t-title{font-weight:800;font-size:52px;line-height:1.08;letter-spacing:-.02em}
+.t-label{font-weight:700;font-size:38px;line-height:1.2}
+.t-small{font-weight:700;font-size:30px;line-height:1.25}
+.t-src{font-weight:700;font-size:28px;line-height:1.25;opacity:.8}
+
+/* Flat outcome chips (never a gradient) */
+.oc{display:inline-flex;align-items:center;gap:12px;height:58px;padding:0 24px;border-radius:29px;font-weight:800;font-size:32px;color:#fff;white-space:nowrap;overflow:hidden}
+.oc.k-admit{background:var(--admit)} .oc.k-discharge{background:var(--discharge)} .oc.k-neutral{background:var(--neutral)}
+
+
+.zm-h{position:absolute;left:44px;top:34px;display:flex;align-items:center;gap:18px}
+.zm-h b{font-weight:800;font-size:40px;letter-spacing:-.01em}
+.zm-tag{font-weight:800;font-size:28px;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:12px;background:rgba(255,255,255,.14)}
+.zm-base,.zm-fill{position:absolute;height:10px;border-radius:5px}
+.zm-base{background:rgba(255,255,255,.22)}
+.zm-fill{background:var(--mint);transform-origin:0 50%}
+.zm-stop{position:absolute;width:300px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.zm-stop b{font-weight:800;font-size:32px;line-height:1.1;margin-top:16px}
+.zm-stop small{font-weight:700;font-size:28px;line-height:1.15;margin-top:6px;opacity:.9}
+.zw{position:relative}
+.zd{position:relative;background:var(--emerald-2);box-shadow:inset 0 0 0 3px rgba(255,255,255,.34);color:#fff}
+.zd .ic{width:46%;height:46%}
+.zd.maybe{outline:3px dashed rgba(255,255,255,.55);outline-offset:7px}
+.zm-halo{position:absolute;border-radius:50%;background:rgba(67,221,140,.3)}
+.zm-tok{position:absolute;width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 0 0 7px rgba(255,255,255,.22),0 12px 20px -8px rgba(0,0,0,.55)}
+.zm-tok i{position:absolute;inset:14px;border-radius:50%;background:var(--emerald-1)}
+.ck{position:relative;flex:none;width:58px;height:58px;border-radius:50%;box-shadow:inset 0 0 0 3px var(--ckr,var(--line-2))}
+.ck-f{position:absolute;inset:0;border-radius:50%;background:var(--ckc,var(--discharge))}
+.ck svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--cks,#fff);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ck path{stroke-dasharray:1}
+.row{display:flex;align-items:center;gap:26px}
+.nb{white-space:nowrap}
+.chip{display:inline-flex;align-items:center;height:64px;padding:0 28px;border-radius:32px;font-weight:800;font-size:34px;white-space:nowrap}
+
+#root{position:absolute;inset:0;overflow:hidden}
+
+  #s02-road{left:160px;top:96px;width:1600px;height:300px}
+  .rd-stop{position:absolute;top:66px;width:300px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .rd-stop b{font-weight:800;font-size:36px;margin-top:16px}
+  .rd-stop small{font-weight:700;font-size:28px;opacity:.9;margin-top:4px}
+  #s02-card{left:160px;top:452px;width:900px;height:430px;padding:44px 52px}
+  #s02-card .t-title{margin-bottom:26px}
+  #s02-card .row{margin-bottom:20px}
+  #s02-card .row span{font-weight:800;font-size:42px}
+  #s02-note{position:absolute;left:52px;bottom:36px;font-weight:700;font-size:28px;color:var(--muted)}
+  #s02-no{left:1120px;top:452px;width:640px;height:430px;padding:44px 48px}
+  #s02-loop{position:absolute;right:40px;top:34px;width:220px;height:150px}
+  #s02-loop path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+  
+
+</style>
+<div id="root" data-composition-id="s02" data-width="1920" data-height="1080">
+
+  <div class="tile t-emerald" id="s02-road">
+    <div class="zm-h" style="top:28px"><span class="zm-tag">One way</span></div>
+    <div class="zm-base" style="left:256px;top:115px;width:1238px"></div>
+    <div class="zm-fill" id="s02-fill" style="left:256px;top:115px;width:1088px"></div>
+    <svg viewBox="0 0 40 40" style="position:absolute;left:1494px;top:104px;width:40px;height:40px;color:rgba(255,255,255,.55)"><path d="M6 4l26 16L6 36z" fill="currentColor"/></svg>
+    <div class="rd-stop" style="left:106px"><div class="disc zd" id="s02-d0" style="width:108px;height:108px"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5 10.5 3H19a1 1 0 0 1 1 1v8.5L13.5 19a1.8 1.8 0 0 1-2.5 0L4 12a1.8 1.8 0 0 1 0-2.5z"/><circle cx="15.5" cy="7.5" r="1.5"/></svg></div><b>Triage</b><small>MTS 4 or 5</small></div><div class="rd-stop" style="left:650px"><div class="disc zd" id="s02-d1" style="width:108px;height:108px"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><b>Secondary triage</b></div><div class="rd-stop" style="left:1194px"><div class="disc zd" id="s02-d2" style="width:108px;height:108px"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10.5" r="2"/></svg></div><b>You, the MO</b><small>Consultation</small></div>
+    <div class="zm-tok" id="s02-tok" style="left:233px;top:8px"><i></i></div>
+  </div>
+  <div class="card" id="s02-card">
+    <h2 class="t-title">Secondary triage</h2>
+    <div class="row"><div class="ck" id="s02-c0"><div class="ck-f" id="s02-c0-f"></div><svg viewBox="0 0 24 24"><path id="s02-c0-p" d="m6.6 12.4 3.6 3.6 7.2-7.4" pathLength="1"/></svg></div><span>Vital signs</span></div><div class="row"><div class="ck" id="s02-c1"><div class="ck-f" id="s02-c1-f"></div><svg viewBox="0 0 24 24"><path id="s02-c1-p" d="m6.6 12.4 3.6 3.6 7.2-7.4" pathLength="1"/></svg></div><span>ECG</span></div><div class="row"><div class="ck" id="s02-c2"><div class="ck-f" id="s02-c2-f"></div><svg viewBox="0 0 24 24"><path id="s02-c2-p" d="m6.6 12.4 3.6 3.6 7.2-7.4" pathLength="1"/></svg></div><span>Dressing</span></div>
+    <p id="s02-note">Also the focused history and wound irrigation</p>
+  </div>
+  <div class="card" id="s02-no">
+    <svg id="s02-loop" viewBox="0 0 220 150"><path id="s02-lp" d="M190 120 C 190 40, 30 40, 30 104" stroke="#0a5a3b" stroke-width="10" pathLength="1" style="stroke-dasharray:1"/><path id="s02-la" d="M10 86 L30 112 L52 88" stroke="#0a5a3b" stroke-width="10" style="opacity:0"/><path id="s02-x" d="M40 20 L180 140" stroke="#c42a20" stroke-width="12" pathLength="1" style="stroke-dasharray:1"/></svg>
+    <h2 class="t-title" style="font-size:56px;margin-top:140px">No repeats</h2>
+    <p id="s02-un" class="t-label" style="margin-top:12px;color:var(--ink-2)">Unless they were missed</p>
+    <p id="s02-pr" class="t-small" style="margin-top:22px;color:var(--muted)">A later ECG is done in the Procedure Room.</p>
+  </div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s02-road",{y:334,rotation:1.5,opacity:0},{y:294,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.05);
+  tl.fromTo("#s02-road",{y:294},{y:0,duration:.6,ease:"power3.inOut",immediateRender:false},2.257);
+  tl.fromTo("#s02-fill",{scaleX:0},{scaleX:0.5,duration:0.9,ease:"power1.inOut"},0.937);
+  tl.fromTo("#s02-tok",{x:0},{x:544,duration:0.9,ease:"power2.inOut"},0.937);
+  tl.fromTo("#s02-d1",{scale:1},{scale:1.12,duration:.16,ease:"power2.out",yoyo:true,repeat:1,immediateRender:false},1.787);
+  tl.fromTo("#s02-card",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},2.657);
+  tl.fromTo("#s02-c0-f",{scale:0},{scale:1,duration:.28,ease:"back.out(2.2)"},3.687);tl.fromTo("#s02-c0-p",{strokeDashoffset:1},{strokeDashoffset:0,duration:.3,ease:"power2.out"},3.787);
+  tl.fromTo("#s02-c1-f",{scale:0},{scale:1,duration:.28,ease:"back.out(2.2)"},4.807);tl.fromTo("#s02-c1-p",{strokeDashoffset:1},{strokeDashoffset:0,duration:.3,ease:"power2.out"},4.907);
+  tl.fromTo("#s02-c2-f",{scale:0},{scale:1,duration:.28,ease:"back.out(2.2)"},5.367);tl.fromTo("#s02-c2-p",{strokeDashoffset:1},{strokeDashoffset:0,duration:.3,ease:"power2.out"},5.467);
+  tl.fromTo("#s02-note",{opacity:0},{opacity:1,duration:0.3,ease:"power1.out"},5.867);
+  tl.fromTo("#s02-no",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},6.677);
+  tl.fromTo("#s02-lp",{strokeDashoffset:1},{strokeDashoffset:0,duration:0.5,ease:"power2.inOut"},6.927);
+  tl.fromTo("#s02-la",{opacity:0},{opacity:1,duration:0.15,ease:"power1.out"},7.377);
+  tl.fromTo("#s02-x",{strokeDashoffset:1},{strokeDashoffset:0,duration:0.28,ease:"power2.inOut"},7.137);
+  tl.fromTo("#s02-un",{opacity:0},{opacity:1,duration:0.3,ease:"power1.out"},7.547);
+  tl.fromTo("#s02-pr",{opacity:0},{opacity:1,duration:0.3,ease:"power1.out"},7.177);
+  window.__timelines["s02"] = tl;
+})();
+</script>
+</template>

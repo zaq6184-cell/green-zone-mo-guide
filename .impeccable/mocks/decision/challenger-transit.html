@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=390">
+<title>The Line</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#14213D;--night2:#1D2D52;--tile:#F6F4EE;--ink:#141A26;--muted:#5D6678;--line:#D9D5CA;--green:#1F9D57;--admit:#D93A2B;--obs:#F2A93B;--ref:#2F5DD0;--neutral:#8A93A6}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:var(--tile);color:var(--ink);font:400 15px/1.35 Signika,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+header{background:var(--night);color:#fff;padding:12px 16px 14px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.top b{font:600 24px/1 Signika;letter-spacing:-.01em}
+.top small{display:block;font:500 11px/1 Signika;letter-spacing:.12em;color:#AFC0E0;margin-top:4px}
+.dot{width:38px;height:38px;border-radius:50%;border:2px solid #3B5285;display:grid;place-items:center}
+.search{margin-top:12px;height:50px;border-radius:25px;background:var(--tile);display:flex;align-items:center;gap:10px;padding:0 16px;color:var(--muted);font-size:16px}
+h3{font:600 11px/1 Signika;letter-spacing:.16em;color:var(--muted);margin:16px 16px 10px;display:flex;justify-content:space-between}
+h3 em{font-style:normal;color:var(--green)}
+.zone{position:relative;height:96px;margin:0 16px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.zone .ln{position:absolute;left:22px;right:22px;top:34px;height:7px;border-radius:4px;background:var(--green)}
+.st{position:absolute;top:28px;width:19px;height:19px;border-radius:50%;background:#fff;border:4px solid var(--green);transform:translateX(-50%)}
+.st.x{width:25px;height:25px;top:25px;border:4px solid var(--ink)}
+.st.you{background:var(--green);box-shadow:0 0 0 4px #fff,0 0 0 6px var(--green)}
+.lb{position:absolute;top:58px;transform:translateX(-50%);font:500 11px/1.15 Signika;text-align:center;width:66px}
+.row{display:grid;grid-template-columns:1fr 132px;align-items:center;gap:10px;margin:0 16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.row b{display:block;font:600 16px/1.2 Signika}
+.row small{font:400 12px Signika;color:var(--muted)}
+.mini{position:relative;height:26px}
+.mini:before{content:"";position:absolute;left:0;right:22px;top:11px;height:5px;border-radius:3px;background:var(--green)}
+.mini i{position:absolute;top:8px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--green)}
+.mini u{position:absolute;right:0;top:4px;display:flex;gap:3px;text-decoration:none}
+.mini u s{width:18px;height:18px;border-radius:4px;background:var(--c);display:block}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 16px 0}
+.nums div{background:var(--night);color:#fff;border-radius:12px;padding:10px 12px}
+.nums small{display:block;font:500 11px Signika;letter-spacing:.1em;color:#AFC0E0}
+.nums b{font:600 32px/1.1 Signika}
+nav{position:fixed;left:0;right:0;bottom:0;height:68px;background:var(--night);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;text-align:center;font:500 11px Signika;color:#AFC0E0}
+nav div{display:flex;flex-direction:column;align-items:center;gap:5px}
+nav i{width:20px;height:5px;border-radius:3px;background:#3B5285}
+nav .on{color:#fff}
+nav .on i{background:var(--green)}
+</style></head><body>
+<header><div class="top"><div><b>Green Zone</b><small>MO GUIDE · ED HKL</small></div><div class="dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></div></div>
+<div class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5D6678" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search a symptom, rule, dose or number</div></header>
+<h3>THE GREEN LINE · ONE WAY <em>ZONE MAP</em></h3>
+<div class="zone"><div class="ln"></div>
+ <span class="st" style="left:22px"></span><span class="lb" style="left:30px">Triage</span>
+ <span class="st you" style="left:105px"></span><span class="lb" style="left:105px">You, the MO</span>
+ <span class="st" style="left:185px"></span><span class="lb" style="left:185px">Treatment room</span>
+ <span class="st x" style="left:265px"></span><span class="lb" style="left:265px">CCA</span>
+ <span class="st" style="left:334px"></span><span class="lb" style="left:326px">Review</span>
+</div>
+<h3>SAVED LINES <em>ALL 38</em></h3>
+<div class="row"><span><b>Renal colic</b><small>Ebook p53–54 · 4 questions</small></span><div class="mini"><i style="left:4px"></i><i style="left:40px"></i><i style="left:76px"></i><u><s style="--c:var(--green)"></s><s style="--c:var(--ref)"></s></u></div></div>
+<div class="row"><span><b>Dengue fever</b><small>Ebook p31–32 · 5 questions</small></span><div class="mini"><i style="left:4px"></i><i style="left:30px"></i><i style="left:56px"></i><i style="left:82px"></i><u><s style="--c:var(--admit)"></s><s style="--c:var(--obs)"></s></u></div></div>
+<div class="row"><span><b>Asthma Zone flow</b><small>Memo, Nov 2025 · 3 questions</small></span><div class="mini"><i style="left:4px"></i><i style="left:44px"></i><u><s style="--c:var(--admit)"></s><s style="--c:var(--green)"></s></u></div></div>
+<div class="nums"><div><small>CODE BLUE</small><b>5333</b></div><div><small>CODE STROKE</small><b>5999</b></div></div>
+<nav><div class="on"><i></i>Home</div><div><i></i>Pathways</div><div><i></i>Search</div><div><i></i>Tools</div><div><i></i>Numbers</div></nav>
+</body></html>

@@ -1,0 +1,219 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,560",
+				"to": "00:00:00,650"
+			},
+			"offsets": {
+				"from": 560,
+				"to": 650
+			},
+			"text": " Kemudian"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,650",
+				"to": "00:00:01,160"
+			},
+			"offsets": {
+				"from": 650,
+				"to": 1160
+			},
+			"text": " pesakit"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,160",
+				"to": "00:00:01,550"
+			},
+			"offsets": {
+				"from": 1160,
+				"to": 1550
+			},
+			"text": " datang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,550",
+				"to": "00:00:01,990"
+			},
+			"offsets": {
+				"from": 1550,
+				"to": 1990
+			},
+			"text": " kepada"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,990",
+				"to": "00:00:02,490"
+			},
+			"offsets": {
+				"from": 1990,
+				"to": 2490
+			},
+			"text": " anda,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,490",
+				"to": "00:00:02,680"
+			},
+			"offsets": {
+				"from": 2490,
+				"to": 2680
+			},
+			"text": " isi"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,680",
+				"to": "00:00:02,940"
+			},
+			"offsets": {
+				"from": 2680,
+				"to": 2940
+			},
+			"text": " slip"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,940",
+				"to": "00:00:03,500"
+			},
+			"offsets": {
+				"from": 2940,
+				"to": 3500
+			},
+			"text": " hijau."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,940",
+				"to": "00:00:04,030"
+			},
+			"offsets": {
+				"from": 3940,
+				"to": 4030
+			},
+			"text": " Bilik"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,030",
+				"to": "00:00:04,540"
+			},
+			"offsets": {
+				"from": 4030,
+				"to": 4540
+			},
+			"text": " rawatan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,540",
+				"to": "00:00:05,060"
+			},
+			"offsets": {
+				"from": 4540,
+				"to": 5060
+			},
+			"text": " memanggil"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,060",
+				"to": "00:00:05,500"
+			},
+			"offsets": {
+				"from": 5060,
+				"to": 5500
+			},
+			"text": " nombor"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,500",
+				"to": "00:00:06,060"
+			},
+			"offsets": {
+				"from": 5500,
+				"to": 6060
+			},
+			"text": " giliran"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,060",
+				"to": "00:00:06,240"
+			},
+			"offsets": {
+				"from": 6060,
+				"to": 6240
+			},
+			"text": " dan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,240",
+				"to": "00:00:06,970"
+			},
+			"offsets": {
+				"from": 6240,
+				"to": 6970
+			},
+			"text": " melaksanakan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,970",
+				"to": "00:00:07,330"
+			},
+			"offsets": {
+				"from": 6970,
+				"to": 7330
+			},
+			"text": " setiap"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,330",
+				"to": "00:00:07,940"
+			},
+			"offsets": {
+				"from": 7330,
+				"to": 7940
+			},
+			"text": " arahan."
+		}
+	]
+}

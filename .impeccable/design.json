@@ -1,0 +1,933 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T12:00:00+08:00",
+  "title": "Design System: Green Zone MO Guide",
+  "extensions": {
+    "colorMeta": {
+      "pearl-ground": {
+        "role": "neutral",
+        "displayName": "Pearl Ground",
+        "canonical": "#e9edeb",
+        "cssVar": "--bg",
+        "dark": "#080d0b"
+      },
+      "pearl-ground-2": {
+        "role": "neutral",
+        "displayName": "Pearl Ground 2",
+        "canonical": "#e1e7e3",
+        "cssVar": "--bg-2",
+        "dark": "#0c1310"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#ffffff",
+        "cssVar": "--surface",
+        "dark": "#111a15"
+      },
+      "on-jewel": {
+        "role": "neutral",
+        "displayName": "On Jewel White",
+        "canonical": "#ffffff",
+        "note": "Literal #fff in the CSS for text on jewel tiles, primary actions and outcome cards; the same in both themes."
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Surface 2",
+        "canonical": "#f5f7f6",
+        "cssVar": "--surface-2",
+        "dark": "#15201a"
+      },
+      "surface-3": {
+        "role": "neutral",
+        "displayName": "Surface 3",
+        "canonical": "#ebefed",
+        "cssVar": "--surface-3",
+        "dark": "#1b2821"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#0f1a15",
+        "cssVar": "--ink",
+        "dark": "#e7f0eb"
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "canonical": "#26352e",
+        "cssVar": "--ink-2",
+        "dark": "#c8d6cf"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#53635b",
+        "cssVar": "--muted",
+        "dark": "#94a79d"
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Faint",
+        "canonical": "#7b8a83",
+        "cssVar": "--faint",
+        "dark": "#6b7e74"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#dbe2de",
+        "cssVar": "--line",
+        "dark": "#1f2c26"
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Line 2",
+        "canonical": "#c5cfc9",
+        "cssVar": "--line-2",
+        "dark": "#2c3c34"
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Ward Emerald",
+        "canonical": "#0b6b47",
+        "cssVar": "--accent",
+        "tonalRamp": [
+          "#063d28",
+          "#08513a",
+          "#0b6b47",
+          "#43dd8c",
+          "#dcf1e5"
+        ],
+        "dark": "#5fd297"
+      },
+      "accent-2": {
+        "role": "primary",
+        "displayName": "Accent 2",
+        "canonical": "#08513a",
+        "cssVar": "--accent-2",
+        "dark": "#86e2b2"
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Accent Soft",
+        "canonical": "#dcf1e5",
+        "cssVar": "--accent-soft",
+        "dark": "#12301f"
+      },
+      "mint": {
+        "role": "primary",
+        "displayName": "Signal Mint",
+        "canonical": "#43dd8c",
+        "cssVar": "--mint",
+        "dark": "#5be89d"
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Gold",
+        "canonical": "#d8b46a",
+        "cssVar": "--gold",
+        "dark": "#e3c27a"
+      },
+      "gold-ink": {
+        "role": "secondary",
+        "displayName": "Gold Ink",
+        "canonical": "#2a1f07",
+        "cssVar": "--gold-ink"
+      },
+      "emerald-1": {
+        "role": "secondary",
+        "displayName": "Emerald stop 1",
+        "canonical": "#0d7049",
+        "cssVar": "--emerald-1",
+        "tonalRamp": [
+          "#063d28",
+          "#0a5a3b",
+          "#0d7049"
+        ]
+      },
+      "emerald-2": {
+        "role": "secondary",
+        "displayName": "Emerald stop 2",
+        "canonical": "#0a5a3b",
+        "cssVar": "--emerald-2",
+        "tonalRamp": [
+          "#063d28",
+          "#0a5a3b",
+          "#0d7049"
+        ]
+      },
+      "emerald-3": {
+        "role": "secondary",
+        "displayName": "Emerald stop 3",
+        "canonical": "#063d28",
+        "cssVar": "--emerald-3",
+        "tonalRamp": [
+          "#063d28",
+          "#0a5a3b",
+          "#0d7049"
+        ]
+      },
+      "sapphire-1": {
+        "role": "secondary",
+        "displayName": "Sapphire stop 1",
+        "canonical": "#24477f",
+        "cssVar": "--sapphire-1",
+        "tonalRamp": [
+          "#0d1f3e",
+          "#16305c",
+          "#24477f"
+        ]
+      },
+      "sapphire-2": {
+        "role": "secondary",
+        "displayName": "Sapphire stop 2",
+        "canonical": "#16305c",
+        "cssVar": "--sapphire-2",
+        "tonalRamp": [
+          "#0d1f3e",
+          "#16305c",
+          "#24477f"
+        ]
+      },
+      "sapphire-3": {
+        "role": "secondary",
+        "displayName": "Sapphire stop 3",
+        "canonical": "#0d1f3e",
+        "cssVar": "--sapphire-3",
+        "tonalRamp": [
+          "#0d1f3e",
+          "#16305c",
+          "#24477f"
+        ]
+      },
+      "plum-1": {
+        "role": "secondary",
+        "displayName": "Plum stop 1",
+        "canonical": "#6a3473",
+        "cssVar": "--plum-1",
+        "tonalRamp": [
+          "#2f1334",
+          "#4a2150",
+          "#6a3473"
+        ]
+      },
+      "plum-2": {
+        "role": "secondary",
+        "displayName": "Plum stop 2",
+        "canonical": "#4a2150",
+        "cssVar": "--plum-2",
+        "tonalRamp": [
+          "#2f1334",
+          "#4a2150",
+          "#6a3473"
+        ]
+      },
+      "plum-3": {
+        "role": "secondary",
+        "displayName": "Plum stop 3",
+        "canonical": "#2f1334",
+        "cssVar": "--plum-3",
+        "tonalRamp": [
+          "#2f1334",
+          "#4a2150",
+          "#6a3473"
+        ]
+      },
+      "garnet-1": {
+        "role": "secondary",
+        "displayName": "Garnet stop 1",
+        "canonical": "#a52234",
+        "cssVar": "--garnet-1",
+        "tonalRamp": [
+          "#560d19",
+          "#7e1626",
+          "#a52234"
+        ]
+      },
+      "garnet-2": {
+        "role": "secondary",
+        "displayName": "Garnet stop 2",
+        "canonical": "#7e1626",
+        "cssVar": "--garnet-2",
+        "tonalRamp": [
+          "#560d19",
+          "#7e1626",
+          "#a52234"
+        ]
+      },
+      "garnet-3": {
+        "role": "secondary",
+        "displayName": "Garnet stop 3",
+        "canonical": "#560d19",
+        "cssVar": "--garnet-3",
+        "tonalRamp": [
+          "#560d19",
+          "#7e1626",
+          "#a52234"
+        ]
+      },
+      "obsidian-1": {
+        "role": "secondary",
+        "displayName": "Obsidian stop 1",
+        "canonical": "#27352e",
+        "cssVar": "--obsidian-1",
+        "tonalRamp": [
+          "#0b110e",
+          "#17211c",
+          "#27352e"
+        ]
+      },
+      "obsidian-2": {
+        "role": "secondary",
+        "displayName": "Obsidian stop 2",
+        "canonical": "#17211c",
+        "cssVar": "--obsidian-2",
+        "tonalRamp": [
+          "#0b110e",
+          "#17211c",
+          "#27352e"
+        ]
+      },
+      "obsidian-3": {
+        "role": "secondary",
+        "displayName": "Obsidian stop 3",
+        "canonical": "#0b110e",
+        "cssVar": "--obsidian-3",
+        "tonalRamp": [
+          "#0b110e",
+          "#17211c",
+          "#27352e"
+        ]
+      },
+      "teal-1": {
+        "role": "secondary",
+        "displayName": "Teal stop 1",
+        "canonical": "#157481",
+        "cssVar": "--teal-1",
+        "tonalRamp": [
+          "#093d45",
+          "#0f5a64",
+          "#157481"
+        ]
+      },
+      "teal-2": {
+        "role": "secondary",
+        "displayName": "Teal stop 2",
+        "canonical": "#0f5a64",
+        "cssVar": "--teal-2",
+        "tonalRamp": [
+          "#093d45",
+          "#0f5a64",
+          "#157481"
+        ]
+      },
+      "teal-3": {
+        "role": "secondary",
+        "displayName": "Teal stop 3",
+        "canonical": "#093d45",
+        "cssVar": "--teal-3",
+        "tonalRamp": [
+          "#093d45",
+          "#0f5a64",
+          "#157481"
+        ]
+      },
+      "bronze-1": {
+        "role": "secondary",
+        "displayName": "Bronze stop 1",
+        "canonical": "#8a5a1f",
+        "cssVar": "--bronze-1",
+        "tonalRamp": [
+          "#47290a",
+          "#6b4414",
+          "#8a5a1f"
+        ]
+      },
+      "bronze-2": {
+        "role": "secondary",
+        "displayName": "Bronze stop 2",
+        "canonical": "#6b4414",
+        "cssVar": "--bronze-2",
+        "tonalRamp": [
+          "#47290a",
+          "#6b4414",
+          "#8a5a1f"
+        ]
+      },
+      "bronze-3": {
+        "role": "secondary",
+        "displayName": "Bronze stop 3",
+        "canonical": "#47290a",
+        "cssVar": "--bronze-3",
+        "tonalRamp": [
+          "#47290a",
+          "#6b4414",
+          "#8a5a1f"
+        ]
+      },
+      "champagne-1": {
+        "role": "secondary",
+        "displayName": "Champagne stop 1",
+        "canonical": "#f2e2bb",
+        "cssVar": "--champ-1",
+        "tonalRamp": [
+          "#c9a563",
+          "#e3ca90",
+          "#f2e2bb"
+        ]
+      },
+      "champagne-2": {
+        "role": "secondary",
+        "displayName": "Champagne stop 2",
+        "canonical": "#e3ca90",
+        "cssVar": "--champ-2",
+        "tonalRamp": [
+          "#c9a563",
+          "#e3ca90",
+          "#f2e2bb"
+        ]
+      },
+      "champagne-3": {
+        "role": "secondary",
+        "displayName": "Champagne stop 3",
+        "canonical": "#c9a563",
+        "cssVar": "--champ-3",
+        "tonalRamp": [
+          "#c9a563",
+          "#e3ca90",
+          "#f2e2bb"
+        ]
+      },
+      "indigo-1": {
+        "role": "secondary",
+        "displayName": "Indigo stop 1",
+        "canonical": "#3d4597",
+        "cssVar": "--indigo-1",
+        "tonalRamp": [
+          "#191d4a",
+          "#2a3072",
+          "#3d4597"
+        ]
+      },
+      "indigo-2": {
+        "role": "secondary",
+        "displayName": "Indigo stop 2",
+        "canonical": "#2a3072",
+        "cssVar": "--indigo-2",
+        "tonalRamp": [
+          "#191d4a",
+          "#2a3072",
+          "#3d4597"
+        ]
+      },
+      "indigo-3": {
+        "role": "secondary",
+        "displayName": "Indigo stop 3",
+        "canonical": "#191d4a",
+        "cssVar": "--indigo-3",
+        "tonalRamp": [
+          "#191d4a",
+          "#2a3072",
+          "#3d4597"
+        ]
+      },
+      "outcome-admit": {
+        "role": "tertiary",
+        "displayName": "Outcome Red",
+        "canonical": "#c42a20",
+        "cssVar": "--b-admit"
+      },
+      "outcome-observe": {
+        "role": "tertiary",
+        "displayName": "Outcome Yellow",
+        "canonical": "#f0ae1c",
+        "cssVar": "--b-observe"
+      },
+      "on-observe": {
+        "role": "tertiary",
+        "displayName": "On Observe",
+        "canonical": "#241900",
+        "cssVar": "--on-observe"
+      },
+      "outcome-discharge": {
+        "role": "tertiary",
+        "displayName": "Outcome Green",
+        "canonical": "#13834c",
+        "cssVar": "--b-discharge"
+      },
+      "outcome-refer": {
+        "role": "tertiary",
+        "displayName": "Outcome Violet",
+        "canonical": "#5a44c4",
+        "cssVar": "--b-refer"
+      },
+      "outcome-neutral": {
+        "role": "tertiary",
+        "displayName": "Outcome Slate",
+        "canonical": "#41544b",
+        "cssVar": "--b-neutral"
+      },
+      "outcome-advice": {
+        "role": "tertiary",
+        "displayName": "Advice Blue",
+        "canonical": "#1b5daf",
+        "cssVar": "--b-advice"
+      },
+      "admit-text": {
+        "role": "tertiary",
+        "displayName": "Admit Text",
+        "canonical": "#ae2219",
+        "cssVar": "--admit",
+        "dark": "#ff958d"
+      },
+      "admit-soft": {
+        "role": "tertiary",
+        "displayName": "Admit Soft",
+        "canonical": "#fcebe9",
+        "cssVar": "--admit-soft",
+        "dark": "#3a1715"
+      },
+      "observe-text": {
+        "role": "tertiary",
+        "displayName": "Observe Text",
+        "canonical": "#7d5300",
+        "cssVar": "--observe",
+        "dark": "#f3c55a"
+      },
+      "observe-soft": {
+        "role": "tertiary",
+        "displayName": "Observe Soft",
+        "canonical": "#fdf2d5",
+        "cssVar": "--observe-soft",
+        "dark": "#33270a"
+      },
+      "discharge-text": {
+        "role": "tertiary",
+        "displayName": "Discharge Text",
+        "canonical": "#0d6f40",
+        "cssVar": "--discharge",
+        "dark": "#6edb9c"
+      },
+      "discharge-soft": {
+        "role": "tertiary",
+        "displayName": "Discharge Soft",
+        "canonical": "#e1f3e8",
+        "cssVar": "--discharge-soft",
+        "dark": "#10301f"
+      },
+      "refer-text": {
+        "role": "tertiary",
+        "displayName": "Refer Text",
+        "canonical": "#4733ae",
+        "cssVar": "--refer",
+        "dark": "#b3a9ff"
+      },
+      "refer-soft": {
+        "role": "tertiary",
+        "displayName": "Refer Soft",
+        "canonical": "#ece9fb",
+        "cssVar": "--refer-soft",
+        "dark": "#211d48"
+      },
+      "advice-text": {
+        "role": "tertiary",
+        "displayName": "Advice Text",
+        "canonical": "#1b5daf",
+        "cssVar": "--advice",
+        "dark": "#8ab7f5"
+      },
+      "advice-soft": {
+        "role": "tertiary",
+        "displayName": "Advice Soft",
+        "canonical": "#e6effb",
+        "cssVar": "--advice-soft",
+        "dark": "#122339"
+      },
+      "concern": {
+        "role": "tertiary",
+        "displayName": "Concern Rose",
+        "canonical": "#a2305a",
+        "cssVar": "--concern",
+        "dark": "#f293b9"
+      },
+      "concern-soft": {
+        "role": "tertiary",
+        "displayName": "Concern Soft",
+        "canonical": "#fbe8ef",
+        "cssVar": "--concern-soft",
+        "dark": "#381625"
+      },
+      "highlight": {
+        "role": "neutral",
+        "displayName": "Highlight",
+        "canonical": "#fde68a",
+        "cssVar": "--mark",
+        "dark": "#5d4b0c"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "View titles, the runner's pathway title, the home greeting. Figtree 900, negative tracking."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section heads, question cards, the outcome title."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Tile, rail, sheet, rule and tool headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All reading text, in Atkinson Hyperlegible Next."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Buttons, pills and tab bar labels."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase tracked chips beside tile headings, badges, the outcome kind under the outcome title, navigation group heads."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Emergency extensions and key numbers, mono and tabular."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Counts, keys, option numbers, the Ebook page chip, thresholds, timecodes."
+      }
+    },
+    "fonts": {
+      "source": "Google Fonts only",
+      "request": "https://fonts.googleapis.com/css2?family=Figtree:wght@600..900&family=Atkinson+Hyperlegible+Mono:wght@400..700&family=Atkinson+Hyperlegible+Next:ital,wght@0,400..800;1,400&display=swap"
+    },
+    "shadows": [
+      {
+        "name": "sh-1",
+        "value": "0 1px 2px rgba(15,26,21,.06)",
+        "dark": "0 0 0 1px rgba(255,255,255,.02)",
+        "purpose": "Hairline: back pill, runner icon buttons, collapsible panels."
+      },
+      {
+        "name": "sh-2",
+        "value": "0 1px 2px rgba(15,26,21,.05),0 18px 34px -20px rgba(15,26,21,.42)",
+        "dark": "0 18px 36px -18px rgba(0,0,0,.8)",
+        "purpose": "Resting: pearl tiles, cards, panels, the search pill."
+      },
+      {
+        "name": "sh-3",
+        "value": "0 2px 10px rgba(15,26,21,.08),0 36px 70px -28px rgba(15,26,21,.5)",
+        "dark": "0 30px 64px -22px rgba(0,0,0,.9)",
+        "purpose": "Raised: hover on pearl surfaces, dialogs, palette, sheet, toast."
+      },
+      {
+        "name": "jewel",
+        "value": "0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px var(--t3)",
+        "purpose": "Every jewel tile at rest, tinted with its deepest stop."
+      },
+      {
+        "name": "jewel-hover",
+        "value": "0 1px 1px rgba(0,0,0,.05),0 28px 44px -24px var(--t3)",
+        "purpose": "Linked jewel tile on hover."
+      },
+      {
+        "name": "outcome-glow",
+        "value": "0 22px 40px -26px var(--oc)",
+        "purpose": "Under the flat outcome card, in its outcome colour."
+      },
+      {
+        "name": "glass-bar",
+        "value": "0 0 0 1px color-mix(in srgb,var(--line) 80%,transparent),0 20px 40px -18px rgba(15,26,21,.5)",
+        "purpose": "The floating phone tab bar."
+      },
+      {
+        "name": "inner-edge",
+        "value": "inset 0 0 0 1px var(--edge)",
+        "purpose": "1 px inner light edge on jewel tiles: white at 14% in light, 10% in dark, 40% on champagne."
+      }
+    ],
+    "materials": [
+      {
+        "name": "tile-gradient",
+        "value": "linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3))",
+        "purpose": "Jewel tile fill; --t1 to --t3 are set by the jewel class."
+      },
+      {
+        "name": "grain",
+        "value": "inline SVG fractalNoise (baseFrequency .85, 3 octaves, white at 10% alpha), tiled at 180px",
+        "purpose": "Faint grain on jewel tiles, library section headers and category tiles."
+      },
+      {
+        "name": "specular",
+        "value": "radial-gradient(280px circle at var(--mx,-400px) var(--my,-400px),rgba(255,255,255,.16),transparent 62%)",
+        "purpose": "Highlight that follows the pointer. A passive pointermove handler sets --mx and --my on the tile under the pointer and removes them when the pointer moves to another. Pearl tiles use mint at 9%."
+      },
+      {
+        "name": "sheen",
+        "value": "radial-gradient(120% 85% at 0 0,rgba(255,255,255,.14),transparent 55%)",
+        "purpose": "Fixed top-left light on jewel tiles."
+      },
+      {
+        "name": "glass",
+        "value": "rgba(255,255,255,.14), .22 on hover",
+        "purpose": "Buttons, tags and chips on jewel surfaces."
+      },
+      {
+        "name": "glass-bar",
+        "value": "color-mix(in srgb,var(--surface) 90%,transparent) with saturate(1.6) blur(18px)",
+        "purpose": "Phone tab bar; the top bar uses the ground at 84% with saturate(1.5) blur(16px)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Default out-curve for every transition and entrance."
+      },
+      {
+        "name": "spring",
+        "value": "cubic-bezier(.34,1.56,.64,1)",
+        "purpose": "Stops and dots that pop: zone stops, journey stops, discharge route dots, intro marks."
+      },
+      {
+        "name": "tile-lift",
+        "value": "translateY(-2px) over 350ms ease; press scale(.985)",
+        "purpose": "Linked tiles on hover and press."
+      },
+      {
+        "name": "button-press",
+        "value": "scale(.98)",
+        "purpose": "Buttons on press."
+      },
+      {
+        "name": "view-in",
+        "value": "400ms ease from opacity 0 and translateY(10px)",
+        "purpose": "Each view on entry."
+      },
+      {
+        "name": "deal",
+        "value": "450ms ease from opacity 0, translateX(22px) rotate(.8deg)",
+        "purpose": "The next question card deals in from the right; journey text swaps with it at 320ms."
+      },
+      {
+        "name": "turn",
+        "value": "600ms ease from perspective(900px) rotateX(-50deg), origin top centre",
+        "purpose": "The outcome card turns over in its colour."
+      },
+      {
+        "name": "zone-draw",
+        "value": "route fill from width 0 over 1.2s ease after 200ms; stops pop from scale(.55) over 550ms spring, 100ms apart from 250ms",
+        "purpose": "The zone tile route on home."
+      },
+      {
+        "name": "art-draw",
+        "value": "stroke-dashoffset 1 to 0 over 1.1s ease; marks pop over 500ms spring",
+        "purpose": "First-shift intro illustrations."
+      },
+      {
+        "name": "sheet-in",
+        "value": "360ms ease from translateX(30px)",
+        "purpose": "Whole-pathway map sheet."
+      },
+      {
+        "name": "dialog-in",
+        "value": "260ms ease from translateY(-10px) scale(.98)",
+        "purpose": "Search palette and settings."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "every entrance is gated on prefers-reduced-motion: no-preference; under reduce, all animation and transition durations become .01ms with one iteration",
+        "purpose": "End states shown at once."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "560px"
+      },
+      {
+        "name": "journey-rail",
+        "value": "640px"
+      },
+      {
+        "name": "phone",
+        "value": "760px",
+        "note": "glass tab bar at and below; four-column bento from 761px"
+      },
+      {
+        "name": "stage",
+        "value": "860px"
+      },
+      {
+        "name": "tour",
+        "value": "900px"
+      },
+      {
+        "name": "runner",
+        "value": "980px",
+        "note": "route rail hides below"
+      },
+      {
+        "name": "desktop",
+        "value": "1100px",
+        "note": "fixed 286px obsidian sidebar from here"
+      }
+    ],
+    "hostConstraints": [
+      "One self-contained page with no framework; scripts inline, or from cdnjs, jsDelivr, unpkg or code.jquery.com pinned to an exact version.",
+      "Fonts only from Google Fonts.",
+      "No doctype, html, head or body tags; the page starts with its title and the claude:viewport-fit-sides cover meta.",
+      "Side gutters max(16px, env(safe-area-inset-left, 0px)) and the right-hand equivalent; nothing scrolls sideways at 390px.",
+      "Colours as root tokens with light values, redefined in the two dark blocks; none defined only in a dark block.",
+      "Reduced motion respected; sound only from a tap."
+    ]
+  },
+  "components": [
+    {
+      "name": "Jewel Tile",
+      "kind": "card",
+      "refersTo": "tile",
+      "description": "The signature surface: gradient, grain, inner edge, tinted shadow, pointer specular. Shown in emerald; set --t1 to --t3 to another jewel's stops.",
+      "html": "<a class=\"ds-tile\" href=\"#\" style=\"--mx:120px;--my:40px\"><span class=\"ds-tile-h\"><b>Pathways</b><span class=\"ds-tag\">23</span></span><span class=\"ds-tile-sub\">Tap a body system to open its pathways.</span></a>",
+      "css": ".ds-tile{--t1:var(--emerald-1);--t2:var(--emerald-2);--t3:var(--emerald-3);position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;gap:12px;min-height:150px;padding:18px;border-radius:28px;color:#fff;text-decoration:none;font-family:var(--body);background:linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));box-shadow:0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px var(--t3);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)}.ds-tile::before{content:\"\";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(280px circle at var(--mx,-400px) var(--my,-400px),rgba(255,255,255,.16),transparent 62%),radial-gradient(120% 85% at 0 0,rgba(255,255,255,.14),transparent 55%),var(--grain);background-size:auto,auto,180px 180px}.ds-tile::after{content:\"\";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px var(--edge)}.ds-tile:hover{transform:translateY(-2px);box-shadow:0 1px 1px rgba(0,0,0,.05),0 28px 44px -24px var(--t3)}.ds-tile:active{transform:scale(.985)}.ds-tile:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.ds-tile-h{display:flex;align-items:center;gap:10px}.ds-tile-h b{font:800 1.1rem/1.15 var(--display);letter-spacing:-.01em}.ds-tag{display:inline-flex;font:800 .7rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:var(--glass)}.ds-tile-sub{margin-top:auto;font-size:.86rem;line-height:1.4;opacity:.94}"
+    },
+    {
+      "name": "Pearl Tile",
+      "kind": "card",
+      "refersTo": "tile-pearl",
+      "description": "White tile for the denser lists between the jewels; outcome dots stay flat.",
+      "html": "<section class=\"ds-pearl\"><b>Quick routes</b><a href=\"#\">Renal colic<small>Ebook p53–54</small><span class=\"ds-dots\"><i style=\"background:var(--b-discharge)\"></i><i style=\"background:var(--b-refer)\"></i><i style=\"background:var(--b-neutral)\"></i></span></a></section>",
+      "css": ".ds-pearl{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:28px;background:var(--surface);color:var(--ink);font-family:var(--body);box-shadow:var(--sh-2),inset 0 0 0 1px var(--line)}.ds-pearl>b{font:800 1.1rem/1.15 var(--display)}.ds-pearl a{display:flex;flex-direction:column;gap:6px;padding:11px 4px;color:var(--ink);text-decoration:none;font:800 .92rem/1.2 var(--body);transition:background-color .15s}.ds-pearl a:hover{background:var(--accent-soft);color:var(--accent)}.ds-pearl a:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.ds-pearl small{font:700 .76rem var(--body);color:var(--muted)}.ds-dots{display:flex;gap:4px}.ds-dots i{width:18px;height:6px;border-radius:3px}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The emerald action.",
+      "html": "<button class=\"ds-btn-primary\">Start the check</button>",
+      "css": ".ds-btn-primary{font:700 .95rem/1.2 var(--body);min-height:46px;padding:10px 16px;border-radius:12px;border:1.5px solid transparent;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-2));color:#fff;box-shadow:0 12px 24px -14px var(--emerald-3);cursor:pointer;transition:transform .2s cubic-bezier(.16,1,.3,1)}.ds-btn-primary:hover{filter:brightness(1.08)}.ds-btn-primary:active{transform:scale(.98)}.ds-btn-primary:focus-visible{outline:3px solid var(--mint);outline-offset:2px}"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "White with a ring; the ring turns accent on hover.",
+      "html": "<button class=\"ds-btn\">Copy advice</button>",
+      "css": ".ds-btn{font:700 .95rem/1.2 var(--body);min-height:46px;padding:10px 16px;border-radius:12px;border:1.5px solid var(--line-2);background:var(--surface);color:var(--ink);cursor:pointer;transition:border-color .15s,transform .2s cubic-bezier(.16,1,.3,1)}.ds-btn:hover{border-color:var(--accent)}.ds-btn:active{transform:scale(.98)}.ds-btn:focus-visible{outline:3px solid var(--mint);outline-offset:2px}"
+    },
+    {
+      "name": "Pill Link",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "See-also and related links, with a chevron.",
+      "html": "<a class=\"ds-pill\" href=\"#\">EMACC follow-up<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9.5 6 6 6-6 6\"/></svg></a>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:7px 14px;border:1.5px solid var(--line-2);border-radius:999px;background:var(--surface);color:var(--ink);text-decoration:none;font:700 .86rem/1.2 var(--body);transition:border-color .15s,color .15s}.ds-pill svg{width:15px;height:15px}.ds-pill:hover{border-color:var(--accent);color:var(--accent)}.ds-pill:focus-visible{outline:3px solid var(--mint);outline-offset:2px}"
+    },
+    {
+      "name": "Answer Option",
+      "kind": "button",
+      "refersTo": "option",
+      "description": "A runner answer row with its number key; the option the checklist suggests turns emerald.",
+      "html": "<div class=\"ds-opts\"><button class=\"ds-opt\"><kbd>1</kbd>Yes</button><button class=\"ds-opt ds-sugg\"><kbd>2</kbd>No</button></div>",
+      "css": ".ds-opts{display:grid;gap:10px}.ds-opt{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;padding:10px 16px 10px 10px;border:0;border-radius:20px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:800 1.02rem/1.3 var(--body);text-align:left;cursor:pointer}.ds-opt kbd{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--surface);color:var(--accent);font:700 .9rem var(--mono);box-shadow:inset 0 0 0 1px var(--line)}.ds-opt:hover{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}.ds-opt:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.ds-sugg{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:0 14px 26px -16px var(--emerald-3)}.ds-sugg kbd{background:var(--mint);color:var(--emerald-3);box-shadow:none}"
+    },
+    {
+      "name": "Outcome Card",
+      "kind": "custom",
+      "refersTo": "outcome-discharge",
+      "description": "Flat outcome colour, never a gradient. Set --oc and --oi per outcome; observation takes var(--on-observe) as ink.",
+      "html": "<article class=\"ds-res\" style=\"--oc:var(--b-discharge);--oi:#fff\"><h2>Discharge with appropriate follow-up</h2><div class=\"ds-res-k\">Discharge (green box)</div><ul><li>Give the discharge advice below</li></ul><div class=\"ds-res-f\"><button>Copy outcome</button><button class=\"ds-res-p\">Discharge advice</button></div></article>",
+      "css": ".ds-res{border-radius:28px;background:var(--oc);color:var(--oi);padding:22px;font-family:var(--body);box-shadow:0 22px 40px -26px var(--oc)}.ds-res h2{margin:0;font:900 clamp(1.45rem,3.2vw,2.1rem)/1.06 var(--display);letter-spacing:-.025em}.ds-res-k{margin-top:6px;font:800 .76rem/1.3 var(--body);letter-spacing:.09em;text-transform:uppercase;opacity:.86}.ds-res ul{padding-left:20px;font-weight:600}.ds-res-f{display:flex;flex-wrap:wrap;gap:8px}.ds-res-f button{min-height:46px;padding:10px 16px;border:0;border-radius:12px;background:rgba(255,255,255,.16);color:inherit;font:700 .95rem var(--body);box-shadow:inset 0 0 0 1px rgba(255,255,255,.26);cursor:pointer}.ds-res-f button:hover{background:rgba(255,255,255,.26)}.ds-res-f button:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.ds-res-f .ds-res-p{background:#fff;color:var(--oc);box-shadow:none}"
+    },
+    {
+      "name": "Number Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Quick-sum input: recessed, mono value, accent ring on focus.",
+      "html": "<label class=\"ds-field\"><span>Weight (kg)</span><input inputmode=\"decimal\" value=\"18\"></label>",
+      "css": ".ds-field{display:grid;gap:6px;font-family:var(--body)}.ds-field span{font:800 .8rem/1.2 var(--body);color:var(--muted)}.ds-field input{width:100%;height:56px;border-radius:16px;border:0;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line-2);color:var(--ink);padding:0 14px;font:700 1.25rem var(--mono)}.ds-field input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--accent);background:var(--surface)}"
+    },
+    {
+      "name": "Glass Tab Bar",
+      "kind": "nav",
+      "refersTo": "tabbar",
+      "description": "Floating phone navigation with the emerald search key at its centre.",
+      "html": "<nav class=\"ds-tabbar\"><a href=\"#\" aria-current=\"page\">Home</a><a href=\"#\">Pathways</a><a href=\"#\" class=\"ds-fab\"><span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"m20 20-4.2-4.2\"/></svg></span>Search</a><a href=\"#\">Tools</a><a href=\"#\">Numbers</a></nav>",
+      "css": ".ds-tabbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;padding:7px;border-radius:26px;background:color-mix(in srgb,var(--surface) 90%,transparent);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 0 0 1px color-mix(in srgb,var(--line) 80%,transparent),0 20px 40px -18px rgba(15,26,21,.5)}.ds-tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;border-radius:19px;color:var(--muted);font:800 .72rem/1 var(--body);text-decoration:none}.ds-tabbar a:hover{color:var(--ink)}.ds-tabbar a:focus-visible{outline:3px solid var(--mint);outline-offset:2px}.ds-tabbar a[aria-current=page]{background:var(--accent-soft);color:var(--accent)}.ds-fab span{display:grid;place-items:center;width:44px;height:44px;border-radius:16px;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:0 10px 20px -10px var(--emerald-3)}.ds-fab svg{width:22px;height:22px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Premium Bento",
+    "overview": "The guide is a familiar clinical-reference app laid out as tiles of different sizes, each tile a live mini-infographic that can be tapped: the zone map with its five stops, the emergency extensions, how each pathway can end, the discharge check, the quick-sum thresholds. The tiles sit on a cool pearl ground in deep jewel colours, one jewel per area of the guide, with an expensive finish: a diagonal gradient, a faint grain, a 1 px inner light edge, a shadow tinted with the tile's own hue, and a soft highlight that follows the pointer. White pearl tiles carry the denser lists between them. The world was chosen by the owner from three live prototypes (a sign system, a clinical atlas and this bento) with the steer \"more interactive and informative, expensive premium, a variety of premium colours\".\n\nDecoration is not part of it. Every tile shows real content from the guide, and the clinical meaning is carried by a second, deliberately plain palette: the ebook's own flat outcome boxes in red, yellow and green, with violet for refer and slate for a next step. The finish belongs to the shell and the areas; the outcomes stay flat so the answer reads as the ebook printed it.\n\nThe density is phone-first. On a 390 px screen the bento is two columns, the zone tile runs the full width, and a floating glass tab bar sits over the content within thumb reach. On desktop an obsidian sidebar holds the navigation and the bento opens to four columns with the zone tile two by two. Light, dark and device themes are all first-class.",
+    "keyCharacteristics": [
+      "Jewel tiles by area over a pearl ground, each a live infographic of guide content.",
+      "One material for every jewel surface: diagonal gradient, grain, inner light edge, hue-tinted shadow, pointer specular.",
+      "Flat outcome colours from the ebook, never finished like a jewel.",
+      "Figtree at 800 to 900 for display, Atkinson Hyperlegible Next for reading, Atkinson Hyperlegible Mono for figures.",
+      "Large radii (28 px tiles), generous touch targets (44 px and up), a floating glass tab bar on phones.",
+      "Motion that explains: cards deal in, outcomes turn over, the zone route draws itself; all of it gone under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Fixed Jewel Key Rule",
+        "body": "A jewel is a key, not a decoration. Each home area and each library topic owns one jewel and keeps it everywhere that area or topic appears: tile, tool header, section header, runner chip, list dot. A new surface in an existing area or topic takes its jewel; never recolour one for variety.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Outcome Rule",
+        "body": "The outcome tokens (outcome-admit, -observe, -discharge, -refer, -neutral) are always flat fills: outcome cards, discharge verdicts, outcome dots, legend swatches, quiz right and wrong states, calculator scale bands. They never take a gradient, grain or specular. The ebook's boxes are flat and the answer must read as the ebook printed it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Theme Rule",
+        "body": "Every colour is a token on the root with a light value. The two dark blocks (device dark unless light is forced, and dark by choice) redefine ground, surface, ink, lines, accent, mint, gold, the outcome text and soft tones, highlight, scrim, inner edge and shadows, and nothing else. The jewel stops, the flat outcome fills, on-observe, gold-ink, glass and grain are the same in both themes. No colour is ever defined only in a dark block.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Means A Figure Rule",
+        "body": "Atkinson Hyperlegible Mono is reserved for things that are read as figures: extensions and phone numbers, doses and thresholds, scores, counts, keys, timecodes and the ebook page chip. Words are never set in mono, and a figure an MO might copy or dial is always mono and tabular.",
+        "section": "typography"
+      },
+      {
+        "name": "The Heavy Display Rule",
+        "body": "Display type is Figtree at 800 to 900 with negative tracking; headings never fall back to a system face and never run lighter than 750.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tinted Shadow Rule",
+        "body": "A jewel surface casts a shadow in its own deepest stop, never in grey. Neutral surfaces use the sh-1 to sh-3 steps.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Ring Not Border Rule",
+        "body": "Surfaces are outlined with a 1 px inset ring (line on light surfaces, a white edge on jewels), not a CSS border, so the edge sits inside the radius and never shifts layout. Hover and focus thicken the ring to 1.5 or 2 px in the accent.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** give every jewel surface the full material: three-stop 150 degree gradient, grain, inner 1 px edge, a shadow in its own deepest stop, and the pointer highlight.",
+      "**Do** keep each area and library topic on its jewel: emerald zone, sapphire pathways, plum rules, garnet emergencies, obsidian shell and Code Stroke, teal tools, bronze sums, champagne for the shift's pearl; topics as keyed in Colors.",
+      "**Do** fill outcome surfaces flat with the outcome tokens, and set text on Outcome Yellow in on-observe.",
+      "**Do** make every tile show real content from the guide: a count, a route, a threshold, a number to copy.",
+      "**Do** set extensions, doses, thresholds, scores, counts and timecodes in Atkinson Hyperlegible Mono with tabular figures, and keep phone numbers as selectable text with a Copy button.",
+      "**Do** define every new colour as a root token with a light value and redefine it in both dark blocks when it must change for dark.",
+      "**Do** use max(16px, env(safe-area-inset-left, 0px)) and the right-hand equivalent for side gutters, and check 390 px for sideways scroll.",
+      "**Do** keep touch targets at 44 px or more and the 3 px mint focus outline on everything focusable.",
+      "**Do** wrap every animation in a no-preference reduced-motion query and show the end state when motion is reduced.",
+      "**Do** load fonts only from Google Fonts and keep scripts inline; there is no framework and no external script."
+    ],
+    "donts": [
+      "**Don't** put a gradient, grain or specular on the outcome tokens; the ebook's boxes are flat.",
+      "**Don't** use a tile as decoration or fill a tile with placeholder art; if it has no guide content, it is not a tile.",
+      "**Don't** set words in mono, or a copyable number in the body face.",
+      "**Don't** put an uppercase label line above a headline; uppercase labels sit beside a heading as a chip, under the outcome title, or as a navigation group head.",
+      "**Don't** use grey shadows under jewel tiles, or CSS borders where an inset ring belongs.",
+      "**Don't** define a colour only inside a dark block, or hard-code a hex in a component when a token exists.",
+      "**Don't** use glyph characters for icons; icons are inline SVG.",
+      "**Don't** let any element scroll the page sideways at 390 px."
+    ]
+  }
+}

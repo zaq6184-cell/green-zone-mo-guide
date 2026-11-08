@@ -1,10 +1,10 @@
-# Green Zone MO Guide, version 7
+# Green Zone MO Guide, version 8
 
 A guide for medical officers working in the Green Zone (MTS levels 4–5), Emergency & Trauma Department, Hospital Kuala Lumpur. It is built for use during a shift, on a phone first. It comes from *The Clinical Pathway in Emergency for Medical Officer* (HKL ED, 2025), which stays the approved source, with department documents from the MO Drive and the triage course folder added as labelled notes. It is a reference tool only and holds no patient data.
 
 ## Links
 
-- **Interactive app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 7 replaced version 6 at the same link on 7 Nov 2026)
+- **Interactive app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 8 replaced version 7 at the same link on 8 Nov 2026).
 - **Poster design canvas** (editable): https://claude.ai/artifact/5QaoLt2gwXut47WzhtprES
 
 Both links are private until you share them from the page's Share menu. The QR code on poster sheet 1 opens the app link, so colleagues can open it only after the app is shared with them.
@@ -21,8 +21,8 @@ Both links are private until you share them from the page's Share menu. The QR c
 | `app/clips/` | Six 8-second Flow Studio clips (1280×720): the hero loop and one for each stop of the patient journey. They are generated artwork with no text, logos or real people. |
 | `app/audio/` | The narration for each journey stop, cut from the explainer's narration. |
 | `flow-video/` | On the laptop only: the same six clips as they came from Flow Studio, at full quality. |
-| `video/` | The narrated explainer at 1080p and 720p, and `REVIEW.md` with how it was made. |
-| `poster/` | `green-zone-poster-A3.pdf` (two A3 pages, ready to print) and a PNG of each sheet. |
+| `video/` | The narrated explainer at 1080p and 720p in English, and in Bahasa Melayu (`-ms-`), `REVIEW.md` with how both were made and checked, and the HyperFrames projects `explainer/` (English, and the shared generator) and `explainer-ms/` (Malay). |
+| `poster/` | `green-zone-poster-A3.pdf` (two A3 pages, ready to print), a PNG of each sheet, and `src/` (`poster.html` and `render.js`, which rebuilds all seven poster files and refuses to write if anything overflows or the QR code differs). |
 | `illustrations/` | The six Flow Studio illustrations (1376×768 PNG). |
 | `DRIVE-RUN-THROUGH.md` | Every subfolder of the MO Drive's 3. CLINICAL folder and the triage course folder documents: what went into the guide, what did not, and why. |
 | `RESEARCH.md` | What the research on point-of-care lookup and teaching video says, and how the app applies it. |
@@ -30,29 +30,37 @@ Both links are private until you share them from the page's Share menu. The QR c
 ## What the app does
 
 **During a shift**
-- **Home:** search, six quick actions, your saved and recent pathways, four key numbers with Copy, a pearl for the shift from Million Ringgit Habits, what is new, and the three rules to keep.
+- **Home:** a bento of tiles, each showing real data from the guide: the zone map (five stops of a Green Zone visit; tap one for what happens there and the rules that apply), Code Blue and Code Stroke with Copy, quick routes with how each pathway can end, your saved and recent pathways, the number of pathways and rules, the discharge check, quick sums, three more numbers, a pearl for the shift, the three rules to keep and what is new.
 - **Search from anywhere:** press **/** or Ctrl K (⌘K on a Mac), tap a search box, or use the Search tab on a phone. It finds pathways, rules, steps, numbers and department notes as you type.
 - **Pathways:** 23 ebook pathways in six body-system groups, and 15 rules and protocols (8 on the Green Zone flow and referrals, 7 department protocols). Filter as you type, or tap a group. Star a pathway to keep it on the home screen.
-- **The step screen:** one question at a time, with a progress bar and **Your path** beside it (on a phone, the answers so far as chips you can tap to go back). Checklists highlight the answer that fits what you ticked. It ends in the outcome box: red for admit, green for discharge, amber for observation, violet for referral. **Copy outcome** and **Copy advice** put the text on the clipboard. Below it, tabs for discharge advice, practical concerns, department notes, tables and references. On a keyboard, 1 to 9 answer and Backspace steps back.
-- **Discharge safety check:** six things to tick before a patient goes home, and seven stop signs (for example a return within 48 hours, abdominal pain above 0, or a CT brain) that each tell you what to do instead.
-- **Quick sums:** shock index, pulse pressure and heart rate against the dengue discharge criteria; child doses by weight (prednisolone, salbutamol MDI puffs, dexamethasone and nebulised adrenaline for croup, ORS); BMI, ideal and adjusted body weight. Nothing you type is saved.
+- **The step screen:** one question per card, with a progress bar and **Your route** beside it (on a phone, the answers so far as chips you can tap to go back). **Can still end in** shows which outcome boxes are still possible from where you are. Checklists highlight the answer that fits what you ticked. It ends in the outcome card, in the ebook's colours: red for admit, yellow for observation, green for discharge, violet for referral. **Copy outcome** and **Copy advice** put the text on the clipboard. Below it, tabs for discharge advice, practical concerns, department notes, tables and references. On a keyboard, 1 to 9 answer and Backspace steps back.
+- **Whole pathway:** every step of a pathway on one sheet, numbered, with each answer pointing to the step it leads to. Your route is lit, and the outcomes you can no longer reach are dimmed. Tap any step to go straight to it.
+- **Discharge safety check:** six things to tick before a patient goes home, shown on a route meter, and seven stop signs (for example a return within 48 hours, abdominal pain above 0, or a CT brain) that each tell you what to do instead.
+- **Quick sums:** shock index, pulse pressure and heart rate against the dengue discharge criteria, each drawn on a scale with those thresholds; child doses by weight (prednisolone, salbutamol MDI puffs, dexamethasone and nebulised adrenaline for croup, ORS); BMI on a scale with the 27.5 threshold, ideal and adjusted body weight. Nothing you type is saved.
 - **Numbers to know:** 14 extensions and lines in four groups, each with a copy button and a link to the rule it belongs to.
 - **Links you can send:** every pathway and every step has its own address, for example `#renal-colic`, `#gz-rules--ivab` or `#calc-kids`.
 - **Settings:** light, dark or the device's theme; standard or large text; journey clips on or off; clear your saved list and history.
-- **On a phone:** a bottom tab bar (Home, Pathways, Search, Tools, Numbers). The hero clip plays only on wide screens, to save mobile data.
+- **On a phone:** a floating tab bar (Home, Pathways, Search, Tools, Numbers). No video plays on the home screen, to save mobile data.
 
 **For learning and new staff**
+- **First-shift intro:** four quick screens with drawn, animated pictures: search, one question at a time, the one-way zone and the tools. The home screen offers it until you have seen it.
 - **The patient journey:** five stops, each with an 8-second clip, a Listen button for the narration, and links to the rules at that stop. Play all runs through them in order.
-- **The tour:** the 65-second explainer with 7 chapters, a clickable transcript, speeds from 0.75 to 1.5, and resume where you stopped.
+- **The tour:** the 89-second explainer (rebuilt for version 8 in the new look, with the version 7 rules), in English or Bahasa Melayu (1:35) with the Narration switch under the video. Each language has 9 chapters, a clickable transcript, speeds from 0.75 to 1.5, and resume where you stopped.
 - **Quiz:** 13 questions on the Green Zone rules and the department material, each with the reason and a link to the rule.
 - **What's new:** the triage course folder and MO Drive run-throughs, and what is still to confirm.
 - **Wall poster** and **Sources and about**.
 
-## What changed from version 6
+## What changed from version 7
+
+- **A new design, chosen from three live prototypes:** a premium bento. Each area has its own jewel colour (emerald for the zone, sapphire for pathways, plum for rules, garnet for emergencies, teal for tools, bronze for quick sums, champagne for the shift's pearl, obsidian for the menu), with a soft sheen that catches the light under the pointer. Outcomes keep the ebook's own colours. Figtree for headings, Atkinson Hyperlegible Next for reading and Atkinson Hyperlegible Mono for numbers and doses, chosen because they keep 1, l and I, and 0 and O, apart.
+- **The zone map** on the home screen, **whole-pathway maps**, **Can still end in** on every step, **visual shift tools** (a route meter and scales) and a **first-shift intro**.
+- No clinical content changed: every pathway, rule, number and threshold is as in version 7.
+
+## What changed from version 6 to version 7
 
 - **Six documents from the triage course folder,** added as seven labelled steps on the Green Zone rules and the referral rules, each with its source and date:
   - One-way flow: no repeat ECG, dressing or vital signs after secondary triage (HKL ED one-way procedure flow; KKM MTS announcement, Jul 2026).
-  - Down-triage is for the MO only, after examining the patient (memo, 4 Oct 2022).
+  - Down-triage: only the EP can allow it (since 8 Nov 2026; written source to be confirmed). The MO examines the patient properly first and documents it on the triage form (memo, 4 Oct 2022).
   - IV antibiotics when no bed is free: a CCA chair, with one of four antibiotics (memo, 30 Jun 2026).
   - When the primary team is delayed: the EP may decide the admission within 4 hours (KKM MTS announcement, Jul 2026).
   - Redirect to a Klinik Kesihatan or private GP (KKM MTS announcement, Jul 2026).
@@ -63,6 +71,7 @@ Both links are private until you share them from the page's Share menu. The QR c
 
 ## Version history
 
+- **Version 8 (published 8 Nov 2026):** the premium bento redesign, the zone map, whole-pathway maps, visual tools and the first-shift intro, as above.
 - **Version 7 (7 Nov 2026):** the triage course folder documents and the new design, as above.
 - **Version 6 (7 Nov 2026):** 11 topics from the MO Drive (EM Watch, admission to MAU, clinic referrals, the Yellow Zone flow, OSCC, blood tests, animal bites, infection alerts, trauma walk-ins, children in the ED, safe practice); the Asthma Zone flow from the 13 November 2025 memo; department notes on six pathways; search, saved and recent, the discharge safety check, quick sums, numbers, deep links, the phone tab bar, the journey clips and the quiz.
 - **Version 5 and earlier:** the 23 ebook pathways, the Green Zone rules, the poster and the explainer.

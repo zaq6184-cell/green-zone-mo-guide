@@ -1,0 +1,274 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,250"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 250
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,250",
+				"to": "00:00:00,580"
+			},
+			"offsets": {
+				"from": 250,
+				"to": 580
+			},
+			"text": " Pasukan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,580",
+				"to": "00:00:01,070"
+			},
+			"offsets": {
+				"from": 580,
+				"to": 1070
+			},
+			"text": " Primer"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,070",
+				"to": "00:00:01,790"
+			},
+			"offsets": {
+				"from": 1070,
+				"to": 1790
+			},
+			"text": " lewat,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,790",
+				"to": "00:00:02,020"
+			},
+			"offsets": {
+				"from": 1790,
+				"to": 2020
+			},
+			"text": " IP,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,020",
+				"to": "00:00:02,610"
+			},
+			"offsets": {
+				"from": 2020,
+				"to": 2610
+			},
+			"text": " boleh"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,610",
+				"to": "00:00:03,300"
+			},
+			"offsets": {
+				"from": 2610,
+				"to": 3300
+			},
+			"text": " memutuskan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,300",
+				"to": "00:00:03,750"
+			},
+			"offsets": {
+				"from": 3300,
+				"to": 3750
+			},
+			"text": " kemasukan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,750",
+				"to": "00:00:03,850"
+			},
+			"offsets": {
+				"from": 3750,
+				"to": 3850
+			},
+			"text": " ke"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,850",
+				"to": "00:00:04,050"
+			},
+			"offsets": {
+				"from": 3850,
+				"to": 4050
+			},
+			"text": " Watt"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,050",
+				"to": "00:00:04,300"
+			},
+			"offsets": {
+				"from": 4050,
+				"to": 4300
+			},
+			"text": " dalam"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,300",
+				"to": "00:00:04,500"
+			},
+			"offsets": {
+				"from": 4300,
+				"to": 4500
+			},
+			"text": " masa"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,500",
+				"to": "00:00:04,650"
+			},
+			"offsets": {
+				"from": 4500,
+				"to": 4650
+			},
+			"text": " 4"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,650",
+				"to": "00:00:04,980"
+			},
+			"offsets": {
+				"from": 4650,
+				"to": 4980
+			},
+			"text": " jam."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,400",
+				"to": "00:00:05,730"
+			},
+			"offsets": {
+				"from": 5400,
+				"to": 5730
+			},
+			"text": " Tidak"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,730",
+				"to": "00:00:05,750"
+			},
+			"offsets": {
+				"from": 5730,
+				"to": 5750
+			},
+			"text": " pasti"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,750",
+				"to": "00:00:06,030"
+			},
+			"offsets": {
+				"from": 5750,
+				"to": 6030
+			},
+			"text": " atau"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,030",
+				"to": "00:00:06,550"
+			},
+			"offsets": {
+				"from": 6030,
+				"to": 6550
+			},
+			"text": " buntu,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,550",
+				"to": "00:00:07,190"
+			},
+			"offsets": {
+				"from": 6550,
+				"to": 7190
+			},
+			"text": " hubungi"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,190",
+				"to": "00:00:07,230"
+			},
+			"offsets": {
+				"from": 7190,
+				"to": 7230
+			},
+			"text": " IP"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,230",
+				"to": "00:00:07,530"
+			},
+			"offsets": {
+				"from": 7230,
+				"to": 7530
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,530",
+				"to": "00:00:08,440"
+			},
+			"offsets": {
+				"from": 7530,
+				"to": 8440
+			},
+			"text": " bertugas."
+		}
+	]
+}

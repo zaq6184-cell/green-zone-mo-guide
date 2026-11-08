@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Option A · Sign System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..900&family=Atkinson+Hyperlegible+Mono:wght@500;700&family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1F5F2;--surface:#fff;--s2:#F6F9F7;--s3:#E6EEE9;--ink:#0B1F16;--ink2:#21352B;--muted:#4C6056;--line:#D9E3DD;--line2:#C0CEC6;
+ --sign:#0A5A3B;--sign2:#063F29;--sign3:#11704A;--sl:rgba(255,255,255,.16);--sg:rgba(255,255,255,.09);--on:#fff;--onm:#BDE3CF;
+ --route:#169E58;--rb:#45E08D;--rs:#DFF3E8;--accent:#0A6B45;--as:#E1F2E8;
+ --b-admit:#C42A20;--b-observe:#F0AE1C;--b-discharge:#13834C;--b-refer:#5A44C4;--b-neutral:#41544B;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:#D7E1DB;color:var(--ink);font:400 16px/1.5 "Atkinson Hyperlegible Next",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+::selection{background:#bfe8d1}
+button{font:inherit;cursor:pointer;color:inherit}
+.phone{position:relative;max-width:430px;min-height:100vh;margin:0 auto;background:var(--bg);overflow-x:hidden;padding-bottom:84px}
+svg.i{width:22px;height:22px;flex:none}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:4px;height:56px;padding:0 8px;background:var(--sign);color:var(--on)}
+.top .ib{width:44px;height:44px;border:0;border-radius:12px;background:none;display:grid;place-items:center}
+.top .ib:hover{background:var(--sg)}
+.top .t{flex:1;font:800 17px/1 Archivo;font-stretch:112%;letter-spacing:-.01em;padding-left:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.screen{display:none}.screen.on{display:block;animation:in .38s var(--ease)}
+@keyframes in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+/* Home sign panel */
+.hero{position:relative;isolation:isolate;background:var(--sign);color:var(--on);padding:10px 18px 0;border-radius:0 0 28px 28px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 70% at 100% 0,var(--sign3),transparent 60%),radial-gradient(90% 70% at 0 100%,var(--sign2),transparent 70%)}
+.name{margin:8px 0 0;font:800 47px/.9 Archivo;font-stretch:112%;letter-spacing:-.035em}
+.name span{display:block;color:var(--rb)}
+.sub{margin:12px 0 16px;font:800 11.5px/1.3 "Atkinson Hyperlegible Next";letter-spacing:.16em;text-transform:uppercase;color:var(--onm)}
+.find{display:flex;align-items:center;gap:12px;width:100%;height:58px;padding:0 16px;border:0;border-radius:16px;background:#fff;color:#56695F;font:700 16.5px/1 "Atkinson Hyperlegible Next";text-align:left;box-shadow:0 16px 34px -16px rgba(0,0,0,.6)}
+.find svg{color:var(--accent);width:23px;height:23px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+.chips button{min-height:38px;padding:7px 14px;border-radius:999px;border:1.5px solid var(--sl);background:var(--sg);color:#fff;font:700 14px/1 "Atkinson Hyperlegible Next"}
+.chips button:hover,.chips button:focus-visible{border-color:var(--rb);outline:none}
+.zone{margin-top:18px;padding:16px 0 22px;border-top:1px solid var(--sl)}
+.zh{display:flex;justify-content:space-between;align-items:baseline}
+.zh h2{margin:0;font:800 16px/1.2 Archivo;font-stretch:108%}
+.zh a{color:var(--rb);font-weight:800;font-size:14px;text-decoration:none}
+.stops{position:relative;display:grid;grid-template-columns:repeat(5,1fr);margin-top:16px}
+.zline{position:absolute;left:10%;right:10%;top:23px;height:6px;border-radius:3px;background:var(--rb);transform-origin:left;transform:scaleX(0);animation:grow 1.15s var(--ease) .25s forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+.stop{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:none;padding:0;color:#fff;text-align:center}
+.disc{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--sign2);box-shadow:0 0 0 3px var(--rb);opacity:0;transform:scale(.6);animation:pop .5s var(--ease) forwards;animation-delay:calc(.35s + var(--i)*.13s)}
+@keyframes pop{to{opacity:1;transform:none}}
+.disc svg{width:25px;height:25px}
+.stop.you .disc{background:var(--rb);color:var(--sign2);box-shadow:0 0 0 3px var(--rb),0 0 0 10px rgba(69,224,141,.22)}
+.stop.maybe .disc{box-shadow:none;border:3px dashed var(--rb)}
+.stop b{font:800 12px/1.15 "Atkinson Hyperlegible Next"}
+.stop small{font:700 10.5px/1.1 "Atkinson Hyperlegible Next";color:var(--onm)}
+.stop:hover .disc{transform:scale(1.07)}
+/* Destinations board */
+.wrap{padding:0 16px}
+.board{margin:18px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 1px 2px rgba(11,31,22,.06)}
+.board button{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border:0;border-top:1px solid var(--line);background:var(--surface);text-align:left}
+.board button:first-child{border-top:0}
+.board button:hover{background:var(--s2)}
+.board .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--sign);color:#fff;flex:none}
+.board b{display:block;font:800 16px/1.2 "Atkinson Hyperlegible Next"}
+.board small{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+.board .go{margin-left:auto;color:var(--accent);transition:transform .2s var(--ease)}
+.board button:hover .go{transform:translateX(4px)}
+.board .new{background:var(--rs)}
+.board .new .ic{background:var(--route)}
+h3.sec{margin:26px 2px 10px;font:800 19px/1.2 Archivo;font-stretch:108%;letter-spacing:-.01em;display:flex;justify-content:space-between;align-items:baseline}
+h3.sec a{font:800 14px "Atkinson Hyperlegible Next";color:var(--accent);text-decoration:none}
+.plates{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.plate{padding:12px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.plate span{display:block;font:800 13px/1.25 "Atkinson Hyperlegible Next";color:var(--muted)}
+.plate b{display:inline-block;margin-top:8px;padding:7px 10px;border-radius:9px;background:var(--sign);color:#fff;font:700 22px/1 "Atkinson Hyperlegible Mono";font-variant-numeric:tabular-nums}
+.plate.hot b{background:var(--b-admit)}
+.plate em{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:7px}
+/* Tab bar */
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;padding:6px 6px 10px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -12px 30px -22px rgba(11,31,22,.5)}
+.tabs button{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:56px;padding:6px 2px;border:0;background:none;color:var(--muted);font:800 11px/1 "Atkinson Hyperlegible Next"}
+.tabs .on{color:var(--accent)}
+.tabs .on::before{content:"";position:absolute;top:-6px;left:30%;right:30%;height:3px;border-radius:0 0 3px 3px;background:var(--route)}
+.tabs .fab span{display:grid;place-items:center;width:54px;height:54px;margin-top:-24px;border-radius:50%;background:var(--sign);color:#fff;box-shadow:0 10px 22px -8px rgba(6,63,41,.65),0 0 0 4px #fff}
+/* Stop sheet */
+.sheet{position:fixed;inset:0;z-index:40;display:none;align-items:flex-end;justify-content:center;background:rgba(4,16,11,.5)}
+.sheet.on{display:flex}
+.sbox{width:100%;max-width:430px;background:var(--surface);border-radius:26px 26px 0 0;overflow:hidden;animation:up .4s var(--ease)}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.shead{display:flex;align-items:center;gap:14px;padding:18px 18px 16px;background:var(--sign);color:#fff}
+.shead .disc{opacity:1;transform:none;animation:none;width:48px;height:48px}
+.shead h4{margin:0;font:800 22px/1.1 Archivo;font-stretch:110%}
+.shead p{margin:2px 0 0;color:var(--onm);font-weight:700;font-size:13px}
+.shead .x{margin-left:auto;width:42px;height:42px;border:0;border-radius:50%;background:var(--sg);color:#fff;display:grid;place-items:center}
+.sbody{padding:16px 18px 26px}
+.sbody ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.sbody li{position:relative;padding-left:28px;font-size:15.5px}
+.sbody li::before{content:"";position:absolute;left:4px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--route)}
+.rl{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.rl span{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--as);color:var(--accent);font-weight:800;font-size:14px}
+/* Runner */
+.rh{padding:18px 16px 0}
+.meta{display:flex;align-items:center;gap:10px;font:700 12.5px "Atkinson Hyperlegible Mono";color:var(--muted);letter-spacing:.02em}
+.meta .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--as);color:var(--accent)}
+.rh h1{margin:10px 0 6px;font:800 42px/.95 Archivo;font-stretch:116%;letter-spacing:-.03em}
+.rh p{margin:0;color:var(--muted)}
+.ends{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:14px 0 0}
+.ends>span{font:800 12.5px "Atkinson Hyperlegible Next";color:var(--muted);margin-right:2px}
+.end{display:inline-flex;align-items:center;gap:7px;padding:6px 9px 6px 6px;border-radius:8px;background:#fff;border:1px solid var(--line);font:800 12.5px/1 "Atkinson Hyperlegible Next";transition:opacity .3s,transform .3s var(--ease)}
+.end::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--c)}
+.route{display:flex;align-items:center;gap:0;overflow-x:auto;margin:16px -16px 0;padding:4px 16px 8px;scrollbar-width:none}
+.route::-webkit-scrollbar{display:none}
+.rs{flex:none;display:flex;align-items:center}
+.rs button{display:flex;align-items:center;gap:7px;padding:6px 11px 6px 6px;border-radius:999px;border:0;background:var(--as);color:var(--accent);font:800 13px/1 "Atkinson Hyperlegible Next"}
+.rs button i{width:18px;height:18px;border-radius:50%;background:var(--route);box-shadow:inset 0 0 0 4px var(--as)}
+.rs .ln{width:16px;height:4px;background:var(--route);border-radius:2px}
+.rs .now{display:flex;align-items:center;gap:7px;font:800 13px "Atkinson Hyperlegible Next";color:var(--ink)}
+.rs .now i{width:22px;height:22px;border-radius:50%;background:var(--sign);box-shadow:0 0 0 4px var(--rs)}
+.card{margin:12px 16px 0;padding:22px 20px 18px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 36px -20px rgba(11,31,22,.35);animation:in .38s var(--ease)}
+.card h2{margin:0 0 12px;font:800 25px/1.18 Archivo;font-stretch:104%;letter-spacing:-.015em}
+.card .qh{display:flex;gap:12px;align-items:flex-start}
+.card .qh .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--as);color:var(--accent);flex:none}
+.card ul.it{margin:0 0 14px;padding-left:20px}
+.card .hint{margin:0 0 10px;color:var(--muted);font-size:14.5px}
+.checks{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.checks label{display:flex;gap:12px;align-items:flex-start;padding:12px 13px;border:1.5px solid var(--line2);border-radius:14px;cursor:pointer;font-size:15px}
+.checks input{width:21px;height:21px;margin:1px 0 0;accent-color:var(--accent);flex:none}
+.checks label:has(input:checked){background:var(--as);border-color:var(--accent)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;padding:10px 16px 10px 10px;border:1.5px solid var(--line2);border-radius:16px;background:#fff;text-align:left;font:800 17px/1.25 "Atkinson Hyperlegible Next";transition:background-color .15s,border-color .15s,transform .15s var(--ease)}
+.opt kbd{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--as);color:var(--accent);font:800 15px "Atkinson Hyperlegible Mono"}
+.opt .go{margin-left:auto;color:var(--accent);transition:transform .2s var(--ease)}
+.opt:hover{border-color:var(--accent);background:var(--s2)}.opt:hover .go{transform:translateX(4px)}
+.opt:active{transform:scale(.985)}
+.opt.sugg{background:var(--sign);border-color:var(--sign);color:#fff;box-shadow:0 14px 26px -14px rgba(6,63,41,.7)}
+.opt.sugg kbd{background:var(--rb);color:var(--sign2)}.opt.sugg .go{color:var(--rb)}
+.res{margin:12px 16px 0;border-radius:22px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 18px 36px -20px rgba(11,31,22,.35)}
+.res-h{display:flex;align-items:center;gap:16px;padding:20px;background:var(--c);color:var(--ci);animation:wipe .6s var(--ease) both}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+.res-h .disc{opacity:1;transform:none;width:58px;height:58px;background:var(--ci);color:var(--c);box-shadow:none;animation:pop .5s .2s var(--ease) both}
+.res-h h2{margin:0;font:800 26px/1.08 Archivo;font-stretch:108%;letter-spacing:-.015em}
+.res-h p{margin:5px 0 0;font:800 12px/1 "Atkinson Hyperlegible Next";letter-spacing:.08em;text-transform:uppercase;opacity:.88}
+.res-b{padding:16px 20px 4px}
+.res-b ul{margin:0 0 12px;padding:0;list-style:none;display:grid;gap:9px}
+.res-b li{position:relative;padding-left:30px}
+.res-b li::before{content:"";position:absolute;left:2px;top:3px;width:18px;height:18px;border-radius:6px;border:2px solid var(--ct)}
+.res-b li::after{content:"";position:absolute;left:8px;top:6px;width:5px;height:10px;border:solid var(--ct);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.res-f{display:flex;gap:8px;padding:14px 16px 16px;border-top:1px solid var(--line);background:var(--s2)}
+.res-f button{flex:1;min-height:48px;border-radius:13px;border:1.5px solid var(--line2);background:#fff;font:800 14.5px "Atkinson Hyperlegible Next";display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.res-f .pri{background:var(--sign);border-color:var(--sign);color:#fff}
+.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);z-index:50;background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-weight:800;font-size:14px;display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.zline{transform:none}.disc{opacity:1;transform:none}}
+</style></head><body>
+<div class="phone">
+ <header class="top" id="top"></header>
+ <section class="screen on" id="home">
+  <div class="hero">
+   <h1 class="name">Green Zone<span>MO Guide</span></h1>
+   <p class="sub">Zon Hijau · Emergency &amp; Trauma, HKL · MTS 4–5</p>
+   <button class="find" data-toast="Search opens here"><span data-i="search"></span>Symptom, rule, dose or number</button>
+   <div class="chips" id="chips"></div>
+   <div class="zone"><div class="zh"><h2>One way through the zone</h2><a href="#" data-toast="Opens the patient journey">Journey</a></div><div class="stops" id="stops"><div class="zline"></div></div></div>
+  </div>
+  <div class="wrap">
+   <div class="board" id="board"></div>
+   <h3 class="sec">Key numbers <a href="#" data-toast="Opens all 14 numbers">All 14</a></h3>
+   <div class="plates" id="plates"></div>
+  </div>
+ </section>
+ <section class="screen" id="run"></section>
+ <nav class="tabs"><button class="on" data-home><span data-i="home"></span>Home</button><button data-toast="Pathways"><span data-i="path"></span>Pathways</button><button class="fab" data-toast="Search"><span><span data-i="search"></span></span>Search</button><button data-toast="Tools"><span data-i="check"></span>Tools</button><button data-toast="Numbers"><span data-i="phone"></span>Numbers</button></nav>
+ <div class="sheet" id="sheet"><div class="sbox" id="sbox"></div></div>
+ <div class="toast" id="toast"></div>
+</div>
+<script>
+const I={search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',home:'<path d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H5.5A1.5 1.5 0 0 1 4 19z"/>',path:'<circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="12" r="2.2"/><path d="M6 7.2v9.6M8 5h4a4 4 0 0 1 4 4v1M8 19h4a4 4 0 0 0 4-4v-1"/>',check:'<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="m8.5 12 2.2 2.2L15.5 9.5"/>',phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',menu:'<path d="M4 7h16M4 12h16M4 17h11"/>',sliders:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',back:'<path d="M14.5 6l-6 6 6 6"/>',go:'<path d="M4.5 12h14"/><path d="m13 6.5 5.5 5.5-5.5 5.5"/>',x:'<path d="M6 6l12 12M18 6 6 18"/>',copy:'<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 8.5v-2A2.5 2.5 0 0 0 13 4H6.5A2.5 2.5 0 0 0 4 6.5V13a2.5 2.5 0 0 0 2.5 2.5h2"/>',restart:'<path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/>',rule:'<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',calc:'<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01"/>',flag:'<path d="M5 21V4"/><path d="M5 4h11l-2 3.5 2 3.5H5"/>',triage:'<path d="M4 9.5 10.5 3H19a1 1 0 0 1 1 1v8.5L13.5 19a1.8 1.8 0 0 1-2.5 0L4 12a1.8 1.8 0 0 1 0-2.5z"/><circle cx="15.5" cy="7.5" r="1.5"/>',stetho:'<path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10.5" r="2"/>',syringe:'<path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><path d="m4 20 2.4-2.4M10 10.5l3.5 3.5"/>',chair:'<path d="M7 4v8.5h10V20M7 12.5V20M17 12.5V8"/><path d="M5 12.5h14"/>',review:'<path d="M14 3.5H7A2 2 0 0 0 5 5.5v13a2 2 0 0 0 2 2h4"/><path d="M8.5 8h6M8.5 11.5h3"/><circle cx="16" cy="15.5" r="3.3"/><path d="m18.5 18 2 2"/>',abd:'<path d="M7 3.5c0 3.2-1.6 4.8-1.6 8.5S7 20.5 7 20.5M17 3.5c0 3.2 1.6 4.8 1.6 8.5S17 20.5 17 20.5"/><path d="M12 7.5v9.5M8 12.2h8"/>',step:'<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M9 8h6M9 12h6M9 16h3"/>',bed:'<path d="M3 18.5v-11M3 14.5h18v4M21 14.5V12a3 3 0 0 0-3-3h-7v5.5"/><circle cx="7" cy="11.5" r="1.8"/>',door:'<path d="M13.5 4H7A1.5 1.5 0 0 0 5.5 5.5v13A1.5 1.5 0 0 0 7 20h6.5"/><path d="M10.5 12H20M16.5 8.5 20 12l-3.5 3.5"/>',clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',send:'<path d="M4 12h12.5"/><path d="m11.5 6.5 5.5 5.5-5.5 5.5"/><path d="M20 5v14"/>',next:'<circle cx="12" cy="12" r="9"/><path d="M10.5 8.5 14 12l-3.5 3.5"/>'};
+const svg=k=>`<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
+const fill=r=>r.querySelectorAll('[data-i]').forEach(e=>{e.outerHTML=svg(e.dataset.i)});
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const RC={title:'Renal colic',page:'53–54',start:'susp',nodes:{susp:{q:'Clinical picture and history suggestive of ureteric colic?',opts:[['Yes','pain'],['No','alt']]},alt:{end:'neutral',title:'Consider an alternative diagnosis',items:[]},pain:{step:'Pain management',items:['NSAIDs'],next:'urgent'},urgent:{check:'any',q:'Any urgent indication for urology referral?',items:['Fever, urosepsis or pyelonephritis','Frank haematuria or anuria','Pregnant','Comorbidities: single kidney, transplanted kidney, autoimmune disease, heart disease, diabetes mellitus'],opts:[['Yes, present','uro'],['None','pocus']]},pocus:{q:'POCUS: hydronephrosis?',opts:[['Present','kub'],['Absent','resolve']]},kub:{step:'Urgent KUB ultrasound by the radiology team',items:[],next:'uro'},resolve:{q:'Symptoms resolved?',opts:[['Yes','home'],['No','uro']]},uro:{end:'refer',title:'Refer urology team',items:[]},home:{end:'discharge',title:'Discharge with discharge bundle',items:['Early TCA for KUB ultrasound','Urology referral','Give the discharge advice below']}}};
+const KIND={admit:'Admit · red box',observe:'Observation · yellow box',discharge:'Discharge · green box',refer:'Refer',neutral:'Next step'},KL={admit:'Admit',observe:'Observation',discharge:'Discharge',refer:'Refer',neutral:'Next step'},KI={admit:'bed',observe:'clock',discharge:'door',refer:'send',neutral:'next'},ORD=['admit','observe','discharge','refer','neutral'];
+const ZONE=[{t:'Triage',s:'MTS 4 or 5',ic:'triage',items:['Triage gives MTS 4 or 5, which brings the patient to the Green Zone','Then secondary triage','ECG, irrigation or dressing only if needed','Patients move one way: next they come to you'],rules:['No repeat tests after secondary triage','Down-triage: the MO only']},{t:'You, the MO',s:'Consultation',ic:'stetho',you:1,items:['See the patient and open the ebook pathway','Fill in the slip hijau and attach the queue number','The patient puts the slip in the Red Box and waits'],rules:['Never waits outside: the elderly, ACS, stat drugs']},{t:'Treatment room',s:'PPP',ic:'syringe',items:['Takes the slip from the Red Box and calls the queue number','Carries out and documents each order','Tells the patient the next step'],rules:['GXM sample: label at the bedside']},{t:'CCA',s:'If needed',ic:'chair',maybe:1,items:['For pending results, observation or referral','Staff record vital signs on the slip and monitor','You stay responsible for the patient you sent'],rules:['IV antibiotics on a CCA chair, no bed free']},{t:'Review',s:'Back to you',ic:'review',items:['Reassess before you admit, discharge or transfer','Review every blood result and image','CT brain and going home: EP review, then EM Watch or EMACC'],rules:['Reassess first','When it stalls: call the EP']}];
+const ends=k=>{const out=new Set(),seen=new Set(),q=[k];while(q.length){const x=q.shift();if(seen.has(x))continue;seen.add(x);const n=RC.nodes[x];if(n.end)out.add(n.end);(n.opts||[]).forEach(o=>q.push(o[1]));if(n.next)q.push(n.next)}return ORD.filter(e=>out.has(e))};
+const BC={admit:['#C42A20','#fff','#AE2219'],observe:['#F0AE1C','#241900','#7D5300'],discharge:['#13834C','#fff','#0D6F40'],refer:['#5A44C4','#fff','#4733AE'],neutral:['#41544B','#fff','#3A4C43']};
+let st={cur:'susp',trail:[]};
+function toast(m){const t=$('#toast');t.textContent=m+' (prototype)';t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',1600)}
+function topbar(run){$('#top').innerHTML=run?`<button class="ib" data-home aria-label="Back">${svg('back')}</button><span class="t">${RC.title}</span><button class="ib" aria-label="Search">${svg('search')}</button>`:`<button class="ib" aria-label="Menu">${svg('menu')}</button><span class="t"></span><button class="ib" aria-label="Search">${svg('search')}</button><button class="ib" aria-label="Settings">${svg('sliders')}</button>`}
+function home(){topbar(0);
+ $('#chips').innerHTML=['Renal colic','Dengue','Asthma Zone','MAU criteria','IV antibiotics, no bed','Ortho referral'].map(t=>`<button ${t==='Renal colic'?'data-rc':`data-toast="${t}"`}>${t}</button>`).join('');
+ $('#stops').innerHTML='<div class="zline"></div>'+ZONE.map((z,i)=>`<button class="stop${z.you?' you':''}${z.maybe?' maybe':''}" data-stop="${i}" style="--i:${i}"><span class="disc">${svg(z.ic)}</span><b>${z.t}</b><small>${z.s}</small></button>`).join('');
+ $('#board').innerHTML=[['new','flag','New to the Green Zone?','Four quick screens before your first shift'],['','path','Pathways','23 ebook pathways and 15 rules'],['','rule','Rules and protocols','Who never waits, reassess, call the EP'],['','check','Discharge safety check','Six checks and seven stop signs'],['','calc','Quick sums','Shock index, child doses, adjusted weight'],['','phone','Numbers','Code Blue, Code Stroke, MAU, EMACC, IPR']].map(([c,ic,t,s])=>`<button class="${c}" data-toast="${t}"><span class="ic">${svg(ic)}</span><span><b>${t}</b><small>${s}</small></span><span class="go">${svg('go')}</span></button>`).join('');
+ $('#plates').innerHTML=[['Code Blue','5333','Outside the ED',1],['Code Stroke','5999','Onset under 9 hours',1],['MAU mobile team','6682','Or 6684, office hours'],['EMACC follow-up','7040','Follow-up clinic']].map(([l,v,e,h])=>`<div class="plate${h?' hot':''}"><span>${l}</span><b>${v}</b><em>${e}</em></div>`).join('')}
+function openStop(i){const z=ZONE[i];$('#sbox').innerHTML=`<div class="shead"><span class="disc">${svg(z.ic)}</span><div><h4>${z.t}</h4><p>Stop ${i+1} of 5 · ${z.s}</p></div><button class="x" data-close aria-label="Close">${svg('x')}</button></div><div class="sbody"><ul>${z.items.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><div class="rl">${z.rules.map(r=>`<span>${svg('rule')}${esc(r)}</span>`).join('')}</div></div>`;$('#sheet').classList.add('on')}
+function run(){const n=RC.nodes[st.cur],e=ends(st.cur);
+ const route=st.trail.map((t,i)=>`<div class="rs">${i?'<span class="ln"></span>':''}<button data-back="${i}"><i></i>${esc(t.l)}</button></div>`).join('')+`<div class="rs">${st.trail.length?'<span class="ln"></span>':''}<span class="now"><i></i>${n.end?'Outcome':'Now'}</span></div>`;
+ let body;
+ if(n.end){const [c,ci,ct]=BC[n.end];body=`<article class="res" style="--c:${c};--ci:${ci};--ct:${ct}"><div class="res-h"><span class="disc">${svg(KI[n.end])}</span><div><h2>${esc(n.title)}</h2><p>${KIND[n.end]}</p></div></div>${n.items.length?`<div class="res-b"><ul>${n.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`:''}<div class="res-f"><button data-restart>${svg('restart')}Start again</button><button class="${n.end==='discharge'?'pri':''}" data-toast="Copied">${svg('copy')}Copy outcome</button></div></article>`}
+ else if(n.step){body=`<div class="card"><div class="qh"><span class="ic">${svg('step')}</span><h2>${esc(n.step)}</h2></div>${n.items.length?`<ul class="it">${n.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`:''}<div class="opts"><button class="opt sugg" data-next><kbd>1</kbd><span>Done, continue</span><span class="go">${svg('go')}</span></button></div></div>`}
+ else{body=`<div class="card"><h2>${esc(n.q)}</h2>${n.check?`<p class="hint">Tick any that are present.</p><ul class="checks">${n.items.map((t,k)=>`<li><label><input type="checkbox"><span>${esc(t)}</span></label></li>`).join('')}</ul>`:''}<div class="opts">${n.opts.map(([l],k)=>`<button class="opt" data-go="${k}"><kbd>${k+1}</kbd><span>${esc(l)}</span><span class="go">${svg('go')}</span></button>`).join('')}</div></div>`}
+ $('#run').innerHTML=`<div class="rh"><div class="meta"><span class="ic">${svg('abd')}</span>Abdomen · EBOOK p${RC.page}</div><h1>${RC.title}</h1><p>Start with the history and examination.</p><div class="ends"><span>${n.end?'Ended in':'Can end in'}</span>${e.map(k=>`<span class="end" style="--c:${BC[k][0]}">${KL[k]}</span>`).join('')}</div><div class="route">${route}</div></div>${body}<div style="height:24px"></div>`;
+ if(n.check){const boxes=[...document.querySelectorAll('#run .checks input')],bs=[...document.querySelectorAll('#run .opt')];boxes.forEach(b=>b.onchange=()=>{const any=boxes.some(x=>x.checked);bs.forEach((x,i)=>x.classList.toggle('sugg',any?i===0:false))})}}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo(0,0);topbar(id==='run')}
+document.addEventListener('click',e=>{const b=e.target.closest('button,a');if(!b)return;
+ if(b.dataset.toast!==undefined){e.preventDefault();toast(b.dataset.toast);return}
+ if(b.hasAttribute('data-rc')){st={cur:RC.start,trail:[]};run();show('run');return}
+ if(b.hasAttribute('data-home')){show('home');return}
+ if(b.dataset.stop!==undefined){openStop(+b.dataset.stop);return}
+ if(b.hasAttribute('data-close')){$('#sheet').classList.remove('on');return}
+ const n=RC.nodes[st.cur];
+ if(b.dataset.go!==undefined){const [l,to]=n.opts[+b.dataset.go];st.trail.push({n:st.cur,l});st.cur=to;run();return}
+ if(b.hasAttribute('data-next')){st.trail.push({n:st.cur,l:'Done'});st.cur=n.next;run();return}
+ if(b.dataset.back!==undefined){const i=+b.dataset.back;st.cur=st.trail[i].n;st.trail=st.trail.slice(0,i);run();return}
+ if(b.hasAttribute('data-restart')){st={cur:RC.start,trail:[]};run();return}});
+$('#sheet').addEventListener('click',e=>{if(e.target.id==='sheet')$('#sheet').classList.remove('on')});
+home();fill(document);
+</script>
+</body></html>

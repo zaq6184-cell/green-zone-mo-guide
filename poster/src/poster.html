@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Green Zone MO Guide: A3 wall poster</title>
+<!--
+  The two A3 wall-poster sheets of the Green Zone MO Guide, in the version 8 look (DESIGN.md).
+  Each sheet is 1123 x 1587 CSS px, A3 portrait at 96 dpi. render.js turns this file into
+  ../sheet1-patient-flow.png, ../sheet2-pathways-referrals.png, ../green-zone-poster-A3.pdf
+  and the app's copies in ../../app/poster/. Edit this file, then run: node render.js
+  Print only, so there is one light theme. Every clinical line comes from the ebook, the
+  department documents named on the sheet, or src/parts (data2.js, data3.js, engine.js).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@600..900&family=Atkinson+Hyperlegible+Mono:wght@400..700&family=Atkinson+Hyperlegible+Next:ital,wght@0,400..800;1,400&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#e9edeb; --surface:#ffffff; --surface-2:#f5f7f6; --surface-3:#ebefed;
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --line-2:#c5cfc9;
+  --accent:#0b6b47; --accent-soft:#dcf1e5; --mint:#43dd8c; --gold-ink:#2a1f07;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334; --plum-soft:#f3eaf4;
+  --garnet-1:#a52234; --garnet-2:#7e1626; --garnet-3:#560d19;
+  --obsidian-1:#27352e; --obsidian-2:#17211c; --obsidian-3:#0b110e;
+  --champ-1:#f2e2bb; --champ-2:#e3ca90;
+  --b-admit:#c42a20; --b-observe:#f0ae1c; --b-discharge:#13834c; --b-refer:#5a44c4; --b-advice:#1b5daf;
+  --on-emerald:#e6f3ec; --on-obsidian:#dfe9e3;
+  --edge:rgba(255,255,255,.14);
+  --sh-1:0 1px 2px rgba(15,26,21,.06);
+  --sh-2:0 1px 2px rgba(15,26,21,.05),0 18px 34px -20px rgba(15,26,21,.42);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  --display:"Figtree","Atkinson Hyperlegible Next",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Atkinson Hyperlegible Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html{background:#d3dad6}
+body{margin:0;font:400 16px/1.34 var(--body);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,p,ul,ol{margin:0}
+ul,ol{padding:0}
+svg{display:block}
+.m{font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
+.acc{color:var(--accent)}
+
+/* ---------- The sheet ---------- */
+@page{size:1123px 1587px;margin:0}
+.sheet{position:relative;width:1123px;height:1587px;overflow:hidden;background:var(--bg);padding:34px 48px 26px;display:flex;flex-direction:column;gap:10px}
+#sheet2{gap:14px}
+.nw{white-space:nowrap}
+@media screen{.sheet{margin:24px auto}}
+@media print{html{background:none}.sheet{margin:0;break-after:page}.sheet:last-of-type{break-after:auto}}
+
+/* ---------- Tiles: the jewel material, as in the app (no pointer light on paper) ---------- */
+.tile{position:relative;isolation:isolate;border-radius:28px;padding:18px 20px;color:#fff;min-width:0;
+  background:linear-gradient(150deg,var(--t1),var(--t2) 55%,var(--t3));box-shadow:0 1px 1px rgba(0,0,0,.05),0 22px 38px -24px var(--t3)}
+.tile::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.12),transparent 55%),var(--grain);background-size:auto,180px 180px}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px var(--edge)}
+.t-emerald{--t1:var(--emerald-1);--t2:var(--emerald-2);--t3:var(--emerald-3)}
+.t-sapphire{--t1:var(--sapphire-1);--t2:var(--sapphire-2);--t3:var(--sapphire-3)}
+.t-plum{--t1:var(--plum-1);--t2:var(--plum-2);--t3:var(--plum-3)}
+.t-garnet{--t1:var(--garnet-1);--t2:var(--garnet-2);--t3:var(--garnet-3)}
+.t-obsidian{--t1:var(--obsidian-1);--t2:var(--obsidian-2);--t3:var(--obsidian-3)}
+.pearl{background:var(--surface);color:var(--ink);box-shadow:var(--sh-2)}
+.pearl::before{content:none}
+.pearl::after{box-shadow:inset 0 0 0 1px var(--line)}
+.tile-h{display:flex;align-items:center;gap:12px;min-width:0}
+.tile-h h2{font:850 24px/1.1 var(--display);letter-spacing:-.02em}
+
+/* Icon squares: glass on a jewel, a jewel key, a flat outcome key, or a soft tint */
+.ic{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:13px}
+.ic svg{width:21px;height:21px}
+.ic.glass{background:rgba(255,255,255,.16);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.26)}
+.ic.jw{background:linear-gradient(150deg,var(--t1),var(--t2));color:#fff;box-shadow:inset 0 0 0 1px var(--edge),0 8px 16px -10px var(--t3)}
+.ic.soft{background:var(--accent-soft);color:var(--accent)}
+.ic.k-discharge{background:var(--b-discharge);color:#fff}
+.ic.k-advice{background:var(--b-advice);color:#fff}
+.ic.k-refer{background:var(--b-refer);color:#fff}
+.ic.plum{background:var(--plum-soft);color:var(--plum-1)}
+.mark{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:14px;
+  background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 10px 20px -10px var(--emerald-3)}
+.mark svg{width:26px;height:26px}
+
+/* Footer: sources and the reference line */
+.foot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-top:9px;border-top:1px solid var(--line-2)}
+.foot p{font-size:13px;line-height:1.36;color:var(--muted);max-width:905px}
+.pg{font:700 13px/1.4 var(--mono);color:var(--muted);white-space:nowrap}
+.src{font-size:13px;line-height:1.35;color:var(--muted)}
+
+/* ================= Sheet 1 ================= */
+.s1-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.s1-title{display:flex;align-items:center;gap:16px;min-width:0}
+.s1-title .mark{width:58px;height:58px;border-radius:18px}
+.s1-title .mark svg{width:36px;height:36px}
+.s1-title h1{font:900 60px/1 var(--display);letter-spacing:-.04em;white-space:nowrap}
+.tagline{margin-top:10px;font:800 25px/1.15 var(--display);letter-spacing:-.015em}
+.tagline span{color:var(--accent)}
+.dept{margin-top:4px;font-weight:700;color:var(--muted)}
+.qr-tile{display:flex;align-items:center;gap:18px;padding:11px 24px 11px 11px;flex:none}
+.qr-plate{display:block;flex:none;padding:7px;background:#fff;border-radius:14px;box-shadow:0 10px 22px -14px rgba(0,0,0,.7)}
+.qr{display:block;width:111px;height:111px;image-rendering:pixelated}
+.qr-tile h2{font:900 26px/1.05 var(--display);letter-spacing:-.025em}
+.qr-tile p{margin-top:6px;max-width:172px;color:var(--on-obsidian)}
+
+/* The zone flow: the app's zone tile, drawn for paper */
+.flow{padding:15px 22px 16px}
+.flow .tile-h{align-items:baseline;flex-wrap:wrap;gap:4px 14px}
+.flow .tile-h h2{font-size:26px}
+.flow .tile-h p{color:var(--on-emerald)}
+.route{position:relative;list-style:none;margin-top:14px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:14px}
+.route::before{content:"";position:absolute;left:9%;right:16px;top:27px;height:6px;border-radius:3px;background:var(--mint)}
+.route::after{content:"";position:absolute;right:0;top:21px;border-left:18px solid var(--mint);border-top:9px solid transparent;border-bottom:9px solid transparent}
+.route li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;min-width:0}
+.stop{display:grid;place-items:center;width:60px;height:60px;margin-bottom:6px;border-radius:50%;background:var(--emerald-2);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.34)}
+.stop svg{width:28px;height:28px}
+.stop.n{font:700 24px/1 var(--mono)}
+.route .you .stop{background:var(--mint);color:var(--emerald-3);box-shadow:0 0 0 8px rgba(67,221,140,.26)}
+.route b{font:800 18px/1.15 var(--display);letter-spacing:-.01em;white-space:nowrap}
+.route li>span:last-child{color:var(--on-emerald);line-height:1.3}
+
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.box{padding:14px 20px 16px}
+.box .tile-h{margin-bottom:6px}
+.box .ic{width:32px;height:32px;border-radius:11px}
+.box .ic svg{width:19px;height:19px}
+.box h3{font:800 19px/1.2 var(--display);letter-spacing:-.01em}
+.box p{color:var(--ink-2)}
+.maybe::after{box-shadow:none;border:2px dashed var(--accent);opacity:.7}
+
+.sec{font:850 25px/1.1 var(--display);letter-spacing:-.02em}
+.rules3{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1.06fr);gap:14px}
+.rule{display:flex;flex-direction:column;gap:9px;padding:15px 18px 17px}
+.rule .tile-h{align-items:center}
+.rule .tile-h .ic{width:40px;height:40px;border-radius:13px}
+.rule h3{font:850 17px/1.15 var(--display);letter-spacing:-.01em;white-space:nowrap}
+.do{margin-top:2px;font:900 26px/1.05 var(--display);letter-spacing:-.025em;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{padding:1px 12px;border-radius:999px;background:#fff;color:var(--garnet-2);font:800 16px/1.35 var(--body)}
+.rule ul{padding-left:19px;display:grid;gap:4px}
+.pearl.rule ul{color:var(--ink-2)}
+
+.more{padding:15px 20px 17px}
+.more-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:30px;margin-top:12px}
+.more-cols>div{display:grid;align-content:start;gap:14px}
+.more-cols article{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;align-items:start}
+.more-cols .ic{width:36px;height:36px;border-radius:12px}
+.more-cols .ic svg{width:20px;height:20px}
+.more-cols h3{font:800 18px/1.2 var(--display);letter-spacing:-.01em}
+.more-cols ul{margin-top:3px;padding-left:19px;display:grid;gap:2px;color:var(--ink-2)}
+.more-cols .src{margin-top:4px}
+
+.nums{padding:14px 20px 13px}
+.nstrip{list-style:none;margin-top:8px;display:grid;grid-template-columns:166px 225px 202px 234px minmax(0,1fr);column-gap:0}
+.nstrip li{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;padding:0 12px;border-left:1px solid var(--line)}
+.nstrip li:first-child{padding-left:0;border-left:0}
+.nstrip li:last-child{padding-right:0}
+.nstrip b{font:800 16px/1.25 var(--body)}
+.val{font:700 24px/1.15 var(--mono);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.val small{font:700 16px/1 var(--mono);color:var(--muted);letter-spacing:0}
+.val.w{font:850 22px/1.2 var(--display);letter-spacing:-.015em}
+.nstrip .note{color:var(--ink-2);line-height:1.3}
+.chk{margin-top:4px;padding:1px 10px;border-radius:999px;background:var(--champ-1);color:var(--gold-ink);font:800 16px/1.35 var(--body);box-shadow:inset 0 0 0 1px var(--champ-2);white-space:nowrap}
+
+/* ================= Sheet 2 ================= */
+.s2-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.s2-head h1{font:900 46px/1 var(--display);letter-spacing:-.035em}
+.brand{display:flex;align-items:center;gap:12px;flex:none}
+.brand b{font:850 19px/1.1 var(--display);letter-spacing:-.015em}
+
+.paths{padding:16px 20px 16px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
+.od{display:inline-flex;align-items:center;gap:8px;padding:4px 12px 4px 8px;border-radius:999px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);font:800 16px/1.3 var(--body);color:var(--ink-2)}
+.od::before{content:"";width:20px;height:8px;border-radius:4px;background:var(--oc)}
+.od.admit{--oc:var(--b-admit)} .od.observe{--oc:var(--b-observe)} .od.discharge{--oc:var(--b-discharge)} .od.advice{--oc:var(--b-advice)}
+.intro{margin-top:8px;color:var(--muted)}
+.plist{list-style:none;margin-top:10px;columns:3;column-gap:26px}
+.plist li{display:flex;gap:10px;line-height:1.3;padding-bottom:3px;break-inside:avoid}
+.plist .pp{flex:0 0 52px;font:700 16px/1.3 var(--mono);color:var(--sapphire-1)}
+
+.emacc{padding:16px 0 2px}
+.emacc .tile-h{padding:0 20px;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
+.emacc .tile-h .ic{align-self:center}
+.emacc .tile-h p{color:var(--muted)}
+.emacc .crit{padding:0 20px;margin-top:6px}
+.emacc table{width:100%;border-collapse:collapse;margin-top:9px}
+.emacc th{padding:6px 12px;text-align:left;background:var(--surface-2);font:800 16px/1.3 var(--body);color:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.emacc td{padding:5px 12px;vertical-align:top;line-height:1.27;border-top:1px solid var(--line);color:var(--ink-2)}
+.emacc tr:first-child td{border-top:0}
+.emacc td:first-child{width:45%;font-weight:700;color:var(--ink)}
+.emacc th:first-child,.emacc td:first-child{padding-left:20px}
+.emacc th:last-child,.emacc td:last-child{padding-right:20px}
+
+.s2-bottom{display:grid;grid-template-columns:minmax(0,1.61fr) minmax(0,1fr);gap:16px;align-items:start}
+.asthma .tile-h{margin-bottom:10px}
+.asthma .tile-h h2{font-size:24px}
+.amap{position:relative;list-style:none;display:grid;gap:6px}
+.amap::before{content:"";position:absolute;left:14px;top:16px;bottom:60px;width:4px;border-radius:2px;background:var(--line-2)}
+.amap>li{position:relative;display:flex;align-items:center;gap:0;padding-left:44px}
+.amap .d{position:absolute;left:0;top:50%;transform:translateY(-50%);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 3px var(--line-2);font:700 16px/1 var(--mono);color:var(--muted)}
+.amap .s .d{border-radius:10px}
+.amap .e .d{border-radius:10px;background:var(--b-discharge);color:#fff;box-shadow:none}
+.amap .e .d svg{width:18px;height:18px}
+.node{flex:1 1 auto;min-width:0;padding:6px 11px;border-radius:15px;background:var(--surface);box-shadow:var(--sh-1),inset 0 0 0 1px var(--line)}
+.node>b{font:800 16px/1.3 var(--body)}
+.node ul{margin-top:2px;padding-left:19px;display:grid;gap:0;line-height:1.28;color:var(--ink-2);list-style:disc}
+.go{display:inline-block;margin-right:4px;padding:0 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font:800 16px/1.4 var(--body)}
+.off{position:relative;flex:none;margin-left:24px;padding:6px 12px;border-radius:14px;background:var(--b-admit);color:#fff;line-height:1.3;white-space:nowrap}
+.off::before{content:"";position:absolute;left:-21px;top:50%;width:13px;height:3px;margin-top:-1.5px;background:var(--b-admit)}
+.off::after{content:"";position:absolute;left:-9px;top:50%;margin-top:-6px;border-left:8px solid var(--b-admit);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.off b{font:800 16px/1.3 var(--body)}
+.node.dc{background:var(--b-discharge);color:#fff;box-shadow:0 14px 26px -20px var(--b-discharge)}
+.node.dc ul{color:#fff}
+.node.dc .go{background:#fff;color:var(--b-discharge)}
+.asthma .src{margin-top:12px}
+
+.refer{padding:16px 20px 18px}
+.rlist{margin-top:10px;padding-left:19px;display:grid;gap:5px;color:var(--ink-2)}
+.rlist b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ======================= SHEET 1: patient flow ======================= -->
+<section class="sheet" id="sheet1" aria-label="Sheet 1 of 2: patient flow, rules and numbers">
+
+  <header class="s1-head">
+    <div>
+      <div class="s1-title"><span class="mark" data-mark></span><h1>Green Zone <span class="acc">MO Guide</span></h1></div>
+
+      <p class="tagline">Right <span>patient.</span> Right <span>zone.</span> Right <span>time.</span></p>
+      <p class="dept">HKL Emergency &amp; Trauma Department</p>
+    </div>
+    <aside class="tile t-obsidian qr-tile">
+      <span class="qr-plate"><img class="qr" width="148" height="148" alt="QR code that opens the Green Zone MO Guide app" src="data:image/png;base64,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"></span>
+      <div><h2>Open the app</h2><p>Every pathway and rule, step by step</p></div>
+    </aside>
+  </header>
+
+  <section class="tile t-emerald flow" aria-label="Patients move one way">
+    <div class="tile-h"><h2>Patients move one way</h2><p>MTS level 4 and 5 patients, from triage to discharge</p></div>
+    <ol class="route">
+      <li><span class="stop" data-icon="triage"></span><b>Triage</b><span>MTS level 4 or 5</span></li>
+      <li><span class="stop n">2</span><b>Secondary triage</b><span>ECG, irrigation, dressing, only if needed</span></li>
+      <li class="you"><span class="stop" data-icon="stetho"></span><b>You, the MO</b><span>Fill in the green slip, attach the queue number</span></li>
+      <li><span class="stop n">4</span><b>Red Box</b><span>The slip goes in; the patient waits in the tent</span></li>
+      <li><span class="stop" data-icon="syringe"></span><b>Treatment room (PPP)</b><span>Calls the number, does each order, documents it</span></li>
+    </ol>
+  </section>
+
+  <div class="duo">
+    <section class="tile pearl box maybe">
+      <div class="tile-h"><span class="ic soft" data-icon="chair"></span><h3>Results pending, observation or referral</h3></div>
+      <p>PPP takes the patient to the CCA (Chair Centric Area) and hands over to Yellow Zone Extension staff, who record vital signs on the slip and send the patient back to you.</p>
+    </section>
+    <section class="tile pearl box">
+      <div class="tile-h"><span class="ic soft" data-icon="review"></span><h3>To finish</h3></div>
+      <p>Results back: call the queue number again. Attach the slip to the BHT, complete the notes, give a TCA from the appointment flow chart and discharge advice.</p>
+    </section>
+  </div>
+
+  <h2 class="sec">Three rules to keep</h2>
+  <div class="rules3">
+    <article class="tile t-garnet rule">
+      <div class="tile-h"><span class="ic glass" data-icon="chair"></span><div><h3>Never waits outside</h3><p class="do">Bring them inside</p></div></div>
+      <div class="chips"><span>Elderly</span><span>NSTEMI or ACS</span><span>Stat drugs and monitoring</span></div>
+      <ul>
+        <li>Seat them in the CCA, the rooms in front of R2, the R2 corridor or any zone with space</li>
+        <li>The designated MA and HO there start management and monitoring</li>
+        <li>No space: tell the EP in charge</li>
+      </ul>
+    </article>
+    <article class="tile pearl rule">
+      <div class="tile-h"><span class="ic k-discharge" data-icon="review"></span><div><h3>Admit, discharge, transfer</h3><p class="do">Reassess first</p></div></div>
+      <ul>
+        <li>Reassess every patient; review every blood result and image</li>
+        <li>Came within 24 hours: ask the TL, a master student or the EP to look at the case</li>
+        <li>CT brain and going home: EP review, then an EMWATCH or EMACC appointment</li>
+      </ul>
+    </article>
+    <article class="tile pearl rule">
+      <div class="tile-h"><span class="ic k-advice" data-icon="phone"></span><div><h3>When it stalls</h3><p class="do">Call the EP in charge</p></div></div>
+      <ul>
+        <li>Several disciplines and no disposition after a long wait: inform the EP</li>
+        <li>External referral: discuss with the EP before accepting</li>
+        <li>Pending at the end of your shift: hand over to the next MO and document who</li>
+      </ul>
+    </article>
+  </div>
+
+  <section class="tile pearl more" aria-label="Four more rules">
+    <div class="tile-h"><span class="ic jw t-plum" data-icon="rule"></span><h2>Four more rules</h2></div>
+    <div class="more-cols">
+      <div>
+      <article>
+        <span class="ic plum" data-icon="route"></span>
+        <div>
+          <h3>One-way flow: no repeats after secondary triage</h3>
+          <ul>
+            <li>Do not repeat the ECG, dressing or vital signs later unless they were missed</li>
+            <li>An ECG you ask for in the Green Zone is done in the Procedure Room: do not send the patient back to secondary triage</li>
+          </ul>
+          <p class="src">Sources: HKL ED one-way procedure flow (Green Zone); KKM MTS announcement, Jul 2026.</p>
+        </div>
+      </article>
+      <article>
+        <span class="ic plum" data-icon="triage"></span>
+        <div>
+          <h3>Down-triage: the EP allows it</h3>
+          <ul>
+            <li>Examine the patient properly first, then document it on the triage form</li>
+          </ul>
+          <p class="src">Source: memo HKL/JK/98/188/3(22)22, 4 Oct 2022. EP rule: to be confirmed.</p>
+        </div>
+      </article>
+      </div>
+      <div>
+      <article>
+        <span class="ic plum" data-icon="chair"></span>
+        <div>
+          <h3>IV antibiotics when no bed is free</h3>
+          <ul>
+            <li>Look for a bed first in Yellow Obs, ISO or YZ Ext, and pass the patient over to the zone in-charge</li>
+            <li>If none is free, the patient can have IV antibiotics on a chair in the CCA, with one of the four allowed antibiotics only: Augmentin, cefuroxime, ceftriaxone or Unasyn</li>
+          </ul>
+          <p class="src">Source: IV antibiotic memo, 30 Jun 2026.</p>
+        </div>
+      </article>
+      <article>
+        <span class="ic plum" data-icon="clock"></span>
+        <div>
+          <h3>When the primary team is delayed</h3>
+          <ul>
+            <li>The EP may decide the admission within 4 hours if the primary team is delayed</li>
+          </ul>
+          <p class="src">Sources: KKM MTS announcement, Jul 2026; memo HKL/JK/98/188/3(17)23, 1 Sep 2023.</p>
+        </div>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tile pearl nums" aria-label="Numbers to know">
+    <div class="tile-h"><span class="ic soft" data-icon="phone"></span><h2>Numbers to know</h2></div>
+    <ul class="nstrip">
+      <li><b>EMACC follow-up</b><span class="val"><small>ext </small>7040</span><span class="note">Via <span class="m nw">03-2615 5555</span>, MO in charge</span><span class="chk">Check: 2018 SOP</span></li>
+      <li><b>MAU mobile team</b><span class="val"><small>ext </small>6682 / 6684</span><span class="note">After hours: MAU 1, 2 and 3 wards</span><span class="chk">Check: 2022 flow chart</span></li>
+      <li><b>IJN hotline</b><span class="val">03-2617 8996</span><span class="note">ACS meeting the referral criteria</span></li>
+      <li><b>Neuro Rehab Clinic</b><span class="val"><small>ext </small>7099</span><span class="note">Mild TBI, normal CT, PTA over 4 h</span><span class="chk">Check: current directory</span></li>
+      <li><b>MAU FAST clinic</b><span class="val w">MHKL level 2</span><span class="note"><span class="nw">8 am–4:30 pm;</span> CAP, <span class="nw">CURB-65 0–1</span></span></li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <p>Sources: Clinical Pathway in Emergency for MO HKL (ebook by the HKL Emergency Physicians); Green Zone memos 2022 to 2026; EMACC SOP 2018; MAU flow chart, 18 Oct 2022; HKL ED one-way procedure flow (Green Zone); down-triage memo, 4 Oct 2022; IV antibiotic memo, 30 Jun 2026; KKM MTS announcement, Jul 2026. A reference, not a substitute for clinical judgement: follow current department guidance. No patient data.</p>
+    <span class="pg">1 / 2</span>
+  </footer>
+</section>
+
+<!-- ======================= SHEET 2: pathways and referrals ======================= -->
+<section class="sheet" id="sheet2" aria-label="Sheet 2 of 2: pathways, follow-up and referrals">
+
+  <header class="s2-head">
+    <h1>Pathways, follow-up <span class="acc">and referrals</span></h1>
+    <div class="brand"><span class="mark" data-mark></span><b>Green Zone MO Guide</b></div>
+  </header>
+
+  <section class="tile pearl paths" aria-label="The 23 ebook pathways">
+    <div class="tile-h">
+      <span class="ic jw t-sapphire" data-icon="path"></span><h2>The 23 ebook pathways</h2>
+      <div class="legend"><span class="od admit">Admit</span><span class="od observe">Observation</span><span class="od discharge">Discharge</span><span class="od advice">Discharge advice</span></div>
+    </div>
+    <p class="intro">Listed by page in Clinical Pathway in Emergency for MO HKL. The colours are the ebook's outcome boxes.</p>
+    <ol class="plist">
+      <li><span class="pp">5–9</span><span>Acute behavioural disturbance</span></li>
+      <li><span class="pp">10–11</span><span>Abdominal pain</span></li>
+      <li><span class="pp">12–14</span><span>Acute coronary syndrome and Obsess protocol</span></li>
+      <li><span class="pp">15–16</span><span>Anaphylaxis</span></li>
+      <li><span class="pp">17–18</span><span>Acute gastroenteritis (adult)</span></li>
+      <li><span class="pp">19–23</span><span>Bronchial asthma</span></li>
+      <li><span class="pp">24</span><span>Biliary disease</span></li>
+      <li><span class="pp">25–26</span><span>Mild traumatic brain injury</span></li>
+      <li><span class="pp">27</span><span>Community acquired pneumonia</span></li>
+      <li><span class="pp">28–29</span><span>CVA and TIA</span></li>
+      <li><span class="pp">30</span><span>Acute cellulitis</span></li>
+      <li><span class="pp">31–32</span><span>Dengue fever</span></li>
+      <li><span class="pp">33–35</span><span>Deep vein thrombosis</span></li>
+      <li><span class="pp">36–37</span><span>Heart failure</span></li>
+      <li><span class="pp">38–40</span><span>Hypertensive urgency</span></li>
+      <li><span class="pp">41–42</span><span>Hyperglycaemia</span></li>
+      <li><span class="pp">43–44</span><span>Hypoglycaemia</span></li>
+      <li><span class="pp">45–50</span><span>Pain management</span></li>
+      <li><span class="pp">51–52</span><span>Paracetamol overdose</span></li>
+      <li><span class="pp">53–54</span><span>Renal colic</span></li>
+      <li><span class="pp">55–56</span><span>Supraventricular tachycardia</span></li>
+      <li><span class="pp">57–58</span><span>Syncope</span></li>
+      <li><span class="pp">59–63</span><span>Acute scrotal pain</span></li>
+    </ol>
+  </section>
+
+  <section class="tile pearl emacc" aria-label="EMACC follow-up">
+    <div class="tile-h"><span class="ic jw t-emerald" data-icon="clock"></span><h2>EMACC follow-up</h2><p><span class="m">ext 7040</span> · Green Zone, Mon–Fri 9 am–4 pm · first review within 1 week</p></div>
+    <p class="crit"><b>For</b> adults 18+ being discharged, with no own-clinic appointment within 14 days, a case below, and no admission needed.</p>
+    <table>
+      <thead><tr><th>Case</th><th>Review in EMACC</th></tr></thead>
+      <tbody>
+        <tr><td>Hypertensive urgency</td><td>Within 1 week for BP review; renal profile if started on captopril</td></tr>
+        <tr><td>Low-risk chest pain after OBSSES</td><td>Within 2 weeks: symptoms, repeat ECG, EST result; aspirin 150 mg OD if no contraindication; EST within 1 week, or refer to PC if EST is contraindicated</td></tr>
+        <tr><td>Uncontrolled DM: sugar over 11, not DKA or HHS, no admission needed</td><td>Within 1 week if there is no timely primary clinic appointment</td></tr>
+        <tr><td>Heart failure improved with ED treatment, no admission needed</td><td>Within 1 week; repeat renal profile if frusemide or an ACE inhibitor was started; suspected new HF: also refer to PC</td></tr>
+        <tr><td>Renal colic, improved, normal renal profile</td><td>First episode with a normal KUB X-ray: EMACC review. Recurrent: KUB ultrasound, then EMACC reviews symptoms and result</td></tr>
+        <tr><td>Non-specific abdominal pain: 7 days or less, no diagnosis, normal workup, improved</td><td>Within 3 days; discuss every case with the EP in charge</td></tr>
+        <tr><td>Trauma: up to 2 uncomplicated rib fractures, undisplaced closed fracture, minor dislocation, suspected fracture with a normal X-ray, soft tissue injury with marked swelling, large laceration (especially in diabetics)</td><td>Within 3 days for a wound check and pain review; repeat X-ray if needed; MC until the EMACC appointment</td></tr>
+        <tr><td>Blood results to review, such as TFT</td><td>As arranged</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="s2-bottom">
+    <section class="asthma" aria-label="Asthma Zone flow">
+      <div class="tile-h"><span class="ic jw t-emerald" data-icon="lungs"></span><h2>Asthma Zone</h2></div>
+      <ol class="amap">
+        <li class="q"><span class="d">1</span><div class="node"><b>Triage level given at primary triage?</b></div><div class="off">Level 2 or 3: <b>Critical zone, R1</b></div></li>
+        <li class="s"><span class="d">2</span><div class="node"><span class="go">Level 4 or 5</span> <b>Asthma card and a 5000 queue number</b></div></li>
+        <li class="s"><span class="d">3</span><div class="node"><b>Asthma Treatment Room (PPP)</b>
+          <ul>
+            <li>Secondary assessment; uptriage at once if unstable</li>
+            <li>Vital signs and PEFR before and after treatment</li>
+            <li>Reassess at 15–20 minutes</li>
+          </ul></div></li>
+        <li class="q"><span class="d">4</span><div class="node"><b>Resolved after the inhaler cycle?</b></div><div class="off">Not resolved: <b>Uptriage to R1</b></div></li>
+        <li class="s"><span class="d">5</span><div class="node"><span class="go">Resolved</span> <b>Health education, then the card comes to your room</b></div></li>
+        <li class="q"><span class="d">6</span><div class="node"><b>You re-examine the patient. Stable?</b></div><div class="off">Not stable: <b>Uptriage to R1</b></div></li>
+        <li class="e"><span class="d" data-icon="door"></span><div class="node dc"><span class="go">Stable</span> <b>Discharge (you, the Green Zone MO)</b>
+          <ul>
+            <li>Give the balance of the MDI the patient used, with the spacer</li>
+            <li>Prednisolone 30 mg once daily for 5 days</li>
+            <li>Salbutamol MDI 4 puffs every 4–6 hours for 1 day, then 2 puffs as needed</li>
+            <li>Do not share the MDI; bring your own spacer next time; come back at once (TCA stat) if the attack recurs</li>
+          </ul></div></li>
+      </ol>
+      <p class="src">Source: Asthma memo, Nov 2025. Discharge prescription: department BA/COPD protocol, 27 Mar 2020.</p>
+    </section>
+
+    <section class="tile pearl refer" aria-label="Refer to">
+      <div class="tile-h"><span class="ic k-refer" data-icon="send"></span><h2>Refer to</h2></div>
+      <ul class="rlist">
+        <li><b>Joint dislocation</b>, shoulder too: the on-call Orthopaedic team, not the clinic.</li>
+        <li><b>GI bleed:</b> medical cause, Gastroenterology; surgical cause, General Surgery. <b>Cholecystitis</b> without jaundice: General Surgery. <b>Jaundice:</b> Gastroenterology.</li>
+        <li><b>Medical ward:</b> refer to the Medical specialist or MO on call first.</li>
+        <li><b>Psychiatric relapse</b>, known history, no other medical problem: Psychiatry MO on call, no bloods or CT first.</li>
+        <li><b>Gout:</b> nearest Klinik Kesihatan; complex cases to Rheumatology.</li>
+        <li><b>Dengue from a KK</b>, warning signs only, normal CCTVR and vitals, platelets over 50,000, not morbidly obese: straight to the Observation Ward.</li>
+        <li><b>IPR (respiratory):</b> stable, no inotropes, Venturi 40% at most.</li>
+      </ul>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <p>Sources: the ebook above; EMACC SOP (1 Feb 2018: check the extension and hours are current); Asthma memo, 13 Nov 2025; department BA/COPD protocol, 27 Mar 2020; referral memos and letters 2018 to 2026. A reference, not a substitute for clinical judgement. No patient data.</p>
+    <span class="pg">2 / 2</span>
+  </footer>
+</section>
+
+<script>
+/* The app's own stroke pictograms (src/parts/engine.js, ICONS) and its mark (LOGO), copied as they are */
+const ICONS = {
+  triage:'<path d="M4 9.5 10.5 3H19a1 1 0 0 1 1 1v8.5L13.5 19a1.8 1.8 0 0 1-2.5 0L4 12a1.8 1.8 0 0 1 0-2.5z"/><circle cx="15.5" cy="7.5" r="1.5"/>',
+  stetho:'<path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10.5" r="2"/>',
+  syringe:'<path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><path d="m4 20 2.4-2.4M10 10.5l3.5 3.5"/>',
+  chair:'<path d="M7 4v8.5h10V20M7 12.5V20M17 12.5V8"/><path d="M5 12.5h14"/>',
+  review:'<path d="M14 3.5H7A2 2 0 0 0 5 5.5v13a2 2 0 0 0 2 2h4"/><path d="M8.5 8h6M8.5 11.5h3"/><circle cx="16" cy="15.5" r="3.3"/><path d="m18.5 18 2 2"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  route:'<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  rule:'<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+  path:'<circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="12" r="2.2"/><path d="M6 7.2v9.6M8 5h4a4 4 0 0 1 4 4v1M8 19h4a4 4 0 0 0 4-4v-1"/>',
+  lungs:'<path d="M12 4v8"/><path d="M12 12c-.8 1.2-2 1.8-3.4 1.8M12 12c.8 1.2 2 1.8 3.4 1.8"/><path d="M8.7 6.6C6.3 7.2 4 10.6 4 15.2 4 17.8 5 19.5 7 19.5c2.6 0 3.6-1.6 3.6-4.2V9.5"/><path d="M15.3 6.6c2.4.6 4.7 4 4.7 8.6 0 2.6-1 4.3-3 4.3-2.6 0-3.6-1.6-3.6-4.2V9.5"/>',
+  send:'<path d="M4 12h12.5"/><path d="m11.5 6.5 5.5 5.5-5.5 5.5"/><path d="M20 5v14"/>',
+  door:'<path d="M13.5 4H7A1.5 1.5 0 0 0 5.5 5.5v13A1.5 1.5 0 0 0 7 20h6.5"/><path d="M10.5 12H20M16.5 8.5 20 12l-3.5 3.5"/>'
+};
+const LOGO = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 18.5h7.5a4 4 0 0 0 4-4V12.2" style="stroke:var(--mint)" stroke-width="2.6" stroke-linecap="round"/><path d="M16.5 3.6v6.6M13.2 6.9h6.6" style="stroke:#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="5" cy="18.5" r="2.3" style="fill:#fff"/></svg>';
+document.querySelectorAll('[data-icon]').forEach(el => {
+  el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + (ICONS[el.dataset.icon] || '') + '</svg>';
+});
+document.querySelectorAll('[data-mark]').forEach(el => { el.innerHTML = LOGO; });
+document.documentElement.dataset.ready = '1';
+</script>
+</body>
+</html>

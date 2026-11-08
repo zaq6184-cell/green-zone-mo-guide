@@ -2,8 +2,9 @@
 
 A phone-first reference for medical officers (MOs) and house officers (HOs) working in the Green Zone (MTS levels 4 and 5) of the Emergency & Trauma Department, Hospital Kuala Lumpur. The owner is Krishna, an MO in that department. MOs open it mid-shift on a phone, with little time per question, so judge every change by on-shift use first: fast lookup, one tap to an answer, a phone layout and little mobile data. The journey, tour, quiz and poster are extras for new staff.
 
-- **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 7, published 7 Nov 2026). It is private to Krishna until he shares it from the page's Share menu.
-- **Content:** 23 ebook pathways and 15 rules and protocols (8 flow, 7 protocols), shift tools, 14 key numbers, a five-stop patient journey, a 65-second tour, a 13-question quiz, a What's new page and the wall poster.
+- **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 8, published 8 Nov 2026 as artifact version 1794130364-3a36). It is private to Krishna until he shares it from the page's Share menu.
+- **Version 8** (live since 8 Nov 2026): a premium bento redesign Krishna chose from three live prototypes, with a zone map, whole-pathway maps, "Can still end in" on every step, visual shift tools and a first-shift intro. The explainer is rebuilt (86 s, with the version 7 rules), the tour can play it in English or Bahasa Melayu (the Narration switch under the video), and both poster sheets are redrawn. No clinical content changed.
+- **Content:** 23 ebook pathways and 15 rules and protocols (8 flow, 7 protocols), shift tools, 14 key numbers, a five-stop patient journey, an 89-second tour (also in Bahasa Melayu), a 13-question quiz, a four-screen first-shift intro, a What's new page and the wall poster.
 
 ## Standing rules
 
@@ -27,6 +28,10 @@ These are Krishna's instructions. Follow them exactly, and quote them back if a 
 | Path | What it is |
 |---|---|
 | `CLAUDE.md` | This file. |
+| `PRODUCT.md` | Product truth for design work: users, purpose, constraints, brand commitments (including the look Krishna confirmed on 8 Nov 2026). |
+| `DESIGN.md` | The version 8 design system (tokens, components, motion), written from the built page. |
+| `.impeccable/` | Design records, dev only: the direction contract (`surfaces/`), the three redesign prototypes (`mocks/options/`, preview with the `redesign-options` server), review screenshots. Not published. |
+| `.claude/launch.json` | Preview servers for the browser pane: `guide` (the offline copy, port 8765) and `redesign-options` (port 8770). Stop `guide` before `npm test`, or run the test with another port, for example `PORT=8791 node test.js`. |
 | `HANDOVER.md` | For Krishna: how to start Claude Code here, and the first prompt. |
 | `README.md` | What the app does, and the version history. |
 | `DRIVE-RUN-THROUGH.md` | Every MO Drive "3. CLINICAL" subfolder and the triage course folder documents: what went in, what did not, and why. |
@@ -35,8 +40,8 @@ These are Krishna's instructions. Follow them exactly, and quote them back if a 
 | `src/build.js`, `check-data.js`, `test.js`, `serve.js` | Build, content check, Playwright test, local preview. |
 | `green-zone-pathways.html` | Built page: exactly what is published as the artifact. |
 | `app/` | Built offline copy (`index.html`) plus the media it uses: `img/`, `media/`, `poster/`, `clips/`, `audio/`. These media folders are the master copies. |
-| `video/` | The narrated explainer, 1080p and 720p, and `REVIEW.md` on how it was made. |
-| `poster/` | The two A3 sheets as PDF and PNG. Editable canvas: https://claude.ai/artifact/5QaoLt2gwXut47WzhtprES |
+| `video/` | The narrated explainer, 1080p and 720p, `REVIEW.md` on how it was made, and `explainer/`, the HyperFrames project it is rendered from (`SPEC.md`, `work/timing.cjs` and `work/build.cjs`). |
+| `poster/` | The two A3 sheets as PDF and PNG, and `src/` (`poster.html`, `render.js`): edit `poster.html`, then run `node render.js` in `poster/src`, which rewrites the PNGs, the PDF and the four `app/poster/` webp files. The claude.ai canvas (https://claude.ai/artifact/5QaoLt2gwXut47WzhtprES) still holds the version 7 sheets. |
 | `illustrations/` | The six Flow Studio illustrations as full-size PNG. |
 | `flow-video/` | The six Flow Studio clips at full quality (the app uses smaller copies in `app/clips/`). |
 
@@ -52,7 +57,7 @@ npm run serve    # preview the offline copy at http://localhost:8765
 npm run all      # check, build and test in one go
 ```
 
-After any change in `src/parts/`: run check, build and test, then look at the screenshots in `src/shots/` for the views you touched (`d-` desktop, `p-` phone, `pd-` phone dark, `t-` tablet). The test checks for console errors, sideways scroll on every view, search, the step runner, deep links, tabs, tools, quiz, journey and settings. It uses the version 7 ids, so update it when you change the markup.
+After any change in `src/parts/`: run check, build and test, then look at the screenshots in `src/shots/` for the views you touched (`d-` desktop, `p-` phone, `pd-` phone dark, `t-` tablet). The test checks for console errors, sideways scroll on every view, search, the step runner, deep links, tabs, tools, quiz, journey and settings. It also checks the version 8 features: the zone map, the whole-pathway map, "Can still end in", the route meter, the gauges and the intro. It uses the version 8 ids, so update it when you change the markup.
 
 ## How the page is built
 
@@ -60,11 +65,11 @@ One self-contained page with no framework and no external scripts. `build.js` jo
 
 | Part | What it holds |
 |---|---|
-| `head.html` | The `<title>`, fonts (Outfit, Inter, JetBrains Mono from Google Fonts), all CSS (design tokens, light and dark) and the static markup of the shell and every view. |
+| `head.html` | The `<title>`, fonts (Figtree, Atkinson Hyperlegible Next and Atkinson Hyperlegible Mono from Google Fonts), all CSS (design tokens, the jewel tile palette, light and dark) and the static markup of the shell, the home bento and every view. |
 | `data.js` | `const P = {}`, the 23 ebook pathways, and the first four rule entries: `gz-rules`, `asthma-zone`, `emacc`, `referral-rules`. |
 | `data2.js` | Version 6: eleven entries from the MO Drive (`em-watch`, `mau-admission`, `outpatient-referral`, `yellow-zone`, `oscc`, `blood-tests`, `animal-bites`, `infection-alerts`, `trauma-walkins`, `children`, `safe-practice`), the 2025 Asthma Zone memo, and department notes on six pathways. |
 | `data3.js` | Version 7: the triage course folder documents, added as steps on `gz-rules` (`oneway`, `down`, `ivab`, `ep4`, `kk`) and `referral-rules` (`ortho`, `ipr`). |
-| `engine.js` | Everything else: icons, groups, search, saved and recent, the router, the step runner, tools, numbers, journey, tour, quiz, What's new, settings. The content lists for those views (journey stops, numbers, quiz, tips, Drive run-through, open items) are constants near its top. |
+| `engine.js` | Everything else: icons, groups (each with a jewel colour), search, saved and recent, the router, the home bento and zone map, the step runner and whole-pathway map, tools, numbers, journey, tour, quiz, the first-shift intro, What's new, settings. The content lists for those views (journey stops, numbers, quiz, tips, Drive run-through, open items, version 8 notes, intro screens) are constants near its top. |
 
 ### Content model
 
@@ -96,9 +101,9 @@ To add a **rule entry**, give it `grp:'rules'` and `sub`, and it joins the Flow 
 
 ### Routes and storage
 
-- Views: `#home`, `#pathways`, `#saved`, `#rules`, `#tools`, `#calc`, `#calc-dengue`, `#calc-kids`, `#calc-weight`, `#numbers`, `#journey`, `#journey-1` to `#journey-5`, `#tour` (also `#video`), `#quiz`, `#new`, `#poster`, `#about`, `#search`.
+- Views: `#home`, `#pathways`, `#saved`, `#rules`, `#tools`, `#calc`, `#calc-dengue`, `#calc-kids`, `#calc-weight`, `#numbers`, `#intro`, `#journey`, `#journey-1` to `#journey-5`, `#tour` (also `#video`), `#quiz`, `#new`, `#poster`, `#about`, `#search`.
 - Any entry is `#<id>`, and any step of it is `#<id>--<node>`, for example `#gz-rules--ivab`. Changing an id or a node key breaks links that people have saved or sent, and the QR code on poster sheet 1 opens the app link.
-- `localStorage` keys, all on the viewer's own device: `gz-saved`, `gz-recent`, `gz-quiz-v7`, `gz-tour-pos`, `gz-theme`, `gz-size`, `gz-clips`, `gz-seen`. Settings → Clear removes the saved list, recent list, quiz and tour position.
+- `localStorage` keys, all on the viewer's own device: `gz-saved`, `gz-recent`, `gz-quiz-v7`, `gz-tour-pos`, `gz-tour-pos-ms`, `gz-tour-lang`, `gz-theme`, `gz-size`, `gz-clips`, `gz-seen`, `gz-intro`. Settings → Clear removes the saved list, recent list, quiz, both tour positions, the tour language and the intro flag.
 
 ## Rules of the artifact host
 
@@ -119,7 +124,7 @@ Publishing is an external change: ask Krishna first, every time.
 
 1. Run `npm run all` and check the screenshots.
 2. With the Artifact tool, read https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 first, then publish `green-zone-pathways.html` with that link as `url`, a one-sentence `description` and a short `label` (for example "v8 ..."). Leave out `icon`, so the page keeps its icon.
-3. The 23 media files (`img/`, `media/`, `poster/`, `clips/`, `audio/`) are already published beside the page, and stay when you publish only the page. A new or changed media file goes in `files`, mapped from its published path to its file here, for example `{"clips/stop1-triage.mp4": "app/clips/stop1-triage.mp4"}`.
+3. The 25 media files (`img/`, `media/`, `poster/`, `clips/`, `audio/`) are already published beside the page, and stay when you publish only the page. A new or changed media file goes in `files`, mapped from its published path to its file here, for example `{"clips/stop1-triage.mp4": "app/clips/stop1-triage.mp4"}`. Version 8 (published 8 Nov 2026) replaced six of them and added two: `media/green-zone-explainer-720p.mp4`, `media/explainer-poster.webp`, `media/green-zone-explainer-ms-720p.mp4` (new), `media/explainer-ms-poster.webp` (new), `poster/sheet1.webp`, `poster/sheet1-thumb.webp`, `poster/sheet2.webp` and `poster/sheet2-thumb.webp`.
 4. If this session has no Artifact tool, say so. The offline copy in `app/` still works, and Krishna can publish from a claude.ai session.
 
 ## Writing style for the app
@@ -147,11 +152,12 @@ Still to confirm with the department (the app lists them under Still to confirm 
 4. Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents), the SCAN team line and the IPR on-call line.
 5. The MERS-CoV case definition, which is not in the PUI file.
 6. A readable copy of the Malaysian snakebite guideline.
+7. The written source for "only the EP can allow a down-triage", which Krishna added on 8 Nov 2026. The down-triage memo HKL/JK/98/188/3(22)22 of 4 Oct 2022 says the MO must examine the patient first and document it on the triage form, but does not mention the EP.
 
-Waiting on Krishna: his review of version 7, and when to share the app with colleagues.
+Waiting on Krishna: his review of version 8 (including the Malay wording and how both narrations sound), and when to share the app with colleagues. The poster canvas on claude.ai still holds the version 7 sheets.
 
 ## Tools on Krishna's laptop
 
 - **Flow Studio** is his local web app at http://127.0.0.1:8787 (Cast, Frames, Shots, Voice, Restyle, Cut, Captions, Library), driven by the `flow` MCP tool. When he says "Flow", he means this. The app's clips were made with Omni 1.1 Flash at 12 credits each, 720p, with the first and last frame set so they loop.
-- **VoiceStudio** (`voicestudio` MCP) saves to `C:\Users\user\Documents\hkl-football-medicine-2026\`. Leave out `instruct`: free text there returns an error. The explainer narration used the voice "Google Kira - Female - BM + EN" at speed 0.86.
-- **HyperFrames** made the explainer (see `video/REVIEW.md`).
+- **VoiceStudio** (`voicestudio` MCP) saves to `C:\Users\user\Downloads\Music\Voice Studio\` (since 8 Nov 2026; the clips it saved earlier in `Documents\hkl-football-medicine-2026\` were moved there too). The folder is set by the Windows user environment variable `OMNIVOICE_MCP_BASE_PATH`, which VoiceStudio reads only when it starts, and it is also the only folder VoiceStudio may read audio from (transcribe, clone_voice). Leave out `instruct`: free text there returns an error. The explainer narration used the voice "Google Kira - Female - BM + EN" at speed 0.86.
+- **HyperFrames** made the explainer (see `video/REVIEW.md`). Version 8 uses HyperFrames 0.9.22 pinned with `npx --yes hyperframes@0.9.22`; never run its `publish` command, which uploads the project.

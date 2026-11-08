@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Option B · Clinical Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Atkinson+Hyperlegible+Mono:wght@500;700&family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fff;--panel:#F3F4F1;--ink:#0F1418;--ink2:#2A3036;--muted:#5A6168;--line:#E3E5E1;--green:#0B7A4B;--green2:#075C38;--gsoft:#E3F2EA;
+ --b-admit:#C42A20;--b-observe:#F0AE1C;--b-discharge:#13834C;--b-refer:#5A44C4;--b-neutral:#41544B;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:#E3E5E1;color:var(--ink);font:400 16px/1.5 "Atkinson Hyperlegible Next",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;color:inherit}
+.phone{position:relative;max-width:430px;min-height:100vh;margin:0 auto;background:var(--paper);overflow-x:hidden;padding-bottom:84px}
+svg.i{width:22px;height:22px;flex:none}
+.disp{font-family:"Bricolage Grotesque",sans-serif;font-variation-settings:"opsz" 96}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:4px;height:56px;padding:0 8px 0 14px;background:var(--paper);border-bottom:2px solid var(--ink)}
+.top .wm{flex:1;font:800 15px/1 "Bricolage Grotesque";letter-spacing:.12em;text-transform:uppercase}
+.top .wm i{font-style:normal;color:var(--green)}
+.top .ib{width:44px;height:44px;border:0;border-radius:10px;background:none;display:grid;place-items:center}
+.top .ib:hover{background:var(--panel)}
+.screen{display:none}.screen.on{display:block;animation:in .4s var(--ease)}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pad{padding:0 18px}
+.title{margin:22px 0 0;font:800 66px/.84 "Bricolage Grotesque";font-variation-settings:"opsz" 96,"wdth" 78;letter-spacing:-.035em}
+.title span{display:block;color:var(--green)}
+.subt{margin:14px 0 18px;color:var(--muted);font-weight:700;font-size:14px}
+.find{display:flex;align-items:center;gap:12px;width:100%;height:58px;padding:0 16px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--muted);font:700 16.5px/1 "Atkinson Hyperlegible Next";text-align:left}
+.find:hover{box-shadow:0 0 0 4px var(--gsoft)}
+h2.h{display:flex;justify-content:space-between;align-items:baseline;margin:30px 0 0;padding-top:10px;border-top:2px solid var(--ink);font:800 24px/1.1 "Bricolage Grotesque";font-variation-settings:"opsz" 48;letter-spacing:-.015em}
+h2.h small{font:700 13px "Atkinson Hyperlegible Next";color:var(--muted)}
+.toc{list-style:none;margin:8px 0 0;padding:0}
+.toc button{display:flex;align-items:baseline;gap:10px;width:100%;padding:13px 0;border:0;border-bottom:1px solid var(--line);background:none;text-align:left}
+.toc b{font:800 17px/1.2 "Atkinson Hyperlegible Next"}
+.toc i{flex:1;border-bottom:2px dotted #C4C8C3;transform:translateY(-4px)}
+.toc span{font:700 13px "Atkinson Hyperlegible Mono";color:var(--muted)}
+.toc .go{color:var(--green);transform:translateY(5px)}
+.toc button:hover b{color:var(--green)}
+.plate{margin-top:12px;padding:18px 14px 16px;border-radius:14px;background:var(--panel)}
+.zone{position:relative;display:grid;grid-template-columns:repeat(5,1fr);text-align:center}
+.zl{position:absolute;left:10%;right:10%;top:21px;height:6px;background:var(--ink);border-radius:3px}
+.zp{position:absolute;left:10%;top:21px;height:6px;width:0;background:var(--green);border-radius:3px;animation:prog 1.2s var(--ease) .3s forwards}
+@keyframes prog{to{width:20%}}
+.zs{position:relative;display:flex;flex-direction:column;align-items:center;gap:7px;border:0;background:none;padding:0}
+.zs .n{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff;border:3px solid var(--ink);font:700 18px "Atkinson Hyperlegible Mono";transition:transform .2s var(--ease)}
+.zs.you .n{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 0 0 6px var(--gsoft)}
+.zs.maybe .n{border-style:dashed}
+.zs.sel .n{transform:scale(1.1);background:var(--ink);border-color:var(--ink);color:#fff}
+.zs b{font:800 12px/1.15 "Atkinson Hyperlegible Next"}
+.zs small{font:700 10.5px/1.1 "Atkinson Hyperlegible Next";color:var(--muted)}
+.zd{margin-top:16px;padding-top:14px;border-top:2px solid var(--ink);animation:in .35s var(--ease)}
+.zd h3{margin:0 0 8px;font:800 21px/1.1 "Bricolage Grotesque"}
+.zd ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
+.zd p{margin:10px 0 0;font-weight:800;font-size:14px;color:var(--green)}
+.key{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:12px}
+.key span{display:flex;align-items:center;gap:10px;font:800 14px "Atkinson Hyperlegible Next"}
+.key i{width:26px;height:26px;border-radius:6px;background:var(--c)}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin-top:6px}
+.nums div{padding:12px 0;border-bottom:1px solid var(--line)}
+.nums small{display:block;font:800 12px/1.2 "Atkinson Hyperlegible Next";letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.nums b{display:block;margin-top:6px;font:700 38px/1 "Atkinson Hyperlegible Mono";letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.nums .hot b{color:var(--b-admit)}
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);align-items:end;padding:6px 6px 10px;background:#fff;border-top:2px solid var(--ink)}
+.tabs button{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:56px;padding:6px 2px;border:0;background:none;color:var(--muted);font:800 11px/1 "Atkinson Hyperlegible Next"}
+.tabs .on{color:var(--ink)}
+.tabs .on::after{content:"";position:absolute;bottom:0;left:28%;right:28%;height:3px;background:var(--green)}
+.tabs .fab span{display:grid;place-items:center;width:54px;height:54px;margin-top:-24px;border-radius:14px;background:var(--ink);color:#fff;box-shadow:0 0 0 4px #fff}
+/* runner */
+.rt{margin:18px 0 0;font:800 54px/.86 "Bricolage Grotesque";font-variation-settings:"opsz" 96,"wdth" 80;letter-spacing:-.03em}
+.rmeta{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;font:700 13px "Atkinson Hyperlegible Mono";color:var(--muted)}
+.rmeta span{padding:4px 8px;border:1.5px solid var(--ink);border-radius:6px;color:var(--ink)}
+.flow{margin-top:16px;padding:12px 10px 10px;border-radius:14px;background:var(--panel)}
+.flow h4{margin:0 4px 8px;display:flex;justify-content:space-between;font:800 15px "Bricolage Grotesque"}
+.flow h4 small{font:700 12px "Atkinson Hyperlegible Next";color:var(--muted)}
+.flow svg{display:block;width:100%;height:auto}
+.flow .nd{cursor:pointer}
+.flow .nd rect{fill:#fff;stroke:var(--ink);stroke-width:2;transition:fill .3s,stroke .3s,opacity .3s}
+.flow .nd text{font:700 11.5px "Atkinson Hyperlegible Next";fill:var(--ink);transition:fill .3s}
+.flow .nd.vis rect{fill:var(--ink)}.flow .nd.vis text{fill:#fff}
+.flow .nd.cur rect{fill:var(--green);stroke:var(--green)}.flow .nd.cur text{fill:#fff}
+.flow .nd.end rect{stroke:none;fill:var(--c)}.flow .nd.end text{fill:var(--t)}
+.flow .nd.gone{opacity:.28}
+.flow .ed{fill:none;stroke:#8C9298;stroke-width:2}
+.flow .ed.on{stroke:var(--green);stroke-width:3.5}
+.flow .el{font:800 10px "Atkinson Hyperlegible Next";fill:var(--muted)}
+.q{margin:14px 0 0;padding:20px 18px 18px;border:2px solid var(--ink);border-radius:14px;animation:in .35s var(--ease)}
+.q h2{margin:0 0 14px;font:700 25px/1.15 "Bricolage Grotesque";font-variation-settings:"opsz" 36;letter-spacing:-.01em}
+.q ul.it{margin:0 0 14px;padding-left:20px}
+.q .hint{margin:0 0 10px;color:var(--muted);font-size:14.5px}
+.checks{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.checks label{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1.5px solid #C8CCC7;border-radius:10px;cursor:pointer;font-size:15px}
+.checks input{width:21px;height:21px;margin:1px 0 0;accent-color:var(--green);flex:none}
+.checks label:has(input:checked){border-color:var(--ink);background:var(--panel)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:10px 16px;border:2px solid var(--ink);border-radius:10px;background:#fff;text-align:left;font:800 17px/1.25 "Atkinson Hyperlegible Next";transition:background-color .15s,color .15s}
+.opt .go{margin-left:auto;transition:transform .2s var(--ease)}
+.opt:hover{background:var(--ink);color:#fff}.opt:hover .go{transform:translateX(4px)}
+.opt.sugg{background:var(--green);border-color:var(--green);color:#fff}
+.res{margin-top:14px;border-radius:14px;overflow:hidden;background:var(--c);color:var(--t);animation:block .55s var(--ease)}
+@keyframes block{from{transform:scaleY(.6);transform-origin:top;opacity:0}to{transform:none;opacity:1}}
+.res-h{padding:22px 18px 16px}
+.res-h p{margin:0 0 8px;font:800 12.5px "Atkinson Hyperlegible Next";letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.res-h h2{margin:0;font:800 36px/.95 "Bricolage Grotesque";font-variation-settings:"opsz" 96,"wdth" 82;letter-spacing:-.025em}
+.res ul{margin:0;padding:0 18px 14px 38px;display:grid;gap:6px;font-weight:600}
+.res-f{display:flex;gap:8px;padding:12px;background:rgba(0,0,0,.12)}
+.res-f button{flex:1;min-height:48px;border-radius:10px;border:2px solid currentColor;background:transparent;font:800 14.5px "Atkinson Hyperlegible Next";display:inline-flex;align-items:center;justify-content:center;gap:8px;color:inherit}
+.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);z-index:50;background:var(--ink);color:#fff;padding:11px 18px;border-radius:10px;font-weight:800;font-size:14px;display:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.zp{width:20%}}
+</style></head><body>
+<div class="phone">
+ <header class="top" id="top"></header>
+ <section class="screen on" id="home"><div class="pad">
+  <h1 class="title">Green Zone<span>MO Guide</span></h1>
+  <p class="subt">Emergency &amp; Trauma, Hospital Kuala Lumpur · MTS 4–5</p>
+  <button class="find" data-toast="Search opens here"><span data-i="search"></span>Symptom, rule, dose or number</button>
+  <h2 class="h">Quick routes <small>ebook page or source</small></h2>
+  <ul class="toc" id="toc"></ul>
+  <h2 class="h">The zone, one way <small>tap a stop</small></h2>
+  <div class="plate"><div class="zone" id="zone"></div><div id="zd"></div></div>
+  <h2 class="h">Outcome key <small>from the ebook</small></h2>
+  <div class="key"><span><i style="--c:var(--b-admit)"></i>Admit · red box</span><span><i style="--c:var(--b-observe)"></i>Observation · yellow</span><span><i style="--c:var(--b-discharge)"></i>Discharge · green box</span><span><i style="--c:var(--b-refer)"></i>Refer</span></div>
+  <h2 class="h">Key numbers <small>all 14 in Numbers</small></h2>
+  <div class="nums"><div class="hot"><small>Code Blue</small><b>5333</b></div><div class="hot"><small>Code Stroke</small><b>5999</b></div><div><small>MAU team</small><b>6682</b></div><div><small>EMACC</small><b>7040</b></div></div>
+ </div></section>
+ <section class="screen" id="run"></section>
+ <nav class="tabs"><button class="on" data-home><span data-i="home"></span>Home</button><button data-toast="Pathways"><span data-i="path"></span>Pathways</button><button class="fab" data-toast="Search"><span><span data-i="search"></span></span>Search</button><button data-toast="Tools"><span data-i="check"></span>Tools</button><button data-toast="Numbers"><span data-i="phone"></span>Numbers</button></nav>
+ <div class="toast" id="toast"></div>
+</div>
+<script>
+const I={search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',home:'<path d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H5.5A1.5 1.5 0 0 1 4 19z"/>',path:'<circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="12" r="2.2"/><path d="M6 7.2v9.6M8 5h4a4 4 0 0 1 4 4v1M8 19h4a4 4 0 0 0 4-4v-1"/>',check:'<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="m8.5 12 2.2 2.2L15.5 9.5"/>',phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',sliders:'<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',back:'<path d="M14.5 6l-6 6 6 6"/>',go:'<path d="M4.5 12h14"/><path d="m13 6.5 5.5 5.5-5.5 5.5"/>',copy:'<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 8.5v-2A2.5 2.5 0 0 0 13 4H6.5A2.5 2.5 0 0 0 4 6.5V13a2.5 2.5 0 0 0 2.5 2.5h2"/>',restart:'<path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/>'};
+const svg=k=>`<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
+const fill=r=>r.querySelectorAll('[data-i]').forEach(e=>{e.outerHTML=svg(e.dataset.i)});
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const RC={title:'Renal colic',page:'53–54',start:'susp',nodes:{susp:{q:'Clinical picture and history suggestive of ureteric colic?',opts:[['Yes','pain'],['No','alt']]},alt:{end:'neutral',title:'Consider an alternative diagnosis',items:[]},pain:{step:'Pain management',items:['NSAIDs'],next:'urgent'},urgent:{check:'any',q:'Any urgent indication for urology referral?',items:['Fever, urosepsis or pyelonephritis','Frank haematuria or anuria','Pregnant','Comorbidities: single kidney, transplanted kidney, autoimmune disease, heart disease, diabetes mellitus'],opts:[['Yes, present','uro'],['None','pocus']]},pocus:{q:'POCUS: hydronephrosis?',opts:[['Present','kub'],['Absent','resolve']]},kub:{step:'Urgent KUB ultrasound by the radiology team',items:[],next:'uro'},resolve:{q:'Symptoms resolved?',opts:[['Yes','home'],['No','uro']]},uro:{end:'refer',title:'Refer urology team',items:[]},home:{end:'discharge',title:'Discharge with discharge bundle',items:['Early TCA for KUB ultrasound','Urology referral','Give the discharge advice below']}}};
+const KIND={admit:'Admit · red box',observe:'Observation · yellow box',discharge:'Discharge · green box',refer:'Refer',neutral:'Next step'};
+const BC={admit:['#C42A20','#fff'],observe:['#F0AE1C','#241900'],discharge:['#13834C','#fff'],refer:['#5A44C4','#fff'],neutral:['#41544B','#fff']};
+/* The whole pathway as a plate: positions in a 340 x 430 box */
+const LAY={susp:[170,26,300,'Ureteric colic picture?'],pain:[95,98,160,'Pain management'],alt:[262,98,140,'Other diagnosis'],urgent:[95,170,170,'Urgent urology sign?'],pocus:[95,242,160,'POCUS: hydronephrosis?'],uro:[262,242,140,'Refer urology'],resolve:[95,314,160,'Symptoms resolved?'],kub:[262,314,140,'Urgent KUB US'],home:[95,392,160,'Discharge bundle']};
+const EDGES=[['susp','pain','Yes'],['susp','alt','No'],['pain','urgent',''],['urgent','uro','Yes'],['urgent','pocus','None'],['pocus','kub','Present'],['pocus','resolve','Absent'],['kub','uro',''],['resolve','home','Yes'],['resolve','uro','No']];
+const ZONE=[{t:'Triage',s:'MTS 4 or 5',items:['Triage gives MTS 4 or 5, which brings the patient to the Green Zone','Then secondary triage; ECG, irrigation or dressing only if needed','Patients move one way: next they come to you'],r:'No repeat tests after secondary triage'},{t:'You, the MO',s:'Consultation',you:1,items:['See the patient and open the ebook pathway','Fill in the slip hijau and attach the queue number','The patient puts the slip in the Red Box and waits'],r:'Never waits outside: the elderly, ACS, stat drugs'},{t:'Treatment room',s:'PPP',items:['Takes the slip and calls the queue number','Carries out and documents each order','Tells the patient the next step'],r:'GXM sample: label at the bedside'},{t:'CCA',s:'If needed',maybe:1,items:['For pending results, observation or referral','Staff record vital signs on the slip and monitor','You stay responsible for the patient you sent'],r:'IV antibiotics on a CCA chair, no bed free'},{t:'Review',s:'Back to you',items:['Reassess before you admit, discharge or transfer','Review every blood result and image','CT brain and going home: EP review, then EM Watch or EMACC'],r:'When it stalls: call the EP in charge'}];
+const reach=k=>{const out=new Set(),q=[k];while(q.length){const x=q.shift();if(out.has(x))continue;out.add(x);const n=RC.nodes[x];(n.opts||[]).forEach(o=>q.push(o[1]));if(n.next)q.push(n.next)}return out};
+const pathTo=t=>{const prev={[RC.start]:null},q=[RC.start];while(q.length){const k=q.shift();if(k===t)break;const n=RC.nodes[k];const nx=n.opts?n.opts.map(o=>[o[1],o[0]]):n.next?[[n.next,'Done']]:[];for(const [to,l] of nx)if(!(to in prev)){prev[to]=[k,l];q.push(to)}}const tr=[];let k=t;while(prev[k]){tr.unshift({n:prev[k][0],l:prev[k][1]});k=prev[k][0]}return tr};
+let st={cur:'susp',trail:[]},zsel=-1;
+function toast(m){const t=$('#toast');t.textContent=m+' (prototype)';t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',1600)}
+function topbar(run){$('#top').innerHTML=run?`<button class="ib" data-home aria-label="Back">${svg('back')}</button><span class="wm">Renal <i>colic</i></span><button class="ib">${svg('search')}</button>`:`<span class="wm">Green <i>Zone</i></span><button class="ib">${svg('search')}</button><button class="ib">${svg('sliders')}</button>`}
+function home(){topbar(0);
+ $('#toc').innerHTML=[['Renal colic','p53–54',1],['Dengue fever','p31–32'],['Asthma Zone flow','Memo, Nov 2025'],['Admission to MAU','Oct 2022'],['IV antibiotics, no bed','Memo, 30 Jun 2026'],['Orthopaedic referral','Lampiran 1']].map(([t,p,rc])=>`<li><button ${rc?'data-rc':`data-toast="${t}"`}><b>${t}</b><i></i><span>${p}</span><span class="go">${svg('go')}</span></button></li>`).join('');
+ zone()}
+function zone(){$('#zone').innerHTML='<span class="zl"></span><span class="zp"></span>'+ZONE.map((z,i)=>`<button class="zs${z.you?' you':''}${z.maybe?' maybe':''}${i===zsel?' sel':''}" data-z="${i}"><span class="n">${i+1}</span><b>${z.t}</b><small>${z.s}</small></button>`).join('');
+ const z=ZONE[zsel];$('#zd').innerHTML=z?`<div class="zd"><h3>${zsel+1}. ${z.t}</h3><ul>${z.items.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><p>Rule here: ${esc(z.r)}</p></div>`:''}
+function plate(){const vis=new Set(st.trail.map(t=>t.n)),on=new Set(),r=reach(st.cur);
+ st.trail.forEach((t,i)=>on.add(t.n+'>'+(st.trail[i+1]?st.trail[i+1].n:st.cur)));
+ const mid=(a,b)=>{const [x1,y1]=LAY[a],[x2,y2]=LAY[b];if(x1===x2)return `M${x1} ${y1+16}V${y2-16}`;if(y1===y2)return `M${x1+80} ${y1}H${x2-70}`;return `M${x1+(x2>x1?40:-40)} ${y1+16}V${(y1+y2)/2}H${x2}V${y2-16}`};
+ const edges=EDGES.map(([a,b,l])=>{const [x1,y1]=LAY[a],[x2,y2]=LAY[b];return `<path class="ed${on.has(a+'>'+b)?' on':''}" d="${mid(a,b)}"/>${l?`<text class="el" x="${(x1+x2)/2+(x1===x2?8:0)}" y="${(y1+y2)/2+(x1===x2?4:-4)}">${l}</text>`:''}`}).join('');
+ const nodes=Object.entries(LAY).map(([k,[x,y,w,t]])=>{const n=RC.nodes[k],end=n.end,cls=['nd',k===st.cur?'cur':vis.has(k)?'vis':'',end?'end':'',!r.has(k)&&!vis.has(k)&&k!==st.cur?'gone':''].join(' ');const st2=end?`style="--c:${BC[end][0]};--t:${BC[end][1]}"`:'';return `<g class="${cls}" ${st2} data-node="${k}"><rect x="${x-w/2}" y="${y-16}" width="${w}" height="32" rx="${end?4:8}"/><text x="${x}" y="${y+4}" text-anchor="middle">${t}</text></g>`}).join('');
+ return `<div class="flow"><h4>The whole pathway <small>tap any box</small></h4><svg viewBox="0 0 340 412" role="img" aria-label="Renal colic pathway">${edges}${nodes}</svg></div>`}
+function run(){const n=RC.nodes[st.cur];let body;
+ if(n.end){const [c,t]=BC[n.end];body=`<article class="res" style="--c:${c};--t:${t}"><div class="res-h"><p>${KIND[n.end]}</p><h2>${esc(n.title)}</h2></div>${n.items.length?`<ul>${n.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`:''}<div class="res-f"><button data-restart>${svg('restart')}Start again</button><button data-toast="Copied">${svg('copy')}Copy outcome</button></div></article>`}
+ else if(n.step){body=`<div class="q"><h2>${esc(n.step)}</h2>${n.items.length?`<ul class="it">${n.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`:''}<div class="opts"><button class="opt sugg" data-next><span>Done, continue</span><span class="go">${svg('go')}</span></button></div></div>`}
+ else{body=`<div class="q"><h2>${esc(n.q)}</h2>${n.check?`<p class="hint">Tick any that are present.</p><ul class="checks">${n.items.map(t=>`<li><label><input type="checkbox"><span>${esc(t)}</span></label></li>`).join('')}</ul>`:''}<div class="opts">${n.opts.map(([l],k)=>`<button class="opt" data-go="${k}"><span>${esc(l)}</span><span class="go">${svg('go')}</span></button>`).join('')}</div></div>`}
+ $('#run').innerHTML=`<div class="pad"><h1 class="rt">Renal colic</h1><div class="rmeta"><span>EBOOK p53–54</span><span>Abdomen</span><span>${st.trail.length} answer${st.trail.length===1?'':'s'}</span></div>${plate()}${body}<div style="height:22px"></div></div>`;
+ if(n.check){const bx=[...document.querySelectorAll('#run .checks input')],bs=[...document.querySelectorAll('#run .opt')];bx.forEach(b=>b.onchange=()=>{const any=bx.some(x=>x.checked);bs.forEach((x,i)=>x.classList.toggle('sugg',any&&i===0))})}}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo(0,0);topbar(id==='run')}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-node]');if(g){const k=g.dataset.node;st={cur:k,trail:pathTo(k)};run();return}
+ const b=e.target.closest('button,a');if(!b)return;
+ if(b.dataset.toast!==undefined){e.preventDefault();toast(b.dataset.toast);return}
+ if(b.hasAttribute('data-rc')){st={cur:RC.start,trail:[]};run();show('run');return}
+ if(b.hasAttribute('data-home')){show('home');return}
+ if(b.dataset.z!==undefined){zsel=zsel===+b.dataset.z?-1:+b.dataset.z;zone();return}
+ const n=RC.nodes[st.cur];
+ if(b.dataset.go!==undefined){const [l,to]=n.opts[+b.dataset.go];st.trail.push({n:st.cur,l});st.cur=to;run();return}
+ if(b.hasAttribute('data-next')){st.trail.push({n:st.cur,l:'Done'});st.cur=n.next;run();return}
+ if(b.hasAttribute('data-restart')){st={cur:RC.start,trail:[]};run();return}});
+home();fill(document);
+</script>
+</body></html>

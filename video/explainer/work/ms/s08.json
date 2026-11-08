@@ -1,0 +1,296 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,080"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 80
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,080",
+				"to": "00:00:00,320"
+			},
+			"offsets": {
+				"from": 80,
+				"to": 320
+			},
+			"text": " Sebelum"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,320",
+				"to": "00:00:00,830"
+			},
+			"offsets": {
+				"from": 320,
+				"to": 830
+			},
+			"text": " discharge,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,830",
+				"to": "00:00:01,050"
+			},
+			"offsets": {
+				"from": 830,
+				"to": 1050
+			},
+			"text": " nilai"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,050",
+				"to": "00:00:01,320"
+			},
+			"offsets": {
+				"from": 1050,
+				"to": 1320
+			},
+			"text": " semula"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,320",
+				"to": "00:00:01,700"
+			},
+			"offsets": {
+				"from": 1320,
+				"to": 1700
+			},
+			"text": " pesakit"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,700",
+				"to": "00:00:01,850"
+			},
+			"offsets": {
+				"from": 1700,
+				"to": 1850
+			},
+			"text": " dan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,850",
+				"to": "00:00:02,120"
+			},
+			"offsets": {
+				"from": 1850,
+				"to": 2120
+			},
+			"text": " semak"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,120",
+				"to": "00:00:02,440"
+			},
+			"offsets": {
+				"from": 2120,
+				"to": 2440
+			},
+			"text": " setiap"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,440",
+				"to": "00:00:02,940"
+			},
+			"offsets": {
+				"from": 2440,
+				"to": 2940
+			},
+			"text": " keputusan."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,560",
+				"to": "00:00:03,680"
+			},
+			"offsets": {
+				"from": 3560,
+				"to": 3680
+			},
+			"text": " Selepas"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,680",
+				"to": "00:00:03,890"
+			},
+			"offsets": {
+				"from": 3680,
+				"to": 3890
+			},
+			"text": " CT"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,890",
+				"to": "00:00:04,520"
+			},
+			"offsets": {
+				"from": 3890,
+				"to": 4520
+			},
+			"text": " otak,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,520",
+				"to": "00:00:05,040"
+			},
+			"offsets": {
+				"from": 4520,
+				"to": 5040
+			},
+			"text": " minta"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,040",
+				"to": "00:00:05,350"
+			},
+			"offsets": {
+				"from": 5040,
+				"to": 5350
+			},
+			"text": " EEP"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,350",
+				"to": "00:00:06,280"
+			},
+			"offsets": {
+				"from": 5350,
+				"to": 6280
+			},
+			"text": " menyemak,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,280",
+				"to": "00:00:07,100"
+			},
+			"offsets": {
+				"from": 6280,
+				"to": 7100
+			},
+			"text": " kemudian"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,100",
+				"to": "00:00:07,330"
+			},
+			"offsets": {
+				"from": 7100,
+				"to": 7330
+			},
+			"text": " buat"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,330",
+				"to": "00:00:07,630"
+			},
+			"offsets": {
+				"from": 7330,
+				"to": 7630
+			},
+			"text": " temu"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,630",
+				"to": "00:00:08,070"
+			},
+			"offsets": {
+				"from": 7630,
+				"to": 8070
+			},
+			"text": " janji"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,070",
+				"to": "00:00:08,380"
+			},
+			"offsets": {
+				"from": 8070,
+				"to": 8380
+			},
+			"text": " EMC"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,380",
+				"to": "00:00:08,660"
+			},
+			"offsets": {
+				"from": 8380,
+				"to": 8660
+			},
+			"text": " atau"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,660",
+				"to": "00:00:08,810"
+			},
+			"offsets": {
+				"from": 8660,
+				"to": 8810
+			},
+			"text": " EM"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,810",
+				"to": "00:00:09,520"
+			},
+			"offsets": {
+				"from": 8810,
+				"to": 9520
+			},
+			"text": " Watch."
+		}
+	]
+}

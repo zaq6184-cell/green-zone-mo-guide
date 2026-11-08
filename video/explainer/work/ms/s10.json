@@ -1,0 +1,142 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,390"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 390
+			},
+			"text": " Pesakit"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,390",
+				"to": "00:00:00,680"
+			},
+			"offsets": {
+				"from": 390,
+				"to": 680
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,680",
+				"to": "00:00:01,180"
+			},
+			"offsets": {
+				"from": 680,
+				"to": 1180
+			},
+			"text": " tepat,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,180",
+				"to": "00:00:01,270"
+			},
+			"offsets": {
+				"from": 1180,
+				"to": 1270
+			},
+			"text": " zone"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,270",
+				"to": "00:00:01,520"
+			},
+			"offsets": {
+				"from": 1270,
+				"to": 1520
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,520",
+				"to": "00:00:02,220"
+			},
+			"offsets": {
+				"from": 1520,
+				"to": 2220
+			},
+			"text": " tepat,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,220",
+				"to": "00:00:02,240"
+			},
+			"offsets": {
+				"from": 2220,
+				"to": 2240
+			},
+			"text": " masa"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,240",
+				"to": "00:00:02,440"
+			},
+			"offsets": {
+				"from": 2240,
+				"to": 2440
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,440",
+				"to": "00:00:02,880"
+			},
+			"offsets": {
+				"from": 2440,
+				"to": 2880
+			},
+			"text": " tepat."
+		}
+	]
+}

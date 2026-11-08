@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Green Zone MO Guide · Redesign options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#E8EDEA;--ink:#0F1A15;--muted:#55645C;--line:#CFD9D3;--green:#0A5A3B}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.5 "Atkinson Hyperlegible Next",system-ui,sans-serif}
+header{padding:18px 20px 8px;max-width:1300px;margin:0 auto}
+h1{margin:0;font-size:24px;line-height:1.15;font-weight:800;letter-spacing:-.01em}
+header p{margin:6px 0 0;color:var(--muted);max-width:80ch}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;max-width:1300px;margin:10px auto 0;padding:0 20px}
+.seg{display:inline-flex;gap:4px;padding:4px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.seg button{border:0;border-radius:9px;padding:8px 14px;background:none;font:800 14px "Atkinson Hyperlegible Next";color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+main{max-width:1300px;margin:0 auto;padding:14px 20px 40px}
+.one{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:820px){.one{grid-template-columns:minmax(0,1fr)}}
+.frame{width:calc(390px*var(--s) + 20px);height:calc(844px*var(--s) + 20px);border-radius:calc(48px*var(--s) + 10px);background:#0E1512;padding:10px;box-shadow:0 30px 60px -28px rgba(0,0,0,.6);flex:none;margin:0 auto}
+.frame .clip{width:calc(390px*var(--s));height:calc(844px*var(--s));border-radius:calc(40px*var(--s));overflow:hidden;background:#fff}
+.frame iframe{width:390px;height:844px;border:0;transform:scale(var(--s));transform-origin:0 0;display:block}
+.info{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.info .k{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--bg);font-weight:800;font-size:13px}
+.info h2{margin:10px 0 6px;font-size:28px;line-height:1.1;letter-spacing:-.015em}
+.info .th{margin:0 0 14px;font-size:16.5px;font-weight:600}
+.info dl{margin:0;display:grid;grid-template-columns:150px minmax(0,1fr);gap:10px 16px}
+@media (max-width:560px){.info dl{grid-template-columns:minmax(0,1fr)}}
+.info dt{font-weight:800;color:var(--muted)}
+.info dd{margin:0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chips i{width:26px;height:26px;border-radius:7px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+.try{margin-top:16px;padding:12px 14px;border-radius:12px;background:#F2F6F3;font-size:14px}
+.try b{display:block;margin-bottom:4px}
+.open{display:inline-block;margin-top:14px;font-weight:800;color:var(--green)}
+.three{display:flex;flex-wrap:wrap;gap:22px;justify-content:center}
+.three figure{margin:0;display:grid;gap:10px;justify-items:center}
+.three figcaption{text-align:center}
+.three figcaption b{display:block;font-size:17px}
+.three figcaption span{color:var(--muted);font-size:13.5px}
+[hidden]{display:none!important}
+</style></head><body>
+<header><h1>Green Zone MO Guide: three redesign options</h1>
+<p>All three are bold and premium. Each keeps version 7's familiar layout, with search first for on-shift use. Each phone is live: tap <b>Renal colic</b>, a <b>zone stop</b> and the answers to reach an outcome. Buttons that only show a short note are not built in these prototypes.</p></header>
+<div class="bar"><div class="seg" id="opt" role="group" aria-label="Option"><button data-o="a" aria-pressed="true">A · Sign System</button><button data-o="b" aria-pressed="false">B · Clinical Atlas</button><button data-o="c" aria-pressed="false">C · Bento</button></div>
+<div class="seg" id="mode" role="group" aria-label="View"><button data-m="one" aria-pressed="true">One at a time</button><button data-m="three" aria-pressed="false">Side by side</button></div></div>
+<main>
+ <section class="one" id="one"><div class="frame" id="f1"><div class="clip"><iframe id="ifr" src="a-sign.html" title="Option prototype"></iframe></div></div><div class="info" id="info"></div></section>
+ <section class="three" id="three" hidden>
+  <figure><div class="frame f3"><div class="clip"><iframe src="a-sign.html" title="Option A"></iframe></div></div><figcaption><b>A · Sign System</b><span>Committed sign green, wayfinding</span></figcaption></figure>
+  <figure><div class="frame f3"><div class="clip"><iframe src="b-atlas.html" title="Option B"></iframe></div></div><figcaption><b>B · Clinical Atlas</b><span>Editorial black and white, big diagrams</span></figcaption></figure>
+  <figure><div class="frame f3"><div class="clip"><iframe src="c-bento.html" title="Option C"></iframe></div></div><figcaption><b>C · Bento</b><span>Modular tiles, soft depth</span></figcaption></figure>
+ </section>
+</main>
+<script>
+const O={
+ a:{src:'a-sign.html',k:'Option A',n:'Sign System',th:'The guide as the Green Zone\'s own sign system: deep sign-green panels, huge expanded type, white pictogram discs and a luminous route line.',
+  bold:'Sign green fills whole regions (top bar, home panel, sidebar on desktop); the name is set huge; outcomes arrive as full-colour sign bands that wipe in.',
+  prem:'One drawn pictogram family, number plates for extensions, precise spacing, Archivo for display and Atkinson Hyperlegible for reading and numbers.',
+  inter:'The zone line draws itself and each stop opens its rules; the pathway shows where it can still end, a route of your answers, and a suggested answer from the ticks.',
+  risk:'The most colour on the screen of the three; green is both the zone and the discharge colour, so labels and pictograms must carry the difference.',
+  pal:['#0A5A3B','#063F29','#45E08D','#F1F5F2','#C42A20','#F0AE1C','#5A44C4'],type:'Archivo (display), Atkinson Hyperlegible Next and Mono'},
+ b:{src:'b-atlas.html',k:'Option B',n:'Clinical Atlas',th:'The guide as a bold medical atlas: white paper, black ink rules, very large condensed headlines and diagram plates; colour only where it means something.',
+  bold:'Huge condensed type, thick black rules and full-colour outcome blocks; the whole pathway is drawn as a flowchart plate above every question.',
+  prem:'Editorial restraint: white space, a contents-page list with page numbers, an outcome key like a map legend, big mono numerals.',
+  inter:'Tap any box in the pathway plate to jump there; the route you took lights green and outcomes you can no longer reach fade. Zone stops open in place.',
+  risk:'Least colour, so it reads more like a reference book than an app; the black-and-white look depends on very careful type to stay premium.',
+  pal:['#FFFFFF','#0F1418','#0B7A4B','#F3F4F1','#C42A20','#F0AE1C','#5A44C4'],type:'Bricolage Grotesque (display), Atkinson Hyperlegible Next and Mono'},
+ c:{src:'c-bento.html',k:'Option C',n:'Bento',th:'The guide as a modular dashboard: rounded tiles of different sizes, each a live mini-infographic, with soft depth and a floating tab bar.',
+  bold:'Large colour tiles (sign green zone map, red Code Blue, ink Code Stroke, mint discharge check) and big numerals at a glance.',
+  prem:'Soft layered shadows, generous radii, a floating glass tab bar, a card-stack pathway with cards dealt in and outcomes that flip in.',
+  inter:'Every tile is tappable; the zone tile expands in place; the pathway deals one card per question with a step bar and the outcomes still possible.',
+  risk:'The most familiar "modern app" look; tiles can crowd the home on small phones, so the order must stay strictly on-shift first.',
+  pal:['#EBF0ED','#0B5E3E','#4BE393','#101B16','#C42A20','#D6F0E1','#5A44C4'],type:'Figtree (display), Atkinson Hyperlegible Next and Mono'}};
+const $=s=>document.querySelector(s);
+function info(o){const x=O[o];$('#info').innerHTML=`<span class="k">${x.k}</span><h2>${x.n}</h2><p class="th">${x.th}</p><dl><dt>Bold</dt><dd>${x.bold}</dd><dt>Premium</dt><dd>${x.prem}</dd><dt>Interactive</dt><dd>${x.inter}</dd><dt>Watch out</dt><dd>${x.risk}</dd><dt>Palette</dt><dd><span class="chips">${x.pal.map(c=>`<i style="background:${c}"></i>`).join('')}</span></dd><dt>Type</dt><dd>${x.type}</dd></dl><div class="try"><b>Try it in the phone</b>Tap Renal colic, answer Yes, Done, tick a sign or choose None, and reach an outcome. Tap a zone stop to see its rules.</div><a class="open" href="${x.src}" target="_blank">Open ${x.k} full size</a>`;$('#ifr').src=x.src}
+function fit(){const one=!$('#one').hidden;const h=innerHeight-170;const s1=Math.max(.5,Math.min(1,h/864));$('#f1').style.setProperty('--s',s1.toFixed(3));const w=Math.min(1300,innerWidth)-80;const s3=Math.max(.42,Math.min(.8,(w/3-34)/390,(innerHeight-200)/864));document.querySelectorAll('.f3').forEach(f=>f.style.setProperty('--s',s3.toFixed(3)))}
+$('#opt').addEventListener('click',e=>{const b=e.target.closest('[data-o]');if(!b)return;document.querySelectorAll('#opt button').forEach(x=>x.setAttribute('aria-pressed',x===b));info(b.dataset.o);if($('#one').hidden){$('#one').hidden=false;$('#three').hidden=true;document.querySelectorAll('#mode button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.m==='one'));fit()}});
+$('#mode').addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(!b)return;document.querySelectorAll('#mode button').forEach(x=>x.setAttribute('aria-pressed',x===b));const three=b.dataset.m==='three';$('#one').hidden=three;$('#three').hidden=!three;fit()});
+addEventListener('resize',fit);info('a');fit();
+</script>
+</body></html>

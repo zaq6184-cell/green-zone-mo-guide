@@ -1,0 +1,285 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,290"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 290
+			},
+			"text": " Before"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,290",
+				"to": "00:00:00,840"
+			},
+			"offsets": {
+				"from": 290,
+				"to": 840
+			},
+			"text": " discharge,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,840",
+				"to": "00:00:01,340"
+			},
+			"offsets": {
+				"from": 840,
+				"to": 1340
+			},
+			"text": " reassess"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,340",
+				"to": "00:00:01,440"
+			},
+			"offsets": {
+				"from": 1340,
+				"to": 1440
+			},
+			"text": " and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,440",
+				"to": "00:00:01,770"
+			},
+			"offsets": {
+				"from": 1440,
+				"to": 1770
+			},
+			"text": " review"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,770",
+				"to": "00:00:02,040"
+			},
+			"offsets": {
+				"from": 1770,
+				"to": 2040
+			},
+			"text": " every"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,040",
+				"to": "00:00:02,580"
+			},
+			"offsets": {
+				"from": 2040,
+				"to": 2580
+			},
+			"text": " result."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,160",
+				"to": "00:00:03,160"
+			},
+			"offsets": {
+				"from": 3160,
+				"to": 3160
+			},
+			"text": " After"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,160",
+				"to": "00:00:03,210"
+			},
+			"offsets": {
+				"from": 3160,
+				"to": 3210
+			},
+			"text": " a"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,210",
+				"to": "00:00:03,360"
+			},
+			"offsets": {
+				"from": 3210,
+				"to": 3360
+			},
+			"text": " CT"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,360",
+				"to": "00:00:04,040"
+			},
+			"offsets": {
+				"from": 3360,
+				"to": 4040
+			},
+			"text": " brain,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,040",
+				"to": "00:00:04,300"
+			},
+			"offsets": {
+				"from": 4040,
+				"to": 4300
+			},
+			"text": " ask"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,300",
+				"to": "00:00:04,590"
+			},
+			"offsets": {
+				"from": 4300,
+				"to": 4590
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,590",
+				"to": "00:00:04,780"
+			},
+			"offsets": {
+				"from": 4590,
+				"to": 4780
+			},
+			"text": " EP"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,780",
+				"to": "00:00:05,000"
+			},
+			"offsets": {
+				"from": 4780,
+				"to": 5000
+			},
+			"text": " to"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,000",
+				"to": "00:00:05,800"
+			},
+			"offsets": {
+				"from": 5000,
+				"to": 5800
+			},
+			"text": " review,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,800",
+				"to": "00:00:06,320"
+			},
+			"offsets": {
+				"from": 5800,
+				"to": 6320
+			},
+			"text": " then"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,320",
+				"to": "00:00:06,780"
+			},
+			"offsets": {
+				"from": 6320,
+				"to": 6780
+			},
+			"text": " book"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,780",
+				"to": "00:00:07,240"
+			},
+			"offsets": {
+				"from": 6780,
+				"to": 7240
+			},
+			"text": " EMAC"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,240",
+				"to": "00:00:07,630"
+			},
+			"offsets": {
+				"from": 7240,
+				"to": 7630
+			},
+			"text": " or"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,630",
+				"to": "00:00:07,720"
+			},
+			"offsets": {
+				"from": 7630,
+				"to": 7720
+			},
+			"text": " EM"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,720",
+				"to": "00:00:08,700"
+			},
+			"offsets": {
+				"from": 7720,
+				"to": 8700
+			},
+			"text": " Watch."
+		}
+	]
+}

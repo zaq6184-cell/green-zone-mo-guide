@@ -1,0 +1,241 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,040"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 40
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,040",
+				"to": "00:00:00,370"
+			},
+			"offsets": {
+				"from": 40,
+				"to": 370
+			},
+			"text": " Hanya"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,370",
+				"to": "00:00:00,590"
+			},
+			"offsets": {
+				"from": 370,
+				"to": 590
+			},
+			"text": " IPI"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,590",
+				"to": "00:00:00,930"
+			},
+			"offsets": {
+				"from": 590,
+				"to": 930
+			},
+			"text": " boleh"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,930",
+				"to": "00:00:01,710"
+			},
+			"offsets": {
+				"from": 930,
+				"to": 1710
+			},
+			"text": " membenarkan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,710",
+				"to": "00:00:02,060"
+			},
+			"offsets": {
+				"from": 1710,
+				"to": 2060
+			},
+			"text": " turun"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,060",
+				"to": "00:00:02,780"
+			},
+			"offsets": {
+				"from": 2060,
+				"to": 2780
+			},
+			"text": " triash."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,520",
+				"to": "00:00:03,560"
+			},
+			"offsets": {
+				"from": 3520,
+				"to": 3560
+			},
+			"text": " Sebelum"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,560",
+				"to": "00:00:03,880"
+			},
+			"offsets": {
+				"from": 3560,
+				"to": 3880
+			},
+			"text": " turun"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,880",
+				"to": "00:00:04,500"
+			},
+			"offsets": {
+				"from": 3880,
+				"to": 4500
+			},
+			"text": " triash,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,500",
+				"to": "00:00:05,060"
+			},
+			"offsets": {
+				"from": 4500,
+				"to": 5060
+			},
+			"text": " periksa"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,060",
+				"to": "00:00:05,660"
+			},
+			"offsets": {
+				"from": 5060,
+				"to": 5660
+			},
+			"text": " pesakit"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,660",
+				"to": "00:00:06,100"
+			},
+			"offsets": {
+				"from": 5660,
+				"to": 6100
+			},
+			"text": " dengan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,100",
+				"to": "00:00:06,600"
+			},
+			"offsets": {
+				"from": 6100,
+				"to": 6600
+			},
+			"text": " teliti"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,600",
+				"to": "00:00:07,070"
+			},
+			"offsets": {
+				"from": 6600,
+				"to": 7070
+			},
+			"text": " kemudian"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,070",
+				"to": "00:00:07,610"
+			},
+			"offsets": {
+				"from": 7070,
+				"to": 7610
+			},
+			"text": " catatkannya"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,610",
+				"to": "00:00:07,860"
+			},
+			"offsets": {
+				"from": 7610,
+				"to": 7860
+			},
+			"text": " dalam"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:07,860",
+				"to": "00:00:08,130"
+			},
+			"offsets": {
+				"from": 7860,
+				"to": 8130
+			},
+			"text": " borang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:08,130",
+				"to": "00:00:08,700"
+			},
+			"offsets": {
+				"from": 8130,
+				"to": 8700
+			},
+			"text": " triash."
+		}
+	]
+}

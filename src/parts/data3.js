@@ -17,11 +17,12 @@
     'Do not repeat the ECG, dressing or vital signs later unless they were missed',
     'An ECG you ask for in the Green Zone is done in the Procedure Room: do not send the patient back to secondary triage'],
     gap:'Sources: HKL ED one-way procedure flow (Green Zone); KKM MTS announcement, Jul 2026.'};
-  G.nodes.down = {end:'neutral', title:'Down-triage is for the MO only', items:[
-    'Down-triage is not allowed unless the MO has examined the patient first',
-    'The MO documents the down-triage on the triage form',
-    'The PPP checks that it was documented'],
-    gap:'Source: down-triage memo, 4 Oct 2022.'};
+  G.nodes.down = {end:'neutral', title:'Down-triage: only the EP can allow it', items:[
+    'Only the EP can allow a down-triage',
+    'If you, the MO, need to down-triage, examine the patient properly first: it is not allowed until the MO has examined the patient',
+    'Then document the down-triage on the patient\'s triage form',
+    'The PPP makes sure the MO who down-triaged has documented it'],
+    gap:'Sources: memo HKL/JK/98/188/3(22)22, 4 Oct 2022 (examine first, document on the triage form, the PPP makes sure). The EP\'s permission was added on 8 Nov 2026 at the guide owner\'s instruction; the 2022 memo does not mention it, so its written source is still to be confirmed.'};
   G.nodes.ivab = {end:'neutral', title:'IV antibiotics when no bed is free', items:[
     'Look for a bed first in Yellow Obs, ISO or YZ Ext, and pass the patient over to the zone in-charge',
     'If none is free, the patient can have IV antibiotics on a chair in the CCA, with one of the four allowed antibiotics only: Augmentin, cefuroxime, ceftriaxone or Unasyn',
@@ -39,7 +40,7 @@
     'Gout is managed at primary care: refer to the nearest Klinik Kesihatan'],
     links:[['#gz-rules--gout','Gout referrals'],['#outpatient-referral','Clinic referrals from the ED']],
     gap:'Sources: KKM MTS announcement, Jul 2026; MAU FAST referral criteria. The HKL procedure for redirecting patients is still to be confirmed.'};
-  G.refs.push('HKL ED one-way procedure flow, Green Zone (triage course folder)', 'Down-triage memo, 4 Oct 2022', 'IV antibiotic memo: Green Zone patients needing IV antibiotics with no bed available, 30 Jun 2026', 'KKM MTS announcement, Jul 2026');
+  G.refs.push('HKL ED one-way procedure flow, Green Zone (triage course folder)', 'Memo HKL/JK/98/188/3(22)22: Peringatan tatacara triage di Jabatan Kecemasan dan Trauma, 4 Oct 2022', 'IV antibiotic memo: Green Zone patients needing IV antibiotics with no bed available, 30 Jun 2026', 'KKM MTS announcement, Jul 2026');
 
   const R = P['referral-rules'];
   R.nodes.ortho = {check:'any', q:'Any of these? Then refer to the orthopaedic team on call.', hint:'Lampiran 1 of the orthopaedic referral memo (17 May 2024). Unsure about the X-ray? Ask the EP on duty first.', items:[

@@ -1,0 +1,230 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "ms",
+		"translate": false
+	},
+	"result": {
+		"language": "ms"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,040"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 40
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,040",
+				"to": "00:00:00,370"
+			},
+			"offsets": {
+				"from": 40,
+				"to": 370
+			},
+			"text": " Baru"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,370",
+				"to": "00:00:00,450"
+			},
+			"offsets": {
+				"from": 370,
+				"to": 450
+			},
+			"text": " di"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,450",
+				"to": "00:00:00,660"
+			},
+			"offsets": {
+				"from": 450,
+				"to": 660
+			},
+			"text": " Zon"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,660",
+				"to": "00:00:01,240"
+			},
+			"offsets": {
+				"from": 660,
+				"to": 1240
+			},
+			"text": " Hijau,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,240",
+				"to": "00:00:01,810"
+			},
+			"offsets": {
+				"from": 1240,
+				"to": 1810
+			},
+			"text": " inilah"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,810",
+				"to": "00:00:02,240"
+			},
+			"offsets": {
+				"from": 1810,
+				"to": 2240
+			},
+			"text": " cara"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,240",
+				"to": "00:00:02,800"
+			},
+			"offsets": {
+				"from": 2240,
+				"to": 2800
+			},
+			"text": " pesakit"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,800",
+				"to": "00:00:03,620"
+			},
+			"offsets": {
+				"from": 2800,
+				"to": 3620
+			},
+			"text": " bergerak"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,620",
+				"to": "00:00:04,140"
+			},
+			"offsets": {
+				"from": 3620,
+				"to": 4140
+			},
+			"text": " melaluinya"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,140",
+				"to": "00:00:04,500"
+			},
+			"offsets": {
+				"from": 4140,
+				"to": 4500
+			},
+			"text": " dan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,500",
+				"to": "00:00:04,640"
+			},
+			"offsets": {
+				"from": 4500,
+				"to": 4640
+			},
+			"text": " apa"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,640",
+				"to": "00:00:04,740"
+			},
+			"offsets": {
+				"from": 4640,
+				"to": 4740
+			},
+			"text": " yang"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,740",
+				"to": "00:00:04,980"
+			},
+			"offsets": {
+				"from": 4740,
+				"to": 4980
+			},
+			"text": " anda"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,980",
+				"to": "00:00:05,460"
+			},
+			"offsets": {
+				"from": 4980,
+				"to": 5460
+			},
+			"text": " putuskan"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,460",
+				"to": "00:00:05,700"
+			},
+			"offsets": {
+				"from": 5460,
+				"to": 5700
+			},
+			"text": " pada"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,700",
+				"to": "00:00:06,140"
+			},
+			"offsets": {
+				"from": 5700,
+				"to": 6140
+			},
+			"text": " setiap"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,140",
+				"to": "00:00:06,680"
+			},
+			"offsets": {
+				"from": 6140,
+				"to": 6680
+			},
+			"text": " langkah."
+		}
+	]
+}
