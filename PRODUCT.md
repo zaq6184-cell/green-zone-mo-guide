@@ -53,7 +53,7 @@ The only guide built on the department's own approved ebook, *The Clinical Pathw
 
 - The ebook PDF (in the claude.ai project files, not in this folder).
 - Department documents from the HKL ED MO Drive and the triage course folder, listed in `DRIVE-RUN-THROUGH.md`.
-- Media: six Flow Studio illustrations (`illustrations/`), six 8-second Flow clips (`flow-video/`, smaller copies in `app/clips/`), journey narration (`app/audio/`), the 65-second explainer (`video/`), the two A3 poster sheets (`poster/`).
+- Media: six Flow Studio illustrations (`illustrations/`), six 8-second Flow clips (`flow-video/`, smaller copies in `app/clips/`), journey narration (`app/audio/`), seventeen Flow Studio tile stills and 7 to 8-second tile loops (`illustrations/tiles/`, `flow-video/tiles/`, smaller copies in `app/tiles/`), the explainer films in English and Bahasa Melayu, day and night (`video/`), the two A3 poster sheets (`poster/`).
 - Research on point-of-care lookup and teaching video: `RESEARCH.md` (Ely, BMJ 1999; Brame, 2016).
 - No usage data, testimonials or outcome measures exist. None may be invented.
 

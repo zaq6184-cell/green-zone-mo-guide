@@ -67,7 +67,7 @@ const V8 = [
   ['First-shift intro','Four quick screens for a new MO or HO.',[['#intro','Open the intro']]],
   ['A new tour','The narrated explainer is rebuilt in the new look and now covers the version 7 rules: no repeat tests after secondary triage, down-triage only with the EP\'s permission, IV antibiotics on a CCA chair, and when the EP may decide the admission. It is also in Bahasa Melayu: switch the narration under the video.',[['#tour','Watch the tour']]],
   ['The wall poster, redrawn','Both A3 sheets in the new look. Sheet 1 adds the four version 7 rules with their sources, and marks the three numbers still to confirm. Sheet 2 shows the Asthma Zone flow from the November 2025 memo.',[['#poster','Wall poster']]],
-  ['Moving tiles','The topic tiles, Code Blue and Code Stroke show a glass sculpture of their body system, made in Flow Studio, moving in a quiet 8-second loop: the heart beats, the lungs breathe. A loop plays only while its tile is on screen. Settings, Moving tiles turns them off.',[['#pathways','Pathways'],['#home','Home']]],
+  ['Moving tiles','The topic tiles, Code Blue and Code Stroke show a glass sculpture of their body system, made in Flow Studio, moving in a quiet 8-second loop: the heart beats, the lungs breathe. The other home tiles move too: a book, a shield, a doorway, a gauge, a compass and a pearl. So do the Pathways section bars and the Shift tools headers. A loop plays only while its tile is on screen, and a phone plays at most six at once. Settings, Moving tiles turns them off.',[['#home','Home'],['#pathways','Pathways'],['#tools','Shift tools']]],
   ['Day and night','A switch on the home screen turns the night colours on and off. In night colours the tour plays a night version of the film, in English and in Bahasa Melayu, and the poster page shows night versions of both sheets. The sheets on the wall keep the day colours.',[['#home','Home'],['#tour','Watch the tour']]]
 ];
 
@@ -637,18 +637,27 @@ function zoneMap(anim){
   x.hidden = !s;
   x.innerHTML = s ? `<h3>${zSel + 1}. ${esc(s.title)}</h3><ul>${s.items.slice(0, 4).map(i => `<li>${esc(i)}</li>`).join('')}</ul><div class="links">${[...(s.note ? [[s.note.href, s.note.k]] : []), ...s.links].slice(0, 4).map(([h, t]) => `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}<a class="pill" href="#journey-${zSel + 1}">Watch this stop${svg('chev')}</a></div>` : '';
 }
-/* Tile media (8 Nov 2026): Flow Studio stills of each topic in jewel glass (tiles/<key>.webp) and their 7 to 8-second loops
-   (tiles/<key>.mp4). A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on
-   and motion is not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_STILLS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke']);
-const TILE_CLIPS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke']);
-const tileMedia = k => TILE_STILLS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
+/* Tile media (8 Nov 2026): Flow Studio jewel-glass stills (tiles/<key>.webp) and their 7 to 8-second loops (tiles/<key>.mp4)
+   for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
+   both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
+   not reduced, and it pauses offscreen or when the page is hidden. */
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip']);
+const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
+/* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
+   The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
+const TILE_MAX = matchMedia('(max-width: 760px)').matches ? 6 : 12;
 let tileIO = null;
+const tileSeen = new Map();
 function tileClips(){
   if (tileIO) tileIO.disconnect();
-  if (prefs.tiles !== 'on' || REDUCED || !('IntersectionObserver' in window)){ $$('.tm video').forEach(v => v.pause()); return; }
-  tileIO = tileIO || new IntersectionObserver(es => es.forEach(e => playTile(e.target, e.isIntersecting)), {threshold:.4});
-  $$('.tm').forEach(el => { if (TILE_CLIPS.has(el.dataset.tm)) tileIO.observe(el); });
+  tileSeen.clear();
+  if (prefs.tiles !== 'on' || REDUCED || !('IntersectionObserver' in window)){ $$('.tm video').forEach(v => v.pause()); $$('.tm[data-play]').forEach(el => el.removeAttribute('data-play')); return; }
+  tileIO = tileIO || new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting && e.intersectionRatio >= .35) tileSeen.set(e.target, e.intersectionRatio); else tileSeen.delete(e.target); });
+    const top = new Set([...tileSeen].sort((a, b) => b[1] - a[1]).slice(0, TILE_MAX).map(([el]) => el));
+    $$('.tm').forEach(el => { el.toggleAttribute('data-play', top.has(el)); if (top.has(el) || el.querySelector('video')) playTile(el, top.has(el)); });
+  }, {threshold:[0, .35, .6, .85, 1]});
+  $$('.tm').forEach(el => { if (TILE_KEYS.has(el.dataset.tm)) tileIO.observe(el); });
 }
 function playTile(el, show){
   let v = el.querySelector('video');
@@ -677,17 +686,17 @@ function numTile(i){
 const DC_SHORT = ['Reassessed, results reviewed', 'Safety-net advice', 'Allergy asked', 'Last vital signs', 'Walks independently', 'Advice and follow-up'];
 function statTiles(){
   const cats = CATS.filter(c => c.ids.length && !['flow', 'prot'].includes(c.k));
-  $('#t-paths').innerHTML = `<div class="tile-h"><h3><a href="#pathways">Pathways</a></h3><span class="tag">${Object.keys(P).length}</span></div><ul class="gl">${cats.map(c => `<li><button type="button" data-gocat="${c.k}"><i class="jd ${c.j}" aria-hidden="true"></i><span>${esc(c.s)}</span><b>${c.ids.length}</b></button></li>`).join('')}</ul>`;
+  withTiles($('#t-paths'), `${tileMedia('paths')}<div class="tile-h"><h3><a href="#pathways">Pathways</a></h3><span class="tag">${Object.keys(P).length}</span></div><ul class="gl">${cats.map(c => `<li><button type="button" data-gocat="${c.k}"><i class="jd ${c.j}" aria-hidden="true"></i><span>${esc(c.s)}</span><b>${c.ids.length}</b></button></li>`).join('')}</ul>`);
   const top = ['gz-rules', 'referral-rules', 'asthma-zone', 'mau-admission'].filter(id => P[id]);
-  $('#t-rules').innerHTML = `<div class="tile-h"><h3><a href="#rules">Rules and protocols</a></h3><span class="tag">${FLOW_IDS.length + PROT_IDS.length}</span></div><ul class="gl">${top.map(id => `<li><a href="#${id}"><span>${esc(P[id].title)}</span>${svg('chev')}</a></li>`).join('')}</ul>`;
-  $('#t-dc').innerHTML = `<div class="tile-h"><h3><a href="#tools">Discharge check</a></h3><span class="tag">${DC_STOP.length} stop signs</span></div><ul class="dcl">${DC_SHORT.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
-  $('#t-calc').innerHTML = `<div class="tile-h"><h3><a href="#calc">Quick sums</a></h3>${svg('calc')}</div><ul class="thr"><li><span>Shock index</span><b>under 1</b></li><li><span>Pulse pressure</span><b>20 to 50</b></li><li><span>Heart rate</span><b>under 90</b></li></ul><p class="sub">Dengue SOP 2.0 discharge criteria. Child doses and adjusted weight too.</p>`;
+  withTiles($('#t-rules'), `${tileMedia('rules')}<div class="tile-h"><h3><a href="#rules">Rules and protocols</a></h3><span class="tag">${FLOW_IDS.length + PROT_IDS.length}</span></div><ul class="gl">${top.map(id => `<li><a href="#${id}"><span>${esc(P[id].title)}</span>${svg('chev')}</a></li>`).join('')}</ul>`);
+  withTiles($('#t-dc'), `${tileMedia('dc')}<div class="tile-h"><h3><a href="#tools">Discharge check</a></h3><span class="tag">${DC_STOP.length} stop signs</span></div><ul class="dcl">${DC_SHORT.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`);
+  withTiles($('#t-calc'), `${tileMedia('calc')}<div class="tile-h"><h3><a href="#calc">Quick sums</a></h3>${svg('calc')}</div><ul class="thr"><li><span>Shock index</span><b>under 1</b></li><li><span>Pulse pressure</span><b>20 to 50</b></li><li><span>Heart rate</span><b>under 90</b></li></ul><p class="sub">Dengue SOP 2.0 discharge criteria. Child doses and adjusted weight too.</p>`);
   introTile();
 }
 function introTile(){
   const done = !!store.get('gz-intro', 0), t = $('#t-intro');
   t.classList.toggle('done', done);
-  t.innerHTML = `<span class="pl">${svg(done ? 'restart' : 'play')}</span><span><h3>${done ? 'First-shift intro' : 'First shift?'}</h3><p>${done ? 'Four quick screens, any time you want them again.' : 'Four quick screens: search, pathways, the zone and the tools.'}</p></span>`;
+  withTiles(t, `${tileMedia('intro')}<span class="pl">${svg(done ? 'restart' : 'play')}</span><span><h3>${done ? 'First-shift intro' : 'First shift?'}</h3><p>${done ? 'Four quick screens, any time you want them again.' : 'Four quick screens: search, pathways, the zone and the tools.'}</p></span>`);
 }
 function renderHome(){
   const d = new Date(), hr = d.getHours();
@@ -737,10 +746,10 @@ function renderLib(){
   withTiles($('#libcats'), `<button type="button" data-cat="all" aria-pressed="${libCat === 'all'}">${tileMedia('all')}${svg('grid')}<span>All topics</span><small>${ids.length}</small></button>` + cats.map(c => `<button type="button" class="${c.j}" data-cat="${c.k}" aria-pressed="${libCat === c.k}">${tileMedia(c.k)}${svg(c.ic)}<span>${esc(c.s)}</span><small>${c.ids.filter(id => ids.includes(id)).length}</small></button>`).join(''));
   const shown = CATS.filter(c => libCat === 'all' || c.k === libCat).map(c => [c, c.ids.filter(id => ids.includes(id)).sort(byTitle)]).filter(([, l]) => l.length);
   let h;
-  if (shown.length) h = shown.map(([c, l]) => `<section class="libsec ${c.j}" aria-label="${esc(c.t)}"><h2 class="lh">${svg(c.ic)}<span>${esc(c.t)}</span><small>${l.length}</small></h2><div class="grid">${l.map(pcard).join('')}</div></section>`).join('');
+  if (shown.length) h = shown.map(([c, l]) => `<section class="libsec ${c.j}" aria-label="${esc(c.t)}"><h2 class="lh">${tileMedia(c.k)}${svg(c.ic)}<span>${esc(c.t)}</span><small>${l.length}</small></h2><div class="grid">${l.map(pcard).join('')}</div></section>`).join('');
   else if (libF === 'saved' && !s.length) h = '<div class="empty">Nothing saved yet. Tap the star on any pathway to keep it here, on the home page and in the menu.</div>';
   else h = `<div class="empty">No pathway matches “${esc(q)}”. The search also covers rules, numbers, doses and the tour. <button type="button" class="sm" data-find>Search everything</button></div>`;
-  $('#libgrid').innerHTML = h;
+  withTiles($('#libgrid'), h);
 }
 
 /* ================= Rules and protocols ================= */
@@ -933,7 +942,7 @@ function selectTab(k, focus){
 /* ================= Shift tools ================= */
 function renderDcheck(){
   const li = (it, i, stop) => `<li><label><input type="checkbox" data-dc="${stop ? 's' : 'a'}${i}"><span>${esc(it[0])}<small>${stop ? svg('chev') : ''}${esc(it[1])}</small></span></label></li>`;
-  $('#dcheck').innerHTML = `<div class="tile t-teal tool-h"><div class="row"><span class="ic">${svg('check')}</span><h2>Discharge safety check</h2></div><p>Tick through it before the patient leaves. It is not saved, and Clear resets it.</p><div class="dc-route" id="dcr" aria-hidden="true"><span class="fill"></span>${DC_ALL.map(() => '<i></i>').join('')}</div></div>
+  $('#dcheck').innerHTML = `<div class="tile t-teal tool-h">${tileMedia('dc')}<div class="row"><span class="ic">${svg('check')}</span><h2>Discharge safety check</h2></div><p>Tick through it before the patient leaves. It is not saved, and Clear resets it.</p><div class="dc-route" id="dcr" aria-hidden="true"><span class="fill"></span>${DC_ALL.map(() => '<i></i>').join('')}</div></div>
     <div class="tool-b"><h3 class="dc-group">Every patient</h3><ul class="dc-list">${DC_ALL.map((it, i) => li(it, i)).join('')}</ul>
     <h3 class="dc-group">${svg('stop')}Tick if it applies: stop and act</h3><ul class="dc-list stop">${DC_STOP.map((it, i) => li(it, i, true)).join('')}</ul>
     <div class="verdict" id="verdict" aria-live="polite"></div>
@@ -1006,9 +1015,9 @@ function renderCalc(){
   const field = ([k, l, unit, choices]) => choices
     ? `<div class="field"><label for="cf-${k}">${l}</label><select id="cf-${k}" data-k="${k}">${choices.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select></div>`
     : `<div class="field"><label for="cf-${k}">${l}${unit ? ' (' + unit + ')' : ''}</label><input id="cf-${k}" data-k="${k}" type="number" inputmode="decimal" min="0" step="any" autocomplete="off"></div>`;
-  box.innerHTML = `<div class="tile t-bronze tool-h"><div class="row"><span class="ic">${svg('calc')}</span><h2>Quick sums</h2></div><p>Arithmetic only, from the ebook and department posters. Nothing you type is saved.</p></div>
+  withTiles(box, `<div class="tile t-bronze tool-h">${tileMedia('calc')}<div class="row"><span class="ic">${svg('calc')}</span><h2>Quick sums</h2></div><p>Arithmetic only, from the ebook and department posters. Nothing you type is saved.</p></div>
     <div class="tool-b"><div class="seg" role="group" aria-label="Calculator">${Object.entries(CALCS).map(([k, x]) => `<button type="button" data-ct="${k}" aria-pressed="${k === calcTab}">${x.t}</button>`).join('')}</div>
-    <div class="fields">${c.fields.map(field).join('')}</div><div class="outs" id="couts" aria-live="polite"></div><p class="calc-note">${esc(c.note)}</p></div>`;
+    <div class="fields">${c.fields.map(field).join('')}</div><div class="outs" id="couts" aria-live="polite"></div><p class="calc-note">${esc(c.note)}</p></div>`);
   const upd = () => {
     const v = {};
     box.querySelectorAll('[data-k]').forEach(el => { v[el.dataset.k] = el.tagName === 'SELECT' ? el.value : (el.value === '' ? 0 : parseFloat(el.value)); });

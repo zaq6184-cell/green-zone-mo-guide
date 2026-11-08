@@ -405,8 +405,8 @@ main{flex:1;outline:none}
 .cats button[aria-pressed="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 14px 26px -18px var(--t3);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 14px 26px -18px color-mix(in srgb,var(--t3),#000 var(--shade-k))}
 .cats button[aria-pressed="false"]{opacity:.9}
 .cats button[data-cat="all"]{--t1:var(--obsidian-1);--t2:var(--obsidian-2);--t3:var(--obsidian-3)}
-/* Tile media (8 Nov 2026): a Flow Studio still of the topic in jewel glass, and its 7 to 8-second loop while Moving tiles is on.
-   It sits under the tile's sheen and grain; a fade in the tile's own colour keeps the words on the left readable. */
+/* Tile media (8 Nov 2026): a Flow Studio still of the tile's subject in jewel glass, and its 7 to 8-second loop while Moving
+   tiles is on. It sits under the tile's sheen and grain; a fade in the tile's own colour keeps the words on the left readable. */
 .tm{position:absolute;inset:0;z-index:-2;overflow:hidden;border-radius:inherit;pointer-events:none;background:var(--t2)}
 .tm img,.tm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 50%}
 .tm video{opacity:0}
@@ -417,7 +417,18 @@ main{flex:1;outline:none}
 /* Code Blue and Code Stroke carry emergency numbers: their picture is a quiet background, so the extension reads at a glance */
 .nt .tm img,.nt .tm video.on{opacity:.4}
 .nt .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
-.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l{text-shadow:0 1px 3px rgba(0,0,0,.45)}
+/* The home list tiles (Pathways, Rules, Discharge check, Quick sums) carry text across their width: a quiet background, as on the number tiles */
+.st .tm img,.st .tm video.on{opacity:.4}
+.st .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
+/* First shift, the Tools headers and the Pathways section bars: the picture on the right, the words on calm colour */
+.first .tm img,.first .tm video,.tool-h .tm img,.tool-h .tm video,.lh .tm img,.lh .tm video{left:auto;width:64%}
+.lh .tm img,.lh .tm video{width:min(64%,250px)}
+.lh .tm::after{background:linear-gradient(90deg,var(--t2) calc(100% - 250px),transparent 100%);background:linear-gradient(90deg,var(--t2) max(36%,calc(100% - 250px)),color-mix(in srgb,var(--t2) 60%,transparent) max(58%,calc(100% - 160px)),transparent 100%)}
+.first .tm::after,.tool-h .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
+/* The pearl tile is light: its picture stays faint so the pearl and its source keep their contrast */
+.tip .tm img,.tip .tm video.on{opacity:.55}
+.tip .tm::after{background:linear-gradient(90deg,var(--t1) 34%,transparent 92%)}
+.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small{text-shadow:0 1px 3px rgba(0,0,0,.45)}
 @media (prefers-reduced-motion:no-preference){.tm video{transition:opacity .6s var(--ease)}}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
 .od{display:inline-flex;align-items:center;gap:6px;font:800 .7rem/1 var(--body);color:var(--ink-2);padding:5px 9px 5px 5px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
@@ -1025,7 +1036,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <section class="tile t-teal st" id="t-dc" aria-label="Discharge safety check"></section>
           <section class="tile t-bronze st" id="t-calc" aria-label="Quick sums"></section>
           <a class="tile t-obsidian wide first" href="#intro" id="t-intro"></a>
-          <section class="tile t-champagne wide tip" id="tl-tip" aria-labelledby="h-tip"><div class="tile-h"><h2 id="h-tip">Pearl for this shift</h2></div><div id="tip" aria-live="polite"></div></section>
+          <section class="tile t-champagne wide tip" id="tl-tip" aria-labelledby="h-tip"><span class="tm" aria-hidden="true" data-tm="tip"><img src="tiles/tip.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span><div class="tile-h"><h2 id="h-tip">Pearl for this shift</h2></div><div id="tip" aria-live="polite"></div></section>
           <section class="tile t-pearl wide" id="tl-keyn" aria-labelledby="h-keyn"><div class="tile-h"><h2 id="h-keyn">More numbers</h2><a class="tl" href="#numbers">All 14</a></div><div id="keynums"></div></section>
           <section class="tile t-pearl wide" id="tl-rules" aria-labelledby="h-rules3"><div class="tile-h"><h2 id="h-rules3">Three rules to keep</h2><a class="tl" href="#rules">All rules</a></div><div class="r3" id="rulecards"></div></section>
           <section class="tile t-pearl wide newcard" id="tl-new" aria-labelledby="h-newc"><div class="tile-h"><h2 id="h-newc">New in version 8</h2><a class="tl" href="#new">What's new</a></div><div id="newcard"></div></section>
@@ -1173,7 +1184,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
     <div class="dlg-h"><h2 id="h-set">Settings</h2><button type="button" class="ib ghost" id="setclose" aria-label="Close settings" data-icon="x"></button></div>
     <div class="set"><div><b>Theme</b><small>Auto follows your device. Dark is easier on the eyes on a night shift.</small></div><div class="seg" id="st-theme" role="group" aria-label="Theme"><button type="button" data-val="auto">Auto</button><button type="button" data-val="light">Light</button><button type="button" data-val="dark">Dark</button></div></div>
     <div class="set"><div><b>Text size</b><small>Larger text for reading at arm's length.</small></div><div class="seg" id="st-size" role="group" aria-label="Text size"><button type="button" data-val="std">Standard</button><button type="button" data-val="large">Large</button></div></div>
-    <div class="set"><div><b>Moving tiles</b><small>The topic tiles, Code Blue and Code Stroke move silently. Off keeps still pictures.</small></div><div class="seg" id="st-tiles" role="group" aria-label="Moving tiles"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
+    <div class="set"><div><b>Moving tiles</b><small>The tiles, section bars and tool headers move silently. Off keeps still pictures and saves mobile data.</small></div><div class="seg" id="st-tiles" role="group" aria-label="Moving tiles"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Moving clips</b><small>The patient journey clips loop silently. Off saves mobile data.</small></div><div class="seg" id="st-clips" role="group" aria-label="Moving clips"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Saved, recent and quiz score</b><small id="st-count">Kept in this browser only.</small></div><button type="button" id="st-clear" class="sm">Clear</button></div>
     <p class="dlg-f">Settings are kept in this browser only. Version 8, 8 Nov 2026.</p>
