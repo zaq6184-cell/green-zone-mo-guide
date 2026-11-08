@@ -405,7 +405,7 @@ main{flex:1;outline:none}
 .cats button[aria-pressed="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 14px 26px -18px var(--t3);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--t1),0 14px 26px -18px color-mix(in srgb,var(--t3),#000 var(--shade-k))}
 .cats button[aria-pressed="false"]{opacity:.9}
 .cats button[data-cat="all"]{--t1:var(--obsidian-1);--t2:var(--obsidian-2);--t3:var(--obsidian-3)}
-/* Tile media (8 Nov 2026): a Flow Studio still of the topic in jewel glass, and its 4-second loop while Moving clips is on.
+/* Tile media (8 Nov 2026): a Flow Studio still of the topic in jewel glass, and its 7 to 8-second loop while Moving tiles is on.
    It sits under the tile's sheen and grain; a fade in the tile's own colour keeps the words on the left readable. */
 .tm{position:absolute;inset:0;z-index:-2;overflow:hidden;border-radius:inherit;pointer-events:none;background:var(--t2)}
 .tm img,.tm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 50%}
@@ -3112,7 +3112,7 @@ function zoneMap(anim){
   x.hidden = !s;
   x.innerHTML = s ? `<h3>${zSel + 1}. ${esc(s.title)}</h3><ul>${s.items.slice(0, 4).map(i => `<li>${esc(i)}</li>`).join('')}</ul><div class="links">${[...(s.note ? [[s.note.href, s.note.k]] : []), ...s.links].slice(0, 4).map(([h, t]) => `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}<a class="pill" href="#journey-${zSel + 1}">Watch this stop${svg('chev')}</a></div>` : '';
 }
-/* Tile media (8 Nov 2026): Flow Studio stills of each topic in jewel glass (tiles/<key>.webp) and their 4-second loops
+/* Tile media (8 Nov 2026): Flow Studio stills of each topic in jewel glass (tiles/<key>.webp) and their 7 to 8-second loops
    (tiles/<key>.mp4). A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on
    and motion is not reduced, and it pauses offscreen or when the page is hidden. */
 const TILE_STILLS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke']);
