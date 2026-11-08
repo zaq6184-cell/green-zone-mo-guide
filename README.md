@@ -75,7 +75,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
-- **Moving home tiles (9 Nov 2026, not yet published):** loops on the other six home tiles, the Pathways section bars and the Shift tools headers; a phone plays at most six loops at once.
+- **Moving home tiles (published 9 Nov 2026):** loops on the other six home tiles, the Pathways section bars and the Shift tools headers; a phone plays at most six loops at once.
 - **Public web app (8 Nov 2026):** the app on GitHub Pages. The QR code on poster sheet 1 and the app's Copy link now open it instead of the private claude.ai link.
 - **Moving tiles (published 8 Nov 2026):** Flow Studio glass sculptures and loops on the topic tiles, Code Blue and Code Stroke, with the Moving tiles setting.
 - **Day and night (published 8 Nov 2026):** the home Day and Night switch, and night versions of both explainer films and both poster sheets. In dark mode the tile shadows now turn black instead of glowing.
