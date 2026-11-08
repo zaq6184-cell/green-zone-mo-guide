@@ -6,8 +6,9 @@ A guide for medical officers working in the Green Zone (MTS levels 4–5), Emerg
 
 - **Interactive app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 8 replaced version 7 at the same link on 8 Nov 2026, and day and night was added the same day).
 - **Poster design canvas** (editable): https://claude.ai/artifact/5QaoLt2gwXut47WzhtprES
+- **Source code** (public): https://github.com/zaq6184-cell/green-zone-mo-guide, with the offline copy in `app/`.
 
-Both links are private until you share them from the page's Share menu. The QR code on poster sheet 1 opens the app link, so colleagues can open it only after the app is shared with them.
+The two claude.ai links are private until you share them from the page's Share menu; the GitHub repository is public. The QR code on poster sheet 1 opens the app link, so colleagues can open it only after the app is shared with them.
 
 ## What is in this folder
 

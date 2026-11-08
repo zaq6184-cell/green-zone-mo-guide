@@ -28,6 +28,7 @@ Read CLAUDE.md and HANDOVER.md. In src, run npm install, npx playwright install 
 
 - **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9, version 8 with day and night (published 8 Nov 2026). It is private until you share it from the page's Share menu. The QR code on poster sheet 1 opens this link, so colleagues can use it only after you share it.
 - **Version 8** (8 Nov 2026): the premium bento redesign, now live at the link above. Preview changes with `npm run serve` in `src`, or the `guide` server in the browser pane. Every later publish still needs your go-ahead.
+- **GitHub:** this folder is also at https://github.com/zaq6184-cell/green-zone-mo-guide, which is public. `git push` puts new commits there for anyone to see, so Claude asks you before every push.
 - **Day and night** (8 Nov 2026, live): a Day/Night switch at the top of the home screen. In night colours the tour plays night versions of both films and the poster page shows night versions of both sheets; the printed sheets keep the day colours. Dark mode's tile shadows now turn black, as DESIGN.md says.
 - **Waiting on you:** your review of version 7.
 - **Still to confirm with the department:** six details, listed at the end of `CLAUDE.md` and on the app's What's new page (EM Watch booking, the KK or GP redirect procedure, the EMACC SOP, four phone numbers, the MERS-CoV case definition and the snakebite guideline).
