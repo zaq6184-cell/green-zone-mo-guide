@@ -32,7 +32,7 @@ The only guide built on the department's own approved ebook, *The Clinical Pathw
 
 ## Capabilities and Constraints
 
-- **Content:** 23 ebook pathways and 15 rules and protocols (8 flow, 7 protocols); shift tools (the discharge safety check with 6 items and 7 stop signs; quick sums for dengue, child doses and weight); 14 key numbers; a five-stop patient journey with clips and narration; a 65-second narrated tour; a 13-question quiz; What's new; the wall poster; sources.
+- **Content:** 23 ebook pathways and 15 rules and protocols (8 flow, 7 protocols); shift tools (the discharge safety check with 6 items and 7 stop signs); 12 calculators built only from the ebook and the department's notes, with links to PEMCalc for five children's tools those sources do not cover; 14 key numbers; a five-stop patient journey with clips and narration; a 65-second narrated tour; a 13-question quiz; What's new; the wall poster; sources.
 - **Approved source:** the ebook's pathways are built as written, with page numbers, and its clinical content is never rewritten. Department documents go in only as labelled notes with source and date.
 - **No clinical content from memory:** every dose, criterion and number needs the ebook or a named department document. Infographics, maps and visual tools draw only on content and thresholds already in the guide. Where a source does not cover a branch, the node says so.
 - **Reference tool only:** no patient data, no patient tracking, nothing that stores what a user types about a patient.
@@ -53,7 +53,7 @@ The only guide built on the department's own approved ebook, *The Clinical Pathw
 
 - The ebook PDF (in the claude.ai project files, not in this folder).
 - Department documents from the HKL ED MO Drive and the triage course folder, listed in `DRIVE-RUN-THROUGH.md`.
-- Media: six Flow Studio illustrations (`illustrations/`), six 8-second Flow clips (`flow-video/`, smaller copies in `app/clips/`), journey narration (`app/audio/`), seventeen Flow Studio tile stills and 7 to 8-second tile loops (`illustrations/tiles/`, `flow-video/tiles/`, smaller copies in `app/tiles/`), the explainer films in English and Bahasa Melayu, day and night (`video/`), the two A3 poster sheets (`poster/`).
+- Media: six Flow Studio illustrations (`illustrations/`), six 8-second Flow clips (`flow-video/`, smaller copies in `app/clips/`), journey narration (`app/audio/`), twenty-three Flow Studio tile stills and 7 to 8-second tile loops (`illustrations/tiles/`, `flow-video/tiles/`, smaller copies in `app/tiles/`), the explainer films in English and Bahasa Melayu, day and night (`video/`), the two A3 poster sheets (`poster/`).
 - Research on point-of-care lookup and teaching video: `RESEARCH.md` (Ely, BMJ 1999; Brame, 2016).
 - No usage data, testimonials or outcome measures exist. None may be invented.
 

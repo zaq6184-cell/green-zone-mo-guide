@@ -19,7 +19,7 @@ const srv = http.createServer((q, r) => {
   fs.readFile(f, (e, d) => { if (e){ r.writeHead(404); r.end(); return; } r.writeHead(200, {'content-type':types[path.extname(f)] || 'application/octet-stream'}); r.end(d); });
 }).listen(PORT);
 const U = `http://localhost:${PORT}/`;
-const VIEWS = ['home','pathways','rules','tools','numbers','intro','journey','tour','quiz','new','poster','about'];
+const VIEWS = ['home','pathways','rules','tools','calc','numbers','intro','journey','tour','quiz','new','poster','about'];
 let fails = 0;
 const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!cond) fails++; };
 
@@ -151,7 +151,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.click('[data-save]'); await p.waitForTimeout(150);
   // Tools
   await go(p, '#tools');
-  ok(await p.evaluate(() => !!document.querySelector('#dcheck .tool-h .tm img') && !!document.querySelector('.tool-h.t-bronze .tm img')), 'the Tools headers have their pictures');
+  ok(await p.evaluate(() => !!document.querySelector('#dcheck .tool-h .tm img') && !!document.querySelector('#tcx .tm img')), 'the discharge check header and the calculators card have their pictures');
+  ok(await p.evaluate(() => document.querySelector('#tcx').getAttribute('href') === '#calc' && document.querySelectorAll('#tcx .gl li').length === 6), 'Shift tools leads to the calculators, with their six groups');
   for (let i = 0; i < 6; i++) await p.check(`[data-dc="a${i}"]`);
   ok(await p.evaluate(() => document.querySelector('#verdict').className) === 'verdict ok', 'all checks give ready to discharge');
   ok(await p.evaluate(() => document.querySelectorAll('#dcr i.on').length) === 6, 'the route meter lights all six stations');
@@ -168,6 +169,66 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.fill('#cf-wt', '15'); await p.waitForTimeout(150);
   console.log('     kids 15 kg ->', await p.evaluate(() => [...document.querySelectorAll('#couts .out b')].map(b => b.textContent).join(' | ')));
   await p.screenshot({path:out + '/d-tools-kids.png', fullPage:true});
+  // Calculators: the hub, the outside links, each kind of calculator, the shared weight, the sources and the storage rule
+  const gz = () => p.evaluate(() => Object.keys(localStorage).filter(k => k.startsWith('gz-')).sort().map(k => k + '=' + localStorage.getItem(k)).join('|'));
+  const store0 = await gz();
+  for (const [r, t] of [['#calc-dengue', 'Shock index'], ['#calc-kids', 'Child doses'], ['#calc-weight', 'Adjusted weight']]){
+    await go(p, r, 300);
+    ok(await p.evaluate(() => document.querySelector('#calcbox:not([hidden]) h2').textContent) === t, `the old link ${r} still opens ${t}`);
+  }
+  await go(p, '#calc', 500);
+  ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 12 && document.querySelectorAll('#cxlist .cxl').length === 5), 'the hub lists 12 calculators and 5 outside links');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && a.href.startsWith('https://pemcalc.com/') && /outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc links open in a new tab and say they are an outside site');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 7 && document.querySelectorAll('#cxcats .tm img').length === 7), 'the seven group tiles have their pictures');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
+  await p.screenshot({path:out + '/d-calc-hub.png', fullPage:true});
+  await p.click('#cxcats [data-cg="scores"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .pc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'curb,wells'), 'the Scores tile shows CURB-65 and Wells');
+  await p.click('#cxcats [data-cg="all"]'); await p.fill('#cxq', 'clexane'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .pc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'anticoag'), 'finding "clexane" shows the anticoagulant calculator');
+  await p.fill('#cxq', 'zzzz'); await p.waitForTimeout(100);
+  ok(await p.evaluate(() => !document.querySelector('#cxempty').hidden), 'a find with no match says so');
+  await p.fill('#cxq', ''); await p.waitForTimeout(100);
+  ok(await p.evaluate(() => calcFactsMissing().map(f => f.join(': ')).join(' / ')) === '', 'every number in the calculators is still in its source text');
+  await go(p, '#calc-curb', 400);
+  for (const i of [0, 1]) await p.check(`#calcbox input[data-k="c"][data-i="${i}"]`);
+  ok(await p.evaluate(() => { const v = document.querySelector('#couts .verdict'); return v.classList.contains('stop') && /admit/.test(v.textContent) && v.querySelector('a').getAttribute('href') === '#pneumonia--admit'; }), 'CURB-65 of 2 gives admit');
+  await go(p, '#calc-wells', 400);
+  for (const i of [0, 1, 2]) await p.check(`#calcbox input[data-k="w"][data-i="${i}"]`);
+  ok(await p.evaluate(() => document.querySelector('#couts .verdict a').getAttribute('href') === '#dvt--cp'), 'Wells of 3 leads to the 2-point compression test');
+  await p.check('#calcbox input[data-k="w"][data-i="9"]');
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '1' && document.querySelector('#couts .verdict a').getAttribute('href') === '#dvt--ddm'), 'the alternative-diagnosis item takes 2 off Wells');
+  await go(p, '#calc-pain', 400);
+  for (const [r, s] of [[0, 2], [1, 2], [2, 2], [3, 1], [4, 0]]) await p.click(`#calcbox [data-r="${r}"][data-s="${s}"]`);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '7 of 10' && document.querySelector('#couts .verdict').classList.contains('refer')), 'FLACC of 7 sends the patient to the EP for the morphine protocol');
+  await p.click('#calcbox [data-sv="cpot"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => { const r = [...document.querySelectorAll('#calcbox .rate .rn')].map(x => x.textContent); return r.length === 4 && /Ventilator/.test(r[3]); }), 'CPOT scores four rows, with the ventilator row for an intubated patient');
+  await p.click('#calcbox [data-sv="ex"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => { const r = [...document.querySelectorAll('#calcbox .rate .rn')].map(x => x.textContent); return r.length === 4 && /Vocalisation/.test(r[3]); }), 'and the vocalisation row instead once extubated');
+  await p.screenshot({path:out + '/d-calc-pain.png', fullPage:true});
+  await go(p, '#calc-analgesia', 400);
+  ok(await p.evaluate(() => document.querySelector('#cf-wt').value === '15' && document.querySelector('#couts .out b').textContent === '225 mg'), 'the weight from Child doses carries to Analgesia: paracetamol 225 mg at 15 kg');
+  await p.fill('#cf-wt', '50'); await p.waitForTimeout(100);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === 'Not covered'), 'exactly 50 kg says the ebook does not cover it');
+  await go(p, '#calc-anticoag', 400);
+  ok(await p.evaluate(() => /Choose over or under 30/.test(document.querySelector('#couts').textContent)), 'the anticoagulant asks for the creatinine clearance first');
+  await p.click('#calcbox [data-sv="over"]'); await p.waitForTimeout(100);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#couts .out b')].map(b => b.textContent).slice(0, 2).join(' | ') === '7.5 mg once a day | 50 mg every 12 hours'), 'at 50 kg: fondaparinux 7.5 mg, Clexane 50 mg 12-hourly');
+  await go(p, '#calc-insulin', 400);
+  await p.click('#calcbox [data-pv="0.4"]'); await p.waitForTimeout(100);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '20 units a day' && !!document.querySelector('#couts .cx-gap')), 'insulin at 50 kg and 0.4 unit/kg: 20 units a day, and the missing split is named');
+  await go(p, '#calc-head', 400);
+  await p.check('#calcbox input[data-k="ct"][data-i="1"]');
+  ok(await p.evaluate(() => document.querySelector('#couts .verdict a').getAttribute('href') === '#mild-tbi--ct1'), 'an immediate CT criterion asks for a CT brain');
+  await go(p, '#calc-calm', 400);
+  await p.click('#calcbox [data-pv="7"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => !!document.querySelector('#calcbox #cf-wt') && document.querySelector('#couts .verdict').classList.contains('stop') && /Midazolam/.test(document.querySelector('#couts').textContent)), 'BARS 7 gives the medication step with weight-based lines');
+  await p.screenshot({path:out + '/d-calc-calm.png', fullPage:true});
+  await go(p, '#calc-soap', 400);
+  for (const i of [0, 1]) await p.check(`#calcbox input[data-k="s"][data-i="${i}"]`);
+  ok(await p.evaluate(() => /5–10% dehydrated/.test(document.querySelector('#couts').textContent) && /moderate/.test(document.querySelector('#couts .cx-gap').textContent)), 'two SOAP signs read 5–10%, and the moderate gap is named');
+  ok(await gz() === store0, 'using the calculators stores nothing');
   // Quiz
   await go(p, '#quiz');
   await p.click('#quizbox .q-opts button'); await p.waitForTimeout(150);

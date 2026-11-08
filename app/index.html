@@ -418,9 +418,9 @@ main{flex:1;outline:none}
 /* Code Blue and Code Stroke carry emergency numbers: their picture is a quiet background, so the extension reads at a glance */
 .nt .tm img,.nt .tm video.on{opacity:.4}
 .nt .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
-/* The home list tiles (Pathways, Rules, Discharge check, Quick sums) carry text across their width: a quiet background, as on the number tiles */
-.st .tm img,.st .tm video.on{opacity:.4}
-.st .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
+/* The home list tiles (Pathways, Rules, Discharge check, Calculators) carry text across their width: a quiet background, as on the number tiles */
+.st .tm img,.st .tm video.on,.tool-go .tm img,.tool-go .tm video.on{opacity:.4}
+.st .tm::after,.tool-go .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
 /* First shift, the Tools headers and the Pathways section bars: the picture on the right, the words on calm colour */
 .first .tm img,.first .tm video,.tool-h .tm img,.tool-h .tm video,.lh .tm img,.lh .tm video{left:auto;width:64%}
 .lh .tm img,.lh .tm video{width:min(64%,250px)}
@@ -429,7 +429,7 @@ main{flex:1;outline:none}
 /* The pearl tile is light: its picture stays faint so the pearl and its source keep their contrast */
 .tip .tm img,.tip .tm video.on{opacity:.55}
 .tip .tm::after{background:linear-gradient(90deg,var(--t1) 34%,transparent 92%)}
-.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small{text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small,.tool-go h2,.tool-go p,.tool-go li,.tool-go .go-l{text-shadow:0 1px 3px rgba(0,0,0,.45)}
 @media (prefers-reduced-motion:no-preference){.tm video{transition:opacity .6s var(--ease)}}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
 .od{display:inline-flex;align-items:center;gap:6px;font:800 .7rem/1 var(--body);color:var(--ink-2);padding:5px 9px 5px 5px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
@@ -746,6 +746,75 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .scale .pin::after{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--surface-2)}
 .calc-note{font-size:.8rem;color:var(--muted);margin:14px 0 0;line-height:1.5}
 
+/* ---------- Calculators (9 Nov 2026): the hub, the open calculator and its field kinds ---------- */
+.cx{display:grid;gap:18px;align-items:start}
+.cx-hub{display:grid;gap:14px;min-width:0;align-content:start}
+.cx-hub .find{max-width:none}
+.cx-hub .cats{margin:0}
+#cxlist{display:grid;gap:14px}
+#cxlist .libsec{margin-top:0}
+@media (min-width:980px){.cx.open{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.cx-h .tags{display:flex;flex-wrap:wrap;gap:6px}
+.field.wt small{font-size:.74rem;line-height:1.3;color:var(--muted)}
+.cf-full{grid-column:1/-1;min-width:0;margin:0;padding:0;border:0}
+.cf-full legend,.cf-l{display:block;padding:0;margin:0 0 8px;font:800 .8rem/1.2 var(--body);color:var(--muted)}
+.cf-seg .seg{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
+.cf-seg .seg button{min-height:44px;white-space:normal;line-height:1.2}
+.out b.w{font:850 1.05rem/1.25 var(--display);letter-spacing:-.01em}
+.dc-list .pts{margin-left:auto;padding-left:10px;font:700 .95rem var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.dc-list label:has(input:checked) .pts{color:var(--accent)}
+.rate{display:grid;gap:6px;margin:0 0 14px}
+.rate:last-child{margin-bottom:0}
+.rate .rn{font:850 .98rem/1.2 var(--display);letter-spacing:-.01em}
+.rate .ro{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.rate button{display:grid;grid-template-columns:minmax(0,1fr);justify-content:stretch;align-content:start;justify-items:start;gap:4px;min-height:72px;padding:10px 11px;border:0;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-2);text-align:left;font:600 .8rem/1.3 var(--body);transition:background-color .15s,box-shadow .15s}
+.rate button b{font:700 1.05rem/1 var(--mono);color:var(--ink)}
+.rate button:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.rate button[aria-checked="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent);color:var(--ink)}
+.rate button[aria-checked="true"] b{color:var(--accent)}
+@media (max-width:560px){.rate .ro{grid-template-columns:minmax(0,1fr)}.rate button{grid-template-columns:24px minmax(0,1fr);align-items:center;min-height:48px}}
+.pick{display:grid;gap:6px}
+.pick button{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;gap:12px;min-height:54px;padding:7px 14px 7px 7px;border:0;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);text-align:left;font:800 .95rem/1.25 var(--body);transition:background-color .15s,box-shadow .15s}
+.pick button b{display:grid;place-items:center;height:40px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-2);font:700 .95rem var(--mono);font-variant-numeric:tabular-nums}
+.pick button small{display:block;margin-top:3px;font:600 .8rem/1.35 var(--body);color:var(--muted)}
+.pick button:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.pick button[aria-checked="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
+.pick button[aria-checked="true"] b{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-2));color:#fff;box-shadow:none}
+.verdict.next{background:var(--b-neutral);color:#fff;box-shadow:0 18px 30px -20px var(--b-neutral);box-shadow:0 18px 30px -20px color-mix(in srgb,var(--b-neutral),#000 var(--shade-k))}
+.verdict.refer{background:var(--b-refer);color:#fff;box-shadow:0 18px 30px -20px var(--b-refer);box-shadow:0 18px 30px -20px color-mix(in srgb,var(--b-refer),#000 var(--shade-k))}
+.verdict > span{display:block}
+.verdict .pill{margin-top:10px;min-height:38px;background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.34);color:#fff}
+.verdict .pill:hover{background:rgba(255,255,255,.26);border-color:#fff;color:#fff}
+.cx-gap{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line-2);font-size:.84rem;line-height:1.45;color:var(--ink-2)}
+.cx-gap svg{width:18px;height:18px;flex:none;margin-top:1px;color:var(--muted)}
+.cx-links{display:flex;flex-wrap:wrap;gap:8px}
+.cx-foot{justify-content:flex-start}
+.cx-foot .sp{flex:1}
+.cxsec .pc{padding-right:48px}
+.cxsec .pc .go{position:absolute;right:18px;top:50%;width:18px;height:18px;margin-top:-9px;color:var(--faint);transition:transform .2s var(--ease),color .2s}
+.cxsec .pc:hover .go{color:var(--accent);transform:translateX(2px)}
+.cxsec .pc.cur{background:var(--accent-soft)}
+.cxsec .pc.cur h3 a{color:var(--accent)}
+.cxl .ext{display:inline-flex;align-items:center;gap:5px}
+.cxl .ext svg{width:14px;height:14px}
+.cx-empty{margin:0;padding:18px;border-radius:var(--r-lg);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-2);color:var(--muted);text-align:center}
+/* The light jewel takes the dark gold ink, without the shadow the dark jewels put under white text */
+.cats button.t-champagne,.libsec.t-champagne .lh{color:var(--gold-ink)}
+.cats button.t-champagne span,.cats button.t-champagne small,.libsec.t-champagne .lh span,.libsec.t-champagne .lh small,.tool-h.t-champagne h2,.tool-h.t-champagne p{text-shadow:none}
+.tool-h.t-champagne .ic{color:var(--gold-ink);background:rgba(255,255,255,.42);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.tool-h.t-champagne .tag{background:rgba(255,255,255,.42)}
+/* The Shift tools card that leads to the calculators */
+.tool-go{gap:12px;text-decoration:none}
+.tool-go .row{display:flex;align-items:center;gap:12px}
+.tool-go .ic{background:var(--glass);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.tool-go h2{margin:0;font:900 1.4rem/1.15 var(--display);letter-spacing:-.02em}
+.tool-go p{margin:0;max-width:46ch;font-size:.9rem;line-height:1.45;opacity:.9}
+.tool-go .gl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:6px}
+.tool-go .gl li{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:38px;padding:6px 12px;border-radius:12px;background:var(--glass);font:700 .88rem var(--body)}
+.tool-go .gl b{font:700 .9rem var(--mono);font-variant-numeric:tabular-nums}
+.tool-go .go-l{display:inline-flex;align-items:center;gap:6px;font:800 .95rem var(--body)}
+.tool-go .go-l svg{width:18px;height:18px}
+
 /* ---------- Numbers ---------- */
 .num-group{display:flex;align-items:center;gap:12px;font:850 1.2rem/1.2 var(--display);letter-spacing:-.01em;margin:30px 0 12px}
 .num-group:first-child{margin-top:0}
@@ -990,6 +1059,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <a href="#pathways" data-v="pathways"><span data-icon="path"></span>Pathways<span class="cnt" id="cnt-path"></span></a>
       <a href="#rules" data-v="rules"><span data-icon="rule"></span>Rules and protocols<span class="cnt" id="cnt-rule"></span></a>
       <a href="#tools" data-v="tools"><span data-icon="check"></span>Shift tools</a>
+      <a href="#calc" data-v="calc"><span data-icon="calc"></span>Calculators<span class="cnt" id="cnt-calc"></span></a>
       <a href="#numbers" data-v="numbers"><span data-icon="phone"></span>Numbers</a>
       <div class="sgrp">Learn</div>
       <a href="#intro" data-v="intro"><span data-icon="flag"></span>First-shift intro</a>
@@ -1035,7 +1105,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <section class="tile t-sapphire st" id="t-paths" aria-label="Pathways by body system"></section>
           <section class="tile t-plum st" id="t-rules" aria-label="Rules and protocols"></section>
           <section class="tile t-teal st" id="t-dc" aria-label="Discharge safety check"></section>
-          <section class="tile t-bronze st" id="t-calc" aria-label="Quick sums"></section>
+          <section class="tile t-bronze st" id="t-calc" aria-label="Calculators"></section>
           <a class="tile t-obsidian wide first" href="#intro" id="t-intro"></a>
           <section class="tile t-champagne wide tip" id="tl-tip" aria-labelledby="h-tip"><span class="tm" aria-hidden="true" data-tm="tip"><img src="tiles/tip.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span><div class="tile-h"><h2 id="h-tip">Pearl for this shift</h2></div><div id="tip" aria-live="polite"></div></section>
           <section class="tile t-pearl wide" id="tl-keyn" aria-labelledby="h-keyn"><div class="tile-h"><h2 id="h-keyn">More numbers</h2><a class="tl" href="#numbers">All 14</a></div><div id="keynums"></div></section>
@@ -1070,8 +1140,23 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Shift tools -->
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
-          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and quick sums from the ebook and the department's posters. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tool" id="calcbox"></div></div>
+          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook and the department's notes. Nothing you tick or type is saved.</p></div></header>
+        <div class="tools"><div class="tool" id="dcheck"></div><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a></div>
+      </div></section>
+
+      <!-- Calculators -->
+      <section class="view" data-view="calc" id="v-calc" hidden aria-labelledby="h-calc"><div class="vw">
+        <header class="vhead"><div><h1 id="h-calc">Calculators</h1>
+          <p>Doses, scores and checks built only from the ebook and the department's notes, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
+        <div class="cx" id="cx">
+          <div class="tool cx-open" id="calcbox" hidden></div>
+          <div class="cx-hub">
+            <label class="find"><span data-icon="search"></span><span class="vh">Find a calculator</span><input id="cxq" type="search" placeholder="Find a calculator, drug or score" autocomplete="off"></label>
+            <div class="cats cx-cats" id="cxcats" role="group" aria-label="Calculator groups"></div>
+            <div id="cxlist"></div>
+            <p class="cx-empty" id="cxempty" hidden>No calculator matches. Try a drug, a score or a condition.</p>
+          </div>
+        </div>
       </div></section>
 
       <!-- Numbers -->
@@ -1138,7 +1223,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <p>Everything in this guide and where it comes from. It is a reference tool only and holds no patient data. Use clinical judgement and consult the Emergency Physician on duty when unsure.</p></div></header>
         <div class="srcs" id="srcs"></div>
         <div class="shead"><h2>Privacy</h2></div>
-        <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the quick sums is kept.</p>
+        <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
           <p>Illustrations and clips are generated artwork and show no real staff or patients. Department documents are cited by title and date; personal phone numbers, registration numbers and patient details in them are left out.</p></div>
       </div></section>
 
@@ -2488,7 +2573,7 @@ P['scrotal-pain'].see = [['#safe-practice--abd','Torsion window: 6 hours']];
 
 /* ================= Green Zone MO Guide, version 8: the engine =================
    One page, one view at a time, routed on the hash:
-   #home, #pathways, #saved, #rules, #tools, #calc(-dengue|-kids|-weight), #numbers,
+   #home, #pathways, #saved, #rules, #tools, #calc and #calc-<calculator>, #numbers,
    #journey(-1..5), #tour (#video), #quiz, #intro, #new, #poster, #about, #search,
    #<entry> and #<entry>--<node> for any step of any pathway or rule.
    Saved, recent, quiz best, tour position and settings stay in this browser only. */
@@ -2547,6 +2632,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['Calculators','Twelve calculators in one place, built only from the ebook and the department\'s notes, each naming its source: analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the pain scales, BARS and RASS, the head injury check, the child dehydration check and the shock index. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Five children\'s tools the ebook does not cover open on PEMCalc, an outside site.',[['#calc','Calculators'],['#calc-curb','CURB-65'],['#calc-analgesia','Analgesia by weight']]],
   ['A new look','The guide is now a bento of tiles, each showing real data from the guide: how each pathway can end, the numbers, the zone.',[['#home','Home']]],
   ['The zone map','The five stops of a Green Zone visit on the home screen. Tap one for what happens there and the rules that apply.',[['#journey','Patient journey']]],
   ['Whole-pathway maps','Every step of a pathway on one sheet, with your route lit and the outcomes you can no longer reach dimmed.',[['#renal-colic','Try it on renal colic']]],
@@ -2563,7 +2649,7 @@ const INTRO = [
   {h:'Find it in one search', p:'Type a symptom, rule, dose or number, or press /. Saved and recent pathways wait on your home screen.', art:'search'},
   {h:'One question at a time', p:'Each pathway asks one question per card and shows how it can still end. It finishes in the ebook\'s outcome colours: red admit, yellow observation, green discharge, violet refer.', art:'path'},
   {h:'Patients move one way', p:'Triage, you the MO, the treatment room, the CCA only if needed, then review. Tap any stop on the zone map for what happens there and the rules that apply.', art:'zone'},
-  {h:'Tools and numbers, one tap away', p:'The discharge safety check, quick sums and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
+  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 12 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
 ];
 const ART = {
   search:'<rect x="18" y="34" width="284" height="56" rx="28" style="fill:#fff"/><circle cx="50" cy="62" r="10" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><path d="m57.5 69.5 7 7" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><text x="76" y="69" style="font:700 19px var(--body);fill:#14211b">renal colic</text><rect x="184" y="50" width="3" height="25" class="blink" style="fill:var(--emerald-1)"/>' +
@@ -2706,7 +2792,8 @@ const CONFIRM = [
   'Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents), the SCAN team line and the IPR on-call line.',
   'The MERS-CoV case definition, which is not in the PUI file.',
   'A readable copy of the Malaysian snakebite guideline.',
-  'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.'
+  'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
+  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; and whether there is a first-line drug at BARS 7.'
 ];
 
 /* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
@@ -2779,7 +2866,11 @@ const ICONS = {
   stop:'<path d="M8.3 3.5h7.4l4.8 4.8v7.4l-4.8 4.8H8.3l-4.8-4.8V8.3z"/><path d="M12 8v5M12 16.2h.01"/>',
   flag:'<path d="M5 21V4"/><path d="M5 4h11l-2 3.5 2 3.5H5"/>',
   grid:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
-  gauge:'<path d="M4 16a8 8 0 0 1 16 0"/><path d="m12 16 4-5"/><circle cx="12" cy="16" r="1.4"/>'
+  gauge:'<path d="M4 16a8 8 0 0 1 16 0"/><path d="m12 16 4-5"/><circle cx="12" cy="16" r="1.4"/>',
+  kid:'<circle cx="12" cy="5" r="2.4"/><path d="M12 8.5v6.5M8 11l4-2 4 2M9.5 21l2.5-6 2.5 6"/>',
+  scale:'<path d="M12 4v16M8.5 20h7M5 7h14M5 7l-2.5 6M5 7l2.5 6M19 7l-2.5 6M19 7l2.5 6"/><path d="M2.5 13a2.5 2.5 0 0 0 5 0zM16.5 13a2.5 2.5 0 0 0 5 0z"/>',
+  feather:'<path d="M19 4C11 4 6 9 6 17v3"/><path d="M6 17c6 0 11-4 13-13M10 13h5"/>',
+  ext:'<path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>'
 };
 const svg = (k, cls = '', fill = false) => `<svg class="i${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[k] || ''}</svg>`;
 /* The mark: the green floor line, leading from the door to care */
@@ -2904,9 +2995,6 @@ for (const [id, p] of Object.entries(P)){
 JOURNEY.forEach((s, i) => IDX.push({href:'#journey-' + (i + 1), title:`Journey stop ${i + 1}: ${s.title}`, kind:'Journey', meta:'Patient flow', body:[s.who, ...s.items, s.note ? s.note.t : ''].join(' · '), ic:'route', c:'c-flow'}));
 NUMS.forEach(n => IDX.push({href:'#numbers', title:`${n.lbl}: ${n.val}`, kind:'Number', meta:n.src, body:n.note, ic:'phone', c:'c-abdo'}));
 IDX.push({href:'#tools', title:'Discharge safety check', kind:'Tool', meta:'Shift tools', body:[...DC_ALL.flat(), ...DC_STOP.map(s => s[0] + ' ' + s[1])].join(' · '), ic:'check', c:'c-meta'});
-IDX.push({href:'#calc-dengue', title:'Shock index and pulse pressure check', kind:'Tool', meta:'Dengue SOP 2.0', body:'Shock index HR divided by SBP; pulse pressure; heart rate; dengue discharge criteria; shock', ic:'calc', c:'c-breath'});
-IDX.push({href:'#calc-kids', title:'Children\'s weight-based doses', kind:'Tool', meta:'Department posters', body:'Prednisolone 1 mg/kg; salbutamol MDI puffs; ipratropium; dexamethasone croup; nebulised adrenaline; ORS 10 ml/kg; moderate dehydration 75 ml/kg; paediatric dose calculator weight', ic:'calc', c:'c-breath'});
-IDX.push({href:'#calc-weight', title:'Adjusted body weight for obese patients', kind:'Tool', meta:'Ebook p31–32', body:'BMI over 27.5; ideal body weight; adjusted body weight; dengue fluid; obese', ic:'calc', c:'c-breath'});
 IDX.push({href:'#tour', title:'Tour: the Green Zone in 90 seconds', kind:'Video', meta:'Explainer, English and Bahasa Melayu', body:CAPTIONS.map(c => c[1]).join(' ') + ' Bahasa Melayu Malay BM ' + CAPTIONS_MS.map(c => c[1]).join(' '), ic:'play', c:'c-infect'});
 IDX.push({href:'#home', title:'Day and night colours', kind:'Setting', meta:'Switch on the home screen', body:'Night colours, night mode, dark mode, dark theme, day colours, light mode, screen too bright, night shift', ic:'moon', c:'c-meta'});
 IDX.push({href:'#quiz', title:`Quick check: ${QUIZ.length} questions`, kind:'Quiz', meta:'Self-test', body:QUIZ.map(q => q.q).join(' · '), ic:'quiz', c:'c-infect'});
@@ -3032,7 +3120,7 @@ function closePal(restore){
 }
 
 /* ================= Views ================= */
-const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro'};
+const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
 function showView(name, sub){
@@ -3064,7 +3152,7 @@ function markNav(){
     const on = a.dataset.v === v && (!a.dataset.sub || a.dataset.sub === curSub);
     if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
-  const tab = curView === 'run' ? 'pathways' : v;
+  const tab = curView === 'run' ? 'pathways' : v === 'calc' ? 'tools' : v;
   $$('#tabbar [data-tab]').forEach(t => { if (t.dataset.tab === tab) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
 }
 function showLearn(sub){
@@ -3128,7 +3216,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -3177,7 +3265,7 @@ function statTiles(){
   const top = ['gz-rules', 'referral-rules', 'asthma-zone', 'mau-admission'].filter(id => P[id]);
   withTiles($('#t-rules'), `${tileMedia('rules')}<div class="tile-h"><h3><a href="#rules">Rules and protocols</a></h3><span class="tag">${FLOW_IDS.length + PROT_IDS.length}</span></div><ul class="gl">${top.map(id => `<li><a href="#${id}"><span>${esc(P[id].title)}</span>${svg('chev')}</a></li>`).join('')}</ul>`);
   withTiles($('#t-dc'), `${tileMedia('dc')}<div class="tile-h"><h3><a href="#tools">Discharge check</a></h3><span class="tag">${DC_STOP.length} stop signs</span></div><ul class="dcl">${DC_SHORT.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`);
-  withTiles($('#t-calc'), `${tileMedia('calc')}<div class="tile-h"><h3><a href="#calc">Quick sums</a></h3>${svg('calc')}</div><ul class="thr"><li><span>Shock index</span><b>under 1</b></li><li><span>Pulse pressure</span><b>20 to 50</b></li><li><span>Heart rate</span><b>under 90</b></li></ul><p class="sub">Dengue SOP 2.0 discharge criteria. Child doses and adjusted weight too.</p>`);
+  withTiles($('#t-calc'), `${tileMedia('calc')}<div class="tile-h"><h3><a href="#calc">Calculators</a></h3><span class="tag">${Object.keys(CALCS).length}</span></div><ul class="thr"><li><span>Shock index</span><b>under 1</b></li><li><span>Pulse pressure</span><b>20 to 50</b></li><li><span>Heart rate</span><b>under 90</b></li></ul><p class="sub">Dengue SOP 2.0 discharge criteria, with doses, scores and checks in the calculators.</p>`);
   introTile();
 }
 function introTile(){
@@ -3429,11 +3517,11 @@ function selectTab(k, focus){
 /* ================= Shift tools ================= */
 function renderDcheck(){
   const li = (it, i, stop) => `<li><label><input type="checkbox" data-dc="${stop ? 's' : 'a'}${i}"><span>${esc(it[0])}<small>${stop ? svg('chev') : ''}${esc(it[1])}</small></span></label></li>`;
-  $('#dcheck').innerHTML = `<div class="tile t-teal tool-h">${tileMedia('dc')}<div class="row"><span class="ic">${svg('check')}</span><h2>Discharge safety check</h2></div><p>Tick through it before the patient leaves. It is not saved, and Clear resets it.</p><div class="dc-route" id="dcr" aria-hidden="true"><span class="fill"></span>${DC_ALL.map(() => '<i></i>').join('')}</div></div>
+  withTiles($('#dcheck'), `<div class="tile t-teal tool-h">${tileMedia('dc')}<div class="row"><span class="ic">${svg('check')}</span><h2>Discharge safety check</h2></div><p>Tick through it before the patient leaves. It is not saved, and Clear resets it.</p><div class="dc-route" id="dcr" aria-hidden="true"><span class="fill"></span>${DC_ALL.map(() => '<i></i>').join('')}</div></div>
     <div class="tool-b"><h3 class="dc-group">Every patient</h3><ul class="dc-list">${DC_ALL.map((it, i) => li(it, i)).join('')}</ul>
     <h3 class="dc-group">${svg('stop')}Tick if it applies: stop and act</h3><ul class="dc-list stop">${DC_STOP.map((it, i) => li(it, i, true)).join('')}</ul>
     <div class="verdict" id="verdict" aria-live="polite"></div>
-    <div class="foot"><span>From the reassessment memo (Jul 2024) and Million Ringgit Habits (ETD HKL)</span><button type="button" class="sm" id="dcclear">${svg('restart')}Clear</button></div></div>`;
+    <div class="foot"><span>From the reassessment memo (Jul 2024) and Million Ringgit Habits (ETD HKL)</span><button type="button" class="sm" id="dcclear">${svg('restart')}Clear</button></div></div>`);
   const upd = () => {
     const a = DC_ALL.filter((_, i) => $(`[data-dc="a${i}"]`).checked).length;
     const stops = DC_STOP.filter((_, i) => $(`[data-dc="s${i}"]`).checked);
@@ -3450,9 +3538,45 @@ function renderDcheck(){
   upd();
 }
 
-/* Quick sums: plain arithmetic from the ebook and department posters, each shown with its source */
+/* ================= Calculators (9 Nov 2026) =================
+   Twelve calculators built only from the ebook and the department's notes (standing rule 8), each naming its source.
+   Where a source stops (exactly 50 kg, exactly 30, no basal-bolus split, no band named "moderate"), the calculator says so
+   instead of choosing. The weight and the child's age band are shared between calculators in memory only and are never
+   stored (rule 4). Paediatric tools that our sources do not cover open on PEMCalc, an outside site, labelled as such.
+   Checklists and tables come straight from the pathway data, so a calculator cannot drift from its pathway. */
+const CALC_GROUPS = [
+  {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'Shock index and adjusted weight'},
+  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants and insulin by weight'},
+  {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65 and Wells'},
+  {k:'calm', t:'Pain and calm', j:'t-plum', ic:'feather', d:'Pain scales, BARS and RASS'},
+  {k:'head', t:'Head injury', j:'t-garnet', ic:'brain', d:'CT and safe discharge criteria'},
+  {k:'kids', t:'Kids', j:'t-champagne', ic:'kid', d:'Child doses and the dehydration check'}
+];
+const CALC_G = Object.fromEntries(CALC_GROUPS.map(g => [g.k, g]));
+/* Outside tools: PEMCalc (pemcalc.com, Dr Kiran Nesarajah). Links only: nothing from it is copied into the guide */
+const PEM = 'https://pemcalc.com/';
+const CALC_LINKS = [
+  {g:'kids', href:PEM + 'asthma.html', t:'PRAM asthma score', d:'Severity score for a child with acute asthma, with doses by severity.'},
+  {g:'kids', href:PEM + 'croup.html', t:'Westley croup score', d:'Croup severity from five signs.'},
+  {g:'kids', href:PEM + 'vitalsigns.html', t:'Normal vital signs by age', d:'Heart rate, breathing rate, blood pressure and SpO2 ranges for each age group.'},
+  {g:'head', href:PEM + 'pecarn.html', t:'PECARN head injury rules', d:'Which children with a head injury can safely go without a CT.'},
+  {g:'head', href:PEM + 'pgcs.html', t:'Paediatric GCS', d:'The GCS with descriptors for infants and young children.'}
+];
+const tableOf = (id, part) => (P[id].tables || []).find(t => t.title.includes(part));
+const r1 = x => Math.round(x * 10) / 10;
+const fx = x => String(r1(x));
+const range = (w, a, b, unit = 'mg') => `${fx(a * w)}–${fx(b * w)} ${unit}`;
+const badWt = (w, lo = 2, hi = 300) => w < lo || w > hi ? [['Weight', `Enter ${lo} to ${hi} kg`, 'warn', '']] : null;
+const PAIN_ROWS = {flacc:'FLACC', painad:'PAINAD', cpot:'CPOT'};
+const painRows = v => {
+  const t = tableOf('pain', PAIN_ROWS[v.sc || 'flacc']).rows;
+  return v.sc === 'cpot' ? [...t.slice(0, 3), t[v.tube === 'ex' ? 4 : 3]] : t;
+};
+const painKey = v => 'r_' + (v.sc || 'flacc') + (v.sc === 'cpot' ? '_' + (v.tube || 'in') : '');
 const CALCS = {
-  dengue:{t:'Shock index', fields:[['hr','Heart rate','/min'],['sbp','Systolic BP','mmHg'],['dbp','Diastolic BP','mmHg']],
+  dengue:{t:'Shock index', g:'dengue', src:'Dengue SOP 2.0', path:'#dengue', kw:'pulse pressure heart rate discharge criteria shock',
+    sub:'Shock index, pulse pressure and heart rate against the dengue discharge criteria.',
+    fields:[['hr','Heart rate','/min'],['sbp','Systolic BP','mmHg'],['dbp','Diastolic BP','mmHg']],
     note:'Dengue SOP 2.0 discharge criteria: pulse pressure over 20 and under 50 mmHg, HR under 90 (allow for temperature), shock index under 1. In the ebook pathway a shock index over 1 is a sign of shock.',
     run(v){
       const out = [];
@@ -3461,23 +3585,9 @@ const CALCS = {
       if (v.hr) out.push(['Heart rate', v.hr + '/min', v.hr < 90 ? 'good' : 'warn', v.hr < 90 ? 'Under 90: meets the criterion' : '90 or more: allow for temperature, and reassess', {min:40, max:160, v:v.hr, bands:[[40, 90, 'good'], [90, 160, 'warn']]}]);
       return out.length ? out : null;
     }},
-  kids:{t:'Child doses', fields:[['wt','Weight','kg'],['age','Age','',[['u6','Under 6 years'],['o6','Over 6 years']]]],
-    note:'From the department\'s paediatric asthma posters and Paediatrics 101 notes. Check doses against the Paediatric Protocols and the child\'s condition.',
-    run(v){
-      if (!v.wt) return null;
-      if (v.wt < 2 || v.wt > 80) return [['Weight', 'Enter 2 to 80 kg', 'warn', '']];
-      const w = v.wt, r1 = x => Math.round(x * 10) / 10, u6 = v.age !== 'o6';
-      const pred = r1(w);
-      return [
-        ['Prednisolone 1 mg/kg/day for 3 days', pred + ' mg', pred > 30 ? 'warn' : 'good', pred > 30 ? 'Over the poster\'s maximum of 30–40 mg a day: give no more than that' : 'Asthma, once daily'],
-        ['Salbutamol MDI with spacer', u6 ? '4–6 puffs' : '8–10 puffs', 'good', 'Mild or moderate asthma. Severe: add ipratropium ' + (u6 ? '4' : '8') + ' puffs, 3 cycles in the first hour'],
-        ['Dexamethasone (croup)', r1(0.3 * w) + '–' + r1(0.6 * w) + ' mg', 'good', '0.3–0.6 mg/kg'],
-        ['Nebulised adrenaline 1:1000 (croup)', r1(Math.min(0.5 * w, 5)) + ' ml', 'good', '0.5 ml/kg, max 5 ml'],
-        ['ORS after each loose stool', Math.round(10 * w) + ' ml', 'good', '10 ml/kg'],
-        ['ORS for moderate dehydration', Math.round(75 * w) + ' ml over 4 h', 'good', '75 ml/kg, about ' + Math.round(75 * w / 4) + ' ml an hour']
-      ];
-    }},
-  weight:{t:'Adjusted weight', fields:[['sex','Sex','',[['f','Female'],['m','Male']]],['ht','Height','cm'],['wt','Weight','kg']],
+  weight:{t:'Adjusted weight', g:'dengue', src:'Ebook p31–32', path:'#dengue', kw:'obese bmi ideal body weight dengue fluid',
+    sub:'Ideal and adjusted body weight for an obese patient, for dengue fluid calculations.',
+    fields:[['sex','Sex','',[['f','Female'],['m','Male']]],['ht','Height','cm'],['wt','Weight','kg']],
     note:'From the ebook\'s dengue table: for an obese patient (BMI over 27.5) use the adjusted body weight. Ideal weight: female 45.5 kg, male 50 kg, plus 0.91 × (height − 152 cm). Adjusted = ideal + 0.4 × (actual − ideal).',
     run(v){
       if (!v.ht || !v.wt) return null;
@@ -3488,31 +3598,334 @@ const CALCS = {
         ['Ideal body weight', ibw.toFixed(1) + ' kg', 'good', ''],
         ['Adjusted body weight', adj.toFixed(1) + ' kg', bmi > 27.5 ? 'good' : 'warn', bmi > 27.5 ? 'Use this weight for dengue fluid calculations' : 'Not needed at this BMI']
       ];
+    }},
+  analgesia:{t:'Analgesia by weight', g:'doses', src:'Ebook p45–50', path:'#pain', kw:'paracetamol panadol ketamine pain dose mg/kg',
+    sub:'Paracetamol and ketamine doses from the ebook\'s choice of analgesia table.',
+    fields:[['wt','Weight','kg']],
+    note:'From the ebook\'s choice of analgesia table. Paracetamol (PO/IV): over 50 kg, 500 mg–1 g 6–8 hourly, max 4 g/day; under 50 kg, 15 mg/kg/dose, max 60 mg/kg/day; caution in hepatic impairment. Ketamine (IM/IV): analgesia 0.1–0.3 mg/kg; 0.2–0.5 mg/kg (labelled "recreational" in the ebook); partial dissociation 0.4–0.8 mg/kg; full dissociation 1–2 mg/kg; avoid in IHD.',
+    run(v){
+      const w = v.wt; if (!w) return null;
+      const bad = badWt(w); if (bad) return bad;
+      const out = [];
+      if (w < 50) out.push(['Paracetamol (PO/IV), each dose', fx(15 * w) + ' mg', 'good', `15 mg/kg/dose, max ${fx(60 * w)} mg a day (60 mg/kg/day). Caution: hepatic impairment`]);
+      else if (w > 50) out.push(['Paracetamol (PO/IV), each dose', '500 mg–1 g', 'good', '6–8 hourly, max 4 g a day. Caution: hepatic impairment']);
+      else out.push(['Paracetamol at exactly 50 kg', 'Not covered', 'warn', 'The ebook gives doses for over 50 kg and under 50 kg, but not for exactly 50 kg']);
+      out.push(['Ketamine (IM/IV): analgesia', range(w, 0.1, 0.3), 'good', '0.1–0.3 mg/kg. Avoid in IHD']);
+      out.push(['Ketamine: 0.2–0.5 mg/kg', range(w, 0.2, 0.5), 'good', 'The ebook labels this dose "recreational"']);
+      out.push(['Ketamine: partial dissociation', range(w, 0.4, 0.8), 'warn', '0.4–0.8 mg/kg']);
+      out.push(['Ketamine: full dissociation', range(w, 1, 2), 'warn', '1–2 mg/kg']);
+      return {outs:out, links:[['#calc-pain', 'Pain scales'], ['#pain--mp', 'Morphine pain protocol']]};
+    }},
+  anticoag:{t:'Anticoagulant for a confirmed DVT', g:'doses', src:'Ebook p33–35', path:'#dvt--dvt', kw:'fondaparinux arixtra clexane enoxaparin creatinine clearance dvt dose',
+    sub:'Fondaparinux and Clexane doses by weight and creatinine clearance.',
+    fields:[['wt','Weight','kg'], {k:'crcl', type:'seg', nodef:true, label:'Creatinine clearance', opts:[['over','Over 30'], ['under','Under 30']]}],
+    note:'From the ebook\'s DVT pathway, once a DVT is confirmed: SC fondaparinux (if creatinine clearance over 30): under 50 kg 5 mg, 50–100 kg 7.5 mg, over 100 kg 10 mg, once a day; or SC Clexane 1 mg/kg every 12 hours (creatinine clearance over 30) or once a day (under 30). Consult EP in an obese patient.',
+    run(v){
+      const w = v.wt; if (!w) return null;
+      const bad = badWt(w); if (bad) return bad;
+      if (!v.crcl) return [['Creatinine clearance', 'Choose over or under 30', 'warn', 'The ebook gives doses for over 30 and under 30, not for exactly 30']];
+      const out = [];
+      if (v.crcl === 'over'){
+        out.push(['SC fondaparinux', (w < 50 ? '5' : w <= 100 ? '7.5' : '10') + ' mg once a day', 'good', w < 50 ? 'Under 50 kg' : w <= 100 ? '50–100 kg' : 'Over 100 kg']);
+        out.push(['or SC Clexane', fx(w) + ' mg every 12 hours', 'good', '1 mg/kg every 12 hours']);
+      } else {
+        out.push(['SC fondaparinux', 'Not given', 'warn', 'The ebook gives fondaparinux only for creatinine clearance over 30']);
+        out.push(['SC Clexane', fx(w) + ' mg once a day', 'good', '1 mg/kg once a day']);
+      }
+      out.push(['Obese patient', 'Consult EP', 'warn', '']);
+      return {outs:out, gap:'The ebook does not state the disposition after a confirmed DVT.', links:[['#calc-wells', 'Wells score']]};
+    }},
+  insulin:{t:'Total daily insulin dose', g:'doses', src:'Ebook p41–42', path:'#hyperglycaemia--known', kw:'tdd basal bolus insulin hyperglycaemia units',
+    sub:'The total daily dose for starting a basal-bolus regimen, from the ebook\'s Table 1.0.',
+    fields:[['wt','Weight','kg'], {k:'prof', type:'pick', label:'Patient profile (unit/kg/day)', opts:() => tableOf('hyperglycaemia', 'insulin').rows.map(r => [r[0], r[1]])}],
+    note:'From the ebook\'s Table 1.0, total daily insulin dose: 0.2–0.3 unit/kg/day for the elderly, renal failure or risk of hypoglycaemia; otherwise 0.4 at BG 7.8–11.1 mmol/L and 0.5 at BG 11.2–22.2 mmol/L.',
+    run(v){
+      const w = v.wt; if (!w || !v.prof) return null;
+      const bad = badWt(w); if (bad) return bad;
+      const [a, b] = v.prof.split('–').map(Number);
+      return {outs:[['Total daily dose', (b ? `${fx(a * w)}–${fx(b * w)}` : fx(a * w)) + ' units a day', 'good', v.prof + ' unit/kg/day']],
+        gap:'The ebook says to start a basal-bolus regimen based on the TDD, but does not give the split between basal and bolus doses.'};
+    }},
+  curb:{t:'CURB-65', g:'scores', src:'Ebook p27', path:'#pneumonia--curb', kw:'pneumonia cap severity score',
+    sub:'Severity score for community-acquired pneumonia, read the way the ebook reads it.',
+    fields:[{k:'c', type:'check', label:'Tick each one present', pts:true, items:() => P.pneumonia.nodes.curb.items}],
+    note:'From the ebook\'s community-acquired pneumonia pathway: score 0–1, under 3% risk of death, then the Pneumonia Severity Index (PSI) class; 2 or more, over 10% risk of death: admit.',
+    run(v){
+      if (!v.c_set) return null;
+      const s = v.c_sum;
+      return {outs:[['CURB-65 score', s + ' of 5', s >= 2 ? 'bad' : 'good', s >= 2 ? 'Over 10% risk of death' : 'Under 3% risk of death', {min:-0.5, max:5.5, v:s, bands:[[-0.5, 1.5, 'good'], [1.5, 5.5, 'bad']]}]],
+        verdict:s >= 2 ? {cls:'stop', h:'Score 2 or more: admit', href:'#pneumonia--admit', link:'Open the pathway step'}
+          : {cls:'next', h:'Score 0–1: next, the Pneumonia Severity Index (PSI) class', href:'#pneumonia--psi', link:'Continue in the pathway'}};
+    }},
+  wells:{t:'Wells score (DVT)', g:'scores', src:'Ebook p33–35', path:'#dvt--wells', kw:'dvt deep vein thrombosis d-dimer compression ultrasound',
+    sub:'Pre-test risk of a DVT, with the next step from the ebook\'s pathway.',
+    fields:[{k:'w', type:'check', label:'Tick each one present', pts:true, items:() => P.dvt.nodes.wells.items}],
+    note:'From the ebook\'s DVT pathway: low risk (−2 to 0), D-dimer; moderate risk (1 to 2), D-dimer and interim anticoagulant while waiting; high risk (3 or more), 2-point compression test and interim anticoagulant while waiting.',
+    run(v){
+      if (!v.w_set) return null;
+      const s = v.w_sum, band = s >= 3 ? 'High risk' : s >= 1 ? 'Moderate risk' : 'Low risk';
+      return {outs:[['Wells score', String(s), s >= 3 ? 'bad' : s >= 1 ? 'warn' : 'good', band, {min:-2.5, max:9.5, v:s, bands:[[-2.5, 0.5, 'good'], [0.5, 2.5, 'warn'], [2.5, 9.5, 'bad']]}]],
+        verdict:s >= 3 ? {cls:'next', h:'High risk: 2-point compression test', p:'Start interim anticoagulant while waiting.', href:'#dvt--cp', link:'Continue in the pathway'}
+          : s >= 1 ? {cls:'next', h:'Moderate risk: D-dimer', p:'Start interim anticoagulant while waiting for the D-dimer.', href:'#dvt--ddm', link:'Continue in the pathway'}
+          : {cls:'next', h:'Low risk: D-dimer', href:'#dvt--dd', link:'Continue in the pathway'},
+        links:[['#calc-anticoag', 'Anticoagulant doses']]};
+    }},
+  pain:{t:'Pain scales', g:'calm', src:'Ebook p45–50', path:'#pain', kw:'flacc painad cpot dementia non-communicative ventilated pain score ladder',
+    sub:'FLACC, PAINAD or CPOT for a patient who cannot rate their own pain, read on the MOH analgesic ladder.',
+    fields:v => [{k:'sc', type:'seg', label:'Scale', re:true, opts:[['flacc','FLACC (non-communicative)'], ['painad','PAINAD (geriatric, dementia)'], ['cpot','CPOT (critical care)']]},
+      ...(v.sc === 'cpot' ? [{k:'tube', type:'seg', label:'The patient is', re:true, opts:[['in','Intubated'], ['ex','Extubated']]}] : []),
+      {k:painKey(v), type:'rate', label:'Score each row', rows:painRows(v)}],
+    note:'From the ebook\'s pain pathway: a patient who cannot self-report is assessed with PAINAD (geriatric, dementia), FLACC (non-communicative) or CPOT (ventilated), then "pain score over 6?" decides the next step, with the MOH analgesic ladder: mild 1–3, moderate 4–6, severe 7–10. CPOT scores the ventilator row or the vocalisation row, not both.',
+    run(v){
+      const rows = painRows(v), a = v[painKey(v)] || [], n = a.filter(x => x != null).length;
+      if (!n) return null;
+      const s = a.reduce((t, x) => t + (x || 0), 0), max = rows.length * 2, name = PAIN_ROWS[v.sc || 'flacc'];
+      const lad = tableOf('pain', 'ladder').rows, step = s >= 7 ? lad[2] : s >= 4 ? lad[1] : s >= 1 ? lad[0] : null;
+      const out = [[name + ' score', `${s} of ${max}`, s > 6 ? 'bad' : s >= 4 ? 'warn' : 'good', n < rows.length ? `${rows.length - n} more row${rows.length - n > 1 ? 's' : ''} to score` : step ? step[0] + ' on the MOH ladder' : 'Score 0', {min:-0.5, max:max + 0.5, v:s, bands:[[-0.5, 3.5, 'good'], [3.5, 6.5, 'warn'], [6.5, max + 0.5, 'bad']]}]];
+      if (n < rows.length) return out;
+      if (step) out.push(['MOH analgesic ladder', step[0].split(' ')[0], s > 6 ? 'bad' : s >= 4 ? 'warn' : 'good', step[1]]);
+      return {outs:out, verdict:s > 6 ? {cls:'refer', h:'Over 6: consult EP for the morphine pain protocol', href:'#pain--mp', link:'Open the pathway step'}
+        : {cls:'next', h:'6 or under: non-pharmacological treatment plus analgesia', p:'Use the analgesic ladder and reassess in 30 minutes to 1 hour.', href:'#pain--np', link:'Open the pathway step'},
+        links:[['#calc-analgesia', 'Analgesia by weight']]};
+    }},
+  calm:{t:'Agitation: BARS and RASS', g:'calm', src:'Ebook p5–9', path:'#behavioural-disturbance', kw:'bars rass agitation violent behaviour sedation midazolam ketamine restraint',
+    sub:'Pick the level to see the ebook\'s next step, with weight-based doses from its medication table at BARS 7.',
+    fields:v => [{k:'sc', type:'seg', label:'Scale', re:true, opts:[['bars','BARS'], ['rass','RASS']]},
+      v.sc === 'rass' ? {k:'rass', type:'pick', label:'RASS level', opts:() => tableOf('behavioural-disturbance', 'RASS').rows.map(r => [r[0], r[1], r[2]])}
+        : {k:'bars', type:'pick', label:'BARS level', re:true, opts:() => tableOf('behavioural-disturbance', 'BARS').rows.map(r => [r[0], r[1]])},
+      ...(v.sc !== 'rass' && v.bars === '7' ? [['wt','Weight','kg']] : [])],
+    note:'From the ebook\'s acute behavioural disturbance pathway: BARS 1 to 3 and 5 to 6, look for an organic cause; BARS 4 (non-violent), look for an organic cause; BARS 7, choice of medication, control and restraint, using the medication table. The ebook lists the RASS levels without an action for each.',
+    run(v){
+      if (v.sc === 'rass'){
+        if (!v.rass) return null;
+        const r = tableOf('behavioural-disturbance', 'RASS').rows.find(x => x[0] === v.rass);
+        return {outs:[['RASS ' + r[0], r[1], 'good', r[2]]], gap:'The ebook lists the RASS levels without an action for each.'};
+      }
+      if (!v.bars) return null;
+      const b = +v.bars, row = tableOf('behavioural-disturbance', 'BARS').rows[b - 1], out = [['BARS ' + b, row[1], b === 7 ? 'bad' : b === 4 ? 'good' : 'warn', '']];
+      if (b !== 7) return {outs:out, verdict:b === 4 ? {cls:'next', h:'Non-violent (BARS 4): look for an organic cause', href:'#behavioural-disturbance--nvorg', link:'Open the pathway step'}
+        : {cls:'next', h:'Look for an organic cause', href:'#behavioural-disturbance--org', link:'Open the pathway step'}};
+      const w = v.wt, verdict = {cls:'stop', h:'BARS 7: choice of medication, control and restraint', p:'Monitor for restraint risks: suffocation (prone position), aspiration, injury, hyperthermia, lactic acidosis, raised CK, escape.', href:'#behavioural-disturbance--meds', link:'Open the pathway step'};
+      if (!w) return {outs:[...out, ['Weight-based doses', 'Enter the weight', 'warn', 'The weight-based lines from the ebook\'s medication table appear here']], verdict};
+      const bad = badWt(w); if (bad) return {outs:[...out, ...bad], verdict};
+      out.push(['Midazolam IM (adult)', range(w, 0.07, 0.1), 'warn', '0.07–0.1 mg/kg (usual 5 mg). Respiratory depression, cardiac arrest, paradoxical agitation']);
+      out.push(['Midazolam IM (paediatric)', range(w, 0.1, 0.2), 'warn', `0.1–0.2 mg/kg (max 0.5 mg/kg, ${fx(0.5 * w)} mg)`]);
+      out.push(['Ketamine IM', fx(4 * w) + ' mg', 'warn', '4 mg/kg. Hypertension, tachycardia, hypersalivation, laryngospasm, emergence phenomenon']);
+      out.push(['Ketamine IV over 60 s', range(w, 0.5, 2), 'warn', '0.5–2 mg/kg']);
+      return {outs:out, verdict, gap:'The ebook\'s medication step does not name a first-line drug. These are the weight-based lines from its medication table; the full table has the other drugs and the reversal agents.', links:[['#behavioural-disturbance', 'Medication table']]};
+    }},
+  head:{t:'Mild head injury: CT and discharge', g:'head', src:'Ebook p25–26', path:'#mild-tbi', kw:'tbi head injury ct brain pta a-wptas concussion discharge',
+    sub:'The immediate CT criteria, then the safe discharge criteria, from the ebook\'s mild TBI pathway.',
+    fields:[{k:'ct', type:'check', label:'Any criteria for immediate CT brain?', stop:true, items:() => P['mild-tbi'].nodes.ct.items},
+      {k:'dc', type:'check', label:'Safe discharge criteria, after PTA charting for at least 6 hours since the injury', items:() => P['mild-tbi'].nodes.dc.items}],
+    note:'From the ebook\'s mild TBI pathway. With no immediate CT criteria: observe and assess PTA (A-WPTAS); CT brain if more than 4 hours since the injury and under 18 points on PTA. Discharge only when every safe discharge criterion is fulfilled; if not, admit for extended observation.',
+    run(v){
+      if (!v.ct_set && !v.dc_set) return null;
+      const out = [], dcT = P['mild-tbi'].nodes.dc.items.length;
+      if (v.ct_set) out.push(['Immediate CT brain', v.ct_n ? 'Indicated' : 'No criteria', v.ct_n ? 'bad' : 'good', v.ct_n ? `${v.ct_n} ${v.ct_n > 1 ? 'criteria' : 'criterion'} present` : 'Observe and assess PTA (A-WPTAS): CT if more than 4 hours since the injury and under 18 points on PTA']);
+      if (v.dc_set) out.push(['Safe discharge criteria', `${v.dc_n} of ${dcT}`, v.dc_n === dcT ? 'good' : 'warn', v.dc_n === dcT ? 'All fulfilled' : 'If they cannot all be met: admit for extended observation']);
+      const verdict = v.dc_n === dcT ? {cls:'ok', h:'All fulfilled: discharge with head injury advice', href:'#mild-tbi--home', link:'Open the discharge step'}
+        : v.ct_n ? {cls:'stop', h:'Perform CT brain', href:'#mild-tbi--ct1', link:'Open the pathway step'}
+        : v.dc_set ? {cls:'next', h:'Not every criterion is fulfilled yet', p:'If they cannot all be met, admit for extended observation.', href:'#mild-tbi--extobs', link:'Open the pathway step'}
+        : {cls:'next', h:'No immediate CT criteria: observe and assess PTA', href:'#mild-tbi--obs', link:'Open the pathway step'};
+      return {outs:out, verdict};
+    }},
+  kids:{t:'Child doses', g:'kids', src:'Department posters', path:'#children', kw:'paediatric prednisolone salbutamol puffs ipratropium croup dexamethasone adrenaline ors',
+    sub:'Asthma, croup and ORS doses by weight, from the department\'s posters and notes.',
+    fields:[['wt','Weight','kg'],['age','Age','',[['u6','Under 6 years'],['o6','Over 6 years']]]],
+    note:'From the department\'s paediatric asthma posters and Paediatrics 101 notes. Check doses against the Paediatric Protocols and the child\'s condition.',
+    run(v){
+      if (!v.wt) return null;
+      if (v.wt < 2 || v.wt > 80) return [['Weight', 'Enter 2 to 80 kg', 'warn', '']];
+      const w = v.wt, u6 = v.age !== 'o6';
+      const pred = r1(w);
+      return [
+        ['Prednisolone 1 mg/kg/day for 3 days', pred + ' mg', pred > 30 ? 'warn' : 'good', pred > 30 ? 'Over the poster\'s maximum of 30–40 mg a day: give no more than that' : 'Asthma, once daily'],
+        ['Salbutamol MDI with spacer', u6 ? '4–6 puffs' : '8–10 puffs', 'good', 'Mild or moderate asthma. Severe: add ipratropium ' + (u6 ? '4' : '8') + ' puffs, 3 cycles in the first hour'],
+        ['Dexamethasone (croup)', r1(0.3 * w) + '–' + r1(0.6 * w) + ' mg', 'good', '0.3–0.6 mg/kg'],
+        ['Nebulised adrenaline 1:1000 (croup)', r1(Math.min(0.5 * w, 5)) + ' ml', 'good', '0.5 ml/kg, max 5 ml'],
+        ['ORS after each loose stool', Math.round(10 * w) + ' ml', 'good', '10 ml/kg'],
+        ['ORS for moderate dehydration', Math.round(75 * w) + ' ml', 'good', 'Over 4 hours: 75 ml/kg, about ' + Math.round(75 * w / 4) + ' ml an hour']
+      ];
+    }},
+  soap:{t:'Dehydration check (SOAP)', g:'kids', src:'Paediatrics 101 notes', path:'#children--dehyd', kw:'diarrhoea gastroenteritis child dehydration ors sunken eyes skin turgor',
+    sub:'Count the four SOAP signs in a child with diarrhoea, with the ORS volumes by weight.',
+    fields:[['wt','Weight','kg'], {k:'s', type:'check', label:'Tick each sign you find', items:() => [['S: sunken eyes'], ['O: offer water (how the child drinks)'], ['A: activeness'], ['P: pinch (skin turgor)']]}],
+    note:'From Paediatrics 101, Dr Alza\'s simple notes (department teaching notes): fewer than 2 signs, under 5% dehydrated; 2 or more signs, 5–10%; all 4 signs, over 10%. ORS 10 ml/kg after each loose stool; moderate dehydration, 75 ml/kg over 4 hours.',
+    run(v){
+      const out = [];
+      if (v.s_set){
+        const n = v.s_n;
+        out.push(['SOAP signs', n + ' of 4', n === 4 ? 'bad' : n >= 2 ? 'warn' : 'good', n === 4 ? 'Over 10% dehydrated' : n >= 2 ? '5–10% dehydrated' : 'Under 5% dehydrated', {min:-0.5, max:4.5, v:n, bands:[[-0.5, 1.5, 'good'], [1.5, 3.5, 'warn'], [3.5, 4.5, 'bad']]}]);
+      }
+      const w = v.wt;
+      if (w){
+        if (w < 2 || w > 80) out.push(['Weight', 'Enter 2 to 80 kg', 'warn', '']);
+        else {
+          out.push(['ORS after each loose stool', Math.round(10 * w) + ' ml', 'good', '10 ml/kg']);
+          out.push(['ORS for moderate dehydration', Math.round(75 * w) + ' ml', 'good', `Over 4 hours: 75 ml/kg, about ${Math.round(75 * w / 4)} ml an hour`]);
+        }
+      }
+      if (!out.length) return null;
+      const gaps = ['The notes do not say which SOAP band counts as moderate dehydration.'];
+      if (v.s_set && v.s_n === 4) gaps.push('They do not cover treatment for a child over 10% dehydrated.');
+      return {outs:out, gap:gaps.join(' ')};
     }}
 };
-let calcTab = 'dengue';
+/* Every number above must still be in the source text: the test checks each of these phrases against the pathway data */
+const CALC_FACTS = [
+  ['pain', '15 mg/kg/dose'], ['pain', 'max 60 mg/kg/day'], ['pain', '500 mg–1 g 6–8 hourly, max 4 g/day'], ['pain', 'Analgesia 0.1–0.3 mg/kg'],
+  ['pain', '0.2–0.5 mg/kg'], ['pain', 'partial dissociation 0.4–0.8 mg/kg'], ['pain', 'full dissociation 1–2 mg/kg'], ['pain', 'Mild 1–3'], ['pain', 'Moderate 4–6'], ['pain', 'Severe 7–10'],
+  ['dvt', 'under 50 kg 5 mg once a day'], ['dvt', '50–100 kg 7.5 mg once a day'], ['dvt', 'over 100 kg 10 mg once a day'],
+  ['dvt', 'Clexane 1 mg/kg every 12 hours (creatinine clearance over 30), 1 mg/kg once a day (creatinine clearance under 30)'], ['dvt', 'Consult EP in an obese patient'],
+  ['dvt', 'Low risk (−2 to 0)'], ['dvt', 'Moderate risk (1 to 2)'], ['dvt', 'High risk (3 or more)'],
+  ['pneumonia', 'Score 0–1 (under 3% risk of death)'], ['pneumonia', 'Score 2 or more (over 10% risk of death)'],
+  ['hyperglycaemia', 'BG 7.8–11.1 mmol/L'], ['hyperglycaemia', 'BG 11.2–22.2 mmol/L'], ['hyperglycaemia', 'basal-bolus insulin regimen based on TDD'],
+  ['behavioural-disturbance', 'IM 0.07–0.1 mg/kg (usual 5 mg)'], ['behavioural-disturbance', 'paediatric IM 0.1–0.2 mg/kg (max 0.5 mg/kg)'], ['behavioural-disturbance', 'IM 4 mg/kg; IV 0.5–2 mg/kg over 60 s'],
+  ['behavioural-disturbance', '1 to 3'], ['behavioural-disturbance', '5 to 6'], ['behavioural-disturbance', 'No (non-violent, BARS 4)'],
+  ['mild-tbi', 'More than 4 hours since injury and under 18 points on PTA'], ['mild-tbi', 'minimum of 6 hours since injury'],
+  ['children', 'Fewer than 2 signs: under 5% dehydrated'], ['children', '2 or more signs: 5–10%'], ['children', 'All 4 signs: over 10%'],
+  ['children', 'ORS 10 ml/kg after each loose stool'], ['children', 'moderate dehydration: 75 ml/kg over 4 hours'], ['children', 'Dexamethasone 0.3–0.6 mg/kg'], ['children', '0.5 ml/kg (max 5 ml)']
+];
+const calcFactsMissing = () => CALC_FACTS.filter(([id, s]) => !JSON.stringify(P[id]).includes(s));
+const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc-wells', 'Wells score calculator'], ['#calc-anticoag', 'Anticoagulant doses']],
+  pain:[['#calc-pain', 'Pain scales calculator'], ['#calc-analgesia', 'Analgesia by weight']], hyperglycaemia:[['#calc-insulin', 'Insulin dose calculator']],
+  'mild-tbi':[['#calc-head', 'Head injury check']], 'behavioural-disturbance':[['#calc-calm', 'BARS and RASS']],
+  dengue:[['#calc-dengue', 'Shock index'], ['#calc-weight', 'Adjusted weight']], children:[['#calc-kids', 'Child doses'], ['#calc-soap', 'Dehydration check']]};
+for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]) P[id].see = [...(P[id].see || []), ...l];
+for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
+CALC_LINKS.forEach(l => IDX.push({href:'#calc', title:l.t + ' (PEMCalc, outside site)', kind:'Calculator', meta:'pemcalc.com', body:l.d, ic:'calc', c:'c-breath', j:CALC_G[l.g].j}));
+
+/* The open calculator. Entries live in memory only: the weight and age band are shared, the rest is per calculator */
+let calcTab = 'dengue', cxOpen = false, cxGroup = 'all', cxQ = '';
+const calcMem = {wt:'', age:'u6'}, cState = {};
+const SHARED = new Set(['wt', 'age']);
+const cGet = (id, k) => SHARED.has(k) ? calcMem[k] : (cState[id] || {})[k];
+const cPut = (id, k, val) => { if (SHARED.has(k)) calcMem[k] = val; else (cState[id] = cState[id] || {})[k] = val; };
+const optsOf = f => typeof f.opts === 'function' ? f.opts() : f.opts;
+const itemsOf = f => (typeof f.items === 'function' ? f.items() : f.items).map(x => Array.isArray(x) ? x : [x]);
+function calcVals(id){
+  const c = CALCS[id], v = {};
+  const read = list => list.forEach(f => {
+    if (Array.isArray(f)){ const [k, , , ch] = f, x = cGet(id, k); v[k] = ch ? (x || ch[0][0]) : (x === '' || x == null ? 0 : parseFloat(x) || 0); return; }
+    const x = cGet(id, f.k);
+    if (f.type === 'check'){ const a = x || [], it = itemsOf(f); v[f.k] = a; v[f.k + '_set'] = !!x; v[f.k + '_n'] = a.filter(Boolean).length; v[f.k + '_sum'] = it.reduce((s, row, i) => s + (a[i] ? (row[1] != null ? row[1] : 1) : 0), 0); }
+    else if (f.type === 'rate') v[f.k] = x || [];
+    else v[f.k] = x || (f.type === 'seg' && !f.nodef ? optsOf(f)[0][0] : '');
+  });
+  /* Fields can depend on earlier choices (the pain scale, BARS 7): read until they settle */
+  let list = typeof c.fields === 'function' ? c.fields(v) : c.fields;
+  read(list);
+  if (typeof c.fields === 'function') for (let i = 0; i < 3; i++){ list = c.fields(v); read(list); }
+  return {v, list};
+}
+function fieldHTML(id, f){
+  if (Array.isArray(f)){
+    const [k, l, unit, ch] = f, x = cGet(id, k);
+    if (ch) return `<div class="field"><label for="cf-${k}">${l}</label><select id="cf-${k}" data-k="${k}">${ch.map(([val, t]) => `<option value="${val}"${x === val ? ' selected' : ''}>${t}</option>`).join('')}</select></div>`;
+    return `<div class="field${k === 'wt' ? ' wt' : ''}"><label for="cf-${k}">${l}${unit ? ' (' + unit + ')' : ''}</label><input id="cf-${k}" data-k="${k}" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" value="${esc(x == null ? '' : String(x))}">${k === 'wt' ? '<small>Shared with the other dose calculators. Not saved.</small>' : ''}</div>`;
+  }
+  const x = cGet(id, f.k);
+  if (f.type === 'seg'){ const o = optsOf(f), cur = x || (f.nodef ? '' : o[0][0]);
+    return `<div class="cf-full cf-seg"><span class="cf-l" id="cl-${f.k}">${esc(f.label)}</span><div class="seg" role="group" aria-labelledby="cl-${f.k}" style="--n:${o.length}">${o.map(([val, t]) => `<button type="button" data-k="${f.k}" data-sv="${val}" aria-pressed="${cur === val}">${esc(t)}</button>`).join('')}</div></div>`; }
+  if (f.type === 'check'){ const a = x || [];
+    return `<fieldset class="cf-full"><legend>${esc(f.label)}</legend><ul class="dc-list${f.stop ? ' stop' : ''}">${itemsOf(f).map((row, i) => `<li><label><input type="checkbox" data-k="${f.k}" data-i="${i}"${a[i] ? ' checked' : ''}><span>${esc(row[0])}</span>${f.pts ? `<b class="pts">${(row[1] != null ? row[1] : 1) > 0 ? '+' : ''}${String(row[1] != null ? row[1] : 1).replace('-', '−')}</b>` : ''}</label></li>`).join('')}</ul></fieldset>`; }
+  if (f.type === 'rate'){ const a = x || [];
+    return `<fieldset class="cf-full"><legend>${esc(f.label)}</legend>${f.rows.map((row, r) => `<div class="rate"><span class="rn" id="rn-${r}">${esc(row[0])}</span><div class="ro" role="radiogroup" aria-labelledby="rn-${r}">${[1, 2, 3].map(s => `<button type="button" role="radio" data-k="${f.k}" data-r="${r}" data-s="${s - 1}" aria-checked="${a[r] === s - 1}"><b>${s - 1}</b><span>${esc(row[s] || '')}</span></button>`).join('')}</div></div>`).join('')}</fieldset>`; }
+  if (f.type === 'pick'){
+    return `<fieldset class="cf-full"><legend>${esc(f.label)}</legend><div class="pick" role="radiogroup">${optsOf(f).map(([val, t, d]) => `<button type="button" role="radio" data-k="${f.k}" data-pv="${esc(val)}" aria-checked="${x === val}"><b>${esc(val)}</b><span>${esc(t)}${d ? `<small>${esc(d)}</small>` : ''}</span></button>`).join('')}</div></fieldset>`; }
+  return '';
+}
+function renderCalc(){
+  const c = CALCS[calcTab], g = CALC_G[c.g], box = $('#calcbox'), {list} = calcVals(calcTab);
+  withTiles(box, `<div class="tile ${g.j} tool-h cx-h">${tileMedia(g.k)}<div class="row"><span class="ic">${svg(g.ic)}</span><h2>${esc(c.t)}</h2></div><p>${esc(c.sub)}</p><div class="tags"><span class="tag">${esc(c.src)}</span><span class="tag">${esc(g.t)}</span></div></div>
+    <div class="tool-b"><div class="fields">${list.map(f => fieldHTML(calcTab, f)).join('')}</div><div class="outs" id="couts" aria-live="polite"></div>
+    <p class="calc-note">${esc(c.note)}</p>
+    <div class="foot cx-foot">${c.path ? `<a class="pill" href="${c.path}">Open the pathway${svg('chev')}</a>` : ''}<span class="sp"></span><button type="button" class="sm" id="cxcopy">${svg('copy')}<span class="bl">Copy</span></button><button type="button" class="sm" id="cxclear">${svg('restart')}<span class="bl">Clear</span></button></div></div>`);
+  calcOut();
+  markCxCurrent();
+}
+let calcLast = null;
+function calcOut(){
+  const c = CALCS[calcTab], {v, list} = calcVals(calcTab);
+  let r = c.run(v);
+  if (Array.isArray(r)) r = {outs:r};
+  calcLast = r;
+  const box = $('#couts');
+  if (!r){ box.innerHTML = `<div class="out"><span>${list.some(f => !Array.isArray(f)) ? 'Choose or tick to see the result' : 'Fill in the boxes to see the result'}</span></div>`; return; }
+  const vd = r.verdict;
+  /* A figure is set in mono; an answer in words (Indicated, Not covered, a BARS level) is set in the display face */
+  box.innerHTML = r.outs.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b${/\d/.test(val) ? '' : ' class="w"'}>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('')
+    + (vd ? `<div class="verdict ${vd.cls}"><span>${esc(vd.h)}</span>${vd.p ? `<p>${esc(vd.p)}</p>` : ''}${vd.href ? `<a class="pill" href="${vd.href}">${esc(vd.link || 'Open the pathway step')}${svg('chev')}</a>` : ''}</div>` : '')
+    + (r.gap ? `<p class="cx-gap">${svg('info')}<span><b>Not in the source:</b> ${esc(r.gap)}</span></p>` : '')
+    + (r.links ? `<div class="cx-links">${r.links.map(([h, t]) => `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : '');
+}
 /* A scale under a result: the bands are the thresholds already given in the note above */
 const scaleOf = s => {
   if (!s) return '';
   const x = Math.max(0, Math.min(100, (s.v - s.min) / (s.max - s.min) * 100));
   return `<div class="scale" aria-hidden="true"><div class="bar">${s.bands.map(([a, b, c]) => `<s class="${c}" style="flex:${b - a}"></s>`).join('')}</div><span class="pin" style="--x:${x.toFixed(1)}%"></span></div>`;
 };
-function renderCalc(){
-  const c = CALCS[calcTab], box = $('#calcbox');
-  const field = ([k, l, unit, choices]) => choices
-    ? `<div class="field"><label for="cf-${k}">${l}</label><select id="cf-${k}" data-k="${k}">${choices.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select></div>`
-    : `<div class="field"><label for="cf-${k}">${l}${unit ? ' (' + unit + ')' : ''}</label><input id="cf-${k}" data-k="${k}" type="number" inputmode="decimal" min="0" step="any" autocomplete="off"></div>`;
-  withTiles(box, `<div class="tile t-bronze tool-h">${tileMedia('calc')}<div class="row"><span class="ic">${svg('calc')}</span><h2>Quick sums</h2></div><p>Arithmetic only, from the ebook and department posters. Nothing you type is saved.</p></div>
-    <div class="tool-b"><div class="seg" role="group" aria-label="Calculator">${Object.entries(CALCS).map(([k, x]) => `<button type="button" data-ct="${k}" aria-pressed="${k === calcTab}">${x.t}</button>`).join('')}</div>
-    <div class="fields">${c.fields.map(field).join('')}</div><div class="outs" id="couts" aria-live="polite"></div><p class="calc-note">${esc(c.note)}</p></div>`);
-  const upd = () => {
-    const v = {};
-    box.querySelectorAll('[data-k]').forEach(el => { v[el.dataset.k] = el.tagName === 'SELECT' ? el.value : (el.value === '' ? 0 : parseFloat(el.value)); });
-    const out = c.run(v);
-    $('#couts').innerHTML = out ? out.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('') : '<div class="out"><span>Fill in the boxes to see the result</span></div>';
-  };
-  box.oninput = upd; box.onchange = upd;
-  upd();
+function calcText(){
+  const c = CALCS[calcTab], r = calcLast, {v, list} = calcVals(calcTab);
+  const ins = list.filter(f => Array.isArray(f) && v[f[0]]).map(f => `${f[1]}: ${f[3] ? (f[3].find(o => o[0] === v[f[0]]) || [, v[f[0]]])[1] : v[f[0]] + (f[2] ? ' ' + f[2] : '')}`);
+  list.filter(f => !Array.isArray(f) && (f.type === 'seg' || f.type === 'pick') && v[f.k]).forEach(f => { const o = optsOf(f).find(x => x[0] === v[f.k]); if (o) ins.push(`${f.label}: ${f.type === 'pick' ? o[0] + ' ' + o[1] : o[1]}`); });
+  const lines = [c.t, ...ins];
+  if (r){ r.outs.forEach(([l, val, , em]) => lines.push(`${l}: ${val}${em ? ' (' + em + ')' : ''}`)); if (r.verdict) lines.push(r.verdict.h + (r.verdict.p ? ' ' + r.verdict.p : '')); if (r.gap) lines.push('Not in the source: ' + r.gap); }
+  lines.push('Source: ' + c.src + ' (Green Zone MO Guide). Check against the patient and local protocols.');
+  return lines.join('\n');
+}
+function fieldOf(k){ return calcVals(calcTab).list.find(f => (Array.isArray(f) ? f[0] : f.k) === k); }
+function calcRefocus(sel){ if (!sel) return; const el = $('#calcbox ' + sel); if (el) el.focus(); }
+$('#calcbox').addEventListener('input', e => { const el = e.target.closest('input[type="number"][data-k]'); if (!el) return; cPut(calcTab, el.dataset.k, el.value); calcOut(); });
+$('#calcbox').addEventListener('change', e => {
+  const el = e.target;
+  if (el.matches('select[data-k]')){ cPut(calcTab, el.dataset.k, el.value); calcOut(); }
+  else if (el.matches('input[type="checkbox"][data-k]')){ const n = itemsOf(fieldOf(el.dataset.k)).length, a = (cGet(calcTab, el.dataset.k) || Array(n).fill(false)).slice(); a[+el.dataset.i] = el.checked; cPut(calcTab, el.dataset.k, a); calcOut(); }
+});
+$('#calcbox').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.id === 'cxcopy') return copyText(calcText(), {btn:b, el:$('#couts')});
+  if (b.id === 'cxclear'){ delete cState[calcTab]; calcMem.wt = ''; calcMem.age = 'u6'; renderCalc(); return calcRefocus('#cxclear'); }
+  const k = b.dataset.k; if (!k) return;
+  const f = fieldOf(k);
+  if (b.dataset.sv != null){ cPut(calcTab, k, b.dataset.sv); if (f && f.re){ renderCalc(); return calcRefocus(`[data-k="${k}"][data-sv="${b.dataset.sv}"]`); } b.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); calcOut(); }
+  else if (b.dataset.r != null){ const a = (cGet(calcTab, k) || []).slice(); a[+b.dataset.r] = +b.dataset.s; cPut(calcTab, k, a); b.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', x === b)); calcOut(); }
+  else if (b.dataset.pv != null){ cPut(calcTab, k, b.dataset.pv); if (f && f.re){ renderCalc(); return calcRefocus(`[data-k="${k}"][data-pv="${b.dataset.pv}"]`); } b.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', x === b)); calcOut(); }
+});
+
+/* The hub: group tiles, a find box and every calculator and outside link, grouped */
+function renderCalcHub(){
+  /* Counts are calculators only, as on the home tile, the sidebar and Shift tools; the outside links are extra rows */
+  const n = g => g === 'all' ? Object.keys(CALCS).length : Object.values(CALCS).filter(c => c.g === g).length;
+  withTiles($('#cxcats'), [{k:'all', t:'All', j:'t-obsidian', ic:'calc'}, ...CALC_GROUPS].map(g => `<button type="button" class="${g.j}" data-cg="${g.k}" aria-pressed="${cxGroup === g.k}">${tileMedia(g.k === 'all' ? 'calc' : g.k)}${svg(g.ic)}<span>${esc(g.t)}</span><small>${n(g.k)}</small></button>`).join(''));
+  withTiles($('#cxlist'), CALC_GROUPS.map(g => {
+    const cs = Object.entries(CALCS).filter(([, c]) => c.g === g.k), ls = CALC_LINKS.filter(l => l.g === g.k);
+    return `<section class="libsec cxsec ${g.j}" data-g="${g.k}" aria-label="${esc(g.t)}"><h2 class="lh">${tileMedia(g.k)}${svg(g.ic)}<span>${esc(g.t)}</span><small>${cs.length}</small></h2><div class="grid">`
+      + cs.map(([id, c]) => `<article class="pc cxc" data-id="${id}" data-kw="${esc([c.t, c.sub, c.src, c.kw, g.t].join(' ').toLowerCase())}"><div class="pc-b"><h3><a href="#calc-${id}">${esc(c.t)}</a></h3><div class="meta"><span class="src">${esc(c.src)}</span></div><p class="ld">${esc(c.sub)}</p></div>${svg('chev', 'go')}</article>`).join('')
+      + ls.map(l => `<article class="pc cxl" data-kw="${esc([l.t, l.d, 'pemcalc paediatric child', g.t].join(' ').toLowerCase())}"><div class="pc-b"><h3><a href="${l.href}" target="_blank" rel="noopener noreferrer">${esc(l.t)}<span class="vh"> (opens PEMCalc, an outside site)</span></a></h3><div class="meta"><span class="ext">${svg('ext')}PEMCalc, outside site</span></div><p class="ld">${esc(l.d)} Not from the ebook or a department document: check it against local protocols.</p></div>${svg('ext', 'go')}</article>`).join('')
+      + '</div></section>';
+  }).join(''));
+  applyCxFilter();
+  markCxCurrent();
+}
+function applyCxFilter(){
+  const q = cxQ.trim().toLowerCase(); let shown = 0;
+  $$('#cxlist .cxsec').forEach(sec => {
+    const inG = cxGroup === 'all' || sec.dataset.g === cxGroup; let k = 0;
+    sec.querySelectorAll('.pc').forEach(row => { const ok = inG && (!q || q.split(/\s+/).every(w => row.dataset.kw.includes(w))); row.hidden = !ok; if (ok) k++; });
+    sec.hidden = !k; shown += k;
+  });
+  $('#cxempty').hidden = shown > 0;
+  $$('#cxcats [data-cg]').forEach(b => b.setAttribute('aria-pressed', b.dataset.cg === cxGroup));
+}
+function markCxCurrent(){ $$('#cxlist .cxc').forEach(r => { const on = cxOpen && r.dataset.id === calcTab; r.classList.toggle('cur', on); const a = r.querySelector('a'); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }); }
+function setCxOpen(on){ cxOpen = on; $('#cx').classList.toggle('open', on); $('#calcbox').hidden = !on; markCxCurrent(); }
+$('#cxcats').addEventListener('click', e => { const b = e.target.closest('[data-cg]'); if (!b) return; cxGroup = b.dataset.cg; applyCxFilter(); });
+$('#cxq').addEventListener('input', e => { cxQ = e.target.value; applyCxFilter(); });
+/* The Shift tools card that leads to the hub */
+function renderToolsCalc(){
+  withTiles($('#tcx'), `${tileMedia('calc')}<div class="row"><span class="ic">${svg('calc')}</span><h2>Calculators</h2><span class="tag">${Object.keys(CALCS).length}</span></div><p>Doses, scores and checks from the ebook and department notes, each with its source.</p><ul class="gl">${CALC_GROUPS.map(g => `<li><span>${esc(g.t)}</span><b>${Object.values(CALCS).filter(c => c.g === g.k).length}</b></li>`).join('')}</ul><span class="go-l">Open the calculators${svg('chev')}</span>`);
 }
 
 /* ================= Numbers ================= */
@@ -3794,10 +4207,12 @@ function route(){
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved'){ if (h === 'saved' && libF !== 'saved'){ libF = 'saved'; renderLib(); } changed = showView('pathways'); }
   else if (['rules', 'tools', 'numbers', 'new', 'poster', 'about'].includes(h)) changed = showView(h);
-  else if ((m = h.match(/^calc(?:-(dengue|kids|weight))?$/))){
-    if (m[1] && m[1] !== calcTab){ calcTab = m[1]; renderCalc(); }
-    changed = showView('tools');
-    $('#calcbox').scrollIntoView({block:'start'});
+  else if ((m = h.match(/^calc(?:-([a-z]+))?$/))){
+    const id = m[1] && CALCS[m[1]] ? m[1] : null;
+    if (id && id !== calcTab){ calcTab = id; renderCalc(); }
+    setCxOpen(!!id);
+    changed = showView('calc');
+    if (id) $('#calcbox').scrollIntoView({block:'start'});
   }
   else if (h === 'learn' || h === 'journey') changed = showLearn('journey');
   else if ((m = h.match(/^journey-([1-5])$/))){ changed = showLearn('journey'); setStep(+m[1] - 1, !changed); }
@@ -3816,8 +4231,9 @@ applyPrefs();
 clipsOn = prefs.clips === 'on';
 $('#cnt-path').textContent = Object.keys(P).length;
 $('#cnt-rule').textContent = FLOW_IDS.length + PROT_IDS.length;
+$('#cnt-calc').textContent = Object.keys(CALCS).length;
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
-renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalc(); renderNums();
+renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums();
 renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
@@ -3886,7 +4302,6 @@ $('#run').addEventListener('keydown', e => {
 });
 
 /* Tools and numbers */
-$('#calcbox').addEventListener('click', e => { const b = e.target.closest('[data-ct]'); if (b){ calcTab = b.dataset.ct; renderCalc(); } });
 $('#nums').addEventListener('click', e => { const b = e.target.closest('button[data-copy]'); if (b){ const i = +b.dataset.copy; copyText(NUMS[i].copy, {btn:b, el:$('#nv' + i)}); } });
 
 /* Learn */

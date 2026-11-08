@@ -417,9 +417,9 @@ main{flex:1;outline:none}
 /* Code Blue and Code Stroke carry emergency numbers: their picture is a quiet background, so the extension reads at a glance */
 .nt .tm img,.nt .tm video.on{opacity:.4}
 .nt .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
-/* The home list tiles (Pathways, Rules, Discharge check, Quick sums) carry text across their width: a quiet background, as on the number tiles */
-.st .tm img,.st .tm video.on{opacity:.4}
-.st .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
+/* The home list tiles (Pathways, Rules, Discharge check, Calculators) carry text across their width: a quiet background, as on the number tiles */
+.st .tm img,.st .tm video.on,.tool-go .tm img,.tool-go .tm video.on{opacity:.4}
+.st .tm::after,.tool-go .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
 /* First shift, the Tools headers and the Pathways section bars: the picture on the right, the words on calm colour */
 .first .tm img,.first .tm video,.tool-h .tm img,.tool-h .tm video,.lh .tm img,.lh .tm video{left:auto;width:64%}
 .lh .tm img,.lh .tm video{width:min(64%,250px)}
@@ -428,7 +428,7 @@ main{flex:1;outline:none}
 /* The pearl tile is light: its picture stays faint so the pearl and its source keep their contrast */
 .tip .tm img,.tip .tm video.on{opacity:.55}
 .tip .tm::after{background:linear-gradient(90deg,var(--t1) 34%,transparent 92%)}
-.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small{text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small,.tool-go h2,.tool-go p,.tool-go li,.tool-go .go-l{text-shadow:0 1px 3px rgba(0,0,0,.45)}
 @media (prefers-reduced-motion:no-preference){.tm video{transition:opacity .6s var(--ease)}}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
 .od{display:inline-flex;align-items:center;gap:6px;font:800 .7rem/1 var(--body);color:var(--ink-2);padding:5px 9px 5px 5px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
@@ -745,6 +745,75 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .scale .pin::after{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--surface-2)}
 .calc-note{font-size:.8rem;color:var(--muted);margin:14px 0 0;line-height:1.5}
 
+/* ---------- Calculators (9 Nov 2026): the hub, the open calculator and its field kinds ---------- */
+.cx{display:grid;gap:18px;align-items:start}
+.cx-hub{display:grid;gap:14px;min-width:0;align-content:start}
+.cx-hub .find{max-width:none}
+.cx-hub .cats{margin:0}
+#cxlist{display:grid;gap:14px}
+#cxlist .libsec{margin-top:0}
+@media (min-width:980px){.cx.open{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.cx-h .tags{display:flex;flex-wrap:wrap;gap:6px}
+.field.wt small{font-size:.74rem;line-height:1.3;color:var(--muted)}
+.cf-full{grid-column:1/-1;min-width:0;margin:0;padding:0;border:0}
+.cf-full legend,.cf-l{display:block;padding:0;margin:0 0 8px;font:800 .8rem/1.2 var(--body);color:var(--muted)}
+.cf-seg .seg{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
+.cf-seg .seg button{min-height:44px;white-space:normal;line-height:1.2}
+.out b.w{font:850 1.05rem/1.25 var(--display);letter-spacing:-.01em}
+.dc-list .pts{margin-left:auto;padding-left:10px;font:700 .95rem var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+.dc-list label:has(input:checked) .pts{color:var(--accent)}
+.rate{display:grid;gap:6px;margin:0 0 14px}
+.rate:last-child{margin-bottom:0}
+.rate .rn{font:850 .98rem/1.2 var(--display);letter-spacing:-.01em}
+.rate .ro{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.rate button{display:grid;grid-template-columns:minmax(0,1fr);justify-content:stretch;align-content:start;justify-items:start;gap:4px;min-height:72px;padding:10px 11px;border:0;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-2);text-align:left;font:600 .8rem/1.3 var(--body);transition:background-color .15s,box-shadow .15s}
+.rate button b{font:700 1.05rem/1 var(--mono);color:var(--ink)}
+.rate button:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.rate button[aria-checked="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent);color:var(--ink)}
+.rate button[aria-checked="true"] b{color:var(--accent)}
+@media (max-width:560px){.rate .ro{grid-template-columns:minmax(0,1fr)}.rate button{grid-template-columns:24px minmax(0,1fr);align-items:center;min-height:48px}}
+.pick{display:grid;gap:6px}
+.pick button{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;gap:12px;min-height:54px;padding:7px 14px 7px 7px;border:0;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);text-align:left;font:800 .95rem/1.25 var(--body);transition:background-color .15s,box-shadow .15s}
+.pick button b{display:grid;place-items:center;height:40px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-2);font:700 .95rem var(--mono);font-variant-numeric:tabular-nums}
+.pick button small{display:block;margin-top:3px;font:600 .8rem/1.35 var(--body);color:var(--muted)}
+.pick button:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.pick button[aria-checked="true"]{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
+.pick button[aria-checked="true"] b{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-2));color:#fff;box-shadow:none}
+.verdict.next{background:var(--b-neutral);color:#fff;box-shadow:0 18px 30px -20px var(--b-neutral);box-shadow:0 18px 30px -20px color-mix(in srgb,var(--b-neutral),#000 var(--shade-k))}
+.verdict.refer{background:var(--b-refer);color:#fff;box-shadow:0 18px 30px -20px var(--b-refer);box-shadow:0 18px 30px -20px color-mix(in srgb,var(--b-refer),#000 var(--shade-k))}
+.verdict > span{display:block}
+.verdict .pill{margin-top:10px;min-height:38px;background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.34);color:#fff}
+.verdict .pill:hover{background:rgba(255,255,255,.26);border-color:#fff;color:#fff}
+.cx-gap{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line-2);font-size:.84rem;line-height:1.45;color:var(--ink-2)}
+.cx-gap svg{width:18px;height:18px;flex:none;margin-top:1px;color:var(--muted)}
+.cx-links{display:flex;flex-wrap:wrap;gap:8px}
+.cx-foot{justify-content:flex-start}
+.cx-foot .sp{flex:1}
+.cxsec .pc{padding-right:48px}
+.cxsec .pc .go{position:absolute;right:18px;top:50%;width:18px;height:18px;margin-top:-9px;color:var(--faint);transition:transform .2s var(--ease),color .2s}
+.cxsec .pc:hover .go{color:var(--accent);transform:translateX(2px)}
+.cxsec .pc.cur{background:var(--accent-soft)}
+.cxsec .pc.cur h3 a{color:var(--accent)}
+.cxl .ext{display:inline-flex;align-items:center;gap:5px}
+.cxl .ext svg{width:14px;height:14px}
+.cx-empty{margin:0;padding:18px;border-radius:var(--r-lg);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-2);color:var(--muted);text-align:center}
+/* The light jewel takes the dark gold ink, without the shadow the dark jewels put under white text */
+.cats button.t-champagne,.libsec.t-champagne .lh{color:var(--gold-ink)}
+.cats button.t-champagne span,.cats button.t-champagne small,.libsec.t-champagne .lh span,.libsec.t-champagne .lh small,.tool-h.t-champagne h2,.tool-h.t-champagne p{text-shadow:none}
+.tool-h.t-champagne .ic{color:var(--gold-ink);background:rgba(255,255,255,.42);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.tool-h.t-champagne .tag{background:rgba(255,255,255,.42)}
+/* The Shift tools card that leads to the calculators */
+.tool-go{gap:12px;text-decoration:none}
+.tool-go .row{display:flex;align-items:center;gap:12px}
+.tool-go .ic{background:var(--glass);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.tool-go h2{margin:0;font:900 1.4rem/1.15 var(--display);letter-spacing:-.02em}
+.tool-go p{margin:0;max-width:46ch;font-size:.9rem;line-height:1.45;opacity:.9}
+.tool-go .gl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:6px}
+.tool-go .gl li{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:38px;padding:6px 12px;border-radius:12px;background:var(--glass);font:700 .88rem var(--body)}
+.tool-go .gl b{font:700 .9rem var(--mono);font-variant-numeric:tabular-nums}
+.tool-go .go-l{display:inline-flex;align-items:center;gap:6px;font:800 .95rem var(--body)}
+.tool-go .go-l svg{width:18px;height:18px}
+
 /* ---------- Numbers ---------- */
 .num-group{display:flex;align-items:center;gap:12px;font:850 1.2rem/1.2 var(--display);letter-spacing:-.01em;margin:30px 0 12px}
 .num-group:first-child{margin-top:0}
@@ -989,6 +1058,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <a href="#pathways" data-v="pathways"><span data-icon="path"></span>Pathways<span class="cnt" id="cnt-path"></span></a>
       <a href="#rules" data-v="rules"><span data-icon="rule"></span>Rules and protocols<span class="cnt" id="cnt-rule"></span></a>
       <a href="#tools" data-v="tools"><span data-icon="check"></span>Shift tools</a>
+      <a href="#calc" data-v="calc"><span data-icon="calc"></span>Calculators<span class="cnt" id="cnt-calc"></span></a>
       <a href="#numbers" data-v="numbers"><span data-icon="phone"></span>Numbers</a>
       <div class="sgrp">Learn</div>
       <a href="#intro" data-v="intro"><span data-icon="flag"></span>First-shift intro</a>
@@ -1034,7 +1104,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <section class="tile t-sapphire st" id="t-paths" aria-label="Pathways by body system"></section>
           <section class="tile t-plum st" id="t-rules" aria-label="Rules and protocols"></section>
           <section class="tile t-teal st" id="t-dc" aria-label="Discharge safety check"></section>
-          <section class="tile t-bronze st" id="t-calc" aria-label="Quick sums"></section>
+          <section class="tile t-bronze st" id="t-calc" aria-label="Calculators"></section>
           <a class="tile t-obsidian wide first" href="#intro" id="t-intro"></a>
           <section class="tile t-champagne wide tip" id="tl-tip" aria-labelledby="h-tip"><span class="tm" aria-hidden="true" data-tm="tip"><img src="tiles/tip.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span><div class="tile-h"><h2 id="h-tip">Pearl for this shift</h2></div><div id="tip" aria-live="polite"></div></section>
           <section class="tile t-pearl wide" id="tl-keyn" aria-labelledby="h-keyn"><div class="tile-h"><h2 id="h-keyn">More numbers</h2><a class="tl" href="#numbers">All 14</a></div><div id="keynums"></div></section>
@@ -1069,8 +1139,23 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Shift tools -->
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
-          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and quick sums from the ebook and the department's posters. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tool" id="calcbox"></div></div>
+          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook and the department's notes. Nothing you tick or type is saved.</p></div></header>
+        <div class="tools"><div class="tool" id="dcheck"></div><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a></div>
+      </div></section>
+
+      <!-- Calculators -->
+      <section class="view" data-view="calc" id="v-calc" hidden aria-labelledby="h-calc"><div class="vw">
+        <header class="vhead"><div><h1 id="h-calc">Calculators</h1>
+          <p>Doses, scores and checks built only from the ebook and the department's notes, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
+        <div class="cx" id="cx">
+          <div class="tool cx-open" id="calcbox" hidden></div>
+          <div class="cx-hub">
+            <label class="find"><span data-icon="search"></span><span class="vh">Find a calculator</span><input id="cxq" type="search" placeholder="Find a calculator, drug or score" autocomplete="off"></label>
+            <div class="cats cx-cats" id="cxcats" role="group" aria-label="Calculator groups"></div>
+            <div id="cxlist"></div>
+            <p class="cx-empty" id="cxempty" hidden>No calculator matches. Try a drug, a score or a condition.</p>
+          </div>
+        </div>
       </div></section>
 
       <!-- Numbers -->
@@ -1137,7 +1222,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <p>Everything in this guide and where it comes from. It is a reference tool only and holds no patient data. Use clinical judgement and consult the Emergency Physician on duty when unsure.</p></div></header>
         <div class="srcs" id="srcs"></div>
         <div class="shead"><h2>Privacy</h2></div>
-        <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the quick sums is kept.</p>
+        <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
           <p>Illustrations and clips are generated artwork and show no real staff or patients. Department documents are cited by title and date; personal phone numbers, registration numbers and patient details in them are left out.</p></div>
       </div></section>
 

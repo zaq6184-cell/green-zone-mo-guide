@@ -22,24 +22,24 @@ The two claude.ai links are private until you share them from the page's Share m
 | `app/` | An offline copy of the app. Open `app/index.html` in Chrome or Edge, and keep the `clips`, `audio`, `img`, `media`, `poster` and `tiles` folders beside it. Fonts need the internet; without it the app falls back to the system font. |
 | `app/clips/` | Six 8-second Flow Studio clips (1280×720): the hero loop and one for each stop of the patient journey. They are generated artwork with no text, logos or real people. |
 | `app/audio/` | The narration for each journey stop, cut from the explainer's narration. |
-| `flow-video/` | The same six clips as they came from Flow Studio, at full quality, and the seventeen tile loops in `tiles/`. |
+| `flow-video/` | The same six clips as they came from Flow Studio, at full quality, and the twenty-three tile loops in `tiles/`. |
 | `video/` | The narrated explainer at 1080p and 720p in English, and in Bahasa Melayu (`-ms-`), each also in night colours (`-night-`), `REVIEW.md` with how they were made and checked, and the HyperFrames projects `explainer/` (English, and the shared generator), `explainer-ms/` (Malay), and `explainer-night/` and `explainer-ms-night/` (night). |
 | `poster/` | `green-zone-poster-A3.pdf` (two A3 pages, ready to print), a PNG of each sheet, a night PNG of each (for screens; the printed sheets stay in day colours), and `src/` (`poster.html` and `render.js`, which builds both themes, refuses to write if anything overflows or the QR code differs, and rewrites only the files that changed). |
-| `illustrations/` | The six Flow Studio illustrations (1376×768 PNG), and the seventeen tile stills in `tiles/`. |
+| `illustrations/` | The six Flow Studio illustrations (1376×768 PNG), and the twenty-three tile stills in `tiles/`. |
 | `DRIVE-RUN-THROUGH.md` | Every subfolder of the MO Drive's 3. CLINICAL folder and the triage course folder documents: what went into the guide, what did not, and why. |
 | `RESEARCH.md` | What the research on point-of-care lookup and teaching video says, and how the app applies it. |
 
 ## What the app does
 
 **During a shift**
-- **Home:** a bento of tiles, each showing real data from the guide: the zone map (five stops of a Green Zone visit; tap one for what happens there and the rules that apply), Code Blue and Code Stroke with Copy, quick routes with how each pathway can end, your saved and recent pathways, the number of pathways and rules, the discharge check, quick sums, three more numbers, a pearl for the shift, the three rules to keep and what is new.
+- **Home:** a bento of tiles, each showing real data from the guide: the zone map (five stops of a Green Zone visit; tap one for what happens there and the rules that apply), Code Blue and Code Stroke with Copy, quick routes with how each pathway can end, your saved and recent pathways, the number of pathways and rules, the discharge check, the calculators, three more numbers, a pearl for the shift, the three rules to keep and what is new.
 - **Search from anywhere:** press **/** or Ctrl K (⌘K on a Mac), tap a search box, or use the Search tab on a phone. It finds pathways, rules, steps, numbers and department notes as you type.
 - **Moving tiles:** each topic tile, and Code Blue and Code Stroke, shows a glass sculpture of its body system made in Flow Studio, moving in a quiet 8-second loop (the heart beats, the lungs breathe). The other home tiles move too: a book, a shield, a doorway, a gauge, a compass and a pearl. So do the Pathways section bars and the Shift tools headers. A loop plays only while its tile is on screen, and a phone plays at most six at once; Settings, Moving tiles turns them off.
 - **Pathways:** 23 ebook pathways in six body-system groups, and 15 rules and protocols (8 on the Green Zone flow and referrals, 7 department protocols). Filter as you type, or tap a group. Star a pathway to keep it on the home screen.
 - **The step screen:** one question per card, with a progress bar and **Your route** beside it (on a phone, the answers so far as chips you can tap to go back). **Can still end in** shows which outcome boxes are still possible from where you are. Checklists highlight the answer that fits what you ticked. It ends in the outcome card, in the ebook's colours: red for admit, yellow for observation, green for discharge, violet for referral. **Copy outcome** and **Copy advice** put the text on the clipboard. Below it, tabs for discharge advice, practical concerns, department notes, tables and references. On a keyboard, 1 to 9 answer and Backspace steps back.
 - **Whole pathway:** every step of a pathway on one sheet, numbered, with each answer pointing to the step it leads to. Your route is lit, and the outcomes you can no longer reach are dimmed. Tap any step to go straight to it.
 - **Discharge safety check:** six things to tick before a patient goes home, shown on a route meter, and seven stop signs (for example a return within 48 hours, abdominal pain above 0, or a CT brain) that each tell you what to do instead.
-- **Quick sums:** shock index, pulse pressure and heart rate against the dengue discharge criteria, each drawn on a scale with those thresholds; child doses by weight (prednisolone, salbutamol MDI puffs, dexamethasone and nebulised adrenaline for croup, ORS); BMI on a scale with the 27.5 threshold, ideal and adjusted body weight. Nothing you type is saved.
+- **Calculators:** twelve, built only from the ebook and the department's notes, each naming its source, in six groups with a glass sculpture each. Dengue: shock index, pulse pressure and heart rate against the discharge criteria, and adjusted body weight. Doses: paracetamol and ketamine by weight, fondaparinux and Clexane for a confirmed DVT, and the total daily insulin dose. Scores: CURB-65 and Wells, with the pathway's next step. Pain and calm: FLACC, PAINAD and CPOT read on the MOH ladder, and BARS and RASS with weight-based lines from the medication table at BARS 7. Head injury: the CT and safe discharge criteria. Kids: child doses and the SOAP dehydration check with ORS. Where a source stops, the calculator says so. Five children's tools our sources do not cover open on PEMCalc, an outside site. The weight carries across the dose calculators while the guide is open; nothing you type is saved.
 - **Numbers to know:** 14 extensions and lines in four groups, each with a copy button and a link to the rule it belongs to.
 - **Links you can send:** every pathway and every step has its own address, for example `#renal-colic`, `#gz-rules--ivab` or `#calc-kids`.
 - **Day and night:** a switch at the top of the home screen turns the night colours on and off. In night colours the tour plays a night version of the film and the poster page shows night versions of the sheets.
@@ -56,7 +56,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## What changed from version 7
 
-- **A new design, chosen from three live prototypes:** a premium bento. Each area has its own jewel colour (emerald for the zone, sapphire for pathways, plum for rules, garnet for emergencies, teal for tools, bronze for quick sums, champagne for the shift's pearl, obsidian for the menu), with a soft sheen that catches the light under the pointer. Outcomes keep the ebook's own colours. Figtree for headings, Atkinson Hyperlegible Next for reading and Atkinson Hyperlegible Mono for numbers and doses, chosen because they keep 1, l and I, and 0 and O, apart.
+- **A new design, chosen from three live prototypes:** a premium bento. Each area has its own jewel colour (emerald for the zone, sapphire for pathways, plum for rules, garnet for emergencies, teal for tools, bronze for the calculators, champagne for the shift's pearl, obsidian for the menu), with a soft sheen that catches the light under the pointer. Outcomes keep the ebook's own colours. Figtree for headings, Atkinson Hyperlegible Next for reading and Atkinson Hyperlegible Mono for numbers and doses, chosen because they keep 1, l and I, and 0 and O, apart.
 - **The zone map** on the home screen, **whole-pathway maps**, **Can still end in** on every step, **visual shift tools** (a route meter and scales) and a **first-shift intro**.
 - No clinical content changed: every pathway, rule, number and threshold is as in version 7.
 
@@ -75,6 +75,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **Calculators (9 Nov 2026, not yet published):** twelve calculators from the ebook and the department's notes in a new Calculators view, replacing Quick sums, with five PEMCalc links for children's tools our sources do not cover.
 - **Moving home tiles (published 9 Nov 2026):** loops on the other six home tiles, the Pathways section bars and the Shift tools headers; a phone plays at most six loops at once.
 - **Public web app (8 Nov 2026):** the app on GitHub Pages. The QR code on poster sheet 1 and the app's Copy link now open it instead of the private claude.ai link.
 - **Moving tiles (published 8 Nov 2026):** Flow Studio glass sculptures and loops on the topic tiles, Code Blue and Code Stroke, with the Moving tiles setting.
@@ -86,7 +87,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Flow Studio use
 
-Six journey clips with Omni 1.1 Flash at 12 credits each: **72 credits**. On 8 Nov 2026, eleven 8-second tile loops with Omni 1.1 Flash: Flow reported 12 credits each (**132 credits**), while the account balance fell from 896 to 814. Later on 8 Nov 2026, six more tile loops for the home tiles: **72 credits** (814 to 742). The stills (Nano Banana) cost nothing. No other paid generation was used.
+Six journey clips with Omni 1.1 Flash at 12 credits each: **72 credits**. On 8 Nov 2026, eleven 8-second tile loops with Omni 1.1 Flash: Flow reported 12 credits each (**132 credits**), while the account balance fell from 896 to 814. Later on 8 Nov 2026, six more tile loops for the home tiles: **72 credits** (814 to 742). On 9 Nov 2026, six loops for the calculator groups: **72 credits** (742 to 670). The stills (Nano Banana) cost nothing. No other paid generation was used.
 
 ## Still to confirm
 
