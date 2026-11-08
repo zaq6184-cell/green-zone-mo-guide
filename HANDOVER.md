@@ -26,7 +26,7 @@ Read CLAUDE.md and HANDOVER.md. In src, run npm install, npx playwright install 
 
 ## Where things stand
 
-- **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9, version 8 with day and night (published 8 Nov 2026). It is private until you share it from the page's Share menu. The QR code on poster sheet 1 opens this link, so colleagues can use it only after you share it.
+- **Live app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9, version 8 with day and night (published 8 Nov 2026). It is private until you share it from the page's Share menu. The QR code on poster sheet 1 now opens the public web app (below) instead, so anyone who scans it can use the guide.
 - **Version 8** (8 Nov 2026): the premium bento redesign, now live at the link above. Preview changes with `npm run serve` in `src`, or the `guide` server in the browser pane. Every later publish still needs your go-ahead.
 - **GitHub:** this folder is also at https://github.com/zaq6184-cell/green-zone-mo-guide, which is public. `git push` puts new commits there for anyone to see, so Claude asks you before every push.
 - **Web app on GitHub Pages:** https://zaq6184-cell.github.io/green-zone-mo-guide/ is the same app, public. It updates by itself when a new build is pushed to `main`.

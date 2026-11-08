@@ -27,7 +27,7 @@ The only guide built on the department's own approved ebook, *The Clinical Pathw
 - **On shift:** a phone in one hand, on mobile data, in a busy and brightly lit ED. On-shift lookup leads the home screen and the layout (confirmed with Krishna, 8 Nov 2026).
 - **Learning:** new staff at orientation or before a first shift, on a phone or a desktop.
 - **Zones:** the ED's zones are named by triage colour. The guide covers the Green Zone (MTS 4 and 5) and links to the Yellow Zone flow.
-- **Distribution:** published as a private claude.ai artifact (https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9) that Krishna shares; an offline copy runs from `app/index.html`. The QR code on the A3 wall poster opens the app link.
+- **Distribution:** a private claude.ai artifact (https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9) for Krishna, and the same app public on GitHub Pages (https://zaq6184-cell.github.io/green-zone-mo-guide/); an offline copy runs from `app/index.html`. The QR code on the A3 wall poster, and links copied in the app, open the public web app.
 - **Department terms:** Klinik Kesihatan (KK), slip hijau, PPP, CCA, EMACC, EM Watch, MAU, MTS, EP, IPR.
 
 ## Capabilities and Constraints
@@ -37,7 +37,7 @@ The only guide built on the department's own approved ebook, *The Clinical Pathw
 - **No clinical content from memory:** every dose, criterion and number needs the ebook or a named department document. Infographics, maps and visual tools draw only on content and thresholds already in the guide. Where a source does not cover a branch, the node says so.
 - **Reference tool only:** no patient data, no patient tracking, nothing that stores what a user types about a patient.
 - **Outcome kinds from the ebook:** admit (the red box), discharge (the green box), observation (the yellow box), plus refer and a neutral next step.
-- **Permanent addresses:** `#<id>` and `#<id>--<node>` links are saved and sent, and the poster QR opens the app link. Ids and node keys never change.
+- **Permanent addresses:** `#<id>` and `#<id>--<node>` links are saved and sent, and the poster QR opens the public web app. Ids and node keys never change.
 - **Artifact host:** one self-contained page with no framework; fonts only from Google Fonts; scripts inline or from pinned cdnjs, jsDelivr, unpkg or code.jquery.com; media only as files published beside the page; no doctype, html, head or body tags in the published file; nothing scrolls sideways at 390 px; colours as tokens with light and dark; every localStorage call wrapped in try/catch; no print button, downloads, iframes, alert, confirm or prompt; sound only from a tap; reduced motion respected; phone numbers as selectable text with Copy.
 - **Little mobile data:** heavy media loads only on wide screens or when asked for.
 - **Build:** `src/parts/` (head.html, data.js, data2.js, data3.js, engine.js) joined by `src/build.js`; `npm run all` checks, builds and tests.

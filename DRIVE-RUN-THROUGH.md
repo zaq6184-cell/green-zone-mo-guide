@@ -23,38 +23,38 @@ The folder holds 31 subfolders and 2 PDFs at the top level. I listed every subfo
 
 | Folder | What it gave the guide | Open in the app |
 |---|---|---|
-| EMWATCH | What EM Watch is, who can use it and which conditions it takes. This answers the open EMWATCH question. | [EM Watch](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#em-watch) |
-| MAU | The 11 admission criteria, the exclusions, the diagnoses MAU considers and how to phone it; the draft MAU FAST and Physician's Clinic criteria. | [Admission to MAU](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#mau-admission), [Clinic referrals](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#outpatient-referral) |
-| YELLOW ZONE | The July 2026 patient flow, and where patients go when the zone is full. | [Yellow Zone flow](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#yellow-zone) |
-| OSCC | Sexual assault, domestic violence, suspected child abuse, and the June 2026 reminders on forms and police reports. | [OSCC](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#oscc) |
-| ABG | When to run a blood gas, and when not to. | [Blood gas](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#blood-tests--gas) |
-| PDN / BLOOD TRANSFUSION | The mandatory pre-transfusion checklist (Mar 2026), bedside labelling and why requests are rejected. | [GXM sample](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#blood-tests--gxm), [Rejections](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#blood-tests--reject) |
-| TOXICOLOGY | The tubes for drug levels, and the methanol sample. | [Drug levels](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#blood-tests--tox) |
-| INFECTIOUS DISEASES | TB, Mpox (Sept 2024), Nipah (Mar 2026), MERS PUI, COVID screening, notification, and rabies with the Animal Bite Clinic. | [Infection alerts](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#infection-alerts), [Animal bites](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#animal-bites) |
-| TRAUMA, ATLS | T-RACS Tier 1 criteria for walk-ins, the HIT whole-body CT protocol and the Aug 2023 trauma lessons. | [Trauma walk-ins](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#trauma-walkins) |
-| PAEDS EMERGENCY | Where to triage a child, croup, dehydration and swallowed objects; weight-based doses in Tools. | [Children in the ED](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#children), [Child doses](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#calc-kids) |
-| MEDICOLEGAL | Million Ringgit Habits and the medicolegal tip, also built into the discharge safety check. | [Safe practice](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#safe-practice), [Safety check](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#tools) |
-| CODE BLUE | The Code Blue numbers and who responds. | [Code Blue](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#safe-practice--blue) |
-| Root files | How to import an imaging CD from another hospital. The resus round template is not Green Zone work. | [Imaging CDs](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#safe-practice--cd) |
+| EMWATCH | What EM Watch is, who can use it and which conditions it takes. This answers the open EMWATCH question. | [EM Watch](https://zaq6184-cell.github.io/green-zone-mo-guide/#em-watch) |
+| MAU | The 11 admission criteria, the exclusions, the diagnoses MAU considers and how to phone it; the draft MAU FAST and Physician's Clinic criteria. | [Admission to MAU](https://zaq6184-cell.github.io/green-zone-mo-guide/#mau-admission), [Clinic referrals](https://zaq6184-cell.github.io/green-zone-mo-guide/#outpatient-referral) |
+| YELLOW ZONE | The July 2026 patient flow, and where patients go when the zone is full. | [Yellow Zone flow](https://zaq6184-cell.github.io/green-zone-mo-guide/#yellow-zone) |
+| OSCC | Sexual assault, domestic violence, suspected child abuse, and the June 2026 reminders on forms and police reports. | [OSCC](https://zaq6184-cell.github.io/green-zone-mo-guide/#oscc) |
+| ABG | When to run a blood gas, and when not to. | [Blood gas](https://zaq6184-cell.github.io/green-zone-mo-guide/#blood-tests--gas) |
+| PDN / BLOOD TRANSFUSION | The mandatory pre-transfusion checklist (Mar 2026), bedside labelling and why requests are rejected. | [GXM sample](https://zaq6184-cell.github.io/green-zone-mo-guide/#blood-tests--gxm), [Rejections](https://zaq6184-cell.github.io/green-zone-mo-guide/#blood-tests--reject) |
+| TOXICOLOGY | The tubes for drug levels, and the methanol sample. | [Drug levels](https://zaq6184-cell.github.io/green-zone-mo-guide/#blood-tests--tox) |
+| INFECTIOUS DISEASES | TB, Mpox (Sept 2024), Nipah (Mar 2026), MERS PUI, COVID screening, notification, and rabies with the Animal Bite Clinic. | [Infection alerts](https://zaq6184-cell.github.io/green-zone-mo-guide/#infection-alerts), [Animal bites](https://zaq6184-cell.github.io/green-zone-mo-guide/#animal-bites) |
+| TRAUMA, ATLS | T-RACS Tier 1 criteria for walk-ins, the HIT whole-body CT protocol and the Aug 2023 trauma lessons. | [Trauma walk-ins](https://zaq6184-cell.github.io/green-zone-mo-guide/#trauma-walkins) |
+| PAEDS EMERGENCY | Where to triage a child, croup, dehydration and swallowed objects; weight-based doses in Tools. | [Children in the ED](https://zaq6184-cell.github.io/green-zone-mo-guide/#children), [Child doses](https://zaq6184-cell.github.io/green-zone-mo-guide/#calc-kids) |
+| MEDICOLEGAL | Million Ringgit Habits and the medicolegal tip, also built into the discharge safety check. | [Safe practice](https://zaq6184-cell.github.io/green-zone-mo-guide/#safe-practice), [Safety check](https://zaq6184-cell.github.io/green-zone-mo-guide/#tools) |
+| CODE BLUE | The Code Blue numbers and who responds. | [Code Blue](https://zaq6184-cell.github.io/green-zone-mo-guide/#safe-practice--blue) |
+| Root files | How to import an imaging CD from another hospital. The resus round template is not Green Zone work. | [Imaging CDs](https://zaq6184-cell.github.io/green-zone-mo-guide/#safe-practice--cd) |
 
 ## Added as department notes on a pathway (7)
 
 | Folder | What it gave the guide | Open in the app |
 |---|---|---|
-| ARDS / ASTHMA | The Asthma Zone flow follows the 13 Nov 2025 memo: you do the final assessment and discharge. Adult and children's MDI doses and the patient action plan are added. | [Asthma Zone flow](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#asthma-zone) |
-| DENGUE | Dengue SOP 2.0: Green Zone timings, the discharge criteria, tags and notification, as department notes on the ebook pathway; plus a shock index check in Tools. | [Dengue fever](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#dengue), [Shock index](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#calc-dengue) |
-| STROKE PROTOCOL PATHWAY | Code Stroke ext 5999 steps, and the discharge medicines for Neuro patients, as department notes. | [CVA and TIA](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#stroke-tia) |
-| STRESS TEST / OBSESS | Trop T tubes, the Thursday stress test and what to do if it is positive, as department notes. | [ACS](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#acs) |
-| STEMI NETWORK | Ticagrelor loading rules, and how to talk to patients about IJN charges. | [ACS](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#acs) |
-| O&G | The ectopic pregnancy circular: record the LMP of every woman of reproductive age. | [Abdominal pain](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#abdominal-pain) |
-| UROLOGY | More reasons for urgent referral, and the discharge bundle for ureteric colic. The acute scrotum flow matches the ebook. | [Renal colic](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#renal-colic) |
+| ARDS / ASTHMA | The Asthma Zone flow follows the 13 Nov 2025 memo: you do the final assessment and discharge. Adult and children's MDI doses and the patient action plan are added. | [Asthma Zone flow](https://zaq6184-cell.github.io/green-zone-mo-guide/#asthma-zone) |
+| DENGUE | Dengue SOP 2.0: Green Zone timings, the discharge criteria, tags and notification, as department notes on the ebook pathway; plus a shock index check in Tools. | [Dengue fever](https://zaq6184-cell.github.io/green-zone-mo-guide/#dengue), [Shock index](https://zaq6184-cell.github.io/green-zone-mo-guide/#calc-dengue) |
+| STROKE PROTOCOL PATHWAY | Code Stroke ext 5999 steps, and the discharge medicines for Neuro patients, as department notes. | [CVA and TIA](https://zaq6184-cell.github.io/green-zone-mo-guide/#stroke-tia) |
+| STRESS TEST / OBSESS | Trop T tubes, the Thursday stress test and what to do if it is positive, as department notes. | [ACS](https://zaq6184-cell.github.io/green-zone-mo-guide/#acs) |
+| STEMI NETWORK | Ticagrelor loading rules, and how to talk to patients about IJN charges. | [ACS](https://zaq6184-cell.github.io/green-zone-mo-guide/#acs) |
+| O&G | The ectopic pregnancy circular: record the LMP of every woman of reproductive age. | [Abdominal pain](https://zaq6184-cell.github.io/green-zone-mo-guide/#abdominal-pain) |
+| UROLOGY | More reasons for urgent referral, and the discharge bundle for ureteric colic. The acute scrotum flow matches the ebook. | [Renal colic](https://zaq6184-cell.github.io/green-zone-mo-guide/#renal-colic) |
 
 ## Checked, nothing new (3)
 
 | Folder | What it gave the guide | Open in the app |
 |---|---|---|
-| GREEN ZONE | The Green Zone Warrior note is already in the guide; nothing new. | [Green Zone rules](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#gz-rules) |
-| EMACC | The 2018 SOP is still the only version. The EMACC video (104 MB) was not opened. | [EMACC](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#emacc) |
+| GREEN ZONE | The Green Zone Warrior note is already in the guide; nothing new. | [Green Zone rules](https://zaq6184-cell.github.io/green-zone-mo-guide/#gz-rules) |
+| EMACC | The 2018 SOP is still the only version. The EMACC video (104 MB) was not opened. | [EMACC](https://zaq6184-cell.github.io/green-zone-mo-guide/#emacc) |
 | CLINICAL PATHWAY EDHKL | Version 8.5 is the same file as the ebook this guide is built from. |  |
 
 ## Not used, and why (5)
@@ -80,12 +80,12 @@ Folder: the triage course folder (https://drive.google.com/drive/folders/1e6MDwA
 
 | Document | What it gave the guide | Open in the app |
 |---|---|---|
-| One-way procedure flow (Green Zone) | No repeat ECG, dressing or vital signs after secondary triage unless they were missed; an ECG asked for in the Green Zone is done in the Procedure Room. | [One-way flow](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#gz-rules--oneway) |
-| Down-triage memo HKL/JK/98/188/3(22)22, 4 Oct 2022 | Down-triage is not allowed unless the MO has examined the patient first; the MO documents it on the triage form, and the PPP makes sure it is documented. Since 8 Nov 2026 the guide also says only the EP can allow a down-triage (Krishna's instruction; that part's written source is still to be confirmed). | [Down-triage](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#gz-rules--down) |
-| IV antibiotic memo, 30 Jun 2026 | No bed free in Yellow Obs, ISO or YZ Ext: IV antibiotics on a CCA chair, with one of four antibiotics only. | [IV antibiotics, no bed](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#gz-rules--ivab) |
-| KKM MTS announcement, Jul 2026 | The EP may decide the admission within 4 hours if the primary team is delayed; non-emergency cases can be redirected to a Klinik Kesihatan or private GP. | [Primary team delayed](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#gz-rules--ep4), [Redirect to a KK or GP](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#gz-rules--kk) |
-| Orthopaedic referral memo, 17 May 2024 | The Lampiran 1 urgent criteria, on-call or clinic referral, CMR within 2 hours, duplicate notes and the referral register. | [Orthopaedic referral](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#referral-rules--ortho) |
-| IPR admission criteria | Who can be transferred to IPR, the exclusions and the specialist on-call line. | [Transfer to IPR](https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9#referral-rules--ipr) |
+| One-way procedure flow (Green Zone) | No repeat ECG, dressing or vital signs after secondary triage unless they were missed; an ECG asked for in the Green Zone is done in the Procedure Room. | [One-way flow](https://zaq6184-cell.github.io/green-zone-mo-guide/#gz-rules--oneway) |
+| Down-triage memo HKL/JK/98/188/3(22)22, 4 Oct 2022 | Down-triage is not allowed unless the MO has examined the patient first; the MO documents it on the triage form, and the PPP makes sure it is documented. Since 8 Nov 2026 the guide also says only the EP can allow a down-triage (Krishna's instruction; that part's written source is still to be confirmed). | [Down-triage](https://zaq6184-cell.github.io/green-zone-mo-guide/#gz-rules--down) |
+| IV antibiotic memo, 30 Jun 2026 | No bed free in Yellow Obs, ISO or YZ Ext: IV antibiotics on a CCA chair, with one of four antibiotics only. | [IV antibiotics, no bed](https://zaq6184-cell.github.io/green-zone-mo-guide/#gz-rules--ivab) |
+| KKM MTS announcement, Jul 2026 | The EP may decide the admission within 4 hours if the primary team is delayed; non-emergency cases can be redirected to a Klinik Kesihatan or private GP. | [Primary team delayed](https://zaq6184-cell.github.io/green-zone-mo-guide/#gz-rules--ep4), [Redirect to a KK or GP](https://zaq6184-cell.github.io/green-zone-mo-guide/#gz-rules--kk) |
+| Orthopaedic referral memo, 17 May 2024 | The Lampiran 1 urgent criteria, on-call or clinic referral, CMR within 2 hours, duplicate notes and the referral register. | [Orthopaedic referral](https://zaq6184-cell.github.io/green-zone-mo-guide/#referral-rules--ortho) |
+| IPR admission criteria | Who can be transferred to IPR, the exclusions and the specialist on-call line. | [Transfer to IPR](https://zaq6184-cell.github.io/green-zone-mo-guide/#referral-rules--ipr) |
 
 ## Still to confirm
 

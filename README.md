@@ -9,7 +9,7 @@ A guide for medical officers working in the Green Zone (MTS levels 4–5), Emerg
 - **Source code** (public): https://github.com/zaq6184-cell/green-zone-mo-guide, with the offline copy in `app/`.
 - **Web app** (public): https://zaq6184-cell.github.io/green-zone-mo-guide/, the same app served by GitHub Pages. It updates itself when a new build reaches `main` on GitHub.
 
-The two claude.ai links are private until you share them from the page's Share menu; the GitHub repository and the GitHub Pages web app are public. The QR code on poster sheet 1 opens the app link, so colleagues can open it only after the app is shared with them.
+The two claude.ai links are private until you share them from the page's Share menu; the GitHub repository and the GitHub Pages web app are public. The QR code on poster sheet 1, and the links the app copies, open the public web app, so anyone can use them.
 
 ## What is in this folder
 
@@ -74,6 +74,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **Public web app (8 Nov 2026):** the app on GitHub Pages. The QR code on poster sheet 1 and the app's Copy link now open it instead of the private claude.ai link.
 - **Day and night (published 8 Nov 2026):** the home Day and Night switch, and night versions of both explainer films and both poster sheets. In dark mode the tile shadows now turn black instead of glowing.
 - **Version 8 (published 8 Nov 2026):** the premium bento redesign, the zone map, whole-pathway maps, visual tools and the first-shift intro, as above.
 - **Version 7 (7 Nov 2026):** the triage course folder documents and the new design, as above.
