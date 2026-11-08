@@ -67,6 +67,7 @@ const V8 = [
   ['First-shift intro','Four quick screens for a new MO or HO.',[['#intro','Open the intro']]],
   ['A new tour','The narrated explainer is rebuilt in the new look and now covers the version 7 rules: no repeat tests after secondary triage, down-triage only with the EP\'s permission, IV antibiotics on a CCA chair, and when the EP may decide the admission. It is also in Bahasa Melayu: switch the narration under the video.',[['#tour','Watch the tour']]],
   ['The wall poster, redrawn','Both A3 sheets in the new look. Sheet 1 adds the four version 7 rules with their sources, and marks the three numbers still to confirm. Sheet 2 shows the Asthma Zone flow from the November 2025 memo.',[['#poster','Wall poster']]],
+  ['Moving tiles','The topic tiles, Code Blue and Code Stroke show a glass sculpture of their body system, made in Flow Studio, moving in a quiet 8-second loop: the heart beats, the lungs breathe. A loop plays only while its tile is on screen. Settings, Moving tiles turns them off.',[['#pathways','Pathways'],['#home','Home']]],
   ['Day and night','A switch on the home screen turns the night colours on and off. In night colours the tour plays a night version of the film, in English and in Bahasa Melayu, and the poster page shows night versions of both sheets. The sheets on the wall keep the day colours.',[['#home','Home'],['#tour','Watch the tour']]]
 ];
 
@@ -636,10 +637,42 @@ function zoneMap(anim){
   x.hidden = !s;
   x.innerHTML = s ? `<h3>${zSel + 1}. ${esc(s.title)}</h3><ul>${s.items.slice(0, 4).map(i => `<li>${esc(i)}</li>`).join('')}</ul><div class="links">${[...(s.note ? [[s.note.href, s.note.k]] : []), ...s.links].slice(0, 4).map(([h, t]) => `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}<a class="pill" href="#journey-${zSel + 1}">Watch this stop${svg('chev')}</a></div>` : '';
 }
+/* Tile media (8 Nov 2026): Flow Studio stills of each topic in jewel glass (tiles/<key>.webp) and their 4-second loops
+   (tiles/<key>.mp4). A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on
+   and motion is not reduced, and it pauses offscreen or when the page is hidden. */
+const TILE_STILLS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke']);
+const TILE_CLIPS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke']);
+const tileMedia = k => TILE_STILLS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
+let tileIO = null;
+function tileClips(){
+  if (tileIO) tileIO.disconnect();
+  if (prefs.tiles !== 'on' || REDUCED || !('IntersectionObserver' in window)){ $$('.tm video').forEach(v => v.pause()); return; }
+  tileIO = tileIO || new IntersectionObserver(es => es.forEach(e => playTile(e.target, e.isIntersecting)), {threshold:.4});
+  $$('.tm').forEach(el => { if (TILE_CLIPS.has(el.dataset.tm)) tileIO.observe(el); });
+}
+function playTile(el, show){
+  let v = el.querySelector('video');
+  if (!show || document.hidden){ if (v) v.pause(); return; }
+  if (!v){
+    v = document.createElement('video');
+    v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+    v.addEventListener('playing', () => v.classList.add('on'), {once:true});
+    v.src = `tiles/${el.dataset.tm}.mp4`; el.appendChild(v);
+  }
+  v.play().catch(() => {});
+}
+/* Redraw a container but keep its tile media nodes, so a loop that is playing does not restart or flicker */
+function withTiles(root, html){
+  const keep = {}; root.querySelectorAll('.tm').forEach(el => { keep[el.dataset.tm] = el; });
+  root.innerHTML = html;
+  root.querySelectorAll('.tm').forEach(el => { const old = keep[el.dataset.tm]; if (old) el.replaceWith(old); });
+  tileClips();
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) $$('.tm video').forEach(v => v.pause()); else tileClips(); });
 function numTile(i){
   const n = NUMS[i], ext = /^ext\s/.test(n.val), v = n.val.replace(/^ext\s+/, '');
   const [title, rest] = n.lbl.split(/,\s*/), sub = rest ? rest.charAt(0).toUpperCase() + rest.slice(1) : (n.note.match(/^[^.]{1,32}\./) || [''])[0].replace(/\.$/, '');
-  return `<span class="lbl">${esc(title)}</span><div class="row"><span class="val" id="kn${i}">${ext ? '<small class="x">ext</small>' : ''}${esc(v)}</span>${n.copy ? `<button type="button" data-kcopy="${i}" data-quiet aria-label="Copy ${esc(n.lbl)}">${svg('copy')}</button>` : ''}</div>${n.href ? `<a class="tl nt-l" href="${n.href}" aria-label="${esc(n.link)}: ${esc(sub)}">${esc(sub)}${svg('chev')}</a>` : ''}`;
+  return `${i < 2 ? tileMedia(['codeblue', 'codestroke'][i]) : ''}<span class="lbl">${esc(title)}</span><div class="row"><span class="val" id="kn${i}">${ext ? '<small class="x">ext</small>' : ''}${esc(v)}</span>${n.copy ? `<button type="button" data-kcopy="${i}" data-quiet aria-label="Copy ${esc(n.lbl)}">${svg('copy')}</button>` : ''}</div>${n.href ? `<a class="tl nt-l" href="${n.href}" aria-label="${esc(n.link)}: ${esc(sub)}">${esc(sub)}${svg('chev')}</a>` : ''}`;
 }
 const DC_SHORT = ['Reassessed, results reviewed', 'Safety-net advice', 'Allergy asked', 'Last vital signs', 'Walks independently', 'Advice and follow-up'];
 function statTiles(){
@@ -663,7 +696,7 @@ function renderHome(){
   $('#greet').textContent = g + (day ? ' · ' + day : '');
   if (zSel < 0 && matchMedia('(min-width: 761px)').matches) zSel = 1;
   zoneMap(true);
-  $('#kn-a').innerHTML = numTile(0); $('#kn-b').innerHTML = numTile(1);
+  withTiles($('#kn-a'), numTile(0)); withTiles($('#kn-b'), numTile(1));
   $('#quick').innerHTML = POPULAR.map(([h, t]) => {
     const m = h.slice(1).match(/^([\w-]+?)(?:--(\w+))?$/), id = m && P[m[1]] ? m[1] : null;
     const kinds = id ? (m[2] ? endsFrom(P[id], m[2]) : outsOf(P[id])) : [], meta = id ? (m[2] ? P[id].title : metaOf(P[id])) : '';
@@ -701,7 +734,7 @@ function renderLib(){
   renderLibf();
   const cats = CATS.filter(c => c.ids.some(id => ids.includes(id)));
   if (libCat !== 'all' && !cats.some(c => c.k === libCat)) libCat = 'all';
-  $('#libcats').innerHTML = `<button type="button" data-cat="all" aria-pressed="${libCat === 'all'}">${svg('grid')}<span>All topics</span><small>${ids.length}</small></button>` + cats.map(c => `<button type="button" class="${c.j}" data-cat="${c.k}" aria-pressed="${libCat === c.k}">${svg(c.ic)}<span>${esc(c.s)}</span><small>${c.ids.filter(id => ids.includes(id)).length}</small></button>`).join('');
+  withTiles($('#libcats'), `<button type="button" data-cat="all" aria-pressed="${libCat === 'all'}">${tileMedia('all')}${svg('grid')}<span>All topics</span><small>${ids.length}</small></button>` + cats.map(c => `<button type="button" class="${c.j}" data-cat="${c.k}" aria-pressed="${libCat === c.k}">${tileMedia(c.k)}${svg(c.ic)}<span>${esc(c.s)}</span><small>${c.ids.filter(id => ids.includes(id)).length}</small></button>`).join(''));
   const shown = CATS.filter(c => libCat === 'all' || c.k === libCat).map(c => [c, c.ids.filter(id => ids.includes(id)).sort(byTitle)]).filter(([, l]) => l.length);
   let h;
   if (shown.length) h = shown.map(([c, l]) => `<section class="libsec ${c.j}" aria-label="${esc(c.t)}"><h2 class="lh">${svg(c.ic)}<span>${esc(c.t)}</span><small>${l.length}</small></h2><div class="grid">${l.map(pcard).join('')}</div></section>`).join('');
@@ -1225,7 +1258,9 @@ function themeChanged(){
 const prefs = {
   theme: store.get('gz-theme', 'auto'),
   size: store.get('gz-size', 'std'),
-  clips: store.get('gz-clips', !REDUCED && matchMedia('(min-width: 761px)').matches ? 'on' : 'off')
+  clips: store.get('gz-clips', !REDUCED && matchMedia('(min-width: 761px)').matches ? 'on' : 'off'),
+  /* The tile loops move on every device unless motion is reduced or the browser's data saver is on */
+  tiles: store.get('gz-tiles', REDUCED || (navigator.connection && navigator.connection.saveData) ? 'off' : 'on')
 };
 let setFrom = null;
 function applyPrefs(){
@@ -1236,7 +1271,7 @@ function applyPrefs(){
   themeChanged();
 }
 function syncSettings(){
-  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
+  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips], ['#st-tiles', prefs.tiles]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
   const s = savedIds().length, r = recentIds().length, best = store.get(QKEY, null);
   $('#st-count').textContent = s || r || best !== null ? `${s} saved, ${r} recent${best !== null ? ', quiz best ' + best + ' of ' + QUIZ.length : ''}. Kept in this browser only.` : 'Nothing kept yet. Saved and recent pathways stay in this browser only.';
 }
@@ -1415,9 +1450,10 @@ $('#settings').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   const grp = b.closest('.seg');
   if (grp && b.dataset.val){
-    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips'}[grp.id];
+    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips', 'st-tiles':'tiles'}[grp.id];
     prefs[key] = b.dataset.val; store.set('gz-' + key, b.dataset.val); applyPrefs(); syncSettings();
     if (key === 'clips') setJourneyClip(prefs.clips === 'on');
+    if (key === 'tiles') tileClips();
   } else if (b.id === 'st-clear'){
     ['gz-saved', 'gz-recent', QKEY, 'gz-quiz-best', 'gz-tour-pos', 'gz-tour-pos-ms', 'gz-tour-lang', 'gz-intro'].forEach(k => store.del(k));
     refreshSaved(); syncSettings(); startQuiz(); introTile(); toast('Cleared from this browser');

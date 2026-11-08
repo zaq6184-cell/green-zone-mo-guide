@@ -50,6 +50,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-poster.webp'), 'in day colours the tour has the day film and cover');
   ok(await p.evaluate(() => document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src') === 'poster/sheet1-thumb.webp'), 'in day colours the poster page has the day sheets');
   ok(await p.evaluate(() => APP_URL) === 'https://zaq6184-cell.github.io/green-zone-mo-guide/', 'Copy link builds links on the public web app');
+  ok(await p.evaluate(() => document.querySelectorAll('#kn-a .tm img, #kn-b .tm img').length) === 2, 'Code Blue and Code Stroke tiles have their pictures');
   await p.screenshot({path:out + '/d-home.png'});
   await p.click('#zmap [data-zs="3"]'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => !document.querySelector('#zx').hidden && /CCA/.test(document.querySelector('#zx h3').textContent)), 'a zone stop opens its rules');
@@ -64,6 +65,14 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await hscroll(p) <= 0, `#${v} no sideways scroll`);
     await p.screenshot({path:out + `/d-${v}.png`, fullPage:true});
   }
+  // Topic tiles: pictures, and loops while Moving tiles is on (on by default)
+  await go(p, '#pathways', 900);
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length) === 9, 'the nine topic tiles have their pictures');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#libcats .tm img')].every(i => i.complete && i.naturalWidth === 640)), 'every topic picture loads');
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm video').length) > 0, 'the topic tiles start their loops (Moving tiles is on by default)');
+  await p.fill('#libq', 'co'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm video').length) > 0, 'typing in the filter keeps the tile loops');
+  await p.fill('#libq', ''); await p.waitForTimeout(150);
   // Library filter and stars
   await go(p, '#pathways');
   ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length) === 38, 'library shows 38 cards');
@@ -185,6 +194,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.click('#st-theme [data-val="dark"]'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => document.documentElement.dataset.theme) === 'dark', 'settings switch to dark');
   ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked')) === 'true', 'the home switch follows Settings');
+  await p.click('#st-tiles [data-val="off"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => JSON.parse(localStorage.getItem('gz-tiles')) === 'off' && [...document.querySelectorAll('.tm video')].every(v => v.paused)), 'Moving tiles off stops the tile loops');
+  await p.click('#st-tiles [data-val="on"]'); await p.waitForTimeout(150);
   await p.keyboard.press('Escape'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => document.querySelector('#settings').hidden), 'Escape closes settings');
   await p.screenshot({path:out + '/d-home-dark.png'});
@@ -256,6 +268,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await hscroll(p) <= 0, `phone #${v} no sideways scroll`);
     await p.screenshot({path:out + `/p-${v}.png`, fullPage:true});
   }
+  await go(p, '#pathways', 600);
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 9 && document.querySelectorAll('#libcats .tm video').length > 0), 'on a phone the topic tiles move by default too');
+  await p.screenshot({path:out + '/p-pathways-tiles.png'});
   await go(p, '#home');
   await p.tap('#menubtn'); await p.waitForTimeout(450);
   ok(await p.evaluate(() => document.querySelector('#side').classList.contains('open')), 'menu opens');
@@ -325,6 +340,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/t-acs.png'});
   await go(p, '#home', 400);
   await p.screenshot({path:out + '/t-home.png'});
+  await go(p, '#pathways', 500);
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 9 && !document.querySelector('.tm video')), 'with reduced motion the tiles stay as still pictures');
 
   console.log('errors:', errs.length ? '\n  ' + errs.join('\n  ') : 'none');
   console.log(fails ? fails + ' FAILED' : 'all checks passed');
