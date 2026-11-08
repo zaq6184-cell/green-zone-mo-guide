@@ -1220,7 +1220,8 @@ const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc
   pain:[['#calc-pain', 'Pain scales calculator'], ['#calc-analgesia', 'Analgesia by weight']], hyperglycaemia:[['#calc-insulin', 'Insulin dose calculator']],
   'mild-tbi':[['#calc-head', 'Head injury check']], 'behavioural-disturbance':[['#calc-calm', 'BARS and RASS']],
   dengue:[['#calc-dengue', 'Shock index'], ['#calc-weight', 'Adjusted weight']], children:[['#calc-kids', 'Child doses'], ['#calc-soap', 'Dehydration check']]};
-for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]) P[id].see = [...(P[id].see || []), ...l];
+/* Add each calculator link once: an entry may already link to it (dengue already links to the shock index) */
+for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; }
 for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
 CALC_LINKS.forEach(l => IDX.push({href:'#calc', title:l.t + ' (PEMCalc, outside site)', kind:'Calculator', meta:'pemcalc.com', body:l.d, ic:'calc', c:'c-breath', j:CALC_G[l.g].j}));
 
