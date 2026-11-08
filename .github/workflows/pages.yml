@@ -1,0 +1,38 @@
+# Publishes the app (the built offline copy in app/) to GitHub Pages:
+#   https://zaq6184-cell.github.io/green-zone-mo-guide/
+# It runs on every push to main that changes app/ or this file, and by hand from the Actions tab.
+# The site is public, so pushing a new build to main publishes it: ask Krishna before every push.
+name: Publish the app to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; a newer push waits rather than cancelling one in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: app
+      - id: deployment
+        uses: actions/deploy-pages@v5
