@@ -78,18 +78,38 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.fill('#libq', ''); await p.waitForTimeout(150);
   // Library filter and stars
   await go(p, '#pathways');
-  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length) === 39, 'library shows 39 cards');
-  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '15'), 'the Ebook filter still counts the 23 ebook pathways (the dengue CPG is not one), and rules 15');
+  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length === Object.keys(P).length && Object.keys(P).length >= 44), `library shows a card for each of the ${await p.evaluate(() => Object.keys(P).length)} entries`);
+  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '15' && document.querySelector('#libf [data-f="cpg"] small').textContent === String(Object.keys(P).filter(id => P[id].grp === 'cpg').length)), 'the Ebook filter still counts the 23 ebook pathways (the CPGs are not), rules 15, and Guidelines every CPG entry');
   await p.fill('#libq', 'colic'); await p.waitForTimeout(150);
   console.log('     filter colic ->', await p.evaluate(() => [...document.querySelectorAll('#libgrid .pc h3')].map(h => h.textContent).join(' | ')));
   await p.fill('#libq', ''); await p.waitForTimeout(100);
   await p.click('#libcats [data-cat="heart"]'); await p.waitForTimeout(150);
-  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length) === 6, 'heart category shows 6');
+  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length) === 7, 'heart category shows 7');
   await p.click('#libgrid [data-star="acs"]'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => JSON.parse(localStorage.getItem('gz-saved') || '[]').includes('acs')), 'star on a card saves it');
   ok(await p.evaluate(() => location.hash) === '#pathways', 'star does not open the card');
   ok(await p.evaluate(() => !document.querySelector('#sidesaved').hidden), 'sidebar shows saved');
   await p.click('#libcats [data-cat="all"]'); await p.waitForTimeout(100);
+  // Guidelines: the CPG entries in the guide, then the national CPG shelf as outside links
+  await p.click('#libf [data-f="cpg"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#libgrid .pc:not(.shelf-c) h3 a')].map(a => a.getAttribute('href')).sort().join() === Object.keys(P).filter(id => P[id].grp === 'cpg').map(id => '#' + id).sort().join() && document.querySelectorAll('#libgrid .pc:not(.shelf-c)').length >= 6), 'Guidelines shows every CPG entry in the guide');
+  ok(await p.evaluate(() => { const want = CPG_SHELF.filter(c => !(c.id && P[c.id])), l = [...document.querySelectorAll('#libgrid .shelf-c h3 a')];
+    return l.length === want.length && l.length >= 35 && l.every((a, i) => a.target === '_blank' && a.rel.includes('noopener') && a.href.startsWith(want[i].drive ? 'https://drive.google.com/file/d/' + want[i].drive : 'https://www.acadmed.org.my/view_file.cfm?fileid=' + want[i].cpg)); }), 'the shelf lists every national CPG not built in: the Drive copy where its terms allow, otherwise the Academy file');
+  ok(await p.evaluate(() => CPG_SHELF.find(c => c.cpg === '894').drive === '' && !!document.querySelector('#libgrid .shelf-c h3 a[href$="fileid=894"]') && CPG_SHELF.filter(c => !c.drive).length >= 10), 'a CPG whose rights are reserved (hypertension, 2018) links to the Academy only');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#libgrid .shelf-c .pill.ext')].filter(x => x.textContent.startsWith('Patient leaflet')).length === 4 && [...document.querySelectorAll('#libgrid .shelf-c .pill.ext')].some(x => x.textContent.startsWith('Patient leaflet, Bahasa Melayu'))), 'the shelf carries the patient leaflets: cancer pain in English and Bahasa Melayu, depression and dementia');
+  ok(await p.evaluate(() => { const want = CPG_SHELF.filter(c => !(c.id && P[c.id])), pills = [...document.querySelectorAll('#libgrid .shelf-c .shelf-l a')];
+    return pills.filter(a => a.textContent.startsWith('Academy')).length === want.filter(c => c.drive).length && pills.every(a => /^https:\/\/(drive\.google\.com\/file\/d\/|www\.acadmed\.org\.my\/view_file\.cfm\?fileid=)/.test(a.href) && a.target === '_blank') && document.querySelector('#libgrid .shelf-top a').href.startsWith('https://drive.google.com/drive/folders/'); }), 'cards with a Drive copy also link the Academy file, every pill opens Drive or the Academy in a new tab, and the shelf opens the whole Drive folder');
+  ok(await p.evaluate(() => CPG_SHELF.filter(c => c.id && P[c.id]).every(c => !document.querySelector(`#libgrid .shelf-c a[href$="fileid=${c.cpg}"]`) && !document.querySelector(`#libgrid .shelf-c a[href*="${c.drive}"]`))), 'the CPGs built into the guide are not repeated as links');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#libgrid .shelf-c .pill.ext')].filter(x => x.textContent.startsWith('Quick reference')).length === CPG_SHELF.filter(c => !(c.id && P[c.id]) && c.qr).length && document.querySelectorAll('#libgrid .shelf-sub').length === 2), 'the shelf carries each quick reference, in two groups');
+  await p.screenshot({path:out + '/d-guidelines.png'});
+  await p.click('#libf [data-f="all"]'); await p.waitForTimeout(100);
+  ok(await p.evaluate(() => !document.querySelector('#libgrid .shelf')), 'All without a search shows no shelf');
+  await p.fill('#libq', 'sore throat'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#libgrid .shelf-c h3 a')].some(a => a.textContent.includes('Sore Throat'))), 'a library search under All also finds a national CPG on the shelf');
+  await p.fill('#libq', ''); await p.waitForTimeout(100);
+  await go(p, '#guidelines');
+  ok(await p.evaluate(() => document.querySelector('#libf [data-f="cpg"]').getAttribute('aria-pressed') === 'true' && !!document.querySelector('#libgrid .shelf')), '#guidelines opens the library on Guidelines');
+  await p.click('#libf [data-f="all"]'); await p.waitForTimeout(100);
   // Palette
   await p.keyboard.press('/'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => !document.querySelector('#pal').hidden && document.activeElement.id === 'gq'), 'slash opens search with focus');
@@ -179,13 +199,13 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 22 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 22 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 25 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 25 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
   await p.screenshot({path:out + '/d-calc-hub.png', fullPage:true});
   await p.click('#cxcats [data-cg="scores"]'); await p.waitForTimeout(150);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'curb,wells' && [...document.querySelectorAll('#cxlist .cxl')].filter(r => !r.hidden).length === 3), 'the Scores tile shows CURB-65 and Wells, with ABCD2, Alvarado and Centor on MDCalc');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'apef,curb,wells' && [...document.querySelectorAll('#cxlist .cxl')].filter(r => !r.hidden).length === 3), 'the Scores tile shows the asthma action plan zones, CURB-65 and Wells, with ABCD2, Alvarado and Centor on MDCalc');
   await p.click('#cxcats [data-cg="all"]'); await p.fill('#cxq', 'clexane'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'anticoag'), 'finding "clexane" shows the anticoagulant calculator');
   await p.fill('#cxq', 'zzzz'); await p.waitForTimeout(100);
@@ -281,6 +301,24 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#calc-duo', 400);
   await p.fill('#cf-vol', '300'); await p.fill('#cf-hrs', '4'); await p.fill('#cf-wt', '60'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '1.25 ml/kg/hr'), 'urine output: 300 ml over 4 hours at 60 kg is 1.25 ml/kg/hr');
+  // The asthma CPG calculators (Academy CPG round)
+  await go(p, '#calc-apred', 400);
+  await p.fill('#cf-ibw', '60'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#couts .out b')].map(b => b.textContent).join(' | ') === '30–50 mg | 5 to 7 days'), 'asthma prednisolone at an ideal weight of 60 kg: 30–50 mg (the upper end held at 50 mg), for 5 to 7 days');
+  await p.fill('#cf-ibw', '110'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '50 mg' && !!document.querySelector('#couts .cx-gap')), 'at 110 kg both ends are 50 mg, and the missing weight formula is named');
+  await go(p, '#calc-apef', 400);
+  await p.fill('#cf-best', '450'); await p.fill('#cf-now', '200'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#couts .out b')].map(b => b.textContent).join(' | ') === '360 to 450 l/min | 225 to 356 l/min | Below 225 l/min | 200 l/min, 44.4%'), 'action plan zones from a best of 450 l/min: 360 to 450, 225 to 356, below 225; 200 is 44.4%');
+  ok(await p.evaluate(() => document.querySelectorAll('#couts .out')[3].querySelector('em').textContent.startsWith('ALERT')), 'and the current reading falls in the ALERT zone');
+  await p.screenshot({path:out + '/d-calc-apef.png', fullPage:true});
+  // The GCS calculator, read from the head injury CPG's Appendix 3
+  await go(p, '#calc-gcs', 400);
+  for (const [k, v] of [['ge', '4'], ['gv', '5'], ['gm', '6']]){ await p.click(`#calcbox [data-k="${k}"][data-pv="${v}"]`); await p.waitForTimeout(80); }
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === 'E4V5M6 = 15' && document.querySelector('#couts .verdict a').getAttribute('href') === '#head-injury-cpg--imm'), 'GCS: E4V5M6 is 15, a mild head injury, and points to the head CT decision');
+  for (const [k, v] of [['ge', '2'], ['gv', '2'], ['gm', '4']]){ await p.click(`#calcbox [data-k="${k}"][data-pv="${v}"]`); await p.waitForTimeout(80); }
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === 'E2V2M4 = 8' && document.querySelector('#couts .verdict').classList.contains('stop') && /intubation/.test(document.querySelector('#couts .verdict').textContent)), 'E2V2M4 is 8, a severe head injury, with the CPG\'s intubation line');
+  await p.screenshot({path:out + '/d-calc-gcs.png', fullPage:true});
   ok(await gz() === store0, 'using the calculators stores nothing');
   // The dengue CPG entry: tabs, the triage route, the leaflet in two languages, deep links and search
   await go(p, '#dengue-cpg', 400);
@@ -309,6 +347,76 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => ['#dengue-cpg', '#calc-dfluid'].includes(a.getAttribute('href')))), 'searching "fluid quota" finds the dengue CPG');
   await p.fill('#gq', 'denggi'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => a.getAttribute('href') === '#dengue-cpg')), 'searching in Malay ("denggi") finds it through the leaflet');
+  await p.keyboard.press('Escape'); await p.waitForTimeout(200);
+  // The asthma and gout CPG entries (Academy CPG round): tabs, banners, a walk to an outcome, deep links, links and search
+  await go(p, '#asthma-cpg', 400);
+  const atabs = await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'));
+  ok(atabs === 'Severity|Drugs|Action plan|Inhaler and spacer|Treatment steps|References', `the asthma CPG has its six tabs (${atabs})`);
+  ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'Asthma in adults: CPG 2nd edition'; }, null, {timeout:5000}).then(() => true, () => false), 'the asthma CPG banner carries its own picture');
+  ok(await p.waitForFunction(() => !!document.querySelector('#run .run-hero .tm video'), null, {timeout:5000}).then(() => true, () => false), 'and its own loop');
+  for (const sel of ['[data-go="0"]', '[data-next]', '[data-go="1"]', '[data-go="1"]', '[data-go="1"]', '[data-next]', '[data-go="0"]', '[data-go="0"]', '[data-go="1"]']){ await p.click('#cur ' + sel); await p.waitForTimeout(220); }
+  ok(await p.evaluate(() => /^Discharge with an asthma action plan/.test(document.querySelector('#cur h2').textContent)), 'mild, improved, both discharge criteria met and no admission factor: discharge with an action plan');
+  await p.screenshot({path:out + '/d-run-asthma-cpg.png', fullPage:true});
+  ok(await p.evaluate(() => P.asthma.see.some(s => s[0] === '#asthma-cpg') && P['asthma-zone'].see.some(s => s[0] === '#asthma-cpg') && P['asthma-cpg'].see.some(s => s[0] === '#asthma')), 'the ebook asthma pathway, the Asthma Zone flow and the CPG link to each other');
+  await p.click('#ptab [data-pt="refs"]'); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => { const a = document.querySelector('#tp-refs .cpg-pdf a'); return !!a && a.href.startsWith('https://drive.google.com/file/d/1pkxXZSQHmoCxIw2X4XLfXBf4OZDAQC0s') && a.target === '_blank'; }), 'the asthma CPG\'s References tab opens the full CPG PDF in Google Drive');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#tp-refs .cpg-pdf a')].some(a => a.textContent.startsWith('Quick reference') && /^https:\/\/(drive\.google\.com\/file\/d\/|www\.acadmed\.org\.my\/view_file\.cfm\?fileid=866)/.test(a.href))), 'and its quick reference');
+  await go(p, '#gout-cpg', 400);
+  const gtabs = await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'));
+  ok(gtabs === 'Flare drugs|Diagnosis|Urate-lowering|Pregnancy|Diet and medicines|References', `the gout CPG has its six tabs (${gtabs})`);
+  ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'Gout: CPG 2nd edition'; }, null, {timeout:5000}).then(() => true, () => false), 'the gout CPG banner carries its own picture');
+  for (const sel of ['[data-go="1"]', '[data-go="0"]', '[data-go="1"]', '[data-go="0"]']){ await p.click('#cur ' + sel); await p.waitForTimeout(220); }
+  ok(await p.evaluate(() => /^Colchicine for the flare/.test(document.querySelector('#cur h2').textContent)), 'treat the flare, colchicine, no contraindication, no interaction: the colchicine doses');
+  await p.screenshot({path:out + '/d-run-gout-cpg.png', fullPage:true});
+  ok(await p.evaluate(() => P['gz-rules'].nodes.gout.links.some(l => l[0] === '#gout-cpg') && P['gout-cpg'].see.some(s => s[0] === '#gz-rules--gout')), 'the Green Zone gout rule and the gout CPG link to each other');
+  for (const [h, t] of [['#asthma-cpg--ltx', 'Life-threatening: treat, and refer early to critical care'], ['#asthma-cpg--preg', 'Pregnancy: treat an exacerbation'], ['#gout-cpg--nsdose', 'NSAID or COX-2 inhibitor for the flare'], ['#gout-cpg--kk', 'Home with advice; follow up at the Klinik Kesihatan']]){
+    await go(p, h, 350);
+    const got = await p.evaluate(() => (document.querySelector('#cur h2') || {}).textContent || '');
+    ok(got.startsWith(t), `${h} shows "${t}" (got "${got}")`);
+  }
+  // Part 2 entries (Academy CPG round)
+  await go(p, '#head-injury-cpg', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#ptab [role="tab"]').length >= 4 && [...document.querySelectorAll('#ptab [role="tab"]')].pop().textContent === 'References'), `head-injury-cpg has its reference tabs (${await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'))})`);
+  ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'Head injury in adults: CPG 2015'; }, null, {timeout:5000}).then(() => true, () => false), 'head-injury-cpg: its banner carries its own picture');
+  ok(await p.evaluate(() => P['mild-tbi'].see.some(s => s[0] === '#head-injury-cpg')), 'mild-tbi links to head-injury-cpg');
+  for (const sel of ["[data-go=\"0\"]","[data-go=\"1\"]","[data-go=\"1\"]","[data-go=\"0\"]","[data-go=\"0\"]"]){ await p.click('#cur ' + sel); await p.waitForTimeout(220); }
+  ok(await p.evaluate(() => (document.querySelector('#cur h2') || {}).textContent.startsWith("Discharge with head injury advice")), 'head-injury-cpg: a walk ends at "Discharge with head injury advice"');
+  await p.screenshot({path:out + '/d-run-head-injury-cpg.png', fullPage:true});
+  await go(p, '#head-injury-cpg--hr', 350); ok(await p.evaluate(() => ((document.querySelector('#cur h2') || {}).textContent || '').startsWith("Aged 65 or over, or on an anticoagulant or antiplatelet") || ((document.querySelector('#cur h2') || {}).textContent || '').includes("Aged 65 or over, or on an anticoagulant or antiplatelet")), '#head-injury-cpg--hr opens "Aged 65 or over, or on an anticoagulant or antiplatelet"');
+  await go(p, '#head-injury-cpg--wardx', 350); ok(await p.evaluate(() => ((document.querySelector('#cur h2') || {}).textContent || '').startsWith("Not for ED observation") || ((document.querySelector('#cur h2') || {}).textContent || '').includes("Not for ED observation")), '#head-injury-cpg--wardx opens "Not for ED observation"');
+  await go(p, '#acs-cpg', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#ptab [role="tab"]').length >= 4 && [...document.querySelectorAll('#ptab [role="tab"]')].pop().textContent === 'References'), `acs-cpg has its reference tabs (${await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'))})`);
+  ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'ACS: CPG 1st edition'; }, null, {timeout:5000}).then(() => true, () => false), 'acs-cpg: its banner carries its own picture');
+  ok(await p.evaluate(() => P['acs'].see.some(s => s[0] === '#acs-cpg')), 'acs links to acs-cpg');
+  await go(p, '#diabetic-foot-cpg', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#ptab [role="tab"]').length >= 4 && [...document.querySelectorAll('#ptab [role="tab"]')].pop().textContent === 'References'), `diabetic-foot-cpg has its reference tabs (${await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'))})`);
+  ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'Diabetic foot: CPG 2nd edition'; }, null, {timeout:5000}).then(() => true, () => false), 'diabetic-foot-cpg: its banner carries its own picture');
+  ok(await p.evaluate(() => P['cellulitis'].see.some(s => s[0] === '#diabetic-foot-cpg')), 'cellulitis links to diabetic-foot-cpg');
+  for (const sel of ["[data-go=\"0\"]","[data-go=\"1\"]","[data-go=\"1\"]","[data-go=\"1\"]","[data-go=\"1\"]","[data-go=\"0\"]","[data-go=\"0\"]"]){ await p.click('#cur ' + sel); await p.waitForTimeout(220); }
+  ok(await p.evaluate(() => (document.querySelector('#cur h2') || {}).textContent.startsWith("Oral antibiotics, then manage as outpatient")), 'diabetic-foot-cpg: a walk ends at "Oral antibiotics, then manage as outpatient"');
+  await p.screenshot({path:out + '/d-run-diabetic-foot-cpg.png', fullPage:true});
+  await go(p, '#diabetic-foot-cpg--mdt', 350); ok(await p.evaluate(() => ((document.querySelector('#cur h2') || {}).textContent || '').startsWith("Refer to the multidisciplinary foot care team") || ((document.querySelector('#cur h2') || {}).textContent || '').includes("Refer to the multidisciplinary foot care team")), '#diabetic-foot-cpg--mdt opens "Refer to the multidisciplinary foot care team"');
+  await go(p, '#diabetic-foot-cpg--cnr', 350); ok(await p.evaluate(() => ((document.querySelector('#cur h2') || {}).textContent || '').startsWith("Suspected Charcot neuroarthropathy") || ((document.querySelector('#cur h2') || {}).textContent || '').includes("Suspected Charcot neuroarthropathy")), '#diabetic-foot-cpg--cnr opens "Suspected Charcot neuroarthropathy"');
+  await go(p, '#fb-children-cpg', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#ptab [role="tab"]').length >= 4 && [...document.querySelectorAll('#ptab [role="tab"]')].pop().textContent === 'References'), `fb-children-cpg has its reference tabs (${await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'))})`);
+  ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'Swallowed foreign body in children: CPG 2025'; }, null, {timeout:5000}).then(() => true, () => false), 'fb-children-cpg: its banner carries its own picture');
+  ok(await p.evaluate(() => P['children'].see.some(s => s[0] === '#fb-children-cpg')), 'children links to fb-children-cpg');
+  for (const sel of ["[data-go=\"1\"]","[data-go=\"1\"]"]){ await p.click('#cur ' + sel); await p.waitForTimeout(220); }
+  ok(await p.evaluate(() => (document.querySelector('#cur h2') || {}).textContent.startsWith("Emergent endoscopic removal")), 'fb-children-cpg: a walk ends at "Emergent endoscopic removal"');
+  await p.screenshot({path:out + '/d-run-fb-children-cpg.png', fullPage:true});
+  await go(p, '#fb-children-cpg--bbage', 350); ok(await p.evaluate(() => ((document.querySelector('#cur h2') || {}).textContent || '').startsWith("Child aged <5 years") || ((document.querySelector('#cur h2') || {}).textContent || '').includes("Child aged <5 years")), '#fb-children-cpg--bbage opens "Child aged <5 years"');
+  await go(p, '#fb-children-cpg--magmet', 350); ok(await p.evaluate(() => ((document.querySelector('#cur h2') || {}).textContent || '').startsWith("A magnet plus another metallic object") || ((document.querySelector('#cur h2') || {}).textContent || '').includes("A magnet plus another metallic object")), '#fb-children-cpg--magmet opens "A magnet plus another metallic object"');
+  await go(p, '#children--bbhome', 350);
+  ok(await p.evaluate(() => !!document.querySelector('#cur .links a[href="#fb-children-cpg--bb"]')), 'the department\'s battery-home outcome links to the CPG\'s battery step');
+  await p.click('#cur .links a[href="#fb-children-cpg--bb"]'); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => location.hash === '#fb-children-cpg--bb' && ((document.querySelector('#cur h2') || {}).textContent || '').startsWith('Confirmed button battery')), 'and the link opens it');
+  ok(await p.evaluate(() => { const t = P['dengue-cpg'].notes.find(x => x.l === 'Tests'); const n = t && t.notes.find(x => x.h === 'Bleeding and transfusion'); return !!n && n.src === 'CPG Recommendation 9 (p57)' && n.items.some(i => i.startsWith('Routine prophylactic transfusion of platelets or plasma should not be performed')); }), 'the dengue CPG has Recommendation 9 on transfusion in its Tests tab');
+  // End of part 2 entries
+  await p.keyboard.press('/'); await p.waitForTimeout(250);
+  await p.fill('#gq', 'colchicine'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => a.getAttribute('href').startsWith('#gout-cpg'))), 'searching "colchicine" finds the gout CPG');
+  await p.fill('#gq', 'peak flow action plan'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => ['#calc-apef', '#asthma-cpg'].includes(a.getAttribute('href')))), 'searching "peak flow action plan" finds the asthma CPG or its calculator');
   await p.keyboard.press('Escape'); await p.waitForTimeout(200);
   // Quiz
   await go(p, '#quiz');
@@ -421,6 +529,16 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 9 && document.querySelectorAll('#libcats .tm video').length > 0), 'on a phone the topic tiles move by default too');
   ok(await p.evaluate(() => { const n = document.querySelectorAll('.tm[data-play]').length; return n > 0 && n <= 6; }), 'a phone plays at most six loops at once');
   await p.screenshot({path:out + '/p-pathways-tiles.png'});
+  await go(p, '#guidelines', 500);
+  ok(await hscroll(p) <= 0, 'phone #guidelines no sideways scroll');
+  await p.screenshot({path:out + '/p-guidelines.png'});
+  await p.screenshot({path:out + '/p-guidelines-full.png', fullPage:true});
+  await p.tap('#libf [data-f="all"]'); await p.waitForTimeout(100);
+  for (const h of ['#asthma-cpg', '#gout-cpg', '#gout-cpg--coldose', '#asthma-cpg--home', '#dengue-cpg--dcok', '#head-injury-cpg', '#acs-cpg', '#diabetic-foot-cpg', '#fb-children-cpg']){
+    await go(p, h, 500);
+    ok(await hscroll(p) <= 0, `phone ${h} no sideways scroll`);
+    if (!h.includes('--')) await p.screenshot({path:out + `/p-${h.slice(1)}.png`});
+  }
   await go(p, '#home');
   await p.tap('#menubtn'); await p.waitForTimeout(450);
   ok(await p.evaluate(() => document.querySelector('#side').classList.contains('open')), 'menu opens');

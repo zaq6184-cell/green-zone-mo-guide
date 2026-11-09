@@ -60,8 +60,9 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['National CPGs: six more','Six more national guidelines from the Academy of Medicine of Malaysia list, step by step, each beside the pathway or rule it belongs to, each with its own moving banner. Management of Asthma in Adults (2nd edition, MaHTAS 2024): grade an exacerbation by Table 9, treat it by the emergency department algorithm, then admit or discharge with an action plan. Management of Gout (2nd edition, MaHTAS 2021): check it is a flare, choose a drug with its doses and contraindications, keep urate-lowering therapy going, and send home with the right referral. Early Management of Head Injury in Adults (2015): head CT, ED observation, admission and the advice card. Acute Coronary Syndromes (1st edition, 2026): the ECG in 10 minutes, the troponin rule-out, risk and first drugs; it asks that suspected ACS is not triaged to a green zone. Diabetic Foot (2nd edition, 2018): general illness, the University of Texas grade, antibiotics and referral. Foreign Body Ingestion in Children (2025): red flags, the first X-ray and each object by where it lies. Every line names its CPG page. New calculators: asthma prednisolone by weight, the action plan PEF zones, and the Glasgow Coma Scale. A new Guidelines filter in Pathways puts the seven national guidelines together and lists 39 more national CPGs chosen for the Green Zone from the Academy of Medicine of Malaysia list, as links: each opens its PDF in Google Drive where the CPG allows a copy, otherwise the Academy\'s own file, with its quick reference and patient leaflets where it has them. Where a CPG and the ebook differ is listed under Still to confirm.',[['#acs-cpg','ACS CPG'],['#head-injury-cpg','Head injury CPG'],['#guidelines','All guidelines']]],
   ['Dengue CPG 2026','The new national guideline, Management of Dengue in Adults (4th edition, MaHTAS 2026), step by step: triage a patient to a zone (Appendix 7 with Table 8), check the discharge criteria, and look up regular medicines. Fluids, tests, shock and the course of illness are in tabs, each line with its CPG page. The home care leaflet is there in English and Bahasa Melayu, with Copy. Four new dengue calculators: triage vital signs, fluids by weight, the test result and urine output. The ebook pathway stays as written, and where the two differ is listed under Still to confirm.',[['#dengue-cpg','Open the dengue CPG'],['#calc-dvitals','Triage vital signs'],['#calc-dfluid','Fluids by weight']]],
-  ['Calculators','Twenty-two calculators in one place, built only from the ebook, the department\'s notes and the dengue CPG, each naming its source: the shock index, analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the Obsess protocol check, syncope, SVT, hypertensive urgency, the pain scales, BARS and RASS, the head injury check, paracetamol overdose by time, anaphylaxis, child doses, the SOAP check, and the dengue triage vital signs, fluids, test result and urine output. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Scores the ebook names but does not define, such as TIMI and ABCD2, and other essential emergency scores open on MDCalc; children\'s tools open on PEMCalc. Both are outside sites.',[['#calc','Calculators'],['#calc-obsess','Obsess protocol check'],['#calc-paraod','Paracetamol overdose']]],
+  ['Calculators','Twenty-five calculators in one place, built only from the ebook, the department\'s notes and the national CPGs, each naming its source: the shock index, analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the Obsess protocol check, syncope, SVT, hypertensive urgency, the pain scales, BARS and RASS, the head injury check, paracetamol overdose by time, anaphylaxis, child doses, the SOAP check, the dengue triage vital signs, fluids, test result and urine output, the asthma prednisolone dose and action plan zones, and the Glasgow Coma Scale. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Scores the ebook names but does not define, such as TIMI and ABCD2, and other essential emergency scores open on MDCalc; children\'s tools open on PEMCalc. Both are outside sites.',[['#calc','Calculators'],['#calc-obsess','Obsess protocol check'],['#calc-paraod','Paracetamol overdose']]],
   ['A new look','The guide is now a bento of tiles, each showing real data from the guide: how each pathway can end, the numbers, the zone.',[['#home','Home']]],
   ['The zone map','The five stops of a Green Zone visit on the home screen. Tap one for what happens there and the rules that apply.',[['#journey','Patient journey']]],
   ['Whole-pathway maps','Every step of a pathway on one sheet, with your route lit and the outcomes you can no longer reach dimmed.',[['#renal-colic','Try it on renal colic']]],
@@ -78,7 +79,7 @@ const INTRO = [
   {h:'Find it in one search', p:'Type a symptom, rule, dose or number, or press /. Saved and recent pathways wait on your home screen.', art:'search'},
   {h:'One question at a time', p:'Each pathway asks one question per card and shows how it can still end. It finishes in the ebook\'s outcome colours: red admit, yellow observation, green discharge, violet refer.', art:'path'},
   {h:'Patients move one way', p:'Triage, you the MO, the treatment room, the CCA only if needed, then review. Tap any stop on the zone map for what happens there and the rules that apply.', art:'zone'},
-  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 22 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
+  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 25 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
 ];
 const ART = {
   search:'<rect x="18" y="34" width="284" height="56" rx="28" style="fill:#fff"/><circle cx="50" cy="62" r="10" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><path d="m57.5 69.5 7 7" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><text x="76" y="69" style="font:700 19px var(--body);fill:#14211b">renal colic</text><rect x="184" y="50" width="3" height="25" class="blink" style="fill:var(--emerald-1)"/>' +
@@ -224,7 +225,14 @@ const CONFIRM = [
   'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
   'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
   'Which dengue source the Green Zone follows where the ebook (built from the CPG 3rd edition, 2015) and the CPG 4th edition (2026) differ: shock CRT over 2 or over 3 seconds; persistent vomiting over 2 times in 24 hours or over 3 a day; the list of warning signs (the ebook has persistent diarrhoea and a tender liver, the CPG liver enlargement over 2 cm, postural hypotension and reduced urine output); and oral fluids (2 litres a day, or 200 ml an hour while awake).',
-  'Points inside the dengue CPG (4th edition) itself: Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.'
+  'Points inside the dengue CPG (4th edition) itself: Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.',
+  'Which asthma source the Green Zone follows where the ebook (built from the 2017 CPG) and the Asthma in Adults CPG, 2nd edition (2024) differ: prednisolone 30 mg a day for 5 days, or 0.5 to 1 mg/kg with a maximum of 50 mg for 5 to 7 days; IV magnesium sulphate 2.47 g or 2 g; SC terbutaline, which the CPG keeps for critical care; ipratropium at moderate and every 20 minutes, or for severe only every 4 to 6 hours; a severe respiratory rate over 30 or over 25; grading and discharge on PEF, which Table 9 does not use; a discharge SpO2 over 95% or over 94%; and an observation route, which the CPG does not have. The full table is in CPG-REVIEW-ASTHMA.md.',
+  'Points inside the asthma CPG (2nd edition) itself: Table 9 prints SpO2 <90% and PaO2 <60 mmHg under both severe and life-threatening, and the guide lists them as life-threatening by its note to classify using the most severe parameters; mild SpO2 is ≥95% in Table 9 but <95% in Algorithms 3 and 4; four oxygen targets (93 to 95%, ≥94%, >94% for improvement, 94 to 98% in pregnancy); prednisolone by the ideal body weight, with no formula; IV hydrocortisone 100 mg stat or 200 mg a day in divided doses; and follow-up within 1 to 2 weeks or within seven days.',
+  'The gout CPG (2nd edition, 2021): the Green Zone gout rule (HKL letter, 29 Nov 2024) words several of Recommendation 12\'s rheumatology referral criteria differently (men under 30, against early onset at age <30 years; at least three months of allopurinol), which may come from the letter itself. The CPG gives no pathway for suspected septic arthritis or joint aspiration, no NSAID course length and no gastroprotection. Inside it: colchicine 1.2 mg then 0.6 mg in the trials (p35) but 1 mg then 0.5 mg in Appendix 5B (p68); no renal row for a CrCl of 90 or more; and NSAIDs in pregnancy restricted to the first and second trimester (Appendix 5C) but avoided from 20 weeks (FDA advice, p40). The full review is in CPG-REVIEW-GOUT.md.',
+  'The head injury CPG (2015) against the ebook\'s mild TBI pathway: the CPG admits every patient aged 65 or over or on an anticoagulant or antiplatelet whatever the CT shows (a boxed statement, p19), where the ebook can send them home after a normal CT; it counts vomiting twice or more, the ebook more than twice; its advice card covers 24 hours, the ebook 48; it has six urgent-CT factors the ebook lacks, and no PTA charting. Inside it: three observation schedules, a six-hour observation with no start point, and no list of indications for neuro-trauma referral. The full review is in CPG-REVIEW-HEAD-INJURY.md.',
+  'The ACS CPG (1st edition, 2026) against the ebook\'s chest pain pathway: Key Recommendation 8 says a patient with chest pain suspected of ACS should NOT be triaged to a green or non-critical zone; it scores by HEART or by TIMI (TIMI only with a high-sensitivity troponin), with TIMI 0 or 1 to go home, where the Obsess protocol asks for TIMI under 1; it calls labelling troponin results positive or negative inappropriate; and low-risk unstable angina may go home. Inside it: Flowchart 6 gives no route for a conventional troponin taken under 6 hours from onset, a single hs-cTn is timed three ways, HEART has no row for exactly 3 risk factors, and the alteplase dose is printed up to 5 mg. Whether HKL\'s troponin is high-sensitivity, and its 99th percentile, are to confirm. The full review is in CPG-REVIEW-ACS.md.',
+  'The diabetic foot CPG (2nd edition, 2018): which HKL team takes an urgent referral, and the route to Foot Protection Services; Algorithm B sends UT 0, IA and IB to outpatient care while Table 2 asks for every active problem to be seen within 24 hours; it gives no route for UT IIA or IIIA; erythema of exactly 2 cm fits neither infection band and SIRS is not defined; and its antibiotic table prints piperacillin/tazobactam 4.5 mg (moderate) and 4.5 g (severe). The full review is in CPG-REVIEW-DIABETIC-FOOT.md.',
+  'The foreign body ingestion CPG (2025) against the department\'s swallowed foreign body step: the department sends every asymptomatic battery past the oesophagus home with stool checks and a Monday clinic, where the CPG removes a gastric button battery within 24 hours if the child is under 5 or the battery is 20 mm or more, and needs no stool checks; the department treats a single magnet as high risk, where the CPG allows discharge; and its width threshold is 2.5 cm against 20 mm. Inside it: five timings for a gastric battery (12, 24 and 48 hours), and no algorithm for a magnet with another metal object. The full review is in CPG-REVIEW-FB-CHILDREN.md.'
 ];
 
 /* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
@@ -384,12 +392,12 @@ function copyText(text, o = {}){
 const FLOW_IDS = Object.keys(P).filter(id => P[id].grp === 'rules' && P[id].sub !== 'protocol');
 const PROT_IDS = Object.keys(P).filter(id => P[id].sub === 'protocol');
 const CATS = [
-  {k:'heart', t:'Heart and vessels', s:'Heart', ic:'heart', c:'c-heart', j:'t-garnet', ids:['acs','heart-failure','hypertensive-urgency','svt','syncope','dvt']},
-  {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','pneumonia','anaphylaxis']},
-  {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','behavioural-disturbance']},
-  {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','gastroenteritis','biliary','renal-colic','scrotal-pain']},
+  {k:'heart', t:'Heart and vessels', s:'Heart', ic:'heart', c:'c-heart', j:'t-garnet', ids:['acs','acs-cpg','heart-failure','hypertensive-urgency','svt','syncope','dvt']},
+  {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','asthma-cpg','pneumonia','anaphylaxis']},
+  {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','behavioural-disturbance']},
+  {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','gastroenteritis','biliary','renal-colic','scrotal-pain','fb-children-cpg']},
   {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis']},
-  {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','paracetamol-overdose','pain']},
+  {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','pain']},
   {k:'flow', t:'Green Zone flow and referrals', s:'Flow and referrals', ic:'route', c:'c-flow', j:'t-emerald', ids:FLOW_IDS},
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
 ];
@@ -654,7 +662,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -734,10 +742,10 @@ function renderHome(){
 
 /* ================= Pathway library ================= */
 let libF = 'all', libCat = 'all';
-function libCounts(){ const all = Object.keys(P); return {all:all.length, ebook:all.filter(id => !P[id].grp).length, rules:all.filter(id => P[id].grp === 'rules').length, saved:savedIds().length}; }
+function libCounts(){ const all = Object.keys(P); return {all:all.length, ebook:all.filter(id => !P[id].grp).length, cpg:all.filter(id => P[id].grp === 'cpg').length, rules:all.filter(id => P[id].grp === 'rules').length, saved:savedIds().length}; }
 function renderLibf(){
   const n = libCounts();
-  $('#libf').innerHTML = [['all', 'All'], ['ebook', 'Ebook'], ['rules', 'Rules and protocols'], ['saved', 'Saved']].map(([k, t]) => `<button type="button" data-f="${k}" aria-pressed="${libF === k}">${t} <small>${n[k]}</small></button>`).join('');
+  $('#libf').innerHTML = [['all', 'All'], ['ebook', 'Ebook'], ['cpg', 'Guidelines'], ['rules', 'Rules and protocols'], ['saved', 'Saved']].map(([k, t]) => `<button type="button" data-f="${k}" aria-pressed="${libF === k}">${t} <small>${n[k]}</small></button>`).join('');
 }
 function pcard(id){
   const p = P[id], c = catOf(id), on = isSaved(id);
@@ -751,8 +759,10 @@ function renderLib(){
     const strict = hit(false);
     match = Object.keys(P).some(strict) ? strict : hit(true);
   }
-  const inF = id => libF === 'all' ? true : libF === 'ebook' ? !P[id].grp : libF === 'rules' ? P[id].grp === 'rules' : s.includes(id);
+  const inF = id => libF === 'all' ? true : libF === 'ebook' ? !P[id].grp : libF === 'cpg' ? P[id].grp === 'cpg' : libF === 'rules' ? P[id].grp === 'rules' : s.includes(id);
   const ids = Object.keys(P).filter(id => inF(id) && match(id));
+  /* National CPGs not built into the guide: all of them under Guidelines, and the ones a search finds under All */
+  const shelf = libF === 'cpg' || (libF === 'all' && q) ? CPG_SHELF.filter(c => shelfOut(c) && (!q || terms(q).every(w => termRe(w, true).test(shelfHay(c))))) : [];
   renderLibf();
   const cats = CATS.filter(c => c.ids.some(id => ids.includes(id)));
   if (libCat !== 'all' && !cats.some(c => c.k === libCat)) libCat = 'all';
@@ -760,9 +770,29 @@ function renderLib(){
   const shown = CATS.filter(c => libCat === 'all' || c.k === libCat).map(c => [c, c.ids.filter(id => ids.includes(id)).sort(byTitle)]).filter(([, l]) => l.length);
   let h;
   if (shown.length) h = shown.map(([c, l]) => `<section class="libsec ${c.j}" aria-label="${esc(c.t)}"><h2 class="lh">${tileMedia(c.k)}${svg(c.ic)}<span>${esc(c.t)}</span><small>${l.length}</small></h2><div class="grid">${l.map(pcard).join('')}</div></section>`).join('');
+  else if (shelf.length) h = '';
   else if (libF === 'saved' && !s.length) h = '<div class="empty">Nothing saved yet. Tap the star on any pathway to keep it here, on the home page and in the menu.</div>';
   else h = `<div class="empty">No pathway matches “${esc(q)}”. The search also covers rules, numbers, doses and the tour. <button type="button" class="sm" data-find>Search everything</button></div>`;
-  withTiles($('#libgrid'), h);
+  withTiles($('#libgrid'), h + (shelf.length ? shelfHTML(shelf) : ''));
+}
+/* The CPG shelf: national CPGs from the Academy of Medicine list that are not built into the guide, as outside links */
+const shelfOut = c => !(c.id && P[c.id]);
+const shelfHay = c => [c.t, c.s, c.y, c.kw, 'cpg guideline national academy'].join(' ');
+function shelfCard(c){
+  /* The Drive copy only where the CPG's terms allow reproduction (c.drive set); otherwise the Academy's own file */
+  const x = 'target="_blank" rel="noopener noreferrer"', main = c.drive ? GDRIVE + c.drive + '/view' : ACAD + c.cpg;
+  const qr = c.qr ? `<a class="pill ext" href="${c.qrd ? GDRIVE + c.qrd + '/view' : ACAD + c.qr}" ${x}>Quick reference<span class="vh"> for ${esc(c.t)}, ${c.qrd ? 'PDF in Google Drive' : 'on the Academy site'}</span>${svg('ext')}</a>` : '';
+  const acad = c.drive ? `<a class="pill ext" href="${ACAD + c.cpg}" ${x}>Academy<span class="vh"> of Medicine: the official file of ${esc(c.t)}</span>${svg('ext')}</a>` : '';
+  const pil = (c.pil || []).map(([p, l, d]) => `<a class="pill ext" href="${d ? GDRIVE + d + '/view' : ACAD + p}" ${x}>Patient leaflet, ${esc(l)}<span class="vh"> for ${esc(c.t)}, ${d ? 'PDF in Google Drive' : 'on the Academy site'}</span>${svg('ext')}</a>`).join('');
+  return `<article class="pc cxl shelf-c"><div class="pc-b"><h3><a href="${main}" ${x}>${esc(c.t)}<span class="vh"> (opens ${c.drive ? 'the PDF in Google Drive' : 'the Academy of Medicine site'}, an outside site)</span></a></h3><div class="meta"><span class="ext">${svg('ext')}${c.drive ? 'PDF in Google Drive' : 'Academy of Medicine'}</span><span>${esc(c.s)} · ${esc(c.y)}</span></div>`
+    + (acad || qr || pil ? `<div class="shelf-l">${acad}${qr}${pil}</div>` : '') + `</div>${svg('ext', 'go')}</article>`;
+}
+function shelfHTML(list){
+  const part = (t, l) => l.length ? `<h3 class="shelf-sub">${t} <small>${l.length}</small></h3><div class="grid">${l.map(shelfCard).join('')}</div>` : '';
+  return `<section class="libsec t-obsidian shelf" aria-label="National CPGs, outside links"><h2 class="lh">${svg('ext')}<span>National CPGs, outside links</span><small>${list.length}</small></h2>`
+    + `<p class="shelf-note">Not built into the guide yet. Each opens its PDF in Google Drive, to read or download, where its copyright allows a copy to be shared, and so do its quick reference and patient leaflets; otherwise, and from the Academy link, the Academy of Medicine's official file, which may ask for a quick check first. Chosen for the Green Zone from the Academy's list of 9 Nov 2026.</p>`
+    + `<div class="shelf-top"><a class="pill ext" href="${CPG_FOLDER}" target="_blank" rel="noopener noreferrer">All 109 national CPGs in one Drive folder${svg('ext')}</a></div>`
+    + part('For the Green Zone', list.filter(c => c.tier !== 'C')) + part('Now and then', list.filter(c => c.tier === 'C')) + '</section>';
 }
 
 /* ================= Rules and protocols ================= */
@@ -943,7 +973,9 @@ function tabsOf(p){
   /* A national guideline's reference notes, several tabs of them, each note with its page */
   (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to MaHTAS.</p>`}));
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
-  if (p.refs) T.push({k:'refs', l:'References', html:`<ol class="refs">${p.refs.map(li).join('')}</ol>`});
+  /* A national CPG on the shelf opens its full PDF from its References tab */
+  const pdf = p.grp === 'cpg' && CPG_SHELF.find(c => c.id && P[c.id] === p);
+  if (p.refs) T.push({k:'refs', l:'References', html:(pdf ? `<div class="cx-links cpg-pdf">${pdf.drive ? `<a class="pill ext" href="${GDRIVE + pdf.drive}/view" target="_blank" rel="noopener noreferrer">The full CPG, PDF in Google Drive${svg('ext')}</a>` : ''}<a class="pill ext" href="${ACAD + pdf.cpg}" target="_blank" rel="noopener noreferrer">Academy of Medicine${svg('ext')}</a>${pdf.qr ? `<a class="pill ext" href="${pdf.qrd ? GDRIVE + pdf.qrd + '/view' : ACAD + pdf.qr}" target="_blank" rel="noopener noreferrer">Quick reference${svg('ext')}</a>` : ''}</div>` : '') + `<ol class="refs">${p.refs.map(li).join('')}</ol>`});
   return T;
 }
 function refTabs(p){
@@ -1000,11 +1032,11 @@ function renderDcheck(){
    Checklists and tables come straight from the pathway data, so a calculator cannot drift from its pathway. */
 const CALC_GROUPS = [
   {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'Triage vital signs, fluids, the test result, urine output, the shock index and adjusted weight'},
-  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants and insulin by weight'},
-  {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65 and Wells'},
+  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin and asthma prednisolone by weight'},
+  {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65, Wells and the asthma action plan zones'},
   {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain, syncope, SVT and blood pressure'},
   {k:'calm', t:'Pain and calm', j:'t-plum', ic:'feather', d:'Pain scales, BARS and RASS'},
-  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria, with the neck and limb rules'},
+  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria and the GCS, with the neck and limb rules'},
   {k:'tox', t:'Poisoning and allergy', j:'t-obsidian', ic:'flask', d:'Paracetamol overdose and anaphylaxis'},
   {k:'kids', t:'Kids', j:'t-champagne', ic:'kid', d:'Child doses and the dehydration check'}
 ];
@@ -1034,6 +1066,65 @@ const CALC_LINKS = [
   {g:'head', site:'MDCalc', href:MDC + '368/ottawa-knee-rule', t:'Ottawa knee rule', d:'Which knee injuries need an X-ray.'},
   {g:'doses', site:'MDCalc', href:MDC + '43/creatinine-clearance-cockcroft-gault-equation', t:'Creatinine clearance (Cockcroft-Gault)', d:'The creatinine clearance that the anticoagulant doses here depend on.'}
 ];
+/* National CPGs on the Academy of Medicine of Malaysia's list (https://www.acadmed.org.my/index.cfm?&menuid=67), read 9 Nov 2026:
+   the 46 that bear on the Green Zone (CPG-RUN-THROUGH.md, tiers A, B and C, and the dengue CPG). Links only. Each opens its PDF
+   in Krishna's Google Drive folder, AMM Clinical Practice Guidelines (all 109 CPGs, shared with anyone who has the link; drive is
+   the Drive file id) where the CPG's terms allow reproduction, with the Academy's own file as a second link (an outside site that
+   may ask for a quick check first). Where the terms do not (none stated, or all rights reserved), drive is empty and the card links
+   to the Academy's file only. Tiers and reuse terms: CPG-RUN-THROUGH.md and its front-matter check.
+   A CPG built into the guide names its entry in id: it shows as that entry, which links to the same PDF from its References tab.
+   Tiers A and B: for the Green Zone; C: now and then. */
+const ACAD = 'https://www.acadmed.org.my/view_file.cfm?fileid=', GDRIVE = 'https://drive.google.com/file/d/', CPG_FOLDER = 'https://drive.google.com/drive/folders/1gzMDT4vyUnK-WiyC2AKdIAEP2eFjxjwh';
+const CPG_SHELF = [
+  {t:'Prevention and Treatment of Venous Thrombosis', y:'2013', s:'Haematology', tier:'B', cpg:'612', drive:'', qr:'613', kw:'dvt pe embolism anticoagulant'},
+  {t:'Management of Type 2 Diabetes Mellitus, 6th edition', y:'2020', s:'Endocrine', tier:'B', cpg:'763', drive:'', qr:'979', kw:'dm diabetes sugar hypoglycaemia'},
+  {t:'Management of Chronic Obstructive Pulmonary Disease, 2nd edition', y:'2009', s:'Respiratory', tier:'B', cpg:'323', drive:'', qr:'324', kw:'copd exacerbation'},
+  {t:'Management of Avulsed Permanent Anterior Teeth, 3rd edition', y:'2019', s:'Dental and oral health', tier:'B', cpg:'429', drive:'113kKK18Qv7IZn1IjjsTtdOo81aHGvikP', kw:'tooth teeth dental knocked out'},
+  {t:'Management of Abdominal Trauma in Adults', y:'2025', s:'Trauma and emergency', tier:'B', cpg:'1160', drive:'1_kf1naStT38xkobBgqoXD-jmbYiVUYBx', qr:'1161', qrd:'1U3l01Ltcf4_Py4BaFwh7lFYZcDWyKa9N', kw:'trauma injury'},
+  {t:'Management of Cancer Pain, 2nd edition', y:'2023', s:'Cancer', tier:'B', cpg:'342', drive:'1c63xgZARDOpfh0ODSlol9YK9PmUadTwE', qr:'343', qrd:'1J1yWlLMa9Ht5aqh6SF7Xhkf5cCNydnQH', pil:[['374','English','1Nz4joQbftSlvhot5sSyKRLvFyvzZnJxz'],['1165','Bahasa Melayu','1XT3FP4QcwEppmNIwSxafa4MWU8807zlK']], kw:'opioid morphine palliative'},
+  {t:'Management of Rhinosinusitis in Adolescents and Adults', y:'2016', s:'Ear, nose and throat', tier:'B', cpg:'845', drive:'1x265L-rLowqaMQhf-hfSB2mTQ_j0uyL2', qr:'846', qrd:'1hAVOU3dKBiTJfEWY8FMyiyX4h8eiho8n', kw:'sinusitis nose'},
+  {t:'Management of Sore Throat', y:'2003', s:'Ear, nose and throat', tier:'B', cpg:'284', drive:'', kw:'pharyngitis tonsillitis'},
+  {t:'Management of Chronic Kidney Disease, 2nd edition', y:'2018', s:'Kidney', tier:'B', cpg:'898', drive:'1trJ06QZ-Ad2nIj_BxVVAC3ZJ-MS4_z9q', qr:'899', qrd:'1cQCUDPeIOFWj_CxH9YciaoDzgp56sifG', kw:'ckd renal egfr'},
+  {t:'Management of Geriatric Hip Fracture', y:'2023', s:'Orthopaedics', tier:'B', cpg:'1107', drive:'1z_KLXdA6hrPuNuu2tRo6eKR6jns_DNWW', qr:'1108', qrd:'15i95pdADpSJI-ENLzONRMRnP5YLX85JN', kw:'fall elderly neck of femur'},
+  {t:'Management of Ischaemic Stroke, 3rd edition', y:'2020', s:'Cardiovascular', tier:'C', cpg:'975', drive:'1WhG4bt5O7NFat8xD2ik25ya2Ya6AK6Tp', qr:'976', qrd:'17A7H8aREOWrvEo2UJK5U5F7bjogHLpHL', kw:'tia stroke thrombolysis'},
+  {t:'Management of Hypertension, 5th edition', y:'2018', s:'Cardiovascular', tier:'C', cpg:'894', drive:'', kw:'bp blood pressure'},
+  {t:'Management of Heart Failure, 5th edition', y:'2023', s:'Cardiovascular', tier:'C', cpg:'684', drive:'1xuqpb9yVtb88CTJMRA7TbgJ2fNCbWndO', kw:'hf breathless oedema'},
+  {t:'Management of Atrial Fibrillation', y:'2012', s:'Cardiovascular', tier:'C', cpg:'564', drive:'', kw:'af palpitations anticoagulation'},
+  {t:'Management of Dengue Fever in Children, 2nd edition', y:'2020', s:'Infectious diseases', tier:'C', cpg:'269', drive:'1OL6FwwwKeEaagMGXkpC_4bqLsxlTFbWc', qr:'997', qrd:'1Qr_F2OmK7cqPFH6VJgDAoI3fVpiu10Ay', kw:'child paediatric dengue'},
+  {t:'Management of Spontaneous Intracerebral Haemorrhage, 1st edition', y:'2025', s:'Neurology and neurosurgery', tier:'C', cpg:'1164', drive:'1BX3zdSYLsleWSWtH2fCAQwOZnEZGpEpW', kw:'ich stroke bleed'},
+  {t:'Prevention, Diagnosis and Management of Infective Endocarditis', y:'2017', s:'Cardiovascular', tier:'C', cpg:'850', drive:'1fAoIHqsQNsfrYjmvtyWapBwlXVgvUCKK', kw:'fever murmur'},
+  {t:'Heart Disease in Pregnancy, 2nd edition', y:'2016', s:'Cardiovascular', tier:'C', cpg:'798', drive:'', kw:'pregnant'},
+  {t:'Management of Mandibular Condyle Fractures', y:'2019', s:'Dental and oral health', tier:'C', cpg:'965', drive:'17zgBeoMbAiyRuPTSnnBhgDAoQ_wi6iRE', kw:'jaw fracture'},
+  {t:'Management of Periodontal Abscess, 2nd edition', y:'2017', s:'Dental and oral health', tier:'C', cpg:'857', drive:'1tDwBS8D9Djf0nE4JgZIolVBTR1rSb5Pv', kw:'dental abscess tooth'},
+  {t:'Management of Acute Orofacial Infection of Odontogenic Origin in Children, 1st edition', y:'2016', s:'Dental and oral health', tier:'C', cpg:'851', drive:'1kurQTenV8kdVId8Wv0BnWK_y4UKc-Bzg', kw:'facial swelling dental child'},
+  {t:'Management of Thyroid Disorders', y:'2019', s:'Endocrine', tier:'C', cpg:'967', drive:'1xtAgksnyFhRSVlCmHZLeOuGpDPIrWpFO', qr:'968', qrd:'1kxOzcusAAi1xK4rDI-VEsjoIcMJFKXbz', kw:'thyrotoxicosis hyperthyroid'},
+  {t:'Management of Type 1 Diabetes Mellitus in Children and Adolescents', y:'2016', s:'Endocrine', tier:'C', cpg:'803', drive:'1XoFrbeqPmc6NCDhCNWE3boR4DqUruSxJ', qr:'804', qrd:'1Ue-J4t5Iquqz9oOsRh4Mf_meAvJ2sfLe', kw:'dka child diabetes'},
+  {t:'Management of Haemophilia', y:'2018', s:'Haematology', tier:'C', cpg:'922', drive:'10vaSILhJpnMWslhtXcOhFjDK14Y5tx5x', qr:'923', qrd:'1dzC9DJ-TdGvACR7KM7REfxI6UT31ikiQ', kw:'bleed factor'},
+  {t:'Management of Immune Thrombocytopenic Purpura', y:'2006', s:'Haematology', tier:'C', cpg:'256', drive:'', kw:'itp platelets'},
+  {t:'Management of Menorrhagia', y:'2004', s:'Men\'s and women\'s health', tier:'C', cpg:'272', drive:'', kw:'pv bleeding period'},
+  {t:'Management of Bipolar Disorder, 2nd edition', y:'2024', s:'Mental health', tier:'C', cpg:'676', drive:'1fCmMFZSeUzqMCjtnoPgMQszzRtcAZDAK', qr:'677', qrd:'19AzjFEoHdh32PCqJ4TD6YZ3dB0KJ2NYi', kw:'mania agitation'},
+  {t:'Management of Schizophrenia, 2nd edition', y:'2021', s:'Mental health', tier:'C', cpg:'290', drive:'1gCEz-7T-Bx-ibo3JEIOZwS7zkhGbhCc5', qr:'1052', qrd:'10C0iIZvt0TcyzE7a1lwslApv8jyAwO6X', kw:'psychosis agitation'},
+  {t:'Management of Dementia, 3rd edition', y:'2021', s:'Mental health', tier:'C', cpg:'1021', drive:'1B0dLPvqNqOMclAN4iaFzc-paC9Bk0GGe', qr:'1022', qrd:'1K8eDSktZPdlzSJoZkuGLAx1dLYlsvfi9', pil:[['427','2nd edition','1LK-lDMHUvQgNFkzY7P76TJgFPurzBBDY']], kw:'confusion elderly'},
+  {t:'Management of Major Depressive Disorder, 2nd edition', y:'2019', s:'Mental health', tier:'C', cpg:'250', drive:'1NDfFHN51KLD0ySFown7okb1qZThliytC', qr:'313', qrd:'1vpAmtc1gvAyXo0kJquaM4jgx7WeyDNT1', pil:[['327','2007 edition','1kkRohTyAs8kMp30P5KEN8ZOmZxwoxQ0x']], kw:'depression suicide self-harm'},
+  {t:'Management of Glaucoma, 2nd edition', y:'2017', s:'Eye', tier:'C', cpg:'878', drive:'1VhY1AHyRITLHZf51X7QFTtrzF9AWAaA9', qr:'879', qrd:'1ikHARjR_yVzzCz0swLeMhsE_qUIoHSnd', kw:'red eye eye pain'},
+  {t:'Management of Tuberculosis, 4th edition', y:'2021', s:'Respiratory', tier:'C', cpg:'567', drive:'1_Yylc0k5I8YQUQ_885JRPWdbpgmEazxi', qr:'568', qrd:'1tmki5ro1_SCGbBozft8CAZxo4qkSrJXw', kw:'tb cough isolation'},
+  {t:'Management of E-cigarette or Vaping Product Use-Associated Lung Injury (EVALI)', y:'2021', s:'Respiratory', tier:'C', cpg:'1012', drive:'1AcbMBiM0XjvCa-7LWgQjxwGWo1C1NyTQ', qr:'1013', qrd:'1u18KVpwOV2qpce5Tb0lzQDkYcid5WGct', kw:'vape vaping e-cigarette'},
+  {t:'Management of Atopic Eczema', y:'2017', s:'Skin', tier:'C', cpg:'883', drive:'1IiXHxz7huUnVYY4jV0JWPbrrJ3QmqtXN', qr:'884', qrd:'1zDPwCb-GvLmIXdza6bxLDpZQwUP_0kkk', kw:'eczema rash itch'},
+  {t:'Management of Colorectal Carcinoma', y:'2017', s:'Cancer', tier:'C', cpg:'900', drive:'1Yi8aOp__YWgYRYviEt0vrSQZgG4g6xa5', qr:'901', qrd:'1BEb98K39atpAyHzM5d7_IQDjwDUlQYUU', kw:'bowel cancer rectal bleeding'},
+  {t:'Management of Nasopharyngeal Carcinoma', y:'2016', s:'Cancer', tier:'C', cpg:'837', drive:'1ZbEPh1f2qWa7D6qzyHDf1SUGwiEICpeJ', qr:'838', qrd:'19rSndbJzC-_fahJc-3cqsYZyi8O1ZUjB', kw:'npc nosebleed epistaxis neck lump'},
+  {t:'Management of Inflammatory Bowel Disease', y:'2025', s:'Gastroenterology', tier:'C', cpg:'1179', drive:'1FVqGrkn0aVfLvIFdWjVrzZTcU7FBYkS1', qr:'1180', qrd:'1bLRvU7YkxydGfZTjdmhQ4GGt-WVoYGvb', kw:'ibd crohn colitis diarrhoea'},
+  {t:'Management of Post-Operative Infectious Endophthalmitis', y:'2006', s:'Eye', tier:'C', cpg:'653', drive:'', kw:'red eye eye surgery'},
+  {t:'Management of Osteoarthritis, 2nd edition', y:'2013', s:'Rheumatology', tier:'C', cpg:'647', drive:'1F0uej_b3o4G-g6ZG_BAzXVDf2UhR2bDH', qr:'648', qrd:'1t7Y674hQrsxlHokFDvTp24A3x12KzIwv', kw:'oa knee hip joint pain'},
+  {t:'Management of Asthma in Adults, 2nd edition', y:'2024', s:'Respiratory', tier:'A', cpg:'865', drive:'1pkxXZSQHmoCxIw2X4XLfXBf4OZDAQC0s', qr:'866', qrd:'1i1Gl8R4N1lwJ3oeyxfcKrYQchX1Gv-yM', id:'asthma-cpg', kw:'wheeze inhaler'},
+  {t:'Early Management of Head Injury in Adults', y:'2015', s:'Neurology and neurosurgery', tier:'A', cpg:'779', drive:'1CR7nrraYWb3xMEUHjg2M_Ic-Vo7ZahiN', qr:'780', qrd:'1uG4KEyp9OZEQU5lFkeaMscOKx7qmjKB1', id:'head-injury-cpg', kw:'tbi concussion ct brain'},
+  {t:'Management of Acute Coronary Syndromes, 1st edition', y:'2026', s:'Cardiovascular', tier:'A', cpg:'1171', drive:'1f9svSyE3_zx9NYxaDNYsDa0BIXmjJZ-6', id:'acs-cpg', kw:'chest pain mi stemi nstemi troponin'},
+  {t:'Management of Gout, 2nd edition', y:'2021', s:'Rheumatology', tier:'A', cpg:'1045', drive:'1XHCEbaV5kRBJuE9we-fL1Dy7dd0WXPYw', qr:'1046', qrd:'1PR9Y2O88nkt0NbBcM7lrokivsN7LnT1w', id:'gout-cpg', kw:'joint uric acid urate colchicine allopurinol'},
+  {t:'Management of Diabetic Foot, 2nd edition', y:'2018', s:'Orthopaedics', tier:'A', cpg:'920', drive:'1eABKtXY8Loc5Nf8vMZSNTewqsjFUvxcA', qr:'921', qrd:'1l5Rz65UkxZIivzaaPIGTCmiE5Z8C6xz8', id:'diabetic-foot-cpg', kw:'ulcer wound amputation'},
+  {t:'Management of Foreign Body Ingestion in Children', y:'2025', s:'Paediatric surgery', tier:'A', cpg:'1174', drive:'1eJ7l3B92PES5w_OOqNazGPbSQ2mx9YYq', qr:'1175', qrd:'1KGHj-gffI6U1RyzYydA4A2LCg34VfVcM', id:'fb-children-cpg', kw:'swallowed coin battery magnet child'},
+  {t:'Management of Dengue in Adults, 4th edition', y:'2026', s:'Infectious diseases', tier:'A', cpg:'756', drive:'16UkGeGZ5-9QKsnFewVHckgU-UXyJIVOb', qr:'757', qrd:'13lJ7CLeGtF-wHslrW6gesJ92hQ-dLXhL', id:'dengue-cpg', kw:'dengue fever'}
+];
+/* The GCS scales, read from the head injury CPG's Appendix 3 rows: 'Spontaneous 4; To voice/sound 3; ...' */
+const gcsOpts = i => () => P['head-injury-cpg'].notes.flatMap(t => t.notes).find(n => n.h.startsWith('Appendix 3')).table.rows[i][1].split('; ').map(s => { const m = s.match(/^(.*) (\d)$/); return [m[2], m[1]]; });
 const tableOf = (id, part) => (P[id].tables || []).find(t => t.title.includes(part));
 /* A table inside the dengue CPG's reference notes (Table 5, the fluid quota) */
 const dTable = part => P['dengue-cpg'].notes.flatMap(t => t.notes).find(n => n.table && n.h.includes(part)).table;
@@ -1179,6 +1270,40 @@ const CALCS = {
       if (v.hrs > 6) out.push(['Time since the last void', fx(v.hrs) + ' hours', 'warn', 'Over 6 hours: the CPG asks for urine at least once every 6 hours (p31)']);
       return out;
     }},
+  /* Asthma in adults, CPG 2nd edition (MaHTAS 2024): each number is in P['asthma-cpg'] (see CALC_FACTS) */
+  apred:{t:'Asthma: prednisolone by weight', g:'doses', src:'Asthma CPG 2nd ed., p xiv and p40', path:'#asthma-cpg--mmt', kw:'asthma exacerbation prednisolone steroid oral corticosteroid ocs dose mg/kg ideal body weight cpg',
+    sub:'The CPG\'s prednisolone range in an asthma exacerbation: 0.5 to 1 mg/kg, maximum 50 mg, for 5 to 7 days.',
+    fields:[['ibw','Ideal body weight','kg']],
+    note:'Asthma CPG 2nd ed. (MaHTAS 2024), Algorithm 4 (p xiv): Prednisolone: 0.5 - 1 mg/kg with a maximum of 50 mg stat, then Continue prednisolone (5 - 7 days). Text (p40): The suggested daily dose of prednisolone ranges from 0.5 to 1 mg/kg of the ideal body weight with a maximum of 50 mg daily; This dosage should be maintained for 5 to 7 days and can be stopped without gradual reduction. The CPG gives no formula for the ideal body weight, so enter it. The ebook pathway and the Asthma Zone memo give 30 mg a day for 5 days; which the Green Zone follows is still to confirm.',
+    run(v){
+      const w = v.ibw; if (!w) return null;
+      const bad = badWt(w, 30, 150); if (bad) return bad;
+      const lo = Math.min(0.5 * w, 50), hi = Math.min(w, 50);
+      const out = [['Prednisolone, stat and then daily', lo === hi ? fx(hi) + ' mg' : `${fx(lo)}–${fx(hi)} mg`, 'good',
+          w >= 100 ? 'Both ends reach the 50 mg maximum' : w > 50 ? '0.5–1 mg/kg; the upper end is held at the 50 mg maximum' : '0.5–1 mg/kg of the ideal body weight'],
+        ['Course', '5 to 7 days', 'good', 'Can be stopped without gradual reduction (p40)']];
+      return {outs:out, gap:'The CPG uses the ideal body weight (p40) but gives no formula for it, and Algorithm 4 writes mg/kg without naming the weight. It gives no tablet strength or rounding, and does not say whether the stat dose is the first day of the course.',
+        links:[['#asthma-cpg--mmt', 'Mild or moderate treatment'], ['#asthma', 'Ebook pathway (30 mg)']]};
+    }},
+  apef:{t:'Asthma action plan: PEF zones', g:'scores', src:'Asthma CPG 2nd ed., Appendix 5', path:'#asthma-cpg--home', kw:'asthma action plan aap peak flow pefr pef personal best predicted zones well getting worse alert discharge cpg',
+    sub:'The three PEFR zones for the CPG\'s written asthma action plan, from the personal best.',
+    fields:[['best','Personal best PEFR, or predicted','l/min'],['now','Current PEFR (optional)','l/min']],
+    note:'Asthma CPG 2nd ed., Appendix 5A (p71), the same in 5B: WELL, PEFR: ____ to ____l/min (80% to 100% of personal best); GETTING WORSE, PEFR: ____ to ____l/min (50% to 79% of personal best); ALERT, PEFR: Below ____l/min (less than 50% of personal best). In PEFR-based plans, personal best PEFR should be used; In patients without known personal best, the predicted value may be used (5.2, p13), read off the nomogram in Appendix 4 (p70). ABG: It should be considered for patients with PEFR <50% (7.3, p41). Values are rounded to the nearest l/min.',
+    run(v){
+      const b = v.best; if (!b) return null;
+      if (b < 60 || b > 900) return [['Check the number', 'Personal best 60–900 l/min', 'warn', '']];
+      const r = x => Math.round(x), out = [
+        ['WELL', `${r(0.8 * b)} to ${r(b)} l/min`, 'good', '80% to 100% of personal best'],
+        ['GETTING WORSE', `${r(0.5 * b)} to ${r(0.79 * b)} l/min`, 'warn', '50% to 79% of personal best'],
+        ['ALERT', `Below ${r(0.5 * b)} l/min`, 'bad', 'Less than 50% of personal best']];
+      if (v.now){
+        const p = v.now / b * 100, pc = fx(p) + '%';
+        const z = p > 100 ? ['Above 100% of personal best', 'warn', 'The plan has no zone above 100%: check the personal best'] : p >= 80 ? ['WELL', 'good', '80% to 100% of personal best'] : p > 79 ? ['Between 79% and 80%', 'warn', 'The plan has no zone between 79% and 80%'] : p >= 50 ? ['GETTING WORSE', 'warn', '50% to 79% of personal best'] : ['ALERT', 'bad', 'Less than 50% of personal best. ABG: it should be considered for patients with PEFR <50% (p41)'];
+        out.push(['Current PEFR', `${r(v.now)} l/min, ${pc}`, z[1], `${z[0]}: ${z[2]}`, {min:0, max:120, v:Math.min(p, 120), bands:[[0, 50, 'bad'], [50, 80, 'warn'], [80, 100, 'good'], [100, 120, 'warn']]}]);
+      }
+      return {outs:out, gap:'The plan\'s bands leave readings between 79% and 80% of personal best, and above 100%, without a zone. The predicted value comes only from the Appendix 4 nomogram, a picture with no formula. PEF or FEV1 may not be applicable in an acute exacerbation (p37).',
+        links:[['#asthma-cpg--home', 'Discharge with an action plan']]};
+    }},
   analgesia:{t:'Analgesia by weight', g:'doses', src:'Ebook p45–50', path:'#pain', kw:'paracetamol panadol ketamine pain dose mg/kg',
     sub:'Paracetamol and ketamine doses from the ebook\'s choice of analgesia table.',
     fields:[['wt','Weight','kg']],
@@ -1310,6 +1435,22 @@ const CALCS = {
         : {cls:'next', h:'No immediate CT criteria: observe and assess PTA', href:'#mild-tbi--obs', link:'Open the pathway step'};
       return {outs:out, verdict, links:[[MDC + '64/glasgow-coma-scale-score-gcs', 'GCS on MDCalc (outside site)', true]]};
     }},
+  /* Head injury in adults, CPG 2015: the Glasgow Coma Scale, read from Appendix 3 in P['head-injury-cpg'] (see CALC_FACTS) */
+  gcs:{t:'Glasgow Coma Scale', g:'head', src:'Head injury CPG 2015, Appendix 3', path:'#head-injury-cpg--sev', kw:'gcs glasgow coma scale score eye verbal motor e4v5m6 consciousness head injury severity mild moderate severe',
+    sub:'The best eye, verbal and motor responses, the total, and the head injury severity it gives.',
+    fields:[{k:'ge', type:'pick', label:'Eye Opening Response', opts:gcsOpts(0)}, {k:'gv', type:'pick', label:'Verbal Response', opts:gcsOpts(1)}, {k:'gm', type:'pick', label:'Motor Response', opts:gcsOpts(2)}],
+    note:'Head injury CPG 2015, Appendix 3 (p52): the scale measures the best motor, verbal and eye opening response, and the score is the cumulative sum of the scale in each component. Eye: Spontaneous 4; To voice/sound 3; To pressure/pain 2; None 1. Verbal: Orientated 5; Confused 4; Words 3; Sounds 2; None 1. Motor: Obeys commands 6; Localising 5; Flexion withdrawal 4; Abnormal flexion 3; Extension 2; None 1. Severity (chapter 3, p5): Mild head injury (MHI): GCS 13 - 15; Moderate head injury: GCS 9 - 12; Severe head injury: GCS 3 - 8. GCS score can be influenced by alcohol intoxication, sedative medications, hypoxia and hypotension (p6).',
+    run(v){
+      const picked = [['E', v.ge], ['V', v.gv], ['M', v.gm]];
+      if (picked.every(([, x]) => !x)) return null;
+      if (picked.some(([, x]) => !x)) return [['Still to pick', picked.filter(([, x]) => !x).map(([l]) => ({E:'eye', V:'verbal', M:'motor'})[l]).join(', '), 'warn', 'The score is the sum of all three components']];
+      const t = +v.ge + +v.gv + +v.gm, code = 'E' + v.ge + 'V' + v.gv + 'M' + v.gm;
+      const sev = t >= 13 ? ['Mild head injury (MHI)', 'good'] : t >= 9 ? ['Moderate head injury', 'warn'] : ['Severe head injury', 'bad'];
+      const out = [['Glasgow Coma Score', code + ' = ' + t, sev[1], sev[0] + ': GCS ' + (t >= 13 ? '13 - 15' : t >= 9 ? '9 - 12' : '3 - 8'), {min:3, max:15, v:t, bands:[[3, 8.5, 'bad'], [8.5, 12.5, 'warn'], [12.5, 15, 'good']]}]];
+      const verdict = t >= 13 ? {cls:'next', h:'Mild head injury: next, the head CT decision', p:'Immediate head CT (Algorithm 3) for GCS <13 on initial management or GCS <15 at 2 hours after injury, among its other risk factors.', href:'#head-injury-cpg--imm', link:'Head CT: Algorithm 3'}
+        : {cls:'stop', h:sev[0] + ': resuscitate and hand on', p:(t <= 8 ? 'In patients with head injury with GCS of ≤8, intubation is recommended for airway protection (p16). ' : '') + 'GCS <13 on initial management: immediate head CT (Algorithm 3); red zone (Algorithm 2).', href:'#head-injury-cpg--modsev', link:'Open the CPG step'};
+      return {outs:out, verdict, gap:'Appendix 3 gives no score for a response that cannot be tested, for example when intubated or with swollen eyes.', links:[['#calc-head', 'Mild head injury: the ebook\'s CT and discharge check']]};
+    }},
   obsess:{t:'Chest pain: Obsess protocol check', g:'cardio', src:'Ebook p12–14', path:'#acs--oc', kw:'acs chest pain obsess observation protocol troponin timi aspirin',
     sub:'Whether a patient with chest pain fits the department\'s Obsess observation protocol.',
     fields:[{k:'o', type:'check', label:'Tick each criterion that is met', items:() => P.acs.nodes.oc.items}],
@@ -1320,7 +1461,7 @@ const CALCS = {
       return {outs:[['Obsess criteria met', `${n} of ${all}`, n === all ? 'good' : 'warn', n === all ? 'All met' : 'If they cannot all be met: not suitable for the Obsess protocol']],
         verdict:n === all ? {cls:'next', h:'All met: start the Obsess protocol', p:P.acs.nodes.obs.items.join('; ') + '.', href:'#acs--obs', link:'Open the protocol step'}
           : {cls:'next', h:'Not suitable for the Obsess protocol yet', p:P.acs.nodes.noobs.items.join(' '), href:'#acs--noobs', link:'Open the pathway step'},
-        links:[[MDC + '111/timi-risk-score-ua-nstemi', 'TIMI score on MDCalc (outside site)', true]]};
+        links:[['#acs-cpg--timi', 'TIMI score (ACS CPG 2026, Appendix IV)'], [MDC + '111/timi-risk-score-ua-nstemi', 'TIMI score on MDCalc (outside site)', true]]};
     }},
   syncope:{t:'Syncope: dangerous causes and high-risk factors', g:'cardio', src:'Ebook p57–58', path:'#syncope--risk', kw:'syncope collapse faint blackout high risk admit ecg troponin',
     sub:'Any dangerous cause or high-risk factor means admission; none means observation and discharge.',
@@ -1480,12 +1621,23 @@ const CALC_FACTS = [
   ['dengue-cpg', 'Start IV crystalloid 3-5ml/kg/hr for 1 hour'], ['dengue-cpg', 'IV crystalloid 2-3ml/kg/hr for 1-2 hour'], ['dengue-cpg', 'reduce to 1-2ml/kg/hr or maintenance fluid; stop IV fluid if able to tolerate orally'],
   ['dengue-cpg', 'increase fluid regimen to 5-7ml/kg/hr while awaiting result'], ['dengue-cpg', 'oral fluid intake equivalent to 1 - 2 ml/ kg/hour, IV fluid administration is not necessary'],
   ['dengue-cpg', 'Optimal urine output: 0.5 - 1 ml/kg/hour'], ['dengue-cpg', 'a minimum of 0.5 ml/kg/hour'], ['dengue-cpg', 'at least once every 6 hours'], ['dengue-cpg', 'Good urine output (0.5 - 1.5 mL/kg/hr)'],
-  ['dengue-cpg', 'IgM and IgG should not be used as confirmatory tests'], ['dengue-cpg', 'Negative test results require differential diagnosis to confirm cause of infection']
+  ['dengue-cpg', 'IgM and IgG should not be used as confirmatory tests'], ['dengue-cpg', 'Negative test results require differential diagnosis to confirm cause of infection'],
+  ['asthma-cpg', 'Prednisolone: 0.5 - 1 mg/kg with a maximum of 50 mg stat'], ['asthma-cpg', 'ranges from 0.5 to 1 mg/kg of the ideal body weight with a maximum of 50 mg daily'],
+  ['asthma-cpg', 'This dosage should be maintained for 5 to 7 days and can be stopped without gradual reduction'], ['asthma-cpg', 'Continue prednisolone (5 - 7 days)'],
+  ['asthma-cpg', 'The CPG gives no formula for the ideal body weight'],
+  ['asthma-cpg', 'PEFR: ____ to ____l/min (80% to 100% of personal best)'], ['asthma-cpg', 'PEFR: ____ to ____l/min (50% to 79% of personal best)'],
+  ['asthma-cpg', 'PEFR: Below ____l/min (less than 50% of personal best)'], ['asthma-cpg', 'In patients without known personal best, the predicted value may be used'],
+  ['asthma-cpg', 'It should be considered for patients with PEFR <50%'], ['asthma-cpg', 'PEF or FEV1 may not be applicable to be used in acute asthma exacerbation'],
+  ['head-injury-cpg', 'Spontaneous 4; To voice/sound 3; To pressure/pain 2; None 1'], ['head-injury-cpg', 'Orientated 5; Confused 4; Words 3; Sounds 2; None 1'],
+  ['head-injury-cpg', 'Obeys commands 6; Localising 5; Flexion withdrawal 4; Abnormal flexion 3; Extension 2; None 1'],
+  ['head-injury-cpg', 'Mild head injury (MHI): GCS 13 - 15'], ['head-injury-cpg', 'Moderate head injury: GCS 9 - 12'], ['head-injury-cpg', 'Severe head injury: GCS 3 - 8'],
+  ['head-injury-cpg', 'GCS <13 on initial management'], ['head-injury-cpg', 'GCS <15 at 2 hours after injury'],
+  ['head-injury-cpg', 'In patients with head injury with GCS of ≤8, intubation is recommended for airway protection']
 ];
 const calcFactsMissing = () => CALC_FACTS.filter(([id, s]) => !JSON.stringify(P[id]).includes(s));
-const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc-wells', 'Wells score calculator'], ['#calc-anticoag', 'Anticoagulant doses']],
+const CALC_SEE = {'asthma-cpg':[['#calc-apred', 'Prednisolone by weight'], ['#calc-apef', 'Action plan PEF zones']], 'head-injury-cpg':[['#calc-gcs', 'Glasgow Coma Scale calculator']], 'acs-cpg':[['#calc-obsess', 'Obsess protocol check']], pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc-wells', 'Wells score calculator'], ['#calc-anticoag', 'Anticoagulant doses']],
   pain:[['#calc-pain', 'Pain scales calculator'], ['#calc-analgesia', 'Analgesia by weight']], hyperglycaemia:[['#calc-insulin', 'Insulin dose calculator']],
-  'mild-tbi':[['#calc-head', 'Head injury check']], 'behavioural-disturbance':[['#calc-calm', 'BARS and RASS']],
+  'mild-tbi':[['#calc-head', 'Head injury check'], ['#calc-gcs', 'Glasgow Coma Scale']], 'behavioural-disturbance':[['#calc-calm', 'BARS and RASS']],
   dengue:[['#calc-dengue', 'Shock index'], ['#calc-weight', 'Adjusted weight']], children:[['#calc-kids', 'Child doses'], ['#calc-soap', 'Dehydration check']],
   acs:[['#calc-obsess', 'Obsess protocol check']], syncope:[['#calc-syncope', 'Syncope risk check']], svt:[['#calc-svt', 'SVT drugs by weight']], 'hypertensive-urgency':[['#calc-htn', 'Hypertensive urgency calculator']],
   'paracetamol-overdose':[['#calc-paraod', 'Time since ingestion']], anaphylaxis:[['#calc-anaph', 'Anaphylaxis drugs and fluids']],
@@ -1494,6 +1646,7 @@ const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc
 for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; }
 for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
 CALC_LINKS.forEach(l => IDX.push({href:'#calc', title:l.t + ' (' + l.site + ', outside site)', kind:'Calculator', meta:l.href.split('/')[2], body:l.d, ic:'calc', c:'c-breath', j:CALC_G[l.g].j}));
+CPG_SHELF.filter(shelfOut).forEach(c => IDX.push({href:'#guidelines', title:c.t + ' (' + c.y + ')', kind:'National CPG', meta:'Academy of Medicine, outside site', body:[c.s, c.kw, 'clinical practice guideline cpg'].join(' · '), ic:'ext', c:'c-prot'}));
 
 /* The open calculator. Entries live in memory only: the weight and age band are shared, the rest is per calculator */
 let calcTab = 'dengue', cxOpen = false, cxGroup = 'all', cxQ = '';
@@ -1907,7 +2060,7 @@ function route(){
   closePal(false); closeSettings(false); closeSheet(); closeMap(false);
   if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
-  else if (h === 'pathways' || h === 'saved'){ if (h === 'saved' && libF !== 'saved'){ libF = 'saved'; renderLib(); } changed = showView('pathways'); }
+  else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
   else if (['rules', 'tools', 'numbers', 'new', 'poster', 'about'].includes(h)) changed = showView(h);
   else if ((m = h.match(/^calc(?:-([a-z]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;

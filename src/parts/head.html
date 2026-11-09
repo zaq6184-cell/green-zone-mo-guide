@@ -478,9 +478,9 @@ main{flex:1;outline:none}
 .run-h h1{font:900 clamp(2.1rem,5.4vw,3.2rem)/1 var(--display);letter-spacing:-.035em;margin:2px 0 0}
 /* A guideline with its own picture: chips and title on a jewel tile, the loop on the right behind them */
 .run-hero{gap:12px;padding:18px 20px 22px;min-height:168px;justify-content:flex-end;box-shadow:var(--sh-2)}
-.run-hero h1{color:#fff;max-width:20ch}
+.run-hero h1{color:#fff;max-width:20ch;text-wrap:balance}
 .run-hero .chip.j{background:var(--glass-2)}
-@media (max-width:760px){.run-hero{min-height:0;padding:16px 16px 18px}}
+@media (max-width:760px){.run-hero{min-height:0;padding:16px 16px 18px}.run-hero h1{max-width:min(20ch,58%)}}
 .run-h .lead{margin:0;color:var(--muted);max-width:70ch;font-size:1.03rem}
 .see{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font:700 .84rem var(--body);color:var(--muted)}
 .see .pill{min-height:34px;padding:5px 12px;font-size:.82rem}
@@ -815,9 +815,20 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 @media (max-width:560px){.cx-list dl > div{grid-template-columns:minmax(0,1fr)}}
 .cx-foot{justify-content:flex-start}
 .cx-foot .sp{flex:1}
-.cxsec .pc{padding-right:48px}
-.cxsec .pc .go{position:absolute;right:18px;top:50%;width:18px;height:18px;margin-top:-9px;color:var(--faint);transition:transform .2s var(--ease),color .2s}
-.cxsec .pc:hover .go{color:var(--accent);transform:translateX(2px)}
+.cxsec .pc,.shelf .pc{padding-right:48px}
+.cxsec .pc .go,.shelf .pc .go{position:absolute;right:18px;top:50%;width:18px;height:18px;margin-top:-9px;color:var(--faint);transition:transform .2s var(--ease),color .2s}
+.cxsec .pc:hover .go,.shelf .pc:hover .go{color:var(--accent);transform:translateX(2px)}
+/* The CPG shelf in the library: national CPGs not built into the guide, as outside links */
+.shelf-note{margin:0;padding:12px 18px;font-size:.88rem;line-height:1.45;color:var(--muted)}
+.shelf-sub{display:flex;align-items:center;gap:8px;margin:0;padding:12px 18px 8px;border-top:1px solid var(--line);font:800 .95rem/1.2 var(--display);color:var(--ink)}
+.shelf-sub small{font:700 .78rem var(--mono);color:var(--muted)}
+/* The dot between where it opens and the section sits in the gap; when the line wraps, the meta clips it at the line start */
+.shelf-c .meta{overflow:hidden;column-gap:14px}
+.shelf-c .meta span+span{position:relative}
+.shelf-c .meta span+span::before{content:"\00b7";position:absolute;left:-9px;top:0;color:var(--faint)}
+.shelf-l{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.shelf-top{padding:0 18px 12px}
+.cpg-pdf{margin:0 0 12px}
 .cxsec .pc.cur{background:var(--accent-soft)}
 .cxsec .pc.cur h3 a{color:var(--accent)}
 .cxl .ext{display:inline-flex;align-items:center;gap:5px}
@@ -1142,7 +1153,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Pathway library -->
       <section class="view" data-view="pathways" id="v-pathways" hidden aria-labelledby="h-lib"><div class="vw">
         <header class="vhead"><div><h1 id="h-lib">Pathways</h1>
-          <p>The 23 ebook pathways and the 15 rules and protocols. Each runs one question at a time to its outcome card. Ebook pathways are built as written; department notes are labelled with their source.</p></div></header>
+          <p>The 23 ebook pathways, the 15 rules and protocols, and the national CPGs. Each runs one question at a time to its outcome card. Ebook pathways are built as written; department notes and CPGs are labelled with their source.</p></div></header>
         <div class="libbar">
           <label class="find"><span data-icon="search"></span><span class="vh">Filter pathways</span><input id="libq" type="search" placeholder="Filter by name, symptom or drug" autocomplete="off"></label>
           <div class="seg" id="libf" role="group" aria-label="Show"></div>
@@ -1165,14 +1176,14 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Shift tools -->
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
-          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the dengue CPG. Nothing you tick or type is saved.</p></div></header>
+          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs. Nothing you tick or type is saved.</p></div></header>
         <div class="tools"><div class="tool" id="dcheck"></div><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a></div>
       </div></section>
 
       <!-- Calculators -->
       <section class="view" data-view="calc" id="v-calc" hidden aria-labelledby="h-calc"><div class="vw">
         <header class="vhead"><div><h1 id="h-calc">Calculators</h1>
-          <p>Doses, scores and checks built only from the ebook, the department's notes and the dengue CPG, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
+          <p>Doses, scores and checks built only from the ebook, the department's notes and the national CPGs, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
         <div class="cx" id="cx">
           <div class="tool cx-open" id="calcbox" hidden></div>
           <div class="cx-hub">

@@ -36,3 +36,6 @@ video/explainer-night/work/
 video/explainer-ms-night/.hyperframes/
 video/explainer-ms-night/renders/
 video/explainer-ms-night/work/
+
+# National CPG PDFs, kept here only to check the guide against them (public on the MOH sites; not published from here)
+sources/
