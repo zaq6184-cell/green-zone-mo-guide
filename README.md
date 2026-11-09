@@ -75,6 +75,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **Dengue CPG round (published 9 Nov 2026):** the CPG Management of Dengue in Adults, 4th edition (MaHTAS, 2026), as an interactive entry (`#dengue-cpg`): triage to a zone (Appendix 7 and Table 8), the discharge criteria, regular medicines, and tabs for the home care leaflet in English and Bahasa Melayu, groups and zones, fluids, tests, shock, and the course of illness, each line with its CPG page. Four new dengue calculators: triage vital signs, fluids by weight, the test result and urine output (22 calculators in all). The ebook's dengue pathway is unchanged and links to it. The entry has its own moving banner, a Flow Studio glass Aedes mosquito. The review is in `CPG-REVIEW.md`.
 - **MDCalc round (published 9 Nov 2026):** six more calculators from the ebook (chest pain, syncope, SVT, hypertensive urgency, paracetamol overdose, anaphylaxis) in two new groups, and thirteen MDCalc links for emergency scores our sources do not define or cover.
 - **One link each (published 9 Nov 2026):** a pathway's see-also row lists each calculator once; dengue had shown the shock index twice.
 - **Calculators (published 9 Nov 2026):** twelve calculators from the ebook and the department's notes in a new Calculators view, replacing Quick sums, with five PEMCalc links for children's tools our sources do not cover.

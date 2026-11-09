@@ -60,7 +60,8 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
-  ['Calculators','Eighteen calculators in one place, built only from the ebook and the department\'s notes, each naming its source: the shock index, analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the Obsess protocol check, syncope, SVT, hypertensive urgency, the pain scales, BARS and RASS, the head injury check, paracetamol overdose by time, anaphylaxis, child doses and the SOAP check. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Scores the ebook names but does not define, such as TIMI and ABCD2, and other essential emergency scores open on MDCalc; children\'s tools open on PEMCalc. Both are outside sites.',[['#calc','Calculators'],['#calc-obsess','Obsess protocol check'],['#calc-paraod','Paracetamol overdose']]],
+  ['Dengue CPG 2026','The new national guideline, Management of Dengue in Adults (4th edition, MaHTAS 2026), step by step: triage a patient to a zone (Appendix 7 with Table 8), check the discharge criteria, and look up regular medicines. Fluids, tests, shock and the course of illness are in tabs, each line with its CPG page. The home care leaflet is there in English and Bahasa Melayu, with Copy. Four new dengue calculators: triage vital signs, fluids by weight, the test result and urine output. The ebook pathway stays as written, and where the two differ is listed under Still to confirm.',[['#dengue-cpg','Open the dengue CPG'],['#calc-dvitals','Triage vital signs'],['#calc-dfluid','Fluids by weight']]],
+  ['Calculators','Twenty-two calculators in one place, built only from the ebook, the department\'s notes and the dengue CPG, each naming its source: the shock index, analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the Obsess protocol check, syncope, SVT, hypertensive urgency, the pain scales, BARS and RASS, the head injury check, paracetamol overdose by time, anaphylaxis, child doses, the SOAP check, and the dengue triage vital signs, fluids, test result and urine output. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Scores the ebook names but does not define, such as TIMI and ABCD2, and other essential emergency scores open on MDCalc; children\'s tools open on PEMCalc. Both are outside sites.',[['#calc','Calculators'],['#calc-obsess','Obsess protocol check'],['#calc-paraod','Paracetamol overdose']]],
   ['A new look','The guide is now a bento of tiles, each showing real data from the guide: how each pathway can end, the numbers, the zone.',[['#home','Home']]],
   ['The zone map','The five stops of a Green Zone visit on the home screen. Tap one for what happens there and the rules that apply.',[['#journey','Patient journey']]],
   ['Whole-pathway maps','Every step of a pathway on one sheet, with your route lit and the outcomes you can no longer reach dimmed.',[['#renal-colic','Try it on renal colic']]],
@@ -77,7 +78,7 @@ const INTRO = [
   {h:'Find it in one search', p:'Type a symptom, rule, dose or number, or press /. Saved and recent pathways wait on your home screen.', art:'search'},
   {h:'One question at a time', p:'Each pathway asks one question per card and shows how it can still end. It finishes in the ebook\'s outcome colours: red admit, yellow observation, green discharge, violet refer.', art:'path'},
   {h:'Patients move one way', p:'Triage, you the MO, the treatment room, the CCA only if needed, then review. Tap any stop on the zone map for what happens there and the rules that apply.', art:'zone'},
-  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 18 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
+  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 22 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
 ];
 const ART = {
   search:'<rect x="18" y="34" width="284" height="56" rx="28" style="fill:#fff"/><circle cx="50" cy="62" r="10" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><path d="m57.5 69.5 7 7" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><text x="76" y="69" style="font:700 19px var(--body);fill:#14211b">renal colic</text><rect x="184" y="50" width="3" height="25" class="blink" style="fill:var(--emerald-1)"/>' +
@@ -221,11 +222,14 @@ const CONFIRM = [
   'The MERS-CoV case definition, which is not in the PUI file.',
   'A readable copy of the Malaysian snakebite guideline.',
   'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
-  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.'
+  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
+  'Which dengue source the Green Zone follows where the ebook (built from the CPG 3rd edition, 2015) and the CPG 4th edition (2026) differ: shock CRT over 2 or over 3 seconds; persistent vomiting over 2 times in 24 hours or over 3 a day; the list of warning signs (the ebook has persistent diarrhoea and a tender liver, the CPG liver enlargement over 2 cm, postural hypotension and reduced urine output); and oral fluids (2 litres a day, or 200 ml an hour while awake).',
+  'Points inside the dengue CPG (4th edition) itself: pregnant, over-65 and morbidly obese patients without warning signs go to MTS level 3 by Appendix 7 but to Group B1, MTS level 4, by Tables 6 and 8 (and all pregnant patients with confirmed dengue should be hospitalised, p72); whether "BP < 90/60" counts either reading below; Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; the quota table does not follow its own method exactly (65 kg: 5700 ml printed, 5770 ml by maintenance plus 50 ml/kg); Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.'
 ];
 
 /* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
 const TIPS = [
+  {t:'Persistent vomiting in the febrile phase is not a dengue warning sign: warning signs are most predictive in the critical phase, when the fever settles.', href:'#dengue-cpg', l:'Dengue CPG, p15'},
   {t:'Discharge abdominal pain only when the pain score is 0, with a clear diagnosis and safety-net advice.', href:'#safe-practice--abd', l:'Million Ringgit Habits'},
   {t:'Pain out of proportion in a limb: think of ischaemia or compartment syndrome, check the distal pulses and refer early.', href:'#safe-practice--limb', l:'Limbs and fractures'},
   {t:'Came back within 48 hours, or after several GP visits? Admit.', href:'#safe-practice--dc', l:'Before any discharge'},
@@ -316,6 +320,7 @@ function fillIcons(root){
 /* ================= Helpers ================= */
 const KIND = {admit:'Admit (red box)', discharge:'Discharge (green box)', observe:'Observation (yellow box)', refer:'Refer', neutral:'Next step'};
 const KIND_R = {admit:'Admit', discharge:'Discharge', observe:'Observation', refer:'Refer', neutral:'The rule'};
+const KIND_G = {admit:'Admit', discharge:'Discharge', observe:'Observation', refer:'Refer', neutral:'What the CPG says'};
 const OUT_ORDER = ['admit','observe','discharge','refer','neutral'];
 const OUT_LBL = {admit:'Admit', observe:'Observation', discharge:'Discharge', refer:'Refer', neutral:'Next step'};
 const OUT_IC = {admit:'bed', discharge:'door', observe:'clock', refer:'send', neutral:'step'};
@@ -329,9 +334,11 @@ const store = {
   del(k){ try { localStorage.removeItem(k); } catch(e){} }
 };
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const kindOf = p => p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
+const kindOf = p => p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
 const metaOf = p => p.page ? 'Ebook p' + p.page : (p.src || '');
-const kindLabel = (p, k) => (p.grp === 'rules' ? KIND_R : KIND)[k];
+const kindLabel = (p, k) => (p.grp === 'rules' ? KIND_R : p.grp === 'cpg' ? KIND_G : KIND)[k];
+/* A guideline's neutral outcomes are its answers (the medicines), not a next step */
+const outLbl = (p, k) => p.grp === 'cpg' && k === 'neutral' ? 'Guidance' : OUT_LBL[k];
 const fmt = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 const outsOf = p => OUT_ORDER.filter(k => Object.values(p.nodes).some(n => n.end === k));
 const badgeOf = p => p.isnew ? '<span class="badge b-new">New</span>' : p.upd ? '<span class="badge b-upd">Updated</span>' : p.dept ? '<span class="badge b-upd">Dept notes</span>' : '';
@@ -381,7 +388,7 @@ const CATS = [
   {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','pneumonia','anaphylaxis']},
   {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','behavioural-disturbance']},
   {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','gastroenteritis','biliary','renal-colic','scrotal-pain']},
-  {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','cellulitis']},
+  {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis']},
   {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','paracetamol-overdose','pain']},
   {k:'flow', t:'Green Zone flow and referrals', s:'Flow and referrals', ic:'route', c:'c-flow', j:'t-emerald', ids:FLOW_IDS},
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
@@ -410,6 +417,8 @@ function pathWords(p){
   return [p.lead, ...Object.values(p.nodes).flatMap(nodeWords), ...(p.advice || []), ...(p.concerns || []),
     ...(p.tables || []).flatMap(t => [t.title, ...t.rows.flat()]),
     ...(p.dept || []).flatMap(d => [d.h, ...(d.items || []), ...(d.table ? d.table.rows.flat() : [])]),
+    ...(p.notes || []).flatMap(t => t.notes.flatMap(d => [d.h, ...(d.items || []), ...(d.table ? d.table.rows.flat() : [])])),
+    ...(p.leaflet ? ['en', 'ms'].flatMap(k => p.leaflet[k].groups.flatMap(g => [g.h, g.p, ...g.items])) : []),
     ...(p.see || []).map(s => s[1])].filter(Boolean);
 }
 const IDX = [];
@@ -417,7 +426,7 @@ for (const [id, p] of Object.entries(P)){
   const c = catOf(id);
   IDX.push({href:'#' + id, title:p.title, kind:kindOf(p), meta:metaOf(p), body:pathWords(p).join(' · '), ic:c.ic, c:c.c, j:c.j});
   const m = p.nodes[p.start];
-  if (p.grp === 'rules' && m.opts && m.opts.length > 2) m.opts.forEach(([label, to]) => {
+  if ((p.grp === 'rules' || p.grp === 'cpg') && m.opts && m.opts.length > 2) m.opts.forEach(([label, to]) => {
     IDX.push({href:`#${id}--${to}`, title:label, kind:kindOf(p), meta:p.title, body:nodeWords(p.nodes[to]).join(' · '), ic:c.ic, c:c.c, j:c.j});
   });
 }
@@ -448,7 +457,7 @@ function search(q, loose){
       if (e.title.toLowerCase().startsWith(ts[i])) s += 7; else if (inT) s += 5;
       if (inB) s += 1;
     }
-    if (e.kind === 'Pathway') s += .5;
+    if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
     return {e, s};
   }).filter(Boolean).sort((a, b) => b.s - a.s).slice(0, 14).map(r => r.e);
 }
@@ -645,7 +654,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -725,14 +734,14 @@ function renderHome(){
 
 /* ================= Pathway library ================= */
 let libF = 'all', libCat = 'all';
-function libCounts(){ const all = Object.keys(P); return {all:all.length, ebook:all.filter(id => P[id].grp !== 'rules').length, rules:all.filter(id => P[id].grp === 'rules').length, saved:savedIds().length}; }
+function libCounts(){ const all = Object.keys(P); return {all:all.length, ebook:all.filter(id => !P[id].grp).length, rules:all.filter(id => P[id].grp === 'rules').length, saved:savedIds().length}; }
 function renderLibf(){
   const n = libCounts();
   $('#libf').innerHTML = [['all', 'All'], ['ebook', 'Ebook'], ['rules', 'Rules and protocols'], ['saved', 'Saved']].map(([k, t]) => `<button type="button" data-f="${k}" aria-pressed="${libF === k}">${t} <small>${n[k]}</small></button>`).join('');
 }
 function pcard(id){
   const p = P[id], c = catOf(id), on = isSaved(id);
-  return `<article class="pc"><div class="pc-b"><h3><a href="#${id}">${esc(p.title)}</a></h3><div class="meta"><span>${esc(metaOf(p))}</span>${badgeOf(p)}</div>${p.lead ? `<p class="ld">${esc(p.lead)}</p>` : ''}<div class="outs-dots">${outsOf(p).map(k => `<span class="od ${k}">${OUT_LBL[k]}</span>`).join('')}</div></div><button type="button" class="pc-st" data-star="${id}" aria-pressed="${on}" aria-label="${(on ? 'Remove from saved: ' : 'Save: ') + esc(p.title)}">${svg('star', '', on)}</button></article>`;
+  return `<article class="pc"><div class="pc-b"><h3><a href="#${id}">${esc(p.title)}</a></h3><div class="meta"><span>${esc(metaOf(p))}</span>${badgeOf(p)}</div>${p.lead ? `<p class="ld">${esc(p.lead)}</p>` : ''}<div class="outs-dots">${outsOf(p).map(k => `<span class="od ${k}">${outLbl(p, k)}</span>`).join('')}</div></div><button type="button" class="pc-st" data-star="${id}" aria-pressed="${on}" aria-label="${(on ? 'Remove from saved: ' : 'Save: ') + esc(p.title)}">${svg('star', '', on)}</button></article>`;
 }
 function renderLib(){
   const q = $('#libq').value.trim(), s = savedIds();
@@ -742,7 +751,7 @@ function renderLib(){
     const strict = hit(false);
     match = Object.keys(P).some(strict) ? strict : hit(true);
   }
-  const inF = id => libF === 'all' ? true : libF === 'ebook' ? P[id].grp !== 'rules' : libF === 'rules' ? P[id].grp === 'rules' : s.includes(id);
+  const inF = id => libF === 'all' ? true : libF === 'ebook' ? !P[id].grp : libF === 'rules' ? P[id].grp === 'rules' : s.includes(id);
   const ids = Object.keys(P).filter(id => inF(id) && match(id));
   renderLibf();
   const cats = CATS.filter(c => c.ids.some(id => ids.includes(id)));
@@ -802,7 +811,7 @@ function restart(){ state.trail = []; state.cur = P[state.id].start; land = fals
 /* How the entry can still end from here, in the ebook's outcome colours */
 function endsHTML(p, n){
   const kinds = n.end ? [n.end] : endsFrom(p, state.cur);
-  return `<div class="ends"><span>${n.end ? 'Ended in' : 'Can still end in'}</span>${kinds.map(k => `<span class="end" style="--oc:var(--b-${k})">${OUT_LBL[k]}</span>`).join('')}</div>`;
+  return `<div class="ends"><span>${n.end ? 'Ended in' : 'Can still end in'}</span>${kinds.map(k => `<span class="end" style="--oc:var(--b-${k})">${outLbl(p, k)}</span>`).join('')}</div>`;
 }
 function draw(focus){
   const p = P[state.id], n = p.nodes[state.cur], c = catOf(state.id), saved = isSaved(state.id), steps = state.trail.length;
@@ -812,7 +821,10 @@ function draw(focus){
   const bar = Array.from({length:total}, (_, i) => `<i class="${n.end ? 'fin' : i <= steps ? 'on' : ''}"></i>`).join('');
   const count = Object.keys(p.nodes).length;
   const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
-  $('#run').innerHTML = `<div class="run-h">
+  /* A guideline can carry its own picture: the chips and title then sit on a jewel tile, with the loop behind them */
+  const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
+      <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>`;
+  withTiles($('#run'), `<div class="run-h">
       <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg('back')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
         <div class="run-acts">
           <button type="button" class="ib" data-save aria-pressed="${saved}" aria-label="${saved ? 'Saved. Tap to remove from your list' : 'Save to your list'}" title="${saved ? 'Saved' : 'Save'}">${svg('star', '', saved)}</button>
@@ -820,8 +832,7 @@ function draw(focus){
           <button type="button" class="ib" data-link aria-label="Copy a link to this step" title="Copy link">${svg('link')}</button>
           <button type="button" class="ib" data-restart aria-label="Start again" title="Start again"${steps ? '' : ' disabled'}>${svg('restart')}</button>
         </div></div>
-      <div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
-      <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>
+      ${p.hero ? `<div class="tile ${c.j} run-hero">${tileMedia(p.hero)}${head}</div>` : head}
       ${about ? `<div class="about-t">${about}</div>` : ''}
     </div>
     <div class="run-grid">
@@ -839,7 +850,7 @@ function draw(focus){
         ${about ? `<details class="about about-m"><summary>About this pathway</summary><div>${about}</div></details>` : ''}
         ${refTabs(p)}
       </div>
-    </div>`;
+    </div>`);
   if (n.check) wireChecks(n);
   if (focus){
     const cur = $('#cur'); cur.focus({preventScroll:true});
@@ -858,7 +869,7 @@ function card(n, p){
       ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${list(n.items, 'ticks')}
         ${n.links ? `<div class="links">${n.links.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : ''}
         ${n.gap ? `<div class="gap">${svg('info')}<span>${esc(n.gap)}</span></div>` : ''}</div>` : ''}
-      <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span><button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${p.advice && n.end === 'discharge' ? '<button type="button" class="primary" data-showadvice>Discharge advice</button>' : ''}</div></article>`;
+      <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span><button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${(p.advice || p.leaflet) && n.end === 'discharge' ? `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
   }
   if (n.step){
     const obs = n.kind === 'observe';
@@ -898,7 +909,7 @@ function renderMap(){
   const ends = order.filter(k => p.nodes[k].end).length;
   $('#pm-title').textContent = p.title;
   $('#pm-sub').textContent = `${order.length} steps · ${ends} outcome${ends === 1 ? '' : 's'} · ${metaOf(p)}`;
-  $('#pmbody').innerHTML = `<div class="legend" aria-label="Outcome colours">${OUT_ORDER.filter(k => order.some(x => p.nodes[x].end === k)).map(k => `<span class="od ${k}">${OUT_LBL[k]}</span>`).join('')}</div>
+  $('#pmbody').innerHTML = `<div class="legend" aria-label="Outcome colours">${OUT_ORDER.filter(k => order.some(x => p.nodes[x].end === k)).map(k => `<span class="od ${k}">${outLbl(p, k)}</span>`).join('')}</div>
     <ol class="pm${state.trail.length ? ' trail' : ''}">${order.map(k => {
       const n = p.nodes[k], here = k === state.cur;
       const cls = [n.end ? 'en ' + n.end : n.step ? 'st' : 'qn', here ? 'now' : on.has(k) ? 'on' : live.has(k) ? 'live' : '', n.end && !live.has(k) && !here ? 'gone' : ''].join(' ');
@@ -926,7 +937,11 @@ function tabsOf(p){
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:`<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
-  if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(d => `<div class="deptnote"><h4>${esc(d.h)}</h4><p class="src">${esc(d.src)}</p>${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
+  const note = d => `<div class="deptnote"><h4>${esc(d.h)}</h4><p class="src">${esc(d.src)}</p>${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
+  if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
+  if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
+  /* A national guideline's reference notes, several tabs of them, each note with its page */
+  (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to MaHTAS.</p>`}));
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
   if (p.refs) T.push({k:'refs', l:'References', html:`<ol class="refs">${p.refs.map(li).join('')}</ol>`});
   return T;
@@ -942,6 +957,15 @@ function selectTab(k, focus){
   $$('#ptab [role="tab"]').forEach(b => { const on = b.dataset.pt === k; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
   $$('#ptab [role="tabpanel"]').forEach(x => { x.hidden = x.id !== 'tp-' + k; });
 }
+/* The CPG's home care leaflet (Appendix 5B) in English or Bahasa Melayu. The choice lives in memory only */
+let leafLang = 'en';
+function leafletHTML(p){
+  const L = p.leaflet, d = L[leafLang];
+  return `<div class="leaf" id="leaf" lang="${leafLang}"><div class="seg leaf-lang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(k => `<button type="button" data-leaf="${k}" aria-pressed="${leafLang === k}" lang="${k}">${esc(L[k].lang)}</button>`).join('')}</div>
+    <h4 class="leaf-t">${esc(d.title)}</h4>${d.groups.map(g => `<section class="leaf-g${g.warn ? ' warn' : ''}"><h5>${g.warn ? svg('stop') : ''}${esc(g.h)}</h5>${g.p ? `<p>${esc(g.p)}</p>` : ''}<ul>${g.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}
+    <p class="src">${esc(L.src)}</p></div><div class="pbar"><button type="button" class="sm" data-copyleaf>${svg('copy')}<span class="bl">Copy advice</span></button></div>`;
+}
+const leafletText = p => { const L = p.leaflet, d = L[leafLang]; return [d.title.toUpperCase(), ...d.groups.flatMap(g => ['', g.h.toUpperCase(), ...(g.p ? [g.p] : []), ...g.items.map(x => '- ' + x)]), '', L.src].join('\n'); };
 
 /* ================= Shift tools ================= */
 function renderDcheck(){
@@ -968,13 +992,14 @@ function renderDcheck(){
 }
 
 /* ================= Calculators (9 Nov 2026) =================
-   Twelve calculators built only from the ebook and the department's notes (standing rule 8), each naming its source.
+   Calculators built only from the ebook and the department's notes (standing rule 8), each naming its source, and since
+   9 Nov 2026 four dengue calculators from the CPG Management of Dengue in Adults, 4th edition, which Krishna admitted as a source.
    Where a source stops (exactly 50 kg, exactly 30, no basal-bolus split, no band named "moderate"), the calculator says so
    instead of choosing. The weight and the child's age band are shared between calculators in memory only and are never
    stored (rule 4). Paediatric tools that our sources do not cover open on PEMCalc, an outside site, labelled as such.
    Checklists and tables come straight from the pathway data, so a calculator cannot drift from its pathway. */
 const CALC_GROUPS = [
-  {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'Shock index and adjusted weight'},
+  {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'Triage vital signs, fluids, the test result, urine output, the shock index and adjusted weight'},
   {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants and insulin by weight'},
   {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65 and Wells'},
   {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain, syncope, SVT and blood pressure'},
@@ -1010,6 +1035,8 @@ const CALC_LINKS = [
   {g:'doses', site:'MDCalc', href:MDC + '43/creatinine-clearance-cockcroft-gault-equation', t:'Creatinine clearance (Cockcroft-Gault)', d:'The creatinine clearance that the anticoagulant doses here depend on.'}
 ];
 const tableOf = (id, part) => (P[id].tables || []).find(t => t.title.includes(part));
+/* A table inside the dengue CPG's reference notes (Table 5, the fluid quota) */
+const dTable = part => P['dengue-cpg'].notes.flatMap(t => t.notes).find(n => n.table && n.h.includes(part)).table;
 const r1 = x => Math.round(x * 10) / 10;
 const fx = x => String(r1(x));
 const range = (w, a, b, unit = 'mg') => `${fx(a * w)}–${fx(b * w)} ${unit}`;
@@ -1045,6 +1072,112 @@ const CALCS = {
         ['Ideal body weight', ibw.toFixed(1) + ' kg', 'good', ''],
         ['Adjusted body weight', adj.toFixed(1) + ' kg', bmi > 27.5 ? 'good' : 'warn', bmi > 27.5 ? 'Use this weight for dengue fluid calculations' : 'Not needed at this BMI']
       ];
+    }},
+  /* Dengue, CPG 4th edition (MaHTAS 2026): each threshold is in P['dengue-cpg'] (see CALC_FACTS), and the tables are read from it */
+  dvitals:{t:'Dengue triage vital signs', g:'dengue', src:'CPG 4th ed., Appendix 7', path:'#dengue-cpg--vit', kw:'dengue triage unstable vital signs blood pressure map mean arterial pulse pressure shock index heart rate respiratory rate spo2 red zone mts level 2 cpg',
+    sub:'The seven unstable vital signs of the CPG\'s systematic triage, checked one by one.',
+    fields:[['sbp','Systolic BP','mmHg'],['dbp','Diastolic BP','mmHg'],['hr','Heart rate','/min'],['rr','Respiratory rate','/min'],['spo2','SpO2','%'],['map','MAP shown on the monitor','mmHg']],
+    note:'CPG Appendix 7 (p108), unstable vital signs: BP < 90/60 mmHg; MAP < 65 mmHg; PP < 30 mmHg; shock index (HR/SBP) > 1; HR > 100/min; RR > 20/min; SpO2 < 95%. Any one sends the patient to the Red Zone, MTS level 2. Pulse pressure is SBP − DBP (Appendix 10). The CPG gives no formula for the MAP, so enter the monitor\'s reading. A systolic under 90 counts as below 90/60. A diastolic under 60 with a systolic of 90 or more is shown for you to judge: the CPG does not say whether it counts on its own.',
+    run(v){
+      if (v.sbp && v.dbp && v.dbp >= v.sbp) return [['Check the numbers', 'The diastolic should be below the systolic', 'warn', '']];
+      const out = [], bad = [], todo = [];
+      let lowDia = false;
+      const add = (l, val, u, em, sc, flag) => { out.push([l, val, u ? 'bad' : 'good', em, sc]); if (u) bad.push(flag); };
+      if (v.sbp && v.dbp){
+        const pp = v.sbp - v.dbp;
+        lowDia = v.sbp >= 90 && v.dbp < 60;
+        if (lowDia) out.push(['Blood pressure', `${v.sbp}/${v.dbp} mmHg`, 'warn', 'Diastolic under 60, systolic 90 or more: whether this alone is below 90/60 is still to confirm']);
+        else add('Blood pressure', `${v.sbp}/${v.dbp} mmHg`, v.sbp < 90, v.sbp < 90 ? 'Systolic under 90: below 90/60' : 'Not below 90/60', null, 'BP < 90/60 mmHg');
+        add('Pulse pressure (SBP − DBP)', pp + ' mmHg', pp < 30, pp < 30 ? 'Under 30 mmHg' : '30 mmHg or more', {min:0, max:80, v:pp, bands:[[0, 30, 'bad'], [30, 80, 'good']]}, 'PP < 30 mmHg');
+      } else todo.push('blood pressure');
+      if (v.map) add('MAP, from the monitor', v.map + ' mmHg', v.map < 65, v.map < 65 ? 'Under 65 mmHg' : '65 mmHg or more', {min:30, max:130, v:v.map, bands:[[30, 65, 'bad'], [65, 130, 'good']]}, 'MAP < 65 mmHg'); else todo.push('MAP');
+      if (v.hr && v.sbp){ const si = v.hr / v.sbp; add('Shock index (HR ÷ SBP)', si.toFixed(2), si > 1, si > 1 ? 'Over 1' : si === 1 ? 'Exactly 1: not over 1' : 'Under 1', {min:0, max:2, v:si, bands:[[0, 1, 'good'], [1, 2, 'bad']]}, 'Shock index > 1'); } else todo.push('shock index');
+      if (v.hr) add('Heart rate', v.hr + '/min', v.hr > 100, v.hr > 100 ? 'Over 100/min' : '100/min or under', {min:40, max:180, v:v.hr, bands:[[40, 100, 'good'], [100, 180, 'bad']]}, 'HR > 100/min'); else todo.push('heart rate');
+      if (v.rr) add('Respiratory rate', v.rr + '/min', v.rr > 20, v.rr > 20 ? 'Over 20/min' : '20/min or under', {min:5, max:45, v:v.rr, bands:[[5, 20, 'good'], [20, 45, 'bad']]}, 'RR > 20/min'); else todo.push('respiratory rate');
+      if (v.spo2) add('SpO2', v.spo2 + '%', v.spo2 < 95, v.spo2 < 95 ? 'Under 95%' : '95% or more', {min:80, max:100, v:v.spo2, bands:[[80, 95, 'bad'], [95, 100, 'good']]}, 'SpO2 < 95%'); else todo.push('SpO2');
+      if (!out.length) return null;
+      const verdict = bad.length ? {cls:'stop', h:'Unstable vital signs: Red Zone, MTS level 2', p:`${bad.join('; ')}. Table 8: compensated dengue shock syndrome; emergency treatment, IV fluid therapy and admission (Group C).`, href:'#dengue-cpg--red2', link:'Open the triage outcome'}
+        : lowDia ? {cls:'next', h:'Check the blood pressure', p:`The diastolic is under 60 with a systolic of 90 or more. Appendix 7 writes BP < 90/60 mmHg and does not say whether a low diastolic alone counts: judge it with the rest of the triage.${todo.length ? ' Still to check: ' + todo.join(', ') + '.' : ''}`, href:'#dengue-cpg--vit', link:'Open the triage question'}
+        : todo.length ? {cls:'next', h:'None unstable so far', p:'Still to check: ' + todo.join(', ') + '.'}
+        : {cls:'ok', h:'No unstable vital signs', p:'Go on to the next triage question: warning signs, unstable co-morbids or high risk.', href:'#dengue-cpg--ws', link:'Next triage question'};
+      return {outs:out, verdict};
+    }},
+  dfluid:{t:'Dengue fluids by weight', g:'dengue', src:'CPG 4th ed., Algorithm 1, Tables 11–13', path:'#dengue-cpg', kw:'dengue fluid quota m+5% maintenance holliday segar 48 hours critical phase warning signs group b2 iv rate ml/kg/hr crystalloid 70 kg limit obese bmi adjusted body weight cpg',
+    sub:'Maintenance, the 48-hour fluid quota and the Algorithm 1 rates, with the 70 kg limit and the adjusted weight.',
+    fields:[['wt','Weight','kg'],['ht','Height (optional, for the BMI)','cm'],{k:'sex', type:'seg', label:'Sex (needed only for the adjusted weight)', opts:[['f','Female'],['m','Male']], nodef:true}],
+    note:'CPG 4th ed.: maintenance by Holliday-Segar (Table 11, p41): 4ml/kg/hr for the first 10kg, 2ml/kg/hr for the next 10kg and 1ml/kg/hr for each kg after that. A 70 kg weight limit applies to maintenance and the fluid quota (p40). Over BMI 27.5, use the adjusted body weight (Table 13, p48). The fluid quota (maintenance + 5% deficit, oral and IV together) is the maximum over 48 hours in the critical phase without shock, read from the table under Algorithm 1 (p xiv). In shock the quota no longer applies (p44).',
+    run(v){
+      const w = v.wt; if (!w) return null;
+      if (w < 20 || w > 300) return [['Weight', 'Enter 20 to 300 kg', 'warn', '']];
+      if (v.ht && (v.ht < 120 || v.ht > 220)) return [['Height', 'Enter 120 to 220 cm, or leave it empty', 'warn', '']];
+      const out = [];
+      let used = w, how = 'actual weight';
+      if (v.ht){
+        const bmi = w / Math.pow(v.ht / 100, 2), obese = bmi > 27.5;
+        out.push(['BMI', bmi.toFixed(1) + ' kg/m²', obese ? 'warn' : 'good', obese ? 'Over 27.5: Table 13 uses the adjusted body weight' : '27.5 or less: use the actual weight', {min:15, max:45, v:bmi, bands:[[15, 27.5, 'good'], [27.5, 45, 'warn']]}]);
+        if (obese){
+          if (!v.sex) return {outs:out, verdict:{cls:'next', h:'Choose the sex', p:'Over BMI 27.5 the CPG uses the adjusted body weight, which needs the ideal body weight for the sex (Table 13, p48).'}};
+          const ibw = (v.sex === 'm' ? 50 : 45.5) + 0.91 * (v.ht - 152);
+          used = ibw + 0.4 * (w - ibw); how = 'adjusted body weight';
+        }
+      }
+      const W = Math.min(used, 70), mh = W <= 10 ? 4 * W : W <= 20 ? 40 + 2 * (W - 10) : 60 + (W - 20);
+      out.push(['Weight for the fluids', fx(W) + ' kg', 'good', used > 70 ? `The ${how} is ${fx(used)} kg: capped at the 70 kg limit (p40)` : `The ${how}`]);
+      out.push(['Maintenance (Table 11)', fx(mh) + ' ml/hr', 'good', `${Math.round(mh * 24)} ml a day`]);
+      const rows = dTable('Fluid quota').rows.map(r => [parseFloat(r[0].replace(/[^\d.]/g, '')), r[1]]);
+      const top = rows[rows.length - 1], exact = rows.find(r => r[0] === W), lo = [...rows].reverse().find(r => r[0] < W), hi = rows.find(r => r[0] > W);
+      const qem = 'Oral and IV together: the most to give over 48 hours, in the critical phase without shock';
+      let gap = '';
+      if (W >= top[0]) out.push(['Fluid quota over 48 hours (M+5%)', top[1] + ' ml', 'good', qem]);
+      else if (exact) out.push(['Fluid quota over 48 hours (M+5%)', exact[1] + ' ml', 'good', qem]);
+      else if (lo && hi){ out.push(['Fluid quota over 48 hours (M+5%)', `${lo[1]}–${hi[1]} ml`, 'warn', `The table gives ${lo[0]} kg ${lo[1]} ml and ${hi[0]} kg ${hi[1]} ml`]); gap = `The table gives the quota in 5 kg steps; it does not say how to treat ${fx(W)} kg.`; }
+      else { out.push(['Fluid quota over 48 hours (M+5%)', 'Below the table', 'warn', 'The table starts at 30 kg']); gap = 'The quota table starts at 30 kg.'; }
+      const k = (a, b) => `${fx(a * W)}–${fx(b * W)} ml/hr`;
+      return {outs:out,
+        lists:[{h:`Algorithm 1 at ${fx(W)} kg: warning signs (Group B2)`, rows:[
+          ['Start', 'IV crystalloid 3–5 ml/kg/hr for 1 hour: ' + k(3, 5)],
+          ['Improving', 'IV crystalloid 2–3 ml/kg/hr for 1–2 hours: ' + k(2, 3)],
+          ['Still improving', `1–2 ml/kg/hr (${k(1, 2)}) or maintenance (${fx(mh)} ml/hr); stop IV fluid if able to tolerate orally`],
+          ['Not improving, not in shock', 'Take FBC/VBG/lactate; increase to 5–7 ml/kg/hr while awaiting the result: ' + k(5, 7)],
+          ['Drinking 1–2 ml/kg/hour', `${fx(W)}–${fx(2 * W)} ml an hour by mouth: IV fluid is not necessary (p44)`]]}],
+        verdict:{cls:'next', h:'Keep the total within the quota', p:'The quota counts oral and IV fluid together over 48 hours, and many patients need less. Reassess before each change: clinical condition, vital signs, CCTVR and urine output. In shock, use Algorithms 2 to 4 instead.', href:'#dengue-cpg', link:'Open the Fluids and Shock tabs'},
+        gap};
+    }},
+  drdt:{t:'Dengue test result', g:'dengue', src:'CPG 4th ed., Table 5', path:'#dengue-cpg', kw:'dengue rdt rapid combo test ns1 igm igg serology interpretation secondary dengue vaccine vaccination qdenga tak-003 cpg',
+    sub:'What a rapid combo test (NS1, IgM and IgG) means, from the CPG\'s Table 5.',
+    fields:[{k:'fd', type:'seg', label:'History of fever', opts:[['lt','Less than 5 days'],['eq','5 days'],['gt','More than 5 days']], nodef:true},
+      {k:'ns1', type:'seg', label:'NS1', opts:[['+','Positive'],['−','Negative']], nodef:true},
+      {k:'igm', type:'seg', label:'IgM', opts:[['+','Positive'],['−','Negative']], nodef:true},
+      {k:'igg', type:'seg', label:'IgG', opts:[['+','Positive'],['−','Negative']], nodef:true},
+      {k:'vax', type:'check', label:'Dengue vaccine', items:['Dengue vaccine (TAK-003/Qdenga) in the last 30 days']}],
+    note:'CPG Table 5 (p20) lists four result patterns for a history of fever of less than 5 days and five for more than 5 days; any other pattern, and exactly 5 days, is not in the table. Recommendation 1 (p21): within 30 days after dengue vaccination, PCR or NS1 antigen may be used to diagnose dengue, and IgM and IgG should not be used as confirmatory tests.',
+    run(v){
+      if (!v.fd || !v.ns1 || !v.igm || !v.igg) return null;
+      const band = {lt:'Less than 5 days', gt:'More than 5 days'}[v.fd], pat = `NS1 ${v.ns1}, IgM ${v.igm}, IgG ${v.igg}`, out = [];
+      let gap = '', verdict = null;
+      if (!band){ out.push(['Table 5', 'Not covered', 'warn', 'The table gives less than 5 days and more than 5 days, not exactly 5']); gap = 'Table 5 has no reading for a history of fever of exactly 5 days.'; }
+      else {
+        const row = dTable('Table 5').rows.find(r => r[0] === band && r[1] === v.ns1 && r[2] === v.igm && r[3] === v.igg);
+        if (row) out.push(['Table 5', row[4], /^Not dengue infection$/.test(row[4]) ? 'good' : /High risk/.test(row[4]) ? 'bad' : 'warn', `${pat}, with ${band.toLowerCase()} of fever`]);
+        else { out.push(['Table 5', 'Not in the table', 'warn', `${pat} is not listed for ${band.toLowerCase()} of fever`]); gap = 'Table 5 does not list this result pattern.'; }
+      }
+      if (v.vax_n) verdict = {cls:'refer', h:'Within 30 days of dengue vaccination', p:'IgM and IgG should not be used as confirmatory tests; PCR or NS1 antigen may be used. A positive NS1 does not tell wild-type from vaccine-derived virus, and a negative one does not fully exclude dengue (Recommendation 1 and 7.3, p21). Rely on clinical evaluation and judgement.'};
+      else if (v.ns1 === '−' && v.igm === '−' && v.igg === '−') verdict = {cls:'next', h:'All three negative', p:'Negative test results require differential diagnosis to confirm cause of infection (p21).'};
+      return {outs:out, verdict, gap};
+    }},
+  duo:{t:'Urine output', g:'dengue', src:'CPG 4th ed., p31, p44 and p84', path:'#dengue-cpg', kw:'dengue urine output ml/kg/hr void oliguria perfusion discharge catheter cpg',
+    sub:'Urine output in ml/kg/hr from one void, against the CPG\'s targets.',
+    fields:[['vol','Urine passed','ml'],['hrs','Hours since the last void','h'],['wt','Weight','kg']],
+    note:'CPG 4th ed.: calculate urine output in ml/kg/hr at each void; 0.5 - 1 ml/kg/hour is optimal and indicates adequate perfusion (p44). The minimum is 0.5 ml/kg/hour, and a patient should pass urine 4 to 6 times a day, at least once every 6 hours (p31). The discharge criteria ask for 0.5 - 1.5 mL/kg/hr (p84). This uses the weight you enter.',
+    run(v){
+      if (!v.vol || !v.hrs || !v.wt) return null;
+      const bad = badWt(v.wt, 20, 300); if (bad) return bad;
+      const u = v.vol / v.wt / v.hrs;
+      const out = [['Urine output', u.toFixed(2) + ' ml/kg/hr', u < 0.5 ? 'bad' : u <= 1.5 ? 'good' : 'warn',
+        u < 0.5 ? 'Under 0.5: below the minimum of 0.5 ml/kg/hour (p31)' : u <= 1 ? '0.5 to 1: optimal, adequate perfusion (p44)' : u <= 1.5 ? 'Over 1: within the discharge criterion of 0.5 to 1.5 (p84)' : 'Over 1.5: above the ranges the CPG gives',
+        {min:0, max:2.5, v:u, bands:[[0, 0.5, 'bad'], [0.5, 1.5, 'good'], [1.5, 2.5, 'warn']]}]];
+      if (v.hrs > 6) out.push(['Time since the last void', fx(v.hrs) + ' hours', 'warn', 'Over 6 hours: the CPG asks for urine at least once every 6 hours (p31)']);
+      return out;
     }},
   analgesia:{t:'Analgesia by weight', g:'doses', src:'Ebook p45–50', path:'#pain', kw:'paracetamol panadol ketamine pain dose mg/kg',
     sub:'Paracetamol and ketamine doses from the ebook\'s choice of analgesia table.',
@@ -1338,7 +1471,16 @@ const CALC_FACTS = [
   ['anaphylaxis', '10–20 ml/kg NS bolus'], ['acs', 'Start T aspirin 300 mg'], ['syncope', 'Follow-up at EMWATCH, EMACC or PC clinic'],
   ['paracetamol-overdose', 'Under 2 hours'], ['paracetamol-overdose', '2 to 8 hours'], ['paracetamol-overdose', '8 to 24 hours'], ['paracetamol-overdose', 'Over 24 hours'],
   ['paracetamol-overdose', '4–8 hours after ingestion'], ['paracetamol-overdose', 'within 8 hours'], ['paracetamol-overdose', 'above the nomogram line, or ALT 50 U/L or more'],
-  ['paracetamol-overdose', 'Paracetamol over 10 mg/L (66 µmol/L), or ALT 50 U/L or more']
+  ['paracetamol-overdose', 'Paracetamol over 10 mg/L (66 µmol/L), or ALT 50 U/L or more'],
+  ['dengue-cpg', 'Blood pressure (BP) < 90/60 mmHg'], ['dengue-cpg', 'Mean arterial pressure (MAP) < 65 mmHg'], ['dengue-cpg', 'Pulse pressure (PP) < 30 mmHg'], ['dengue-cpg', 'Shock index (HR/SBP) > 1'],
+  ['dengue-cpg', 'Heart rate (HR) > 100/min'], ['dengue-cpg', 'Respiratory rate (RR) > 20/min'], ['dengue-cpg', 'Oxygen saturation (SpO2) < 95%'],
+  ['dengue-cpg', '4ml/kg/hr'], ['dengue-cpg', '2ml/kg/hr'], ['dengue-cpg', '1ml/kg/hr'], ['dengue-cpg', '70 kg weight limit for weight-based fluid calculations in maintenance and fluid quota'],
+  ['dengue-cpg', 'For obese patients (BMI >27.5 kg/m2), maintenance fluid calculation should be based on Adjusted Body Weight (ABW).'], ['dengue-cpg', 'ABW = IBW + 0.4 (actual weight - IBW)'],
+  ['dengue-cpg', 'female: 45.5 kg + 0.91(height in cm -152)'], ['dengue-cpg', 'Male: 50.0 kg + 0.91(height in cm -152)'],
+  ['dengue-cpg', 'Start IV crystalloid 3-5ml/kg/hr for 1 hour'], ['dengue-cpg', 'IV crystalloid 2-3ml/kg/hr for 1-2 hour'], ['dengue-cpg', 'reduce to 1-2ml/kg/hr or maintenance fluid; stop IV fluid if able to tolerate orally'],
+  ['dengue-cpg', 'increase fluid regimen to 5-7ml/kg/hr while awaiting result'], ['dengue-cpg', 'oral fluid intake equivalent to 1 - 2 ml/ kg/hour, IV fluid administration is not necessary'],
+  ['dengue-cpg', 'Optimal urine output: 0.5 - 1 ml/kg/hour'], ['dengue-cpg', 'a minimum of 0.5 ml/kg/hour'], ['dengue-cpg', 'at least once every 6 hours'], ['dengue-cpg', 'Good urine output (0.5 - 1.5 mL/kg/hr)'],
+  ['dengue-cpg', 'IgM and IgG should not be used as confirmatory tests'], ['dengue-cpg', 'Negative test results require differential diagnosis to confirm cause of infection']
 ];
 const calcFactsMissing = () => CALC_FACTS.filter(([id, s]) => !JSON.stringify(P[id]).includes(s));
 const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc-wells', 'Wells score calculator'], ['#calc-anticoag', 'Anticoagulant doses']],
@@ -1346,7 +1488,8 @@ const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc
   'mild-tbi':[['#calc-head', 'Head injury check']], 'behavioural-disturbance':[['#calc-calm', 'BARS and RASS']],
   dengue:[['#calc-dengue', 'Shock index'], ['#calc-weight', 'Adjusted weight']], children:[['#calc-kids', 'Child doses'], ['#calc-soap', 'Dehydration check']],
   acs:[['#calc-obsess', 'Obsess protocol check']], syncope:[['#calc-syncope', 'Syncope risk check']], svt:[['#calc-svt', 'SVT drugs by weight']], 'hypertensive-urgency':[['#calc-htn', 'Hypertensive urgency calculator']],
-  'paracetamol-overdose':[['#calc-paraod', 'Time since ingestion']], anaphylaxis:[['#calc-anaph', 'Anaphylaxis drugs and fluids']]};
+  'paracetamol-overdose':[['#calc-paraod', 'Time since ingestion']], anaphylaxis:[['#calc-anaph', 'Anaphylaxis drugs and fluids']],
+  'dengue-cpg':[['#calc-dvitals', 'Triage vital signs'], ['#calc-dfluid', 'Fluids by weight'], ['#calc-drdt', 'Test result'], ['#calc-duo', 'Urine output'], ['#calc-weight', 'Adjusted weight']]};
 /* Add each calculator link once: an entry may already link to it (dengue already links to the shock index) */
 for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; }
 for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
@@ -1413,7 +1556,7 @@ function calcOut(){
   if (!r){ box.innerHTML = `<div class="out"><span>${list.some(f => !Array.isArray(f)) ? 'Choose or tick to see the result' : 'Fill in the boxes to see the result'}</span></div>`; return; }
   const vd = r.verdict;
   /* A figure is set in mono; an answer in words (Indicated, Not covered, a BARS level) is set in the display face */
-  box.innerHTML = r.outs.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b${/\d/.test(val) ? '' : ' class="w"'}>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('')
+  box.innerHTML = r.outs.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b${/\d/.test(val) ? '' : ` class="w${val.length > 22 ? ' long' : ''}"`}>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('')
     + (vd ? `<div class="verdict ${vd.cls}"><span>${esc(vd.h)}</span>${vd.p ? `<p>${esc(vd.p)}</p>` : ''}${vd.href ? `<a class="pill" href="${vd.href}">${esc(vd.link || 'Open the pathway step')}${svg('chev')}</a>` : ''}</div>` : '')
     + (r.lists ? r.lists.map(L => `<div class="cx-list"><h4>${esc(L.h)}</h4><dl>${L.rows.map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('')}</dl></div>`).join('') : '')
     + (r.gap ? `<p class="cx-gap">${svg('info')}<span><b>Not in the source:</b> ${esc(r.gap)}</span></p>` : '')
@@ -1849,7 +1992,9 @@ $('#run').addEventListener('click', e => {
   else if (b.hasAttribute('data-link')) copyText(APP_URL + '#' + state.id + (state.cur === p.start ? '' : '--' + state.cur), {ok:'Link to this step copied', fail:'Copying is blocked here. Use Share to copy the link.'});
   else if (b.hasAttribute('data-copyout')) copyText([p.title + ': ' + n.title, ...(n.items || []).map(i => '- ' + i)].join('\n'), {btn:b, el:b.closest('.res').querySelector('.res-b') || b.closest('.res').querySelector('h2')});
   else if (b.hasAttribute('data-copyadvice')) copyText(p.advice.map((a, i) => (i + 1) + '. ' + a).join('\n'), {btn:b, el:$('#advlist')});
-  else if (b.hasAttribute('data-showadvice')){ selectTab('advice'); $('#ptab').scrollIntoView({block:'start', behavior: REDUCED ? 'auto' : 'smooth'}); }
+  else if (b.hasAttribute('data-copyleaf')) copyText(leafletText(p), {btn:b, el:$('#leaf')});
+  else if (b.dataset.leaf){ leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }
+  else if (b.hasAttribute('data-showadvice')){ selectTab(p.leaflet ? 'leaflet' : 'advice'); $('#ptab').scrollIntoView({block:'start', behavior: REDUCED ? 'auto' : 'smooth'}); }
   else if (b.dataset.pt !== undefined) selectTab(b.dataset.pt);
 });
 $('#run').addEventListener('keydown', e => {

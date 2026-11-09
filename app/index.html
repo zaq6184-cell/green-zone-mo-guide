@@ -422,14 +422,14 @@ main{flex:1;outline:none}
 .st .tm img,.st .tm video.on,.tool-go .tm img,.tool-go .tm video.on{opacity:.4}
 .st .tm::after,.tool-go .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
 /* First shift, the Tools headers and the Pathways section bars: the picture on the right, the words on calm colour */
-.first .tm img,.first .tm video,.tool-h .tm img,.tool-h .tm video,.lh .tm img,.lh .tm video{left:auto;width:64%}
+.first .tm img,.first .tm video,.tool-h .tm img,.tool-h .tm video,.run-hero .tm img,.run-hero .tm video,.lh .tm img,.lh .tm video{left:auto;width:64%}
 .lh .tm img,.lh .tm video{width:min(64%,250px)}
 .lh .tm::after{background:linear-gradient(90deg,var(--t2) calc(100% - 250px),transparent 100%);background:linear-gradient(90deg,var(--t2) max(36%,calc(100% - 250px)),color-mix(in srgb,var(--t2) 60%,transparent) max(58%,calc(100% - 160px)),transparent 100%)}
-.first .tm::after,.tool-h .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
+.first .tm::after,.tool-h .tm::after,.run-hero .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
 /* The pearl tile is light: its picture stays faint so the pearl and its source keep their contrast */
 .tip .tm img,.tip .tm video.on{opacity:.55}
 .tip .tm::after{background:linear-gradient(90deg,var(--t1) 34%,transparent 92%)}
-.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small,.tool-go h2,.tool-go p,.tool-go li,.tool-go .go-l{text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small,.tool-go h2,.tool-go p,.tool-go li,.tool-go .go-l,.run-hero h1{text-shadow:0 1px 3px rgba(0,0,0,.45)}
 @media (prefers-reduced-motion:no-preference){.tm video{transition:opacity .6s var(--ease)}}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
 .od{display:inline-flex;align-items:center;gap:6px;font:800 .7rem/1 var(--body);color:var(--ink-2);padding:5px 9px 5px 5px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
@@ -477,6 +477,11 @@ main{flex:1;outline:none}
 .chip.j svg{width:15px;height:15px}
 .chip.mono{font-family:var(--mono);font-weight:700}
 .run-h h1{font:900 clamp(2.1rem,5.4vw,3.2rem)/1 var(--display);letter-spacing:-.035em;margin:2px 0 0}
+/* A guideline with its own picture: chips and title on a jewel tile, the loop on the right behind them */
+.run-hero{gap:12px;padding:18px 20px 22px;min-height:168px;justify-content:flex-end;box-shadow:var(--sh-2)}
+.run-hero h1{color:#fff;max-width:20ch}
+.run-hero .chip.j{background:var(--glass-2)}
+@media (max-width:760px){.run-hero{min-height:0;padding:16px 16px 18px}}
 .run-h .lead{margin:0;color:var(--muted);max-width:70ch;font-size:1.03rem}
 .see{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font:700 .84rem var(--body);color:var(--muted)}
 .see .pill{min-height:34px;padding:5px 12px;font-size:.82rem}
@@ -615,6 +620,18 @@ button.opt.sugg .gt{color:var(--mint)}
 .ptab-p .pbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .deptnote{padding:12px 14px;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
 .deptnote + .deptnote{margin-top:12px}
+/* A national guideline's tabs (the dengue CPG) and its home care leaflet in two languages */
+.ptab-bar .t-cpg{--tc:var(--gold)}
+.leaf{display:grid;gap:12px}
+.leaf .leaf-lang{justify-self:start}
+.ptab-p .leaf-t{margin:2px 0 0;font:800 1.08rem/1.3 var(--display)}
+.leaf-g{padding:12px 14px 14px;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.leaf-g h5{display:flex;align-items:center;gap:6px;margin:0 0 8px;font:800 .92rem/1.3 var(--body)}
+.leaf-g h5 svg{width:17px;height:17px;flex:none}
+.leaf-g p{margin:0 0 8px}
+.leaf-g.warn{background:var(--concern-soft);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--concern) 35%,transparent)}
+.leaf-g.warn h5{color:var(--concern)}
+.leaf .src{margin:0}
 .tbl{overflow-x:auto;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line)}
 table{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
 th,td{padding:9px 11px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
@@ -761,6 +778,7 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .cf-seg .seg{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
 .cf-seg .seg button{min-height:44px;white-space:normal;line-height:1.2}
 .out b.w{font:850 1.05rem/1.25 var(--display);letter-spacing:-.01em}
+.out b.long{grid-column:1/-1;text-align:left}
 .dc-list .pts{margin-left:auto;padding-left:10px;font:700 .95rem var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
 .dc-list label:has(input:checked) .pts{color:var(--accent)}
 .rate{display:grid;gap:6px;margin:0 0 14px}
@@ -1148,14 +1166,14 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Shift tools -->
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
-          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook and the department's notes. Nothing you tick or type is saved.</p></div></header>
+          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the dengue CPG. Nothing you tick or type is saved.</p></div></header>
         <div class="tools"><div class="tool" id="dcheck"></div><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a></div>
       </div></section>
 
       <!-- Calculators -->
       <section class="view" data-view="calc" id="v-calc" hidden aria-labelledby="h-calc"><div class="vw">
         <header class="vhead"><div><h1 id="h-calc">Calculators</h1>
-          <p>Doses, scores and checks built only from the ebook and the department's notes, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
+          <p>Doses, scores and checks built only from the ebook, the department's notes and the dengue CPG, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
         <div class="cx" id="cx">
           <div class="tool cx-open" id="calcbox" hidden></div>
           <div class="cx-hub">
@@ -2578,6 +2596,167 @@ P['scrotal-pain'].see = [['#safe-practice--abd','Torsion window: 6 hours']];
   R.refs.push('Orthopaedic referral memo with Lampiran 1, 17 May 2024', 'IPR admission criteria (triage course folder)');
 })();
 
+/* ================= Dengue CPG round (9 Nov 2026): CPG Management of Dengue in Adults, 4th edition =================
+   Source: Clinical Practice Guidelines: Management of Dengue in Adults (Fourth Edition). Malaysian Health Technology
+   Assessment Section (MaHTAS), Medical Development Division, Ministry of Health Malaysia; issued 2026.
+   Krishna admitted it as a dengue source on 9 Nov 2026. Every item names its CPG page (the printed page numbers;
+   the algorithms are on pages xiv to xvii). The copyright owner is MaHTAS: content may be reproduced provided that a
+   copyright acknowledgement to MaHTAS is included and the content is not changed.
+   Criteria and numbers are quoted as printed, including the CPG's own spelling. Where its tables word the same item
+   differently, each is quoted with its page. The ebook's dengue pathway (built from the CPG 3rd edition, 2015) stays
+   as written; the differences are listed in CPG-REVIEW.md and under Still to confirm.
+   denguecpg.vercel.app was looked at for features only: nothing from it is copied. */
+P['dengue-cpg'] = {
+  title:'Dengue in adults: CPG 4th edition', grp:'cpg', src:'CPG Dengue in Adults, 4th ed. (2026)', isnew:true, hero:'dcpg',
+  lead:'The national guideline (2026): triage a patient to a zone, check the discharge criteria and regular medicines. Fluids, tests and shock are in the tabs below.',
+  start:'menu',
+  nodes:{
+    menu:{q:'What do you need?', hint:'CPG Management of Dengue in Adults, 4th edition (MaHTAS, 2026). The ebook pathway follows the 3rd edition (2015).', opts:[['Triage a patient with fever (Appendix 7)','ask'],['Ready to go home? Discharge criteria (chapter 13)','dc'],['Regular medicines during dengue (9.1.2)','med']]},
+
+    /* Appendix 7, Systematic triage of dengue in adults (p108), with Table 8 (p35) for each zone */
+    ask:{step:'First ask: fever or history of fever', items:['Ask about the outbreak locality too (9.2.1, p34)','Then primary triage: first look (ABCD) and first touch (CCTVR)'], next:'life'},
+    life:{check:'any', q:'Life-threatening features?', hint:'Primary triage, Appendix 7 (p108).',
+      info:['First look, evaluate ABCD: Appearance; Airway & Breathing; Circulation; Disability','First touch, assess CCTVR: Colour; Capillary refill time; Temperature; Pulse volume; Pulse rate'],
+      items:['Cardiopulmonary arrest','Severe respiratory distress','Active bleeding','Shock: pallor or cyanosis, CRT>3s, cold peripheries, low pulse volume, tachycardia','Unresponsive, seizure, altered mental status'],
+      opts:[['Yes, present','red12'],['None','vit']]},
+    red12:{end:'refer', title:'Red Zone: MTS level 1 or 2', items:['Level 1, resuscitation: decompensated dengue shock syndrome. Immediate resuscitation, ICU admission (Group C)','Level 2, emergency: compensated dengue shock syndrome. Emergency treatment, IV fluid therapy and admission (Group C)','Fluid resuscitation: Algorithms 2 to 4, in the Shock tab below'],
+      links:[['#calc-dfluid','Fluids by weight'],['#calc-dvitals','Triage vital signs']], gap:'CPG Appendix 7 (p108) and Table 8 (p35).'},
+    vit:{check:'any', q:'Unstable vital signs?', hint:'Secondary triage: review vital signs, POCT, warning signs and co-morbids (Appendix 7, p108). The triage vital signs calculator checks each one.',
+      info:['POCT: rapid dengue test; full blood count; blood sugar; AST (if available); blood ketone; ECG'],
+      items:['Blood pressure (BP) < 90/60 mmHg','Mean arterial pressure (MAP) < 65 mmHg','Pulse pressure (PP) < 30 mmHg','Shock index (HR/SBP) > 1','Heart rate (HR) > 100/min','Respiratory rate (RR) > 20/min','Oxygen saturation (SpO2) < 95%'],
+      opts:[['Yes, present','red2'],['None','ws']]},
+    red2:{end:'refer', title:'Red Zone: MTS level 2', items:['Level 2, emergency: compensated dengue shock syndrome','Emergency treatment, IV fluid therapy and admission (Group C)','Fluid resuscitation: Algorithm 2, in the Shock tab below'],
+      links:[['#calc-dvitals','Triage vital signs'],['#calc-dfluid','Fluids by weight']], gap:'CPG Appendix 7 (p108) and Table 8 (p35).'},
+    ws:{check:'any', q:'Warning signs, unstable co-morbids or high risk?', hint:'Appendix 7 asks about high risk at this step. Its High Risk box is not joined to a question, and Tables 6 and 8 put pregnancy, age and obesity in Group B1 (MTS level 4): see Still to confirm. All pregnant patients with confirmed dengue should be hospitalised (p72).',
+      items:['Worsening of symptoms when fever subsided','Intense abdominal pain or tenderness','Persistent vomiting (> 3x per day)','Lethargy, restlessness, irritability or confusion','Fluid accumulation','Postural hypotension','Liver enlargement > 2cm','Reduced or absence of urine output for 4-6 hours','Mucosal bleed','Lab: Rising hematocrit > 20% from the baseline with rapid falling platelet count','An unstable co-morbidity','High risk: pregnancy','High risk: > 65 years old','High risk: morbid obesity'],
+      opts:[['Yes, present','yellow'],['None','cm']]},
+    yellow:{end:'admit', title:'Yellow Zone: MTS level 3', items:['Level 3, urgent: dengue with warning signs, or without warning sign but unstable co-morbidity','IV fluid therapy, admission, management of associated conditions (Group B2)','Fluids: Algorithm 1, with the fluid quota for 48 hours, in the Fluids tab below'],
+      links:[['#calc-dfluid','Fluids by weight'],['#dengue','Ebook pathway and Dengue SOP 2.0']], gap:'CPG Appendix 7 (p108) and Table 8 (p35). Warning signs are most predictive in the critical phase: persistent vomiting in the febrile phase is not a warning sign (p15).'},
+    cm:{check:'any', q:'Presence of co-morbids or social risk?', hint:'Appendix 7 (p108). The decision for referral and admission must not be based on a single clinical parameter instead should depend on the total assessment of the patient (Table 6, p28).',
+      items:['Hypertension','Diabetes mellitus','Asthma/ COPD','Chronic kidney disease','Chronic liver disease','Peptic ulcer disease or gastritis of any etiology','Being treated with anticoagulant/ antiplatelet','Social risk: handicapped','Social risk: lives alone or far from health facilities','Social risk: does not have transportation'],
+      opts:[['Yes, present','green'],['None','pc']]},
+    green:{end:'observe', title:'Green Zone: MTS level 4', items:['Level 4, early care: dengue without warning signs with stable comorbidity','Observation or admission, management of associated conditions (Group B1)','Possible referral to hospital: may require close observation and treatment of their associated condition (Table 6)','Unstable comorbidities must be referred for assessment (Table 6)','Admit early, despite absence of warning signs: heart failure (p74); CKD stage 3b and above (p75)','Hospitalise: confirmed dengue in pregnancy (p72); elderly patients, particularly those with underlying comorbidities or inadequate social support (Recommendation 15, p78)','Obese patients with dengue should be considered for admission (p78)'],
+      links:[['#dengue','Ebook pathway and Dengue SOP 2.0']], gap:'CPG Appendix 7 (p108), Table 6 (p28), Table 8 (p35) and chapter 10 (p72–78).'},
+    pc:{end:'discharge', title:'MTS level 5: at-home outpatient management (Group A)', items:['Level 5, routine care: dengue without warning signs, comorbidity and social risk','At-home outpatient management with follow-up (Group A)','Group A: stable general well-being (able to drink adequately, good urine output and able to ambulate); absence of warning signs in critical phase; haemodynamically stable; stable blood investigations; absence of unstable comorbidities or social factors','Notify the district health office (Table 7, p30): within 24 hours of diagnosis (chapter 6)','Arrange daily follow-up and monitoring until the patient is afebrile for 24 - 48 hours without antipyretics (Table 7, p30)','Provide the Outpatient Dengue Monitoring Record (Appendix 5)','Educate the patient on DOs and DON\'Ts, warning signs and fluid intake, and advise immediate return if warning signs develop: the Home care advice tab'],
+      links:[['#dengue','Ebook pathway and Dengue SOP 2.0'],['#gz-rules--kk','Redirect to a KK or GP']], gap:'Appendix 7 names this box Primary Care and Table 8 names the zone Outpatient. In HKL the Green Zone sees MTS levels 4 and 5; how to redirect a patient to a Klinik Kesihatan is still to confirm.'},
+
+    /* Chapter 13, Discharge criteria (p84) */
+    dc:{check:'all', q:'Absolute discharge criteria met?', hint:'Chapter 13 (p84). All are needed.',
+      items:['Afebrile for 24 - 48 hours and clinically improving','Stable hemodynamic','Adequate oral intake with improved appetite','Good urine output (0.5 - 1.5 mL/kg/hr)','No active bleeding','No respiratory distress','Platelet count: increasing trend (trend matters more than absolute number)','Haematocrit stable without IV fluids','Resolving organ dysfunction'],
+      opts:[['All met','dcok'],['Not all met','dcno']]},
+    dcok:{end:'discharge', title:'Meets the discharge criteria: discharge with counselling', items:['Give clear verbal and written instructions, including adequate oral fluid intake','Resume old medications as instructed','Avoid strenuous activity until full recovery','For admitted patients, attend follow-up review and repeat blood investigations at the nearest primary care clinic as needed'],
+      links:[['#dengue','Ebook pathway and Dengue SOP 2.0']], gap:'CPG chapter 13 (p84). The Dengue SOP 2.0 discharge criteria are on the ebook pathway, as department notes.'},
+    dcno:{end:'observe', title:'Does not meet the absolute discharge criteria', items:['Chapter 13 calls these absolute discharge criteria: each one is needed','Clinical stability: afebrile 24 - 48 hours and improving, stable haemodynamics, adequate oral intake, good urine output, no active bleeding, no respiratory distress','Laboratory stability: rising platelet trend, haematocrit stable without IV fluids, resolving organ dysfunction'], gap:'CPG chapter 13 (p84).'},
+
+    /* 9.1.2d, Use of other medications (p32–33), with Recommendation 3 (p34) */
+    med:{q:'Which medicine?', hint:'CPG 9.1.2 (p31–33) and Recommendation 3 (p34).', opts:[['Paracetamol','mpcm'],['NSAIDs','mnsaid'],['Corticosteroids','mster'],['Antiplatelet, such as aspirin','map'],['Anticoagulant','mac'],['Antibiotics','mabx'],['Statin','mstat'],['Metformin','mmet'],['SGLT2 inhibitor','msglt']]},
+    mpcm:{end:'neutral', title:'Paracetamol: use cautiously', items:['Paracetamol should be used cautiously in dengue fever at the lowest effective dose and shortest duration','Paracetamol should be avoided or discontinued if liver enzymes are deranged','Not to exceed 4 g/day (p32)','A warm bath may be used for fever as supportive management (p32)','In pregnancy, paracetamol is safe; avoid NSAIDs and aspirin due to bleeding risk (p72)'], gap:'CPG Recommendation 3 (p34) and 9.1.2c (p31–32).'},
+    mnsaid:{end:'neutral', title:'NSAIDs: should not be used', items:['Non-steroidal anti-inflammatory drugs (NSAIDs) and corticosteroids should not be used in dengue patients','Already taking NSAIDs for a chronic condition: decide whether to continue case by case, weighing the potential risks and benefits (p32)'], gap:'CPG Recommendation 3 (p34) and 9.1.2d (p32).'},
+    mster:{end:'neutral', title:'Corticosteroids: should not be used', items:['Non-steroidal anti-inflammatory drugs (NSAIDs) and corticosteroids should not be used in dengue patients','Already receiving corticosteroids for another condition: continue or withhold after an individual assessment of risks and benefits (p32)'], gap:'CPG Recommendation 3 (p34) and 9.1.2d (p32).'},
+    map:{end:'neutral', title:'Antiplatelet: clinical judgement', items:['Continuation of antiplatelet in dengue patients should be guided by clinical judgement','Recent stenting: individualised assessment and consultation with a cardiologist, neurologist or vascular surgeon, weighing the risk of in-stent thrombosis against the risk of bleeding associated with dengue (p32)'], gap:'CPG Recommendation 3 (p34) and 9.1.2d (p32).'},
+    mac:{end:'neutral', title:'Anticoagulant: monitor closely', items:['Patients with dengue who are receiving anticoagulant therapy should be closely monitored and may require referral to hospital for further assessment and management','Appendix 7 counts treatment with an anticoagulant or antiplatelet as a co-morbidity (p108)'], gap:'CPG 9.1.2d (p32).'},
+    mabx:{end:'neutral', title:'Antibiotics: no evidence in dengue', items:['There was no retrievable evidence on the use of antibiotics in the treatment of dengue','Inappropriate antibiotic use in dengue fever may lead to antimicrobial resistance'], gap:'CPG 9.1.2d (p33).'},
+    mstat:{end:'neutral', title:'Statin: may continue', items:['Statins and metformin can be safely continued during dengue infection in the absence of contraindications','Statins may be continued during acute illness if there are no contraindications (p33)'], gap:'CPG Recommendation 3 (p34) and 9.1.2d (p33).'},
+    mmet:{end:'neutral', title:'Metformin: may continue as an outpatient; stop in hospital', items:['Outpatient: statins and metformin can be safely continued during dengue infection in the absence of contraindications','Contraindications include renal impairment, dehydration and haemodynamic instability (p33)','There is insufficient evidence to support its use solely for the prevention of severe dengue (p33)','Hospitalised dengue patients with diabetes: oral hypoglycaemics should be stopped and consider insulin for glycaemic control (Recommendation 13, p76); metformin in particular may lead to lactic acidosis'], gap:'CPG Recommendation 3 (p34), 9.1.2d (p33) and Recommendation 13 (p76).'},
+    msglt:{end:'neutral', title:'SGLT2 inhibitor: withhold while unwell', items:['Follow "sick day rules" to reduce the risk of euglycaemic diabetic ketoacidosis','Withhold it temporarily during dehydration (such as significant vomiting or diarrhoea), acute illness (including fever or suspected infection), or when oral intake is reduced','It can be safely restarted in the recovery phase'], gap:'CPG 9.1.2d (p33).'}
+  },
+
+  /* Appendix 5B, Home care advice (p105–106): both languages as printed. The only change is the space in "DO NOT do". */
+  leaflet:{
+    src:'CPG Management of Dengue in Adults (4th ed., 2026), Appendix 5B, p105–106. Copyright MaHTAS, Ministry of Health Malaysia; reproduced with acknowledgement.',
+    en:{lang:'English', title:'Home care advice in dengue', groups:[
+      {h:'What to do', items:['Drink adequate fluids. Aim 200 ml of fluid every hour (one small cup) while awake. Examples of fluids include fruit juice, oral rehydration salts (ORS), coconut water, or soup.','Take paracetamol for fever or pain when necessary, but not to exceed 4g per day.','Get adequate rest.','Monitor the temperature and dengue warning signs.','Seek immediate medical care if warning signs develop.','Attend daily follow-up appointments as advised.','Look for mosquito breeding places in and around the home and prevent mosquito bites using mosquito repellent.']},
+      {h:'What to avoid', items:['DO NOT take steroids, aspirin, ibuprofen, diclofenac, or any other NSAIDs. If you are already taking these medications, please consult your doctors.','DO NOT consume traditional or herbal remedies.','DO NOT take intramuscular injections.','DO NOT do massage, cupping or gua sha.']},
+      {h:'Dengue warning signs', warn:true, p:'As the fever starts to subside, be cautious as the condition may become dangerous and worsen in some dengue patients. Go to the hospital immediately if any of the following occur:', items:['General condition worsening or symptoms becoming more severe','Severe abdominal pain','Persistent vomiting','Extreme fatigue','Difficulty breathing or rapid breathing','Fainting spells','Bleeding from the gums or nose, or blood in vomit, urine, or stool','Reduced urine output less than 4 times per day']}
+    ]},
+    ms:{lang:'Bahasa Melayu', title:'Nasihat pemantauan demam denggi di rumah', groups:[
+      {h:'Apa yang perlu dilakukan', items:['Minum air secukupnya sebanyak 200 ml setiap jam (satu cawan kecil) sewaktu jaga. Contoh minuman termasuk jus buah, larutan garam rehidrasi (ORS), air kelapa, atau sup.','Ambil paracetamol untuk demam atau sakit badan jika perlu, tetapi tidak melebihi 4g sehari.','Dapatkan rehat yang mencukupi.','Pantau suhu badan dan tanda amaran demam denggi.','Dapatkan rawatan segera jika tanda amaran muncul.','Hadiri temujanji susulan.','Periksa tempat pembiakan nyamuk di rumah serta cegah gigitan nyamuk menggunakan semburan penghalau nyamuk.']},
+      {h:'Apa yang perlu dielakkan', items:['JANGAN ambil steroids, aspirin, ibuprofen, diclofenac, atau ubat anti-radang bukan steroid (NSAIDs) lain. Sila rujuk doktor jika anda sedang mengambil ubat-ubatan ini.','JANGAN ambil ubat-ubat tradisional atau herba.','JANGAN ambil suntikan intramuskular.','JANGAN berurut, bekam atau gua sha.']},
+      {h:'Tanda-tanda amaran demam denggi', warn:true, p:'Apabila demam mula kebah, anda perlu berhati-hati kerana keadaan boleh menjadi berbahaya dan semakin teruk bagi sesetengah pesakit demam denggi. Segera ke hospital jika anda mempunyai salah satu tanda-tanda berikut:', items:['Keadaan badan semakin lemah atau simptom semakin teruk','Sakit perut yang teruk','Muntah berterusan','Keletihan melampau','Susah bernafas atau pernafasan laju','Pitam','Pendarahan pada gusi atau hidung, atau darah dalam muntah, air kencing atau najis','Kekerapan kencing kurang dari 4 kali sehari']}
+    ]}
+  },
+
+  /* Reference tabs: each note names its CPG page */
+  notes:[
+    {l:'Groups and zones', notes:[
+      {h:'Dengue without warning signs: the case definition', src:'CPG Table 3 (p14)', items:['Person who lives or has travelled to areas with dengue transmission in the last 14 days and presents with fever, usually of 2 to 7 days duration, and at least 2 of the following criteria: nausea / vomiting; rash; headache/retro-orbital pain; myalgia / arthralgia; petechiae; leukopenia','Severe dengue: severe plasma leakage leading to shock or respiratory distress; severe bleeding which is significant enough to require medical intervention; severe organ involvement (liver impairment, myocarditis, encephalitis, etc.). Requires strict monitoring and immediate medical intervention.']},
+      {h:'Table 8: MTS and dengue classification', src:'CPG p35. Adapted from PAHO 2020 and the MOH Emergency Medicine and Trauma Services Policy 2012.', table:{head:['MTS level','Zone','Dengue classification','PAHO 2020 recommended management'], rows:[
+        ['Level 1, resuscitation','Red','Decompensated dengue shock syndrome','Immediate resuscitation, ICU admission (Group C)'],
+        ['Level 2, emergency','Red','Compensated dengue shock syndrome','Emergency treatment, IV fluid therapy and admission (Group C)'],
+        ['Level 3, urgent','Yellow','Dengue with warning signs or without warning sign but unstable co-morbidity','IV fluid therapy, admission, management of associated conditions (Group B2)'],
+        ['Level 4, early care','Green','Dengue without warning signs with stable comorbidity','Observation or admission, management of associated conditions (Group B1)'],
+        ['Level 5, routine care','Outpatient','Dengue without warning signs, comorbidity and social risk','At-home outpatient management with follow-up (Group A)']]}},
+      {h:'Group A: dengue without warning signs. Outpatient monitoring', src:'Table 6, p28', items:['Stable general well-being (able to drink adequately, good urine output and able to ambulate)','Absence of warning signs in critical phase','Haemodynamically stable','Stable blood investigations','Absence of unstable comorbidities or social factors']},
+      {h:'Group B1: dengue without warning signs. Possible referral to hospital', src:'Table 6, p28. May require close observation and treatment of their associated condition.', items:['Presence of comorbidities: hypertension; diabetes mellitus; asthma/COPD; chronic kidney disease; haemolytic diseases; chronic liver disease; peptic ulcer disease or gastritis of any aetiology; being treated with anticoagulants/antiplatelet; others','Unstable comorbidities must be referred for assessment','High risk group: pregnancy; ≥65 years old; obesity; patients with special needs','Social risk: the patient lives alone or far from health facilities; does not have transportation']},
+      {h:'Group B2: dengue with warning signs. Admit to hospital', src:'Table 6, p28. Dengue case near or in critical phase, that presents with one or more of the following signs.', items:['Lack of clinical improvement or worsening of symptoms when fever subsides','Intense abdominal pain or tenderness','Persistent vomiting (>three times per day)','Lethargy, restlessness, irritability or confusion','Fluid accumulation','Postural hypotension (lipothymia)','Liver enlargement >2 cm','Progressive increase in haematocrit with drop in platelets','Bleeding manifestation','Reduced or absence of urine output 4-6 hours']},
+      {h:'Group C: severe dengue. Intensive Care Unit: requires emergency treatment', src:'Table 6, p28. Every dengue case that has one or more of the following manifestations.', items:['Severe plasma leakage leading to shock or respiratory distress','Severe bleeding which is significant enough to require medical intervention','Severe organ involvement (liver impairment, myocarditis, etc.)','The decision for referral and admission must not be based on a single clinical parameter instead should depend on the total assessment of the patient.']},
+      {h:'Interpreting warning signs', src:'CPG p15', items:['Warning signs are most predictive for severe dengue during the critical phase.','Symptom such as persistent vomiting during febrile phase should not be interpreted as warning signs.','Interpretation should be integrated with: haemodynamic state, haematocrit trend, urine output, perfusion markers (e.g. CRT >3 sec).','Phase-based interpretation of symptoms and signs reduces over-triaging.']},
+      {h:'Predictors of severe dengue', src:'CPG 8.1.4 (p25–26)', items:['Patient\'s factor: older age; overweight/obesity (BMI >25 kg/m²); co-morbid conditions: type-2 DM with poor glycaemic control, presence of one or more co-morbidities','Clinical signs: presence of multiple warning signs; gastrointestinal bleeding; clinical features suggestive of plasma leakage; altered mental status; in-hospital complications e.g., acute kidney injury or pneumonia','Laboratory markers: early decline in platelet count in febrile phase, severe thrombocytopenia (platelet count <50 × 10⁹/L), leucocytosis or rising haematocrit with rapid drop in platelet; early elevation of AST/ALT in febrile phase or severe hepatitis >1000 U/L; prolonged PT','Imaging: gallbladder wall oedema/ increased gallbladder wall thickness, pleural effusion, ascites and/or organomegaly']},
+      {h:'Special populations', src:'CPG key recommendations (p iii) and chapter 10 (p70–79)', items:['All pregnant patients with confirmed dengue should be hospitalised and managed by a multidisciplinary team (Recommendation 11, p73).','In pregnancy, paracetamol is safe; avoid NSAIDs and aspirin due to bleeding risk (p72).','Heart failure: early admission despite absence of warning signs; modify the volume of fluid therapy to reduce the risk of fluid overload (p74).','CKD stage 3b and above: early admission despite absence of warning signs for close monitoring; modify the fluid volume; early nephrologist consultation in oliguric patients at risk of fluid overload (p75).','Elderly patients with dengue particularly those with underlying comorbidities, or inadequate social support should be hospitalised for monitoring and management to prevent complication (Recommendation 15, p78).','Obese patients with dengue should be considered for admission to ensure early escalation of care is feasible (p78).','The CPG uses three age cut-offs: ≥65 years (Table 6), > 65 years (Appendix 7 and Table 7) and ≥60 years for older adults (10.7, p77).','In dengue patients with heart failure, end-stage kidney disease and liver cirrhosis, fluid management should be individualised with close monitoring.','In dengue patients with DKA/HHS, fluid requirement should follow the DKA/HHS regimen.','Hospitalised dengue patients with diabetes: early and serial metabolic assessment to distinguish dengue shock from DKA and HHS; stop oral hypoglycaemics and consider insulin (Recommendation 13, p76).','In dengue patients with hypertension, blood pressure should be interpreted carefully relative to baseline.','In acutely unwell elderly patients with leucopenia, dengue fever should be considered, even in the absence of classical dengue features.','In obese dengue patients in shock, fluid management should be done with caution by applying adjusted body weight-based fluid dosing with frequent monitoring.']},
+      {h:'Where the CPG words the same item differently', src:'Appendix 7 (p108) against Table 6 (p28) and 7.1 (p17). Each is quoted as printed.', items:['Age: "> 65 years old" (Appendix 7); "≥65 years old" (Table 6)','Obesity: "Morbid obesity" (Appendix 7); "Obesity" (Table 6)','Bleeding: "Mucosal bleed" (Appendix 7); "Bleeding manifestation" (Table 6)','Haematocrit: "Rising hematocrit > 20% from the baseline" (Appendix 7); "A rising HCT (≥20% from baseline)" (p17)','High risk: Appendix 7 asks about high risk with the warning signs (MTS level 3); Tables 6 and 8 put pregnancy, age and obesity in Group B1 (MTS level 4)']}
+    ]},
+    {l:'Fluids', notes:[
+      {h:'Algorithm 1: dengue with warning signs (Group B2), in the critical phase', src:'CPG p xiv', items:['Start IV crystalloid 3-5ml/kg/hr for 1 hour','Clinical improvement: gradual reduction of IV crystalloid, to IV crystalloid 2-3ml/kg/hr for 1-2 hour','Still improving: reduce to 1-2ml/kg/hr or maintenance fluid; stop IV fluid if able to tolerate orally','No improvement at either check: is the patient in shock? If yes, refer to Algorithm 2/3/4','Not in shock: take FBC/VBG/lactate; increase fluid regimen to 5-7ml/kg/hr while awaiting result and titrate accordingly','Improvement in blood and clinical condition: back to the gradual reduction. No improvement: refer to Algorithm 2/3/4','Status of improvement: assessed by reevaluating the patient\'s clinical condition, vital signs, CCTVR, and urine output','FBC should be taken every 4-12 hourly in critical phase','Total fluid given should be within fluid quota for 48 hours (M+5%)']},
+      {h:'Fluid quota and rates by weight', src:'CPG p xiv (the table under Algorithm 1) and Appendix 10 (p113). *weight limit at 70kg', table:{head:['Body weight (kg)*','Fluid quota M+5% (oral and IV) over 48 hours (ml)','R1 (1ml/kg/h)','R2 (2ml/kg/h)','R3 (3ml/kg/h)','R5 (5ml/kg/h)','R7 (7ml/kg/h)'], rows:[
+        ['30','3200','30','60','90','150','210'],['35','3600','35','70','105','175','245'],['40','3900','40','80','120','200','280'],
+        ['45','4300','45','90','135','225','315'],['50','4700','50','100','150','250','350'],['55','5000','55','110','165','275','385'],
+        ['60','5400','60','120','180','300','420'],['65','5700','65','130','195','325','455'],['≥ 70','6000','70','140','210','350','490']]}},
+      {h:'The fluid quota', src:'CPG p43–45 and Appendix 11 (p114)', items:['For the entire critical phase, the recommended total fluid volume is Maintenance + 5% deficit, where a 5% deficit is equivalent to 50ml/kg. This fluid quota includes both oral and intravenous fluid intake.','The fluid quota is the maximum fluid to be given over 48 hours. The full fluid quota is not necessary for all patients; many will require less because the rate, peak, and duration of plasma leakage differ among individuals.','The total fluid quota (Maintenance + 5% deficit) must be calculated at the beginning of the critical phase.','The fluid quota is reserved solely for non-shock dengue patients during the critical phase. However, certain groups of patients may need more fluid than the calculated quota such as those in diabetic ketoacidosis (DKA) and hyperosmolar hyperglycaemic state (HHS).','If a patient progresses to shock due to worsening plasma leakage, the fluid quota is no longer applicable.','Example for a 60kg person (Appendix 11): maintenance fluid for 1 day (A) 2400ml (40 ml + 20 ml + 40 ml = 100 ml/hr); 5% deficit (B) 50 ml x 60 kg = 3000ml; total fluid to be given over 48 hrs (A + B) 5400ml.']},
+      {h:'IV fluids in dengue with warning signs (Group B2)', src:'CPG p44 and Recommendation 7 (p45)', items:['Encourage oral fluid intake. Patients entering the critical phase may require IV infusion of crystalloids.','Patients exhibiting warning signs and unable to tolerate oral fluids may require an initial IV fluid infusion of 3 - 5 ml/kg/hour for 1 - 2 hours.','The rate can be reduced to 2 - 3 ml/kg/hour for the next 1 - 2 hours, followed by a maintenance rate.','If a patient can tolerate oral fluid intake equivalent to 1 - 2 ml/ kg/hour, IV fluid administration is not necessary.','The total fluid administered must remain within the calculated fluid quota.','Frequent monitoring of CCTVR, BP, pulse pressure, HCT, and urine output will determine the subsequent IV fluid requirement.','Calculate urine output in ml/kg/hr at each void. Optimal urine output: 0.5 - 1 ml/kg/hour indicates adequate perfusion.','Consider early catheterisation if urine output monitoring is difficult and is essential for high-risk categories.','In the critical phase without shock, the total fluid quota should be administered over 48 hours (Recommendation 7).']},
+      {h:'Maintenance fluid: Holliday-Segar', src:'CPG Tables 11 and 12 (p41)', table:{head:['Weight','Fluid regime'], rows:[['First 10kg','4ml/kg/hr'],['Next 10kg','2ml/kg/hr'],['Subsequent body weight in kg','1ml/kg/hr'],['Example for 50kg male patient','40ml/hr + 20ml/hr + 30ml/hr = 90ml/hr = 2160ml/day'],['Table 12, by weight*','30 kg 70 ml/hr; 40 kg 80; 50 kg 90; 60 kg 100; ≥70 kg 110']]}},
+      {h:'Weight for fluid therapy', src:'CPG p40 and Table 13 (p48)', items:['The CPG DG has decided to adopt a 70 kg weight limit for weight-based fluid calculations in maintenance and fluid quota.','For obese patients (BMI >27.5 kg/m2), maintenance fluid calculation should be based on Adjusted Body Weight (ABW).','ABW = IBW + 0.4 (actual weight - IBW)','IBW, female: 45.5 kg + 0.91(height in cm -152). Male: 50.0 kg + 0.91(height in cm -152)']},
+      {h:'Febrile phase', src:'CPG Recommendation 6 (p42)', items:['Encourage adequate oral fluid intake.','Commence Intravenous (IV) fluids only if the patient is unable to tolerate oral fluids or dehydrated.','Calculate the total fluid requirement (oral and IV) using the Holliday-Segar formula.','Reduce the rate of fluid therapy or stop IV fluids once oral intake improves and dehydration is corrected.']},
+      {h:'Common pitfalls in fluid therapy', src:'CPG p40', items:['Unnecessary fluid boluses during the febrile phase','Excessive and prolonged fixed or graded fluid regimens in clinically stable patients','Continuing intravenous fluids unnecessarily into the recovery phase','Fluid boluses based solely on a single parameter (e.g. rising HCT, tachycardia, or cool peripheries) without a comprehensive assessment','Inadequate and inappropriate fluid resuscitation in dengue shock syndrome','Colloids, such as human albumin, for maintenance fluid therapy in leaking dengue patients','Excessive fluid therapy in pre-existing conditions like heart failure or kidney diseases']}
+    ]},
+    {l:'Tests', notes:[
+      {h:'Table 5: rapid diagnostic test (RDT) for dengue', src:'CPG p20. Every result pattern the table lists; any other pattern is not in it.', table:{head:['History of fever','NS1','IgM','IgG','Interpretation'], rows:[
+        ['Less than 5 days','+','−','−','Acute dengue infection'],
+        ['Less than 5 days','+','+','−','Acute dengue infection'],
+        ['Less than 5 days','+','−','+','Acute dengue infection or secondary infection'],
+        ['Less than 5 days','−','−','−','Not dengue, but if history suggestive of dengue, repeat RDT'],
+        ['More than 5 days','+','+','−','Acute dengue infection. High risk for severe dengue'],
+        ['More than 5 days','−','+','−','Acute or recent dengue infection'],
+        ['More than 5 days','−','+','+','Acute, recent or secondary dengue'],
+        ['More than 5 days','−','−','+','Unable to rule out secondary dengue, proceed with dengue IgG high-titre'],
+        ['More than 5 days','−','−','−','Not dengue infection']]}},
+      {h:'Diagnosis', src:'CPG Recommendation 1, 7.2 to 7.3 (p20–21) and Table 7 (p30)', items:['Suspected dengue: fever + ≥2 symptoms +/- supportive lab findings. Confirmed dengue: laboratory evidence of dengue infection (Table 7).','A complete diagnosis includes the day of fever, the phase (febrile, critical or recovery), the classification, any shock (compensated or decompensated) and comorbidities or special populations (Table 7).','Rapid Diagnostic Test (RDT) with combined non-structural protein 1 (NS1) Antigen/ IgM/IgG markers should be used as the first-line test to diagnose dengue in adults.','Single-specimen IgG testing is not recommended for diagnosing acute dengue (p20).','Negative test results require differential diagnosis to confirm cause of infection (p21).','Within 30 days after dengue vaccination: dengue PCR or NS1 antigen may be used to diagnose dengue; dengue IgM and IgG should not be used as confirmatory tests.','After TAK-003/Qdenga: a positive NS1 does not differentiate wild-type from vaccine-derived virus, and a negative result does not fully exclude dengue or vaccine-strain viraemia (p21).']},
+      {h:'Tests in the emergency department', src:'CPG 9.2.2 (p36)', items:['Do immediately in suspected dengue: FBC; rapid diagnostic test (RDT) for dengue; blood glucose','In suspected severe dengue: blood gases and lactate; LFT and AST; RP; PT/APTT; GXM; electrocardiogram (ECG); troponin and CK in suspected myocarditis and rhabdomyolysis','CXR is not routinely required in uncomplicated dengue but is indicated in patients with respiratory distress','PoCUS, by trained and competent staff where available: detection of early plasma leakage (gall bladder wall oedema) and third space fluid accumulation (pleural effusion, ascites)','Point-of-care ultrasound should be considered as an adjunctive bedside tool in the emergency and inpatient management of dengue, particularly in patients at risk of deterioration; its use should be guided by clinical indication, ultrasound availability and operator competency (Recommendation 4, p37).']},
+      {h:'Haematocrit, white cells and platelets', src:'CPG 7.1 (p17) and p42', items:['A rising HCT (≥20% from baseline) is a marker of plasma leakage in dengue infection.','Median normal HCT: male ≤60 years 46%; male > 60 years 42%; female (all age groups) 40%.','HCT should be interpreted in conjunction with the patient\'s haemodynamic status, disease phase and certain medical conditions.','There is no correlation between platelet count and prediction of bleeding.','Leukocytosis and thrombocytopenia are predictive of severe disease.','A platelet count below 100 × 10⁹/L is the earliest and most useful indicator of the critical phase (p42).']}
+    ]},
+    {l:'Shock', notes:[
+      {h:'Table 1: compensated and decompensated shock', src:'CPG p12', table:{head:['Normal circulation','Compensated shock','Decompensated/hypotensive shock'], rows:[
+        ['Clear consciousness','Clear consciousness','Lethargy, restlessness, irritability or confusion'],
+        ['CRT≤3sec','CRT>3 sec','CRT>3 sec'],
+        ['Warm peripheries','Cool peripheries','Cool peripheries'],
+        ['Heart rate (HR) normal','Tachycardia','Severe tachycardia or bradycardia in late shock'],
+        ['Blood pressure (BP) normal','Normal systolic pressure with raised diastolic pressure','Hypotension'],
+        ['Normal pulse pressure','Narrowing pulse pressure (20 - 30 mmHg)','Narrowed pulse pressure (<20 mmHg)'],
+        ['Normal respiratory rate','Tachypnoea','Tachypnoea or Kussmaul\'s breathing'],
+        ['Normal urine output','Reduced urine output','Oliguria or anuria']]}},
+      {h:'Capillary refill time: how the CPG measures it', src:'CPG Appendix 6 (p107), from WHO 2025', items:['Ensure the room is warm. Select a measurement site free from skin abnormalities. Position the patient\'s hand at the level of the thorax/heart.','Apply firm pressure to the ventral surface of the distal phalanx of the index finger for 10 seconds.','Remove the pressure. Measure the time taken for the skin colour to return to its pre-existing state.','A CRT exceeding 3 seconds is considered abnormal.']},
+      {h:'Dengue shock syndrome', src:'CPG p47–48', items:['Patients with dengue shock must be managed in HDU or ICU. Fluid resuscitation must be initiated promptly; it should not be delayed while waiting for HDU/ICU admission.','Recurrent episodes of shock may occur after initial resuscitation as plasma leakage can persist for 24 - 48 hours.','Crystalloids are the initial and preferred fluid for resuscitation: balanced crystalloids (e.g. Hartman\'s, Sterofundin, etc.) and 0.9% saline.','Albumin 5% is the colloid of choice to be used in resuscitation for DSS. Colloids should be reserved primarily for resuscitation, not maintenance.','The initial and subsequent volume of fluid resuscitation, which may range from 10 - 20 ml/kg adjusted body weight (ABW), depends on the degree of shock.']},
+      {h:'Not responding to the first resuscitation', src:'CPG p53 and Recommendation 8 (p53)', items:['Persistent shock with high HCT: if the haemodynamic state is not stabilised and the HCT remains high after initial fluid resuscitation, colloids should be considered for subsequent fluid resuscitation (Algorithms 2 and 3).','Persistent shock with dropped HCT: significant (often occult) bleeding should be suspected, and prompt blood ± blood products transfusion is necessary (Algorithm 4).','Crystalloids should be used as the initial and preferred fluid for resuscitation in patients with dengue shock. Colloids may be considered in persistent shock, but should not be used for maintenance therapy.']},
+      {h:'Algorithm 2: compensated shock (Group C)', src:'CPG p xv. Systolic pressure maintained but has signs of reduced perfusion: a combination of tachycardia, cold peripheries, CRT >3sec, PP 20-30mmHg, low pulse volume.', items:['Fluid resuscitation with crystalloid 10 ml/kg/hr for 1 hour. Obtain FBC, RP, LFT, RBS, PT/APTT, CK, VBG, Lactate/HCO3, GXM before fluid resuscitation.','Improvement: IV crystalloid 5-7ml/kg/hr for 1-2 hours, then gradual reduction based on clinical assessment before each change. Suggested: 3-5ml/kg/hr for 2-4 hours, then 2-3ml/kg/hr for 2-4 hours. Monitor HCT 4-6 hourly.','No improvement: repeat HCT and run another 10ml/kg/hr crystalloid while waiting for the result.','HCT up ≥20% or unchanged (a rise or drop under 20%): continue a 2nd bolus 10ml/kg/hr crystalloid. Still no improvement: repeat HCT and IV colloid 10-20ml/kg/hr for 1 hour; if it improves, switch to crystalloid.','HCT down ≥20%, or no improvement after the colloid: refer to Algorithm 4 and consider significant occult/overt bleed.','Shock may recur. HCT rise ≥20%: consider increasing the fluid regimen. HCT decrease: consider transfusion with packed red cells and/or blood components. Consider stopping IV fluid at 48 hours of plasma leakage.']},
+      {h:'Algorithm 3: decompensated shock (Group C)', src:'CPG p xvi. Hypotension with signs of reduced perfusion: a combination of tachycardia/bradycardia, cold clammy, CRT >3sec, PP<20mmHg, thready pulse volume.', items:['Fluid resuscitation with 20 ml/kg crystalloid within 15 - 30 minutes. Obtain HCT/FBC, RP, LFT, RBS, PT/APTT, CK, Lactate/HCO3, GXM before fluid resuscitation.','Improvement: IV crystalloid 10ml/kg/hr for 1 hour, then gradual reduction. Suggested: 5-7 ml/kg/hr for 2-4 hours, then 3-5 ml/kg/hr for 2-4 hours, then 2-3 ml/kg/hr for 2-4 hours. Monitor HCT 2-4 hourly or more frequent as indicated.','No improvement: repeat HCT and run a second bolus 10 - 20 ml/kg colloid/crystalloid while waiting for the result.','HCT up ≥20%: continue a 2nd bolus of fluid (colloid/crystalloid) 10-20 ml/kg over ½ to 1 hour; no improvement, refer to Algorithm 4.','HCT down ≥20%: consider significant occult/overt bleed and initiate transfusion with packed red cells and/or blood components; refer to Algorithm 4. HCT unchanged: refer to Algorithm 4.','Shock may recur. Act on the HCT as in Algorithm 2, and consider stopping IV fluid at 48 hours of plasma leakage.']},
+      {h:'Algorithm 4: refractory shock (Group C)', src:'CPG p xvii. Persistent shock: PoCUS and haemodynamic assessment to determine the type of shock and the requirement of fluid. A patient may have more than one type of shock.', items:['Hypovolaemic, bleeding and leaking: look for the source of bleeding (e.g. OGDS); evidence of leaking (USG, chest X-ray); check for coagulopathy; transfuse packed red cells and blood components','Distributive: septic shock, antibiotics + vasopressors; cytokine storm, vasopressors + consider steroids; acute liver failure, supportive management + vasopressors','Cardiogenic: myocardial dysfunction, inotropes (noradrenaline/dobutamine/adrenaline/milrinone); cardiac arrhythmias, anti-arrhythmia agents','Obstructive: cardiac tamponade, pericardiocentesis after expert consultation']}
+    ]},
+    {l:'Course and care', notes:[
+      {h:'Course of illness', src:'CPG 4.2 (p9–11)', items:['The incubation period of dengue infection is 4 to 7 days.','Febrile phase: usually lasts 2 - 7 days; patients are generally haemodynamically stable. Leucopenia and mild thrombocytopenia are common.','Critical phase: occurs when fever subsides, usually between days 3 and 7 of illness. A subset of patients may develop severe plasma leakage resulting in hypovolaemia, shock and multiorgan failure.','Recovery phase: improving general conditions and appetite; convalescent rash; diuresis; increasing platelet count; stabilisation of haematocrit; normalisation of organ dysfunction.']},
+      {h:'Key indicators of the critical phase', src:'CPG p42–43', items:['Temperature change: a rapid drop in temperature may signal entry into the critical phase.','Rising haematocrit level: an increase of HCT ≥20% from baseline.','Platelet count drop: a platelet count below 100 × 10⁹/L is the earliest and most useful indicator.','Plasma leakage on PoCUS (chest and abdomen): pericholecystic fluid collection, thickened gallbladder wall, ascites, or pleural effusion.','Some patients may still have a low-grade fever during the early phase of leakage.','Plasma leakage typically peaks at approximately 24 hours after onset and usually resolves within 48 hours.']},
+      {h:'Outpatient care', src:'CPG 9.1 (p30–32)', items:['All dengue patients who can be monitored as outpatients need daily follow-up, particularly in the febrile and critical phase.','Re-evaluate the diagnosis at every follow-up visit, with the current clinical findings and laboratory results.','Drink approximately 200 ml of fluid every hour while awake. Fluids containing electrolytes (fruit juice, ORS, coconut water or soup) are recommended; plain water alone should be avoided.','Signs of moderate to severe dehydration: IV fluid therapy and referral for hospital management.','Urine output: a minimum of 0.5 ml/kg/hour. A patient should pass urine 4 to 6 times per day, with urination occurring at least once every 6 hours.','All dengue patients must be given clear verbal and written home care advice (9.1.3).']},
+      {h:'Transfer to hospital', src:'CPG p30', items:['All efforts should be taken to stabilise the patient\'s condition before and during transfer.','The Medical Department and/or Emergency Department of the receiving hospital must be informed before transfer.','Send the dengue clerking sheet, fluid chart, monitoring chart and investigations with the patient.']},
+      {h:'Notification', src:'CPG chapter 6 (p16). Prevention and Control of Infectious Diseases Act 1988 (Act 342).', items:['All dengue cases has to be notified by medical practitioners within 24 hours of diagnosis being made.','Failure to notify any suspected case by the medical practitioners can lead to charges against the individual involved with maximum compounds up to RM10,000 or imprisonment not exceeding two years or both.','HKL\'s own process (notify after a positive combo test) is in the Dengue SOP 2.0 notes on the ebook pathway.']},
+      {h:'ICD-11 codes for dengue', src:'CPG Table 4 (p16)', table:{head:['ICD-11 code','Diagnosis'], rows:[['1D20','Dengue without warning signs'],['1D21','Dengue with warning signs'],['1D22','Severe dengue'],['1D2Z','Dengue fever, unspecified']]}},
+      {h:'Statement of intent', src:'CPG, front matter', items:['This clinical practice guidelines (CPG) are meant to be guides for clinical practice, based on the best available evidence at the time of development. The guidelines should not override the responsibility of the practitioners to make decisions appropriate to the circumstances of the individual.']}
+    ]}
+  ],
+  refs:['Ministry of Health Malaysia. Clinical Practice Guidelines: Management of Dengue in Adults (Fourth Edition). Putrajaya: Malaysian Health Technology Assessment Section (MaHTAS), Medical Development Division; 2026. Available at https://mymahtas.moh.gov.my','Copyright MaHTAS. Content reproduced with acknowledgement to MaHTAS, not changed, not sold, and not used to promote any product or service.','Tables 6 and 8 are adapted in the CPG from: Pan American Health Organization. Algorithms for the Clinical Management of Dengue Patients. Washington DC: PAHO; 2020; and Ministry of Health, Malaysia. Emergency Medicine and Trauma Services Policy. Putrajaya: MoH; 2012.'],
+  see:[['#dengue','Dengue fever (ebook pathway, with Dengue SOP 2.0)'],['#infection-alerts--notify','Notifying an infection']]
+};
+
+/* The ebook pathway points to the newer national guideline (a link only: its content stays as written) */
+P['dengue'].see = [...(P['dengue'].see || []), ['#dengue-cpg', 'Dengue CPG, 4th edition (2026)']];
+
 
 /* ================= Green Zone MO Guide, version 8: the engine =================
    One page, one view at a time, routed on the hash:
@@ -2640,7 +2819,8 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
-  ['Calculators','Eighteen calculators in one place, built only from the ebook and the department\'s notes, each naming its source: the shock index, analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the Obsess protocol check, syncope, SVT, hypertensive urgency, the pain scales, BARS and RASS, the head injury check, paracetamol overdose by time, anaphylaxis, child doses and the SOAP check. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Scores the ebook names but does not define, such as TIMI and ABCD2, and other essential emergency scores open on MDCalc; children\'s tools open on PEMCalc. Both are outside sites.',[['#calc','Calculators'],['#calc-obsess','Obsess protocol check'],['#calc-paraod','Paracetamol overdose']]],
+  ['Dengue CPG 2026','The new national guideline, Management of Dengue in Adults (4th edition, MaHTAS 2026), step by step: triage a patient to a zone (Appendix 7 with Table 8), check the discharge criteria, and look up regular medicines. Fluids, tests, shock and the course of illness are in tabs, each line with its CPG page. The home care leaflet is there in English and Bahasa Melayu, with Copy. Four new dengue calculators: triage vital signs, fluids by weight, the test result and urine output. The ebook pathway stays as written, and where the two differ is listed under Still to confirm.',[['#dengue-cpg','Open the dengue CPG'],['#calc-dvitals','Triage vital signs'],['#calc-dfluid','Fluids by weight']]],
+  ['Calculators','Twenty-two calculators in one place, built only from the ebook, the department\'s notes and the dengue CPG, each naming its source: the shock index, analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the Obsess protocol check, syncope, SVT, hypertensive urgency, the pain scales, BARS and RASS, the head injury check, paracetamol overdose by time, anaphylaxis, child doses, the SOAP check, and the dengue triage vital signs, fluids, test result and urine output. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Scores the ebook names but does not define, such as TIMI and ABCD2, and other essential emergency scores open on MDCalc; children\'s tools open on PEMCalc. Both are outside sites.',[['#calc','Calculators'],['#calc-obsess','Obsess protocol check'],['#calc-paraod','Paracetamol overdose']]],
   ['A new look','The guide is now a bento of tiles, each showing real data from the guide: how each pathway can end, the numbers, the zone.',[['#home','Home']]],
   ['The zone map','The five stops of a Green Zone visit on the home screen. Tap one for what happens there and the rules that apply.',[['#journey','Patient journey']]],
   ['Whole-pathway maps','Every step of a pathway on one sheet, with your route lit and the outcomes you can no longer reach dimmed.',[['#renal-colic','Try it on renal colic']]],
@@ -2657,7 +2837,7 @@ const INTRO = [
   {h:'Find it in one search', p:'Type a symptom, rule, dose or number, or press /. Saved and recent pathways wait on your home screen.', art:'search'},
   {h:'One question at a time', p:'Each pathway asks one question per card and shows how it can still end. It finishes in the ebook\'s outcome colours: red admit, yellow observation, green discharge, violet refer.', art:'path'},
   {h:'Patients move one way', p:'Triage, you the MO, the treatment room, the CCA only if needed, then review. Tap any stop on the zone map for what happens there and the rules that apply.', art:'zone'},
-  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 18 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
+  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 22 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
 ];
 const ART = {
   search:'<rect x="18" y="34" width="284" height="56" rx="28" style="fill:#fff"/><circle cx="50" cy="62" r="10" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><path d="m57.5 69.5 7 7" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><text x="76" y="69" style="font:700 19px var(--body);fill:#14211b">renal colic</text><rect x="184" y="50" width="3" height="25" class="blink" style="fill:var(--emerald-1)"/>' +
@@ -2801,11 +2981,14 @@ const CONFIRM = [
   'The MERS-CoV case definition, which is not in the PUI file.',
   'A readable copy of the Malaysian snakebite guideline.',
   'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
-  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.'
+  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
+  'Which dengue source the Green Zone follows where the ebook (built from the CPG 3rd edition, 2015) and the CPG 4th edition (2026) differ: shock CRT over 2 or over 3 seconds; persistent vomiting over 2 times in 24 hours or over 3 a day; the list of warning signs (the ebook has persistent diarrhoea and a tender liver, the CPG liver enlargement over 2 cm, postural hypotension and reduced urine output); and oral fluids (2 litres a day, or 200 ml an hour while awake).',
+  'Points inside the dengue CPG (4th edition) itself: pregnant, over-65 and morbidly obese patients without warning signs go to MTS level 3 by Appendix 7 but to Group B1, MTS level 4, by Tables 6 and 8 (and all pregnant patients with confirmed dengue should be hospitalised, p72); whether "BP < 90/60" counts either reading below; Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; the quota table does not follow its own method exactly (65 kg: 5700 ml printed, 5770 ml by maintenance plus 50 ml/kg); Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.'
 ];
 
 /* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
 const TIPS = [
+  {t:'Persistent vomiting in the febrile phase is not a dengue warning sign: warning signs are most predictive in the critical phase, when the fever settles.', href:'#dengue-cpg', l:'Dengue CPG, p15'},
   {t:'Discharge abdominal pain only when the pain score is 0, with a clear diagnosis and safety-net advice.', href:'#safe-practice--abd', l:'Million Ringgit Habits'},
   {t:'Pain out of proportion in a limb: think of ischaemia or compartment syndrome, check the distal pulses and refer early.', href:'#safe-practice--limb', l:'Limbs and fractures'},
   {t:'Came back within 48 hours, or after several GP visits? Admit.', href:'#safe-practice--dc', l:'Before any discharge'},
@@ -2896,6 +3079,7 @@ function fillIcons(root){
 /* ================= Helpers ================= */
 const KIND = {admit:'Admit (red box)', discharge:'Discharge (green box)', observe:'Observation (yellow box)', refer:'Refer', neutral:'Next step'};
 const KIND_R = {admit:'Admit', discharge:'Discharge', observe:'Observation', refer:'Refer', neutral:'The rule'};
+const KIND_G = {admit:'Admit', discharge:'Discharge', observe:'Observation', refer:'Refer', neutral:'What the CPG says'};
 const OUT_ORDER = ['admit','observe','discharge','refer','neutral'];
 const OUT_LBL = {admit:'Admit', observe:'Observation', discharge:'Discharge', refer:'Refer', neutral:'Next step'};
 const OUT_IC = {admit:'bed', discharge:'door', observe:'clock', refer:'send', neutral:'step'};
@@ -2909,9 +3093,11 @@ const store = {
   del(k){ try { localStorage.removeItem(k); } catch(e){} }
 };
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const kindOf = p => p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
+const kindOf = p => p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
 const metaOf = p => p.page ? 'Ebook p' + p.page : (p.src || '');
-const kindLabel = (p, k) => (p.grp === 'rules' ? KIND_R : KIND)[k];
+const kindLabel = (p, k) => (p.grp === 'rules' ? KIND_R : p.grp === 'cpg' ? KIND_G : KIND)[k];
+/* A guideline's neutral outcomes are its answers (the medicines), not a next step */
+const outLbl = (p, k) => p.grp === 'cpg' && k === 'neutral' ? 'Guidance' : OUT_LBL[k];
 const fmt = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 const outsOf = p => OUT_ORDER.filter(k => Object.values(p.nodes).some(n => n.end === k));
 const badgeOf = p => p.isnew ? '<span class="badge b-new">New</span>' : p.upd ? '<span class="badge b-upd">Updated</span>' : p.dept ? '<span class="badge b-upd">Dept notes</span>' : '';
@@ -2961,7 +3147,7 @@ const CATS = [
   {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','pneumonia','anaphylaxis']},
   {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','behavioural-disturbance']},
   {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','gastroenteritis','biliary','renal-colic','scrotal-pain']},
-  {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','cellulitis']},
+  {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis']},
   {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','paracetamol-overdose','pain']},
   {k:'flow', t:'Green Zone flow and referrals', s:'Flow and referrals', ic:'route', c:'c-flow', j:'t-emerald', ids:FLOW_IDS},
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
@@ -2990,6 +3176,8 @@ function pathWords(p){
   return [p.lead, ...Object.values(p.nodes).flatMap(nodeWords), ...(p.advice || []), ...(p.concerns || []),
     ...(p.tables || []).flatMap(t => [t.title, ...t.rows.flat()]),
     ...(p.dept || []).flatMap(d => [d.h, ...(d.items || []), ...(d.table ? d.table.rows.flat() : [])]),
+    ...(p.notes || []).flatMap(t => t.notes.flatMap(d => [d.h, ...(d.items || []), ...(d.table ? d.table.rows.flat() : [])])),
+    ...(p.leaflet ? ['en', 'ms'].flatMap(k => p.leaflet[k].groups.flatMap(g => [g.h, g.p, ...g.items])) : []),
     ...(p.see || []).map(s => s[1])].filter(Boolean);
 }
 const IDX = [];
@@ -2997,7 +3185,7 @@ for (const [id, p] of Object.entries(P)){
   const c = catOf(id);
   IDX.push({href:'#' + id, title:p.title, kind:kindOf(p), meta:metaOf(p), body:pathWords(p).join(' · '), ic:c.ic, c:c.c, j:c.j});
   const m = p.nodes[p.start];
-  if (p.grp === 'rules' && m.opts && m.opts.length > 2) m.opts.forEach(([label, to]) => {
+  if ((p.grp === 'rules' || p.grp === 'cpg') && m.opts && m.opts.length > 2) m.opts.forEach(([label, to]) => {
     IDX.push({href:`#${id}--${to}`, title:label, kind:kindOf(p), meta:p.title, body:nodeWords(p.nodes[to]).join(' · '), ic:c.ic, c:c.c, j:c.j});
   });
 }
@@ -3028,7 +3216,7 @@ function search(q, loose){
       if (e.title.toLowerCase().startsWith(ts[i])) s += 7; else if (inT) s += 5;
       if (inB) s += 1;
     }
-    if (e.kind === 'Pathway') s += .5;
+    if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
     return {e, s};
   }).filter(Boolean).sort((a, b) => b.s - a.s).slice(0, 14).map(r => r.e);
 }
@@ -3225,7 +3413,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -3305,14 +3493,14 @@ function renderHome(){
 
 /* ================= Pathway library ================= */
 let libF = 'all', libCat = 'all';
-function libCounts(){ const all = Object.keys(P); return {all:all.length, ebook:all.filter(id => P[id].grp !== 'rules').length, rules:all.filter(id => P[id].grp === 'rules').length, saved:savedIds().length}; }
+function libCounts(){ const all = Object.keys(P); return {all:all.length, ebook:all.filter(id => !P[id].grp).length, rules:all.filter(id => P[id].grp === 'rules').length, saved:savedIds().length}; }
 function renderLibf(){
   const n = libCounts();
   $('#libf').innerHTML = [['all', 'All'], ['ebook', 'Ebook'], ['rules', 'Rules and protocols'], ['saved', 'Saved']].map(([k, t]) => `<button type="button" data-f="${k}" aria-pressed="${libF === k}">${t} <small>${n[k]}</small></button>`).join('');
 }
 function pcard(id){
   const p = P[id], c = catOf(id), on = isSaved(id);
-  return `<article class="pc"><div class="pc-b"><h3><a href="#${id}">${esc(p.title)}</a></h3><div class="meta"><span>${esc(metaOf(p))}</span>${badgeOf(p)}</div>${p.lead ? `<p class="ld">${esc(p.lead)}</p>` : ''}<div class="outs-dots">${outsOf(p).map(k => `<span class="od ${k}">${OUT_LBL[k]}</span>`).join('')}</div></div><button type="button" class="pc-st" data-star="${id}" aria-pressed="${on}" aria-label="${(on ? 'Remove from saved: ' : 'Save: ') + esc(p.title)}">${svg('star', '', on)}</button></article>`;
+  return `<article class="pc"><div class="pc-b"><h3><a href="#${id}">${esc(p.title)}</a></h3><div class="meta"><span>${esc(metaOf(p))}</span>${badgeOf(p)}</div>${p.lead ? `<p class="ld">${esc(p.lead)}</p>` : ''}<div class="outs-dots">${outsOf(p).map(k => `<span class="od ${k}">${outLbl(p, k)}</span>`).join('')}</div></div><button type="button" class="pc-st" data-star="${id}" aria-pressed="${on}" aria-label="${(on ? 'Remove from saved: ' : 'Save: ') + esc(p.title)}">${svg('star', '', on)}</button></article>`;
 }
 function renderLib(){
   const q = $('#libq').value.trim(), s = savedIds();
@@ -3322,7 +3510,7 @@ function renderLib(){
     const strict = hit(false);
     match = Object.keys(P).some(strict) ? strict : hit(true);
   }
-  const inF = id => libF === 'all' ? true : libF === 'ebook' ? P[id].grp !== 'rules' : libF === 'rules' ? P[id].grp === 'rules' : s.includes(id);
+  const inF = id => libF === 'all' ? true : libF === 'ebook' ? !P[id].grp : libF === 'rules' ? P[id].grp === 'rules' : s.includes(id);
   const ids = Object.keys(P).filter(id => inF(id) && match(id));
   renderLibf();
   const cats = CATS.filter(c => c.ids.some(id => ids.includes(id)));
@@ -3382,7 +3570,7 @@ function restart(){ state.trail = []; state.cur = P[state.id].start; land = fals
 /* How the entry can still end from here, in the ebook's outcome colours */
 function endsHTML(p, n){
   const kinds = n.end ? [n.end] : endsFrom(p, state.cur);
-  return `<div class="ends"><span>${n.end ? 'Ended in' : 'Can still end in'}</span>${kinds.map(k => `<span class="end" style="--oc:var(--b-${k})">${OUT_LBL[k]}</span>`).join('')}</div>`;
+  return `<div class="ends"><span>${n.end ? 'Ended in' : 'Can still end in'}</span>${kinds.map(k => `<span class="end" style="--oc:var(--b-${k})">${outLbl(p, k)}</span>`).join('')}</div>`;
 }
 function draw(focus){
   const p = P[state.id], n = p.nodes[state.cur], c = catOf(state.id), saved = isSaved(state.id), steps = state.trail.length;
@@ -3392,7 +3580,10 @@ function draw(focus){
   const bar = Array.from({length:total}, (_, i) => `<i class="${n.end ? 'fin' : i <= steps ? 'on' : ''}"></i>`).join('');
   const count = Object.keys(p.nodes).length;
   const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
-  $('#run').innerHTML = `<div class="run-h">
+  /* A guideline can carry its own picture: the chips and title then sit on a jewel tile, with the loop behind them */
+  const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
+      <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>`;
+  withTiles($('#run'), `<div class="run-h">
       <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg('back')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
         <div class="run-acts">
           <button type="button" class="ib" data-save aria-pressed="${saved}" aria-label="${saved ? 'Saved. Tap to remove from your list' : 'Save to your list'}" title="${saved ? 'Saved' : 'Save'}">${svg('star', '', saved)}</button>
@@ -3400,8 +3591,7 @@ function draw(focus){
           <button type="button" class="ib" data-link aria-label="Copy a link to this step" title="Copy link">${svg('link')}</button>
           <button type="button" class="ib" data-restart aria-label="Start again" title="Start again"${steps ? '' : ' disabled'}>${svg('restart')}</button>
         </div></div>
-      <div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
-      <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>
+      ${p.hero ? `<div class="tile ${c.j} run-hero">${tileMedia(p.hero)}${head}</div>` : head}
       ${about ? `<div class="about-t">${about}</div>` : ''}
     </div>
     <div class="run-grid">
@@ -3419,7 +3609,7 @@ function draw(focus){
         ${about ? `<details class="about about-m"><summary>About this pathway</summary><div>${about}</div></details>` : ''}
         ${refTabs(p)}
       </div>
-    </div>`;
+    </div>`);
   if (n.check) wireChecks(n);
   if (focus){
     const cur = $('#cur'); cur.focus({preventScroll:true});
@@ -3438,7 +3628,7 @@ function card(n, p){
       ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${list(n.items, 'ticks')}
         ${n.links ? `<div class="links">${n.links.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : ''}
         ${n.gap ? `<div class="gap">${svg('info')}<span>${esc(n.gap)}</span></div>` : ''}</div>` : ''}
-      <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span><button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${p.advice && n.end === 'discharge' ? '<button type="button" class="primary" data-showadvice>Discharge advice</button>' : ''}</div></article>`;
+      <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span><button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${(p.advice || p.leaflet) && n.end === 'discharge' ? `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
   }
   if (n.step){
     const obs = n.kind === 'observe';
@@ -3478,7 +3668,7 @@ function renderMap(){
   const ends = order.filter(k => p.nodes[k].end).length;
   $('#pm-title').textContent = p.title;
   $('#pm-sub').textContent = `${order.length} steps · ${ends} outcome${ends === 1 ? '' : 's'} · ${metaOf(p)}`;
-  $('#pmbody').innerHTML = `<div class="legend" aria-label="Outcome colours">${OUT_ORDER.filter(k => order.some(x => p.nodes[x].end === k)).map(k => `<span class="od ${k}">${OUT_LBL[k]}</span>`).join('')}</div>
+  $('#pmbody').innerHTML = `<div class="legend" aria-label="Outcome colours">${OUT_ORDER.filter(k => order.some(x => p.nodes[x].end === k)).map(k => `<span class="od ${k}">${outLbl(p, k)}</span>`).join('')}</div>
     <ol class="pm${state.trail.length ? ' trail' : ''}">${order.map(k => {
       const n = p.nodes[k], here = k === state.cur;
       const cls = [n.end ? 'en ' + n.end : n.step ? 'st' : 'qn', here ? 'now' : on.has(k) ? 'on' : live.has(k) ? 'live' : '', n.end && !live.has(k) && !here ? 'gone' : ''].join(' ');
@@ -3506,7 +3696,11 @@ function tabsOf(p){
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:`<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
-  if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(d => `<div class="deptnote"><h4>${esc(d.h)}</h4><p class="src">${esc(d.src)}</p>${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
+  const note = d => `<div class="deptnote"><h4>${esc(d.h)}</h4><p class="src">${esc(d.src)}</p>${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
+  if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
+  if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
+  /* A national guideline's reference notes, several tabs of them, each note with its page */
+  (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to MaHTAS.</p>`}));
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
   if (p.refs) T.push({k:'refs', l:'References', html:`<ol class="refs">${p.refs.map(li).join('')}</ol>`});
   return T;
@@ -3522,6 +3716,15 @@ function selectTab(k, focus){
   $$('#ptab [role="tab"]').forEach(b => { const on = b.dataset.pt === k; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
   $$('#ptab [role="tabpanel"]').forEach(x => { x.hidden = x.id !== 'tp-' + k; });
 }
+/* The CPG's home care leaflet (Appendix 5B) in English or Bahasa Melayu. The choice lives in memory only */
+let leafLang = 'en';
+function leafletHTML(p){
+  const L = p.leaflet, d = L[leafLang];
+  return `<div class="leaf" id="leaf" lang="${leafLang}"><div class="seg leaf-lang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(k => `<button type="button" data-leaf="${k}" aria-pressed="${leafLang === k}" lang="${k}">${esc(L[k].lang)}</button>`).join('')}</div>
+    <h4 class="leaf-t">${esc(d.title)}</h4>${d.groups.map(g => `<section class="leaf-g${g.warn ? ' warn' : ''}"><h5>${g.warn ? svg('stop') : ''}${esc(g.h)}</h5>${g.p ? `<p>${esc(g.p)}</p>` : ''}<ul>${g.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}
+    <p class="src">${esc(L.src)}</p></div><div class="pbar"><button type="button" class="sm" data-copyleaf>${svg('copy')}<span class="bl">Copy advice</span></button></div>`;
+}
+const leafletText = p => { const L = p.leaflet, d = L[leafLang]; return [d.title.toUpperCase(), ...d.groups.flatMap(g => ['', g.h.toUpperCase(), ...(g.p ? [g.p] : []), ...g.items.map(x => '- ' + x)]), '', L.src].join('\n'); };
 
 /* ================= Shift tools ================= */
 function renderDcheck(){
@@ -3548,13 +3751,14 @@ function renderDcheck(){
 }
 
 /* ================= Calculators (9 Nov 2026) =================
-   Twelve calculators built only from the ebook and the department's notes (standing rule 8), each naming its source.
+   Calculators built only from the ebook and the department's notes (standing rule 8), each naming its source, and since
+   9 Nov 2026 four dengue calculators from the CPG Management of Dengue in Adults, 4th edition, which Krishna admitted as a source.
    Where a source stops (exactly 50 kg, exactly 30, no basal-bolus split, no band named "moderate"), the calculator says so
    instead of choosing. The weight and the child's age band are shared between calculators in memory only and are never
    stored (rule 4). Paediatric tools that our sources do not cover open on PEMCalc, an outside site, labelled as such.
    Checklists and tables come straight from the pathway data, so a calculator cannot drift from its pathway. */
 const CALC_GROUPS = [
-  {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'Shock index and adjusted weight'},
+  {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'Triage vital signs, fluids, the test result, urine output, the shock index and adjusted weight'},
   {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants and insulin by weight'},
   {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65 and Wells'},
   {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain, syncope, SVT and blood pressure'},
@@ -3590,6 +3794,8 @@ const CALC_LINKS = [
   {g:'doses', site:'MDCalc', href:MDC + '43/creatinine-clearance-cockcroft-gault-equation', t:'Creatinine clearance (Cockcroft-Gault)', d:'The creatinine clearance that the anticoagulant doses here depend on.'}
 ];
 const tableOf = (id, part) => (P[id].tables || []).find(t => t.title.includes(part));
+/* A table inside the dengue CPG's reference notes (Table 5, the fluid quota) */
+const dTable = part => P['dengue-cpg'].notes.flatMap(t => t.notes).find(n => n.table && n.h.includes(part)).table;
 const r1 = x => Math.round(x * 10) / 10;
 const fx = x => String(r1(x));
 const range = (w, a, b, unit = 'mg') => `${fx(a * w)}–${fx(b * w)} ${unit}`;
@@ -3625,6 +3831,112 @@ const CALCS = {
         ['Ideal body weight', ibw.toFixed(1) + ' kg', 'good', ''],
         ['Adjusted body weight', adj.toFixed(1) + ' kg', bmi > 27.5 ? 'good' : 'warn', bmi > 27.5 ? 'Use this weight for dengue fluid calculations' : 'Not needed at this BMI']
       ];
+    }},
+  /* Dengue, CPG 4th edition (MaHTAS 2026): each threshold is in P['dengue-cpg'] (see CALC_FACTS), and the tables are read from it */
+  dvitals:{t:'Dengue triage vital signs', g:'dengue', src:'CPG 4th ed., Appendix 7', path:'#dengue-cpg--vit', kw:'dengue triage unstable vital signs blood pressure map mean arterial pulse pressure shock index heart rate respiratory rate spo2 red zone mts level 2 cpg',
+    sub:'The seven unstable vital signs of the CPG\'s systematic triage, checked one by one.',
+    fields:[['sbp','Systolic BP','mmHg'],['dbp','Diastolic BP','mmHg'],['hr','Heart rate','/min'],['rr','Respiratory rate','/min'],['spo2','SpO2','%'],['map','MAP shown on the monitor','mmHg']],
+    note:'CPG Appendix 7 (p108), unstable vital signs: BP < 90/60 mmHg; MAP < 65 mmHg; PP < 30 mmHg; shock index (HR/SBP) > 1; HR > 100/min; RR > 20/min; SpO2 < 95%. Any one sends the patient to the Red Zone, MTS level 2. Pulse pressure is SBP − DBP (Appendix 10). The CPG gives no formula for the MAP, so enter the monitor\'s reading. A systolic under 90 counts as below 90/60. A diastolic under 60 with a systolic of 90 or more is shown for you to judge: the CPG does not say whether it counts on its own.',
+    run(v){
+      if (v.sbp && v.dbp && v.dbp >= v.sbp) return [['Check the numbers', 'The diastolic should be below the systolic', 'warn', '']];
+      const out = [], bad = [], todo = [];
+      let lowDia = false;
+      const add = (l, val, u, em, sc, flag) => { out.push([l, val, u ? 'bad' : 'good', em, sc]); if (u) bad.push(flag); };
+      if (v.sbp && v.dbp){
+        const pp = v.sbp - v.dbp;
+        lowDia = v.sbp >= 90 && v.dbp < 60;
+        if (lowDia) out.push(['Blood pressure', `${v.sbp}/${v.dbp} mmHg`, 'warn', 'Diastolic under 60, systolic 90 or more: whether this alone is below 90/60 is still to confirm']);
+        else add('Blood pressure', `${v.sbp}/${v.dbp} mmHg`, v.sbp < 90, v.sbp < 90 ? 'Systolic under 90: below 90/60' : 'Not below 90/60', null, 'BP < 90/60 mmHg');
+        add('Pulse pressure (SBP − DBP)', pp + ' mmHg', pp < 30, pp < 30 ? 'Under 30 mmHg' : '30 mmHg or more', {min:0, max:80, v:pp, bands:[[0, 30, 'bad'], [30, 80, 'good']]}, 'PP < 30 mmHg');
+      } else todo.push('blood pressure');
+      if (v.map) add('MAP, from the monitor', v.map + ' mmHg', v.map < 65, v.map < 65 ? 'Under 65 mmHg' : '65 mmHg or more', {min:30, max:130, v:v.map, bands:[[30, 65, 'bad'], [65, 130, 'good']]}, 'MAP < 65 mmHg'); else todo.push('MAP');
+      if (v.hr && v.sbp){ const si = v.hr / v.sbp; add('Shock index (HR ÷ SBP)', si.toFixed(2), si > 1, si > 1 ? 'Over 1' : si === 1 ? 'Exactly 1: not over 1' : 'Under 1', {min:0, max:2, v:si, bands:[[0, 1, 'good'], [1, 2, 'bad']]}, 'Shock index > 1'); } else todo.push('shock index');
+      if (v.hr) add('Heart rate', v.hr + '/min', v.hr > 100, v.hr > 100 ? 'Over 100/min' : '100/min or under', {min:40, max:180, v:v.hr, bands:[[40, 100, 'good'], [100, 180, 'bad']]}, 'HR > 100/min'); else todo.push('heart rate');
+      if (v.rr) add('Respiratory rate', v.rr + '/min', v.rr > 20, v.rr > 20 ? 'Over 20/min' : '20/min or under', {min:5, max:45, v:v.rr, bands:[[5, 20, 'good'], [20, 45, 'bad']]}, 'RR > 20/min'); else todo.push('respiratory rate');
+      if (v.spo2) add('SpO2', v.spo2 + '%', v.spo2 < 95, v.spo2 < 95 ? 'Under 95%' : '95% or more', {min:80, max:100, v:v.spo2, bands:[[80, 95, 'bad'], [95, 100, 'good']]}, 'SpO2 < 95%'); else todo.push('SpO2');
+      if (!out.length) return null;
+      const verdict = bad.length ? {cls:'stop', h:'Unstable vital signs: Red Zone, MTS level 2', p:`${bad.join('; ')}. Table 8: compensated dengue shock syndrome; emergency treatment, IV fluid therapy and admission (Group C).`, href:'#dengue-cpg--red2', link:'Open the triage outcome'}
+        : lowDia ? {cls:'next', h:'Check the blood pressure', p:`The diastolic is under 60 with a systolic of 90 or more. Appendix 7 writes BP < 90/60 mmHg and does not say whether a low diastolic alone counts: judge it with the rest of the triage.${todo.length ? ' Still to check: ' + todo.join(', ') + '.' : ''}`, href:'#dengue-cpg--vit', link:'Open the triage question'}
+        : todo.length ? {cls:'next', h:'None unstable so far', p:'Still to check: ' + todo.join(', ') + '.'}
+        : {cls:'ok', h:'No unstable vital signs', p:'Go on to the next triage question: warning signs, unstable co-morbids or high risk.', href:'#dengue-cpg--ws', link:'Next triage question'};
+      return {outs:out, verdict};
+    }},
+  dfluid:{t:'Dengue fluids by weight', g:'dengue', src:'CPG 4th ed., Algorithm 1, Tables 11–13', path:'#dengue-cpg', kw:'dengue fluid quota m+5% maintenance holliday segar 48 hours critical phase warning signs group b2 iv rate ml/kg/hr crystalloid 70 kg limit obese bmi adjusted body weight cpg',
+    sub:'Maintenance, the 48-hour fluid quota and the Algorithm 1 rates, with the 70 kg limit and the adjusted weight.',
+    fields:[['wt','Weight','kg'],['ht','Height (optional, for the BMI)','cm'],{k:'sex', type:'seg', label:'Sex (needed only for the adjusted weight)', opts:[['f','Female'],['m','Male']], nodef:true}],
+    note:'CPG 4th ed.: maintenance by Holliday-Segar (Table 11, p41): 4ml/kg/hr for the first 10kg, 2ml/kg/hr for the next 10kg and 1ml/kg/hr for each kg after that. A 70 kg weight limit applies to maintenance and the fluid quota (p40). Over BMI 27.5, use the adjusted body weight (Table 13, p48). The fluid quota (maintenance + 5% deficit, oral and IV together) is the maximum over 48 hours in the critical phase without shock, read from the table under Algorithm 1 (p xiv). In shock the quota no longer applies (p44).',
+    run(v){
+      const w = v.wt; if (!w) return null;
+      if (w < 20 || w > 300) return [['Weight', 'Enter 20 to 300 kg', 'warn', '']];
+      if (v.ht && (v.ht < 120 || v.ht > 220)) return [['Height', 'Enter 120 to 220 cm, or leave it empty', 'warn', '']];
+      const out = [];
+      let used = w, how = 'actual weight';
+      if (v.ht){
+        const bmi = w / Math.pow(v.ht / 100, 2), obese = bmi > 27.5;
+        out.push(['BMI', bmi.toFixed(1) + ' kg/m²', obese ? 'warn' : 'good', obese ? 'Over 27.5: Table 13 uses the adjusted body weight' : '27.5 or less: use the actual weight', {min:15, max:45, v:bmi, bands:[[15, 27.5, 'good'], [27.5, 45, 'warn']]}]);
+        if (obese){
+          if (!v.sex) return {outs:out, verdict:{cls:'next', h:'Choose the sex', p:'Over BMI 27.5 the CPG uses the adjusted body weight, which needs the ideal body weight for the sex (Table 13, p48).'}};
+          const ibw = (v.sex === 'm' ? 50 : 45.5) + 0.91 * (v.ht - 152);
+          used = ibw + 0.4 * (w - ibw); how = 'adjusted body weight';
+        }
+      }
+      const W = Math.min(used, 70), mh = W <= 10 ? 4 * W : W <= 20 ? 40 + 2 * (W - 10) : 60 + (W - 20);
+      out.push(['Weight for the fluids', fx(W) + ' kg', 'good', used > 70 ? `The ${how} is ${fx(used)} kg: capped at the 70 kg limit (p40)` : `The ${how}`]);
+      out.push(['Maintenance (Table 11)', fx(mh) + ' ml/hr', 'good', `${Math.round(mh * 24)} ml a day`]);
+      const rows = dTable('Fluid quota').rows.map(r => [parseFloat(r[0].replace(/[^\d.]/g, '')), r[1]]);
+      const top = rows[rows.length - 1], exact = rows.find(r => r[0] === W), lo = [...rows].reverse().find(r => r[0] < W), hi = rows.find(r => r[0] > W);
+      const qem = 'Oral and IV together: the most to give over 48 hours, in the critical phase without shock';
+      let gap = '';
+      if (W >= top[0]) out.push(['Fluid quota over 48 hours (M+5%)', top[1] + ' ml', 'good', qem]);
+      else if (exact) out.push(['Fluid quota over 48 hours (M+5%)', exact[1] + ' ml', 'good', qem]);
+      else if (lo && hi){ out.push(['Fluid quota over 48 hours (M+5%)', `${lo[1]}–${hi[1]} ml`, 'warn', `The table gives ${lo[0]} kg ${lo[1]} ml and ${hi[0]} kg ${hi[1]} ml`]); gap = `The table gives the quota in 5 kg steps; it does not say how to treat ${fx(W)} kg.`; }
+      else { out.push(['Fluid quota over 48 hours (M+5%)', 'Below the table', 'warn', 'The table starts at 30 kg']); gap = 'The quota table starts at 30 kg.'; }
+      const k = (a, b) => `${fx(a * W)}–${fx(b * W)} ml/hr`;
+      return {outs:out,
+        lists:[{h:`Algorithm 1 at ${fx(W)} kg: warning signs (Group B2)`, rows:[
+          ['Start', 'IV crystalloid 3–5 ml/kg/hr for 1 hour: ' + k(3, 5)],
+          ['Improving', 'IV crystalloid 2–3 ml/kg/hr for 1–2 hours: ' + k(2, 3)],
+          ['Still improving', `1–2 ml/kg/hr (${k(1, 2)}) or maintenance (${fx(mh)} ml/hr); stop IV fluid if able to tolerate orally`],
+          ['Not improving, not in shock', 'Take FBC/VBG/lactate; increase to 5–7 ml/kg/hr while awaiting the result: ' + k(5, 7)],
+          ['Drinking 1–2 ml/kg/hour', `${fx(W)}–${fx(2 * W)} ml an hour by mouth: IV fluid is not necessary (p44)`]]}],
+        verdict:{cls:'next', h:'Keep the total within the quota', p:'The quota counts oral and IV fluid together over 48 hours, and many patients need less. Reassess before each change: clinical condition, vital signs, CCTVR and urine output. In shock, use Algorithms 2 to 4 instead.', href:'#dengue-cpg', link:'Open the Fluids and Shock tabs'},
+        gap};
+    }},
+  drdt:{t:'Dengue test result', g:'dengue', src:'CPG 4th ed., Table 5', path:'#dengue-cpg', kw:'dengue rdt rapid combo test ns1 igm igg serology interpretation secondary dengue vaccine vaccination qdenga tak-003 cpg',
+    sub:'What a rapid combo test (NS1, IgM and IgG) means, from the CPG\'s Table 5.',
+    fields:[{k:'fd', type:'seg', label:'History of fever', opts:[['lt','Less than 5 days'],['eq','5 days'],['gt','More than 5 days']], nodef:true},
+      {k:'ns1', type:'seg', label:'NS1', opts:[['+','Positive'],['−','Negative']], nodef:true},
+      {k:'igm', type:'seg', label:'IgM', opts:[['+','Positive'],['−','Negative']], nodef:true},
+      {k:'igg', type:'seg', label:'IgG', opts:[['+','Positive'],['−','Negative']], nodef:true},
+      {k:'vax', type:'check', label:'Dengue vaccine', items:['Dengue vaccine (TAK-003/Qdenga) in the last 30 days']}],
+    note:'CPG Table 5 (p20) lists four result patterns for a history of fever of less than 5 days and five for more than 5 days; any other pattern, and exactly 5 days, is not in the table. Recommendation 1 (p21): within 30 days after dengue vaccination, PCR or NS1 antigen may be used to diagnose dengue, and IgM and IgG should not be used as confirmatory tests.',
+    run(v){
+      if (!v.fd || !v.ns1 || !v.igm || !v.igg) return null;
+      const band = {lt:'Less than 5 days', gt:'More than 5 days'}[v.fd], pat = `NS1 ${v.ns1}, IgM ${v.igm}, IgG ${v.igg}`, out = [];
+      let gap = '', verdict = null;
+      if (!band){ out.push(['Table 5', 'Not covered', 'warn', 'The table gives less than 5 days and more than 5 days, not exactly 5']); gap = 'Table 5 has no reading for a history of fever of exactly 5 days.'; }
+      else {
+        const row = dTable('Table 5').rows.find(r => r[0] === band && r[1] === v.ns1 && r[2] === v.igm && r[3] === v.igg);
+        if (row) out.push(['Table 5', row[4], /^Not dengue infection$/.test(row[4]) ? 'good' : /High risk/.test(row[4]) ? 'bad' : 'warn', `${pat}, with ${band.toLowerCase()} of fever`]);
+        else { out.push(['Table 5', 'Not in the table', 'warn', `${pat} is not listed for ${band.toLowerCase()} of fever`]); gap = 'Table 5 does not list this result pattern.'; }
+      }
+      if (v.vax_n) verdict = {cls:'refer', h:'Within 30 days of dengue vaccination', p:'IgM and IgG should not be used as confirmatory tests; PCR or NS1 antigen may be used. A positive NS1 does not tell wild-type from vaccine-derived virus, and a negative one does not fully exclude dengue (Recommendation 1 and 7.3, p21). Rely on clinical evaluation and judgement.'};
+      else if (v.ns1 === '−' && v.igm === '−' && v.igg === '−') verdict = {cls:'next', h:'All three negative', p:'Negative test results require differential diagnosis to confirm cause of infection (p21).'};
+      return {outs:out, verdict, gap};
+    }},
+  duo:{t:'Urine output', g:'dengue', src:'CPG 4th ed., p31, p44 and p84', path:'#dengue-cpg', kw:'dengue urine output ml/kg/hr void oliguria perfusion discharge catheter cpg',
+    sub:'Urine output in ml/kg/hr from one void, against the CPG\'s targets.',
+    fields:[['vol','Urine passed','ml'],['hrs','Hours since the last void','h'],['wt','Weight','kg']],
+    note:'CPG 4th ed.: calculate urine output in ml/kg/hr at each void; 0.5 - 1 ml/kg/hour is optimal and indicates adequate perfusion (p44). The minimum is 0.5 ml/kg/hour, and a patient should pass urine 4 to 6 times a day, at least once every 6 hours (p31). The discharge criteria ask for 0.5 - 1.5 mL/kg/hr (p84). This uses the weight you enter.',
+    run(v){
+      if (!v.vol || !v.hrs || !v.wt) return null;
+      const bad = badWt(v.wt, 20, 300); if (bad) return bad;
+      const u = v.vol / v.wt / v.hrs;
+      const out = [['Urine output', u.toFixed(2) + ' ml/kg/hr', u < 0.5 ? 'bad' : u <= 1.5 ? 'good' : 'warn',
+        u < 0.5 ? 'Under 0.5: below the minimum of 0.5 ml/kg/hour (p31)' : u <= 1 ? '0.5 to 1: optimal, adequate perfusion (p44)' : u <= 1.5 ? 'Over 1: within the discharge criterion of 0.5 to 1.5 (p84)' : 'Over 1.5: above the ranges the CPG gives',
+        {min:0, max:2.5, v:u, bands:[[0, 0.5, 'bad'], [0.5, 1.5, 'good'], [1.5, 2.5, 'warn']]}]];
+      if (v.hrs > 6) out.push(['Time since the last void', fx(v.hrs) + ' hours', 'warn', 'Over 6 hours: the CPG asks for urine at least once every 6 hours (p31)']);
+      return out;
     }},
   analgesia:{t:'Analgesia by weight', g:'doses', src:'Ebook p45–50', path:'#pain', kw:'paracetamol panadol ketamine pain dose mg/kg',
     sub:'Paracetamol and ketamine doses from the ebook\'s choice of analgesia table.',
@@ -3918,7 +4230,16 @@ const CALC_FACTS = [
   ['anaphylaxis', '10–20 ml/kg NS bolus'], ['acs', 'Start T aspirin 300 mg'], ['syncope', 'Follow-up at EMWATCH, EMACC or PC clinic'],
   ['paracetamol-overdose', 'Under 2 hours'], ['paracetamol-overdose', '2 to 8 hours'], ['paracetamol-overdose', '8 to 24 hours'], ['paracetamol-overdose', 'Over 24 hours'],
   ['paracetamol-overdose', '4–8 hours after ingestion'], ['paracetamol-overdose', 'within 8 hours'], ['paracetamol-overdose', 'above the nomogram line, or ALT 50 U/L or more'],
-  ['paracetamol-overdose', 'Paracetamol over 10 mg/L (66 µmol/L), or ALT 50 U/L or more']
+  ['paracetamol-overdose', 'Paracetamol over 10 mg/L (66 µmol/L), or ALT 50 U/L or more'],
+  ['dengue-cpg', 'Blood pressure (BP) < 90/60 mmHg'], ['dengue-cpg', 'Mean arterial pressure (MAP) < 65 mmHg'], ['dengue-cpg', 'Pulse pressure (PP) < 30 mmHg'], ['dengue-cpg', 'Shock index (HR/SBP) > 1'],
+  ['dengue-cpg', 'Heart rate (HR) > 100/min'], ['dengue-cpg', 'Respiratory rate (RR) > 20/min'], ['dengue-cpg', 'Oxygen saturation (SpO2) < 95%'],
+  ['dengue-cpg', '4ml/kg/hr'], ['dengue-cpg', '2ml/kg/hr'], ['dengue-cpg', '1ml/kg/hr'], ['dengue-cpg', '70 kg weight limit for weight-based fluid calculations in maintenance and fluid quota'],
+  ['dengue-cpg', 'For obese patients (BMI >27.5 kg/m2), maintenance fluid calculation should be based on Adjusted Body Weight (ABW).'], ['dengue-cpg', 'ABW = IBW + 0.4 (actual weight - IBW)'],
+  ['dengue-cpg', 'female: 45.5 kg + 0.91(height in cm -152)'], ['dengue-cpg', 'Male: 50.0 kg + 0.91(height in cm -152)'],
+  ['dengue-cpg', 'Start IV crystalloid 3-5ml/kg/hr for 1 hour'], ['dengue-cpg', 'IV crystalloid 2-3ml/kg/hr for 1-2 hour'], ['dengue-cpg', 'reduce to 1-2ml/kg/hr or maintenance fluid; stop IV fluid if able to tolerate orally'],
+  ['dengue-cpg', 'increase fluid regimen to 5-7ml/kg/hr while awaiting result'], ['dengue-cpg', 'oral fluid intake equivalent to 1 - 2 ml/ kg/hour, IV fluid administration is not necessary'],
+  ['dengue-cpg', 'Optimal urine output: 0.5 - 1 ml/kg/hour'], ['dengue-cpg', 'a minimum of 0.5 ml/kg/hour'], ['dengue-cpg', 'at least once every 6 hours'], ['dengue-cpg', 'Good urine output (0.5 - 1.5 mL/kg/hr)'],
+  ['dengue-cpg', 'IgM and IgG should not be used as confirmatory tests'], ['dengue-cpg', 'Negative test results require differential diagnosis to confirm cause of infection']
 ];
 const calcFactsMissing = () => CALC_FACTS.filter(([id, s]) => !JSON.stringify(P[id]).includes(s));
 const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc-wells', 'Wells score calculator'], ['#calc-anticoag', 'Anticoagulant doses']],
@@ -3926,7 +4247,8 @@ const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc
   'mild-tbi':[['#calc-head', 'Head injury check']], 'behavioural-disturbance':[['#calc-calm', 'BARS and RASS']],
   dengue:[['#calc-dengue', 'Shock index'], ['#calc-weight', 'Adjusted weight']], children:[['#calc-kids', 'Child doses'], ['#calc-soap', 'Dehydration check']],
   acs:[['#calc-obsess', 'Obsess protocol check']], syncope:[['#calc-syncope', 'Syncope risk check']], svt:[['#calc-svt', 'SVT drugs by weight']], 'hypertensive-urgency':[['#calc-htn', 'Hypertensive urgency calculator']],
-  'paracetamol-overdose':[['#calc-paraod', 'Time since ingestion']], anaphylaxis:[['#calc-anaph', 'Anaphylaxis drugs and fluids']]};
+  'paracetamol-overdose':[['#calc-paraod', 'Time since ingestion']], anaphylaxis:[['#calc-anaph', 'Anaphylaxis drugs and fluids']],
+  'dengue-cpg':[['#calc-dvitals', 'Triage vital signs'], ['#calc-dfluid', 'Fluids by weight'], ['#calc-drdt', 'Test result'], ['#calc-duo', 'Urine output'], ['#calc-weight', 'Adjusted weight']]};
 /* Add each calculator link once: an entry may already link to it (dengue already links to the shock index) */
 for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; }
 for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
@@ -3993,7 +4315,7 @@ function calcOut(){
   if (!r){ box.innerHTML = `<div class="out"><span>${list.some(f => !Array.isArray(f)) ? 'Choose or tick to see the result' : 'Fill in the boxes to see the result'}</span></div>`; return; }
   const vd = r.verdict;
   /* A figure is set in mono; an answer in words (Indicated, Not covered, a BARS level) is set in the display face */
-  box.innerHTML = r.outs.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b${/\d/.test(val) ? '' : ' class="w"'}>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('')
+  box.innerHTML = r.outs.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b${/\d/.test(val) ? '' : ` class="w${val.length > 22 ? ' long' : ''}"`}>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('')
     + (vd ? `<div class="verdict ${vd.cls}"><span>${esc(vd.h)}</span>${vd.p ? `<p>${esc(vd.p)}</p>` : ''}${vd.href ? `<a class="pill" href="${vd.href}">${esc(vd.link || 'Open the pathway step')}${svg('chev')}</a>` : ''}</div>` : '')
     + (r.lists ? r.lists.map(L => `<div class="cx-list"><h4>${esc(L.h)}</h4><dl>${L.rows.map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('')}</dl></div>`).join('') : '')
     + (r.gap ? `<p class="cx-gap">${svg('info')}<span><b>Not in the source:</b> ${esc(r.gap)}</span></p>` : '')
@@ -4429,7 +4751,9 @@ $('#run').addEventListener('click', e => {
   else if (b.hasAttribute('data-link')) copyText(APP_URL + '#' + state.id + (state.cur === p.start ? '' : '--' + state.cur), {ok:'Link to this step copied', fail:'Copying is blocked here. Use Share to copy the link.'});
   else if (b.hasAttribute('data-copyout')) copyText([p.title + ': ' + n.title, ...(n.items || []).map(i => '- ' + i)].join('\n'), {btn:b, el:b.closest('.res').querySelector('.res-b') || b.closest('.res').querySelector('h2')});
   else if (b.hasAttribute('data-copyadvice')) copyText(p.advice.map((a, i) => (i + 1) + '. ' + a).join('\n'), {btn:b, el:$('#advlist')});
-  else if (b.hasAttribute('data-showadvice')){ selectTab('advice'); $('#ptab').scrollIntoView({block:'start', behavior: REDUCED ? 'auto' : 'smooth'}); }
+  else if (b.hasAttribute('data-copyleaf')) copyText(leafletText(p), {btn:b, el:$('#leaf')});
+  else if (b.dataset.leaf){ leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }
+  else if (b.hasAttribute('data-showadvice')){ selectTab(p.leaflet ? 'leaflet' : 'advice'); $('#ptab').scrollIntoView({block:'start', behavior: REDUCED ? 'auto' : 'smooth'}); }
   else if (b.dataset.pt !== undefined) selectTab(b.dataset.pt);
 });
 $('#run').addEventListener('keydown', e => {

@@ -78,7 +78,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.fill('#libq', ''); await p.waitForTimeout(150);
   // Library filter and stars
   await go(p, '#pathways');
-  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length) === 38, 'library shows 38 cards');
+  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length) === 39, 'library shows 39 cards');
+  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '15'), 'the Ebook filter still counts the 23 ebook pathways (the dengue CPG is not one), and rules 15');
   await p.fill('#libq', 'colic'); await p.waitForTimeout(150);
   console.log('     filter colic ->', await p.evaluate(() => [...document.querySelectorAll('#libgrid .pc h3')].map(h => h.textContent).join(' | ')));
   await p.fill('#libq', ''); await p.waitForTimeout(100);
@@ -178,7 +179,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 18 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 18 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 22 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 22 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
@@ -252,7 +253,63 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#calc-anaph', 400);
   ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '500–1000 ml' && document.querySelectorAll('#couts .cx-list dt').length === 8), 'anaphylaxis at 50 kg: a 500–1000 ml bolus, with the eight drugs listed');
   await p.screenshot({path:out + '/d-calc-anaph.png', fullPage:true});
+  // The four dengue CPG calculators (4th edition, 2026)
+  await go(p, '#calc-dvitals', 400);
+  for (const [k, v] of [['sbp', 100], ['dbp', 80], ['hr', 110], ['rr', 18], ['spo2', 98], ['map', 85]]) await p.fill('#cf-' + k, String(v));
+  await p.waitForTimeout(150);
+  ok(await p.evaluate(() => { const v = document.querySelector('#couts .verdict'); return v.classList.contains('stop') && v.querySelector('a').getAttribute('href') === '#dengue-cpg--red2' && /PP < 30 mmHg; Shock index > 1; HR > 100\/min/.test(v.textContent); }), 'dengue triage vital signs: a pulse pressure of 20, shock index 1.1 and HR 110 mean the Red Zone');
+  for (const [k, v] of [['sbp', 120], ['hr', 80], ['rr', 16], ['map', 93]]) await p.fill('#cf-' + k, String(v));
+  await p.waitForTimeout(150);
+  ok(await p.evaluate(() => { const v = document.querySelector('#couts .verdict'); return v.classList.contains('ok') && v.querySelector('a').getAttribute('href') === '#dengue-cpg--ws'; }), 'and stable vital signs lead on to the warning signs question');
+  await p.fill('#cf-sbp', '130'); await p.fill('#cf-dbp', '55'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => { const v = document.querySelector('#couts .verdict'); return v.classList.contains('next') && /Check the blood pressure/.test(v.textContent) && document.querySelector('#couts .out').classList.contains('warn'); }), 'a diastolic under 60 with a normal systolic is flagged to judge, not sent to the Red Zone');
+  await p.fill('#cf-dbp', '80'); await p.waitForTimeout(100);
+  await p.screenshot({path:out + '/d-calc-dvitals.png', fullPage:true});
+  await go(p, '#calc-dfluid', 400);
+  await p.fill('#cf-wt', '60'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#couts .out b')].map(b => b.textContent).join(' | ') === '60 kg | 100 ml/hr | 5400 ml'), 'dengue fluids at 60 kg: maintenance 100 ml/hr and a 48-hour quota of 5400 ml');
+  await p.fill('#cf-wt', '62'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => /5400–5700 ml/.test(document.querySelector('#couts').textContent) && /5 kg steps/.test(document.querySelector('#couts .cx-gap').textContent)), 'at 62 kg the quota shows both table rows and says the table does not cover it');
+  await p.fill('#cf-wt', '80'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#couts .out b')].map(b => b.textContent).join(' | ') === '70 kg | 110 ml/hr | 6000 ml'), 'at 80 kg the 70 kg limit applies: 110 ml/hr and 6000 ml');
+  await p.screenshot({path:out + '/d-calc-dfluid.png', fullPage:true});
+  await go(p, '#calc-drdt', 400);
+  for (const [k, v] of [['fd', 'lt'], ['ns1', '+'], ['igm', '−'], ['igg', '−']]){ await p.click(`#calcbox [data-k="${k}"][data-sv="${v}"]`); await p.waitForTimeout(80); }
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === 'Acute dengue infection'), 'Table 5: NS1 positive alone, under 5 days of fever, is acute dengue');
+  await p.click('#calcbox [data-k="fd"][data-sv="eq"]'); await p.waitForTimeout(120);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === 'Not covered' && !!document.querySelector('#couts .cx-gap')), 'exactly 5 days of fever is not in Table 5, and the gap is named');
+  await go(p, '#calc-duo', 400);
+  await p.fill('#cf-vol', '300'); await p.fill('#cf-hrs', '4'); await p.fill('#cf-wt', '60'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '1.25 ml/kg/hr'), 'urine output: 300 ml over 4 hours at 60 kg is 1.25 ml/kg/hr');
   ok(await gz() === store0, 'using the calculators stores nothing');
+  // The dengue CPG entry: tabs, the triage route, the leaflet in two languages, deep links and search
+  await go(p, '#dengue-cpg', 400);
+  const dtabs = await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'));
+  ok(dtabs === 'Home care advice|Groups and zones|Fluids|Tests|Shock|Course and care|References', `the dengue CPG has its seven tabs (${dtabs})`);
+  ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'Dengue in adults: CPG 4th edition'; }, null, {timeout:5000}).then(() => true, () => false), 'the dengue CPG banner carries its own picture under the title');
+  ok(await p.waitForFunction(() => !!document.querySelector('#run .run-hero .tm video'), null, {timeout:5000}).then(() => true, () => false), 'and starts its own loop (Moving tiles is on by default)');
+  ok(await p.evaluate(() => P.dengue.see.some(s => s[0] === '#dengue-cpg') && P['dengue-cpg'].see.some(s => s[0] === '#dengue')), 'the ebook dengue pathway and the CPG link to each other');
+  await p.click('#cur [data-go="0"]'); await p.waitForTimeout(250);
+  await p.click('#cur [data-next]'); await p.waitForTimeout(250);
+  for (let i = 0; i < 4; i++){ await p.click('#cur [data-go="1"]'); await p.waitForTimeout(250); }
+  ok(await p.evaluate(() => /^MTS level 5/.test(document.querySelector('#cur h2').textContent) && /Home care advice/.test(document.querySelector('#cur [data-showadvice]').textContent)), 'no to every triage question ends at MTS level 5, with the home care advice');
+  await p.click('#cur [data-showadvice]'); await p.waitForTimeout(450);
+  ok(await p.evaluate(() => document.querySelector('#ptab [aria-selected="true"]').dataset.pt === 'leaflet' && document.querySelectorAll('#leaf .leaf-g').length === 3), 'the home care leaflet opens with its three parts');
+  await p.click('#tp-leaflet [data-leaf="ms"]'); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => document.querySelector('#leaf').lang === 'ms' && /^Nasihat/.test(document.querySelector('#leaf .leaf-t').textContent) && document.activeElement.dataset.leaf === 'ms'), 'the leaflet switches to Bahasa Melayu and keeps the focus on the switch');
+  await p.screenshot({path:out + '/d-run-dengue-cpg.png', fullPage:true});
+  await p.click('#tp-leaflet [data-leaf="en"]'); await p.waitForTimeout(150);
+  for (const [h, t] of [['#dengue-cpg--red2', 'Red Zone: MTS level 2'], ['#dengue-cpg--msglt', 'SGLT2 inhibitor: withhold while unwell'], ['#dengue-cpg--dcok', 'Meets the discharge criteria']]){
+    await go(p, h, 350);
+    const got = await p.evaluate(() => (document.querySelector('#cur h2') || {}).textContent || '');
+    ok(got.startsWith(t), `${h} shows "${t}" (got "${got}")`);
+  }
+  await p.keyboard.press('/'); await p.waitForTimeout(250);
+  await p.fill('#gq', 'fluid quota'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => ['#dengue-cpg', '#calc-dfluid'].includes(a.getAttribute('href')))), 'searching "fluid quota" finds the dengue CPG');
+  await p.fill('#gq', 'denggi'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => a.getAttribute('href') === '#dengue-cpg')), 'searching in Malay ("denggi") finds it through the leaflet');
+  await p.keyboard.press('Escape'); await p.waitForTimeout(200);
   // Quiz
   await go(p, '#quiz');
   await p.click('#quizbox .q-opts button'); await p.waitForTimeout(150);

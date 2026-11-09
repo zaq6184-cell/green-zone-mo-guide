@@ -421,14 +421,14 @@ main{flex:1;outline:none}
 .st .tm img,.st .tm video.on,.tool-go .tm img,.tool-go .tm video.on{opacity:.4}
 .st .tm::after,.tool-go .tm::after{background:linear-gradient(90deg,var(--t2),transparent 90%);background:linear-gradient(90deg,color-mix(in srgb,var(--t2) 55%,transparent),transparent 90%)}
 /* First shift, the Tools headers and the Pathways section bars: the picture on the right, the words on calm colour */
-.first .tm img,.first .tm video,.tool-h .tm img,.tool-h .tm video,.lh .tm img,.lh .tm video{left:auto;width:64%}
+.first .tm img,.first .tm video,.tool-h .tm img,.tool-h .tm video,.run-hero .tm img,.run-hero .tm video,.lh .tm img,.lh .tm video{left:auto;width:64%}
 .lh .tm img,.lh .tm video{width:min(64%,250px)}
 .lh .tm::after{background:linear-gradient(90deg,var(--t2) calc(100% - 250px),transparent 100%);background:linear-gradient(90deg,var(--t2) max(36%,calc(100% - 250px)),color-mix(in srgb,var(--t2) 60%,transparent) max(58%,calc(100% - 160px)),transparent 100%)}
-.first .tm::after,.tool-h .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
+.first .tm::after,.tool-h .tm::after,.run-hero .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
 /* The pearl tile is light: its picture stays faint so the pearl and its source keep their contrast */
 .tip .tm img,.tip .tm video.on{opacity:.55}
 .tip .tm::after{background:linear-gradient(90deg,var(--t1) 34%,transparent 92%)}
-.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small,.tool-go h2,.tool-go p,.tool-go li,.tool-go .go-l{text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.cats button span,.cats button small,.nt .lbl,.nt .val,.nt .nt-l,.st .tile-h,.st li,.first h3,.first p,.tool-h h2,.tool-h p,.lh span,.lh small,.tool-go h2,.tool-go p,.tool-go li,.tool-go .go-l,.run-hero h1{text-shadow:0 1px 3px rgba(0,0,0,.45)}
 @media (prefers-reduced-motion:no-preference){.tm video{transition:opacity .6s var(--ease)}}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
 .od{display:inline-flex;align-items:center;gap:6px;font:800 .7rem/1 var(--body);color:var(--ink-2);padding:5px 9px 5px 5px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
@@ -476,6 +476,11 @@ main{flex:1;outline:none}
 .chip.j svg{width:15px;height:15px}
 .chip.mono{font-family:var(--mono);font-weight:700}
 .run-h h1{font:900 clamp(2.1rem,5.4vw,3.2rem)/1 var(--display);letter-spacing:-.035em;margin:2px 0 0}
+/* A guideline with its own picture: chips and title on a jewel tile, the loop on the right behind them */
+.run-hero{gap:12px;padding:18px 20px 22px;min-height:168px;justify-content:flex-end;box-shadow:var(--sh-2)}
+.run-hero h1{color:#fff;max-width:20ch}
+.run-hero .chip.j{background:var(--glass-2)}
+@media (max-width:760px){.run-hero{min-height:0;padding:16px 16px 18px}}
 .run-h .lead{margin:0;color:var(--muted);max-width:70ch;font-size:1.03rem}
 .see{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font:700 .84rem var(--body);color:var(--muted)}
 .see .pill{min-height:34px;padding:5px 12px;font-size:.82rem}
@@ -614,6 +619,18 @@ button.opt.sugg .gt{color:var(--mint)}
 .ptab-p .pbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .deptnote{padding:12px 14px;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
 .deptnote + .deptnote{margin-top:12px}
+/* A national guideline's tabs (the dengue CPG) and its home care leaflet in two languages */
+.ptab-bar .t-cpg{--tc:var(--gold)}
+.leaf{display:grid;gap:12px}
+.leaf .leaf-lang{justify-self:start}
+.ptab-p .leaf-t{margin:2px 0 0;font:800 1.08rem/1.3 var(--display)}
+.leaf-g{padding:12px 14px 14px;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.leaf-g h5{display:flex;align-items:center;gap:6px;margin:0 0 8px;font:800 .92rem/1.3 var(--body)}
+.leaf-g h5 svg{width:17px;height:17px;flex:none}
+.leaf-g p{margin:0 0 8px}
+.leaf-g.warn{background:var(--concern-soft);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--concern) 35%,transparent)}
+.leaf-g.warn h5{color:var(--concern)}
+.leaf .src{margin:0}
 .tbl{overflow-x:auto;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line)}
 table{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
 th,td{padding:9px 11px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
@@ -760,6 +777,7 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .cf-seg .seg{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr))}
 .cf-seg .seg button{min-height:44px;white-space:normal;line-height:1.2}
 .out b.w{font:850 1.05rem/1.25 var(--display);letter-spacing:-.01em}
+.out b.long{grid-column:1/-1;text-align:left}
 .dc-list .pts{margin-left:auto;padding-left:10px;font:700 .95rem var(--mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
 .dc-list label:has(input:checked) .pts{color:var(--accent)}
 .rate{display:grid;gap:6px;margin:0 0 14px}
@@ -1147,14 +1165,14 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Shift tools -->
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
-          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook and the department's notes. Nothing you tick or type is saved.</p></div></header>
+          <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the dengue CPG. Nothing you tick or type is saved.</p></div></header>
         <div class="tools"><div class="tool" id="dcheck"></div><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a></div>
       </div></section>
 
       <!-- Calculators -->
       <section class="view" data-view="calc" id="v-calc" hidden aria-labelledby="h-calc"><div class="vw">
         <header class="vhead"><div><h1 id="h-calc">Calculators</h1>
-          <p>Doses, scores and checks built only from the ebook and the department's notes, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
+          <p>Doses, scores and checks built only from the ebook, the department's notes and the dengue CPG, each naming its source. Where a source stops, the calculator says so. Nothing you type is saved.</p></div></header>
         <div class="cx" id="cx">
           <div class="tool cx-open" id="calcbox" hidden></div>
           <div class="cx-hub">
