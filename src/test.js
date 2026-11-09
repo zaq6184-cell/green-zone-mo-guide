@@ -70,7 +70,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // Topic tiles: pictures, and loops while Moving tiles is on (on by default)
   await go(p, '#pathways', 900);
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length) === 9, 'the nine topic tiles have their pictures');
-  ok(await p.evaluate(() => [...document.querySelectorAll('#libcats .tm img')].every(i => i.complete && i.naturalWidth === 640)), 'every topic picture loads');
+  ok(await p.waitForFunction(() => [...document.querySelectorAll('#libcats .tm img')].every(i => i.complete && i.naturalWidth === 640), null, {timeout:5000}).then(() => true, () => false), 'every topic picture loads');
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm video').length) > 0, 'the topic tiles start their loops (Moving tiles is on by default)');
   ok(await p.evaluate(() => document.querySelectorAll('.libsec .lh .tm img').length) >= 8, 'the Pathways section bars carry their topic pictures');
   await p.fill('#libq', 'co'); await p.waitForTimeout(150);
@@ -152,7 +152,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // Tools
   await go(p, '#tools');
   ok(await p.evaluate(() => !!document.querySelector('#dcheck .tool-h .tm img') && !!document.querySelector('#tcx .tm img')), 'the discharge check header and the calculators card have their pictures');
-  ok(await p.evaluate(() => document.querySelector('#tcx').getAttribute('href') === '#calc' && document.querySelectorAll('#tcx .gl li').length === 6), 'Shift tools leads to the calculators, with their six groups');
+  ok(await p.evaluate(() => document.querySelector('#tcx').getAttribute('href') === '#calc' && document.querySelectorAll('#tcx .gl li').length === 8), 'Shift tools leads to the calculators, with their eight groups');
   for (let i = 0; i < 6; i++) await p.check(`[data-dc="a${i}"]`);
   ok(await p.evaluate(() => document.querySelector('#verdict').className) === 'verdict ok', 'all checks give ready to discharge');
   ok(await p.evaluate(() => document.querySelectorAll('#dcr i.on').length) === 6, 'the route meter lights all six stations');
@@ -178,15 +178,15 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 12 && document.querySelectorAll('#cxlist .cxl').length === 5), 'the hub lists 12 calculators and 5 outside links');
-  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && a.href.startsWith('https://pemcalc.com/') && /outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc links open in a new tab and say they are an outside site');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 7 && document.querySelectorAll('#cxcats .tm img').length === 7), 'the seven group tiles have their pictures');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 18 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 18 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
   await p.screenshot({path:out + '/d-calc-hub.png', fullPage:true});
   await p.click('#cxcats [data-cg="scores"]'); await p.waitForTimeout(150);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .pc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'curb,wells'), 'the Scores tile shows CURB-65 and Wells');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'curb,wells' && [...document.querySelectorAll('#cxlist .cxl')].filter(r => !r.hidden).length === 3), 'the Scores tile shows CURB-65 and Wells, with ABCD2, Alvarado and Centor on MDCalc');
   await p.click('#cxcats [data-cg="all"]'); await p.fill('#cxq', 'clexane'); await p.waitForTimeout(150);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .pc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'anticoag'), 'finding "clexane" shows the anticoagulant calculator');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'anticoag'), 'finding "clexane" shows the anticoagulant calculator');
   await p.fill('#cxq', 'zzzz'); await p.waitForTimeout(100);
   ok(await p.evaluate(() => !document.querySelector('#cxempty').hidden), 'a find with no match says so');
   await p.fill('#cxq', ''); await p.waitForTimeout(100);
@@ -229,6 +229,29 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#calc-soap', 400);
   for (const i of [0, 1]) await p.check(`#calcbox input[data-k="s"][data-i="${i}"]`);
   ok(await p.evaluate(() => /5–10% dehydrated/.test(document.querySelector('#couts').textContent) && /moderate/.test(document.querySelector('#couts .cx-gap').textContent)), 'two SOAP signs read 5–10%, and the moderate gap is named');
+  await go(p, '#calc-obsess', 400);
+  for (let i = 0; i < 7; i++) await p.check('#calcbox input[data-k="o"][data-i="' + i + '"]');
+  ok(await p.evaluate(() => document.querySelector('#couts .verdict a').getAttribute('href') === '#acs--obs' && [...document.querySelectorAll('#couts .cx-links a')].some(a => /mdcalc\.com\/calc\/111\//.test(a.href) && a.target === '_blank')), 'all seven Obsess criteria start the protocol, with the TIMI score on MDCalc beside it');
+  await go(p, '#calc-syncope', 400);
+  await p.check('#calcbox input[data-k="r"][data-i="1"]');
+  ok(await p.evaluate(() => document.querySelector('#couts .verdict').classList.contains('stop') && document.querySelector('#couts .verdict a').getAttribute('href') === '#syncope--adm'), 'one syncope high-risk factor means admission');
+  await go(p, '#calc-svt', 400);
+  ok(await p.evaluate(() => [...document.querySelectorAll('#couts .out b')].slice(0, 4).map(b => b.textContent).join(' | ') === '25 mg/min | 2.5 mg/min | 5 mg/min | 15 mg/min' && document.querySelectorAll('#couts .cx-list dt').length === 4), 'SVT at 50 kg: esmolol 25, 2.5, 5 and up to 15 mg/min, with the four drugs listed');
+  await go(p, '#calc-htn', 400);
+  await p.selectOption('#cf-drug', {index:1}); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '12.5/25 mg stat then bd' && /ACE inhibitors/.test(document.querySelector('#couts').textContent)), 'choosing captopril shows its dose and the ACE inhibitor contraindications');
+  await go(p, '#calc-paraod', 400);
+  await p.fill('#cf-h', '10'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelector('#couts .verdict a').getAttribute('href') === '#paracetamol-overdose--nac' && !!document.querySelector('#couts .cx-gap')), '10 hours after a paracetamol overdose: start N-acetylcysteine, and the missing regimen is named');
+  await p.fill('#cf-h', '8'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => /exactly 8 hours/.test(document.querySelector('#couts .cx-gap').textContent)), 'exactly 8 hours says the ebook does not place it');
+  await p.fill('#cf-h', '');
+  await p.evaluate(() => { const d = new Date(Date.now() - 3 * 3600e3), el = document.querySelector('#cf-at'); el.value = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); el.dispatchEvent(new Event('input', {bubbles:true})); });
+  await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelector('#couts .verdict a').getAttribute('href') === '#paracetamol-overdose--lvl' && /about 3 hours ago/.test(document.querySelector('#couts').textContent)), 'the clock time works: taken 3 hours ago gives the 2 to 8 hour route');
+  await go(p, '#calc-anaph', 400);
+  ok(await p.evaluate(() => document.querySelector('#couts .out b').textContent === '500–1000 ml' && document.querySelectorAll('#couts .cx-list dt').length === 8), 'anaphylaxis at 50 kg: a 500–1000 ml bolus, with the eight drugs listed');
+  await p.screenshot({path:out + '/d-calc-anaph.png', fullPage:true});
   ok(await gz() === store0, 'using the calculators stores nothing');
   // Quiz
   await go(p, '#quiz');

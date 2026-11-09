@@ -788,6 +788,14 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .cx-gap{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;border-radius:16px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line-2);font-size:.84rem;line-height:1.45;color:var(--ink-2)}
 .cx-gap svg{width:18px;height:18px;flex:none;margin-top:1px;color:var(--muted)}
 .cx-links{display:flex;flex-wrap:wrap;gap:8px}
+.cx-list{padding:14px 16px;border-radius:18px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.cx-list h4{margin:0 0 10px;font:850 .95rem/1.2 var(--display);letter-spacing:-.01em}
+.cx-list dl{display:grid;gap:8px;margin:0}
+.cx-list dl > div{display:grid;grid-template-columns:minmax(0,9.5em) minmax(0,1fr);gap:4px 12px;padding-top:8px;border-top:1px solid var(--line)}
+.cx-list dl > div:first-child{padding-top:0;border-top:0}
+.cx-list dt{font:800 .88rem/1.35 var(--body)}
+.cx-list dd{margin:0;font-size:.86rem;line-height:1.45;color:var(--ink-2)}
+@media (max-width:560px){.cx-list dl > div{grid-template-columns:minmax(0,1fr)}}
 .cx-foot{justify-content:flex-start}
 .cx-foot .sp{flex:1}
 .cxsec .pc{padding-right:48px}
@@ -2632,7 +2640,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
-  ['Calculators','Twelve calculators in one place, built only from the ebook and the department\'s notes, each naming its source: analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the pain scales, BARS and RASS, the head injury check, the child dehydration check and the shock index. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Five children\'s tools the ebook does not cover open on PEMCalc, an outside site.',[['#calc','Calculators'],['#calc-curb','CURB-65'],['#calc-analgesia','Analgesia by weight']]],
+  ['Calculators','Eighteen calculators in one place, built only from the ebook and the department\'s notes, each naming its source: the shock index, analgesia, anticoagulant and insulin doses by weight, CURB-65, Wells, the Obsess protocol check, syncope, SVT, hypertensive urgency, the pain scales, BARS and RASS, the head injury check, paracetamol overdose by time, anaphylaxis, child doses and the SOAP check. The weight carries across the dose calculators while the guide is open, and nothing you type is saved. Scores the ebook names but does not define, such as TIMI and ABCD2, and other essential emergency scores open on MDCalc; children\'s tools open on PEMCalc. Both are outside sites.',[['#calc','Calculators'],['#calc-obsess','Obsess protocol check'],['#calc-paraod','Paracetamol overdose']]],
   ['A new look','The guide is now a bento of tiles, each showing real data from the guide: how each pathway can end, the numbers, the zone.',[['#home','Home']]],
   ['The zone map','The five stops of a Green Zone visit on the home screen. Tap one for what happens there and the rules that apply.',[['#journey','Patient journey']]],
   ['Whole-pathway maps','Every step of a pathway on one sheet, with your route lit and the outcomes you can no longer reach dimmed.',[['#renal-colic','Try it on renal colic']]],
@@ -2649,7 +2657,7 @@ const INTRO = [
   {h:'Find it in one search', p:'Type a symptom, rule, dose or number, or press /. Saved and recent pathways wait on your home screen.', art:'search'},
   {h:'One question at a time', p:'Each pathway asks one question per card and shows how it can still end. It finishes in the ebook\'s outcome colours: red admit, yellow observation, green discharge, violet refer.', art:'path'},
   {h:'Patients move one way', p:'Triage, you the MO, the treatment room, the CCA only if needed, then review. Tap any stop on the zone map for what happens there and the rules that apply.', art:'zone'},
-  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 12 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
+  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 18 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
 ];
 const ART = {
   search:'<rect x="18" y="34" width="284" height="56" rx="28" style="fill:#fff"/><circle cx="50" cy="62" r="10" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><path d="m57.5 69.5 7 7" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><text x="76" y="69" style="font:700 19px var(--body);fill:#14211b">renal colic</text><rect x="184" y="50" width="3" height="25" class="blink" style="fill:var(--emerald-1)"/>' +
@@ -2793,7 +2801,7 @@ const CONFIRM = [
   'The MERS-CoV case definition, which is not in the PUI file.',
   'A readable copy of the Malaysian snakebite guideline.',
   'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
-  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; and whether there is a first-line drug at BARS 7.'
+  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.'
 ];
 
 /* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
@@ -2870,7 +2878,8 @@ const ICONS = {
   kid:'<circle cx="12" cy="5" r="2.4"/><path d="M12 8.5v6.5M8 11l4-2 4 2M9.5 21l2.5-6 2.5 6"/>',
   scale:'<path d="M12 4v16M8.5 20h7M5 7h14M5 7l-2.5 6M5 7l2.5 6M19 7l-2.5 6M19 7l2.5 6"/><path d="M2.5 13a2.5 2.5 0 0 0 5 0zM16.5 13a2.5 2.5 0 0 0 5 0z"/>',
   feather:'<path d="M19 4C11 4 6 9 6 17v3"/><path d="M6 17c6 0 11-4 13-13M10 13h5"/>',
-  ext:'<path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>'
+  ext:'<path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>',
+  flask:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.4 14h9.2"/>'
 };
 const svg = (k, cls = '', fill = false) => `<svg class="i${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[k] || ''}</svg>`;
 /* The mark: the green floor line, leading from the door to care */
@@ -3216,7 +3225,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -3548,19 +3557,37 @@ const CALC_GROUPS = [
   {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'Shock index and adjusted weight'},
   {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants and insulin by weight'},
   {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65 and Wells'},
+  {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain, syncope, SVT and blood pressure'},
   {k:'calm', t:'Pain and calm', j:'t-plum', ic:'feather', d:'Pain scales, BARS and RASS'},
-  {k:'head', t:'Head injury', j:'t-garnet', ic:'brain', d:'CT and safe discharge criteria'},
+  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria, with the neck and limb rules'},
+  {k:'tox', t:'Poisoning and allergy', j:'t-obsidian', ic:'flask', d:'Paracetamol overdose and anaphylaxis'},
   {k:'kids', t:'Kids', j:'t-champagne', ic:'kid', d:'Child doses and the dehydration check'}
 ];
 const CALC_G = Object.fromEntries(CALC_GROUPS.map(g => [g.k, g]));
-/* Outside tools: PEMCalc (pemcalc.com, Dr Kiran Nesarajah). Links only: nothing from it is copied into the guide */
-const PEM = 'https://pemcalc.com/';
+/* Outside tools, as links only: nothing from either site is copied into the guide.
+   PEMCalc (pemcalc.com, Dr Kiran Nesarajah): children's tools our sources do not cover.
+   MDCalc (mdcalc.com): emergency scores the ebook names but does not define (TIMI, ABCD2), or does not cover.
+   The MDCalc links come from its own sitemap and were checked to open, 9 Nov 2026. */
+const PEM = 'https://pemcalc.com/', MDC = 'https://www.mdcalc.com/calc/';
 const CALC_LINKS = [
-  {g:'kids', href:PEM + 'asthma.html', t:'PRAM asthma score', d:'Severity score for a child with acute asthma, with doses by severity.'},
-  {g:'kids', href:PEM + 'croup.html', t:'Westley croup score', d:'Croup severity from five signs.'},
-  {g:'kids', href:PEM + 'vitalsigns.html', t:'Normal vital signs by age', d:'Heart rate, breathing rate, blood pressure and SpO2 ranges for each age group.'},
-  {g:'head', href:PEM + 'pecarn.html', t:'PECARN head injury rules', d:'Which children with a head injury can safely go without a CT.'},
-  {g:'head', href:PEM + 'pgcs.html', t:'Paediatric GCS', d:'The GCS with descriptors for infants and young children.'}
+  {g:'kids', site:'PEMCalc', href:PEM + 'asthma.html', t:'PRAM asthma score', d:'Severity score for a child with acute asthma, with doses by severity.'},
+  {g:'kids', site:'PEMCalc', href:PEM + 'croup.html', t:'Westley croup score', d:'Croup severity from five signs.'},
+  {g:'kids', site:'PEMCalc', href:PEM + 'vitalsigns.html', t:'Normal vital signs by age', d:'Heart rate, breathing rate, blood pressure and SpO2 ranges for each age group.'},
+  {g:'head', site:'PEMCalc', href:PEM + 'pecarn.html', t:'PECARN head injury rules', d:'Which children with a head injury can safely go without a CT.'},
+  {g:'head', site:'PEMCalc', href:PEM + 'pgcs.html', t:'Paediatric GCS', d:'The GCS with descriptors for infants and young children.'},
+  {g:'cardio', site:'MDCalc', href:MDC + '111/timi-risk-score-ua-nstemi', t:'TIMI risk score (UA/NSTEMI)', d:'Risk score for unstable angina or NSTEMI. The Obsess protocol needs TIMI under 1, and the ebook does not list its items.'},
+  {g:'cardio', site:'MDCalc', href:MDC + '115/wells-criteria-pulmonary-embolism', t:'Wells criteria for pulmonary embolism', d:'Pre-test probability of a pulmonary embolism.'},
+  {g:'cardio', site:'MDCalc', href:MDC + '347/perc-rule-pulmonary-embolism', t:'PERC rule for pulmonary embolism', d:'When a low-risk patient needs no further testing for a pulmonary embolism.'},
+  {g:'cardio', site:'MDCalc', href:MDC + '48/corrected-qt-interval-qtc', t:'Corrected QT interval (QTc)', d:'The QT interval corrected for the heart rate.'},
+  {g:'scores', site:'MDCalc', href:MDC + '357/abcd2-score-tia', t:'ABCD2 score (TIA)', d:'Stroke risk after a TIA. The ebook\'s TIA route turns on ABCD2 over 3, and it does not list the items.'},
+  {g:'scores', site:'MDCalc', href:MDC + '617/alvarado-score-acute-appendicitis', t:'Alvarado score', d:'Likelihood of appendicitis in a patient with abdominal pain.'},
+  {g:'scores', site:'MDCalc', href:MDC + '104/centor-score-modified-mcisaac-strep-pharyngitis', t:'Centor score (McIsaac)', d:'Likelihood of a streptococcal sore throat.'},
+  {g:'head', site:'MDCalc', href:MDC + '64/glasgow-coma-scale-score-gcs', t:'Glasgow Coma Scale', d:'The GCS that the head injury criteria use.'},
+  {g:'head', site:'MDCalc', href:MDC + '696/canadian-c-spine-rule', t:'Canadian C-spine rule', d:'Which alert, stable trauma patients need imaging of the neck.'},
+  {g:'head', site:'MDCalc', href:MDC + '703/nexus-criteria-c-spine-imaging', t:'NEXUS criteria for C-spine imaging', d:'When the cervical spine can be cleared without imaging.'},
+  {g:'head', site:'MDCalc', href:MDC + '1670/ottawa-ankle-rule', t:'Ottawa ankle rule', d:'Which ankle and midfoot injuries need an X-ray.'},
+  {g:'head', site:'MDCalc', href:MDC + '368/ottawa-knee-rule', t:'Ottawa knee rule', d:'Which knee injuries need an X-ray.'},
+  {g:'doses', site:'MDCalc', href:MDC + '43/creatinine-clearance-cockcroft-gault-equation', t:'Creatinine clearance (Cockcroft-Gault)', d:'The creatinine clearance that the anticoagulant doses here depend on.'}
 ];
 const tableOf = (id, part) => (P[id].tables || []).find(t => t.title.includes(part));
 const r1 = x => Math.round(x * 10) / 10;
@@ -3633,7 +3660,7 @@ const CALCS = {
         out.push(['SC Clexane', fx(w) + ' mg once a day', 'good', '1 mg/kg once a day']);
       }
       out.push(['Obese patient', 'Consult EP', 'warn', '']);
-      return {outs:out, gap:'The ebook does not state the disposition after a confirmed DVT.', links:[['#calc-wells', 'Wells score']]};
+      return {outs:out, gap:'The ebook does not state the disposition after a confirmed DVT.', links:[['#calc-wells', 'Wells score'], [MDC + '43/creatinine-clearance-cockcroft-gault-equation', 'Creatinine clearance on MDCalc (outside site)', true]]};
     }},
   insulin:{t:'Total daily insulin dose', g:'doses', src:'Ebook p41–42', path:'#hyperglycaemia--known', kw:'tdd basal bolus insulin hyperglycaemia units',
     sub:'The total daily dose for starting a basal-bolus regimen, from the ebook\'s Table 1.0.',
@@ -3728,7 +3755,108 @@ const CALCS = {
         : v.ct_n ? {cls:'stop', h:'Perform CT brain', href:'#mild-tbi--ct1', link:'Open the pathway step'}
         : v.dc_set ? {cls:'next', h:'Not every criterion is fulfilled yet', p:'If they cannot all be met, admit for extended observation.', href:'#mild-tbi--extobs', link:'Open the pathway step'}
         : {cls:'next', h:'No immediate CT criteria: observe and assess PTA', href:'#mild-tbi--obs', link:'Open the pathway step'};
-      return {outs:out, verdict};
+      return {outs:out, verdict, links:[[MDC + '64/glasgow-coma-scale-score-gcs', 'GCS on MDCalc (outside site)', true]]};
+    }},
+  obsess:{t:'Chest pain: Obsess protocol check', g:'cardio', src:'Ebook p12–14', path:'#acs--oc', kw:'acs chest pain obsess observation protocol troponin timi aspirin',
+    sub:'Whether a patient with chest pain fits the department\'s Obsess observation protocol.',
+    fields:[{k:'o', type:'check', label:'Tick each criterion that is met', items:() => P.acs.nodes.oc.items}],
+    note:'From the ebook\'s ACS pathway: every criterion must be met for the Obsess protocol (aspirin 300 mg, serial ECG, hourly vital signs, pain score). The ebook does not show the branch where they are not all met, and does not list the TIMI items.',
+    run(v){
+      if (!v.o_set) return null;
+      const all = P.acs.nodes.oc.items.length, n = v.o_n;
+      return {outs:[['Obsess criteria met', `${n} of ${all}`, n === all ? 'good' : 'warn', n === all ? 'All met' : 'If they cannot all be met: not suitable for the Obsess protocol']],
+        verdict:n === all ? {cls:'next', h:'All met: start the Obsess protocol', p:P.acs.nodes.obs.items.join('; ') + '.', href:'#acs--obs', link:'Open the protocol step'}
+          : {cls:'next', h:'Not suitable for the Obsess protocol yet', p:P.acs.nodes.noobs.items.join(' '), href:'#acs--noobs', link:'Open the pathway step'},
+        links:[[MDC + '111/timi-risk-score-ua-nstemi', 'TIMI score on MDCalc (outside site)', true]]};
+    }},
+  syncope:{t:'Syncope: dangerous causes and high-risk factors', g:'cardio', src:'Ebook p57–58', path:'#syncope--risk', kw:'syncope collapse faint blackout high risk admit ecg troponin',
+    sub:'Any dangerous cause or high-risk factor means admission; none means observation and discharge.',
+    fields:[{k:'r', type:'check', label:'Tick each one present', stop:true, items:() => P.syncope.nodes.risk.items}],
+    note:'From the ebook\'s syncope pathway: any dangerous cause or high-risk factor, admit for evaluation and cardiac monitoring; none, observation and discharge, with follow-up at EMWATCH, EMACC or PC clinic.',
+    run(v){
+      if (!v.r_set) return null;
+      const n = v.r_n;
+      return {outs:[['Dangerous causes or high-risk factors', String(n), n ? 'bad' : 'good', n ? 'Present' : 'None ticked']],
+        verdict:n ? {cls:'stop', h:'Admit for evaluation and cardiac monitoring', href:'#syncope--adm', link:'Open the pathway step'}
+          : {cls:'ok', h:'None present: observation and discharge', p:P.syncope.nodes.home.items.slice(-1)[0] + '.', href:'#syncope--home', link:'Open the discharge step'},
+        links:[[MDC + '115/wells-criteria-pulmonary-embolism', 'Wells PE on MDCalc (outside site)', true], [MDC + '48/corrected-qt-interval-qtc', 'QTc on MDCalc (outside site)', true]]};
+    }},
+  svt:{t:'SVT: instability and drugs', g:'cardio', src:'Ebook p55–56', path:'#svt', kw:'svt supraventricular tachycardia adenosine verapamil amiodarone esmolol cardioversion valsalva',
+    sub:'Signs of instability first, then the ebook\'s drugs to terminate SVT, with esmolol worked out by weight.',
+    fields:[{k:'u', type:'check', label:'Signs of instability? Tick each one present', stop:true, items:() => P.svt.nodes.unst.items}, ['wt','Weight','kg']],
+    note:'From the ebook\'s SVT pathway: any sign of instability, consult EP for synchronised cardioversion, then admit; none, vagal manoeuvres first, then the drugs in its table.',
+    run(v){
+      const outs = [], w = v.wt;
+      let verdict = null;
+      if (v.u_set) verdict = v.u_n ? {cls:'stop', h:'Unstable: consult EP for synchronised cardioversion, then admit', p:P.svt.nodes.cv.items.slice(0, 2).join('; ') + '.', href:'#svt--cv', link:'Open the pathway step'}
+        : {cls:'next', h:'Stable: vagal manoeuvres first', p:P.svt.nodes.vagal.items.join(' ') + '.', href:'#svt--vagal', link:'Open the pathway step'};
+      if (!w) outs.push(['Esmolol by weight', 'Enter the weight', 'warn', 'The esmolol rates are given per kg']);
+      else {
+        const bad = badWt(w);
+        if (bad) outs.push(...bad);
+        else {
+          outs.push(['Esmolol loading, over 1 min', fx(0.5 * w) + ' mg/min', 'warn', '0.5 mg/kg/min']);
+          outs.push(['Then over 4 min', fx(0.05 * w) + ' mg/min', 'warn', '0.05 mg/kg/min. Repeat the loading if the HR is not controlled in 5 min']);
+          outs.push(['Esmolol maintenance', fx(0.1 * w) + ' mg/min', 'warn', `0.1 mg/kg/min; after a 3rd bolus if needed, ${fx(0.15 * w)} mg/min (0.15 mg/kg/min)`]);
+          outs.push(['Esmolol maximum', fx(0.3 * w) + ' mg/min', 'bad', '0.3 mg/kg/min']);
+        }
+      }
+      return {outs, verdict, lists:[{h:'Drugs used to terminate SVT, as the ebook gives them', rows:tableOf('svt', 'terminate SVT').rows.map(r => [r[0], r[1] + (r[2] ? '. Precautions: ' + r[2] : '')])}]};
+    }},
+  htn:{t:'Hypertensive urgency', g:'cardio', src:'Ebook p38–40', path:'#hypertensive-urgency', kw:'hypertension blood pressure bp urgency emergency antihypertensive captopril perindopril amlodipine nifedipine',
+    sub:'Target organ damage first, then any of the ebook\'s antihypertensives in the ED, with its contraindications.',
+    fields:[{k:'t', type:'check', label:'New or progressive target organ damage? Tick each one present', stop:true, items:() => P['hypertensive-urgency'].nodes.tod.items},
+      ['drug', 'Antihypertensive in the ED (* preferred in the ebook)', '', [['', 'Choose a drug'], ...tableOf('hypertensive-urgency', 'antihypertensives').rows.map(r => [r[0], r[0] + ' (' + r[1] + ')'])]]],
+    note:'From the ebook\'s hypertensive urgency pathway: any new or progressive target organ damage, manage as a hypertensive emergency; none, rest and recheck. Drugs from its Table 1.0, contraindications from its Table 1.1.',
+    run(v){
+      const outs = [];
+      let verdict = null;
+      if (v.t_set) verdict = v.t_n ? {cls:'refer', h:'Hypertensive emergency: manage as a hypertensive emergency', href:'#hypertensive-urgency--emerg', link:'Open the pathway step'}
+        : {cls:'next', h:'Hypertensive urgency: rest and recheck', p:P['hypertensive-urgency'].nodes.rest.items.join('; ') + '.', href:'#hypertensive-urgency--rest', link:'Open the pathway step'};
+      const row = v.drug && tableOf('hypertensive-urgency', 'antihypertensives').rows.find(r => r[0] === v.drug);
+      if (row){
+        const cls = {'ACEi':'ACE inhibitors', 'ARB':'ARBs', 'CCB':'Calcium channel blockers', 'Beta-blocker':'Beta-blockers', 'Thiazide diuretic':'Thiazide diuretics'}[row[1]];
+        const ci = cls && tableOf('hypertensive-urgency', 'contraindications').rows.find(r => r[0] === cls);
+        outs.push(['Starting dose', row[2], 'good', row[0].includes('*') ? row[1] + ', preferred in the ebook' : row[1]]);
+        outs.push(['Maximum dose', row[4], 'warn', '']);
+        outs.push(['Onset, then peak', `${row[3]} h, peak ${row[5]} h`, '', '']);
+        if (ci) outs.push([`Contraindications: ${ci[0]}`, ci[1] ? 'Check these' : 'Possible only', 'bad', (ci[1] ? 'Compelling: ' + ci[1] + '. ' : '') + (ci[2] ? 'Possible: ' + ci[2] + '.' : '')]);
+      }
+      return outs.length || verdict ? {outs, verdict} : null;
+    }},
+  paraod:{t:'Paracetamol overdose: time since ingestion', g:'tox', src:'Ebook p51–52', path:'#paracetamol-overdose', kw:'paracetamol acetaminophen panadol overdose poisoning nac n-acetylcysteine charcoal nomogram',
+    sub:'The ebook\'s route by the time since ingestion, from the hours or from the clock time it was taken.',
+    fields:[['h','Hours since ingestion','h'], {k:'at', type:'time', label:'Or the time it was taken'}],
+    note:'From the ebook\'s paracetamol overdose pathway: under 2 hours, activated charcoal; 2 to 8 hours, serum paracetamol and LFT at 4–8 hours (the nomogram if the results are back within 8 hours of ingestion, otherwise N-acetylcysteine); 8 to 24 hours and over 24 hours, start N-acetylcysteine and measure the paracetamol level and LFT.',
+    run(v){
+      let h = v.h > 0 ? v.h : null, from = '';
+      if (h == null && v.at){
+        const [hh, mm] = v.at.split(':').map(Number), now = new Date(), d = now.getHours() * 60 + now.getMinutes() - (hh * 60 + mm);
+        h = (d < 0 ? d + 1440 : d) / 60; from = `Taken at ${v.at}: about ${fx(h)} hours ago, if within the last 24 hours`;
+      }
+      if (h == null) return null;
+      const band = h < 2 ? 'u2' : h < 8 ? 'u8' : h === 8 ? 'e8' : h <= 24 ? 'u24' : 'o24';
+      const V = {
+        u2:{h:'Under 2 hours: activated charcoal', href:'#paracetamol-overdose--ac'},
+        u8:{h:'2 to 8 hours: serum paracetamol and LFT at 4–8 hours after ingestion', p:'If the results will be back within 8 hours of ingestion, plot on the nomogram: above the treatment line, full-dose N-acetylcysteine and admit. If not, start N-acetylcysteine.', href:'#paracetamol-overdose--lvl'},
+        e8:{h:'At exactly 8 hours the ebook\'s bands meet', p:'2 to 8 hours: measure the paracetamol level and LFT, and use the nomogram only if the results are back within 8 hours. 8 to 24 hours: start N-acetylcysteine.', href:'#paracetamol-overdose--time'},
+        u24:{h:'8 to 24 hours: commence N-acetylcysteine infusion', p:'Measure serum paracetamol and LFT. Paracetamol above the nomogram line, or ALT 50 U/L or more: full-dose N-acetylcysteine and admit.', href:'#paracetamol-overdose--nac'},
+        o24:{h:'Over 24 hours: commence N-acetylcysteine infusion', p:'Measure serum paracetamol and LFT. Paracetamol over 10 mg/L (66 µmol/L), or ALT 50 U/L or more: full-dose N-acetylcysteine and admit.', href:'#paracetamol-overdose--nac24'}
+      };
+      return {outs:[['Time since ingestion', fx(h) + ' h', '', from || {u2:'Under 2 hours', u8:'2 to 8 hours', e8:'Exactly 8 hours', u24:'8 to 24 hours', o24:'Over 24 hours'}[band]]],
+        verdict:{cls:'next', link:'Open the pathway step', ...V[band]},
+        gap:'The ebook does not give the activated charcoal dose, the N-acetylcysteine regimen or which nomogram treatment line to use.' + (band === 'e8' ? ' It does not say which band exactly 8 hours belongs to.' : '')};
+    }},
+  anaph:{t:'Anaphylaxis: drugs and fluids', g:'tox', src:'Ebook p15–16', path:'#anaphylaxis--first', kw:'anaphylaxis allergy adrenaline epinephrine glucagon hydrocortisone chlorpheniramine salbutamol fluids',
+    sub:'The ebook\'s drugs in anaphylaxis at a glance, with the fluid bolus worked out by weight.',
+    fields:[['wt','Weight','kg']],
+    note:'From the ebook\'s anaphylaxis pathway: remove the allergen, give oxygen and IM adrenaline, and monitor the blood pressure, pulse oximetry and ECG; then the drugs in its table.',
+    run(v){
+      const w = v.wt, outs = [];
+      if (!w) outs.push(['IV fluids: NS bolus', 'Enter the weight', 'warn', '10–20 ml/kg']);
+      else { const bad = badWt(w); if (bad) outs.push(...bad); else outs.push(['IV fluids: NS bolus', `${Math.round(10 * w)}–${Math.round(20 * w)} ml`, 'good', '10–20 ml/kg']); }
+      return {outs, lists:[{h:'Drugs in anaphylaxis, as the ebook gives them', rows:tableOf('anaphylaxis', 'Drugs').rows.map(r => [r[0], r[1]])}],
+        gap:'The ebook\'s table gives one dose for each drug and no child doses.'};
     }},
   kids:{t:'Child doses', g:'kids', src:'Department posters', path:'#children', kw:'paediatric prednisolone salbutamol puffs ipratropium croup dexamethasone adrenaline ors',
     sub:'Asthma, croup and ORS doses by weight, from the department\'s posters and notes.',
@@ -3785,17 +3913,24 @@ const CALC_FACTS = [
   ['behavioural-disturbance', '1 to 3'], ['behavioural-disturbance', '5 to 6'], ['behavioural-disturbance', 'No (non-violent, BARS 4)'],
   ['mild-tbi', 'More than 4 hours since injury and under 18 points on PTA'], ['mild-tbi', 'minimum of 6 hours since injury'],
   ['children', 'Fewer than 2 signs: under 5% dehydrated'], ['children', '2 or more signs: 5–10%'], ['children', 'All 4 signs: over 10%'],
-  ['children', 'ORS 10 ml/kg after each loose stool'], ['children', 'moderate dehydration: 75 ml/kg over 4 hours'], ['children', 'Dexamethasone 0.3–0.6 mg/kg'], ['children', '0.5 ml/kg (max 5 ml)']
+  ['children', 'ORS 10 ml/kg after each loose stool'], ['children', 'moderate dehydration: 75 ml/kg over 4 hours'], ['children', 'Dexamethasone 0.3–0.6 mg/kg'], ['children', '0.5 ml/kg (max 5 ml)'],
+  ['svt', 'Loading 0.5 mg/kg/min over 1 min, then 0.05 mg/kg/min over 4 min'], ['svt', 'maintenance 0.1 mg/kg/min'], ['svt', 'then 0.15 mg/kg/min'], ['svt', 'max 0.3 mg/kg/min'],
+  ['anaphylaxis', '10–20 ml/kg NS bolus'], ['acs', 'Start T aspirin 300 mg'], ['syncope', 'Follow-up at EMWATCH, EMACC or PC clinic'],
+  ['paracetamol-overdose', 'Under 2 hours'], ['paracetamol-overdose', '2 to 8 hours'], ['paracetamol-overdose', '8 to 24 hours'], ['paracetamol-overdose', 'Over 24 hours'],
+  ['paracetamol-overdose', '4–8 hours after ingestion'], ['paracetamol-overdose', 'within 8 hours'], ['paracetamol-overdose', 'above the nomogram line, or ALT 50 U/L or more'],
+  ['paracetamol-overdose', 'Paracetamol over 10 mg/L (66 µmol/L), or ALT 50 U/L or more']
 ];
 const calcFactsMissing = () => CALC_FACTS.filter(([id, s]) => !JSON.stringify(P[id]).includes(s));
 const CALC_SEE = {pneumonia:[['#calc-curb', 'CURB-65 calculator']], dvt:[['#calc-wells', 'Wells score calculator'], ['#calc-anticoag', 'Anticoagulant doses']],
   pain:[['#calc-pain', 'Pain scales calculator'], ['#calc-analgesia', 'Analgesia by weight']], hyperglycaemia:[['#calc-insulin', 'Insulin dose calculator']],
   'mild-tbi':[['#calc-head', 'Head injury check']], 'behavioural-disturbance':[['#calc-calm', 'BARS and RASS']],
-  dengue:[['#calc-dengue', 'Shock index'], ['#calc-weight', 'Adjusted weight']], children:[['#calc-kids', 'Child doses'], ['#calc-soap', 'Dehydration check']]};
+  dengue:[['#calc-dengue', 'Shock index'], ['#calc-weight', 'Adjusted weight']], children:[['#calc-kids', 'Child doses'], ['#calc-soap', 'Dehydration check']],
+  acs:[['#calc-obsess', 'Obsess protocol check']], syncope:[['#calc-syncope', 'Syncope risk check']], svt:[['#calc-svt', 'SVT drugs by weight']], 'hypertensive-urgency':[['#calc-htn', 'Hypertensive urgency calculator']],
+  'paracetamol-overdose':[['#calc-paraod', 'Time since ingestion']], anaphylaxis:[['#calc-anaph', 'Anaphylaxis drugs and fluids']]};
 /* Add each calculator link once: an entry may already link to it (dengue already links to the shock index) */
 for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; }
 for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
-CALC_LINKS.forEach(l => IDX.push({href:'#calc', title:l.t + ' (PEMCalc, outside site)', kind:'Calculator', meta:'pemcalc.com', body:l.d, ic:'calc', c:'c-breath', j:CALC_G[l.g].j}));
+CALC_LINKS.forEach(l => IDX.push({href:'#calc', title:l.t + ' (' + l.site + ', outside site)', kind:'Calculator', meta:l.href.split('/')[2], body:l.d, ic:'calc', c:'c-breath', j:CALC_G[l.g].j}));
 
 /* The open calculator. Entries live in memory only: the weight and age band are shared, the rest is per calculator */
 let calcTab = 'dengue', cxOpen = false, cxGroup = 'all', cxQ = '';
@@ -3812,6 +3947,7 @@ function calcVals(id){
     const x = cGet(id, f.k);
     if (f.type === 'check'){ const a = x || [], it = itemsOf(f); v[f.k] = a; v[f.k + '_set'] = !!x; v[f.k + '_n'] = a.filter(Boolean).length; v[f.k + '_sum'] = it.reduce((s, row, i) => s + (a[i] ? (row[1] != null ? row[1] : 1) : 0), 0); }
     else if (f.type === 'rate') v[f.k] = x || [];
+    else if (f.type === 'time') v[f.k] = x || '';
     else v[f.k] = x || (f.type === 'seg' && !f.nodef ? optsOf(f)[0][0] : '');
   });
   /* Fields can depend on earlier choices (the pain scale, BARS 7): read until they settle */
@@ -3827,6 +3963,7 @@ function fieldHTML(id, f){
     return `<div class="field${k === 'wt' ? ' wt' : ''}"><label for="cf-${k}">${l}${unit ? ' (' + unit + ')' : ''}</label><input id="cf-${k}" data-k="${k}" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" value="${esc(x == null ? '' : String(x))}">${k === 'wt' ? '<small>Shared with the other dose calculators. Not saved.</small>' : ''}</div>`;
   }
   const x = cGet(id, f.k);
+  if (f.type === 'time') return `<div class="field"><label for="cf-${f.k}">${esc(f.label)}</label><input id="cf-${f.k}" data-k="${f.k}" type="time" autocomplete="off" value="${esc(x || '')}"></div>`;
   if (f.type === 'seg'){ const o = optsOf(f), cur = x || (f.nodef ? '' : o[0][0]);
     return `<div class="cf-full cf-seg"><span class="cf-l" id="cl-${f.k}">${esc(f.label)}</span><div class="seg" role="group" aria-labelledby="cl-${f.k}" style="--n:${o.length}">${o.map(([val, t]) => `<button type="button" data-k="${f.k}" data-sv="${val}" aria-pressed="${cur === val}">${esc(t)}</button>`).join('')}</div></div>`; }
   if (f.type === 'check'){ const a = x || [];
@@ -3858,8 +3995,9 @@ function calcOut(){
   /* A figure is set in mono; an answer in words (Indicated, Not covered, a BARS level) is set in the display face */
   box.innerHTML = r.outs.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b${/\d/.test(val) ? '' : ' class="w"'}>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('')
     + (vd ? `<div class="verdict ${vd.cls}"><span>${esc(vd.h)}</span>${vd.p ? `<p>${esc(vd.p)}</p>` : ''}${vd.href ? `<a class="pill" href="${vd.href}">${esc(vd.link || 'Open the pathway step')}${svg('chev')}</a>` : ''}</div>` : '')
+    + (r.lists ? r.lists.map(L => `<div class="cx-list"><h4>${esc(L.h)}</h4><dl>${L.rows.map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('')}</dl></div>`).join('') : '')
     + (r.gap ? `<p class="cx-gap">${svg('info')}<span><b>Not in the source:</b> ${esc(r.gap)}</span></p>` : '')
-    + (r.links ? `<div class="cx-links">${r.links.map(([h, t]) => `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : '');
+    + (r.links ? `<div class="cx-links">${r.links.map(([h, t, ext]) => ext ? `<a class="pill ext" href="${h}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>` : `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : '');
 }
 /* A scale under a result: the bands are the thresholds already given in the note above */
 const scaleOf = s => {
@@ -3872,13 +4010,13 @@ function calcText(){
   const ins = list.filter(f => Array.isArray(f) && v[f[0]]).map(f => `${f[1]}: ${f[3] ? (f[3].find(o => o[0] === v[f[0]]) || [, v[f[0]]])[1] : v[f[0]] + (f[2] ? ' ' + f[2] : '')}`);
   list.filter(f => !Array.isArray(f) && (f.type === 'seg' || f.type === 'pick') && v[f.k]).forEach(f => { const o = optsOf(f).find(x => x[0] === v[f.k]); if (o) ins.push(`${f.label}: ${f.type === 'pick' ? o[0] + ' ' + o[1] : o[1]}`); });
   const lines = [c.t, ...ins];
-  if (r){ r.outs.forEach(([l, val, , em]) => lines.push(`${l}: ${val}${em ? ' (' + em + ')' : ''}`)); if (r.verdict) lines.push(r.verdict.h + (r.verdict.p ? ' ' + r.verdict.p : '')); if (r.gap) lines.push('Not in the source: ' + r.gap); }
+  if (r){ r.outs.forEach(([l, val, , em]) => lines.push(`${l}: ${val}${em ? ' (' + em + ')' : ''}`)); if (r.verdict) lines.push(r.verdict.h + (r.verdict.p ? ' ' + r.verdict.p : '')); if (r.lists) r.lists.forEach(L => { lines.push(L.h + ':'); L.rows.forEach(([a, b]) => lines.push('  ' + a + ': ' + b)); }); if (r.gap) lines.push('Not in the source: ' + r.gap); }
   lines.push('Source: ' + c.src + ' (Green Zone MO Guide). Check against the patient and local protocols.');
   return lines.join('\n');
 }
 function fieldOf(k){ return calcVals(calcTab).list.find(f => (Array.isArray(f) ? f[0] : f.k) === k); }
 function calcRefocus(sel){ if (!sel) return; const el = $('#calcbox ' + sel); if (el) el.focus(); }
-$('#calcbox').addEventListener('input', e => { const el = e.target.closest('input[type="number"][data-k]'); if (!el) return; cPut(calcTab, el.dataset.k, el.value); calcOut(); });
+$('#calcbox').addEventListener('input', e => { const el = e.target.closest('input[type="number"][data-k], input[type="time"][data-k]'); if (!el) return; cPut(calcTab, el.dataset.k, el.value); calcOut(); });
 $('#calcbox').addEventListener('change', e => {
   const el = e.target;
   if (el.matches('select[data-k]')){ cPut(calcTab, el.dataset.k, el.value); calcOut(); }
@@ -3904,7 +4042,7 @@ function renderCalcHub(){
     const cs = Object.entries(CALCS).filter(([, c]) => c.g === g.k), ls = CALC_LINKS.filter(l => l.g === g.k);
     return `<section class="libsec cxsec ${g.j}" data-g="${g.k}" aria-label="${esc(g.t)}"><h2 class="lh">${tileMedia(g.k)}${svg(g.ic)}<span>${esc(g.t)}</span><small>${cs.length}</small></h2><div class="grid">`
       + cs.map(([id, c]) => `<article class="pc cxc" data-id="${id}" data-kw="${esc([c.t, c.sub, c.src, c.kw, g.t].join(' ').toLowerCase())}"><div class="pc-b"><h3><a href="#calc-${id}">${esc(c.t)}</a></h3><div class="meta"><span class="src">${esc(c.src)}</span></div><p class="ld">${esc(c.sub)}</p></div>${svg('chev', 'go')}</article>`).join('')
-      + ls.map(l => `<article class="pc cxl" data-kw="${esc([l.t, l.d, 'pemcalc paediatric child', g.t].join(' ').toLowerCase())}"><div class="pc-b"><h3><a href="${l.href}" target="_blank" rel="noopener noreferrer">${esc(l.t)}<span class="vh"> (opens PEMCalc, an outside site)</span></a></h3><div class="meta"><span class="ext">${svg('ext')}PEMCalc, outside site</span></div><p class="ld">${esc(l.d)} Not from the ebook or a department document: check it against local protocols.</p></div>${svg('ext', 'go')}</article>`).join('')
+      + ls.map(l => `<article class="pc cxl" data-kw="${esc([l.t, l.d, l.site.toLowerCase() + (l.site === 'PEMCalc' ? ' paediatric child' : ' emergency'), g.t].join(' ').toLowerCase())}"><div class="pc-b"><h3><a href="${l.href}" target="_blank" rel="noopener noreferrer">${esc(l.t)}<span class="vh"> (opens ${l.site}, an outside site)</span></a></h3><div class="meta"><span class="ext">${svg('ext')}${l.site}, outside site</span></div><p class="ld">${esc(l.d)} Not from the ebook or a department document: check it against local protocols.</p></div>${svg('ext', 'go')}</article>`).join('')
       + '</div></section>';
   }).join(''));
   applyCxFilter();
