@@ -21,16 +21,16 @@ Krishna asked on 9 Nov 2026 to run through the site, review the CPGs and add wha
 | Tier | What it means | Count |
 |---|---|---|
 | A | Recommended first: a common Green Zone problem, beside a pathway or department step that already exists | 0 |
-| B | Next: an ED problem the Green Zone sees, or a CPG the ebook already uses | 10 |
+| B | Next: an ED problem the Green Zone sees, or a CPG the ebook already uses | 1 (nine more went into the app in the third round) |
 | C | Now and then: mostly another zone or a specialist, so a link to the CPG is enough for now | 29 |
-| In the app | Built into the guide as Guideline entries | 7 |
+| In the app | Built into the guide as Guideline entries | 16 |
 | Not for the Green Zone | Clinic, specialist, surgical, dental or screening care | 63 |
 
 ## Tier A: recommended first (0)
 
-All six are now in the app (below).
+All six are now in the app (below), and nine of tier B followed in the third round (9 Nov 2026).
 
-## Tier B: next (10)
+## Tier B: next (10; nine now in the app, see Already in the app)
 
 | CPG | Beside, in the app | Note | Reuse | Files |
 |---|---|---|---|---|
@@ -79,7 +79,7 @@ All six are now in the app (below).
 | Management of Post-Operative Infectious Endophthalmitis (2006) | – | the Green Zone sees red eyes, and this is the post-surgical one not to miss; old, so link only. (moved on the front-matter check, 9 Nov 2026). | Not stated | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=653) |
 | Management of Osteoarthritis, 2nd edition (2013) | – | knee and hip OA flares reach the Green Zone, and its analgesic section bears on the discharge prescription; old, so link only. (moved on the front-matter check, 9 Nov 2026). | Yes | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=647) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=648) |
 
-## Already in the app (7)
+## Already in the app (16)
 
 | CPG | Entry | Note | Files |
 |---|---|---|---|
@@ -90,6 +90,15 @@ All six are now in the app (below).
 | Management of Diabetic Foot, 2nd edition (2018) | `diabetic-foot-cpg` | In the app since 9 Nov 2026, Academy CPG round (see its `CPG-REVIEW-*.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=920) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=921) |
 | Management of Foreign Body Ingestion in Children (2025) | `fb-children-cpg` | In the app since 9 Nov 2026, Academy CPG round (see its `CPG-REVIEW-*.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=1174) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=1175) |
 | Management of Dengue in Adults, 4th edition (2026) | `dengue-cpg` | In the app since 9 Nov 2026 (see `CPG-REVIEW.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=756) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=757) |
+| Management of Chronic Kidney Disease in Adults, 2nd edition (2018) | `ckd-cpg` | In the app since 9 Nov 2026, third round (see its `CPG-REVIEW-*.md`). Calculator: kidney function and drug doses. | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=898) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=899) |
+| Management of Rhinosinusitis in Adolescents and Adults (2016) | `sinusitis-cpg` | In the app since 9 Nov 2026, third round (see its `CPG-REVIEW-*.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=845) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=846) |
+| Management of Avulsed Permanent Anterior Teeth, 3rd edition (2019) | `avulsed-tooth-cpg` | In the app since 9 Nov 2026, third round (see its `CPG-REVIEW-*.md`). Copyright the Oral Health Programme. | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=429) |
+| Management of Geriatric Hip Fracture (2023) | `hip-fracture-cpg` | In the app since 9 Nov 2026, third round (see its `CPG-REVIEW-*.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=1107) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=1108) |
+| Management of Cancer Pain, 2nd edition (2023) | `cancer-pain-cpg` | In the app since 9 Nov 2026, third round (see its `CPG-REVIEW-*.md`). With its patient leaflet in English and Bahasa Melayu; calculator: rescue dose and titration. | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=342) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=343) |
+| Management of Type 2 Diabetes Mellitus, 6th edition (2020) | `t2dm-cpg` | In the app since 9 Nov 2026, third round, summarised in the guide's own words: its copyright gives no permission to reproduce (see its `CPG-REVIEW-*.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=763) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=979) |
+| Prevention and Treatment of Venous Thromboembolism (2013) | `vte-cpg` | In the app since 9 Nov 2026, third round, summarised in the guide's own words: its copyright gives no permission to reproduce (see its `CPG-REVIEW-*.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=612) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=613) |
+| Management of Chronic Obstructive Pulmonary Disease, 2nd edition (2009) | `copd-cpg` | In the app since 9 Nov 2026, third round, summarised in the guide's own words: its copyright gives no permission to reproduce (see its `CPG-REVIEW-*.md`). | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=323) · [QR](https://www.acadmed.org.my/view_file.cfm?fileid=324) |
+| Management of Sore Throat (2003) | `sore-throat-cpg` | In the app since 9 Nov 2026, third round, summarised in the guide's own words: its copyright gives no permission to reproduce (see its `CPG-REVIEW-*.md`). Calculator: McIsaac score. | [CPG](https://www.acadmed.org.my/view_file.cfm?fileid=284) |
 
 ## Not for the Green Zone (63)
 

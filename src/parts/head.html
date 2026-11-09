@@ -24,6 +24,7 @@
   --bronze-1:#8a5a1f; --bronze-2:#6b4414; --bronze-3:#47290a;
   --champ-1:#f2e2bb; --champ-2:#e3ca90; --champ-3:#c9a563;
   --indigo-1:#3d4597; --indigo-2:#2a3072; --indigo-3:#191d4a;
+  --slate-1:#46586b; --slate-2:#2f3e4f; --slate-3:#1c2733;
   --b-admit:#c42a20; --b-observe:#f0ae1c; --on-observe:#241900; --b-discharge:#13834c; --b-refer:#5a44c4; --b-neutral:#41544b; --b-advice:#1b5daf;
   --admit:#ae2219; --admit-soft:#fcebe9; --observe:#7d5300; --observe-soft:#fdf2d5; --discharge:#0d6f40; --discharge-soft:#e1f3e8;
   --refer:#4733ae; --refer-soft:#ece9fb; --neutral:#3a4c43; --neutral-soft:#e7eee9; --advice:#1b5daf; --advice-soft:#e6effb; --concern:#a2305a; --concern-soft:#fbe8ef;
@@ -123,6 +124,7 @@ a.tile:active,button.tile:active{transform:scale(.985)}
 .t-teal{--t1:var(--teal-1);--t2:var(--teal-2);--t3:var(--teal-3)}
 .t-bronze{--t1:var(--bronze-1);--t2:var(--bronze-2);--t3:var(--bronze-3)}
 .t-indigo{--t1:var(--indigo-1);--t2:var(--indigo-2);--t3:var(--indigo-3)}
+.t-slate{--t1:var(--slate-1);--t2:var(--slate-2);--t3:var(--slate-3)}
 .t-champagne{--t1:var(--champ-1);--t2:var(--champ-2);--t3:var(--champ-3);--t-ink:var(--gold-ink);--edge:rgba(255,255,255,.4)}
 .t-pearl{--t1:var(--surface);--t2:var(--surface);--t3:var(--surface);--t-ink:var(--ink);box-shadow:var(--sh-2)}
 .t-pearl::before{background:radial-gradient(280px circle at var(--mx,-400px) var(--my,-400px),color-mix(in srgb,var(--mint) 9%,transparent),transparent 62%)}
@@ -708,6 +710,8 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
 @media (max-width:980px){.tools{grid-template-columns:minmax(0,1fr)}}
 .tool{background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-2),inset 0 0 0 1px var(--line);min-width:0;overflow:hidden}
+/* The open calculator clips without becoming a scroll box, so a sticky result bar inside it can stick (older browsers keep hidden) */
+.tool.cx-open{overflow:clip}
 .tool-h{margin:0}
 .tool-h.tile{border-radius:0;box-shadow:none;padding:18px 20px 16px;gap:10px}
 .tool-h .row{display:flex;align-items:center;gap:12px}
@@ -760,6 +764,36 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .scale .good{background:color-mix(in srgb,var(--b-discharge) 70%,transparent)} .scale .warn{background:color-mix(in srgb,var(--b-observe) 75%,transparent)} .scale .bad{background:color-mix(in srgb,var(--b-admit) 70%,transparent)}
 .scale .pin{position:absolute;top:3px;width:4px;height:25px;margin-left:-2px;border-radius:2px;background:var(--ink);left:var(--x);transition:left .5s var(--ease)}
 .scale .pin::after{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--surface-2)}
+/* One-screen calculators (the dengue assessment): numbered section headings, a None of these choice under a checklist,
+   and the phase timeline: the febrile phase and the usual critical-phase window over days 1 to 10, with the day entered */
+.cf-h{display:flex;align-items:center;gap:10px;margin:12px 0 -2px;padding-top:14px;border-top:1px solid var(--line);font:850 1.02rem/1.2 var(--display);color:var(--ink)}
+.cf-h:first-child{margin-top:0;padding-top:0;border-top:0}
+.cf-h b{display:grid;place-items:center;flex:none;width:28px;height:28px;border-radius:10px;background:linear-gradient(150deg,var(--bronze-1),var(--bronze-3));color:#fff;font:800 .82rem/1 var(--mono);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.dc-list li.none label{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.dc-list li.none label span{font-weight:800}
+.dc-list li.none input{accent-color:var(--b-discharge)}
+.dc-list li.none label:has(input:checked){background:var(--discharge-soft);box-shadow:inset 0 0 0 1.5px var(--discharge)}
+.dtl{grid-column:1/-1;display:grid;gap:8px;margin-top:8px}
+.dtl-lg{display:grid;gap:3px;font:700 .74rem/1.35 var(--body);color:var(--muted)}
+.dtl-lg i{display:inline-block;width:14px;height:8px;margin-right:7px;border-radius:3px;vertical-align:1px}
+.dtl-lg i.feb,.dtl-t .feb{background:color-mix(in srgb,var(--b-advice) 72%,transparent)}
+.dtl-lg i.crit,.dtl-t .crit{background:color-mix(in srgb,var(--b-observe) 80%,transparent)}
+.dtl-k{position:relative;display:grid;gap:5px}
+.dtl-t{position:relative;height:10px;border-radius:5px;background:var(--surface-3);box-shadow:inset 0 0 0 1px var(--line)}
+.dtl-t s{position:absolute;top:0;bottom:0;border-radius:5px}
+.dtl-ax{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));font:700 .7rem/1.4 var(--mono);color:var(--faint);text-align:center}
+.dtl-ax i{font-style:normal}
+.dtl-ax i.on{color:var(--ink);font-weight:800}
+.dtl-pin{position:absolute;top:-4px;bottom:17px;width:3px;margin-left:-1.5px;border-radius:2px;background:var(--ink);left:var(--x);box-shadow:0 0 0 2px var(--surface-2);transition:left .5s var(--ease)}
+/* A one-screen calculator keeps its result in view: a bar that sticks to the bottom of the screen while the form scrolls and
+   settles above the results when they come into view (clear of the phone tab bar) */
+.cx-sticky{position:sticky;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:52px;margin:16px 0 0;padding:10px 16px;border:0;border-radius:18px;background:var(--b-neutral);color:#fff;font:850 1rem/1.25 var(--display);text-align:left;box-shadow:var(--sh-3)}
+.cx-sticky:hover{border:0;filter:brightness(1.08)}
+.cx-sticky.stop{background:var(--b-admit)} .cx-sticky.ok{background:var(--b-discharge)}
+.cx-sticky small{display:inline-flex;align-items:center;gap:2px;flex:none;font:700 .78rem/1 var(--body);opacity:.92}
+.cx-sticky small svg{width:15px;height:15px;transform:rotate(90deg)}
+@media (max-width:760px){.cx-sticky{bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+.outs{scroll-margin-top:84px}
 .calc-note{font-size:.8rem;color:var(--muted);margin:14px 0 0;line-height:1.5}
 
 /* ---------- Calculators (9 Nov 2026): the hub, the open calculator and its field kinds ---------- */

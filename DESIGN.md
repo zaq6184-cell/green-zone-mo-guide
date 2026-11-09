@@ -47,6 +47,9 @@ colors:
   indigo-1: "#3d4597"
   indigo-2: "#2a3072"
   indigo-3: "#191d4a"
+  slate-1: "#46586b"
+  slate-2: "#2f3e4f"
+  slate-3: "#1c2733"
   outcome-admit: "#c42a20"
   outcome-observe: "#f0ae1c"
   on-observe: "#241900"
@@ -255,7 +258,7 @@ Two palettes with separate jobs: a jewel palette that tells the MO which area of
   - **Teal**: shift tools and the discharge check.
   - **Bronze**: the calculators (the home tile and the Shift tools card that lead to them).
   - **Champagne**: the shift's pearl (tip of the day), Still to confirm and the saved-state highlight; the only light jewel, so it takes dark gold ink.
-  - In the pathway library the same jewels are reassigned as a second, fixed key for the eight topic groups: heart garnet, breathing sapphire, brain plum, abdomen teal, infection bronze, sugar and pain **Indigo** (the one jewel used only here), Green Zone flow emerald, protocols obsidian. A topic keeps its jewel on its library tile, section header, runner chip and list dot.
+  - In the pathway library the same jewels are reassigned as a second, fixed key for the eight topic groups: heart garnet, breathing sapphire, brain plum, abdomen teal, infection bronze, sugar and pain **Indigo** (the one jewel used only here), Green Zone flow emerald, protocols obsidian, injuries and teeth **Slate** (a cool blue-grey, added with the third CPG round for hip fracture and the knocked-out tooth). A topic keeps its jewel on its library tile, section header, runner chip and list dot.
   - In the calculators the jewels are a third fixed key, for the six groups: Dengue bronze, Doses indigo, Scores sapphire, Heart teal, Pain and calm plum, Injuries garnet, Poisoning and allergy obsidian, Kids champagne. A group keeps its jewel on its tile, its section bar and the header of each of its calculators. Kids is the light jewel, so its tiles take the dark gold ink without a text shadow.
 - **Gold** (gold, gold-ink): small warm accents on dark: saved stars, the What's new dot, the intro's call to go, the tour's current chapter.
 
@@ -425,3 +428,6 @@ The ease is a long out-curve, cubic-bezier(.16, 1, .3, 1); a spring, cubic-bezie
 - **Don't** define a colour only inside a dark block, or hard-code a hex in a component when a token exists.
 - **Don't** use glyph characters for icons; icons are inline SVG.
 - **Don't** let any element scroll the page sideways at 390 px.
+
+### One-screen Calculator (the dengue assessment)
+A long calculator can run as one screen in numbered sections: each section heading is a bronze 28 px numbered badge with a display-face title, separated by a hairline. A checklist that must be answered before a lower result can show ends with a **None of these** row, outlined in line-2 and filled discharge-soft when ticked; ticking an item clears it, and ticking it clears the list. A result bar (`.cx-sticky`) sticks to the foot of the screen while the form scrolls (above the phone tab bar, at 96 px plus the safe area) in the verdict's own outcome colour, and settles above the results; tapping it scrolls to them. The open calculator clips with `overflow:clip` so the bar can stick. The dengue phase timeline is a ten-day strip: a legend above, two 10 px tracks (the febrile phase in advice blue, the usual critical window in observe amber) and a 3 px ink marker on the day entered, with the day's number set in bold on the axis.

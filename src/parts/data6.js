@@ -1185,3 +1185,6 @@ P['children'].see = [...(P['children'].see || []), ['#fb-children-cpg', 'Foreign
    button battery in the stomach or beyond home, where the CPG removes a gastric battery within 24 hours if the child is aged
    <5 years or the battery is ≥20 mm (Recommendation 3, p25). Which the Green Zone follows is open item 17. */
 P['children'].nodes.bbhome.links = [...(P['children'].nodes.bbhome.links || []), ['#fb-children-cpg--bb', 'CPG 2025: battery in the stomach, under 5 or 20 mm or more']];
+
+/* The ACS CPG's copyright holders, named in the footer of its reference tabs (the others are MaHTAS's) */
+P['acs-cpg'].ack = 'the National Heart Association of Malaysia (NHAM) and the Academy of Medicine Malaysia';
