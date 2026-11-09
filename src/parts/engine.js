@@ -224,7 +224,7 @@ const CONFIRM = [
   'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
   'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
   'Which dengue source the Green Zone follows where the ebook (built from the CPG 3rd edition, 2015) and the CPG 4th edition (2026) differ: shock CRT over 2 or over 3 seconds; persistent vomiting over 2 times in 24 hours or over 3 a day; the list of warning signs (the ebook has persistent diarrhoea and a tender liver, the CPG liver enlargement over 2 cm, postural hypotension and reduced urine output); and oral fluids (2 litres a day, or 200 ml an hour while awake).',
-  'Points inside the dengue CPG (4th edition) itself: pregnant, over-65 and morbidly obese patients without warning signs go to MTS level 3 by Appendix 7 but to Group B1, MTS level 4, by Tables 6 and 8 (and all pregnant patients with confirmed dengue should be hospitalised, p72); whether "BP < 90/60" counts either reading below; Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; the quota table does not follow its own method exactly (65 kg: 5700 ml printed, 5770 ml by maintenance plus 50 ml/kg); Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.'
+  'Points inside the dengue CPG (4th edition) itself: Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.'
 ];
 
 /* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
@@ -1077,7 +1077,7 @@ const CALCS = {
   dvitals:{t:'Dengue triage vital signs', g:'dengue', src:'CPG 4th ed., Appendix 7', path:'#dengue-cpg--vit', kw:'dengue triage unstable vital signs blood pressure map mean arterial pulse pressure shock index heart rate respiratory rate spo2 red zone mts level 2 cpg',
     sub:'The seven unstable vital signs of the CPG\'s systematic triage, checked one by one.',
     fields:[['sbp','Systolic BP','mmHg'],['dbp','Diastolic BP','mmHg'],['hr','Heart rate','/min'],['rr','Respiratory rate','/min'],['spo2','SpO2','%'],['map','MAP shown on the monitor','mmHg']],
-    note:'CPG Appendix 7 (p108), unstable vital signs: BP < 90/60 mmHg; MAP < 65 mmHg; PP < 30 mmHg; shock index (HR/SBP) > 1; HR > 100/min; RR > 20/min; SpO2 < 95%. Any one sends the patient to the Red Zone, MTS level 2. Pulse pressure is SBP − DBP (Appendix 10). The CPG gives no formula for the MAP, so enter the monitor\'s reading. A systolic under 90 counts as below 90/60. A diastolic under 60 with a systolic of 90 or more is shown for you to judge: the CPG does not say whether it counts on its own.',
+    note:'CPG Appendix 7 (p108), unstable vital signs: BP < 90/60 mmHg; MAP < 65 mmHg; PP < 30 mmHg; shock index (HR/SBP) > 1; HR > 100/min; RR > 20/min; SpO2 < 95%. Any one sends the patient to the Red Zone, MTS level 2. Pulse pressure is SBP − DBP (Appendix 10). The CPG gives no formula for the MAP, so enter the monitor\'s reading. A systolic under 90 counts as below 90/60. A diastolic under 60 with a systolic of 90 or more is shown for you to judge: the CPG does not say whether it counts on its own, and the Green Zone leaves it to the MO (the guide owner\'s decision, 9 Nov 2026).',
     run(v){
       if (v.sbp && v.dbp && v.dbp >= v.sbp) return [['Check the numbers', 'The diastolic should be below the systolic', 'warn', '']];
       const out = [], bad = [], todo = [];
@@ -1086,7 +1086,7 @@ const CALCS = {
       if (v.sbp && v.dbp){
         const pp = v.sbp - v.dbp;
         lowDia = v.sbp >= 90 && v.dbp < 60;
-        if (lowDia) out.push(['Blood pressure', `${v.sbp}/${v.dbp} mmHg`, 'warn', 'Diastolic under 60, systolic 90 or more: whether this alone is below 90/60 is still to confirm']);
+        if (lowDia) out.push(['Blood pressure', `${v.sbp}/${v.dbp} mmHg`, 'warn', 'Diastolic under 60, systolic 90 or more: not counted on its own, so judge it']);
         else add('Blood pressure', `${v.sbp}/${v.dbp} mmHg`, v.sbp < 90, v.sbp < 90 ? 'Systolic under 90: below 90/60' : 'Not below 90/60', null, 'BP < 90/60 mmHg');
         add('Pulse pressure (SBP − DBP)', pp + ' mmHg', pp < 30, pp < 30 ? 'Under 30 mmHg' : '30 mmHg or more', {min:0, max:80, v:pp, bands:[[0, 30, 'bad'], [30, 80, 'good']]}, 'PP < 30 mmHg');
       } else todo.push('blood pressure');
@@ -1105,7 +1105,7 @@ const CALCS = {
   dfluid:{t:'Dengue fluids by weight', g:'dengue', src:'CPG 4th ed., Algorithm 1, Tables 11–13', path:'#dengue-cpg', kw:'dengue fluid quota m+5% maintenance holliday segar 48 hours critical phase warning signs group b2 iv rate ml/kg/hr crystalloid 70 kg limit obese bmi adjusted body weight cpg',
     sub:'Maintenance, the 48-hour fluid quota and the Algorithm 1 rates, with the 70 kg limit and the adjusted weight.',
     fields:[['wt','Weight','kg'],['ht','Height (optional, for the BMI)','cm'],{k:'sex', type:'seg', label:'Sex (needed only for the adjusted weight)', opts:[['f','Female'],['m','Male']], nodef:true}],
-    note:'CPG 4th ed.: maintenance by Holliday-Segar (Table 11, p41): 4ml/kg/hr for the first 10kg, 2ml/kg/hr for the next 10kg and 1ml/kg/hr for each kg after that. A 70 kg weight limit applies to maintenance and the fluid quota (p40). Over BMI 27.5, use the adjusted body weight (Table 13, p48). The fluid quota (maintenance + 5% deficit, oral and IV together) is the maximum over 48 hours in the critical phase without shock, read from the table under Algorithm 1 (p xiv). In shock the quota no longer applies (p44).',
+    note:'CPG 4th ed.: maintenance by Holliday-Segar (Table 11, p41): 4ml/kg/hr for the first 10kg, 2ml/kg/hr for the next 10kg and 1ml/kg/hr for each kg after that. A 70 kg weight limit applies to maintenance and the fluid quota (p40). Over BMI 27.5, use the adjusted body weight (Table 13, p48). The fluid quota (maintenance + 5% deficit, oral and IV together) is the maximum over 48 hours in the critical phase without shock, read from the table under Algorithm 1 (p xiv), as the Green Zone does (the guide owner\'s decision, 9 Nov 2026). In shock the quota no longer applies (p44).',
     run(v){
       const w = v.wt; if (!w) return null;
       if (w < 20 || w > 300) return [['Weight', 'Enter 20 to 300 kg', 'warn', '']];

@@ -91,9 +91,9 @@ Like the other calculators, they save nothing. A test checks that every threshol
 
 ## Points to raise: inside the CPG itself
 
-These are quoted as printed. The app takes no side; where a point changes what the app shows, the app says so on the spot.
+These are quoted as printed. The app takes no side, except on points 1, 9 and 12, which Krishna decided on 9 Nov 2026. Where a point changes what the app shows, the app says so on the spot.
 
-1. **High risk at triage.** Appendix 7 asks "Warning signs, unstable co-morbids or high risk?" before sending a patient to MTS level 3. Its High Risk box (pregnancy, > 65 years, morbid obesity) is not joined to a question. Tables 6 and 8 put the same patients in Group B1 at MTS level 4. Recommendation 11 then says all pregnant patients with confirmed dengue should be hospitalised (page 73). Heart failure and CKD 3b and above get "early admission despite absence of warning signs" (pages 74 to 75). The app follows Appendix 7's wording at that step and shows the conflict in the question's hint. (Still to confirm, item 10.)
+1. **High risk at triage.** Appendix 7 asks "Warning signs, unstable co-morbids or high risk?" before sending a patient to MTS level 3. Its High Risk box (pregnancy, > 65 years, morbid obesity) is not joined to a question. Tables 6 and 8 put the same patients in Group B1 at MTS level 4. Recommendation 11 then says all pregnant patients with confirmed dengue should be hospitalised (page 73). Heart failure and CKD 3b and above get "early admission despite absence of warning signs" (pages 74 to 75). The app follows Appendix 7's wording at that step and shows the conflict in the question's hint. **Decided by Krishna on 9 Nov 2026:** the Green Zone follows Appendix 7 (MTS level 3).
 2. **Unstable comorbidity.** Table 6 keeps it in Group B1 ("*Unstable comorbidities must be referred for assessment"). Table 8 puts "without warning sign but unstable co-morbidity" at MTS level 3, Group B2.
 3. **Group B1's disposition.** "Possible referral to hospital" (Table 6) against "Observation or admission" (Table 8).
 4. **Age.** ≥65 years (Table 6); > 65 years (Appendix 7, Table 7, Appendix 9, 10.3); ≥60 years for older adults (10.7, page 77).
@@ -105,10 +105,10 @@ These are quoted as printed. The app takes no side; where a point changes what t
    - 65 kg: the method gives 5770 ml; the table prints 5700.
    - 70 kg: the method gives 6140 ml; the table prints 6000.
 
-   The calculator shows the printed table, as the wall chart (Appendix 10) does.
+   The calculator shows the printed table, as the wall chart (Appendix 10) does. **Decided by Krishna on 9 Nov 2026:** the Green Zone uses the printed table.
 10. **"Administered over 48 hours".** Recommendation 7 says the total fluid quota "should be administered over 48 hours". The text calls it "the maximum fluid to be given over 48 hours", and says many patients need less (page 43).
 11. **Weight for fluids.** The 70 kg limit covers maintenance and the quota (page 40). Table 13 uses the adjusted weight for maintenance over BMI 27.5. Shock boluses are "10 - 20 ml/kg adjusted body weight (ABW)" (page 48). The CPG does not say how the limit and the adjusted weight combine for boluses, or whether a non-obese patient in shock uses the adjusted weight. The calculator therefore does not work out bolus volumes.
-12. **"BP < 90/60".** Whether one reading below is enough (Appendix 7). The calculator counts a systolic under 90, and flags a low diastolic with a normal systolic for the MO to judge.
+12. **"BP < 90/60".** Whether one reading below is enough (Appendix 7). The calculator counts a systolic under 90, and flags a low diastolic with a normal systolic for the MO to judge. **Decided by Krishna on 9 Nov 2026:** keep it that way.
 13. **MAP.** Appendix 7 and the monitoring chart use MAP < 65 without a formula.
 14. **Table 5.** It lists 9 of the 16 result patterns, and has no row for exactly 5 days of fever.
 15. **Algorithms 2 and 3 handle an unchanged HCT differently.** Algorithm 2 gives a second bolus; Algorithm 3 goes straight to Algorithm 4.
