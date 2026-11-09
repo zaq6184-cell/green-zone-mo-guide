@@ -1,0 +1,85 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28; --mint:#43dd8c;
+  --amber-1:#b8741a; --amber-2:#8f5510; --amber-3:#5e3608; --gold:#d8b46a;
+  --garnet-1:#a52234; --garnet-2:#7e1626; --garnet-3:#560d19; --garnet-soft:#fbe3e6;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-amber{--j1:var(--amber-1);--j2:var(--amber-2);--j3:var(--amber-3)}
+.j-garnet{--j1:var(--garnet-1);--j2:var(--garnet-2);--j3:var(--garnet-3)}
+.hd{position:absolute;left:108px;top:84px;right:108px;height:96px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font:800 60px/1.05 'Figtree';letter-spacing:-.02em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hd.two{top:64px;height:124px}
+.hd.two h2{font-size:50px;line-height:1.06;text-wrap:balance}
+.card{position:absolute;left:56px;top:216px;width:968px;height:808px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;top:44px;width:864px;height:640px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{width:112px;height:112px;border-radius:34px;padding:26px;position:relative}
+.it .disc .ban{position:absolute;inset:14px;width:auto;height:auto;color:#fff;opacity:.92}
+.it p{margin-top:34px !important;font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink)}
+.it p .no{color:var(--garnet-1);font-weight:900}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+#s3-p{position:absolute;left:52px;top:52px;width:864px;font:700 46px/1.28 'Figtree';color:var(--ink);opacity:0}
+#s3-p b{color:var(--garnet-1);font-weight:900}
+#s3-lh{position:absolute;left:52px;top:46px;width:864px;font:900 40px/1.18 'Figtree';color:var(--garnet-1);letter-spacing:-.01em;opacity:0}
+#s3-ul{position:absolute;left:40px;top:160px;width:888px;list-style:none;display:flex;flex-direction:column;gap:4px}
+#s3-ul li{display:flex;align-items:center;gap:16px;padding:6px 14px 6px 8px;border-radius:18px;font:700 33px/1.2 'Figtree';color:var(--ink);opacity:0}
+#s3-ul li .mk{width:46px;height:46px;border-radius:15px;padding:10px;flex:none}</style>
+<div id="root" data-composition-id="s3" data-width="1080" data-height="1080">
+  <div class="hd" id="s3-hd"><div class="disc jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.3 3.5h7.4l4.8 4.8v7.4l-4.8 4.8H8.3l-4.8-4.8V8.3z"/><path d="M12 8v5M12 16.2h.01"/></svg></div><h2>Dengue warning signs</h2></div>
+  <div class="card" id="s3-card">
+    <p id="s3-p">As the fever starts to subside, be cautious as the condition may become dangerous and worsen in some dengue patients. <b>Go to the hospital immediately if any of the following occur:</b></p>
+    <p id="s3-lh">Go to the hospital immediately if any of the following occur:</p>
+    <ul id="s3-ul"><li id="s3-l0"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5l6 6 4-4 7 7"/><path d="M14.5 16.5h6v-6"/></svg></span><span>General condition worsening or symptoms becoming more severe</span></li><li id="s3-l1"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3.5c0 3.2-1.6 4.8-1.6 8.5S7 20.5 7 20.5M17 3.5c0 3.2 1.6 4.8 1.6 8.5S17 20.5 17 20.5"/><path d="M12 7.5v9.5M8 12.2h8"/></svg></span><span>Severe abdominal pain</span></li><li id="s3-l2"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M8 8.8h.01M12 8.8h.01M8.5 12.8h3"/><path d="M17.5 15s2 2.2 2 3.6a2 2 0 0 1-4 0c0-1.4 2-3.6 2-3.6z"/></svg></span><span>Persistent vomiting</span></li><li id="s3-l3"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7.5" width="16" height="9" rx="2"/><path d="M21 10.5v3M6.5 10.5v3"/></svg></span><span>Extreme fatigue</span></li><li id="s3-l4"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v8"/><path d="M12 12c-.8 1.2-2 1.8-3.4 1.8M12 12c.8 1.2 2 1.8 3.4 1.8"/><path d="M8.7 6.6C6.3 7.2 4 10.6 4 15.2 4 17.8 5 19.5 7 19.5c2.6 0 3.6-1.6 3.6-4.2V9.5"/><path d="M15.3 6.6c2.4.6 4.7 4 4.7 8.6 0 2.6-1 4.3-3 4.3-2.6 0-3.6-1.6-3.6-4.2V9.5"/></svg></span><span>Difficulty breathing or rapid breathing</span></li><li id="s3-l5"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12a1.5 1.5 0 1 1 1.5-1.5 3 3 0 1 1-3-3 4.5 4.5 0 1 1-4.5 4.5 6 6 0 1 1 6 6"/></svg></span><span>Fainting spells</span></li><li id="s3-l6"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5s6 6.4 6 10.9a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5z"/><path d="M9.4 14.6a2.6 2.6 0 0 0 2.6 2.6"/></svg></span><span>Bleeding from the gums or nose, or blood in vomit, urine, or stool</span></li><li id="s3-l7"><span class="mk jw j-garnet"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4s-4.5 4.8-4.5 8.2a4.5 4.5 0 0 0 9 0C13.5 8.8 9 4 9 4z"/><path d="M18 6v12M15 15l3 3 3-3"/></svg></span><span>Reduced urine output less than 4 times per day</span></li></ul>
+  </div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s3-hd",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.3);
+  tl.fromTo("#s3-card",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.42);
+  tl.fromTo("#s3-p",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},2.38);
+  tl.fromTo("#s3-p",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},14.5);
+  tl.fromTo("#s3-lh",{opacity:0},{opacity:1,duration:0.35,ease:"power1.out",immediateRender:false},14.8);
+  tl.fromTo("#s3-l0",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},15.05);
+  tl.fromTo("#s3-l0",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},15.05);
+  tl.fromTo("#s3-l0",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.3,ease:"power1.inOut",immediateRender:false},19.84);
+  tl.fromTo("#s3-l1",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},19.84);
+  tl.fromTo("#s3-l1",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},19.84);
+  tl.fromTo("#s3-l1",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.3,ease:"power1.inOut",immediateRender:false},22.18);
+  tl.fromTo("#s3-l2",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},22.18);
+  tl.fromTo("#s3-l2",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},22.18);
+  tl.fromTo("#s3-l2",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.3,ease:"power1.inOut",immediateRender:false},23.75);
+  tl.fromTo("#s3-l3",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},23.75);
+  tl.fromTo("#s3-l3",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},23.75);
+  tl.fromTo("#s3-l3",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.3,ease:"power1.inOut",immediateRender:false},25.55);
+  tl.fromTo("#s3-l4",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},25.55);
+  tl.fromTo("#s3-l4",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},25.55);
+  tl.fromTo("#s3-l4",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.3,ease:"power1.inOut",immediateRender:false},28.5);
+  tl.fromTo("#s3-l5",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},28.5);
+  tl.fromTo("#s3-l5",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},28.5);
+  tl.fromTo("#s3-l5",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.3,ease:"power1.inOut",immediateRender:false},30.4);
+  tl.fromTo("#s3-l6",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},30.4);
+  tl.fromTo("#s3-l6",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},30.4);
+  tl.fromTo("#s3-l6",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.3,ease:"power1.inOut",immediateRender:false},35.49);
+  tl.fromTo("#s3-l7",{x:28,opacity:0},{x:0,opacity:1,duration:.4,ease:"power3.out"},35.49);
+  tl.fromTo("#s3-l7",{backgroundColor:"rgba(251,227,230,0)"},{backgroundColor:"rgba(251,227,230,1)",duration:.3,ease:"power1.out",immediateRender:false},35.49);
+  tl.fromTo("#s3-l7",{backgroundColor:"rgba(251,227,230,1)"},{backgroundColor:"rgba(251,227,230,0)",duration:.4,ease:"power1.inOut",immediateRender:false},38.927);
+  tl.fromTo("#s3-hd",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},39.477);
+  tl.fromTo("#s3-card",{y:0,opacity:1},{y:60,opacity:0,duration:.45,ease:"power2.in",immediateRender:false},39.427);
+  window.__timelines["s3"] = tl;
+})();
+</script>
+</template>

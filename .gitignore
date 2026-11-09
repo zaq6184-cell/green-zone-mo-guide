@@ -39,3 +39,25 @@ video/explainer-ms-night/work/
 
 # National CPG PDFs, kept here only to check the guide against them (public on the MOH sites; not published from here)
 sources/
+
+# Read-aloud narration (9 Nov 2026): the recorded takes and the music masters stay on this PC (the published copies are
+# the MP3s in app/audio and the films); the scripts with their segment, take and timing files are in narration/scripts/
+narration/read-aloud/
+narration/music/
+narration/scripts/asm/
+narration/scripts/transcripts/
+
+# Dengue at home films: renders, review frames and scratch; the two assets a script makes (bg.mp4 from the dcpg loop,
+# vo-*.wav from the narration, see video/REVIEW.md); and the Malay project, which work/build.cjs ms writes in full
+video/dengue-home/.hyperframes/
+video/dengue-home/renders/
+video/dengue-home/work/snap*/
+video/dengue-home/work/*.mp4
+video/dengue-home/work/check*.json
+video/dengue-home/work/snap*.json
+video/dengue-home/work/*.log
+video/dengue-home/work/*.err
+video/dengue-home/work/*.md5
+video/dengue-home/assets/bg.mp4
+video/dengue-home/assets/vo-*.wav
+video/dengue-home-ms/

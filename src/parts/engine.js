@@ -60,6 +60,8 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['Rabies and the ABC, in full','The HKL protocol on rabies and the Animal Bite Clinic (Oct 2022) step by step: its risk checklist, the wound categories, the rabies vaccine and RIG flow charts, and how to write each prescription (IM, ID and RIG; ward chart, Malaysian or foreigner), with the schedules, sites and doses drawn. A prescription writer counts every dose date from Day 0. The protocol PDF opens from the entry.',[['#animal-bites','Animal bites and rabies'],['#calc-rabies','Write the prescription']]],
+  ['Read aloud and watch','The patient advice, read aloud word for word for a patient to follow: both CPG leaflets (dengue and cancer pain) in English and Bahasa Melayu, and the discharge advice of mild head injury, dengue and the Asthma Zone. Tap Listen; the line being read is marked as the voice reaches it, and the chips start a section. The dengue leaflet also has a two-minute film in each language, every line on screen as it is read. Nothing downloads until you tap.',[['#dengue-cpg','Dengue CPG: Home care advice'],['#mild-tbi','Mild head injury: Discharge advice']]],
   ['National CPGs: nine more','Nine more national guidelines from the Academy of Medicine of Malaysia list, step by step, each beside the pathway or rule it belongs to, each with its own moving banner. Quoted with their page numbers: Chronic Kidney Disease in Adults (2nd edition, 2018), with dose changes by kidney function; Rhinosinusitis in Adolescents and Adults (2016); Avulsed Permanent Anterior Teeth (3rd edition, 2019), for the knocked-out front tooth; Geriatric Hip Fracture (2023); and Cancer Pain (2nd edition, 2023), with its patient leaflet in English and Bahasa Melayu. Summarised in the guide\'s own words with page numbers, because their copyright gives no permission to reproduce them: Type 2 Diabetes Mellitus (6th edition, 2020), Venous Thromboembolism (2013), COPD (2nd edition, 2009) and Sore Throat (2003). Hip fracture and the knocked-out tooth sit in a new Injuries and teeth group. New calculators: kidney function with drug doses, the cancer pain rescue dose and the McIsaac score. Where a CPG and the ebook differ is listed under Still to confirm.',[['#ckd-cpg','CKD CPG'],['#cancer-pain-cpg','Cancer pain CPG'],['#guidelines','All guidelines']]],
   ['Dengue: one screen','The dengue CPG\'s whole triage on one screen (4th edition, 2026): first look and first touch, the seven vital signs, warning signs and co-morbids, with the day of illness and blood results. The MTS level, zone and group update as you tick, in Appendix 7\'s own order; a timeline marks the day of illness against the febrile and critical phases, and on a phone the result stays in view at the foot of the screen. Nothing is saved.',[['#calc-dassess','Open the assessment'],['#dengue-cpg','Dengue CPG']]],
   ['National CPGs: six more','Six more national guidelines from the Academy of Medicine of Malaysia list, step by step, each beside the pathway or rule it belongs to, each with its own moving banner. Management of Asthma in Adults (2nd edition, MaHTAS 2024): grade an exacerbation by Table 9, treat it by the emergency department algorithm, then admit or discharge with an action plan. Management of Gout (2nd edition, MaHTAS 2021): check it is a flare, choose a drug with its doses and contraindications, keep urate-lowering therapy going, and send home with the right referral. Early Management of Head Injury in Adults (2015): head CT, ED observation, admission and the advice card. Acute Coronary Syndromes (1st edition, 2026): the ECG in 10 minutes, the troponin rule-out, risk and first drugs; it asks that suspected ACS is not triaged to a green zone. Diabetic Foot (2nd edition, 2018): general illness, the University of Texas grade, antibiotics and referral. Foreign Body Ingestion in Children (2025): red flags, the first X-ray and each object by where it lies. Every line names its CPG page. New calculators: asthma prednisolone by weight, the action plan PEF zones, and the Glasgow Coma Scale. A new Guidelines filter in Pathways puts the national guidelines together and lists the other national CPGs chosen for the Green Zone from the Academy of Medicine of Malaysia list, as links: each opens its PDF in Google Drive where the CPG allows a copy, otherwise the Academy\'s own file, with its quick reference and patient leaflets where it has them. Where a CPG and the ebook differ is listed under Still to confirm.',[['#acs-cpg','ACS CPG'],['#head-injury-cpg','Head injury CPG'],['#guidelines','All guidelines']]],
@@ -244,6 +246,7 @@ const CONFIRM = [
   'The type 2 diabetes CPG (2020, summarised): which total daily insulin dose and split to use outside DKA (the ebook\'s 0.2 - 0.5 unit/kg/day, the CPG\'s split after DKA, or its basal start), which answers part of item 8 only for that case; its hypoglycaemia doses and the ebook\'s admission and discharge rules, which it lacks; metformin under an eGFR of 45; SGLT2 inhibitors under 30; and euglycaemic ketoacidosis in the blood gas rule. CPG-REVIEW-T2DM.md.',
   'The VTE CPG (2013, summarised): it has no D-dimer step, because the assay most Malaysian laboratories run is not sensitive enough to rule out VTE: which assay HKL runs, and whether the Green Zone keeps the ebook\'s D-dimer step; disposition after a confirmed DVT, which neither source sets; and its two-band Wells against the ebook\'s three. CPG-REVIEW-VTE.md.',
   'The COPD CPG (2009, summarised): whether every Green Zone COPD flare-up gets the ABG it recommends; its oxygen target of 90 - 93% against the department\'s discharge at SpO2 95% or more; prednisolone 30 - 40 mg for 7 - 14 days against the department\'s 30 mg for 5 days; and its antibiotic triggers. CPG-REVIEW-COPD.md.',
+  'The rabies and ABC protocol (Oct 2022): how a possible risk in its checklist (Table 1B, the animal can be observed for 14 days) changes the flow charts\' "Risk of rabies?", which the protocol does not say in words; the vaccine schedule after pre-exposure prophylaxis (the vaccine flow chart asks only about post-exposure prophylaxis, the RIG flow chart about either); which four sites the ID 4-site course uses; and whether the protocol is still current.',
   'The sore throat CPG (2003, summarised): which team takes a suspected quinsy from the Green Zone (the CPG gives no red flags or admission criteria); whether the ED has a rapid strep test or sends throat cultures, and who acts on the result; and NSAIDs, which the ebook\'s pain ladder allows and this CPG advises against routinely. CPG-REVIEW-SORE-THROAT.md.'
 ];
 
@@ -345,6 +348,41 @@ const KIND_G = {admit:'Admit', discharge:'Discharge', observe:'Observation', ref
 const OUT_ORDER = ['admit','observe','discharge','refer','neutral'];
 const OUT_LBL = {admit:'Admit', observe:'Observation', discharge:'Discharge', refer:'Refer', neutral:'Next step'};
 const OUT_IC = {admit:'bed', discharge:'door', observe:'clock', refer:'send', neutral:'step'};
+/* Infographics for the rabies protocol (10 Nov 2026), drawn from its flow charts and appendices; a node or note names one in fig */
+const FIGS = {
+  /* The three wound categories of the flow charts (Appendices 2 and 3), with what each leads to */
+  woundcat:() => {
+    const skin = cut => `<svg class="wc-sk" viewBox="0 0 64 40" aria-hidden="true"><rect x="2" y="22" width="60" height="16" rx="3" class="sk3"/><rect x="2" y="12" width="60" height="12" rx="2" class="sk2"/><rect x="2" y="7" width="60" height="6" rx="2" class="sk1"/>${cut}</svg>`;
+    const rows = [['c1', '1', 'Intact skin', 'No vaccine, no RIG', ''],
+      ['c2', '2', 'Superficial wound', 'Vaccine, by prophylaxis history', '<path class="cut" d="M24 7l4 4 4-3 4 4 4-4"/>'],
+      ['c3', '3', 'Punctured wound', 'Vaccine, and RIG if eligible', '<path class="cut" d="M30 6l2 26 2-26"/><circle class="drop" cx="32" cy="4" r="2.4"/>']];
+    return `<div class="fig figwc" role="img" aria-label="Wound categories: 1, intact skin, no vaccine or RIG; 2, superficial wound, vaccine by prophylaxis history; 3, punctured wound, vaccine and RIG if eligible">${rows.map(([c, n, t, d, cut]) => `<div class="wc ${c}">${skin(cut)}<b>Category ${n}</b><span>${t}</span><em>${d}</em></div>`).join('')}</div>`;
+  },
+  /* The vaccine schedules on a day strip, with the sites and the dose at each (Appendix 2) */
+  sched:() => {
+    const R = [['Full course · IM', '1 site; D0,3,7,14-28', [0, 3, 7], [14, 28], ''], ['Full course · ID', '2 sites; D0,3,7', [0, 3, 7], null, '×2'],
+      ['Shorter course · IM/ID', '1 site; D0,3', [0, 3], null, ''], ['Shorter course · ID', '4 sites; D0', [0], null, '×4']];
+    const x = d => (d / 28 * 100).toFixed(2) + '%';
+    return `<div class="fig figsc"><div class="sc-k" role="img" aria-label="Rabies vaccine schedules: full course IM 1 site on days 0, 3, 7 and 14 to 28, or ID 2 sites on days 0, 3 and 7; shorter course after post-exposure prophylaxis 3 months ago or more, IM or ID 1 site on days 0 and 3, or ID 4 sites on day 0">
+      <p class="sc-cap">Full course: no previous post-exposure prophylaxis. Shorter course: post-exposure prophylaxis 3 months ago or more.</p>
+      ${R.map(([t, d, days, rng, m]) => `<div class="sc-r"><span class="sc-l"><b>${t}</b>${d}</span><div class="sc-t"><span class="sc-line"></span>${rng ? `<s style="--a:${x(rng[0])};--b:${x(rng[1])}"></s>` : ''}${days.map(n => `<i style="--x:${x(n)}">${m ? `<small>${m}</small>` : ''}</i>`).join('')}</div></div>`).join('')}
+      <div class="sc-r sc-ax"><span class="sc-l"></span><div class="sc-t">${[0, 3, 7, 14, 28].map(n => `<em style="--x:${x(n)}">D${n}</em>`).join('')}</div></div></div>
+      <div class="sc-site" role="img" aria-label="Sites: deltoid for IM or ID, suprascapular for ID, anterolateral thigh for ID. Dose at each site: IM 0.5 ml, ID 0.1 ml">
+        <svg viewBox="0 0 132 120" aria-hidden="true"><g class="bd"><circle cx="34" cy="14" r="9"/><path d="M20 28q14-6 28 0l4 34h-36z"/><path d="M20 30l-9 32M48 30l9 32"/><path d="M25 62l-3 52M43 62l3 52"/><circle cx="98" cy="14" r="9"/><path d="M84 28q14-6 28 0l4 34h-36z"/><path d="M84 30l-9 32M112 30l9 32"/><path d="M89 62l-3 52M107 62l3 52"/></g>
+          <circle class="pt im" cx="17" cy="38" r="4.5"/><circle class="pt id" cx="24" cy="80" r="4.5"/><circle class="pt id" cx="91" cy="35" r="4.5"/><circle class="pt id" cx="105" cy="35" r="4.5"/>
+          <text x="34" y="119" class="cap">front</text><text x="98" y="119" class="cap">back</text></svg>
+        <ul><li><i class="pt im"></i>Deltoid (IM/ID)</li><li><i class="pt id"></i>Suprascapular (ID)</li><li><i class="pt id"></i>Anterolateral thigh (ID)</li></ul>
+        <p class="sc-dose"><b>Dose (each site)</b><span>IM <b>0.5 ml</b></span><span>ID <b>0.1 ml</b></span></p></div></div>`;
+  },
+  /* RIG at a glance (Appendices 3 and 6) */
+  rig:() => `<div class="fig figrig" role="img" aria-label="RIG: 1 vial, 1000 IU, at most 1 vial a patient; infiltrate around the wounds; equine RIG may be diluted with normal saline to 2 to 3 times the volume; never in the same syringe as the rabies vaccine">
+    <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v3l-3 4v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9l-3-4V3"/><path d="M7 13h10"/></svg><b>1 vial (1000 iu)</b><span>Max. dose: 1 vial/patient</span></div>
+    <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12c3-4 13-4 16 0-3 4-13 4-16 0z"/><path d="M12 4v3M12 17v3M5 6l2 2M19 6l-2 2M5 18l2-2M19 18l-2-2"/></svg><b>Infiltrate around the wounds</b><span>Stat, in the ED when urgent</span></div>
+    <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v5l3 4v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7l3-4z"/><path d="M6 15h12"/></svg><b>Equine RIG may be diluted</b><span>With normal saline, 2 – 3x volume</span></div>
+    <div class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><circle cx="12" cy="12" r="10"/><path d="m5 5 14 14"/></svg><b>Never in the same syringe</b><span>as the rabies vaccine</span></div></div>`
+};
+const figHTML = k => FIGS[k] ? FIGS[k]() : '';
+
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -751,7 +789,7 @@ function renderHome(){
   $('#keynums').innerHTML = [3, 4, 5].map(i => { const n = NUMS[i]; return `<div class="qnum"><div class="rt"><span>${esc(n.lbl)}</span><b id="kn${i}">${esc(n.val)}</b></div>${n.copy ? `<button type="button" class="sm" data-kcopy="${i}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</div>`; }).join('');
   renderTip();
   $('#rulecards').innerHTML = ruleRows();
-  $('#newcard').innerHTML = `<ul>${V8.map(([t, , l]) => `<li><a href="${l[0][0]}">${esc(t)}</a></li>`).join('')}</ul><a class="pill" href="#new">Everything new, and what came from the drives${svg('chev')}</a>`;
+  $('#newcard').innerHTML = `<ul>${V8.slice(0, 6).map(([t, , l]) => `<li><a href="${l[0][0]}">${esc(t)}</a></li>`).join('')}</ul><a class="pill" href="#new">Everything new, and what came from the drives${svg('chev')}</a>`;
 }
 
 /* ================= Pathway library ================= */
@@ -864,7 +902,7 @@ function draw(focus){
   const total = n.end ? Math.max(steps, 1) : steps + Math.max(stepsLeft(p, state.cur), 1);
   const bar = Array.from({length:total}, (_, i) => `<i class="${n.end ? 'fin' : i <= steps ? 'on' : ''}"></i>`).join('');
   const count = Object.keys(p.nodes).length;
-  const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
+  const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.doc ? `<div class="see"><span>Source</span><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
   /* A guideline can carry its own picture: the chips and title then sit on a jewel tile, with the loop behind them */
   const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
       <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>`;
@@ -911,13 +949,13 @@ function card(n, p){
     const ic = n.end === 'neutral' && p.grp === 'rules' ? 'rule' : OUT_IC[n.end];
     return `<article class="res ${n.end}${land ? ' land' : ''}"><div class="res-h"><span class="ic">${svg(ic)}</span><div><h2>${esc(n.title)}</h2><div class="res-k">${kindLabel(p, n.end)}</div></div></div>
       ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${list(n.items, 'ticks')}
-        ${n.links ? `<div class="links">${n.links.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : ''}
+        ${n.fig ? figHTML(n.fig) : ''}${n.links ? `<div class="links">${n.links.map(([href, t]) => /^https:/.test(href) ? `<a class="pill ext" href="${href}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>` : `<a class="pill" href="${href}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : ''}
         ${n.gap ? `<div class="gap">${svg('info')}<span>${esc(n.gap)}</span></div>` : ''}</div>` : ''}
       <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span><button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${(p.advice || p.leaflet) && n.end === 'discharge' ? `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
   }
   if (n.step){
     const obs = n.kind === 'observe';
-    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${list(n.items)}
+    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig ? figHTML(n.fig) : ''}${list(n.items)}
       <div class="opts"><button type="button" class="opt sugg" data-next><kbd>1</kbd><span>Done, continue</span>${svg('chev', 'gt')}</button></div></div></div>`;
   }
   const sc = n.check === 'score';
@@ -926,7 +964,7 @@ function card(n, p){
     n.items.map((i, k) => `<li><label><input type="checkbox" id="c${k}"><span>${sc ? esc(i[0]) + ` <b class="pts">(${pts(i[1])})</b>` : esc(i)}</span></label></li>`).join('') + '</ul>' + (sc ? '<p class="score">Score <b id="scv">0</b></p>' : '') : '';
   const info = n.info ? '<ul class="info">' + n.info.map(i => `<li>${esc(i)}</li>`).join('') + '</ul>' : '';
   return `<div class="stack"><div class="qc"><h2>${esc(n.q)}</h2>
-    ${n.hint ? `<p class="hint">${esc(n.hint)}</p>` : ''}${info}${checks}
+    ${n.hint ? `<p class="hint">${esc(n.hint)}</p>` : ''}${n.fig ? figHTML(n.fig) : ''}${info}${checks}
     <div class="opts">${n.opts.map(([l], k) => `<button type="button" class="opt" data-go="${k}">${k < 9 ? `<kbd>${k + 1}</kbd>` : ''}<span>${esc(l)}</span>${svg('chev', 'gt')}</button>`).join('')}</div></div></div>`;
 }
 function wireChecks(n){
@@ -979,17 +1017,17 @@ function closeMap(restore){
 function tabsOf(p){
   const T = [], li = a => `<li>${esc(a)}</li>`;
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-  if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:`<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
+  if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
-  const note = d => `<div class="deptnote"><h4>${esc(d.h)}</h4><p class="src">${esc(d.src)}</p>${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
+  const note = d => `<div class="deptnote"><h4>${esc(d.h)}</h4><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
   if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
   /* A national guideline's reference notes, several tabs of them, each note with its page */
-  (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + (p.own ? `<p class="hint">From the ${esc(p.src)}, with its page numbers, in the guide's own words: the CPG gives no permission to reproduce it, so nothing here is quoted.</p>` : `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to ${esc(p.ack || 'MaHTAS')}.</p>`)}));
+  (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + (p.notesFoot ? `<p class="hint">${esc(p.notesFoot)}</p>` : p.own ? `<p class="hint">From the ${esc(p.src)}, with its page numbers, in the guide's own words: the CPG gives no permission to reproduce it, so nothing here is quoted.</p>` : `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to ${esc(p.ack || 'MaHTAS')}.</p>`)}));
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
   /* A national CPG on the shelf opens its full PDF from its References tab */
   const pdf = p.grp === 'cpg' && CPG_SHELF.find(c => c.id && P[c.id] === p);
-  if (p.refs) T.push({k:'refs', l:'References', html:(pdf ? `<div class="cx-links cpg-pdf">${pdf.drive ? `<a class="pill ext" href="${GDRIVE + pdf.drive}/view" target="_blank" rel="noopener noreferrer">The full CPG, PDF in Google Drive${svg('ext')}</a>` : ''}<a class="pill ext" href="${ACAD + pdf.cpg}" target="_blank" rel="noopener noreferrer">Academy of Medicine${svg('ext')}</a>${pdf.qr ? `<a class="pill ext" href="${pdf.qrd ? GDRIVE + pdf.qrd + '/view' : ACAD + pdf.qr}" target="_blank" rel="noopener noreferrer">Quick reference${svg('ext')}</a>` : ''}</div>` : '') + `<ol class="refs">${p.refs.map(li).join('')}</ol>`});
+  if (p.refs) T.push({k:'refs', l:'References', html:(p.doc ? `<div class="cx-links cpg-pdf"><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (pdf ? `<div class="cx-links cpg-pdf">${pdf.drive ? `<a class="pill ext" href="${GDRIVE + pdf.drive}/view" target="_blank" rel="noopener noreferrer">The full CPG, PDF in Google Drive${svg('ext')}</a>` : ''}<a class="pill ext" href="${ACAD + pdf.cpg}" target="_blank" rel="noopener noreferrer">Academy of Medicine${svg('ext')}</a>${pdf.qr ? `<a class="pill ext" href="${pdf.qrd ? GDRIVE + pdf.qrd + '/view' : ACAD + pdf.qr}" target="_blank" rel="noopener noreferrer">Quick reference${svg('ext')}</a>` : ''}</div>` : '') + `<ol class="refs">${p.refs.map(li).join('')}</ol>`});
   return T;
 }
 function refTabs(p){
@@ -1003,11 +1041,126 @@ function selectTab(k, focus){
   $$('#ptab [role="tab"]').forEach(b => { const on = b.dataset.pt === k; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
   $$('#ptab [role="tabpanel"]').forEach(x => { x.hidden = x.id !== 'tp-' + k; });
 }
+/* Read-aloud (9 Nov 2026): VoiceStudio narrations of the patient advice, word for word, recorded one line at a time
+   (narration/README.md) and played from app/audio/ (mono MP3). dur, marks (the start of each section, in seconds) and lines
+   (the start of each line, as [seconds, section, element]) are written by narration/scripts/fill-read.cjs. */
+const READ = {
+  'leaf-dengue-en':{src:'audio/leaf-dengue-en.mp3', dur:108.5, marks:[0, 2.29, 46.86, 70.02],
+    lines:[[0,0,0],[2.29,1,0],[3.82,1,1],[18.55,1,2],[24.99,1,3],[26.68,1,4],[30.6,1,5],[34.72,1,6],[38.21,1,7],[46.86,2,0],[47.97,2,1],[59.64,2,2],[63.43,2,3],[66.58,2,4],[70.02,3,0],[72.15,3,1],[84.82,3,2],[89.61,3,3],[91.95,3,4],[93.52,3,5],[95.32,3,6],[98.27,3,7],[100.17,3,8],[105.26,3,9]]},
+  'leaf-dengue-ms':{src:'audio/leaf-dengue-ms.mp3', dur:101.49, marks:[0, 3.28, 42.31, 64.11],
+    lines:[[0,0,0],[3.28,1,0],[5.14,1,1],[17.1,1,2],[23.68,1,3],[25.76,1,4],[29.01,1,5],[32.26,1,6],[34.35,1,7],[42.31,2,0],[44.27,2,1],[55.5,2,2],[58.61,2,3],[61.37,2,4],[64.11,3,0],[66.31,3,1],[80.99,3,2],[84.64,3,3],[86.26,3,4],[87.96,3,5],[89.67,3,6],[92.13,3,7],[93.2,3,8],[98.53,3,9]]},
+  'leaf-cancerpain-en':{src:'audio/leaf-cancerpain-en.mp3', dur:236.36, marks:[0, 1.91, 16.87, 61.56, 130.99, 150.57, 174.93, 188],
+    lines:[[0,0,0],[1.91,1,0],[4.1,1,1],[10.02,1,2],[16.87,2,0],[18.89,2,1],[26.93,2,2],[36.63,2,3],[52.81,2,4],[61.56,3,0],[65.26,3,1],[82.33,3,2],[103.43,3,3],[116.9,3,4],[130.99,4,0],[138.86,4,1],[150.57,5,0],[155.24,5,1],[174.93,6,0],[177.68,6,1],[179.99,6,2],[182.34,6,3],[184.66,6,4],[188,7,0],[190.91,7,1],[194.74,7,2],[197.33,7,3],[202.84,7,4],[210.62,7,5],[215.8,7,6]]},
+  'leaf-cancerpain-ms':{src:'audio/leaf-cancerpain-ms.mp3', dur:235.17, marks:[0, 2.18, 17.26, 62.26, 127.4, 147.59, 173.45, 186.54],
+    lines:[[0,0,0],[2.18,1,0],[4.71,1,1],[10.47,1,2],[17.26,2,0],[19.56,2,1],[27.3,2,2],[36.41,2,3],[53.91,2,4],[62.26,3,0],[65.7,3,1],[81.81,3,2],[98.52,3,3],[114.35,3,4],[127.4,4,0],[133.86,4,1],[147.59,5,0],[151.86,5,1],[173.45,6,0],[176.65,6,1],[178.62,6,2],[181.31,6,3],[183.44,6,4],[186.54,7,0],[191.49,7,1],[195.28,7,2],[197.96,7,3],[203.01,7,4],[210.41,7,5],[215.37,7,6]]},
+  'adv-tbi-en':{src:'audio/adv-tbi-en.mp3', dur:57.09, marks:[0, 42.06],
+    lines:[[0,0,0],[6.69,0,1],[27.81,0,2],[36.39,0,3],[42.06,0,4],[45.71,0,5],[48.4,0,6],[55.9,0,7]]},
+  'adv-dengue-en':{src:'audio/adv-dengue-en.mp3', dur:37.67, marks:[0, 21.03],
+    lines:[[0,0,0],[2.27,0,1],[8.75,0,2],[12.8,0,3],[14.76,0,4],[21.03,0,5],[26.51,0,6],[32.64,0,7],[35,0,8]]},
+  'adv-asthma-en':{src:'audio/adv-asthma-en.mp3', dur:47.52, marks:[0, 32.59],
+    lines:[[0,0,0],[6.12,0,1],[18.97,0,2],[32.59,0,3],[41.69,0,4]]}
+};
+const READ_LEAF = {'dengue-cpg':'leaf-dengue', 'cancer-pain-cpg':'leaf-cancerpain'}, READ_ADV = {'mild-tbi':'adv-tbi-en', 'dengue':'adv-dengue-en', 'asthma-zone':'adv-asthma-en'};
+const mmss = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
+const reader = new Audio(); reader.preload = 'none';
+let readKey = '';
+function listenBar(key, label, chips){
+  const r = READ[key]; if (!r) return '';
+  return `<div class="lsn" data-read="${key}"><button type="button" class="lsn-b" aria-pressed="false" aria-label="${esc(label)}, ${mmss(r.dur)}">${svg('play')}</button>
+    <div class="lsn-t"><b>${esc(label)}</b><span class="lsn-time"><span class="lsn-at">0:00</span> / ${mmss(r.dur)}</span></div>
+    <div class="lsn-bar" aria-hidden="true"><i></i>${r.marks.slice(1).map(m => `<s style="--x:${(m / r.dur * 100).toFixed(1)}%"></s>`).join('')}</div>
+    ${chips && chips.length ? `<div class="lsn-ch${chips.length > 4 ? ' many' : ''}">${chips.map((c, i) => r.marks[i + 1] != null ? `<button type="button" data-seek="${r.marks[i + 1]}">${esc(c)}</button>` : '').join('')}</div>` : ''}</div>`;
+}
+function readerUI(){
+  const box = $(`.lsn[data-read="${readKey}"]`); if (!box) return;
+  const r = READ[readKey], t = reader.currentTime || 0, on = !reader.paused;
+  const b = box.querySelector('.lsn-b'); b.innerHTML = svg(on ? 'pause' : 'play'); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  box.classList.toggle('on', on);
+  box.querySelector('.lsn-at').textContent = mmss(t);
+  box.querySelector('.lsn-bar i').style.width = Math.min(100, t / r.dur * 100).toFixed(2) + '%';
+  /* Light the section being read: the title, then each section of the leaflet in order */
+  const k = r.marks.filter(m => m <= t + 0.05).length - 1, leaf = box.closest('.leaf');
+  box.querySelectorAll('.lsn-ch button').forEach((c, i) => {
+    const was = c.classList.contains('on'), now = (on || t > 0) && i === k - 1;
+    c.classList.toggle('on', now);
+    /* A long chip row is one swipeable line: bring the section being read into it, without moving the page */
+    if (now && !was && c.parentElement.classList.contains('many')){ const row = c.parentElement; row.scrollTo({left:c.offsetLeft - (row.clientWidth - c.offsetWidth) / 2, behavior:REDUCED ? 'auto' : 'smooth'}); }
+  });
+  if (leaf){
+    const parts = [leaf.querySelector('.leaf-t'), ...leaf.querySelectorAll('.leaf-g')];
+    parts.forEach((el, i) => el && el.classList.toggle('reading', (on || t > 0) && i === k && t < r.dur - 0.2));
+  }
+  /* Mark the line being read (lines: [seconds, section, element]) and keep it in view, unless the reader has just scrolled */
+  const ln = (on || t > 0) && t < r.dur - 0.2 && r.lines ? r.lines.filter(l => l[0] <= t + 0.05).pop() : null;
+  const el = ln ? readLine(box, ln[1], ln[2]) : null;
+  document.querySelectorAll('.rl-on').forEach(x => { if (x !== el) x.classList.remove('rl-on'); });
+  if (el && !el.classList.contains('rl-on')){
+    el.classList.add('rl-on');
+    const b = el.getBoundingClientRect();
+    if (on && Date.now() - readScrolled > 4000 && (b.top < 80 || b.bottom > innerHeight - 96)) el.scrollIntoView({block:'center', behavior:REDUCED ? 'auto' : 'smooth'});
+  }
+}
+/* A leaflet's section 0 is its title and section k its k-th group, whose elements are [heading, paragraph if any, ...items];
+   an advice tab's elements are its advice lines */
+function readLine(box, s, e){
+  const leaf = box.closest('.leaf');
+  if (!leaf){ const tab = box.closest('[role="tabpanel"]'); return tab ? tab.querySelectorAll('#advlist > li')[e] || null : null; }
+  if (s === 0) return leaf.querySelector('.leaf-t');
+  const g = leaf.querySelectorAll('.leaf-g')[s - 1];
+  return g ? g.querySelectorAll(':scope > h5, :scope > p, :scope > ul > li')[e] || null : null;
+}
+let readScrolled = 0;
+['wheel', 'touchmove', 'keydown'].forEach(ev => addEventListener(ev, e => { if (ev !== 'keydown' || /^(Page|Arrow(Up|Down)|Home|End)/.test(e.key)) readScrolled = Date.now(); }, {passive:true}));
+function stopReader(){
+  if (!readKey) return;
+  reader.pause();
+  const box = $(`.lsn[data-read="${readKey}"]`);
+  if (box){ box.classList.remove('on'); const b = box.querySelector('.lsn-b'); b.innerHTML = svg('play'); b.setAttribute('aria-pressed', 'false'); }
+  document.querySelectorAll('.reading, .lsn-ch button.on, .rl-on').forEach(el => el.classList.remove('reading', 'on', 'rl-on'));
+}
+function playReader(key, at){
+  if (readKey !== key){ stopReader(); readKey = key; reader.src = READ[key].src; }
+  stopJourney(); pauseTour(); pauseFilms();
+  if (at != null){ try { reader.currentTime = at; } catch(e){} }
+  reader.play().then(readerUI).catch(() => toast('The narration could not play here'));
+}
+reader.addEventListener('timeupdate', readerUI);
+reader.addEventListener('pause', readerUI);
+reader.addEventListener('ended', () => { reader.currentTime = 0; readerUI(); document.querySelectorAll('.reading, .lsn-ch button.on, .rl-on').forEach(el => el.classList.remove('reading', 'on', 'rl-on')); });
+document.addEventListener('click', e => {
+  const b = e.target.closest('.lsn-b, .lsn-ch [data-seek]'); if (!b) return;
+  const key = b.closest('.lsn').dataset.read;
+  if (b.dataset.seek != null) return playReader(key, +b.dataset.seek);
+  if (readKey === key && !reader.paused) reader.pause(); else playReader(key);
+});
+
+/* A short film of a leaflet (9 Nov 2026): every line on screen as the read-aloud voice says it (video/dengue-home). A small card
+   until tapped; the tap swaps in the player, so nothing downloads before it (preload none). One film per language. */
+const FILMS = {'dengue-cpg':{
+  en:{src:'media/dengue-home-720.mp4', cover:'media/dengue-home-poster.webp', thumb:'media/dengue-home-thumb.webp', t:'Watch this leaflet', d:'2 min · every line on screen as it is read'},
+  ms:{src:'media/dengue-home-ms-720.mp4', cover:'media/dengue-home-ms-poster.webp', thumb:'media/dengue-home-ms-thumb.webp', t:'Tonton risalah ini', d:'2 min · setiap baris di skrin semasa dibacakan'}}};
+function filmCard(id, lg){
+  const f = FILMS[id] && FILMS[id][lg]; if (!f) return '';
+  return `<div class="lfilm" lang="${lg}"><button type="button" class="lfilm-b" data-film="${f.src}" data-cover="${f.cover}"><span class="lfilm-th"><img src="${f.thumb}" alt="" width="72" height="72" loading="lazy">${svg('play')}</span><span class="lfilm-t"><b>${esc(f.t)}</b><small>${esc(f.d)}</small></span></button></div>`;
+}
+function pauseFilms(){ $$('.lfilm video').forEach(v => { if (!v.paused) v.pause(); }); }
+document.addEventListener('click', e => {
+  const b = e.target.closest('.lfilm-b'); if (!b) return;
+  stopReader(); stopJourney(); pauseTour();
+  const box = b.parentElement;
+  box.innerHTML = `<video class="lfilm-v" controls playsinline preload="none" width="720" height="720" poster="${b.dataset.cover}" src="${b.dataset.film}"></video>`;
+  const v = box.querySelector('video');
+  v.addEventListener('play', stopReader);
+  v.play().catch(() => {});
+});
+
 /* The CPG's home care leaflet (Appendix 5B) in English or Bahasa Melayu. The choice lives in memory only */
 let leafLang = 'en';
 function leafletHTML(p){
   const L = p.leaflet, d = L[leafLang];
   return `<div class="leaf" id="leaf" lang="${leafLang}"><div class="seg leaf-lang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(k => `<button type="button" data-leaf="${k}" aria-pressed="${leafLang === k}" lang="${k}">${esc(L[k].lang)}</button>`).join('')}</div>
+    ${READ_LEAF[state.id] ? listenBar(READ_LEAF[state.id] + '-' + leafLang, leafLang === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen in English', d.groups.map(g => g.h.length > 28 ? g.h.slice(0, 26).replace(/\s+\S*$/, '') + '…' : g.h)) : ''}
+    ${filmCard(state.id, leafLang)}
     <h4 class="leaf-t">${esc(d.title)}</h4>${d.groups.map(g => `<section class="leaf-g${g.warn ? ' warn' : ''}"><h5>${g.warn ? svg('stop') : ''}${esc(g.h)}</h5>${g.p ? `<p>${esc(g.p)}</p>` : ''}<ul>${g.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}
     <p class="src">${esc(L.src)}</p></div><div class="pbar"><button type="button" class="sm" data-copyleaf>${svg('copy')}<span class="bl">Copy advice</span></button></div>`;
 }
@@ -1046,7 +1199,7 @@ function renderDcheck(){
    Checklists and tables come straight from the pathway data, so a calculator cannot drift from its pathway. */
 const CALC_GROUPS = [
   {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'The one-screen assessment, triage vital signs, fluids, the test result, urine output, the shock index and adjusted weight'},
-  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin, asthma prednisolone, and kidney function with drug doses'},
+  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin, asthma prednisolone, kidney function with drug doses, and the rabies vaccine and RIG'},
   {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65, Wells, the asthma action plan zones and the McIsaac score'},
   {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain, syncope, SVT and blood pressure'},
   {k:'calm', t:'Pain and calm', j:'t-plum', ic:'feather', d:'Pain scales, BARS and RASS, and the cancer pain rescue dose'},
@@ -1155,10 +1308,6 @@ const painRows = v => {
 };
 const painKey = v => 'r_' + (v.sc || 'flacc') + (v.sc === 'cpot' ? '_' + (v.tube || 'in') : '');
 const CALCS = {
-  /* Dengue CPG 4th edition: Appendix 7's systematic triage on one screen. The checklists and outcome cards are read from
-     P['dengue-cpg'] (its triage steps life, vit, ws, cm and the outcomes red12, red2, yellow, green, pc); the vital signs use the
-     triage vital signs calculator's own checks; the course of illness, the haematocrit and the platelets come from its notes
-     (see CALC_FACTS). Nothing is saved, and there is no name or ID box. */
   dassess:{t:'Dengue assessment: one screen', g:'dengue', sticky:true, src:'CPG 4th ed., Appendix 7 and Table 8', path:'#dengue-cpg--ask', kw:'dengue assessment one screen whole triage appendix 7 table 8 mts zone level group a b1 b2 c warning signs comorbid co-morbid social risk vital signs day of illness phase febrile critical recovery haematocrit hct baseline platelet notification cpg',
     sub:'The CPG\'s systematic triage in one place: first look, vital signs, warning signs and co-morbids, with the day of illness and blood results. The zone, MTS level and group update as you tick.',
     fields:[
@@ -1507,6 +1656,50 @@ const CALCS = {
         lists:[{h:'Type 2 diabetes CPG (2020, summarised): what it gives on splitting', rows:P['t2dm-cpg'].nodes.isplit.items.map((x, i) => [String(i + 1), x])}],
         gap:'The ebook says to start a basal-bolus regimen based on the TDD, but does not give the split between basal and bolus doses. The type 2 diabetes CPG gives a split only for the move off an insulin infusion after DKA, and a different starting TDD: which the Green Zone uses is still to confirm.', links:[['#t2dm-cpg--isplit', 'Type 2 diabetes CPG: the split']]};
     }},
+  /* Rabies post-exposure prophylaxis: the prescriptions written the way the protocol's examples write them (Appendices 4 to 6),
+     with the dose dates worked out from Day 0, and the schedules from its flow chart (Appendix 2). No name, IC or serial number:
+     the slip's own boxes take those. Nothing is saved. */
+  rabies:{t:'Rabies vaccine and RIG: the prescription', g:'doses', src:'Rabies and ABC protocol, Oct 2022', path:'#animal-bites--cat', kw:'rabies dog bite cat bite monkey bite animal bite abc vaccine rig immunoglobulin pep post-exposure prophylaxis intradermal intramuscular deltoid prescription schedule foreigner ward chart',
+    sub:'Writes the rabies vaccine and RIG prescriptions as the protocol\'s examples do, with each dose date counted from Day 0.',
+    fields:v => [
+      {k:'reg', type:'seg', label:'Vaccine course', re:true, opts:[['full', 'Full course'], ['short', 'Shorter course']]},
+      {k:'rt', type:'seg', label:'Route', re:true, opts:v.reg === 'short' ? [['im1', 'IM, 1 site'], ['id1', 'ID, 1 site'], ['id4', 'ID, 4 sites']] : [['im', 'IM, 1 site'], ['id', 'ID, 2 sites']]},
+      {k:'slip', type:'seg', label:'Prescription', opts:[['opd', 'Outpatient: Malaysian'], ['fgn', 'Outpatient: foreigner'], ['ward', 'Ward chart']]},
+      {k:'d0', type:'date', label:'Day 0: the date of the first dose'},
+      {k:'rig', type:'seg', label:'RIG (Category 3, eligible, urgent in the ED)', opts:[['no', 'No RIG'], ['yes', 'RIG in the ED']]}
+    ],
+    note:'Full course: no history of post-exposure prophylaxis. Shorter course: post-exposure prophylaxis 3 months ago or more. Less than 3 months ago, or a Category 1 wound, or no rabies risk: no vaccine and no RIG. The MO writes the prescription and the EP countersigns it; the SN or PPP indents from the A&E pharmacy.',
+    run(v){
+      const short = v.reg === 'short';
+      const rt = short ? (['im1', 'id1', 'id4'].includes(v.rt) ? v.rt : 'im1') : (v.rt === 'id' ? 'id' : 'im');
+      const im = rt === 'im' || rt === 'im1', sites = rt === 'id' ? 2 : rt === 'id4' ? 4 : 1;
+      const days = short ? (rt === 'id4' ? [0] : [0, 3]) : (im ? [0, 3, 7, 14] : [0, 3, 7]);
+      const pad = n => String(n).padStart(2, '0');
+      const d0 = /^\d{4}-\d{2}-\d{2}$/.test(v.d0) ? v.d0.split('-').map(Number) : null;
+      const on = n => { if (!d0) return 'date'; const d = new Date(Date.UTC(d0[0], d0[1] - 1, d0[2] + n)); return pad(d.getUTCDate()) + '/' + pad(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear(); };
+      const chart = short ? (rt === 'id4' ? 'ID: 4 sites; D0' : 'IM/ID: 1 site; D0,3') : (im ? 'IM: 1 site; D0,3,7,14-28' : 'ID: 2 sites; D0,3,7');
+      const drug = im ? 'IM Rabies Vaccine 0.5 ml stat' : `ID Rabies Vaccine 0.1 ml x ${sites} site${sites > 1 ? 's' : ''} stat`;
+      const outs = [
+        ['Schedule', days.map(n => 'D' + n).join(', '), 'good', chart + (!short && im ? ' · the last dose from D14 to D28' : ''), {rx:true, days, rng:!short && im ? [14, 28] : null, m:sites > 1 ? '×' + sites : ''}],
+        ['Dose at each site', im ? '0.5 ml' : '0.1 ml', 'good', im ? 'Intramuscular (IM): 0.5 ml' : `Intradermal (ID): 0.1 ml, at ${sites} site${sites > 1 ? 's' : ''}`],
+        ['Site', im ? 'Deltoid' : sites === 4 ? 'See below' : 'Deltoid', 'good', im ? 'Deltoid (IM/ID)' : 'Deltoid (IM/ID); Suprascapular (ID); Anterolateral thigh (ID)']];
+      let rows;
+      if (v.slip === 'ward') rows = [['Kaedah Administrasi', im ? 'IM (Deltoid)' : 'Intradermal'], ['Nama Ubat', 'Rabies Vaccine (Day 0)'], ['Dos', im ? '0.5ml' : `0.1 ml x ${sites} site${sites > 1 ? 's' : ''}${sites === 2 ? ' (each deltoid)' : ''}`], ['Frekuensi', 'Stat'], ['Signed', 'MO: sign and stamp; EP: countersign and stamp (T/tangan timbal & Cop Pakar)']];
+      else if (v.slip === 'fgn') rows = [['Site', '(Deltoid)'], ['D0', (im ? 'IM Rabies Vaccine 0.5 ml stat' : `Intradermal Rabies Vaccine 0.1 ml x ${sites} site${sites > 1 ? 's' : ''} stat`) + ` D0 (${on(0)})`], ['Signed', 'EP and MO: sign and stamp'], ['Later doses', 'One dose per visit: at each visit, write that day\'s dose the same way']];
+      else rows = [['Site', im ? '(Deltoid)' : '(To inject at Deltoid) (Intradermal)'], ...days.map(n => ['D' + n, `${drug} D${n} (${on(n)})`]), ['Signed', 'EP and MO: sign and stamp']];
+      const lists = [{h:v.slip === 'ward' ? 'Write on the ward chart (Day 0)' : v.slip === 'fgn' ? 'Write on the outpatient slip (foreigner: to prescribe ONE dose per visit)' : 'Write on the outpatient slip (Malaysian)', rows}];
+      if (v.rig === 'yes') lists.push({h:'RIG', rows:[['Before', 'Refer ID trainee/consultant (accept verbal consent)'], v.slip === 'ward' ? ['Ward chart', 'Rabies Immunoglobulin (to infiltrate around the wounds) · Dos: 1 vial (1000 iu) · Frekuensi: Stat · Case d/w ID Dr (name)'] : ['Outpatient slip', 'Rabies Immunoglobulin 1 vial (1000 units) stat'], ['Signed', v.slip === 'ward' ? 'MO, countersigned by the EP' : 'ID Trainee/Consultant (accept verbal consent) and MO'], ['Max. dose', '1 vial/patient'], ['Give', 'Infiltrate around the wounds. RIG MUST NOT be administered in the same syringe as the rabies vaccine. Equine RIG (Rabix IG / Equirab) can be further diluted with normal saline (2 – 3x Volume)']]});
+      const gaps = [];
+      if (short) gaps.push('The protocol\'s prescription examples show the full course; the shorter course is written here in the same format.');
+      if (rt === 'id4') gaps.push('It lists the ID sites as deltoid, suprascapular and anterolateral thigh, and does not say which four to use.');
+      if (!d0) gaps.push('Enter Day 0 to put the dates in.');
+      return {outs, lists, gap:gaps.join(' ') || null,
+        verdict:{cls:'refer', h:'Then: EP to countersign, give the first dose, refer to the ABC', p:'SN/PPP to indent from A&E Pharmacy. Issue the vaccine card, fill in the animal bite notification form, and refer to the Animal Bite Clinic (ext 1017/1178) with a copy of it.', href:'#animal-bites--abc', link:'The ABC referral'}};
+    }},
+  /* Dengue CPG 4th edition: Appendix 7's systematic triage on one screen. The checklists and outcome cards are read from
+     P['dengue-cpg'] (its triage steps life, vit, ws, cm and the outcomes red12, red2, yellow, green, pc); the vital signs use the
+     triage vital signs calculator's own checks; the course of illness, the haematocrit and the platelets come from its notes
+     (see CALC_FACTS). Nothing is saved, and there is no name or ID box. */
   curb:{t:'CURB-65', g:'scores', src:'Ebook p27', path:'#pneumonia--curb', kw:'pneumonia cap severity score',
     sub:'Severity score for community-acquired pneumonia, read the way the ebook reads it.',
     fields:[{k:'c', type:'check', label:'Tick each one present', pts:true, items:() => P.pneumonia.nodes.curb.items}],
@@ -1752,6 +1945,11 @@ const CALCS = {
 };
 /* Every number above must still be in the source text: the test checks each of these phrases against the pathway data */
 const CALC_FACTS = [
+  ['animal-bites', 'IM: 1 site; D0,3,7,14-28'], ['animal-bites', 'ID: 2 sites; D0,3,7'], ['animal-bites', 'IM/ID: 1 site; D0,3'], ['animal-bites', 'ID: 4 sites; D0'],
+  ['animal-bites', 'Intramuscular (IM): 0.5 ml'], ['animal-bites', 'Intradermal (ID): 0.1 ml'], ['animal-bites', 'Deltoid (IM/ID)'], ['animal-bites', 'Suprascapular (ID)'], ['animal-bites', 'Anterolateral thigh (ID)'],
+  ['animal-bites', 'IM Rabies Vaccine 0.5 ml stat D0'], ['animal-bites', 'ID Rabies Vaccine 0.1 ml x 2 sites stat D0'], ['animal-bites', 'Intradermal Rabies Vaccine 0.1 ml x 2 sites stat D0'], ['animal-bites', '0.1 ml x 2 sites (each deltoid)'],
+  ['animal-bites', 'to prescribe ONE dose per visit'], ['animal-bites', 'Rabies Immunoglobulin 1 vial (1000 units) stat'], ['animal-bites', 'Dos: 1 vial (1000 iu)'], ['animal-bites', 'Max. dose: 1 vial/patient'],
+  ['animal-bites', 'Refer ID trainee/consultant (accept verbal consent)'], ['animal-bites', 'RIG MUST NOT be administered in the same syringe as the rabies vaccine'], ['animal-bites', 'Equine RIG (Rabix IG / Equirab) can be further diluted with normal saline (2 – 3x Volume)'],
   ['ckd-cpg', 'CrCl (ml/min/1.73 m²) = (140 - age (yrs)) x body weight (kg)/SCr (umol/l) x Constant where the constant is 1.23 in male or 1.04 in female'], ['ckd-cpg', 'In the elderly (age >65 years), there is no accurate method to assess renal function'],
   ['ckd-cpg', 'Mild (GFR 60 - 90 ml/min)'], ['ckd-cpg', 'Moderate (GFR 30 - 59 ml/min)'], ['ckd-cpg', 'Severe (GFR <30 ml/min)'], ['ckd-cpg', '#Drug dosing calculated using MDRD or CKD-Epi'],
   ['ckd-cpg', 'The dosing guide for GFR <10 ml/min does not provide information on dosing in haemodialysis, peritoneal dialysis or continuous RRT patients'],
@@ -1835,7 +2033,7 @@ function calcVals(id){
     const x = cGet(id, f.k);
     if (f.type === 'check'){ const a = x || [], it = itemsOf(f); v[f.k] = a; v[f.k + '_set'] = !!x; v[f.k + '_n'] = a.filter(Boolean).length; v[f.k + '_sum'] = it.reduce((s, row, i) => s + (a[i] ? (row[1] != null ? row[1] : 1) : 0), 0); if (f.none) v[f.k + '_none'] = !!cGet(id, f.k + '_none') && !v[f.k + '_n']; }
     else if (f.type === 'rate') v[f.k] = x || [];
-    else if (f.type === 'time') v[f.k] = x || '';
+    else if (f.type === 'time' || f.type === 'date') v[f.k] = x || '';
     else v[f.k] = x || (f.type === 'seg' && !f.nodef ? optsOf(f)[0][0] : '');
   });
   /* Fields can depend on earlier choices (the pain scale, BARS 7): read until they settle */
@@ -1853,6 +2051,7 @@ function fieldHTML(id, f){
   if (f.type === 'h') return `<h3 class="cf-full cf-h">${f.n ? `<b>${esc(f.n)}</b>` : ''}${esc(f.label)}</h3>`;
   const x = cGet(id, f.k);
   if (f.type === 'time') return `<div class="field"><label for="cf-${f.k}">${esc(f.label)}</label><input id="cf-${f.k}" data-k="${f.k}" type="time" autocomplete="off" value="${esc(x || '')}"></div>`;
+  if (f.type === 'date') return `<div class="field"><label for="cf-${f.k}">${esc(f.label)}</label><input id="cf-${f.k}" data-k="${f.k}" type="date" autocomplete="off" value="${esc(x || '')}"></div>`;
   if (f.type === 'seg'){ const o = optsOf(f), cur = x || (f.nodef ? '' : o[0][0]);
     return `<div class="cf-full cf-seg"><span class="cf-l" id="cl-${f.k}">${esc(f.label)}</span><div class="seg" role="group" aria-labelledby="cl-${f.k}" style="--n:${o.length}">${o.map(([val, t]) => `<button type="button" data-k="${f.k}" data-sv="${val}" aria-pressed="${cur === val}">${esc(t)}</button>`).join('')}</div></div>`; }
   if (f.type === 'check'){ const a = x || [];
@@ -1893,6 +2092,8 @@ function calcOut(){
 /* A scale under a result: the bands are the thresholds already given in the note above */
 const scaleOf = s => {
   if (!s) return '';
+  if (s.rx){ const x = d => (d / 28 * 100).toFixed(2) + '%';
+    return `<div class="rxs" aria-hidden="true"><div class="sc-t"><span class="sc-line"></span>${s.rng ? `<s style="--a:${x(s.rng[0])};--b:${x(s.rng[1])}"></s>` : ''}${s.days.map(n => `<i style="--x:${x(n)}">${s.m ? `<small>${s.m}</small>` : ''}</i>`).join('')}</div><div class="sc-t sc-ax">${[...new Set([...s.days, ...(s.rng ? [s.rng[1]] : [])])].map(n => `<em style="--x:${x(n)}">D${n}</em>`).join('')}</div></div>`; }
   if (s.tl){ const x = (Math.max(1, Math.min(10, s.day)) - .5) * 10;
     return `<div class="dtl" aria-hidden="true"><div class="dtl-lg"><span><i class="feb"></i>Febrile phase: usually 2 to 7 days</span><span><i class="crit"></i>Critical phase: usually days 3 to 7, as the fever subsides</span></div><div class="dtl-k"><div class="dtl-t"><s class="feb" style="left:0;width:70%"></s></div><div class="dtl-t"><s class="crit" style="left:20%;width:50%"></s></div><div class="dtl-ax">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(d => `<i${d === s.day ? ' class="on"' : ''}>${d}</i>`).join('')}</div><span class="dtl-pin" style="--x:${x}%"></span></div></div>`; }
   const x = Math.max(0, Math.min(100, (s.v - s.min) / (s.max - s.min) * 100));
@@ -1909,7 +2110,7 @@ function calcText(){
 }
 function fieldOf(k){ return calcVals(calcTab).list.find(f => (Array.isArray(f) ? f[0] : f.k) === k); }
 function calcRefocus(sel){ if (!sel) return; const el = $('#calcbox ' + sel); if (el) el.focus(); }
-$('#calcbox').addEventListener('input', e => { const el = e.target.closest('input[type="number"][data-k], input[type="time"][data-k]'); if (!el) return; cPut(calcTab, el.dataset.k, el.value); calcOut(); });
+$('#calcbox').addEventListener('input', e => { const el = e.target.closest('input[type="number"][data-k], input[type="time"][data-k], input[type="date"][data-k]'); if (!el) return; cPut(calcTab, el.dataset.k, el.value); calcOut(); });
 $('#calcbox').addEventListener('change', e => {
   const el = e.target;
   if (el.matches('select[data-k]')){ cPut(calcTab, el.dataset.k, el.value); calcOut(); }
@@ -2234,6 +2435,7 @@ function closeSettings(restore){
 
 /* ================= Routing ================= */
 function route(){
+  stopReader(); pauseFilms();
   const h = decodeURIComponent(location.hash.slice(1));
   let m, changed = false;
   closePal(false); closeSettings(false); closeSheet(); closeMap(false);
@@ -2326,7 +2528,7 @@ $('#run').addEventListener('click', e => {
   /* Advice is copied for the patient: page references stay on screen but not in the copied text */
   else if (b.hasAttribute('data-copyadvice')) copyText(p.advice.map((a, i) => (i + 1) + '. ' + a.replace(/\s*\([^()]*\bp\s?(?:\d|[ivxl]+\b)[^()]*\)/g, '')).join('\n'), {btn:b, el:$('#advlist')});
   else if (b.hasAttribute('data-copyleaf')) copyText(leafletText(p), {btn:b, el:$('#leaf')});
-  else if (b.dataset.leaf){ leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }
+  else if (b.dataset.leaf){ stopReader(); leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }
   else if (b.hasAttribute('data-showadvice')){ selectTab(p.leaflet ? 'leaflet' : 'advice'); $('#ptab').scrollIntoView({block:'start', behavior: REDUCED ? 'auto' : 'smooth'}); }
   else if (b.dataset.pt !== undefined) selectTab(b.dataset.pt);
 });

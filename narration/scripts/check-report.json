@@ -1,0 +1,1332 @@
+[
+ {
+  "id": "leaf-dengue-en#0 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "home care advice in dengue."
+ },
+ {
+  "id": "leaf-dengue-en#1 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "What to do."
+ },
+ {
+  "id": "leaf-dengue-en#1 p1-0.wav",
+  "ok": true,
+  "cer": 0.032,
+  "ratio": 1.02,
+  "why": [],
+  "heard": "drink adequate fluids. Aim 200 milliliters of fluid every hour. one small cup while awake. Examples of fluids include fruit juice, oral rehydration salts. OR size coconut water or soup."
+ },
+ {
+  "id": "leaf-dengue-en#1 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Take paracetamol for fever or pain when necessary, but not to exceed 4 grams per day."
+ },
+ {
+  "id": "leaf-dengue-en#1 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Get adequate rest."
+ },
+ {
+  "id": "leaf-dengue-en#1 p4-0.wav",
+  "ok": true,
+  "cer": 0.048,
+  "ratio": 0.95,
+  "why": [],
+  "heard": "Monitor the temperature and Deng warning signs."
+ },
+ {
+  "id": "leaf-dengue-en#1 p5-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "seek immediate medical care if warning signs develop."
+ },
+ {
+  "id": "leaf-dengue-en#1 p6-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Attend daily follow-up appointments as advised."
+ },
+ {
+  "id": "leaf-dengue-en#1 p7-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "look for mosquito breeding places in and around the home. and prevent mosquito bites. using mosquito repellent."
+ },
+ {
+  "id": "leaf-dengue-en#2 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "What to avoid."
+ },
+ {
+  "id": "leaf-dengue-en#2 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do not take steroids, aspirin, ibuprofen, diclofenac, or any other NSAIDS. If you are already taking these medications, please consult your doctors."
+ },
+ {
+  "id": "leaf-dengue-en#2 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do not consume traditional or herbal remedies."
+ },
+ {
+  "id": "leaf-dengue-en#2 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "do not take intramuscular injections."
+ },
+ {
+  "id": "leaf-dengue-en#2 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do not do massage, cupping, or gua sha."
+ },
+ {
+  "id": "leaf-dengue-en#3 p0-0.wav",
+  "ok": false,
+  "cer": 0.167,
+  "ratio": 0.89,
+  "why": [
+   "error 17%"
+  ],
+  "heard": "Dang warning signs."
+ },
+ {
+  "id": "leaf-dengue-en#3 p1-0.wav",
+  "ok": true,
+  "cer": 0.014,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "As the fever starts to subside, be cautious as the condition may become dangerous and worsen in some Deng patients. Go to the hospital immediately if any of the following occur."
+ },
+ {
+  "id": "leaf-dengue-en#3 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "general condition worsening or symptoms becoming more severe."
+ },
+ {
+  "id": "leaf-dengue-en#3 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "severe abdominal pain."
+ },
+ {
+  "id": "leaf-dengue-en#3 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Persistent vomiting."
+ },
+ {
+  "id": "leaf-dengue-en#3 p5-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "extreme fatigue."
+ },
+ {
+  "id": "leaf-dengue-en#3 p6-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "difficulty breathing or rapid breathing."
+ },
+ {
+  "id": "leaf-dengue-en#3 p7-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Fainting spells."
+ },
+ {
+  "id": "leaf-dengue-en#3 p8-0.wav",
+  "ok": true,
+  "cer": 0.039,
+  "ratio": 1.02,
+  "why": [],
+  "heard": "Bleeding from the gums or nose. or blood and vomit, urine, or stool."
+ },
+ {
+  "id": "leaf-dengue-en#3 p9-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "reduced urine output less than four times per day."
+ },
+ {
+  "id": "leaf-cancerpain-en#0 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "cancer pain."
+ },
+ {
+  "id": "leaf-cancerpain-en#1 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "What causes cancer pain?"
+ },
+ {
+  "id": "leaf-cancerpain-en#1 p1-0.wav",
+  "ok": true,
+  "cer": 0.016,
+  "ratio": 0.98,
+  "why": [],
+  "heard": "Cancer pain can result from the tumor pressing on organs, nerves, or bones."
+ },
+ {
+  "id": "leaf-cancerpain-en#1 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "It may also be caused by cancer treatments like chemotherapy, radiation, or surgery."
+ },
+ {
+  "id": "leaf-cancerpain-en#2 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Assessing your cancer pain."
+ },
+ {
+  "id": "leaf-cancerpain-en#2 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "there are several tools that can be used to assess pain. for example, Ministry of Health. MOH Pain Scale."
+ },
+ {
+  "id": "leaf-cancerpain-en#2 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "The MOH pain scale combines the NRS VAS, and FACES scale. Patients point to their pain level on a scale from 0 to 10."
+ },
+ {
+  "id": "leaf-cancerpain-en#2 p3-0.wav",
+  "ok": true,
+  "cer": 0.006,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "For children under 7 and cognitively impaired adults, the IASP faces... pain scale or FLACC scale may be used. In sedated and intubated patients, Pain is assessed through observation, including on behavior."
+ },
+ {
+  "id": "leaf-cancerpain-en#2 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Cancer pain affects not... only your physical well-being, but also your emotional, social. and spiritual health."
+ },
+ {
+  "id": "leaf-cancerpain-en#3 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "What types of pain medications are available?"
+ },
+ {
+  "id": "leaf-cancerpain-en#3 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "What are the side effects of pain medications? Common side effects include constipation, nausea, drowsiness, and dizziness. Your doctor can provide treatments to manage these side effects."
+ },
+ {
+  "id": "leaf-cancerpain-en#5 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "If I use morphine, Does that mean I'm nearing the end of my life?"
+ },
+ {
+  "id": "leaf-cancerpain-en#6 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "How can my family or caregivers help?"
+ },
+ {
+  "id": "leaf-cancerpain-en#6 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Assist with medication schedules."
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "contact the following for help. and more information."
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Malaysian Hospice and Palliative Care Council. mhpcc www.malaysianhospicecouncil.com"
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p6-1.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Academy of Medicine Malaysia www.acadmed.org.my"
+ },
+ {
+  "id": "leaf-dengue-ms#1 p1-0.wav",
+  "ok": true,
+  "cer": 0.028,
+  "ratio": 1.02,
+  "why": [],
+  "heard": "Minum air secukupnya sebanyak 200 ml setiap jam, satu cawan kecil. Sewaktu jaga, contoh minuman termasuk jus buah, larutan garam rehydrasi, Oarsif air kelapa atau sup."
+ },
+ {
+  "id": "leaf-dengue-ms#1 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Pantau suhu badan dan tanda amaran demam denggi."
+ },
+ {
+  "id": "leaf-dengue-ms#1 p7-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Periksa tempat pembiakan nyamuk di rumah. serta cegah gigitan nyamuk menggunakan semburan penghalau nyamuk."
+ },
+ {
+  "id": "leaf-cancerpain-en#3 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "What should I know about pain-relieving medications?"
+ },
+ {
+  "id": "leaf-cancerpain-en#3 p2-1.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Medications include over-the-counter pain relievers. For example, paracetamol ibuprofen. Prescription opioids. for example morphine, Oxycodone. Adjuvant medications. for example, antidepressants or anticonvulsants for nerve pain."
+ },
+ {
+  "id": "leaf-cancerpain-en#4 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "If I use morphine, or other opioids for my pain now. Will it be less effective later on when pain gets worse?"
+ },
+ {
+  "id": "leaf-cancerpain-en#5 p1-0.wav",
+  "ok": true,
+  "cer": 0.011,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "No, taking morphine does not mean you are near the end of life. It is used to manage pain and improve comfort any stage of cancer. Many people take it for a long time. while continuing treatment and daily activities."
+ },
+ {
+  "id": "leaf-cancerpain-en#6 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "family and caregivers can."
+ },
+ {
+  "id": "leaf-cancerpain-en#6 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "provide emotional and physical support."
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "nearest health clinic or hospital."
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p5-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Malaysian Association for the Study of Pain. masp.org.my."
+ },
+ {
+  "id": "leaf-dengue-ms#0 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Nasihat pemantauan demam, denggi di rumah."
+ },
+ {
+  "id": "leaf-cancerpain-en#3 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "How is cancer pain treated? Cancer pain can be treated using medications. like opioids, non-opioids, or adjuvant drugs. physical therapies, psychological and spiritual support, and in some cases, interventional procedures."
+ },
+ {
+  "id": "leaf-cancerpain-en#3 p3-0.wav",
+  "ok": true,
+  "cer": 0.007,
+  "ratio": 1,
+  "why": [],
+  "heard": "Will I become addicted? to pain medications. addiction is rare when opioids are used under medical supervision for cancer pain. your doctor will prescribe them safely to minimize risks."
+ },
+ {
+  "id": "leaf-cancerpain-en#4 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "No, you should not worry about this. Good pain relief will lead to better physical, mental, and social well-being. which will help you cope with your cancer."
+ },
+ {
+  "id": "leaf-cancerpain-en#5 p1-1.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Talk to your doctor if you have concerns."
+ },
+ {
+  "id": "leaf-cancerpain-en#6 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "help track your pain levels."
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Where can I get more help for my cancer pain?"
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p3-0.wav",
+  "ok": true,
+  "cer": 0.018,
+  "ratio": 1,
+  "why": [],
+  "heard": "Non-governmental organizations, NGOs, for pain and palliative care."
+ },
+ {
+  "id": "leaf-dengue-ms#1 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Apa yang perlu dilakukan?"
+ },
+ {
+  "id": "leaf-dengue-ms#1 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Dapatkan rehat yang mencukupi."
+ },
+ {
+  "id": "leaf-dengue-ms#1 p6-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Hadiri temujanji susulan."
+ },
+ {
+  "id": "leaf-dengue-ms#2 p1-0.wav",
+  "ok": true,
+  "cer": 0.015,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "Jangan ambil steroid, aspirin ibuprofen, diclofenaz, atau ubat anti-radang bukan steroid. NSAID lain. Sila rujuk doktor jika anda sedang mengambil ubat-ubatan ini."
+ },
+ {
+  "id": "leaf-dengue-ms#2 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Jangan ambil suntikan intramuskular."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Tanda-tanda amaran demam denggi."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Keadaan badan semakin lemah atau simptom semakin teruk."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Muntah berterusan"
+ },
+ {
+  "id": "leaf-dengue-ms#3 p6-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "susah bernafas atau pernafasan laju."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p8-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Pendarahan pada gusi atau hidung atau darah dalam muntah, air kencing atau najis."
+ },
+ {
+  "id": "leaf-cancerpain-ms#0 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Sakit akibat kanser."
+ },
+ {
+  "id": "leaf-cancerpain-ms#1 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Sakit akibat kanser boleh berlaku apabila ketumbuhan menekan organ, saraf atau tulang."
+ },
+ {
+  "id": "leaf-cancerpain-ms#2 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "menilai sakit akibat kanser anda."
+ },
+ {
+  "id": "leaf-cancerpain-ms#2 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "MOH Pain Scale menggabungkan NRS VAS dan skala muka. Pesakit menilai tahap kesakitan mereka pada skala dari sifar hingga 10."
+ },
+ {
+  "id": "leaf-cancerpain-ms#2 p3-1.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Bagi pesakit yang tidak sedar dan diintubasi, Kesakitan dinilai melalui pemerhatian termasuklah ke atas tingkah laku."
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Apa yang perlu saya tahu tentang ubat melegakan sakit?"
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p1-1.wav",
+  "ok": true,
+  "cer": 0.019,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "Sakit akibat sanser boleh dirawat dengan ubat-ubatan. seperti opioid, bukan opioid atau ubat ajufan. terapi fizikal, sokongan psikologi dan kerohanian. serta dalam beberapa kes, prosedur khas."
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p2-1.wav",
+  "ok": true,
+  "cer": 0.006,
+  "ratio": 1,
+  "why": [],
+  "heard": "Ubat-ubatan termasuk ubat tahan sakit tanpa preskripsi. Contoh, paracetamol, ibuprofen, opioid dengan preskripsi. Contoh morfin oksikodon. Ubat adjufan, contoh antidepresan atau antikejang untuk sakit saraf."
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p3-1.wav",
+  "ok": false,
+  "cer": 0.118,
+  "ratio": 1.12,
+  "why": [
+   "error 12%"
+  ],
+  "heard": "Doktor anda akan mempreskripsikannya dengan selamat. bagi mengurangkan risiko overster."
+ },
+ {
+  "id": "leaf-cancerpain-ms#4 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Jika saya guna morfin atau opioid sekarang? Adakah ia kurang berkesan bila sakit saya makin teruk?"
+ },
+ {
+  "id": "leaf-cancerpain-ms#5 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Jika saya ambil morfin, Adakah itu tanda saya di penghujung hayat?"
+ },
+ {
+  "id": "leaf-cancerpain-ms#5 p1-1.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Ramai yang menggunakannya dalam jangka panjang sambil meneruskan rawatan dan aktiviti harian. Jika anda ada kebimbangan, Berbincanglah dengan doktor anda."
+ },
+ {
+  "id": "leaf-cancerpain-ms#6 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Keluarga dan penjaga boleh."
+ },
+ {
+  "id": "leaf-cancerpain-ms#6 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "membantu mengatur jadual ubat."
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "di mana saya boleh dapatkan bantuan tambahan untuk sakit akibat kanser."
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "klinik kesihatan atau hospital terdekat."
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Malaysian Hospice dan Palliative Care Council, MHPCC www.malaysianhospicecouncil.com"
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p6-0.wav",
+  "ok": true,
+  "cer": 0.048,
+  "ratio": 0.98,
+  "why": [],
+  "heard": "Untuk maklumat lanjut, rujuk kepada Clinical Practice Guidelines Management of Cancer Pain 2nd Edition boleh didapati di laman sesawang berikut. Kementerian Kesihatan Malaysia www.db.gov.moy"
+ },
+ {
+  "id": "adv-tbi-en#0 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "After a concussion, the patient should be accompanied by a responsible adult, if possible."
+ },
+ {
+  "id": "adv-tbi-en#0 p1-1.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "loss of consciousness, Disorientation, New Deafness, Imbalance. blurred or double vision. Weakness of any limb. excessive sleepiness or drowsiness, vomiting, bleeding from either ear, fitting, or severe headache. not relieved by painkillers."
+ },
+ {
+  "id": "adv-tbi-en#0 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Don't stay at home alone. for 48 hours. after leaving hospital."
+ },
+ {
+  "id": "adv-tbi-en#1 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Don't take aspirin or sleeping tablets."
+ },
+ {
+  "id": "adv-tbi-en#1 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Don't drive."
+ },
+ {
+  "id": "adv-dengue-en#0 p1-0.wav",
+  "ok": true,
+  "cer": 0.029,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do adequate fluid intake. more than eight glasses or two liters for an average person."
+ },
+ {
+  "id": "adv-dengue-en#0 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do tepid sponging."
+ },
+ {
+  "id": "adv-dengue-en#1 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do look for and remove mosquito breeding places in and around the home."
+ },
+ {
+  "id": "adv-dengue-en#1 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Antibiotics are not required."
+ },
+ {
+  "id": "adv-asthma-en#0 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Preventer Budesonide MDI Every Day. Reliever, salbutamol, MDI when needed."
+ },
+ {
+  "id": "adv-asthma-en#0 p2-0.wav",
+  "ok": true,
+  "cer": 0.029,
+  "ratio": 0.98,
+  "why": [],
+  "heard": "Severe. He's that does not settle. Breathless. Hard to talk. come straight to hospital. or call an ambulance, taking four puffs of the reliever. every four minutes on the way."
+ },
+ {
+  "id": "adv-asthma-en#1 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Know your triggers. Smoke. animal fur, cold air, dust, exercise, and infections."
+ },
+ {
+  "id": "explainer-ms s01",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Baru di Zon Hijau? Inilah cara pesakit bergerak melaluinya. dan apa yang anda putuskan pada setiap langkah."
+ },
+ {
+  "id": "explainer-ms s03",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Kemudian pesakit datang kepada anda. Isi slip hijau. Bilik rawatan memanggil nombor giliran. dan melaksanakan setiap arahan."
+ },
+ {
+  "id": "explainer-ms s05",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Untuk diagnosis, Buka laluan klinikalnya. Satu soalan pada satu masa. Setiap langkah menunjukkan kesudahan yang masih mungkin."
+ },
+ {
+  "id": "explainer-ms s07",
+  "ok": true,
+  "cer": 0.008,
+  "ratio": 1.01,
+  "why": [],
+  "heard": "Perlukan antibiotik IVA. Tetapi tiada katil kosong. Gunakan kerusi di CCA. dengan salah satu daripada empat antibiotik yang dibenarkan sahaja."
+ },
+ {
+  "id": "explainer-ms s09",
+  "ok": true,
+  "cer": 0.057,
+  "ratio": 1.03,
+  "why": [],
+  "heard": "Pasukan Primer lewat. IPEI boleh memutuskan kemasukan ke Watt dalam masa 4 jam. Tidak pasti atau buntu? Hubungi IP yang bertugas."
+ },
+ {
+  "id": "explainer-en s01",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "New to the green zone? Here is how a patient moves through it. and what you decide at each step."
+ },
+ {
+  "id": "explainer-en s03",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Then onto you. Fill in the green slip. The treatment room calls the queue number and carries out each order."
+ },
+ {
+  "id": "explainer-en s05",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "For the diagnosis, open its pathway. one question at a time. Each step shows how it can still end."
+ },
+ {
+  "id": "explainer-en s07",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Needs IV antibiotics and no bed is free. Use a CCA chair. with one of the four allowed antibiotics only."
+ },
+ {
+  "id": "explainer-en s09",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Primary team delayed? the EP may decide the admission within four hours, unsure or stuck. call the EP in charge."
+ },
+ {
+  "id": "journey stop1.mp3",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Patients move one way. triage, then secondary triage, then ECG, irrigation, or dressing if needed, and on to you."
+ },
+ {
+  "id": "journey stop3.mp3",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "The treatment room calls the queue number. carries out each order and documents it."
+ },
+ {
+  "id": "journey stop5.mp3",
+  "ok": true,
+  "cer": 0.027,
+  "ratio": 1.01,
+  "why": [],
+  "heard": "Before discharge, reassess and review every result. After a CT brain, ask the EP to review. and book E-May-See or E-M-Watch follow-up. unsure or the disposition is stuck. call the EP in charge."
+ },
+ {
+  "id": "leaf-dengue-ms#1 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Ambil paracetamol untuk demam atau sakit badan jika perlu. tetapi tidak melebihi 4 gram sehari."
+ },
+ {
+  "id": "leaf-dengue-ms#1 p5-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Dapatkan rawatan segera jika tanda amaran muncul."
+ },
+ {
+  "id": "leaf-dengue-ms#2 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Apa yang perlu dielakkan?"
+ },
+ {
+  "id": "leaf-dengue-ms#2 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Jangan ambil ubat-ubat tradisional atau herba."
+ },
+ {
+  "id": "leaf-dengue-ms#2 p4-0.wav",
+  "ok": false,
+  "cer": 0.071,
+  "ratio": 1.04,
+  "why": [
+   "error 7%"
+  ],
+  "heard": "Jangan berurut bekam atau gua syah."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p1-0.wav",
+  "ok": true,
+  "cer": 0.006,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "Apabila demam mula kebah, anda perlu berhati-hati kerana keadaan boleh menjadi berbahaya dan semakin teruk. bagi sesetengah pesakit demam dengi. Segera ke hospital jika anda mempunyai salah satu tanda-tanda berikut."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Sakit perut yang teruk."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p5-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Keletihan melampau."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p7-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Pitam."
+ },
+ {
+  "id": "leaf-dengue-ms#3 p9-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Kekerapan kencing kurang dari 4 kali sehari."
+ },
+ {
+  "id": "leaf-cancerpain-ms#1 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Apakah punca sakit akibat kanser?"
+ },
+ {
+  "id": "leaf-cancerpain-ms#1 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Ia juga boleh disebabkan oleh rawatan kanser seperti kemoterapi, radioterapi atau pembedahan."
+ },
+ {
+  "id": "leaf-cancerpain-ms#2 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Terdapat beberapa alat yang boleh digunakan untuk menilai kesakitan Contoh, Ministry of Health, MOH PainScale."
+ },
+ {
+  "id": "leaf-cancerpain-ms#2 p3-0.wav",
+  "ok": true,
+  "cer": 0.027,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "Bagi kanak-kanak di bawah 7 tahun dan orang dewasa dengan gangguan kognitif, IASP FacePaint Scale atau FLAC Scale boleh digunakan."
+ },
+ {
+  "id": "leaf-cancerpain-ms#2 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Sakit kanser bukan sahaja menjejaskan kesejahteraan fizikal anda, tetapi juga kesihatan emosi. Sosial dan Kerohanian"
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Bagaimana sakit akibat kanser dirawat?"
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Apakah jenis ubat tahan sakit yang ada?"
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Adakah saya akan menjadi ketagih kepada ubat tahan sakit? Ketagihan jarang berlaku. apabila opioid digunakan di bawah pengawasan perubatan untuk sakit kanser."
+ },
+ {
+  "id": "leaf-cancerpain-ms#3 p4-0.wav",
+  "ok": true,
+  "cer": 0.026,
+  "ratio": 1.01,
+  "why": [],
+  "heard": "Apakah kesan sampingan ubat tahan sakit? Kesan sampingan biasa termasuk Sembelit. Lawyer. mengantuk dan pening. Doktor anda boleh memberikan rawatan untuk menguruskan kesan sampingan ini."
+ },
+ {
+  "id": "leaf-cancerpain-ms#4 p1-0.wav",
+  "ok": true,
+  "cer": 0.03,
+  "ratio": 1.03,
+  "why": [],
+  "heard": "Tidak, anda tidak perlu risau mengenainya Kelegaan sakit. Sakit yang baik akan meningkatkan kesejahteraan fizikal. mental dan sosial anda. yang dapat membantu anda mengharungi kanser dengan lebih baik."
+ },
+ {
+  "id": "leaf-cancerpain-ms#5 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Tidak, mengambil morfin tidak bermakna anda... Hampir ke akhir hayat. Ia digunakan untuk mengawal kesakitan dan memberi keselesaan pada setiap peringkat kanser."
+ },
+ {
+  "id": "leaf-cancerpain-ms#6 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Bagaimana keluarga atau penjaga boleh membantu?"
+ },
+ {
+  "id": "leaf-cancerpain-ms#6 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "membantu memantau tahap kesihatan anda."
+ },
+ {
+  "id": "leaf-cancerpain-ms#6 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "memberi sokongan emosi dan fizikal."
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Hubungi pihak berikut untuk bantuan dan maklumat lanjut."
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p3-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Pertubuhan bukan kerajaan. NGO untuk penjagaan kesakitan dan paliatif."
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p5-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Malaysian Association for the Study of Pain MASP.org.my"
+ },
+ {
+  "id": "leaf-cancerpain-ms#7 p6-1.wav",
+  "ok": true,
+  "cer": 0.05,
+  "ratio": 1,
+  "why": [],
+  "heard": "Akademi of Medicine Malaysia www.acadmed.org.my"
+ },
+ {
+  "id": "adv-tbi-en#0 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "go to the nearest emergency department for."
+ },
+ {
+  "id": "adv-tbi-en#0 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "do stay within reach of a telephone. Rest, sleep regularly. and take painkillers, such as paracetamol for headache."
+ },
+ {
+  "id": "adv-tbi-en#1 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Don't drink alcohol or take recreational drugs."
+ },
+ {
+  "id": "adv-tbi-en#1 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Don't play or train for... any contact sport for at least three weeks without consulting your doctor."
+ },
+ {
+  "id": "adv-dengue-en#0 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do adequate bed rest."
+ },
+ {
+  "id": "adv-dengue-en#0 p2-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do. Take paracetamol. not more than four grams a day."
+ },
+ {
+  "id": "adv-dengue-en#0 p4-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Do. Use mosquito repellent or rest under a mosquito net. even in the daytime."
+ },
+ {
+  "id": "adv-dengue-en#1 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Don't take NSAIDS. painkillers if already taking them consult your doctor"
+ },
+ {
+  "id": "adv-dengue-en#1 p3-0.wav",
+  "ok": true,
+  "cer": 0.036,
+  "ratio": 1.04,
+  "why": [],
+  "heard": "Don't use massage, cupping, or quassa."
+ },
+ {
+  "id": "adv-asthma-en#0 p1-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Getting worse, waking at night. Worse with a cold. Reliever every four hours. Keep taking the preventer. and come to hospital, if not better. Bringing the MDI and Spacer."
+ },
+ {
+  "id": "adv-asthma-en#1 p0-0.wav",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Wash the spacer once a week in soapy water. Rinse and let it air dry. Do not wipe it with a cloth or tissue or brush the inside."
+ },
+ {
+  "id": "leaf-cancerpain-en#7 p6-0.wav",
+  "ok": true,
+  "cer": 0.032,
+  "ratio": 0.97,
+  "why": [],
+  "heard": "For further information, refer to the Clinical Practice Guidelines Management of Cancer Pain. Second edition, available on the following websites. Ministry of Health Malaysia W-W-W. dot m-o-h"
+ },
+ {
+  "id": "explainer-ms s02",
+  "ok": true,
+  "cer": 0.009,
+  "ratio": 1,
+  "why": [],
+  "heard": "pesakit bergerak sehala. Trias sekunder mengambil tanda vital. membuat ECG dan balutan. Jangan ulanginya kecuali jika ada yang tertinggal."
+ },
+ {
+  "id": "explainer-ms s04",
+  "ok": false,
+  "cer": 0.036,
+  "ratio": 1.01,
+  "why": [
+   "repeats \"turun trias\""
+  ],
+  "heard": "Hanya EP boleh membenarkan turun trias. Sebelum turun trias, Periksa pesakit dengan teliti, kemudian catatkannya dalam borang triash."
+ },
+ {
+  "id": "explainer-ms s06",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Menunggu keputusan, hantar pesakit ke CCA. Warga Emas ACS atau sesiapa yang memerlukan ubat stat? tidak boleh dibiarkan menunggu di luar."
+ },
+ {
+  "id": "explainer-ms s08",
+  "ok": false,
+  "cer": 0.067,
+  "ratio": 1.03,
+  "why": [
+   "error 7%"
+  ],
+  "heard": "Sebelum discharge, nilai semula pesakit dan semak setiap keputusan. Selepas CT otak, minta IEP. P menyemak, kemudian buat... Temu janji EMC atau EM Watch."
+ },
+ {
+  "id": "explainer-ms s10",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Pesakit yang tepat. Zon yang tepat. Masa yang tepat."
+ },
+ {
+  "id": "explainer-en s02",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "patients move one way. Secondary triage does the vital signs. ECG and dressing. Do not repeat them unless they were missed."
+ },
+ {
+  "id": "explainer-en s04",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Only the EP can allow a down-triage. before you down-triage. Examine the patient properly. then document it on the triage form."
+ },
+ {
+  "id": "explainer-en s06",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "waiting for results, send the patient to the CCA The elderly, ACS. or anyone needing stat drugs never waits outside."
+ },
+ {
+  "id": "explainer-en s08",
+  "ok": true,
+  "cer": 0.011,
+  "ratio": 0.99,
+  "why": [],
+  "heard": "Before discharge, reassess and review every result. After a CT brain, ask the EP to review, then book EMAC. or EMWatch."
+ },
+ {
+  "id": "explainer-en s10",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "Right patient. Right zone. Right time."
+ },
+ {
+  "id": "journey stop2.mp3",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "You fill in the green slip. For the diagnosis, Open its pathway."
+ },
+ {
+  "id": "journey stop4.mp3",
+  "ok": true,
+  "cer": 0,
+  "ratio": 1,
+  "why": [],
+  "heard": "waiting for results, send the patient to the CCA. The elderly ACS, or anyone needing stat drugs. never waits outside."
+ }
+]

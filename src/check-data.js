@@ -5,7 +5,7 @@
    - the start node exists, and every option and "next" points to a node that exists;
    - every node is a question (opts), a step (step + next) or an outcome (end + items);
    - every node can be reached from the start;
-   - every link (node links, "see also") points to an entry, a step (#entry--node) or a view of the app;
+   - every link (node links, "see also") points to an entry, a step (#entry--node), a view of the app, or a source PDF in Google Drive;
    - a scored checklist (check:'score') has a suggest function.
 
    Expected result since the third CPG round (9 Nov 2026): "54 entries; rules: 15" and "no errors".
@@ -25,6 +25,7 @@ const VIEWS = ['top', 'home', 'search', 'tour', 'video', 'journey', 'learn', 'ru
 /* Every calculator the engine defines: the keys of its CALCS object */
 const CALC_IDS = (() => { const e = fs.readFileSync(path.join(dir, 'engine.js'), 'utf8'), b = e.slice(e.indexOf('const CALCS = {'), e.indexOf('\n};', e.indexOf('const CALCS = {'))); return [...b.matchAll(/^  ([a-z0-9]+):\{t:'/gm)].map(m => m[1]); })();
 const okHref = h => {
+  if (/^https:\/\/drive\.google\.com\/file\/d\/[\w-]+\/view$/.test(h)) return true; /* a source document's PDF in Drive */
   const x = h.slice(1);
   if (P[x]) return true;
   const mm = x.match(/^([\w-]+?)--(\w+)$/);

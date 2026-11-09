@@ -1,0 +1,87 @@
+{
+ "src": "CPG Management of Dengue in Adults (4th ed., 2026), Appendix 5B, p105–106. Copyright MaHTAS, Ministry of Health Malaysia; reproduced with acknowledgement.",
+ "en": {
+  "lang": "English",
+  "title": "Home care advice in dengue",
+  "groups": [
+   {
+    "h": "What to do",
+    "items": [
+     "Drink adequate fluids. Aim 200 ml of fluid every hour (one small cup) while awake. Examples of fluids include fruit juice, oral rehydration salts (ORS), coconut water, or soup.",
+     "Take paracetamol for fever or pain when necessary, but not to exceed 4g per day.",
+     "Get adequate rest.",
+     "Monitor the temperature and dengue warning signs.",
+     "Seek immediate medical care if warning signs develop.",
+     "Attend daily follow-up appointments as advised.",
+     "Look for mosquito breeding places in and around the home and prevent mosquito bites using mosquito repellent."
+    ]
+   },
+   {
+    "h": "What to avoid",
+    "items": [
+     "DO NOT take steroids, aspirin, ibuprofen, diclofenac, or any other NSAIDs. If you are already taking these medications, please consult your doctors.",
+     "DO NOT consume traditional or herbal remedies.",
+     "DO NOT take intramuscular injections.",
+     "DO NOT do massage, cupping or gua sha."
+    ]
+   },
+   {
+    "h": "Dengue warning signs",
+    "warn": true,
+    "p": "As the fever starts to subside, be cautious as the condition may become dangerous and worsen in some dengue patients. Go to the hospital immediately if any of the following occur:",
+    "items": [
+     "General condition worsening or symptoms becoming more severe",
+     "Severe abdominal pain",
+     "Persistent vomiting",
+     "Extreme fatigue",
+     "Difficulty breathing or rapid breathing",
+     "Fainting spells",
+     "Bleeding from the gums or nose, or blood in vomit, urine, or stool",
+     "Reduced urine output less than 4 times per day"
+    ]
+   }
+  ]
+ },
+ "ms": {
+  "lang": "Bahasa Melayu",
+  "title": "Nasihat pemantauan demam denggi di rumah",
+  "groups": [
+   {
+    "h": "Apa yang perlu dilakukan",
+    "items": [
+     "Minum air secukupnya sebanyak 200 ml setiap jam (satu cawan kecil) sewaktu jaga. Contoh minuman termasuk jus buah, larutan garam rehidrasi (ORS), air kelapa, atau sup.",
+     "Ambil paracetamol untuk demam atau sakit badan jika perlu, tetapi tidak melebihi 4g sehari.",
+     "Dapatkan rehat yang mencukupi.",
+     "Pantau suhu badan dan tanda amaran demam denggi.",
+     "Dapatkan rawatan segera jika tanda amaran muncul.",
+     "Hadiri temujanji susulan.",
+     "Periksa tempat pembiakan nyamuk di rumah serta cegah gigitan nyamuk menggunakan semburan penghalau nyamuk."
+    ]
+   },
+   {
+    "h": "Apa yang perlu dielakkan",
+    "items": [
+     "JANGAN ambil steroids, aspirin, ibuprofen, diclofenac, atau ubat anti-radang bukan steroid (NSAIDs) lain. Sila rujuk doktor jika anda sedang mengambil ubat-ubatan ini.",
+     "JANGAN ambil ubat-ubat tradisional atau herba.",
+     "JANGAN ambil suntikan intramuskular.",
+     "JANGAN berurut, bekam atau gua sha."
+    ]
+   },
+   {
+    "h": "Tanda-tanda amaran demam denggi",
+    "warn": true,
+    "p": "Apabila demam mula kebah, anda perlu berhati-hati kerana keadaan boleh menjadi berbahaya dan semakin teruk bagi sesetengah pesakit demam denggi. Segera ke hospital jika anda mempunyai salah satu tanda-tanda berikut:",
+    "items": [
+     "Keadaan badan semakin lemah atau simptom semakin teruk",
+     "Sakit perut yang teruk",
+     "Muntah berterusan",
+     "Keletihan melampau",
+     "Susah bernafas atau pernafasan laju",
+     "Pitam",
+     "Pendarahan pada gusi atau hidung, atau darah dalam muntah, air kencing atau najis",
+     "Kekerapan kencing kurang dari 4 kali sehari"
+    ]
+   }
+  ]
+ }
+}

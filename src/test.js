@@ -9,6 +9,11 @@
    Usage: node test.js [site folder, default ../app] [screenshot folder, default ./shots]     (npm test) */
 const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path');
+/* Values that must never appear in the app (names, IC, passport and registration numbers from the sources) live in
+   guard-values.local.json, kept out of git, so this public test checks for them without publishing them. */
+let GUARD = null;
+try { GUARD = JSON.parse(fs.readFileSync(path.join(__dirname, 'guard-values.local.json'), 'utf8')); } catch (e) { console.log('note: guard-values.local.json not found, so the checks for values that must never appear are skipped'); }
+const guardRe = k => GUARD && GUARD[k] ? GUARD[k].map(s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') : null;
 const root = path.resolve(process.argv[2] || path.join(__dirname, '..', 'app'));
 const out = path.resolve(process.argv[3] || path.join(__dirname, 'shots'));
 const PORT = Number(process.env.PORT) || 8765;
@@ -16,7 +21,16 @@ fs.mkdirSync(out, {recursive:true});
 const types = {'.html':'text/html','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg','.png':'image/png'};
 const srv = http.createServer((q, r) => {
   const f = path.join(root, decodeURIComponent(q.url.split('?')[0]).replace(/^\/$/, '/index.html'));
-  fs.readFile(f, (e, d) => { if (e){ r.writeHead(404); r.end(); return; } r.writeHead(200, {'content-type':types[path.extname(f)] || 'application/octet-stream'}); r.end(d); });
+  fs.readFile(f, (e, d) => {
+    if (e){ r.writeHead(404); r.end(); return; }
+    /* Byte ranges, as a web host serves them, so the read-aloud narration and the films can seek */
+    const type = types[path.extname(f)] || 'application/octet-stream', m = /^bytes=(\d*)-(\d*)$/.exec(q.headers.range || '');
+    if (m && (m[1] || m[2])){
+      const s = m[1] ? +m[1] : Math.max(0, d.length - +m[2]), t = m[1] && m[2] ? Math.min(+m[2], d.length - 1) : d.length - 1;
+      r.writeHead(206, {'content-type':type, 'accept-ranges':'bytes', 'content-range':`bytes ${s}-${t}/${d.length}`, 'content-length':t - s + 1}); r.end(d.subarray(s, t + 1)); return;
+    }
+    r.writeHead(200, {'content-type':type, 'accept-ranges':'bytes', 'content-length':d.length}); r.end(d);
+  });
 }).listen(PORT);
 const U = `http://localhost:${PORT}/`;
 const VIEWS = ['home','pathways','rules','tools','calc','numbers','intro','journey','tour','quiz','new','poster','about'];
@@ -199,7 +213,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 29 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 29 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 30 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 30 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
@@ -375,6 +389,38 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => document.querySelector('#leaf').lang === 'ms' && /^Nasihat/.test(document.querySelector('#leaf .leaf-t').textContent) && document.activeElement.dataset.leaf === 'ms'), 'the leaflet switches to Bahasa Melayu and keeps the focus on the switch');
   await p.screenshot({path:out + '/d-run-dengue-cpg.png', fullPage:true});
   await p.click('#tp-leaflet [data-leaf="en"]'); await p.waitForTimeout(150);
+  // Read-aloud: the leaflet's Listen bar follows its language, loads nothing until tapped, lights the section being read
+  ok(await p.evaluate(() => document.querySelector('#leaf .lsn').dataset.read === 'leaf-dengue-en' && document.querySelectorAll('#leaf .lsn-ch button').length === 3 && reader.paused && !performance.getEntriesByType('resource').some(e => /audio\/(leaf|adv)-/.test(e.name))), 'the leaflet has a Listen bar with three section chips, and no narration loads before a tap');
+  await p.click('#leaf .lsn-ch button >> nth=1'); await p.waitForTimeout(1500);
+  ok(await p.evaluate(() => !reader.paused && reader.currentTime > READ['leaf-dengue-en'].marks[2] && document.querySelector('#leaf .leaf-g.reading h5').textContent.startsWith('What to avoid') && document.querySelector('#leaf .lsn-ch button.on').textContent === 'What to avoid'), 'tapping a section chip plays from that section and lights it');
+  ok(await p.evaluate(() => document.querySelectorAll('.rl-on').length === 1 && !!document.querySelector('#leaf .leaf-g.reading .rl-on')), 'the line being read is marked inside the section being read');
+  ok(await p.evaluate(() => { const box = document.querySelector('#leaf .lsn'), L = READ['leaf-dengue-en'].lines; return L.length === document.querySelectorAll('#leaf .leaf-t, #leaf .leaf-g > h5, #leaf .leaf-g > p, #leaf .leaf-g li').length && L.every(l => readLine(box, l[1], l[2])) && L.every((l, i) => !i || l[0] > L[i - 1][0]); }), 'every English leaflet line has its own mark, in order, on its own element');
+  // The leaflet's film: a small card until tapped (nothing loads before), then the player, which stops the narration
+  ok(await p.evaluate(() => { const b = document.querySelector('#leaf .lfilm-b'); return !!b && b.dataset.film === 'media/dengue-home-720.mp4' && !document.querySelector('#leaf video') && !performance.getEntriesByType('resource').some(e => e.name.includes('dengue-home') && e.name.includes('.mp4')); }), 'the leaflet offers its film as a small card, and no film loads before a tap');
+  await p.click('#leaf .lfilm-b'); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => { const v = document.querySelector('#leaf .lfilm video'); return !!v && v.src.endsWith('media/dengue-home-720.mp4') && v.controls && reader.paused; }), 'tapping the film card swaps in the player and stops the narration');
+  ok(Object.values(await p.evaluate(() => FILMS)).every(f => ['en', 'ms'].every(l => ['src', 'cover', 'thumb'].every(k => fs.existsSync(path.join(__dirname, '..', 'app', f[l][k]))) && !/FILM_/.test(f[l].d))), 'every leaflet film, cover and thumbnail exists, with its length written');
+  await p.click('#tp-leaflet [data-leaf="ms"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => reader.paused && document.querySelector('#leaf .lsn').dataset.read === 'leaf-dengue-ms' && !document.querySelector('.reading, .rl-on')), 'switching to Bahasa Melayu stops the English narration and offers the Malay one');
+  ok(await p.evaluate(() => { const box = document.querySelector('#leaf .lsn'), L = READ['leaf-dengue-ms'].lines; return L.length === document.querySelectorAll('#leaf .leaf-t, #leaf .leaf-g > h5, #leaf .leaf-g > p, #leaf .leaf-g li').length && L.every(l => readLine(box, l[1], l[2])); }), 'every Malay leaflet line has its own mark on its own element');
+  ok(await p.evaluate(() => (document.querySelector('#leaf .lfilm-b') || {}).dataset?.film === 'media/dengue-home-ms-720.mp4' && !document.querySelector('#leaf video')), 'the Malay leaflet offers the Malay film');
+  await p.click('#leaf .lsn-b'); await p.waitForTimeout(800);
+  await go(p, '#home', 300);
+  ok(await p.evaluate(() => reader.paused), 'leaving the page stops the narration');
+  await go(p, '#mild-tbi', 400); await p.click('#ptab [data-pt="advice"]'); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => (document.querySelector('#tp-advice .lsn') || {}).dataset?.read === 'adv-tbi-en' && READ['adv-tbi-en'].lines.length === document.querySelectorAll('#tp-advice #advlist > li').length), 'the mild head injury advice has its Listen bar, with a mark for each advice line');
+  for (const [h, k] of [['#dengue', 'adv-dengue-en'], ['#asthma-zone', 'adv-asthma-en']]){
+    await go(p, h, 400); await p.click('#ptab [data-pt="advice"]'); await p.waitForTimeout(150);
+    ok(await p.evaluate(k => (document.querySelector('#tp-advice .lsn') || {}).dataset?.read === k && READ[k].lines.length === document.querySelectorAll('#tp-advice #advlist > li').length, k), 'the advice of ' + h.slice(1) + ' has its Listen bar, with a mark for each advice line');
+  }
+  await go(p, '#cancer-pain-cpg', 400); await p.click('#ptab [data-pt="leaflet"]'); await p.waitForTimeout(150);
+  for (const lg of ['en', 'ms']){
+    await p.click('#tp-leaflet [data-leaf="' + lg + '"]'); await p.waitForTimeout(150);
+    ok(await p.evaluate(lg => { const box = document.querySelector('#leaf .lsn'), L = READ['leaf-cancerpain-' + lg].lines; return box.dataset.read === 'leaf-cancerpain-' + lg && L.length === document.querySelectorAll('#leaf .leaf-t, #leaf .leaf-g > h5, #leaf .leaf-g > p, #leaf .leaf-g li').length && L.every(l => readLine(box, l[1], l[2])) && !document.querySelector('#leaf .lfilm'); }, lg), 'every line of the cancer pain leaflet (' + lg + ') has its own mark, and it has no film');
+  }
+  ok(Object.values(await p.evaluate(() => READ)).every(r => fs.existsSync(path.join(__dirname, '..', 'app', r.src)) && r.marks[0] === 0 && r.marks.every((m, i, a) => !i || m > a[i - 1]) && r.marks[r.marks.length - 1] < r.dur), 'every narration file exists, and its section marks run in order inside it');
+  await go(p, '#dengue-cpg', 400); await p.click('#ptab [data-pt="leaflet"]'); await p.waitForTimeout(150);
+  await p.click('#tp-leaflet [data-leaf="en"]'); await p.waitForTimeout(150);
   for (const [h, t] of [['#dengue-cpg--red2', 'Red Zone: MTS level 2'], ['#dengue-cpg--msglt', 'SGLT2 inhibitor: withhold while unwell'], ['#dengue-cpg--dcok', 'Meets the discharge criteria']]){
     await go(p, h, 350);
     const got = await p.evaluate(() => (document.querySelector('#cur h2') || {}).textContent || '');
@@ -548,6 +594,41 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(day.src === 'media/green-zone-explainer-720p.mp4' && day.cover === 'media/explainer-poster.webp' && day.thumb === 'poster/sheet1-thumb.webp', 'day colours bring back the day film, cover and sheets');
   await p.screenshot({path:out + '/d-home-day-again.png'});
   await p.evaluate(() => { localStorage.setItem('gz-theme', '"auto"'); });
+
+  /* Rabies and the ABC (protocol of Oct 2022, rebuilt 10 Nov 2026): the two flow charts as one pathway, figures, PDF, writer */
+  await go(p, '#animal-bites', 500);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .checks li').length === 15 && /Definite risk/.test(document.querySelector('#cur h2').textContent)), 'animal bites opens on the checklist\'s Table 1A, all fifteen items');
+  await p.click('#cur .checks li:first-child input'); await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /Wound category/.test(document.querySelector('#cur h2').textContent) && document.querySelectorAll('#cur .figwc .wc').length === 3), 'a definite risk leads to the wound category, with the three categories drawn');
+  await p.click('#cur button.opt[data-go="2"]'); await p.waitForTimeout(200);
+  await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(200);
+  await p.click('#cur .checks li:nth-child(2) input'); await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(200);
+  await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /^RIG in the ED/.test(document.querySelector('#cur h2').textContent.replace(/^Do this: /, '')) && document.querySelector('#cur .figrig') && /Max\. dose: 1 vial\/patient/.test(document.querySelector('#cur').textContent)), 'Category 3, no prophylaxis, eligible and urgent: RIG in the ED, at most one vial, with the RIG card');
+  await p.click('#cur button[data-next]'); await p.waitForTimeout(200); await p.click('#cur button[data-next]'); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => document.querySelector('#cur .res.refer h2').textContent === 'Refer to the Animal Bite Clinic' && !!document.querySelector('#cur .res a.ext[href^="https://drive.google.com/file/d/1k8Yh8oSoEMw3MPJ02kf19ujBnxCXMsX8"]') && state.cur === 'abc'), 'the route ends at the ABC referral (its old node key, abc), with the protocol PDF');
+  await go(p, '#animal-bites--hx2', 400);
+  await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /IM: 1 site; D0,3,7,14-28/.test(document.querySelector('#cur').textContent) && document.querySelectorAll('#cur .figsc .sc-r i').length === 9), 'Category 2 with no prophylaxis: the full course, with the schedule strip');
+  await go(p, '#animal-bites--hx3', 400);
+  await p.click('#cur button.opt[data-go="3"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /Pre-exposure prophylaxis only/.test(document.querySelector('#cur h2').textContent) && /Not in the protocol/.test(document.querySelector('#cur .gap').textContent)), 'pre-exposure prophylaxis: no RIG, and the vaccine schedule is marked as not in the protocol');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(t => t.textContent).join('|') === 'How to prescribe|Risk checklist|Who does what|Signs to counsel|References' && !!document.querySelector('#tp-refs a.ext[href*="1k8Yh8oSoEMw3MPJ02kf19ujBnxCXMsX8"]')), 'its tabs: how to prescribe, the checklist, who does what, signs to counsel, and references with the PDF');
+  if (guardRe('rabies')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P['animal-bites']) + document.body.textContent), guardRe('rabies')), 'no name, IC, passport or serial number from the sample prescriptions, and not the mobile number on the card');
+  /* The writer: the protocol's own example (Appendix 4B) must come out as printed */
+  await go(p, '#calc-rabies', 500);
+  await p.fill('#cf-d0', '2022-05-01'); await p.waitForTimeout(200);
+  const rx = () => p.evaluate(() => [...document.querySelectorAll('#couts .cx-list dd')].map(d => d.textContent));
+  ok((await rx()).join('|').includes('IM Rabies Vaccine 0.5 ml stat D0 (01/05/2022)|IM Rabies Vaccine 0.5 ml stat D3 (04/05/2022)|IM Rabies Vaccine 0.5 ml stat D7 (08/05/2022)|IM Rabies Vaccine 0.5 ml stat D14 (15/05/2022)'), 'the writer gives the protocol\'s own example: D0 1 May 2022, then 4, 8 and 15 May');
+  await p.click('[data-k="slip"][data-sv="fgn"]'); await p.waitForTimeout(150);
+  ok((await rx()).filter(t => /stat D\d/.test(t)).join() === 'IM Rabies Vaccine 0.5 ml stat D0 (01/05/2022)', 'a foreigner gets one dose per visit');
+  await p.click('[data-k="slip"][data-sv="opd"]'); await p.click('[data-k="rt"][data-sv="id"]'); await p.waitForTimeout(200);
+  ok((await rx()).join('|').includes('ID Rabies Vaccine 0.1 ml x 2 sites stat D7 (08/05/2022)') && !(await rx()).some(t => /D14/.test(t)), 'the ID course: 0.1 ml at 2 sites on D0, D3 and D7');
+  await p.click('[data-k="rig"][data-sv="yes"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => /Rabies Immunoglobulin 1 vial \(1000 units\) stat/.test(document.querySelector('#couts').textContent) && /accept verbal consent/.test(document.querySelector('#couts').textContent)), 'with RIG: one vial, after the ID trainee or consultant agrees');
+  await p.click('[data-k="reg"][data-sv="short"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => [...document.querySelectorAll('[data-k="rt"]')].map(b => b.textContent).join('|') === 'IM, 1 site|ID, 1 site|ID, 4 sites' && /D0, D3/.test(document.querySelector('#couts .out b').textContent)), 'the shorter course offers 1 site on D0 and D3, or ID at 4 sites on D0');
+  await go(p, '#home', 300);
 
   /* ---------- Phone, light ---------- */
   const phone = {viewport:{width:390, height:844}, isMobile:true, hasTouch:true, deviceScaleFactor:1};

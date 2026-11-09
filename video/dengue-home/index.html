@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-resolution="square">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1080" />
+    <title>Dengue at home</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+#root{background:#0b0805}
+#bgw{position:absolute;left:0;top:0;width:1080px;height:1080px;overflow:hidden}
+#bg{position:absolute;left:0;top:0;width:1080px;height:1080px;object-fit:cover}
+#scrim{position:absolute;left:0;top:0;width:1080px;height:1080px;background:linear-gradient(180deg,rgba(8,6,4,.86) 0%,rgba(8,6,4,.42) 46%,rgba(8,6,4,.78) 100%)}
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="119.397" data-width="1080" data-height="1080">
+      <div id="bgw"><video id="bg" class="clip" src="assets/bg.mp4" data-start="0" data-duration="119.397" data-track-index="1" muted playsinline></video></div>
+      <div id="scrim"></div>
+      <div id="s0" data-composition-id="s0" data-composition-src="compositions/s0.html" data-start="0" data-duration="4.04" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1080" style="z-index:3"></div>
+      <div id="s1" data-composition-id="s1" data-composition-src="compositions/s1.html" data-start="4.04" data-duration="44.57" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1080" style="z-index:4"></div>
+      <div id="s2" data-composition-id="s2" data-composition-src="compositions/s2.html" data-start="48.61" data-duration="23.16" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1080" style="z-index:5"></div>
+      <div id="s3" data-composition-id="s3" data-composition-src="compositions/s3.html" data-start="71.77" data-duration="39.827" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1080" style="z-index:6"></div>
+      <div id="s4" data-composition-id="s4" data-composition-src="compositions/s4.html" data-start="111.597" data-duration="7.8" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1080" style="z-index:7"></div>
+      <audio id="vo" class="clip" src="assets/vo-en.wav" data-start="2.2" data-duration="108.497" data-track-index="3" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/music.mp3" data-start="0" data-duration="119.397" data-track-index="4" data-volume="0.14" data-fade-in="1.2" data-fade-out="3.5"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#bgw",{scale:1},{scale:1.1,duration:119.397,ease:"none"},0);
+      tl.fromTo("#scrim",{opacity:0.15},{opacity:0.75,duration:1.4,ease:"power1.inOut"},0.5);
+      tl.fromTo("#scrim",{opacity:0.75},{opacity:1,duration:0.8,ease:"power1.inOut",immediateRender:false},3.89);
+      tl.fromTo("#scrim",{opacity:1},{opacity:0.6,duration:1.2,ease:"power1.inOut",immediateRender:false},111.397);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

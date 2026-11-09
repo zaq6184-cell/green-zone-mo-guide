@@ -1,0 +1,91 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28; --mint:#43dd8c;
+  --amber-1:#b8741a; --amber-2:#8f5510; --amber-3:#5e3608; --gold:#d8b46a;
+  --garnet-1:#a52234; --garnet-2:#7e1626; --garnet-3:#560d19; --garnet-soft:#fbe3e6;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-amber{--j1:var(--amber-1);--j2:var(--amber-2);--j3:var(--amber-3)}
+.j-garnet{--j1:var(--garnet-1);--j2:var(--garnet-2);--j3:var(--garnet-3)}
+.hd{position:absolute;left:108px;top:84px;right:108px;height:96px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font:800 60px/1.05 'Figtree';letter-spacing:-.02em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hd.two{top:64px;height:124px}
+.hd.two h2{font-size:50px;line-height:1.06;text-wrap:balance}
+.card{position:absolute;left:56px;top:216px;width:968px;height:808px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;top:44px;width:864px;height:640px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{width:112px;height:112px;border-radius:34px;padding:26px;position:relative}
+.it .disc .ban{position:absolute;inset:14px;width:auto;height:auto;color:#fff;opacity:.92}
+.it p{margin-top:34px !important;font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink)}
+.it p .no{color:var(--garnet-1);font-weight:900}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+#s1-i0,#s1-i1,#s1-i2,#s1-i3,#s1-i4,#s1-i5,#s1-i6{opacity:0}</style>
+<div id="root" data-composition-id="s1" data-width="1080" data-height="1080">
+  <div class="hd" id="s1-hd"><div class="disc jw j-emerald"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div><h2>What to do</h2></div>
+  <div class="card" id="s1-card">
+  <div class="it" id="s1-i0"><div class="disc jw j-emerald" id="s1-c0"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h12l-1.3 11.2A2 2 0 0 1 13.7 20H8.3a2 2 0 0 1-2-1.8z"/><path d="M17 9.5h1.5a2.5 2.5 0 0 1 0 5h-2"/><path d="M6.4 11.5h10.2"/></svg></div><p style="font-size:48px">Drink adequate fluids. Aim 200 ml of fluid every hour (one small cup) while awake. Examples of fluids include fruit juice, oral rehydration salts (ORS), coconut water, or soup.</p></div>
+  <div class="it" id="s1-i1"><div class="disc jw j-emerald" id="s1-c1"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 20.5a5 5 0 0 1-7-7l6-6a5 5 0 0 1 7 7z"/><path d="m8.5 8.5 7 7"/></svg></div><p style="font-size:58px">Take paracetamol for fever or pain when necessary, but not to exceed 4g per day.</p></div>
+  <div class="it" id="s1-i2"><div class="disc jw j-emerald" id="s1-c2"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18.5v-11M3 14.5h18v4M21 14.5V12a3 3 0 0 0-3-3h-7v5.5"/><circle cx="7" cy="11.5" r="1.8"/></svg></div><p style="font-size:70px">Get adequate rest.</p></div>
+  <div class="it" id="s1-i3"><div class="disc jw j-emerald" id="s1-c3"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7.5"/></svg></div><p style="font-size:58px">Monitor the temperature and dengue warning signs.</p></div>
+  <div class="it" id="s1-i4"><div class="disc jw j-emerald" id="s1-c4"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20.5V8.5l8-4.5 8 4.5v12"/><path d="M2.5 20.5h19"/><path d="M12 8.5v5M9.5 11h5"/><path d="M10 20.5v-3.5h4v3.5"/></svg></div><p style="font-size:58px">Seek immediate medical care if warning signs develop.</p></div>
+  <div class="it" id="s1-i5"><div class="disc jw j-emerald" id="s1-c5"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/><path d="m9 15 2 2 4-4"/></svg></div><p style="font-size:70px">Attend daily follow-up appointments as advised.</p></div>
+  <div class="it" id="s1-i6"><div class="disc jw j-emerald" id="s1-c6"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9.5h7v10.5a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1z"/><path d="M9.5 9.5v-3h4v3M11.5 6.5v-2h3"/><path d="M18 5h.01M20 7h.01M18 9h.01M20.5 3.8h.01"/></svg></div><p style="font-size:52px">Look for mosquito breeding places in and around the home and prevent mosquito bites using mosquito repellent.</p></div>
+    <div class="dots"><i id="s1-d0"></i><i id="s1-d1"></i><i id="s1-d2"></i><i id="s1-d3"></i><i id="s1-d4"></i><i id="s1-d5"></i><i id="s1-d6"></i></div>
+  </div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s1-hd",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.3);
+  tl.fromTo("#s1-card",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.42);
+  tl.fromTo("#s1-i0",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},1.78);
+  tl.fromTo("#s1-c0",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},1.83);
+  tl.fromTo("#s1-d0",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#0d7049",duration:.35,ease:"power2.out"},1.78);
+  tl.fromTo("#s1-i0",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},16.21);
+  tl.fromTo("#s1-d0",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},16.51);
+  tl.fromTo("#s1-i1",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},16.51);
+  tl.fromTo("#s1-c1",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},16.56);
+  tl.fromTo("#s1-d1",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#0d7049",duration:.35,ease:"power2.out"},16.51);
+  tl.fromTo("#s1-i1",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},22.65);
+  tl.fromTo("#s1-d1",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},22.95);
+  tl.fromTo("#s1-i2",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},22.95);
+  tl.fromTo("#s1-c2",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},23);
+  tl.fromTo("#s1-d2",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#0d7049",duration:.35,ease:"power2.out"},22.95);
+  tl.fromTo("#s1-i2",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},24.34);
+  tl.fromTo("#s1-d2",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},24.64);
+  tl.fromTo("#s1-i3",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},24.64);
+  tl.fromTo("#s1-c3",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},24.69);
+  tl.fromTo("#s1-d3",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#0d7049",duration:.35,ease:"power2.out"},24.64);
+  tl.fromTo("#s1-i3",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},28.26);
+  tl.fromTo("#s1-d3",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},28.56);
+  tl.fromTo("#s1-i4",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},28.56);
+  tl.fromTo("#s1-c4",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},28.61);
+  tl.fromTo("#s1-d4",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#0d7049",duration:.35,ease:"power2.out"},28.56);
+  tl.fromTo("#s1-i4",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},32.38);
+  tl.fromTo("#s1-d4",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},32.68);
+  tl.fromTo("#s1-i5",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},32.68);
+  tl.fromTo("#s1-c5",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},32.73);
+  tl.fromTo("#s1-d5",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#0d7049",duration:.35,ease:"power2.out"},32.68);
+  tl.fromTo("#s1-i5",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},35.87);
+  tl.fromTo("#s1-d5",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},36.17);
+  tl.fromTo("#s1-i6",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},36.17);
+  tl.fromTo("#s1-c6",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},36.22);
+  tl.fromTo("#s1-d6",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#0d7049",duration:.35,ease:"power2.out"},36.17);
+  tl.fromTo("#s1-hd",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},44.22);
+  tl.fromTo("#s1-card",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},44.22);
+  window.__timelines["s1"] = tl;
+})();
+</script>
+</template>

@@ -1,0 +1,56 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28; --mint:#43dd8c;
+  --amber-1:#b8741a; --amber-2:#8f5510; --amber-3:#5e3608; --gold:#d8b46a;
+  --garnet-1:#a52234; --garnet-2:#7e1626; --garnet-3:#560d19; --garnet-soft:#fbe3e6;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-amber{--j1:var(--amber-1);--j2:var(--amber-2);--j3:var(--amber-3)}
+.j-garnet{--j1:var(--garnet-1);--j2:var(--garnet-2);--j3:var(--garnet-3)}
+.hd{position:absolute;left:108px;top:84px;right:108px;height:96px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font:800 60px/1.05 'Figtree';letter-spacing:-.02em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.hd.two{top:64px;height:124px}
+.hd.two h2{font-size:50px;line-height:1.06;text-wrap:balance}
+.card{position:absolute;left:56px;top:216px;width:968px;height:808px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;top:44px;width:864px;height:640px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{width:112px;height:112px;border-radius:34px;padding:26px;position:relative}
+.it .disc .ban{position:absolute;inset:14px;width:auto;height:auto;color:#fff;opacity:.92}
+.it p{margin-top:34px !important;font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink)}
+.it p .no{color:var(--garnet-1);font-weight:900}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+#s0-t{position:absolute;left:108px;top:118px;width:820px;color:#fff;font:900 96px/1.0 'Figtree';letter-spacing:-.035em;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+#s0-t span{display:inline-block;margin-right:.22em}
+#s0-k{position:absolute;left:108px;top:352px;display:flex;align-items:center;gap:14px;padding:12px 22px 12px 14px;border-radius:999px;background:rgba(216,180,106,.16);box-shadow:inset 0 0 0 1.5px rgba(216,180,106,.55);color:#f3dfb4;font:700 32px/1 'Figtree'}
+#s0-k i{display:block;width:30px;height:30px;border-radius:50%;background:var(--gold)}</style>
+<div id="root" data-composition-id="s0" data-width="1080" data-height="1080">
+  <h1 id="s0-t"><span id="s0-w0">Home</span><span id="s0-w1">care</span><span id="s0-w2">advice</span><span id="s0-w3">in</span><span id="s0-w4">dengue</span></h1>
+  <div id="s0-k"><i></i>Dengue CPG, 4th edition · Appendix 5B</div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s0-w0",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},1.9);
+  tl.fromTo("#s0-w1",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},1.97);
+  tl.fromTo("#s0-w2",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},2.04);
+  tl.fromTo("#s0-w3",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},2.11);
+  tl.fromTo("#s0-w4",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},2.18);
+  tl.fromTo("#s0-k",{x:-30,opacity:0},{x:0,opacity:1,duration:.45,ease:"power3.out"},0.5);
+  tl.fromTo("#s0-t",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},3.64);
+  tl.fromTo("#s0-k",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},3.64);
+  window.__timelines["s0"] = tl;
+})();
+</script>
+</template>
