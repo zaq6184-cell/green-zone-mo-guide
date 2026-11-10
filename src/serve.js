@@ -7,7 +7,7 @@ const path = require('path');
 
 const root = path.resolve(process.argv[2] || path.join(__dirname, '..', 'app'));
 const port = Number(process.env.PORT) || 8765;
-const TYPES = {'.html': 'text/html; charset=utf-8', '.webp': 'image/webp', '.png': 'image/png', '.mp4': 'video/mp4', '.mp3': 'audio/mpeg', '.js': 'text/javascript', '.css': 'text/css'};
+const TYPES = {'.html': 'text/html; charset=utf-8', '.webp': 'image/webp', '.png': 'image/png', '.mp4': 'video/mp4', '.mp3': 'audio/mpeg', '.js': 'text/javascript', '.css': 'text/css', '.webmanifest': 'application/manifest+json', '.json': 'application/json'};
 
 http.createServer((req, res) => {
   let rel = decodeURIComponent(req.url.split('?')[0]);

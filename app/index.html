@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230d7049%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23063d28%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2218%22%20fill%3D%22url(%23g)%22%2F%3E%3Cg%20transform%3D%22translate(11%2011)%20scale(1.75)%22%20fill%3D%22none%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M5%2018.5h7.5a4%204%200%200%200%204-4V12.2%22%20stroke%3D%22%2343dd8c%22%2F%3E%3Cpath%20d%3D%22M16.5%203.6v6.6M13.2%206.9h6.6%22%20stroke%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%225%22%20cy%3D%2218.5%22%20r%3D%222.3%22%20fill%3D%22%23fff%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230d7049%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23063d28%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2218%22%20fill%3D%22url(%23g)%22%2F%3E%3Cg%20transform%3D%22translate(11%2011)%20scale(1.75)%22%20fill%3D%22none%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M5%2018.5h7.5a4%204%200%200%200%204-4V12.2%22%20stroke%3D%22%2343dd8c%22%2F%3E%3Cpath%20d%3D%22M16.5%203.6v6.6M13.2%206.9h6.6%22%20stroke%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%225%22%20cy%3D%2218.5%22%20r%3D%222.3%22%20fill%3D%22%23fff%22%20stroke%3D%22none%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="Green Zone"><meta name="theme-color" content="#e9edeb" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#080d0b" media="(prefers-color-scheme: dark)"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
 <title>Green Zone MO Guide</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1471,6 +1471,13 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:95;display:flex;align-items:center;gap:8px;background:var(--obsidian-2);color:#fff;padding:12px 18px;border-radius:999px;font-weight:800;font-size:.88rem;box-shadow:var(--sh-3);max-width:calc(100% - 32px)}
 @media (prefers-reduced-motion:no-preference){.toast:not([hidden]){animation:tin .3s var(--ease)}@keyframes tin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}}
 @media (max-width:760px){.toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}}
+/* The public web app's update notice: pwa.js, which build.js adds to app/index.html only (never the artifact) */
+.toast.upd{width:max-content;padding:6px 6px 6px 18px;gap:10px}
+.toast.upd button{flex:none;min-height:44px;border:0;border-radius:999px;font:800 .86rem/1 var(--body)}
+.toast.upd .tb{padding:8px 18px;background:var(--mint);color:var(--obsidian-3)}
+.toast.upd .tx{width:44px;padding:0;background:transparent;color:#fff}
+.toast.upd .tx:hover{background:rgba(255,255,255,.1)}
+.toast.upd .tx svg{width:18px;height:18px}
 
 /* ---------- Footer ---------- */
 .foot{border-top:1px solid var(--line)}
@@ -11360,5 +11367,96 @@ route();
 window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Image(); im.src = s.img; }));
 
 </script>
+<script>
+/* The public web app only. build.js adds this script to app/index.html (GitHub Pages and the offline copy), never to the
+   claude.ai artifact, whose host forbids a service worker. It runs after engine.js.
+   - Keeps the browser bar's colour (theme-color) with the page's own background, Day and Night switch included.
+   - On github.io and localhost only (nowhere else, not even 127.0.0.1 or a file opened from disk), registers sw.js, which
+     saves the guide for use without a signal (see src/parts/sw.js).
+   - Adds an "Offline and install" row to Settings: whether the guide is saved, how many films and sounds are kept, and how
+     to install it (an Install button where the browser offers one).
+   - When a newer version of the guide has been saved while an older page is open, offers Reload. */
+(() => {
+  const PAGE = 'e42f21ecc547'; /* this page's id, which build.js also writes into sw.js */
 
+  const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
+  const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };
+  tint();
+  new MutationObserver(tint).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+  try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', tint); } catch (e) {}
+
+  const host = location.hostname;
+  if (!('serviceWorker' in navigator) || !(host === 'localhost' || /\.github\.io$/.test(host))) return;
+  const sw = navigator.serviceWorker;
+  let state = 'saving', last = null, offer = null;
+
+  /* Settings: Offline and install */
+  const box = document.querySelector('#settings .dlg-box');
+  if (box){
+    const row = document.createElement('div');
+    row.className = 'set'; row.id = 'st-offline';
+    row.innerHTML = '<div><b>Offline and install</b><small id="st-off" aria-live="polite"></small></div><button type="button" class="sm" id="st-inst" hidden>Install</button>';
+    box.insertBefore(row, box.querySelector('.dlg-f'));
+    row.querySelector('#st-inst').addEventListener('click', async () => {
+      const o = offer; offer = null; draw();
+      if (o) try { await o.prompt(); await o.userChoice; } catch (e) {}
+    });
+    new MutationObserver(() => { if (!document.querySelector('#settings').hidden) ask(); }).observe(document.querySelector('#settings'), {attributes: true, attributeFilter: ['hidden']});
+  }
+  const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const installed = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  function draw(){
+    const s = document.querySelector('#st-off'), b = document.querySelector('#st-inst');
+    if (!s) return;
+    let t = state === 'failed' ? 'This browser could not save the guide for use without a signal.'
+      : state === 'saving' || !last ? 'Saving the guide on this device, so it opens without a signal.'
+      : 'Saved on this device: it opens without a signal.' +
+        (last.saved < last.of ? ` Pictures are saved as you view them (${last.saved} of ${last.of} so far).` : '') +
+        (last.played ? ` Films and sounds you have played are kept (${last.played} so far).` : ' Films and sounds are kept once you have played them.');
+    if (installed()) t = 'Installed. ' + t;
+    else if (!offer) t += ios ? ' To install it: Share, then Add to Home Screen.' : " To install it: your browser's menu, Install app or Add to Home screen.";
+    s.textContent = t;
+    b.hidden = !offer || installed();
+  }
+  function ask(){
+    if (sw.controller) sw.controller.postMessage({gz: 'status'});
+    draw();
+  }
+  addEventListener('beforeinstallprompt', e => { offer = e; draw(); });
+  addEventListener('appinstalled', () => { offer = null; draw(); });
+
+  /* A newer version is saved while this older page is open: offer Reload */
+  function offerReload(){
+    if (document.querySelector('#gz-upd')) return;
+    const t = document.createElement('div');
+    t.className = 'toast upd'; t.id = 'gz-upd'; t.setAttribute('role', 'status');
+    t.innerHTML = `<span>New version ready</span><button type="button" class="tb">Reload</button><button type="button" class="tx" aria-label="Not now">${typeof svg === 'function' ? svg('x') : '×'}</button>`;
+    t.querySelector('.tb').addEventListener('click', () => location.reload());
+    t.querySelector('.tx').addEventListener('click', () => t.remove());
+    document.body.appendChild(t);
+  }
+
+  sw.addEventListener('message', e => {
+    const d = e.data || {};
+    if (d.gz === 'ready'){ state = 'saved'; if (d.page && d.page !== PAGE) offerReload(); ask(); }
+    else if (d.gz === 'status'){ state = 'saved'; last = d; draw(); }
+  });
+  /* The first time the worker takes charge of this page, pass the fonts the page has already loaded through it once (they
+     come from the browser's own cache), so the guide keeps its type offline from the first visit */
+  const warmFonts = () => performance.getEntriesByType('resource').map(r => r.name).filter(u => /^https:\/\/fonts\.(googleapis|gstatic)\.com\//.test(u))
+    .forEach(u => fetch(u, {mode: u.includes('fonts.googleapis.com') ? 'no-cors' : 'cors'}).catch(() => {}));
+  let had = !!sw.controller;
+  sw.addEventListener('controllerchange', () => { if (!had) warmFonts(); had = true; ask(); });
+  sw.startMessages();
+
+  /* Register once the page has loaded, so saving it never slows the first view. Installed, ask the browser to keep the
+     saved copy even when the phone runs short of space (Chrome grants this to installed apps without asking) */
+  const go = () => {
+    const r = sw.register('sw.js', {scope: './'});
+    Promise.resolve(r).then(reg => { if (!reg) state = 'failed'; else if (sw.controller) state = 'saved'; ask(); }, () => { state = 'failed'; draw(); });
+    if (installed() && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+  };
+  if (document.readyState === 'complete') go(); else addEventListener('load', go);
+})();
+</script>
 </body></html>

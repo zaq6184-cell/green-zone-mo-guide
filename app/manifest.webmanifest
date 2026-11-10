@@ -1,0 +1,60 @@
+{
+  "id": "/green-zone-mo-guide/",
+  "name": "Green Zone MO Guide",
+  "short_name": "Green Zone",
+  "description": "Pathways, rules, calculators and numbers for medical officers and house officers in the Green Zone (MTS 4 and 5), Emergency & Trauma Department, Hospital Kuala Lumpur. A reference tool only.",
+  "lang": "en-GB",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#e9edeb",
+  "theme_color": "#e9edeb",
+  "categories": [
+    "medical",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Search the guide",
+      "short_name": "Search",
+      "url": "./#search"
+    },
+    {
+      "name": "Calculators",
+      "short_name": "Calculators",
+      "url": "./#calc"
+    },
+    {
+      "name": "Numbers to know",
+      "short_name": "Numbers",
+      "url": "./#numbers"
+    }
+  ]
+}

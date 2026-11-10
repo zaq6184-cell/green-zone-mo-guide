@@ -1470,6 +1470,13 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:95;display:flex;align-items:center;gap:8px;background:var(--obsidian-2);color:#fff;padding:12px 18px;border-radius:999px;font-weight:800;font-size:.88rem;box-shadow:var(--sh-3);max-width:calc(100% - 32px)}
 @media (prefers-reduced-motion:no-preference){.toast:not([hidden]){animation:tin .3s var(--ease)}@keyframes tin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}}
 @media (max-width:760px){.toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}}
+/* The public web app's update notice: pwa.js, which build.js adds to app/index.html only (never the artifact) */
+.toast.upd{width:max-content;padding:6px 6px 6px 18px;gap:10px}
+.toast.upd button{flex:none;min-height:44px;border:0;border-radius:999px;font:800 .86rem/1 var(--body)}
+.toast.upd .tb{padding:8px 18px;background:var(--mint);color:var(--obsidian-3)}
+.toast.upd .tx{width:44px;padding:0;background:transparent;color:#fff}
+.toast.upd .tx:hover{background:rgba(255,255,255,.1)}
+.toast.upd .tx svg{width:18px;height:18px}
 
 /* ---------- Footer ---------- */
 .foot{border-top:1px solid var(--line)}

@@ -7,7 +7,7 @@ A guide for medical officers working in the Green Zone (MTS levels 4–5), Emerg
 - **Interactive app:** https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9 (version 8 replaced version 7 at the same link on 8 Nov 2026, and day and night was added the same day).
 - **Poster design canvas** (editable): https://claude.ai/artifact/5QaoLt2gwXut47WzhtprES
 - **Source code** (public): https://github.com/zaq6184-cell/green-zone-mo-guide, with the offline copy in `app/`.
-- **Web app** (public): https://zaq6184-cell.github.io/green-zone-mo-guide/, the same app served by GitHub Pages. It updates itself when a new build reaches `main` on GitHub.
+- **Web app** (public): https://zaq6184-cell.github.io/green-zone-mo-guide/, the same app served by GitHub Pages. It updates itself when a new build reaches `main` on GitHub, and it installs on a phone and opens without a signal (see Install it on a phone, below).
 
 The two claude.ai links are private until you share them from the page's Share menu; the GitHub repository and the GitHub Pages web app are public. The QR code on poster sheet 1, and the links the app copies, open the public web app, so anyone can use them.
 
@@ -19,7 +19,7 @@ The two claude.ai links are private until you share them from the page's Share m
 | `CLAUDE.md` | What Claude Code reads first: your rules, how the app is built and tested, and how to publish it. |
 | `src/` | The source: `parts/` (the page in five files), and the build, check, test and preview scripts. |
 | `green-zone-pathways.html` | The built page, exactly as published. |
-| `app/` | An offline copy of the app. Open `app/index.html` in Chrome or Edge, and keep the `clips`, `audio`, `img`, `media`, `poster` and `tiles` folders beside it. Fonts need the internet; without it the app falls back to the system font. |
+| `app/` | An offline copy of the app. Open `app/index.html` in Chrome or Edge, and keep the `clips`, `audio`, `img`, `media`, `poster` and `tiles` folders beside it. Fonts need the internet; without it the app falls back to the system font. It is also the public web app, with its `icons/`, `manifest.webmanifest` and service worker `sw.js` (built from `src/`); the service worker runs only on GitHub Pages and localhost, not on a file opened from disk. |
 | `app/clips/` | Six 8-second Flow Studio clips (1280×720): the hero loop and one for each stop of the patient journey. They are generated artwork with no text, logos or real people. |
 | `app/audio/` | The narration for each journey stop, cut from the explainer's narration, and the read-aloud narration of the patient advice (`leaf-*.mp3`, `adv-*.mp3`; the masters, one take per line, are in `narration/read-aloud/`). |
 | `flow-video/` | The same six clips as they came from Flow Studio, at full quality, and the twenty-five tile loops in `tiles/`. |
@@ -47,6 +47,11 @@ The two claude.ai links are private until you share them from the page's Share m
 - **Day and night:** a switch at the top of the home screen turns the night colours on and off. In night colours the tour plays a night version of the film and the poster page shows night versions of the sheets.
 - **Settings:** light, dark or the device's theme (the same setting as the Day and Night switch; Auto follows the device again); standard or large text; moving tiles on or off; journey clips on or off; clear your saved list and history.
 - **On a phone:** a floating tab bar (Home, Pathways, Search, Tools, Numbers). No video plays on the home screen, to save mobile data.
+- **Install it on a phone, and use it without a signal** (the public web app only): open https://zaq6184-cell.github.io/green-zone-mo-guide/ once with a signal and it saves itself on the phone: the guide and its pictures (about 1.6 MB to download, much of which the page loads anyway). After that it opens on patchy ward Wi-Fi or with no signal at all. Films and sounds are not downloaded ahead: each is kept once you have played it with a signal (nothing is downloaded twice), and then plays offline too. Settings, Offline and install, says what is saved.
+  - **Android (Chrome):** tap **Install** when Chrome offers it, or open Chrome's ⋮ menu and choose **Install app** (or **Add to Home screen**). The Green Zone icon opens it full screen; press and hold the icon for Search, Calculators and Numbers.
+  - **iPhone or iPad (Safari):** tap the **Share** button, then **Add to Home Screen**, then **Add**.
+  - **A computer (Chrome or Edge):** the install icon at the right of the address bar.
+  - When a new version is published, the phone picks it up the next time the guide opens with a signal; a page left open from an older version shows **New version ready** with Reload.
 
 **For learning and new staff**
 - **First-shift intro:** four quick screens with drawn, animated pictures: search, one question at a time, the one-way zone and the tools. The home screen offers it until you have seen it.
@@ -77,6 +82,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **Offline web app (built 10 Nov 2026):** the public web app installs on a phone (Android, iPhone and iPad, and computers) with the Green Zone mark as its icon, and opens without a signal. A service worker saves the guide and its pictures, keeps films and sounds once they have been played, always prefers the newest guide when there is a signal, and offers Reload when a newer version has been saved. Settings has an Offline and install row. The claude.ai link is unchanged.
 - **Premium round (built 10 Nov 2026):** every pathway, rule and protocol opens on its topic's glass banner, compact on a phone; the rabies protocol has its own (an amber glass paw and a vaccine vial); the ED links, communication and interpreter banners move with Flow Studio; and the discharge advice of gastroenteritis, renal colic, abdominal pain and hypoglycaemia can be read aloud.
 - **Audit (live 10 Nov 2026):** the colour codes outcome shows its codes and extensions in day colours again; no step scrolls sideways on a phone; small text, low contrast, small targets and heading levels fixed across the app.
 - **From the department's link page (live 10 Nov 2026):** the 2026 department policy, work instructions, memos and the fire and disaster plans, as notes in the steps they belong to: the Green Zone at a glance, sepsis escalation, EM Watch booking, the June 2026 IV antibiotic flow chart, leaving the department, prescriptions, DNR, referral details, redirection, and Fire in the department.

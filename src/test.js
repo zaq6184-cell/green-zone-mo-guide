@@ -3,6 +3,8 @@
    in light and dark, with reduced motion on the tablet. It fails on any console or page error, any
    sideways scroll, and any check below that does not hold. Screenshots go to the shots folder.
 
+   The pages register the service worker, as the web app does on localhost. Last, on a second server (PORT + 1), it checks the
+   web app itself: the manifest and icons, the worker's install, offline reloads, kept sounds, an update and the artifact.
    It is written for the version 8 markup (ids such as #bento, #zmap, #daynight, #libgrid, #cur, #ptab, #pmap, #introbox, #gq). Change it with the shell.
    The night poster sheets and night films must be in the site folder: the dark runs load them.
    Setup once: npm install, then npx playwright install chromium.
@@ -18,11 +20,18 @@ const root = path.resolve(process.argv[2] || path.join(__dirname, '..', 'app'));
 const out = path.resolve(process.argv[3] || path.join(__dirname, 'shots'));
 const PORT = Number(process.env.PORT) || 8765;
 fs.mkdirSync(out, {recursive:true});
-const types = {'.html':'text/html','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg','.png':'image/png'};
-const srv = http.createServer((q, r) => {
+const types = {'.html':'text/html','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg','.png':'image/png','.js':'text/javascript','.webmanifest':'application/manifest+json'};
+/* For the web app's update check below: when set, sw.js is served as a newer build (its version and page id changed) */
+let swNewer = null;
+/* The site server. log, if given, collects every path asked for, with its byte range and Sec-Fetch-Dest. A film or sound
+   asked for in a byte range comes from a player (Chrome marks one the service worker passes on as dest empty), and one
+   asked for whole is a fetch, such as the worker's own. The web app checks run on a server of their own, PORT + 1 */
+const site = log => (q, r) => {
+  if (log) log.push(decodeURIComponent(q.url.split('?')[0]) + (q.headers.range ? ' ' + q.headers.range : '') + ' dest=' + (q.headers['sec-fetch-dest'] || ''));
   const f = path.join(root, decodeURIComponent(q.url.split('?')[0]).replace(/^\/$/, '/index.html'));
   fs.readFile(f, (e, d) => {
     if (e){ r.writeHead(404); r.end(); return; }
+    if (swNewer && q.url.split('?')[0] === '/sw.js') d = Buffer.from(swNewer(d.toString()));
     /* Byte ranges, as a web host serves them, so the read-aloud narration and the films can seek */
     const type = types[path.extname(f)] || 'application/octet-stream', m = /^bytes=(\d*)-(\d*)$/.exec(q.headers.range || '');
     if (m && (m[1] || m[2])){
@@ -31,7 +40,8 @@ const srv = http.createServer((q, r) => {
     }
     r.writeHead(200, {'content-type':type, 'accept-ranges':'bytes', 'content-length':d.length}); r.end(d);
   });
-}).listen(PORT);
+};
+const srv = http.createServer(site()).listen(PORT);
 const U = `http://localhost:${PORT}/`;
 const VIEWS = ['home','pathways','rules','tools','calc','numbers','links','intro','journey','tour','quiz','new','poster','about'];
 let fails = 0;
@@ -857,6 +867,145 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/t-home.png'});
   await go(p, '#pathways', 500);
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 10 && !document.querySelector('.tm video')), 'with reduced motion the tiles stay as still pictures');
+
+  /* ---------- The public web app: manifest, service worker, offline, kept sounds, updates ----------
+     On a server of its own (PORT + 1), whose log holds only this phone's requests and its worker's. With reduced motion
+     the tiles stay still, so a film or sound fetched before a tap would be the worker's doing. */
+  {
+    const log = [], srv2 = http.createServer(site(log)).listen(PORT + 1), W = `http://localhost:${PORT + 1}/`;
+    const swText = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+    const [, VER, PAGEID] = /const VERSION = '([0-9a-f]{12})', PAGE = '([0-9a-f]{12})'/.exec(swText) || [];
+    const PRE = JSON.parse((/const PRE = (\{[\s\S]*?\n\});/.exec(swText) || [0, '{}'])[1]), KEEP = JSON.parse((/const KEEP = (\{[\s\S]*?\n\});/.exec(swText) || [0, '{}'])[1]);
+    const CACHE = 'green-zone-mo-guide-' + VER, KEPT = 'green-zone-mo-guide-kept', nPre = Object.keys(PRE).length;
+    const until = (q, fn, arg, ms = 10000) => q.waitForFunction(fn, arg, {timeout:ms, polling:250}).then(() => true, () => false);
+    const kept = (q, f) => q.evaluate(async ([k, u]) => { const r = await (await caches.open(k)).match(u); return r ? r.headers.get('X-GZ-Hash') : null; }, [KEPT, W + f]);
+    const playIt = (q, f) => q.evaluate(src => new Promise(res => { const a = new Audio(src); a.muted = true; a.onended = () => res(true); a.onerror = () => res(false); a.play().catch(() => res(false)); setTimeout(() => res(false), 15000); }), f);
+    ok(!!VER && !!PAGEID && !!PRE[''] && !!PRE['manifest.webmanifest'] && nPre > 50 && Object.keys(KEEP).filter(f => /\.(mp4|mp3)$/.test(f)).length > 60, `web app: sw.js is build ${VER} (page ${PAGEID}), with ${nPre} files to save at install and ${Object.keys(KEEP).length} to keep once used`);
+    ok(Object.keys(PRE).every(f => f === '' || f === 'manifest.webmanifest' || /^(img|tiles|media|poster)\/[^/]+\.webp$/.test(f)) && !Object.keys(PRE).some(f => /^poster\/sheet\d(-night)?\.webp$/.test(f)), 'web app: only the page, the manifest and the small stills are saved ahead, no film, sound, loop or full poster sheet');
+    const ctx = await b.newContext({...phone, reducedMotion:'reduce', colorScheme:'light'});
+    let p = await ctx.newPage();
+    const perr = [], cerr = [];
+    p.on('pageerror', e => perr.push(e.message));
+    p.on('console', m => { if (m.type() === 'error') cerr.push(m.text()); });
+    await p.goto(W, {waitUntil:'load'});
+
+    /* The manifest and the icons */
+    const man = await p.evaluate(async () => { const l = document.querySelector('link[rel="manifest"]'), r = await fetch(l.href); return {href:l.href, type:r.headers.get('content-type'), m:await r.json()}; });
+    const m = man.m, LIVE = 'https://zaq6184-cell.github.io/green-zone-mo-guide/';
+    ok(man.href === W + 'manifest.webmanifest' && /^application\/manifest\+json/.test(man.type) && m.name === 'Green Zone MO Guide' && m.short_name === 'Green Zone' && m.display === 'standalone', 'web app: the manifest loads, with its name, short name and standalone display');
+    ok([m.start_url, m.scope, m.id].every(u => new URL(u, LIVE + 'manifest.webmanifest').href === LIVE), 'web app: on GitHub Pages its start_url, scope and id are /green-zone-mo-guide/');
+    const bg = await p.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--bg').trim());
+    ok(m.theme_color === bg && m.background_color === bg && await p.evaluate(c => { const t = [...document.querySelectorAll('meta[name="theme-color"]')]; return t.length === 2 && t.every(x => x.content === c); }, bg), 'web app: the theme and background colours are the page background (--bg), and so is the browser bar');
+    const srcs = m.icons.map(i => i.src).concat('icons/apple-touch-icon.png');
+    const dims = await p.evaluate(list => Promise.all(list.map(src => new Promise(res => { const i = new Image(); i.onload = () => res(i.naturalWidth + 'x' + i.naturalHeight); i.onerror = () => res('none'); i.src = src; }))), srcs);
+    ok(m.icons.every((ic, k) => ic.type === 'image/png' && ic.sizes === dims[k]) && ['192x192', '512x512'].every(s => ['any', 'maskable'].every(u => m.icons.some(ic => ic.sizes === s && ic.purpose === u))) && dims[dims.length - 1] === '180x180' && await p.evaluate(() => document.querySelector('link[rel="apple-touch-icon"]').getAttribute('href') === 'icons/apple-touch-icon.png'), 'web app: the 192 and 512 px icons (any and maskable) and the 180 px touch icon load at their sizes');
+    const cdp = await ctx.newCDPSession(p);
+    const am = await cdp.send('Page.getAppManifest');
+    ok(am.url === W + 'manifest.webmanifest' && am.errors.length === 0, 'web app: Chrome reads the manifest with no errors' + (am.errors.length ? ': ' + am.errors.map(x => x.message).join('; ') : ''));
+
+    /* The service worker saves the page and the small stills, and nothing heavy */
+    const reg = await p.evaluate(() => Promise.race([navigator.serviceWorker.ready.then(r => ({scope:r.scope, url:r.active.scriptURL})), new Promise(r => setTimeout(r, 20000, {}))]));
+    ok(reg.scope === W && reg.url === W + 'sw.js', 'web app: the service worker registers, for the whole app');
+    ok(await until(p, () => !!navigator.serviceWorker.controller), 'web app: it takes charge of the open page');
+    const saved = await p.evaluate(async c => (await (await caches.open(c)).keys()).map(r => r.url), CACHE);
+    ok(saved.length === nPre && Object.keys(PRE).every(f => saved.includes(W + f)), `web app: the page, the manifest and the ${nPre - 2} small stills are saved, each matching the build`);
+    /* A whole film, sound or poster sheet fetched (no byte range) would be the worker's doing. The test browser's own tour
+       player may ask for a range of its film on load despite preload="none": that is the page, not the worker. */
+    const ahead = log.filter(l => (/\.(mp4|mp3) /.test(l) || /^\/poster\/sheet\d(-night)?\.webp /.test(l)) && !/ bytes=/.test(l));
+    ok(!ahead.length, 'web app: the worker fetched no film, sound, loop or full poster sheet ahead' + (ahead.length ? ': ' + ahead.join(', ') : ''));
+    const inst = await cdp.send('Page.getInstallabilityErrors').catch(e => ({installabilityErrors:[{errorId:'cdp: ' + e.message}]}));
+    const instErr = inst.installabilityErrors.map(x => x.errorId).filter(x => x !== 'in-incognito');
+    ok(!instErr.length, 'web app: Chrome finds nothing that stops it installing (besides the test browser being private)' + (instErr.length ? ': ' + instErr.join(', ') : ''));
+    for (const s of m.shortcuts){
+      await go(p, s.url.slice(2), 450);
+      const at = await p.evaluate(() => ({v:[...document.querySelectorAll('#viewport > .view')].filter(v => !v.hidden).map(v => v.dataset.view).join(), pal:!document.querySelector('#pal').hidden}));
+      ok(s.url === './#search' ? at.pal : at.v === s.url.slice(3), `web app: the ${s.short_name} shortcut (${s.url}) opens it`);
+      if (at.pal) await p.keyboard.press('Escape');
+    }
+
+    /* Settings: Offline and install */
+    await go(p, '#home', 300);
+    await p.tap('#topbar [data-settings]');
+    ok(await until(p, () => /^Saved on this device: it opens without a signal\. Films and sounds are kept once you have played them\./.test((document.querySelector('#st-off') || {}).textContent || ''), null, 5000), 'Settings: Offline and install says the guide is saved on this device');
+    ok(await p.evaluate(() => document.querySelector('#st-inst').hidden && /To install it: your browser's menu/.test(document.querySelector('#st-off').textContent) && document.querySelector('#st-offline').nextElementSibling.classList.contains('dlg-f')), 'Settings: with no install offer from the browser, it says how to install from the menu (the row sits above the footnote)');
+    ok(await hscroll(p) <= 0, 'Settings with the offline row: no sideways scroll');
+    await p.evaluate(() => document.querySelector('#st-offline').scrollIntoView({block:'center'}));
+    await p.screenshot({path:out + '/p-settings-offline.png'});
+    await p.keyboard.press('Escape');
+
+    /* A sound is kept once played, from the same download, and a part of one or an unplayed film is not */
+    ok(await playIt(p, 'audio/stop2.mp3'), 'web app: a sound plays through the worker');
+    ok(await until(p, ([k, u, h]) => caches.open(k).then(c => c.match(u)).then(r => !!r && r.headers.get('X-GZ-Hash') === h), [KEPT, W + 'audio/stop2.mp3', KEEP['audio/stop2.mp3']], 8000), 'web app: once played, the sound is kept, and it matches the build');
+    const asked = log.filter(l => l.startsWith('/audio/stop2.mp3'));
+    ok(asked.length > 0 && asked.every(l => / bytes=\d+-\d* /.test(l)), 'web app: it was kept from the player\'s own download, with nothing fetched twice (' + asked.join(', ') + ')');
+    const part = await p.evaluate(async () => { const r = await fetch('audio/stop3.mp3', {headers:{Range:'bytes=0-99'}}); return [r.status, (await r.arrayBuffer()).byteLength]; });
+    await p.waitForTimeout(400);
+    ok(part[0] === 206 && part[1] === 100 && !(await kept(p, 'audio/stop3.mp3')), 'web app: part of a sound (a byte range) is passed on but not kept');
+    ok(await p.evaluate(async k => !(await (await caches.open(k)).keys()).some(r => /\.mp4$/.test(r.url)), KEPT), 'web app: no film is kept before it has been played');
+
+    /* Offline */
+    await ctx.setOffline(true);
+    perr.length = 0; cerr.length = 0;
+    await p.reload({waitUntil:'load'});
+    ok(await visible(p) === 'home', 'offline: the guide reloads from the saved copy, on home');
+    ok(await until(p, () => { const im = [...document.querySelectorAll('#v-home .tm img')].filter(i => { const r = i.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; }); return im.length > 0 && im.every(i => i.complete && i.naturalWidth > 0); }, null, 8000), 'offline: the tile pictures on screen show from the saved stills');
+    await p.screenshot({path:out + '/p-offline-home.png'});
+    await go(p, '#renal-colic', 500);
+    ok(await visible(p) === 'run' && await p.evaluate(() => document.querySelectorAll('#cur button.opt').length > 1), 'offline: a pathway opens');
+    await p.tap('#cur button.opt'); await p.waitForTimeout(350);
+    ok(await p.evaluate(() => state.id === 'renal-colic' && state.trail.length === 1), 'offline: and an answer steps through it');
+    await go(p, '#calc-dengue', 500);
+    ok(await visible(p) === 'calc', 'offline: a calculator opens');
+    await go(p, '#pathways', 700);
+    ok(await until(p, () => { const im = [...document.querySelectorAll('#libcats .tm img')]; return im.length === 10 && im.every(i => i.complete && i.naturalWidth === 640); }, null, 8000), 'offline: the topic tiles show their saved pictures');
+    await p.screenshot({path:out + '/p-offline-pathways.png'});
+    ok(await playIt(p, 'audio/stop2.mp3'), 'offline: the kept sound plays');
+    const rng = await p.evaluate(async () => { const r = await fetch('audio/stop2.mp3', {headers:{Range:'bytes=100-199'}}); return [r.status, r.headers.get('content-range'), (await r.arrayBuffer()).byteLength]; });
+    ok(rng[0] === 206 && rng[1] === 'bytes 100-199/' + fs.statSync(path.join(root, 'audio', 'stop2.mp3')).size && rng[2] === 100, 'offline: the kept sound answers byte ranges, so it can seek');
+    ok(await p.evaluate(() => fetch('audio/stop4.mp3').then(() => false, () => true)), 'offline: a sound never played is not there, as nothing was fetched ahead');
+    await go(p, '#home', 300);
+    await p.tap('#topbar [data-settings]');
+    ok(await until(p, () => /Films and sounds you have played are kept \(1 so far\)/.test(document.querySelector('#st-off').textContent), null, 5000), 'offline: Settings counts the films and sounds kept');
+    await p.keyboard.press('Escape');
+    ok(!perr.length, 'offline: no script errors' + (perr.length ? ': ' + perr.join('; ') : ''));
+    const cother = cerr.filter(t => !/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::ERR_|FetchEvent/.test(t));
+    ok(!cother.length, 'offline: no console errors besides failed network loads' + (cother.length ? ': ' + cother.join('; ') : ''));
+
+    /* An update: sw.js changes (a newer build), the newer worker takes over, keeps what is unchanged without downloading it
+       again, deletes the old cache but no other site's, and the open page from the older build offers Reload */
+    await ctx.setOffline(false);
+    await p.evaluate(async () => { await (await caches.open('another-site-on-github-io')).put('/x', new Response('x')); await (await caches.open('green-zone-mo-guide-000000000000')).put('/x', new Response('x')); });
+    swNewer = t => t.replace(`'${VER}'`, `'${VER}a'`).replace(`'${PAGEID}'`, `'${PAGEID}a'`);
+    const from = log.length;
+    await p.evaluate(() => navigator.serviceWorker.getRegistration().then(r => r.update()).catch(e => String(e)));
+    ok(await until(p, v => caches.keys().then(k => k.includes('green-zone-mo-guide-' + v + 'a') && !k.includes('green-zone-mo-guide-' + v)), VER, 15000), 'update: a newer build takes over and deletes the older cache');
+    /* The notice comes once the newer worker has finished taking over */
+    ok(await until(p, () => !!document.querySelector('#gz-upd') && /New version ready/.test(document.querySelector('#gz-upd').textContent), null, 8000), 'update: the open page from the older build offers Reload');
+    const keys = await p.evaluate(() => caches.keys());
+    ok(keys.includes('another-site-on-github-io') && !keys.includes('green-zone-mo-guide-000000000000'), 'update: another site\'s cache on the same origin is left alone, this guide\'s leftovers go (' + keys.join(', ') + ')');
+    const nNew = await p.evaluate(async c => (await (await caches.open(c)).keys()).length, CACHE + 'a');
+    ok(nNew === nPre, `update: the newer build has every file saved (${nNew} of ${nPre})`);
+    const fetched = log.slice(from).filter(l => !/^\/sw\.js /.test(l));
+    ok(!fetched.length, 'update: the unchanged page and stills come from the old cache, nothing downloaded again' + (fetched.length ? ': ' + fetched.slice(0, 5).join(', ') : ''));
+    ok(await kept(p, 'audio/stop2.mp3') === KEEP['audio/stop2.mp3'], 'update: the kept sound stays kept, as its file has not changed');
+    ok(await hscroll(p) <= 0 && await p.evaluate(() => { const u = document.querySelector('#gz-upd'), r = u.getBoundingClientRect(), t = document.querySelector('#tabbar').getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.bottom <= t.top && r.height < 60; }), 'update: the notice fits the phone on one line, above the tab bar');
+    await p.screenshot({path:out + '/p-update.png'});
+    await Promise.all([p.waitForEvent('load'), p.tap('#gz-upd .tb')]);
+    await p.waitForTimeout(600);
+    ok(await visible(p) === 'home' && !(await p.$('#gz-upd')), 'update: Reload opens the page, without the notice');
+    swNewer = null;
+
+    /* Anywhere but github.io or localhost (here 127.0.0.1), the page registers nothing */
+    const q = await ctx.newPage();
+    await q.goto(`http://127.0.0.1:${PORT + 1}/`, {waitUntil:'load'}); await q.waitForTimeout(1200);
+    ok(await q.evaluate(async () => 'serviceWorker' in navigator && (await navigator.serviceWorker.getRegistrations()).length === 0 && !document.querySelector('#st-offline')), 'web app: served from anywhere but github.io or localhost (here 127.0.0.1), it registers no service worker and adds no offline row');
+    await ctx.close(); srv2.close();
+
+    /* The claude.ai artifact never gets any of it */
+    const art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+    ok(!/serviceWorker|sw\.js|manifest\.webmanifest|rel="manifest"|apple-touch-icon|theme-color|st-offline|gz-upd/.test(art), 'the claude.ai artifact has no manifest, touch icon, theme colour, service worker or offline row');
+    ok(idx.includes('<link rel="manifest" href="manifest.webmanifest">') && idx.includes("register('sw.js'") && idx.includes(`const PAGE = '${PAGEID}'`), 'the web app copy links the manifest and registers sw.js, with the page id its worker knows');
+  }
 
   console.log('errors:', errs.length ? '\n  ' + errs.join('\n  ') : 'none');
   console.log(fails ? fails + ' FAILED' : 'all checks passed');
