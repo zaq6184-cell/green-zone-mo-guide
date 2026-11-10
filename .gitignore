@@ -65,3 +65,6 @@ video/dengue-home-ms/
 narration/scripts/ext/
 narration/scripts/piece-*.wav
 narration/scripts/items.json
+
+# The triage course review holds the Drive links to the decks: on this PC only (11 Nov 2026)
+LECTURE-REVIEW.md

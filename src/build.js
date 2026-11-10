@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Build the Green Zone MO Guide.
 
-   Joins parts/head.html with the twelve scripts, in this order: data.js, data2.js, data3.js, data4.js, data5.js, data6.js, data7.js, data8.js, data9.js, data10.js, data11.js, engine.js.
+   Joins parts/head.html with the fourteen scripts, in this order: data.js, data2.js, data3.js, data4.js, data5.js, data6.js, data7.js, data8.js, data9.js, data10.js, data11.js, data12.js, data13.js, engine.js.
    Writes into the folder above src/ (or into the folder given as the first argument):
 
      green-zone-pathways.html   The page that is published as the claude.ai artifact. It has no doctype,
@@ -27,7 +27,7 @@ const crypto = require('crypto');
 const PARTS = path.join(__dirname, 'parts');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const APP = path.join(OUT, 'app');
-const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'engine.js'];
+const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'engine.js'];
 const stop = msg => { console.error(msg); process.exit(1); };
 
 /* LF line endings throughout, as git keeps the files (.gitattributes), so the hashes in sw.js match what GitHub Pages serves */

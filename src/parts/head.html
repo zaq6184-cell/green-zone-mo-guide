@@ -314,11 +314,12 @@ main{flex:1;outline:none}
 .bento .st{min-height:150px}
 #tl-quick,#tl-mine{order:1}
 #t-paths,#t-rules,#t-dc,#t-calc{order:2}
-#t-intro,#tl-tip,#tl-keyn{order:3}
+#t-intro,#t-inst,#tl-tip,#tl-keyn{order:3}
 #tl-rules,#tl-new{order:4}
 @media (max-width:760px){#t-dc,#t-calc{grid-column:span 2}}
 @media (min-width:761px){.bento{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.bento .zt{grid-row:span 2}
-  #t-paths,#t-rules{order:1} #tl-quick,#tl-mine{order:2} #t-dc,#t-calc,#tl-keyn{order:3} #t-intro,#tl-tip{order:4}}
+  #t-paths,#t-rules{order:1} #tl-quick,#tl-mine{order:2} #t-dc,#t-calc,#tl-keyn{order:3} #t-intro,#t-inst,#tl-tip{order:4}
+  .bento:has(#t-inst:not([hidden])) #tl-new{grid-column:span 4}}
 /* Zone tile */
 .zm{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;margin:6px 0 0;padding:0}
 .zm::before{content:"";position:absolute;left:10%;right:10%;top:23px;height:5px;border-radius:3px;background:rgba(255,255,255,.22)}
@@ -342,6 +343,34 @@ main{flex:1;outline:none}
 .zx .links .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#fff;min-height:34px;font-size:.8rem}
 .zx .links .pill:hover{border-color:var(--mint)}
 .zt .sub{margin-top:auto}
+/* Install on the front page (10 Nov 2026): a teal tile, the tools world, with a phone drawn in 3D. The phone is a stack of
+   layers at different depths (translateZ) inside a perspective box: body, screen, a row of ghost icons, and the guide's own
+   icon standing proud of the glass. It turns toward the pointer (--tx, --ty from engine.js) and, on a touch screen, as the tile crosses the screen. */
+.hin{flex-direction:row;align-items:center;gap:14px}
+.hin-t{flex:1;min-width:0;display:grid;gap:10px}
+.hin .links .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.24);color:#fff;min-height:38px}
+.hin .links .pill:hover{border-color:var(--mint);color:#fff}
+.hin .in-go{min-height:38px}
+.ph3{flex:none;display:grid;place-items:center;width:104px;height:150px;perspective:640px}
+.ph3-b{position:relative;display:block;width:78px;height:140px;border-radius:18px;transform-style:preserve-3d;transform:rotateY(calc(-26deg + var(--tx,0)*24deg)) rotateX(calc(9deg + var(--ty,0)*-16deg));background:linear-gradient(160deg,var(--obsidian-1),var(--obsidian-3));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28),16px 22px 26px -14px rgba(0,0,0,.55)}
+.ph3-b>*{position:absolute;display:block}
+.ph3-s{inset:4px;border-radius:14px;background:linear-gradient(165deg,var(--teal-1),var(--teal-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);transform:translateZ(1px)}
+.ph3-n{left:50%;top:8px;width:22px;height:5px;margin-left:-11px;border-radius:3px;background:var(--obsidian-3);transform:translateZ(2px)}
+.ph3-g{left:12px;top:24px;width:14px;height:14px;border-radius:4px;background:rgba(255,255,255,.2);box-shadow:20px 0 rgba(255,255,255,.2),40px 0 rgba(255,255,255,.2),0 20px rgba(255,255,255,.2),40px 20px rgba(255,255,255,.2),0 40px rgba(255,255,255,.14),20px 40px rgba(255,255,255,.14),40px 40px rgba(255,255,255,.14);transform:translateZ(7px)}
+.ph3-i{left:28px;top:40px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.3),0 10px 14px -6px rgba(0,0,0,.6);transform:translateZ(30px) scale(1.5)}
+.ph3-i svg{width:14px;height:14px}
+.ph3-k{left:48px;top:30px;width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:var(--mint);color:var(--emerald-3);transform:translateZ(44px)}
+.ph3-k svg{width:11px;height:11px}
+@media (prefers-reduced-motion:no-preference){
+  .ph3-b{transition:transform .5s var(--ease)}
+  .ph3-i{animation:ph3drop .9s var(--spring) .25s backwards}@keyframes ph3drop{from{opacity:0;transform:translateZ(90px) scale(2.1)}}
+  .ph3-k{animation:ph3pop .5s var(--spring) .95s backwards}@keyframes ph3pop{from{opacity:0;transform:translateZ(44px) scale(.3)}}
+}
+@supports (animation-timeline:view()){@media (hover:none) and (prefers-reduced-motion:no-preference){
+  .ph3-b{animation:ph3turn linear both;animation-timeline:view();animation-range:cover 8% cover 92%}
+  @keyframes ph3turn{from{transform:rotateY(-40deg) rotateX(16deg)}to{transform:rotateY(28deg) rotateX(-2deg)}}
+}}
+@media (max-width:374px){.ph3{width:84px}.hin{gap:10px}}
 @media (min-width:1100px){.zt:has(.zx[hidden]) .zm{margin-block:auto}.zt:has(.zx[hidden]) .zm .zd{width:min(76px,calc(100% - 10px));height:auto;aspect-ratio:1}.zt:has(.zx[hidden]) .zm .zd svg{width:32px;height:32px}.zt:has(.zx[hidden]) .zm::before,.zt:has(.zx[hidden]) .zm .zf{top:34px}.zt:has(.zx[hidden]) .zm button{gap:10px}.zt:has(.zx[hidden]) .zm b{font-size:.95rem}.zt:has(.zx[hidden]) .zm small{font-size:.8rem}}
 /* Number tiles */
 .nt{justify-content:space-between}
@@ -1678,6 +1707,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <section class="tile t-teal st" id="t-dc" aria-label="Discharge safety check"></section>
           <section class="tile t-bronze st" id="t-calc" aria-label="Calculators"></section>
           <a class="tile t-obsidian wide first" href="#intro" id="t-intro"></a>
+          <section class="tile t-teal wide hin" id="t-inst" aria-labelledby="h-inst" hidden></section>
           <section class="tile t-champagne wide tip" id="tl-tip" aria-labelledby="h-tip"><span class="tm" aria-hidden="true" data-tm="tip"><img src="tiles/tip.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span><div class="tile-h"><h2 id="h-tip">Pearl for this shift</h2></div><div id="tip" aria-live="polite"></div></section>
           <section class="tile t-pearl wide" id="tl-keyn" aria-labelledby="h-keyn"><div class="tile-h"><h2 id="h-keyn">More numbers</h2><a class="tl" href="#numbers">All 14</a></div><div id="keynums"></div></section>
           <section class="tile t-pearl wide" id="tl-rules" aria-labelledby="h-rules3"><div class="tile-h"><h2 id="h-rules3">Three rules to keep</h2><a class="tl" href="#rules">All rules</a></div><div class="r3" id="rulecards"></div></section>
@@ -1712,7 +1742,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->

@@ -4,6 +4,67 @@ Moved from `CLAUDE.md` on 10 Nov 2026. The questions still to confirm with the d
 
 Still to confirm with the department (the app lists them under Still to confirm on its What's new page, from `CONFIRM` in `engine.js`):
 
+**Reading X-rays (`xray-guide`, from the named online sources in `XRAY-RESEARCH.md`, added 11 Nov 2026).** Krishna admitted these sources on 10 Nov 2026 as sources of facts, in the guide's own words. Where they disagree, or differ from what the guide already says, the guide names both and the department's answer is still needed:
+
+- Hot reporting: does HKL have it, and who reviews a late radiology report, and by when? (NICE NG38 wants a report before discharge; RCEM, 2023, sets a 72-hour review of abnormal reports.)
+- Who reviews a doubtful film? No source lists the findings that must go to a senior; the guide only has "ask the EP first" in `referral-rules--ortho`.
+- Ottawa ankle and foot rules: which ages and exclusions does the department follow (under 18 excluded on the NHS Scotland sheet; over 5 years in NICE NG38; under 6 or over 55 on WikEM)? The rule's wording comes from secondary sources, because the original papers are not open.
+- Ottawa knee rule: is the age "55 or over" (ACR) or "over 55" (WikEM)? Is weight-bearing one criterion or two? The checklist follows the ACR narrative; what is the youngest age it applies to?
+- A suspected scaphoid fracture with a normal film: the sources give MRI first, MRI at 10 days, repeat films at 10 to 14 days or at 2 to 3 weeks, and the guide's EMACC entry reviews within 3 days. Which next test, and when?
+- Occult hip fracture and hip views are kept out of the X-ray guide, because the hip fracture CPG entry holds the local answer (CT as the local choice; its own views) and NICE CG124 and Radiology Masterclass differ from it.
+- Abdominal film: the ebook's abdominal pain pathway lists "CXR (erect) with or without abdominal X-ray"; the RCR's list of indications does not include abdominal pain alone. `xray-guide--abno` says so and points to the ebook as the approved pathway.
+- Elbow extension test (Appelboam, BMJ 2008): how would a Green Zone patient be brought back at 7 to 10 days?
+- The adult cervical spine film is left out (Krishna, 10 Nov 2026): the head injury CPG (2015) still uses three-view films, where NICE and the ACR now send adults who need imaging to CT.
+- The "Easily missed" tab carries the missed-fracture figures of Mattijssen-Horstink 2020 as a rearranged table, credited under CC BY 4.0: say if it should be prose only.
+- Not in the guide: anything from Radiopaedia (its terms need accepting), RCEMLearning (its module no longer opens), the shoulder girdle beyond the glenohumeral joint, and any measurement for ankle mortise or pubic symphysis widening (no source gives one).
+
+**The triage course decks (TAG Warrior Course, ETD HKL, 2026; reviewed in `LECTURE-REVIEW.md`, added 11 Nov 2026).** Krishna admitted the decks as department notes on 10 Nov 2026 on the terms that a slide which differs from the ebook or a dated department protocol stays out of the guide until the department confirms it. These are those slides, and the points kept as printed that still need a source:
+
+*Lecture 4 (Referral System)*
+
+- Slide 3's footnote "Low threshold for admission if have recurrent visit to ed or multiple health care facilities in 48 hours" differs from `safe-practice--dc` ("Came back within 48 hours, or after several GP visits: admit") and `gz-rules--reas` (a senior look at 24 hours).
+- Slide 3 sends "Investigating palpitation" to the Klinik Kesihatan, where its own slide 13 and the `outpatient-referral` table send palpitations to the MAU FAST clinic.
+- Slide 3 sends "Thyroid swelling" to the Klinik Kesihatan (kept in the referral map as printed); the guide sends suspected hyperthyroidism with a TFT pending to MAU FAST. Confirm the two do not overlap.
+- Slide 3's fractures for the on-call MO ("Long bone fracture, fracture involving joint or growth plate, displaced fracture") are not the Lampiran 1 list of the memo of 17 May 2024.
+- Slide 3's "Special situation: early TCA" under the on-call MO is unclear.
+- Slide 9, memo point 2.1.1 (the ETD team does the CMR first if Orthopaedics cannot reduce a dislocation at once) goes further than `referral-rules--orthoc`.
+- Slide 10's Lampiran 1 urgent list is wider than the `referral-rules--ortho` checklist: wounds involving muscle or dirty wounds, ligament injury with gross swelling, fractures with dislocation, angulation or overriding.
+- Slide 13 says "CURB score 0,1 only" where `outpatient-referral` says CURB-65 of 0 to 1.
+- Slide 14's IPR poster lists "Needing further investigation (CT Scan, OGDS, Colonoscopy)" and "biggest diameter >60CM", which `referral-rules--ipr` lacks, and does not carry the guide's "Not on inotropic support".
+- Slide 27 gives EMACC "Result: x-ray report" and EM Watch "Result: investigation, CT report", where the guide lists blood results under both `emacc` and `em-watch`.
+- The memo points in `referral-rules--orthmemo` (2.1.4, 2.6 to 2.10) were read from a slide image in Malay: check them against the memo PDF.
+
+*Lecture 4 (Handing over)*
+
+- Slide 4's shift and registration times for MOs and the TL are mistyped ("230am", "730pm", "700pm") and cannot be used as typed.
+- Slide 13's "NBA>6h to EP" has no dated department document behind it in the guide; the nearest lines are the 4-hour ones in the dengue notes and `gz-rules--ep4`.
+- Slides 8 and 9 hand over by a list (Patient, History and DDX, IX, Referral), where `communication--hand` teaches ISBAR: which format does the department want, and are the two "Future updates & improvements" paper forms in use?
+- "30 minutes before end for the shift" (in `handover--chk`, as typed) is ambiguous.
+
+*Lecture 5 (Commonly missed fracture)*
+
+- Slide 29's knee X-ray rule prints "Age ≥55 years" in its table and ">55" beside it, and quotes the Ottawa knee rules from outside the department: the whole rule is left out of `missed-fractures`.
+
+*Lecture 6 (Approach to abdominal pain)*
+
+- Slide 23's safety-net script ("don't keep taking the pain killer", no follow-up date) differs from the ebook's abdominal pain advice (paracetamol; EMACC or EM Watch in 24 to 48 hours): the script is left out.
+- Slide 17's "Amylase – Consider if there's guarding, vomiting" differs from `safe-practice--abd` ("Epigastric pain: ECG ± amylase").
+- Slide 15's gloss "(asymptomatic elevated blood pressure)" on hypertensive urgency adds a word the ebook's `hypertensive-urgency` lead does not use.
+- The deck's true case of a missed appendicitis is in the abdominal pain notes without an exact age, hospital or doses; three readings are kept because the teaching turns on them. Say if it should be cut further.
+
+*CBD 2*
+
+- Slide 15 (rabies) differs from the HKL protocol of October 2022 in `animal-bites` on dose (1 ml IM), schedule (days 0, 3, 7, 14 and 28, alternative day 30; days 0 and 3 if fully immunised), exposure categories, immunoglobulin for every Category 3 and a stop rule: the whole slide is left out.
+- Slide 23's "IV Morphine 4mg STAT" for a 65-year-old differs from the ebook's morphine pain protocol in `pain` (0.5 mg steps over 60 years).
+- Slide 24's pain score row (under 6 keep, 6 or more uptriage) differs from the ebook's "Pain score over 6?" and the policy's 7; the table's other three rows are in.
+- Slide 6's "CORRECT TRIAGE: LEVEL 3 = YZ/ Y OBS … redirect immediately to Y OBS" differs from `gz-rules--dengue` (memo of 23 Mar 2023: direct to the Observation Ward).
+- Slide 6's "Dengue fever without warning sign with/without special population ONLY allowed to be triaged to GREEN ZONE" differs from the Dengue SOP 2.0 note in `dengue`. Its "Platelet <50" point is kept as printed although the case's count is 80.
+- Slide 9's antibiotics ("IV cefepime or IV tazocin"; "IV ceftriaxone or IV tazocin") include two not on the IV antibiotic memo's list of 30 Jun 2026: the names are left out.
+- Slide 11's FBC intervals ("EOD FBC in KK or GP" if the combo is negative, "daily FBC" if positive) are left out: the ebook gives none, and the dengue CPG says daily follow-up.
+- Slide 16's speaker note grades the foot ulcer by Wagner, where `diabetic-foot-cpg` uses the University of Texas classification.
+- Kept as the slides print them, from outside sources the decks do not name: the bite slide's figures (5% and 80% infection risk, cat-scratch at 7 to 12 days, "Does not transmit leptospirosis", cloxacillin and Augmentin with no dose), "IM diclofenac" for the sudden headache with no dose, SNOOP4 and the low-risk headache criteria, the burn points and the six tibial plateau types. Confirm each, or name its source.
+- Does the "wrong triage QR" register in case 2 exist?
+
 1. How to book EM Watch: the training deck shows the recruitment step only as a picture.
 2. The procedure for patients redirected to a Klinik Kesihatan or private GP.
 3. Whether the EMACC SOP of 1 Feb 2018 (ext 7040, Monday to Friday 9 am to 4 pm) is still current.

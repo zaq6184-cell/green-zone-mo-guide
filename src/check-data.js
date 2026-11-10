@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Check the guide's content before every build.
 
-   Loads parts/data.js, data2.js, data3.js, data4.js, data5.js, data6.js, data7.js, data8.js, data9.js, data10.js and data11.js and checks every entry in P:
+   Loads parts/data.js, data2.js, data3.js, data4.js, data5.js, data6.js, data7.js, data8.js, data9.js, data10.js, data11.js, data12.js and data13.js and checks every entry in P:
    - the start node exists, and every option and "next" points to a node that exists;
    - every node is a question (opts), a step (step + next) or an outcome (end + items);
    - every node can be reached from the start;
@@ -14,7 +14,7 @@ const fs = require('fs');
 const path = require('path');
 
 const dir = path.resolve(process.argv[2] || path.join(__dirname, 'parts'));
-const parts = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js'].filter(f => fs.existsSync(path.join(dir, f)));
+const parts = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js'].filter(f => fs.existsSync(path.join(dir, f)));
 const src = parts.map(f => fs.readFileSync(path.join(dir, f), 'utf8')).join('\n') + '\nmodule.exports = P;';
 const m = {exports: {}};
 new Function('module', src)(m);
