@@ -926,7 +926,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     /* Settings: Offline and install */
     await go(p, '#home', 300);
     await p.tap('#topbar [data-settings]');
-    ok(await until(p, () => /^Saved on this device: it opens without a signal\. Films and sounds are kept once you have played them\./.test((document.querySelector('#st-off') || {}).textContent || ''), null, 5000), 'Settings: Offline and install says the guide is saved on this device');
+    ok(await until(p, () => /^Saved on this device: it opens without a signal\. Films and sounds are kept once played through\./.test((document.querySelector('#st-off') || {}).textContent || ''), null, 5000), 'Settings: Offline and install says the guide is saved on this device');
     ok(await p.evaluate(() => document.querySelector('#st-inst').hidden && /To install it: your browser's menu/.test(document.querySelector('#st-off').textContent) && document.querySelector('#st-offline').nextElementSibling.classList.contains('dlg-f')), 'Settings: with no install offer from the browser, it says how to install from the menu (the row sits above the footnote)');
     ok(await hscroll(p) <= 0, 'Settings with the offline row: no sideways scroll');
     await p.evaluate(() => document.querySelector('#st-offline').scrollIntoView({block:'center'}));
@@ -965,7 +965,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await p.evaluate(() => fetch('audio/stop4.mp3').then(() => false, () => true)), 'offline: a sound never played is not there, as nothing was fetched ahead');
     await go(p, '#home', 300);
     await p.tap('#topbar [data-settings]');
-    ok(await until(p, () => /Films and sounds you have played are kept \(1 so far\)/.test(document.querySelector('#st-off').textContent), null, 5000), 'offline: Settings counts the films and sounds kept');
+    ok(await until(p, () => /Films and sounds you have played through are kept \(1 so far\)/.test(document.querySelector('#st-off').textContent), null, 5000), 'offline: Settings counts the films and sounds kept');
     await p.keyboard.press('Escape');
     ok(!perr.length, 'offline: no script errors' + (perr.length ? ': ' + perr.join('; ') : ''));
     const cother = cerr.filter(t => !/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::ERR_|FetchEvent/.test(t));

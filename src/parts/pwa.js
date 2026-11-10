@@ -42,7 +42,7 @@
       : state === 'saving' || !last ? 'Saving the guide on this device, so it opens without a signal.'
       : 'Saved on this device: it opens without a signal.' +
         (last.saved < last.of ? ` Pictures are saved as you view them (${last.saved} of ${last.of} so far).` : '') +
-        (last.played ? ` Films and sounds you have played are kept (${last.played} so far).` : ' Films and sounds are kept once you have played them.');
+        (last.played ? ` Films and sounds you have played through are kept (${last.played} so far).` : ' Films and sounds are kept once played through.');
     if (installed()) t = 'Installed. ' + t;
     else if (!offer) t += ios ? ' To install it: Share, then Add to Home Screen.' : " To install it: your browser's menu, Install app or Add to Home screen.";
     s.textContent = t;
