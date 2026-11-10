@@ -211,7 +211,7 @@ P['snakebite-moh'] = {
       'Gum bleeding usually stops within 15-30 minutes, and clotting returns in 3-9 hours (7.5, p75)',
       'Clotting profile 6-hourly; no IM injections, aspirin, NSAIDs or arterial puncture (4.5, p38; 6.4.4, p55; 6.5.2.2, p56). Blood products only for life-threatening bleeding until antivenom is available (6.4.9, p55); tranexamic acid and vitamin K do not work (6.5.6, p57)'],
       links:[['#calc-snakeav','Antivenom by snake']],
-      gap:'Table 15 (p71); 7.5 and 7.6 (p75). The guideline\'s own case photo shows a patient given 3 vials in all (p37). Not in Borneo (p74). No maximum dose is given.'},
+      gap:'Table 15 (p71); 7.5 and 7.6 (p75). The guide follows Table 15\'s 4 vials, the guide owner\'s decision of 10 Nov 2026; the guideline\'s own case photo shows a patient given 3 vials in all (p37). Not in Borneo (p74). No maximum dose is given.'},
     gpv:{end:'refer', title:'Green pit vipers: QSMI Green Pit Viper Antivenin', fig:'avgive', items:[
       'For the Hagen\'s, white-lipped, mangrove, Thai peninsula, Tioman island and Cameron pit vipers (Peninsular), and the Kinabalu brown, Kinabalu green, Sumatran and Bornean palm pit vipers (Sabah and Sarawak) (Table 15, p72; Table 16, p73 to 74)',
       'Starting dose: 3 vials; the next dose at 6 hours, by the signs. Second choice: QSMI Haemato Polyvalent (Tables 15 and 16)',
@@ -260,11 +260,12 @@ P['snakebite-moh'] = {
     rxe:{end:'neutral', title:'Early reaction: stop, adrenaline, then restart slowly', items:[
       'Stop the antivenom; restart it more slowly once the reaction is treated and settled (7.7, p76)',
       'Adrenaline IM at the first sign: adult 0.5 mg, child 0.01 mg/kg, of 1 mg/ml (1 in 1,000). Repeat every 5-10 minutes, or an IV infusion if worse; with a coagulopathy, no IM: go straight to IV (Table 17, p76)',
+      'Adrenaline infusion, adult: 1 mcg/min, 1 mg (1 ml of 1:1000) in 500 ml NS at 0.5 ml/min, as the ebook gives it for anaphylaxis (ebook p15 to 16). Child: ask the EP',
       'Chlorpheniramine IV: adult 10 mg, child 0.2 mg/kg. Ranitidine IV: adult 50 mg, child 1 mg/kg (Table 17, p76)',
       'Hydrocortisone IV 2-4 mg/kg, for a child at most 200 mg; it can prevent a delayed or recurrent reaction (Table 17, p76)',
       'IV fluids for hypovolaemia (Table 17, p76)'],
       links:[['#anaphylaxis','Ebook: anaphylaxis']],
-      gap:'Table 17 prints the adrenaline infusion as 1 microgm/kg/min (p76); the ebook\'s anaphylaxis pathway runs it at 1 mcg/min: check with the EP before starting one. No adult maximum is printed for hydrocortisone.'},
+      gap:'The adult infusion follows the ebook, the guide owner\'s decision of 10 Nov 2026: Table 17 prints it as 1 microgm/kg/min (p76), which is not used. Neither source gives a child\'s infusion. No adult maximum is printed for hydrocortisone.'},
     rxp:{end:'neutral', title:'Pyrogenic reaction: cool, antipyretic, fluids', items:[
       'Shaking chills, fever, vasodilatation and falling blood pressure 1-2 hours after; febrile convulsions in children (Table 17, p76)',
       'Cool the patient and give an antipyretic, such as paracetamol by mouth or suppository; IV fluids for hypovolaemia (Table 17, p76)'],
@@ -387,7 +388,7 @@ P['snakebite-moh'] = {
         'Early, 2-180 minutes after starting (itch, hives, cough, vomiting, a fast pulse; a few, hypotension, bronchospasm or angio-oedema): stop the antivenom; adrenaline IM, adult 0.5 mg, child 0.01 mg/kg, repeated every 5-10 minutes or an IV infusion if worse, IV straight away with a coagulopathy; chlorpheniramine, ranitidine and hydrocortisone IV; restart the antivenom more slowly',
         'Pyrogenic, 1-2 hours after (rigors, fever, a fall in blood pressure): cool the patient, an antipyretic, IV fluids',
         'Late, 1-12 days after: chlorpheniramine by mouth for 5 days; prednisolone if no response in 24-48 hours',
-        'Table 17 prints the adrenaline infusion as 1 microgm/kg/min; the ebook\'s is 1 mcg/min: check with the EP']},
+        'Adrenaline infusion: for an adult the guide follows the ebook\'s 1 mcg/min (ebook p15 to 16), the guide owner\'s decision of 10 Nov 2026; Table 17 prints 1 microgm/kg/min. Child: ask the EP']},
       {h:'Neostigmine for paralysis', src:'6.5.4 (p56 to 57), adapted from the WHO South-East Asia guideline of 2016', items:[
         'May help in neurotoxic envenoming, especially from cobras, not kraits, and in coral snake bites; antivenom first (p56; Table 15, p71)',
         'Record baseline signs. Atropine IV, adult 0.6 mg, child 50 µg/kg (or glycopyrronium); then neostigmine IM, adult 0.02 mg/kg, child 0.04 mg/kg. Or edrophonium by slow IV injection, adult 10 mg, child 0.25 mg/kg (p56 to 57)',

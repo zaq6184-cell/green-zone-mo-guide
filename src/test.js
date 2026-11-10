@@ -679,6 +679,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.click('[data-k="grp"][data-sv="pv"]'); await p.waitForTimeout(150); await p.click('[data-k="sp"][data-sv="mpv"]'); await p.waitForTimeout(150);
   await p.click('[data-k="age"][data-sv="ch"]'); await p.waitForTimeout(150); await p.fill('#cf-wt', '18'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => { const x = document.querySelector('#couts').textContent; return /QSMI Malayan Pit Viper Antivenin/.test(x) && /4 vials/.test(x) && /0\.18 mg/.test(x) && /90-180 ml/.test(x) && /At 6 hours/.test(x); }), 'antivenom by snake: a child of 18 kg with a Malayan pit viper bite gets 4 vials, adrenaline 0.18 mg ready and 90-180 ml to dilute in');
+  ok(await p.evaluate(() => /Not in the sources for a child/.test(document.querySelector('#calcbox').textContent)), 'a child\'s adrenaline infusion: in neither source, so ask the EP');
+  ok(await p.evaluate(() => P['snakebite-moh'].nodes.rxe.items.some(s => s.includes('1 mcg/min')) && !CONFIRM.some(c => c.startsWith('LA OT')) && P['referral-rules'].nodes.orthoc.items.some(s => s.includes('6-hour limit')) && !JSON.stringify(P).includes('Which limit applies')), 'settled on 10 Nov 2026: the adult adrenaline infusion, LA OT and the pit viper');
   await p.click('[data-k="reg"][data-sv="bor"]'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => /Not in Borneo/.test(document.querySelector('#calcbox').textContent)), 'Sabah and Sarawak with a Malayan pit viper: the not-in-Borneo note');
   await p.click('[data-k="grp"][data-sv="unk"]'); await p.waitForTimeout(150); await p.click('[data-k="syn"][data-sv="par"]'); await p.waitForTimeout(250);

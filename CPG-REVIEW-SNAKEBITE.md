@@ -91,7 +91,7 @@ None is resolved in the entry. Those that change an ED decision are also in a no
 
 **Reactions (Table 17)**
 
-23. **Adrenaline infusion.** Printed as "1 microgm/kg/min" (p76). The ebook's anaphylaxis pathway runs at 1 mcg/min, not per kg. The entry shows the print and sends the MO to the EP; this needs Krishna's decision.
+23. **Adrenaline infusion.** Printed as "1 microgm/kg/min" (p76). The ebook's anaphylaxis pathway runs at 1 mcg/min, not per kg. The entry shows the print and sends the MO to the EP; this needs Krishna's decision. Settled on 10 Nov 2026 at his go-ahead: an adult's infusion follows the ebook; a child's is in neither source (ask the EP).
 24. **Hydrocortisone.** Adult 2-4 mg/kg with no maximum; child 2-4 mg/kg, maximum 200 mg (p76).
 25. **Prednisolone.** "A 5-day course" given "for 5-7 days" (p77).
 26. **One treatment cell for two reactions.** The adrenaline, antihistamines and hydrocortisone sit in the same cell as the pyrogenic reaction's cooling and fluids (p76): which apply to a pyrogenic reaction is not said.
@@ -145,8 +145,8 @@ The entry links the ebook's anaphylaxis pathway from the early reaction outcome 
 
 **Open questions for Krishna** (also in the nodes' `gap`)
 
-1. The adrenaline infusion for an antivenom reaction: Table 17's 1 microgm/kg/min, or the ebook's 1 mcg/min (point 23).
-2. Malayan pit viper: Table 15's 4 vials, against 3 vials in the guideline's case photo and the MST book (point 14). Cobra: when 5 and when 10 vials for local envenoming (point 15).
+1. The adrenaline infusion for an antivenom reaction: Table 17's 1 microgm/kg/min, or the ebook's 1 mcg/min (point 23). Settled on 10 Nov 2026 at Krishna's go-ahead: the ebook's 1 mcg/min for an adult; a child's infusion is in neither source (ask the EP).
+2. Malayan pit viper: Table 15's 4 vials, against 3 vials in the guideline's case photo and the MST book (point 14). Settled on 10 Nov 2026: Table 15's 4 vials. Cobra: when 5 and when 10 vials for local envenoming (point 15).
 3. The polyvalent dose for an unidentified bite, neurotoxic or haematotoxic (point 13), and the antivenom for the four pit vipers with blank cells and the beautiful pit viper (point 11).
 4. How long to observe a known venomous species without signs, and before discharge after observation (point 2); where in HKL these patients are observed (MAU, a medical ward, the observation ward), and whether the Green Zone may hold an asymptomatic bite while it is identified (point 1).
 5. RECS: the number to call. The guideline names the service on five pages and prints no contact (p iii, p vi, p vii, p3, p67); the MST book acknowledges it without a contact (p4).
