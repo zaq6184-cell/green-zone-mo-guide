@@ -23,9 +23,9 @@
               ranges, so they seek offline.
    Fonts      The Google Fonts stylesheet and font files are kept as the page loads them, so the guide keeps its type. */
 'use strict';
-const VERSION = 'b1855fcfa6bc', PAGE = '410436a867d8';
+const VERSION = 'ce59b5b36406', PAGE = 'd3882d17ddc2';
 const PRE = {
-  "": "a96549f91c3d20f5",
+  "": "a914e083569a97ea",
   "manifest.webmanifest": "3f4620e73fac5885",
   "img/gz-01-hero.webp": "e0db0e365820090d",
   "img/gz-02-triage.webp": "60e7adac5fc1ea89",
@@ -183,6 +183,7 @@ const hash = async buf => [...new Uint8Array(await crypto.subtle.digest('SHA-256
 const pathOf = url => url.startsWith(BASE) ? decodeURIComponent(url.slice(BASE.length).split(/[?#]/)[0]) : null;
 const own = (body, type, extra) => new Response(body, {headers: Object.assign({'Content-Type': type || ''}, extra)});
 const older = names => names.filter(n => n.startsWith(NAME) && ![CACHE, KEPT, FONTS].includes(n));
+const has = (o, k) => k !== null && Object.prototype.hasOwnProperty.call(o, k);
 
 self.addEventListener('install', e => e.waitUntil((async () => {
   const cache = await caches.open(CACHE);
@@ -210,20 +211,24 @@ self.addEventListener('activate', e => e.waitUntil((async () => {
   await Promise.all(older(await caches.keys()).map(n => caches.delete(n)));
   const kept = await caches.open(KEPT);
   for (const req of await kept.keys()){
-    const p = pathOf(req.url), res = p && KEEP[p] ? await kept.match(req) : null;
+    const p = pathOf(req.url), res = has(KEEP, p) ? await kept.match(req) : null;
     if (!res || res.headers.get('X-GZ-Hash') !== KEEP[p]) await kept.delete(req);
   }
   await self.clients.claim();
   for (const c of await self.clients.matchAll({type: 'window', includeUncontrolled: true})) c.postMessage({gz: 'ready', page: PAGE});
 })()));
 
-/* pwa.js asks what is saved, for its row in Settings */
+/* pwa.js asks what is saved, for Settings and the Install the guide page: how many files, and their size in bytes */
 self.addEventListener('message', e => {
   if (!e.data || e.data.gz !== 'status' || !e.source) return;
   e.waitUntil((async () => {
-    const [pre, kept] = await Promise.all([CACHE, KEPT].map(async n => (await (await caches.open(n)).keys()).map(r => pathOf(r.url))));
-    e.source.postMessage({gz: 'status', page: PAGE, version: VERSION, saved: pre.filter(p => p in PRE).length, of: Object.keys(PRE).length,
-      played: kept.filter(p => PLAYED.test(p)).length});
+    const [pre, kept] = await Promise.all([CACHE, KEPT].map(async n => {
+      const c = await caches.open(n);
+      return Promise.all((await c.keys()).map(async r => ({p: pathOf(r.url), size: (await (await c.match(r)).blob()).size})));
+    }));
+    const mine = pre.filter(x => has(PRE, x.p)), sum = a => a.reduce((s, x) => s + x.size, 0);
+    e.source.postMessage({gz: 'status', page: PAGE, version: VERSION, saved: mine.length, of: Object.keys(PRE).length,
+      bytes: sum(mine) + sum(kept), played: kept.filter(x => PLAYED.test(x.p || '')).length});
   })());
 });
 
@@ -233,8 +238,8 @@ self.addEventListener('fetch', e => {
   const p = pathOf(req.url);
   if (p !== null){
     if (p === '' || p === 'index.html') e.respondWith(page(e));
-    else if (PRE[p]) e.respondWith(still(e, p));
-    else if (KEEP[p]) e.respondWith(/\.(mp4|mp3)$/.test(p) ? media(e, p) : later(e, p));
+    else if (has(PRE, p)) e.respondWith(still(e, p));
+    else if (has(KEEP, p)) e.respondWith(/\.(mp4|mp3)$/.test(p) ? media(e, p) : later(e, p));
     return; /* anything else (sw.js, the icons) goes to the network as usual */
   }
   const host = new URL(req.url).hostname;

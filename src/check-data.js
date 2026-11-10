@@ -21,7 +21,7 @@ new Function('module', src)(m);
 const P = m.exports;
 
 /* Views of the app that a link may point to (see the route list at the top of engine.js) */
-const VIEWS = ['top', 'home', 'search', 'tour', 'video', 'journey', 'learn', 'rules', 'pathways', 'saved', 'quiz', 'numbers', 'links', 'tools', 'poster', 'new', 'about', 'intro'];
+const VIEWS = ['top', 'home', 'search', 'tour', 'video', 'journey', 'learn', 'rules', 'pathways', 'saved', 'quiz', 'numbers', 'links', 'tools', 'poster', 'new', 'about', 'intro', 'install'];
 /* Every calculator the engine defines: the keys of its CALCS object */
 const CALC_IDS = (() => { const e = fs.readFileSync(path.join(dir, 'engine.js'), 'utf8'), b = e.slice(e.indexOf('const CALCS = {'), e.indexOf('\n};', e.indexOf('const CALCS = {'))); return [...b.matchAll(/^  ([a-z0-9]+):\{t:'/gm)].map(m => m[1]); })();
 const okHref = h => {

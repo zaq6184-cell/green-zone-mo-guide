@@ -4,7 +4,9 @@
    sideways scroll, and any check below that does not hold. Screenshots go to the shots folder.
 
    The pages register the service worker, as the web app does on localhost. Last, on a second server (PORT + 1), it checks the
-   web app itself: the manifest and icons, the worker's install, offline reloads, kept sounds, an update and the artifact.
+   web app itself: the manifest and icons, the worker's install, Install the guide (#install: its live state, the steps for
+   each device and browser, the Install offer, the QR code, read back with qr.js), offline reloads, kept sounds, an update,
+   the installed app, and the artifact's copy (served as /artifact.html); then #install at 360 px by day and night.
    It is written for the version 8 markup (ids such as #bento, #zmap, #daynight, #libgrid, #cur, #ptab, #pmap, #introbox, #gq). Change it with the shell.
    The night poster sheets and night films must be in the site folder: the dark runs load them.
    Setup once: npm install, then npx playwright install chromium.
@@ -28,10 +30,12 @@ let swNewer = null;
    asked for whole is a fetch, such as the worker's own. The web app checks run on a server of their own, PORT + 1 */
 const site = log => (q, r) => {
   if (log) log.push(decodeURIComponent(q.url.split('?')[0]) + (q.headers.range ? ' ' + q.headers.range : '') + ' dest=' + (q.headers['sec-fetch-dest'] || ''));
-  const f = path.join(root, decodeURIComponent(q.url.split('?')[0]).replace(/^\/$/, '/index.html'));
+  /* /artifact.html is the claude.ai artifact's page, with the site's media beside it, as the host serves it */
+  const f = q.url.split('?')[0] === '/artifact.html' ? path.join(__dirname, '..', 'green-zone-pathways.html') : path.join(root, decodeURIComponent(q.url.split('?')[0]).replace(/^\/$/, '/index.html'));
   fs.readFile(f, (e, d) => {
     if (e){ r.writeHead(404); r.end(); return; }
     if (swNewer && q.url.split('?')[0] === '/sw.js') d = Buffer.from(swNewer(d.toString()));
+    if (q.url.split('?')[0] === '/artifact.html') d = Buffer.from('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>\n' + d + '\n</body></html>');
     /* Byte ranges, as a web host serves them, so the read-aloud narration and the films can seek */
     const type = types[path.extname(f)] || 'application/octet-stream', m = /^bytes=(\d*)-(\d*)$/.exec(q.headers.range || '');
     if (m && (m[1] || m[2])){
@@ -43,7 +47,7 @@ const site = log => (q, r) => {
 };
 const srv = http.createServer(site()).listen(PORT);
 const U = `http://localhost:${PORT}/`;
-const VIEWS = ['home','pathways','rules','tools','calc','numbers','links','intro','journey','tour','quiz','new','poster','about'];
+const VIEWS = ['home','pathways','rules','tools','calc','numbers','links','intro','journey','tour','quiz','new','poster','about','install'];
 let fails = 0;
 const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!cond) fails++; };
 
@@ -927,11 +931,69 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#home', 300);
     await p.tap('#topbar [data-settings]');
     ok(await until(p, () => /^Saved on this device: it opens without a signal\. Films and sounds are kept once played through\./.test((document.querySelector('#st-off') || {}).textContent || ''), null, 5000), 'Settings: Offline and install says the guide is saved on this device');
-    ok(await p.evaluate(() => document.querySelector('#st-inst').hidden && /To install it: your browser's menu/.test(document.querySelector('#st-off').textContent) && document.querySelector('#st-offline').nextElementSibling.classList.contains('dlg-f')), 'Settings: with no install offer from the browser, it says how to install from the menu (the row sits above the footnote)');
+    ok(await p.evaluate(() => document.querySelector('#st-inst').hidden && !document.querySelector('#st-how').hidden && document.querySelector('#st-how').getAttribute('href') === '#install' && document.querySelector('#st-offline').nextElementSibling.classList.contains('dlg-f')), 'Settings: with no install offer from the browser, it links to How to install (the row sits above the footnote)');
     ok(await hscroll(p) <= 0, 'Settings with the offline row: no sideways scroll');
     await p.evaluate(() => document.querySelector('#st-offline').scrollIntoView({block:'center'}));
     await p.screenshot({path:out + '/p-settings-offline.png'});
+
+    /* Install the guide: the live state, this device's steps and every other device's, the browser's own Install offer, the code */
+    await p.tap('#st-how'); await p.waitForTimeout(450);
+    ok(await visible(p) === 'install' && await p.evaluate(() => document.querySelector('#settings').hidden), 'Settings: How to install opens Install the guide');
+    ok(await until(p, () => document.querySelector('#in-state').textContent === 'Ready offline' && /^Saved on this device: the guide and all its pictures, \d+\.\d MB\./.test(document.querySelector('#in-sub').textContent) && /Works without a signal/.test(document.querySelector('#in-chips').textContent) && /Not installed yet/.test(document.querySelector('#in-chips').textContent) && /Online/.test(document.querySelector('#in-chips').textContent), null, 6000), 'install: the hero says Ready offline, with the size saved on this device, not installed yet, online');
+    ok(await p.evaluate(() => /^Windows/.test(document.querySelector('#in-plat [aria-pressed="true"]').textContent) && /Chrome or Edge/.test(document.querySelector('#in-br [aria-pressed="true"]').textContent) && [...document.querySelectorAll('#in-steps h3')].map(h => h.textContent).join('|').includes('Click the install icon') && document.querySelectorAll('#in-steps .in-fig svg').length === 3), 'install: it finds this browser (Chrome on Windows) and shows its three steps, each drawn');
+    const UAS = [
+      ['Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Mobile/15E148 Safari/604.1', 'iphone safari'],
+      ['Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/131.0.6778.73 Mobile/15E148 Safari/604.1', 'iphone other'],
+      ['Mozilla/5.0 (iPad; CPU OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1', 'iphone safari'],
+      ['Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36', 'android chrome'],
+      ['Mozilla/5.0 (Linux; Android 14; SM-S921B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/26.0 Chrome/122.0.0.0 Mobile Safari/537.36', 'android samsung'],
+      ['Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 EdgA/131.0.0.0', 'android edge'],
+      ['Mozilla/5.0 (Android 14; Mobile; rv:133.0) Gecko/133.0 Firefox/133.0', 'android firefox'],
+      ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0', 'windows chrome'],
+      ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0', 'windows firefox'],
+      ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15', 'mac safari'],
+      ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'mac chrome'],
+      ['Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'linux chrome'],
+      ['Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'linux chrome']];
+    const det = await p.evaluate(list => { const r = list.map(([ua]) => { Object.defineProperty(navigator, 'userAgent', {get:() => ua, configurable:true}); const d = detectDevice(); return d.plat + ' ' + d.br; }); delete navigator.userAgent; return r; }, UAS);
+    const detBad = UAS.map(([, want], i) => det[i] === want ? '' : want + ' got ' + det[i]).filter(Boolean);
+    ok(!detBad.length, `install: it tells apart ${UAS.length} phones, tablets and computers by their browser (iPhone and iPad, Android with Chrome, Samsung Internet, Edge or Firefox, Windows, Mac, Linux and ChromeOS)` + (detBad.length ? ': ' + detBad.join('; ') : ''));
+    let stepsOk = true;
+    for (const [pl, br, want] of [['iphone', 'safari', 'Add to Home Screen'], ['iphone', 'other', 'Add to Home Screen'], ['android', 'chrome', 'Install app'], ['android', 'samsung', 'Add page to'], ['android', 'edge', 'Add to phone'], ['android', 'firefox', 'Tap Install'], ['mac', 'safari', 'Add to Dock'], ['mac', 'firefox', 'Bookmark it'], ['linux', 'chrome', 'Click the install icon'], ['windows', 'firefox', 'Bookmark it'], ['windows', 'chrome', 'Click Install']]){
+      await p.tap(`#in-plat [data-inplat="${pl}"]`); await p.waitForTimeout(60);
+      if (await p.$(`#in-br [data-inbr="${br}"]`)){ await p.tap(`#in-br [data-inbr="${br}"]`); await p.waitForTimeout(60); }
+      const got = await p.evaluate(() => [...document.querySelectorAll('#in-steps h3')].map(h => h.textContent).join(' | '));
+      if (!got.includes(want) || await hscroll(p) > 0){ stepsOk = false; console.log('     install steps', pl, br, '->', got); }
+    }
+    ok(stepsOk, 'install: each device and browser chosen shows its own steps, with no sideways scroll');
+    await p.evaluate(() => { window.__prompted = 0; const e = new Event('beforeinstallprompt'); e.prompt = () => { window.__prompted++; return Promise.resolve(); }; e.userChoice = Promise.resolve({outcome:'accepted', platform:'web'}); dispatchEvent(e); });
+    ok(await until(p, () => !!document.querySelector('#in-acts [data-ingo]'), null, 3000) && await p.evaluate(() => !document.querySelector('#st-inst').hidden && document.querySelector('#st-how').hidden), 'install: when the browser offers to install, the page and Settings show Install');
+    await p.screenshot({path:out + '/p-install-offer.png', fullPage:true});
+    await p.tap('#in-acts [data-ingo]'); await p.waitForTimeout(300);
+    ok(await p.evaluate(() => window.__prompted === 1 && !document.querySelector('#in-acts [data-ingo]') && document.querySelector('#st-inst').hidden), 'install: Install opens the browser\'s own install prompt, once');
+    const qrm = require('./qr.js');
+    const posterQr = (fs.readFileSync(path.join(__dirname, '..', 'poster', 'src', 'poster.html'), 'utf8').match(/<img class="qr"[^>]*src="(data:image\/png;base64,[^"]+)"/) || [])[1];
+    const pgrid = await p.evaluate(async s => {
+      const im = new Image(); im.src = s; await im.decode();
+      const c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight; const x = c.getContext('2d'); x.drawImage(im, 0, 0);
+      const n = 37, m = im.naturalWidth / n, d = x.getImageData(0, 0, c.width, c.height).data, g = [];
+      for (let r = 2; r < n - 2; r++){ const row = []; for (let k = 2; k < n - 2; k++){ const i = (Math.floor((r + .5) * m) * c.width + Math.floor((k + .5) * m)) * 4; row.push(d[i] < 128); } g.push(row); }
+      return g;
+    }, posterQr);
+    const pd = qrm.decode(pgrid);
+    ok(pd.text === LIVE && pd.eccOk, 'QR: qr.js reads the poster\'s code, made by another encoder, as the web app, with its error correction intact');
+    const iq = qrm.encode(LIVE + '#install', 'M'), back = qrm.decode(iq.modules);
+    ok(await p.evaluate(() => INSTALL_QR) === qrm.path(iq) && back.text === LIVE + '#install' && back.eccOk, 'QR: the install page\'s code is the one qr.js makes for the web app\'s #install address, and reads back as it');
+    ok(await p.evaluate(() => { const s = document.querySelector('.in-qr-c'); return !!s && s.getBoundingClientRect().width >= 120 && /On your phone/.test(document.querySelector('#h-inqr').textContent); }), 'QR: on a computer it shows at a scannable size, for your phone');
+    await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], {origin:W.slice(0, -1)});
+    await p.tap('[data-incopy]'); await p.waitForTimeout(250);
+    ok(await p.evaluate(() => navigator.clipboard.readText()) === LIVE + '#install', 'install: Copy link copies the web app\'s #install address');
+    ok(await p.evaluate(() => { const t = document.querySelector('#tin'); return !!t && t.getAttribute('href') === '#install' && /Install the guide/.test(t.textContent) && /Ready offline/.test(t.querySelector('.tag').textContent) && !!document.querySelector('#snav a[href="#install"]'); }), 'install: Shift tools has its tile (Ready offline), and the menu links it');
+    await p.tap('#tabbar .fab'); await p.fill('#gq', 'install'); await p.waitForTimeout(250);
+    ok(await p.evaluate(() => !!document.querySelector('#palbody a[href="#install"]')), 'search: "install" finds Install the guide');
     await p.keyboard.press('Escape');
+    await go(p, '#install', 300);
+    await p.screenshot({path:out + '/p-install-web.png', fullPage:true});
 
     /* A sound is kept once played, from the same download, and a part of one or an unplayed film is not */
     ok(await playIt(p, 'audio/stop2.mp3'), 'web app: a sound plays through the worker');
@@ -945,6 +1007,10 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
 
     /* Offline */
     await ctx.setOffline(true);
+    ok(await until(p, () => /Offline: the saved guide still works/.test((document.querySelector('#toast') || {}).textContent || ''), null, 5000), 'offline: when the connection drops, a notice says the saved guide still works');
+    ok(await until(p, () => /Offline now: using the saved copy/.test(document.querySelector('#in-chips').textContent), null, 3000), 'install: the hero shows the guide is offline, on its saved copy');
+    await p.screenshot({path:out + '/p-install-offline.png'});
+    await go(p, '#home', 300);
     perr.length = 0; cerr.length = 0;
     await p.reload({waitUntil:'load'});
     ok(await visible(p) === 'home', 'offline: the guide reloads from the saved copy, on home');
@@ -995,6 +1061,23 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await visible(p) === 'home' && !(await p.$('#gz-upd')), 'update: Reload opens the page, without the notice');
     swNewer = null;
 
+    /* Opened as the installed app (iOS reports navigator.standalone; the others display-mode standalone) */
+    const ip = await ctx.newPage();
+    await ip.addInitScript(() => Object.defineProperty(Navigator.prototype, 'standalone', {get:() => true, configurable:true}));
+    await ip.goto(W + '#install', {waitUntil:'load'});
+    ok(await until(ip, () => document.querySelector('#in-state').textContent === 'Installed: you are using the app' && /Installed/.test(document.querySelector('#in-chips').textContent) && !document.querySelector('#in-acts [data-ingo]'), null, 8000), 'install: opened as the installed app, it says so');
+    await ip.close();
+
+    /* The claude.ai artifact's copy: it cannot install, so it says so and links to the web app's #install page */
+    const ac = await b.newContext({...phone, colorScheme:'light'}), ap = await ac.newPage(), aerr = [];
+    ap.on('pageerror', e => aerr.push(e.message));
+    ap.on('console', m => { if (m.type() === 'error') aerr.push(m.text()); });
+    await ap.goto(W + 'artifact.html#install', {waitUntil:'load'}); await ap.waitForTimeout(900);
+    ok(await ap.evaluate(() => { const a = document.querySelector('#inhero a.in-go'); return document.querySelector('#in-state').textContent === 'Install it from the web app' && !document.querySelector('#in-steps') && !document.querySelector('#in-chips') && !window.GZ_PWA && !!a && a.href === APP_URL + '#install' && a.target === '_blank' && a.rel.includes('noopener') && !!document.querySelector('.in-qr-c'); }), 'artifact: Install the guide says it installs from the web app, links to its #install page and shows the code');
+    ok(await ap.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).length === 0) && !aerr.length && await hscroll(ap) <= 0, 'artifact: no service worker, no errors, no sideways scroll' + (aerr.length ? ': ' + aerr.join('; ') : ''));
+    await ap.screenshot({path:out + '/p-install-artifact.png', fullPage:true});
+    await ac.close();
+
     /* Anywhere but github.io or localhost (here 127.0.0.1), the page registers nothing */
     const q = await ctx.newPage();
     await q.goto(`http://127.0.0.1:${PORT + 1}/`, {waitUntil:'load'}); await q.waitForTimeout(1200);
@@ -1005,6 +1088,20 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
     ok(!/serviceWorker|sw\.js|manifest\.webmanifest|rel="manifest"|apple-touch-icon|theme-color|st-offline|gz-upd/.test(art), 'the claude.ai artifact has no manifest, touch icon, theme colour, service worker or offline row');
     ok(idx.includes('<link rel="manifest" href="manifest.webmanifest">') && idx.includes("register('sw.js'") && idx.includes(`const PAGE = '${PAGEID}'`), 'the web app copy links the manifest and registers sw.js, with the page id its worker knows');
+  }
+
+  /* Install the guide on an Android phone: 360 px by day and by night, and 390 px by night */
+  {
+    const ANDROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36';
+    for (const [w, h, scheme, name] of [[360, 780, 'light', 's-install'], [360, 780, 'dark', 'sd-install'], [390, 844, 'dark', 'pd-install']]){
+      const q = await mk({viewport:{width:w, height:h}, isMobile:true, hasTouch:true, deviceScaleFactor:1, colorScheme:scheme, userAgent:ANDROID}, name);
+      await q.goto(U + '#install', {waitUntil:'load'});
+      const where = `install at ${w} px by ${scheme === 'dark' ? 'night' : 'day'}`;
+      ok(await q.waitForFunction(() => document.querySelector('#in-state') && document.querySelector('#in-state').textContent === 'Ready offline', null, {timeout:15000, polling:250}).then(() => true, () => false)
+        && await q.evaluate(() => /^Android/.test(document.querySelector('#in-plat [aria-pressed="true"]').textContent) && /Install app/.test(document.querySelector('#in-steps').textContent) && /For a colleague/.test(document.querySelector('#h-inqr').textContent)), `${where}: Ready offline, the Android steps, and the code is for a colleague`);
+      ok(await hscroll(q) <= 0 && await q.evaluate(() => [...document.querySelectorAll('#instbox button, #instbox a')].filter(e => e.offsetParent !== null).every(e => { const r = e.getBoundingClientRect(); return r.left >= -1 && r.right <= innerWidth + 1; })), `${where}: no sideways scroll, and no control clipped at the edges`);
+      await q.screenshot({path:out + `/${name}.png`, fullPage:true});
+    }
   }
 
   console.log('errors:', errs.length ? '\n  ' + errs.join('\n  ') : 'none');

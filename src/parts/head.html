@@ -1478,6 +1478,80 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .toast.upd .tx:hover{background:rgba(255,255,255,.1)}
 .toast.upd .tx svg{width:18px;height:18px}
 
+/* ---------- Install the guide (#install): a teal hero with the live state, the steps for a device and browser, drawn,
+   the QR code and what works offline. In the claude.ai artifact only the hero and the code, linking to the web app. ---------- */
+.in-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center;gap:6px 22px;padding:24px;min-height:240px}
+.in-hero-t{display:grid;min-width:0;align-content:center}
+.in-hero .lbl{font:800 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92)}
+.in-hero h2{margin:8px 0 0;font:900 clamp(1.55rem,4.6vw,2.15rem)/1.06 var(--display);letter-spacing:-.025em;color:#fff}
+.in-hero p{margin:8px 0 0;max-width:52ch;font-size:.95rem;line-height:1.5;color:rgba(255,255,255,.94)}
+.in-art{display:block;width:100%;max-width:330px;height:auto;justify-self:center;overflow:visible}
+@media (max-width:760px){.in-hero{grid-template-columns:minmax(0,1fr);padding:18px}.in-art{order:-1;max-width:220px;margin:-6px auto -4px}}
+.in-chips{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.in-chips li{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:5px 12px 5px 9px;border-radius:999px;background:var(--glass);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font:700 .82rem/1.2 var(--body);color:#fff}
+.in-chips li svg{width:15px;height:15px;flex:none}
+.in-chips li.on{background:#fff;color:var(--teal-3);box-shadow:none}
+.in-chips li.warn{background:var(--observe-soft);color:var(--observe);box-shadow:none}
+.in-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.in-acts:empty{display:none}
+.in-go{background:#fff;color:var(--teal-3);border-color:transparent;font-weight:800;box-shadow:0 10px 22px -14px rgba(0,0,0,.6)}
+.in-go:hover{border-color:transparent;background:#effaf4}
+.in-go svg{width:18px;height:18px}
+.in-pick{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+.in-me{display:inline-block;width:7px;height:7px;margin-left:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 2px rgba(67,221,140,.3)}
+.in-steps{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.in-step{padding:0;gap:0}
+.in-fig{display:grid;place-items:center;padding:12px 12px 6px;background:var(--surface-2);box-shadow:inset 0 -1px 0 var(--line)}
+.in-fig svg{display:block;width:100%;max-width:320px;height:auto;overflow:hidden}
+.in-txt{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:start;padding:14px 16px 16px}
+.in-n{grid-row:span 2;display:grid;place-items:center;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,var(--teal-1),var(--teal-2));color:#fff;font:800 .95rem var(--mono)}
+.in-txt h3{margin:5px 0 0;font:800 1.04rem/1.3 var(--display);letter-spacing:-.01em;color:var(--ink)}
+.in-txt p{margin:0;font-size:.9rem;line-height:1.45;color:var(--muted)}
+.in-key{display:inline-grid;place-items:center;width:1.6em;height:1.6em;margin:0 .12em;vertical-align:-.4em;border-radius:7px;background:var(--surface-3);box-shadow:inset 0 0 0 1px var(--line-2);color:var(--ink)}
+.in-key svg{width:1em;height:1em}
+.in-note{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;padding:12px 14px;border-radius:var(--r-md);background:var(--advice-soft);color:var(--ink);font-size:.9rem;line-height:1.45}
+.in-note svg{flex:none;width:18px;height:18px;margin-top:1px;color:var(--advice)}
+.in-more{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:16px}
+.in-qr{flex-direction:row;align-items:center;gap:16px}
+@media (max-width:420px){.in-qr{flex-direction:column;align-items:flex-start}}
+.in-qr-w{flex:none;padding:8px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.in-qr-c{display:block;width:132px;height:132px}
+.in-qr h3,.in-off h3{margin:0;font:800 1.05rem/1.2 var(--display)}
+.in-qr p{margin:6px 0 0;font-size:.9rem;line-height:1.45;color:var(--muted)}
+.in-url{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.in-url code{min-width:0;font:700 .8rem/1.3 var(--mono);color:var(--ink);word-break:break-all}
+.in-ok{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.in-ok li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;line-height:1.4}
+.in-ok li svg{flex:none;width:22px;height:22px;padding:3px;border-radius:7px}
+.in-ok li.y svg{background:var(--discharge-soft);color:var(--discharge)}
+.in-ok li.n svg{background:var(--surface-3);color:var(--muted)}
+.in-ok + .sub{margin-top:12px}
+/* The step drawings: a light phone or window, whatever the theme, with the control to use ringed in teal */
+.ia .a-ph{fill:var(--obsidian-2);stroke:var(--line-2);stroke-width:1.5}
+.ia .a-sc{fill:#f4f7f5}
+.ia .a-pl{fill:#dbe3de}
+.ia .a-cd{fill:#fff;stroke:#d9e1dc;stroke-width:1}
+.ia .a-sh{fill:#0b110e;opacity:.12}
+.ia .a-bar,.ia .a-tb{fill:#e6ece8}
+.ia .a-win{fill:#fbfcfb;stroke:var(--line-2);stroke-width:1.5}
+.ia .a-dim{fill:#0b110e;opacity:.3}
+.ia .a-sep{stroke:#e2e8e4;stroke-width:1}
+.ia .a-mk{fill:var(--emerald-1)}
+.ia .a-tx,.ia .a-mu,.ia .a-ac,.ia .a-bt{font-family:var(--body);font-weight:650}
+.ia .a-tx{fill:#16231c}
+.ia .a-mu{fill:#56665e}
+.ia .a-ac{fill:var(--teal-1);font-weight:800}
+.ia .a-bt{fill:#fff;font-weight:800}
+.ia .a-b{font-weight:800}
+.ia .a-ic{fill:none;stroke:#26352e;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ia .a-dt{fill:#26352e}
+.ia .a-btn{fill:var(--teal-1)}
+.ia .a-okp{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ia .a-hl{fill:rgba(21,116,129,.14);stroke:var(--teal-1);stroke-width:2.5}
+.ia .a-hr{fill:rgba(21,116,129,.13);stroke:var(--teal-1);stroke-width:2}
+.ia .a-echo{fill:none;stroke:var(--teal-1);stroke-width:2;opacity:0}
+@media (prefers-reduced-motion:no-preference){.ia .a-echo{transform-box:fill-box;transform-origin:center;animation:inecho 1.6s var(--ease) .8s 3}@keyframes inecho{0%{opacity:.85;transform:none}100%{opacity:0;transform:scale(1.65)}}}
+
 /* ---------- Footer ---------- */
 .foot{border-top:1px solid var(--line)}
 .foot .vw{padding-block:22px 34px;display:grid;gap:8px;font-size:.82rem;color:var(--muted)}
@@ -1516,6 +1590,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <a href="#new" data-v="new"><span data-icon="spark"></span>What's new<span class="dotn" aria-hidden="true"></span></a>
       <a href="#poster" data-v="poster"><span data-icon="poster"></span>Wall poster</a>
       <a href="#about" data-v="about"><span data-icon="info"></span>Sources and about</a>
+      <a href="#install" data-v="install"><span data-icon="install"></span>Install the guide</a>
     </nav>
     <div class="side-saved" id="sidesaved"></div>
     <div class="side-foot"><button type="button" class="ghost" data-settings><span data-icon="sliders"></span>Settings</button><span>Version 8</span></div>
@@ -1587,7 +1662,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -1682,6 +1757,13 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
         <div class="shead"><h2>Privacy</h2></div>
         <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
           <p>Illustrations and clips are generated artwork and show no real staff or patients. Department documents are cited by title and date; personal phone numbers, registration numbers and patient details in them are left out.</p></div>
+      </div></section>
+
+      <!-- Install the guide: on a phone, tablet or computer, and without a signal (engine.js draws it; in the web app, pwa.js feeds its live state) -->
+      <section class="view" data-view="install" id="v-install" hidden aria-labelledby="h-install"><div class="vw">
+        <header class="vhead"><div><h1 id="h-install">Install the guide</h1>
+          <p>Put the guide on your home screen or desktop. It opens like an app, full screen, and works without a signal: on ward Wi-Fi, on mobile data or with none at all.</p></div></header>
+        <div id="instbox"></div>
       </div></section>
 
       <!-- Pathway runner -->

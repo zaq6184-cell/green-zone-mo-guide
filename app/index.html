@@ -1479,6 +1479,80 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .toast.upd .tx:hover{background:rgba(255,255,255,.1)}
 .toast.upd .tx svg{width:18px;height:18px}
 
+/* ---------- Install the guide (#install): a teal hero with the live state, the steps for a device and browser, drawn,
+   the QR code and what works offline. In the claude.ai artifact only the hero and the code, linking to the web app. ---------- */
+.in-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center;gap:6px 22px;padding:24px;min-height:240px}
+.in-hero-t{display:grid;min-width:0;align-content:center}
+.in-hero .lbl{font:800 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92)}
+.in-hero h2{margin:8px 0 0;font:900 clamp(1.55rem,4.6vw,2.15rem)/1.06 var(--display);letter-spacing:-.025em;color:#fff}
+.in-hero p{margin:8px 0 0;max-width:52ch;font-size:.95rem;line-height:1.5;color:rgba(255,255,255,.94)}
+.in-art{display:block;width:100%;max-width:330px;height:auto;justify-self:center;overflow:visible}
+@media (max-width:760px){.in-hero{grid-template-columns:minmax(0,1fr);padding:18px}.in-art{order:-1;max-width:220px;margin:-6px auto -4px}}
+.in-chips{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.in-chips li{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:5px 12px 5px 9px;border-radius:999px;background:var(--glass);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font:700 .82rem/1.2 var(--body);color:#fff}
+.in-chips li svg{width:15px;height:15px;flex:none}
+.in-chips li.on{background:#fff;color:var(--teal-3);box-shadow:none}
+.in-chips li.warn{background:var(--observe-soft);color:var(--observe);box-shadow:none}
+.in-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.in-acts:empty{display:none}
+.in-go{background:#fff;color:var(--teal-3);border-color:transparent;font-weight:800;box-shadow:0 10px 22px -14px rgba(0,0,0,.6)}
+.in-go:hover{border-color:transparent;background:#effaf4}
+.in-go svg{width:18px;height:18px}
+.in-pick{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+.in-me{display:inline-block;width:7px;height:7px;margin-left:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 2px rgba(67,221,140,.3)}
+.in-steps{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.in-step{padding:0;gap:0}
+.in-fig{display:grid;place-items:center;padding:12px 12px 6px;background:var(--surface-2);box-shadow:inset 0 -1px 0 var(--line)}
+.in-fig svg{display:block;width:100%;max-width:320px;height:auto;overflow:hidden}
+.in-txt{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:start;padding:14px 16px 16px}
+.in-n{grid-row:span 2;display:grid;place-items:center;width:32px;height:32px;border-radius:11px;background:linear-gradient(150deg,var(--teal-1),var(--teal-2));color:#fff;font:800 .95rem var(--mono)}
+.in-txt h3{margin:5px 0 0;font:800 1.04rem/1.3 var(--display);letter-spacing:-.01em;color:var(--ink)}
+.in-txt p{margin:0;font-size:.9rem;line-height:1.45;color:var(--muted)}
+.in-key{display:inline-grid;place-items:center;width:1.6em;height:1.6em;margin:0 .12em;vertical-align:-.4em;border-radius:7px;background:var(--surface-3);box-shadow:inset 0 0 0 1px var(--line-2);color:var(--ink)}
+.in-key svg{width:1em;height:1em}
+.in-note{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;padding:12px 14px;border-radius:var(--r-md);background:var(--advice-soft);color:var(--ink);font-size:.9rem;line-height:1.45}
+.in-note svg{flex:none;width:18px;height:18px;margin-top:1px;color:var(--advice)}
+.in-more{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:16px}
+.in-qr{flex-direction:row;align-items:center;gap:16px}
+@media (max-width:420px){.in-qr{flex-direction:column;align-items:flex-start}}
+.in-qr-w{flex:none;padding:8px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.in-qr-c{display:block;width:132px;height:132px}
+.in-qr h3,.in-off h3{margin:0;font:800 1.05rem/1.2 var(--display)}
+.in-qr p{margin:6px 0 0;font-size:.9rem;line-height:1.45;color:var(--muted)}
+.in-url{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.in-url code{min-width:0;font:700 .8rem/1.3 var(--mono);color:var(--ink);word-break:break-all}
+.in-ok{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.in-ok li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;line-height:1.4}
+.in-ok li svg{flex:none;width:22px;height:22px;padding:3px;border-radius:7px}
+.in-ok li.y svg{background:var(--discharge-soft);color:var(--discharge)}
+.in-ok li.n svg{background:var(--surface-3);color:var(--muted)}
+.in-ok + .sub{margin-top:12px}
+/* The step drawings: a light phone or window, whatever the theme, with the control to use ringed in teal */
+.ia .a-ph{fill:var(--obsidian-2);stroke:var(--line-2);stroke-width:1.5}
+.ia .a-sc{fill:#f4f7f5}
+.ia .a-pl{fill:#dbe3de}
+.ia .a-cd{fill:#fff;stroke:#d9e1dc;stroke-width:1}
+.ia .a-sh{fill:#0b110e;opacity:.12}
+.ia .a-bar,.ia .a-tb{fill:#e6ece8}
+.ia .a-win{fill:#fbfcfb;stroke:var(--line-2);stroke-width:1.5}
+.ia .a-dim{fill:#0b110e;opacity:.3}
+.ia .a-sep{stroke:#e2e8e4;stroke-width:1}
+.ia .a-mk{fill:var(--emerald-1)}
+.ia .a-tx,.ia .a-mu,.ia .a-ac,.ia .a-bt{font-family:var(--body);font-weight:650}
+.ia .a-tx{fill:#16231c}
+.ia .a-mu{fill:#56665e}
+.ia .a-ac{fill:var(--teal-1);font-weight:800}
+.ia .a-bt{fill:#fff;font-weight:800}
+.ia .a-b{font-weight:800}
+.ia .a-ic{fill:none;stroke:#26352e;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ia .a-dt{fill:#26352e}
+.ia .a-btn{fill:var(--teal-1)}
+.ia .a-okp{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ia .a-hl{fill:rgba(21,116,129,.14);stroke:var(--teal-1);stroke-width:2.5}
+.ia .a-hr{fill:rgba(21,116,129,.13);stroke:var(--teal-1);stroke-width:2}
+.ia .a-echo{fill:none;stroke:var(--teal-1);stroke-width:2;opacity:0}
+@media (prefers-reduced-motion:no-preference){.ia .a-echo{transform-box:fill-box;transform-origin:center;animation:inecho 1.6s var(--ease) .8s 3}@keyframes inecho{0%{opacity:.85;transform:none}100%{opacity:0;transform:scale(1.65)}}}
+
 /* ---------- Footer ---------- */
 .foot{border-top:1px solid var(--line)}
 .foot .vw{padding-block:22px 34px;display:grid;gap:8px;font-size:.82rem;color:var(--muted)}
@@ -1517,6 +1591,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <a href="#new" data-v="new"><span data-icon="spark"></span>What's new<span class="dotn" aria-hidden="true"></span></a>
       <a href="#poster" data-v="poster"><span data-icon="poster"></span>Wall poster</a>
       <a href="#about" data-v="about"><span data-icon="info"></span>Sources and about</a>
+      <a href="#install" data-v="install"><span data-icon="install"></span>Install the guide</a>
     </nav>
     <div class="side-saved" id="sidesaved"></div>
     <div class="side-foot"><button type="button" class="ghost" data-settings><span data-icon="sliders"></span>Settings</button><span>Version 8</span></div>
@@ -1588,7 +1663,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -1683,6 +1758,13 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
         <div class="shead"><h2>Privacy</h2></div>
         <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
           <p>Illustrations and clips are generated artwork and show no real staff or patients. Department documents are cited by title and date; personal phone numbers, registration numbers and patient details in them are left out.</p></div>
+      </div></section>
+
+      <!-- Install the guide: on a phone, tablet or computer, and without a signal (engine.js draws it; in the web app, pwa.js feeds its live state) -->
+      <section class="view" data-view="install" id="v-install" hidden aria-labelledby="h-install"><div class="vw">
+        <header class="vhead"><div><h1 id="h-install">Install the guide</h1>
+          <p>Put the guide on your home screen or desktop. It opens like an app, full screen, and works without a signal: on ward Wi-Fi, on mobile data or with none at all.</p></div></header>
+        <div id="instbox"></div>
       </div></section>
 
       <!-- Pathway runner -->
@@ -8356,6 +8438,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['Install the guide, and use it without a signal','The web app now installs on any phone, tablet or computer: an iPhone or iPad from Safari, Android from Chrome, Samsung Internet, Edge or Firefox, and Windows, Mac, Linux or ChromeOS from Chrome, Edge or Safari. Install the guide shows the steps for your device, drawn, with an Install button where the browser offers one. Once opened with a signal, the guide saves itself and opens without one: every pathway, rule, calculator and number, and the pictures; films and sounds once played through. It updates itself the next time it opens with a signal.',[['#install','Install the guide']]],
   ['Every entry on its banner','Every pathway, rule and protocol now opens on its topic\'s glass banner, compact on a phone so the first question stays near the top; the rabies protocol has its own, an amber glass paw and a vaccine vial. The ED links, communication and interpreter banners now move with Flow Studio, and the discharge advice of gastroenteritis, renal colic, abdominal pain and hypoglycaemia can be read aloud.',[['#renal-colic','Renal colic'],['#animal-bites','Animal bites and rabies']]],
   ['From the department\'s link page','What the 2026 department documents add for the Green Zone: the zone at a glance (seen by an MO in under 120 minutes; the referred team answers in 1 to 2 hours), sepsis goes up to the Yellow or Red Zone, how to book EM Watch step by step, the IV antibiotic flow chart of June 2026, leaving the department (own-risk discharge, absconded patients), prescriptions the pharmacy rejects, DNR, referral details, redirection at triage, and a Fire in the department card (dial 6000, the five steps, the assembly point). Each with its memo, policy or plan and date.',[['#gz-rules--glance','The Green Zone at a glance'],['#code-blue--fire','Fire in the department']]],
   ['Communication on shift','Step by step from the situation in front of you: an angry or aggressive patient or relative (a weapon or violence now: step away and call Code Gray, ext 5441; otherwise a safe stance, calm yourself, the department\'s three steps), a complaint about the wait, bad news (SPIKES), explaining a discharge with teach-back, a phone referral by ISBAR, and no shared language. From the department\'s quick card and published sources, each named, with the phrases to say and not to say, in English and Bahasa Melayu.',[['#communication','Communication on shift']]],
@@ -8590,6 +8673,14 @@ if (TIP_SRC.length !== TIPS.length) console.warn('TIP_SRC and TIPS differ in len
 
 /* ================= Icons ================= */
 const ICONS = {
+  install:'<rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M12 7v7M9 11.2l3 3 3-3M10.5 18.3h3"/>',
+  share:'<path d="M7 10H6a1.5 1.5 0 0 0-1.5 1.5v8A1.5 1.5 0 0 0 6 21h12a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 18 10h-1M12 3v12M8.5 6.5 12 3l3.5 3.5"/>',
+  kebab:'<circle cx="12" cy="5.5" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="12" cy="18.5" r="1.3"/>',
+  dots:'<circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/>',
+  burger:'<path d="M4.5 7h15M4.5 12h15M4.5 17h15"/>',
+  tick:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  wifi:'<path d="M2.8 9a13.5 13.5 0 0 1 18.4 0M6 12.4a9 9 0 0 1 12 0M9.2 15.8a4.5 4.5 0 0 1 5.6 0"/><circle cx="12" cy="19.2" r="1.1"/>',
+  nowifi:'<path d="M2.8 9a13.5 13.5 0 0 1 18.4 0M6 12.4a9 9 0 0 1 12 0M9.2 15.8a4.5 4.5 0 0 1 5.6 0M3.5 3.5l17 17"/><circle cx="12" cy="19.2" r="1.1"/>',
   x:'<path d="M6 6l12 12M18 6 6 18"/>',
   search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
   home:'<path d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H5.5A1.5 1.5 0 0 1 4 19z"/>',
@@ -9035,6 +9126,7 @@ IDX.push({href:'#home', title:'Day and night colours', kind:'Setting', meta:'Swi
 IDX.push({href:'#quiz', title:`Quick check: ${QUIZ.length} questions`, kind:'Quiz', meta:'Self-test', body:QUIZ.map(q => q.q).join(' · '), ic:'quiz', c:'c-infect'});
 IDX.push({href:'#new', title:'What\'s new from the drives', kind:'Update', meta:'7 Nov 2026', body:[...DRIVE.map(d => d[0] + ' ' + d[2]), ...V7.map(d => d[0] + ' ' + d[1])].join(' · '), ic:'spark', c:'c-flow'});
 IDX.push({href:'#poster', title:'Wall poster, two A3 sheets', kind:'Poster', meta:'Print', body:'poster A3 sheet patient flow rules numbers pathways', ic:'poster', c:'c-prot'});
+IDX.push({href:'#install', title:'Install the guide, and use it without a signal', kind:'Setting', meta:'Phone, tablet or computer', body:'install app home screen add to home screen offline no signal no internet no wifi download save phone android iphone ipad samsung windows mac laptop computer desktop', ic:'install', c:'c-meta'});
 IDX.push({href:'#about', title:'Sources and about', kind:'About', meta:'Sources, privacy', body:'sources ebook memos SOP privacy no patient data version', ic:'info', c:'c-prot'});
 const HAY = new Map(Object.entries(P).map(([id, p]) => [id, (p.title + ' ' + pathWords(p).join(' ')).toLowerCase()]));
 
@@ -9155,7 +9247,7 @@ function closePal(restore){
 }
 
 /* ================= Views ================= */
-const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro'};
+const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
 function showView(name, sub){
@@ -9187,7 +9279,7 @@ function markNav(){
     const on = a.dataset.v === v && (!a.dataset.sub || a.dataset.sub === curSub);
     if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
-  const tab = curView === 'run' ? 'pathways' : v === 'calc' ? 'tools' : v;
+  const tab = curView === 'run' ? 'pathways' : v === 'calc' || v === 'install' ? 'tools' : v;
   $$('#tabbar [data-tab]').forEach(t => { if (t.dataset.tab === tab) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
 }
 function showLearn(sub){
@@ -11142,6 +11234,240 @@ function closeSettings(restore){
   if (restore && setFrom && setFrom.focus) setFrom.focus();
 }
 
+/* ================= Install the guide (#install) ================= */
+/* Installing the guide on a phone, tablet or computer, and using it without a signal. engine.js draws this page in both
+   copies. The live state (saved for offline use, installed, the browser's own Install offer) comes from pwa.js, which only
+   the web app on GitHub Pages has (window.GZ_PWA); it calls renderInstall again once it is ready. The claude.ai artifact
+   cannot install or keep an offline copy, so there the page says so and links to the web app.
+   The QR code opens APP_URL + '#install'. It was made by src/qr.js
+   (node qr.js "https://zaq6184-cell.github.io/green-zone-mo-guide/#install" M: version 4, 33 modules, one path unit a
+   module), and test.js checks that it still reads as that address. */
+const INSTALL_QR = 'M0 0h7v1h-7zM8 0h2v1h-2zM11 0h4v1h-4zM18 0h1v1h-1zM24 0h1v1h-1zM26 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h3v1h-3zM12 1h3v1h-3zM16 1h1v1h-1zM18 1h3v1h-3zM22 1h1v1h-1zM26 1h1v1h-1zM32 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM8 2h1v1h-1zM13 2h4v1h-4zM20 2h2v1h-2zM24 2h1v1h-1zM26 2h1v1h-1zM28 2h3v1h-3zM32 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM10 3h1v1h-1zM12 3h1v1h-1zM14 3h4v1h-4zM19 3h3v1h-3zM24 3h1v1h-1zM26 3h1v1h-1zM28 3h3v1h-3zM32 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h3v1h-3zM15 4h5v1h-5zM24 4h1v1h-1zM26 4h1v1h-1zM28 4h3v1h-3zM32 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM11 5h6v1h-6zM20 5h1v1h-1zM22 5h2v1h-2zM26 5h1v1h-1zM32 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h7v1h-7zM9 7h1v1h-1zM12 7h2v1h-2zM15 7h2v1h-2zM20 7h1v1h-1zM23 7h1v1h-1zM0 8h1v1h-1zM3 8h6v1h-6zM11 8h2v1h-2zM16 8h2v1h-2zM19 8h1v1h-1zM22 8h2v1h-2zM25 8h1v1h-1zM28 8h1v1h-1zM30 8h3v1h-3zM1 9h2v1h-2zM4 9h1v1h-1zM8 9h1v1h-1zM10 9h1v1h-1zM13 9h3v1h-3zM17 9h4v1h-4zM23 9h2v1h-2zM28 9h3v1h-3zM0 10h1v1h-1zM5 10h5v1h-5zM13 10h1v1h-1zM15 10h1v1h-1zM20 10h1v1h-1zM22 10h4v1h-4zM28 10h5v1h-5zM3 11h2v1h-2zM11 11h3v1h-3zM15 11h1v1h-1zM17 11h2v1h-2zM20 11h1v1h-1zM25 11h3v1h-3zM30 11h1v1h-1zM32 11h1v1h-1zM1 12h1v1h-1zM3 12h1v1h-1zM5 12h2v1h-2zM12 12h2v1h-2zM16 12h1v1h-1zM20 12h1v1h-1zM23 12h2v1h-2zM26 12h2v1h-2zM31 12h2v1h-2zM0 13h1v1h-1zM2 13h1v1h-1zM4 13h1v1h-1zM8 13h1v1h-1zM14 13h1v1h-1zM17 13h1v1h-1zM20 13h1v1h-1zM22 13h2v1h-2zM25 13h1v1h-1zM27 13h1v1h-1zM29 13h2v1h-2zM2 14h2v1h-2zM5 14h2v1h-2zM8 14h1v1h-1zM10 14h1v1h-1zM13 14h1v1h-1zM15 14h2v1h-2zM18 14h4v1h-4zM26 14h2v1h-2zM29 14h2v1h-2zM1 15h2v1h-2zM5 15h1v1h-1zM8 15h1v1h-1zM10 15h3v1h-3zM19 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM29 15h2v1h-2zM32 15h1v1h-1zM0 16h2v1h-2zM3 16h2v1h-2zM6 16h1v1h-1zM8 16h1v1h-1zM12 16h2v1h-2zM19 16h2v1h-2zM25 16h5v1h-5zM2 17h1v1h-1zM4 17h1v1h-1zM7 17h1v1h-1zM12 17h6v1h-6zM19 17h2v1h-2zM22 17h1v1h-1zM24 17h3v1h-3zM28 17h1v1h-1zM30 17h3v1h-3zM0 18h2v1h-2zM4 18h1v1h-1zM6 18h5v1h-5zM12 18h1v1h-1zM14 18h3v1h-3zM18 18h4v1h-4zM23 18h1v1h-1zM27 18h1v1h-1zM29 18h2v1h-2zM32 18h1v1h-1zM0 19h1v1h-1zM3 19h1v1h-1zM7 19h4v1h-4zM13 19h3v1h-3zM19 19h1v1h-1zM22 19h1v1h-1zM24 19h2v1h-2zM28 19h3v1h-3zM0 20h4v1h-4zM5 20h2v1h-2zM8 20h2v1h-2zM11 20h2v1h-2zM15 20h3v1h-3zM24 20h1v1h-1zM29 20h1v1h-1zM0 21h2v1h-2zM4 21h1v1h-1zM8 21h1v1h-1zM10 21h1v1h-1zM12 21h1v1h-1zM15 21h1v1h-1zM19 21h5v1h-5zM27 21h4v1h-4zM0 22h1v1h-1zM4 22h1v1h-1zM6 22h6v1h-6zM14 22h2v1h-2zM17 22h1v1h-1zM21 22h3v1h-3zM30 22h3v1h-3zM0 23h1v1h-1zM2 23h3v1h-3zM8 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM17 23h2v1h-2zM20 23h1v1h-1zM23 23h1v1h-1zM26 23h2v1h-2zM30 23h3v1h-3zM0 24h2v1h-2zM3 24h10v1h-10zM14 24h1v1h-1zM16 24h1v1h-1zM19 24h2v1h-2zM24 24h6v1h-6zM31 24h1v1h-1zM8 25h1v1h-1zM14 25h3v1h-3zM18 25h1v1h-1zM21 25h1v1h-1zM23 25h2v1h-2zM28 25h1v1h-1zM30 25h2v1h-2zM0 26h7v1h-7zM8 26h1v1h-1zM10 26h2v1h-2zM14 26h2v1h-2zM19 26h6v1h-6zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM11 27h1v1h-1zM13 27h2v1h-2zM18 27h1v1h-1zM23 27h2v1h-2zM28 27h4v1h-4zM0 28h1v1h-1zM2 28h3v1h-3zM6 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM12 28h4v1h-4zM20 28h1v1h-1zM22 28h7v1h-7zM31 28h1v1h-1zM0 29h1v1h-1zM2 29h3v1h-3zM6 29h1v1h-1zM8 29h2v1h-2zM12 29h2v1h-2zM15 29h1v1h-1zM18 29h3v1h-3zM22 29h1v1h-1zM24 29h2v1h-2zM27 29h1v1h-1zM31 29h2v1h-2zM0 30h1v1h-1zM2 30h3v1h-3zM6 30h1v1h-1zM9 30h3v1h-3zM15 30h1v1h-1zM17 30h4v1h-4zM22 30h4v1h-4zM27 30h3v1h-3zM31 30h2v1h-2zM0 31h1v1h-1zM6 31h1v1h-1zM9 31h1v1h-1zM11 31h2v1h-2zM14 31h1v1h-1zM18 31h2v1h-2zM22 31h1v1h-1zM26 31h3v1h-3zM30 31h3v1h-3zM0 32h7v1h-7zM8 32h1v1h-1zM14 32h2v1h-2zM17 32h1v1h-1zM19 32h1v1h-1zM24 32h1v1h-1zM27 32h2v1h-2z';
+const INSTALL_PLAT = [
+  {k:'iphone', t:'iPhone or iPad', br:[['safari', 'Safari'], ['other', 'Chrome or Edge']]},
+  {k:'android', t:'Android', br:[['chrome', 'Chrome'], ['samsung', 'Samsung Internet'], ['edge', 'Edge'], ['firefox', 'Firefox']]},
+  {k:'windows', t:'Windows', br:[['chrome', 'Chrome or Edge'], ['firefox', 'Firefox']]},
+  {k:'mac', t:'Mac', br:[['safari', 'Safari'], ['chrome', 'Chrome or Edge'], ['firefox', 'Firefox']]},
+  {k:'linux', t:'Linux or ChromeOS', br:[['chrome', 'Chrome or Edge'], ['firefox', 'Firefox']]}
+];
+/* Steps: [drawing, title, line]. {kebab}, {dots}, {burger} and {share} stand for the button's own icon */
+const INSTALL_STEPS = {
+  'iphone-safari':{steps:[
+    ['iosShare', 'Tap {share} Share', 'The square with an arrow: at the bottom of Safari on an iPhone, at the top right on an iPad.'],
+    ['iosSheet', 'Tap Add to Home Screen', 'Scroll down the list if you do not see it.'],
+    ['iosAdd', 'Tap Add', 'Green Zone joins your home screen. Open it from there: full screen, and it works without a signal.']]},
+  'iphone-other':{steps:[
+    ['iosShareTop', 'Tap {share} Share', 'In Chrome it is in the address bar; in Edge, open the menu {dots} first.'],
+    ['iosSheet', 'Tap Add to Home Screen', 'Scroll down the list if you do not see it.'],
+    ['iosAdd', 'Tap Add', 'Green Zone joins your home screen, and works without a signal.']],
+    note:'From Chrome or Edge, an iPhone or iPad needs iOS 16.4 or later. On an older one, open the guide in Safari.'},
+  'android-chrome':{steps:[
+    ['andKebab', 'Tap {kebab}', 'At the top right of Chrome. If Chrome offers Install at the bottom of the screen, tap that instead.'],
+    ['andMenu', 'Tap Install app', 'On some phones it says Add to Home screen.'],
+    ['andPrompt', 'Tap Install', 'Green Zone joins your apps and home screen, and opens full screen.']]},
+  'android-samsung':{steps:[
+    ['samBar', 'Tap {burger}', 'At the bottom right of Samsung Internet. If the address bar shows an install icon, tap that instead.'],
+    ['samMenu', 'Tap Add page to', 'In the menu that opens.'],
+    ['samTarget', 'Tap Home screen, then Add', 'Green Zone joins your home screen.']]},
+  'android-edge':{steps:[
+    ['edgeBar', 'Tap {dots}', 'In the bar at the bottom of Edge.'],
+    ['edgeMenu', 'Tap Add to phone', 'In the menu that opens.'],
+    ['andPrompt', 'Tap Install', 'Green Zone joins your apps and home screen.']]},
+  'android-firefox':{steps:[
+    ['andKebab', 'Tap {kebab}', 'Firefox has its menu at the top or the bottom of the screen.'],
+    ['ffMenu', 'Tap Install', 'In older versions: Add to Home screen.'],
+    ['andPrompt', 'Tap Add', 'Green Zone joins your home screen.']]},
+  'desk-chrome':{steps:[
+    ['deskIcon', 'Click the install icon', 'At the right end of the address bar: a screen with a down arrow. Edge may say App available.'],
+    ['deskPrompt', 'Click Install', 'The guide opens in its own window, and stays in the Start menu, the Dock or the app launcher.'],
+    ['deskMenu', 'No icon? Use the menu', 'Chrome: {kebab}, Cast, save and share, Install page as app. Edge: {dots}, Apps, Install this site as an app.']]},
+  'mac-safari':{steps:[
+    ['macFile', 'Choose File, then Add to Dock', 'In Safari 17 or later (macOS Sonoma or newer). The {share} Share button has Add to Dock too.'],
+    ['macAdd', 'Click Add', 'Keep the name Green Zone, or type your own.'],
+    ['macDock', 'Open it from the Dock', 'It opens in its own window, and works without a signal.']]},
+  'desk-firefox':{steps:[
+    ['ffStar', 'Bookmark it', 'Firefox on a computer cannot install web apps. Click the star in the address bar, or press Ctrl+D (Cmd+D on a Mac).'],
+    ['ffOffline', 'It still opens without a signal', 'Once the guide has saved itself, the bookmark opens it offline too. To install it as an app, open it in Chrome or Edge.']]}
+};
+const INSTALL_KEYS = {kebab:['kebab', 'the menu button'], dots:['dots', 'the menu button'], burger:['burger', 'the menu button'], share:['share', '']};
+const instText = s => esc(s).replace(/\{(\w+)\}/g, (m, k) => INSTALL_KEYS[k] ? `<span class="in-key" aria-hidden="true">${svg(INSTALL_KEYS[k][0])}</span>${INSTALL_KEYS[k][1] ? `<span class="vh">${INSTALL_KEYS[k][1]}</span>` : ''}` : m);
+
+/* The device and browser, from the user agent; the choice can be changed on the page (in memory only) */
+function detectDevice(){
+  const ua = navigator.userAgent || '', touchMac = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+  const os = /iPhone|iPod|iPad/.test(ua) || touchMac ? 'iphone' : /Android/.test(ua) ? 'android' : /CrOS|Linux|X11/.test(ua) ? 'linux' : /Windows/.test(ua) ? 'windows' : /Macintosh|Mac OS X/.test(ua) ? 'mac' : '';
+  const br = /SamsungBrowser/.test(ua) ? 'samsung' : /EdgA\/|EdgiOS|Edg\//.test(ua) ? 'edge' : /FxiOS|Firefox\//.test(ua) ? 'firefox' : /CriOS|Chrome\/|Chromium\//.test(ua) ? 'chrome' : /Safari\//.test(ua) ? 'safari' : '';
+  const inapp = /FBAN|FBAV|FB_IAB|Instagram|Line\/|MicroMessenger|WhatsApp|Telegram|; wv\)/.test(ua);
+  const plat = os || 'windows';
+  const pick = {iphone:br === 'safari' || !br ? 'safari' : 'other', android:['samsung', 'edge', 'firefox'].includes(br) ? br : 'chrome', mac:br === 'safari' ? 'safari' : br === 'firefox' ? 'firefox' : 'chrome'}[plat] || (br === 'firefox' ? 'firefox' : 'chrome');
+  return {os, plat, br:pick, inapp, known:!!os};
+}
+const DEVICE = detectDevice();
+let instPlat = DEVICE.plat, instBr = DEVICE.br;
+const instKey = (p, b) => ['windows', 'linux', 'mac'].includes(p) && b !== 'safari' ? 'desk-' + b : p + '-' + b;
+
+/* Step drawings, 320 by 200, in the intro's vocabulary: a phone or a window, the control to use ringed in teal */
+const IA = (() => {
+  const t = (x, y, s, txt, c = 'a-tx', a = '') => `<text x="${x}" y="${y}" class="${c}" style="font-size:${s}px"${a ? ` text-anchor="${a}"` : ''}>${txt}</text>`;
+  const ring = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r}" class="a-hl pop" style="--d:.35s"/><circle cx="${x}" cy="${y}" r="${r}" class="a-echo"/>`;
+  const row = (x, y, w, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="9" class="a-hr pop" style="--d:.35s"/>`;
+  const mark = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${(s / 24).toFixed(3)})"><rect width="24" height="24" rx="6.5" class="a-mk"/><g transform="translate(3.6 3.6) scale(.7)" fill="none" stroke-width="2.6" stroke-linecap="round"><path d="M5 18.5h7.5a4 4 0 0 0 4-4V12.2" stroke="#43dd8c"/><path d="M16.5 3.6v6.6M13.2 6.9h6.6" stroke="#fff"/><circle cx="5" cy="18.5" r="2.3" fill="#fff" stroke="none"/></g></g>`;
+  /* Phones are cropped: the top or the bottom of one, so the control is large */
+  const phone = (top, inner) => top
+    ? `<rect x="66" y="8" width="188" height="232" rx="30" class="a-ph"/><rect x="75" y="17" width="170" height="214" rx="22" class="a-sc"/>${inner}`
+    : `<rect x="66" y="-40" width="188" height="232" rx="30" class="a-ph"/><rect x="75" y="-31" width="170" height="214" rx="22" class="a-sc"/>${inner}`;
+  const page = y => `<rect x="88" y="${y}" width="110" height="9" rx="4.5" class="a-pl"/><rect x="88" y="${y + 16}" width="78" height="9" rx="4.5" class="a-pl"/><rect x="88" y="${y + 34}" width="144" height="34" rx="9" class="a-cd"/><rect x="88" y="${y + 76}" width="144" height="34" rx="9" class="a-cd"/>`;
+  const ic = {
+    share:(x, y) => `<path d="M${x - 6} ${y - 3}v10h12v-10M${x} ${y - 9}v11M${x - 4} ${y - 5}l4-4 4 4" class="a-ic"/>`,
+    kebab:(x, y) => `<circle cx="${x}" cy="${y - 6}" r="2" class="a-dt"/><circle cx="${x}" cy="${y}" r="2" class="a-dt"/><circle cx="${x}" cy="${y + 6}" r="2" class="a-dt"/>`,
+    dots:(x, y) => `<circle cx="${x - 6}" cy="${y}" r="2" class="a-dt"/><circle cx="${x}" cy="${y}" r="2" class="a-dt"/><circle cx="${x + 6}" cy="${y}" r="2" class="a-dt"/>`,
+    burger:(x, y) => `<path d="M${x - 7} ${y - 5}h14M${x - 7} ${y}h14M${x - 7} ${y + 5}h14" class="a-ic"/>`,
+    back:(x, y) => `<path d="M${x + 3} ${y - 6}l-6 6 6 6" class="a-ic"/>`,
+    fwd:(x, y) => `<path d="M${x - 3} ${y - 6}l6 6-6 6" class="a-ic"/>`,
+    book:(x, y) => `<path d="M${x - 7} ${y - 6}h5a2 2 0 0 1 2 2v11a2 2 0 0 0-2-2h-5zM${x + 7} ${y - 6}h-5a2 2 0 0 0-2 2v11a2 2 0 0 1 2-2h5z" class="a-ic"/>`,
+    tabs:(x, y) => `<rect x="${x - 6}" y="${y - 4}" width="11" height="11" rx="2" class="a-ic"/><path d="M${x - 3} ${y - 7}h8a2 2 0 0 1 2 2v8" class="a-ic"/>`,
+    home:(x, y) => `<path d="M${x - 7} ${y}l7-6 7 6M${x - 5} ${y - 2}v8h10v-8" class="a-ic"/>`,
+    plus:(x, y) => `<rect x="${x - 7}" y="${y - 7}" width="14" height="14" rx="3.5" class="a-ic"/><path d="M${x} ${y - 3.5}v7M${x - 3.5} ${y}h7" class="a-ic"/>`,
+    lock:(x, y) => `<rect x="${x - 4}" y="${y - 1}" width="8" height="6" rx="1.5" class="a-ic"/><path d="M${x - 2.5} ${y - 1}v-2a2.5 2.5 0 0 1 5 0v2" class="a-ic"/>`,
+    star:(x, y) => `<path d="M${x} ${y - 7}l2.1 4.3 4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7-3.4-3.3 4.7-.7z" class="a-ic"/>`,
+    inst:(x, y) => `<rect x="${x - 8}" y="${y - 7}" width="16" height="11" rx="2" class="a-ic"/><path d="M${x - 4} ${y + 7}h8M${x} ${y - 4}v5M${x - 2.5} ${y - .5}l2.5 2.5 2.5-2.5" class="a-ic"/>`,
+    wifioff:(x, y) => `<path d="M${x - 9} ${y - 3}a13 13 0 0 1 18 0M${x - 5.5} ${y + 1}a8 8 0 0 1 11 0M${x - 2} ${y + 5}a3 3 0 0 1 4 0M${x - 9} ${y - 9}l18 18" class="a-ic"/>`
+  };
+  /* A sheet or menu of rows; hi is the row to tap */
+  const rows = (x, y, w, items, hi, h = 26, fs = 11) => items.map((s, i) => (i === hi ? row(x, y + i * h, w, h - 2) : '') + t(x + 12, y + i * h + h / 2 + 4, fs, s, i === hi ? 'a-tx a-b' : 'a-tx')).join('');
+  const sheet = (x, y, w, hgt) => `<rect x="${x}" y="${y + 3}" width="${w}" height="${hgt}" rx="12" class="a-sh"/><rect x="${x}" y="${y}" width="${w}" height="${hgt}" rx="12" class="a-cd"/>`;
+  /* A desktop browser window: a tab, the address bar, the page */
+  const win = (extra = '') => `<rect x="8" y="12" width="304" height="182" rx="12" class="a-win"/><rect x="8" y="12" width="304" height="30" rx="12" class="a-tb"/><rect x="8" y="30" width="304" height="12" class="a-tb"/>` +
+    `<rect x="22" y="19" width="122" height="23" rx="7" class="a-cd"/>${mark(30, 24, 13)}${t(49, 35, 10, 'Green Zone MO Guide')}<circle cx="282" cy="27" r="4" class="a-pl"/><circle cx="296" cy="27" r="4" class="a-pl"/>` +
+    `${ic.back(28, 58)}${ic.fwd(46, 58)}<rect x="62" y="47" width="240" height="23" rx="11.5" class="a-bar"/>${ic.lock(76, 57)}${t(87, 62, 10, 'zaq6184-cell.github.io/green…', 'a-mu')}` +
+    `<rect x="24" y="84" width="150" height="10" rx="5" class="a-pl"/><rect x="24" y="102" width="110" height="10" rx="5" class="a-pl"/><rect x="24" y="124" width="132" height="54" rx="10" class="a-cd"/><rect x="166" y="124" width="132" height="54" rx="10" class="a-cd"/>${extra}`;
+  const dim = top => `<rect x="75" y="${top ? 17 : -31}" width="170" height="214" rx="22" class="a-dim"/>`;
+  const iosAddr = y => `<rect x="88" y="${y}" width="144" height="24" rx="12" class="a-bar"/>${t(160, y + 16, 10.5, 'zaq6184-cell.github.io', 'a-mu', 'middle')}`;
+  return {
+    iosShare:() => phone(false, page(-2) + iosAddr(124) + ic.back(96, 165) + ic.fwd(128, 165) + ic.share(160, 166) + ic.book(192, 165) + ic.tabs(224, 165) + ring(160, 163, 15)),
+    iosShareTop:() => phone(true, `<rect x="86" y="32" width="148" height="26" rx="13" class="a-bar"/>${t(100, 49, 10.5, 'zaq6184-cell.github…', 'a-mu')}${ic.share(219, 46)}${ring(219, 44, 14)}` + page(70)),
+    iosSheet:() => phone(false, page(-2) + dim(false) + sheet(75, 34, 170, 160) + mark(88, 46, 22) + t(118, 56, 10.5, 'Green Zone MO Guide', 'a-tx a-b') + t(118, 70, 10, 'zaq6184-cell.github.io', 'a-mu') +
+      `<path d="M85 84h150" class="a-sep"/>` + rows(80, 88, 160, ['Copy', 'Add to Reading List', 'Add to Home Screen'], 2) + ic.plus(226, 153)),
+    iosAdd:() => phone(true, t(88, 44, 11, 'Add to Home Screen', 'a-tx a-b') + t(232, 44, 11, 'Add', 'a-ac', 'end') + ring(221, 40, 15) +
+      `<path d="M75 56h170" class="a-sep"/>` + mark(90, 70, 42) + `<rect x="142" y="74" width="92" height="26" rx="7" class="a-cd"/>` + t(150, 91, 11, 'Green Zone') + t(142, 116, 10, 'zaq6184-cell.github.io', 'a-mu')),
+    andKebab:() => phone(true, `<rect x="84" y="30" width="132" height="26" rx="13" class="a-bar"/>${ic.lock(97, 42)}${t(106, 47, 10.5, 'zaq6184-cell.github…', 'a-mu')}${ic.kebab(232, 43)}${ring(232, 43, 13)}` + page(70)),
+    andMenu:() => phone(true, `<rect x="84" y="30" width="132" height="26" rx="13" class="a-bar"/>${t(98, 47, 10.5, 'zaq6184-cell…', 'a-mu')}` + page(70) + sheet(122, 26, 118, 172) + rows(124, 32, 114, ['New tab', 'History', 'Bookmarks', 'Install app', 'Share…', 'Settings'], 3)),
+    andPrompt:() => phone(true, page(40) + dim(true) + `<rect x="84" y="54" width="152" height="112" rx="16" class="a-cd"/>` + mark(94, 68, 28) + t(128, 80, 12, 'Install app', 'a-tx a-b') + t(128, 96, 10, 'Green Zone MO Guide') +
+      t(94, 120, 10, 'zaq6184-cell.github.io', 'a-mu') + t(150, 151, 11, 'Cancel', 'a-ac', 'middle') + `<rect x="184" y="136" width="42" height="22" rx="11" class="a-btn"/>` + t(205, 151, 10.5, 'Install', 'a-bt', 'middle') + ring(205, 147, 19)),
+    samBar:() => phone(false, page(-2) + `<rect x="75" y="148" width="170" height="35" class="a-tb"/>` + ic.back(94, 165) + ic.fwd(120, 165) + ic.home(148, 166) + ic.book(176, 165) + ic.tabs(204, 165) + ic.burger(230, 165) + ring(230, 165, 13)),
+    samMenu:() => phone(false, page(-2) + dim(false) + sheet(75, 32, 170, 160) + rows(80, 42, 160, ['Bookmarks', 'Saved pages', 'Add page to', 'Ad blockers', 'Settings'], 2)),
+    samTarget:() => phone(false, page(-2) + dim(false) + `<rect x="88" y="34" width="144" height="128" rx="14" class="a-cd"/>` + t(100, 54, 11.5, 'Add page to', 'a-tx a-b') + rows(92, 64, 136, ['Bookmarks', 'Quick access', 'Home screen'], 2) + t(220, 152, 11, 'Add', 'a-ac', 'end')),
+    edgeBar:() => phone(false, page(-2) + `<rect x="75" y="148" width="170" height="35" class="a-tb"/>` + ic.back(96, 165) + ic.fwd(126, 165) + ic.dots(160, 165) + ic.tabs(194, 165) + `<circle cx="225" cy="165" r="7" class="a-ic"/>` + ring(160, 165, 14)),
+    edgeMenu:() => phone(false, page(-2) + dim(false) + sheet(75, 32, 170, 160) + rows(80, 42, 160, ['Favourites', 'History', 'Add to phone', 'Share', 'Settings'], 2)),
+    ffMenu:() => phone(false, page(-2) + dim(false) + sheet(75, 32, 170, 160) + rows(80, 42, 160, ['Bookmarks', 'History', 'Find in page', 'Install', 'Share'], 3)),
+    deskIcon:() => win(`${ic.inst(266, 58)}${ic.star(288, 58)}${ring(266, 58, 13)}`),
+    deskPrompt:() => win(`${ic.inst(266, 58)}${ic.star(288, 58)}` + sheet(136, 76, 168, 106) + t(150, 96, 11.5, 'Install app?', 'a-tx a-b') + mark(150, 106, 26) + t(184, 116, 10.5, 'Green Zone MO Guide') + t(184, 131, 10, 'zaq6184-cell.github.io', 'a-mu') +
+      `<rect x="236" y="148" width="54" height="22" rx="11" class="a-btn"/>` + t(263, 163, 10.5, 'Install', 'a-bt', 'middle') + t(208, 163, 10.5, 'Cancel', 'a-ac', 'middle') + ring(263, 159, 19)),
+    deskMenu:() => win(`${ic.kebab(296, 58)}` + sheet(170, 72, 134, 112) + rows(172, 78, 130, ['New tab', 'History', 'Cast, save and share', 'Settings'], 2, 26, 10.5) + sheet(28, 128, 150, 34) + rows(32, 132, 142, ['Install page as app…'], 0)),
+    macFile:() => `<rect x="8" y="12" width="304" height="182" rx="12" class="a-win"/><rect x="8" y="12" width="304" height="22" rx="12" class="a-tb"/><rect x="8" y="24" width="304" height="10" class="a-tb"/>` +
+      `<circle cx="24" cy="23" r="5" class="a-pl"/>${t(38, 27, 11, 'Safari', 'a-tx a-b')}${row(80, 15, 34, 17)}${t(87, 27, 11, 'File', 'a-tx a-b')}${t(126, 27, 11, 'Edit')}${t(158, 27, 11, 'View')}${t(194, 27, 11, 'History')}` +
+      sheet(80, 36, 168, 140) + rows(82, 42, 164, ['New Window', 'New Private Window', 'Open File…', 'Add to Dock…', 'Close Window'], 3),
+    macAdd:() => `<rect x="8" y="12" width="304" height="182" rx="12" class="a-win"/>` + sheet(64, 28, 192, 150) + t(160, 52, 12, 'Add to Dock', 'a-tx a-b', 'middle') + mark(82, 66, 44) +
+      `<rect x="138" y="72" width="102" height="26" rx="7" class="a-cd"/>` + t(146, 89, 11, 'Green Zone') + t(138, 116, 10, 'zaq6184-cell.github.io', 'a-mu') +
+      t(176, 158, 11, 'Cancel', 'a-ac', 'middle') + `<rect x="200" y="143" width="44" height="22" rx="11" class="a-btn"/>` + t(222, 158, 10.5, 'Add', 'a-bt', 'middle') + ring(222, 154, 18),
+    macDock:() => `<rect x="8" y="12" width="304" height="182" rx="12" class="a-win"/><rect x="40" y="136" width="240" height="46" rx="14" class="a-bar"/>` +
+      [0, 1, 2, 4, 5].map(i => `<rect x="${52 + i * 38}" y="143" width="30" height="30" rx="8" class="a-pl"/>`).join('') + `<g class="pop" style="--d:.3s">${mark(128, 143, 30)}</g>` + ring(143, 158, 21) +
+      `<rect x="104" y="100" width="78" height="22" rx="11" class="a-cd"/>` + t(143, 115, 10.5, 'Green Zone', 'a-tx a-b', 'middle'),
+    ffStar:() => win(`${ic.star(288, 58)}${ring(288, 58, 13)}`),
+    ffOffline:() => win(`${ic.star(288, 58)}<rect x="196" y="82" width="104" height="24" rx="12" class="a-cd"/>${ic.wifioff(212, 95)}${t(226, 98, 10.5, 'No signal', 'a-tx a-b')}` +
+      `<g class="pop" style="--d:.35s"><circle cx="232" cy="151" r="16" class="a-btn"/><path d="M225 151l5 5 9-10" class="a-okp"/></g>`)
+  };
+})();
+
+/* The picture beside the live state: a phone's home screen with Green Zone on it, and a badge for the state */
+function instHeroArt(st){
+  const icons = [...Array(12)].map((_, i) => { const x = 118 + (i % 3) * 30, y = 44 + Math.floor(i / 3) * 34; return i === 4 ? '' : `<rect x="${x}" y="${y}" width="22" height="22" rx="6" style="fill:rgba(255,255,255,.16)"/>`; }).join('');
+  const badge = st === 'offline' ? `<circle cx="172" cy="80" r="11" style="fill:var(--observe-soft);stroke:#fff;stroke-width:2"/><path d="M166 78a9 9 0 0 1 12 0M168.5 81a5 5 0 0 1 7 0M166 74l12 12" style="fill:none;stroke:var(--observe);stroke-width:1.8;stroke-linecap:round"/>`
+    : st === 'saved' || st === 'installed' ? `<circle cx="172" cy="80" r="11" style="fill:var(--mint);stroke:#fff;stroke-width:2"/><path d="M167 80l3.5 3.5 6.5-7" style="fill:none;stroke:var(--teal-3);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"/>`
+    : st === 'saving' ? `<circle cx="172" cy="80" r="11" style="fill:var(--teal-2);stroke:#fff;stroke-width:2"/><path d="M172 74v8M168.5 79l3.5 3.5 3.5-3.5" style="fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round"/>` : '';
+  return `<rect x="96" y="10" width="128" height="204" rx="24" style="fill:rgba(0,0,0,.2);stroke:#fff;stroke-width:3"/><rect x="138" y="18" width="44" height="6" rx="3" style="fill:rgba(255,255,255,.4)"/>${icons}` +
+    `<g class="pop" style="--d:.25s"><g transform="translate(148 78)"><rect width="22" height="22" rx="6" style="fill:var(--emerald-1);stroke:var(--mint);stroke-width:1.5"/><g transform="translate(3.3 3.3) scale(.64)" fill="none" stroke-width="2.6" stroke-linecap="round"><path d="M5 18.5h7.5a4 4 0 0 0 4-4V12.2" stroke="#43dd8c"/><path d="M16.5 3.6v6.6M13.2 6.9h6.6" stroke="#fff"/><circle cx="5" cy="18.5" r="2.3" fill="#fff" stroke="none"/></g></g></g>` +
+    `<g class="pop" style="--d:.55s">${badge}</g><text x="159" y="114" text-anchor="middle" style="font:700 10px var(--body);fill:#fff">Green Zone</text>` +
+    `<path pathLength="1" d="M28 196 H292" class="ln draw" style="stroke:rgba(255,255,255,.25);stroke-width:3"/>`;
+}
+
+let instWeb = false;
+function renderInstall(){
+  const pwa = window.GZ_PWA, box = $('#instbox'); if (!box) return;
+  instWeb = !!pwa;
+  const url = APP_URL + '#install';
+  const qr = `<div class="in-qr-w"><svg class="in-qr-c" viewBox="-3 -3 39 39" role="img" aria-label="QR code that opens the install page of the web app"><rect x="-3" y="-3" width="39" height="39" rx="3" fill="#fff"/><path d="${INSTALL_QR}" fill="#0b110e" shape-rendering="crispEdges"/></svg></div>`;
+  const onPhone = ['iphone', 'android'].includes(DEVICE.os);
+  const qrTile = `<section class="tile t-pearl in-qr" aria-labelledby="h-inqr">${qr}<div><h3 id="h-inqr">${onPhone ? 'For a colleague' : 'On your phone'}</h3><p>${onPhone ? 'Their camera opens this page from the code. Then they follow the steps for their phone.' : 'Point your phone\'s camera at the code to open this page there, then follow the steps for your phone.'}</p>` +
+    `<div class="in-url"><code id="in-url">${esc(url.replace(/^https:\/\//, ''))}</code><button type="button" class="sm" data-incopy><span class="bl">Copy link</span></button></div></div></section>`;
+  if (!instWeb){
+    const claude = /(^|\.)claude\.ai$|claudeusercontent\.com$/.test(location.hostname);
+    box.innerHTML = `<section class="tile t-teal in-hero" id="inhero"><div class="in-hero-t"><span class="lbl">The guide as an app</span><h2 id="in-state">Install it from the web app</h2>` +
+      `<p id="in-sub">${claude ? 'This copy runs inside claude.ai, which cannot install apps or keep the guide for use without a signal.' : 'This copy cannot be installed or kept for use without a signal.'} Open the web app to install it on this phone or computer, or scan the code with your phone.</p>` +
+      `<div class="in-acts"><a class="btn in-go" href="${url}" target="_blank" rel="noopener">Open the web app${svg('ext')}</a></div></div>` +
+      `<svg class="art in-art" viewBox="0 0 320 220" aria-hidden="true" focusable="false">${instHeroArt('')}</svg></section><div class="in-more">${qrTile}</div>`;
+    renderToolsInstall();
+    return;
+  }
+  const plat = INSTALL_PLAT.find(p => p.k === instPlat) || INSTALL_PLAT[0];
+  if (!plat.br.some(b => b[0] === instBr)) instBr = plat.br[0][0];
+  const set = INSTALL_STEPS[instKey(plat.k, instBr)];
+  const here = INSTALL_PLAT.find(p => p.k === DEVICE.plat), hereBr = here && here.br.find(b => b[0] === DEVICE.br);
+  box.innerHTML = `<section class="tile t-teal in-hero" id="inhero" aria-live="polite"><div class="in-hero-t"><span class="lbl">The guide as an app</span><h2 id="in-state"></h2><p id="in-sub"></p><ul class="in-chips" id="in-chips"></ul><div class="in-acts" id="in-acts"></div></div>` +
+    `<svg class="art in-art" id="in-art" viewBox="0 0 320 220" aria-hidden="true" focusable="false"></svg></section>` +
+    `<div class="shead"><h2 id="h-insteps">Install it, step by step</h2><p id="in-dev">${DEVICE.known ? `This looks like ${esc(here.t)}${hereBr ? ', ' + esc(hereBr[1]) : ''}. Choose another device or browser to see its steps.` : 'Choose your device and browser.'}</p></div>` +
+    `<div class="in-pick"><div class="seg" id="in-plat" role="group" aria-label="Device">${INSTALL_PLAT.map(p => `<button type="button" data-inplat="${p.k}" aria-pressed="${p.k === plat.k}">${esc(p.t)}${p.k === DEVICE.plat && DEVICE.known ? '<i class="in-me" aria-hidden="true"></i><span class="vh"> (this device)</span>' : ''}</button>`).join('')}</div>` +
+    (plat.br.length > 1 ? `<div class="seg" id="in-br" role="group" aria-label="Browser">${plat.br.map(([k, t]) => `<button type="button" data-inbr="${k}" aria-pressed="${k === instBr}">${esc(t)}</button>`).join('')}</div>` : '') + `</div>` +
+    (DEVICE.inapp && plat.k === DEVICE.plat ? `<p class="in-note">${svg('info')}<span>This page seems to be open inside another app. Open it in ${DEVICE.os === 'iphone' ? 'Safari' : 'Chrome'} first: the app's menu has Open in browser.</span></p>` : '') +
+    `<ol class="in-steps" id="in-steps" aria-labelledby="h-insteps">${set.steps.map(([art, h, p], i) => `<li class="tile t-pearl in-step"><div class="in-fig"><svg class="art ia" viewBox="0 0 320 200" aria-hidden="true" focusable="false">${IA[art]()}</svg></div>` +
+      `<div class="in-txt"><b class="in-n" aria-hidden="true">${i + 1}</b><h3><span class="vh">Step ${i + 1}: </span>${instText(h)}</h3><p>${instText(p)}</p></div></li>`).join('')}</ol>` +
+    (set.note ? `<p class="in-note">${svg('info')}<span>${esc(set.note)}</span></p>` : '') +
+    `<div class="in-more">${qrTile}<section class="tile t-pearl in-off" aria-labelledby="h-inoff"><h3 id="h-inoff">What works without a signal</h3><ul class="in-ok">` +
+    [['y', 'Every pathway, rule, guideline and calculator'], ['y', 'Numbers to know, the discharge check and the quiz'], ['y', 'The pictures in the guide'], ['y', 'Films and sounds you have played through once'],
+      ['n', 'Outside links: Drive PDFs, MDCalc, PEMCalc and the hospital systems'], ['n', 'Films and sounds not yet played']].map(([k, s]) => `<li class="${k}">${svg(k === 'y' ? 'tick' : 'x')}<span><span class="vh">${k === 'y' ? 'Works: ' : 'Needs a signal: '}</span>${esc(s)}</span></li>`).join('') +
+    `</ul><p class="sub">It updates itself the next time it opens with a signal.</p></section></div>`;
+  installLive();
+  renderToolsInstall();
+}
+
+/* The live state: saved for offline use, installed, online or not, and the browser's own Install offer */
+function installLive(){
+  const pwa = window.GZ_PWA; if (!pwa || !$('#in-state')) return;
+  const s = pwa.info(), on = navigator.onLine !== false;
+  const mb = n => n ? (n / 1048576).toFixed(1) + ' MB' : '';
+  const kept = s.played ? ` ${s.played} film${s.played === 1 ? '' : 's'} and sounds you played through are kept too.` : ' Films and sounds are kept once you play them through.';
+  const [h, p, art] = s.installed ? ['Installed: you are using the app', 'It opens from your home screen, full screen, and works without a signal.' + (s.state === 'saved' ? ` Saved on this device: ${mb(s.bytes)}.` : ''), on ? 'installed' : 'offline']
+    : s.state === 'saved' ? ['Ready offline', `Saved on this device: the guide and ${s.saved === s.of ? 'all its' : s.saved - 2 + ' of its'} pictures, ${mb(s.bytes)}.` + kept + ' Install it to open it like an app.', on ? 'saved' : 'offline']
+    : s.state === 'failed' ? ['Works online here', 'This browser could not keep a copy for use without a signal. It still works with one.', '']
+    : ['Saving for offline use', 'Keep this page open with a signal for a moment.', 'saving'];
+  $('#in-state').textContent = h; $('#in-sub').textContent = p;
+  const chip = (cls, ic, t) => `<li class="${cls}">${svg(ic)}<span>${t}</span></li>`;
+  $('#in-chips').innerHTML = (s.state === 'saved' ? chip('on', 'tick', 'Works without a signal') : s.state === 'failed' ? chip('off', 'x', 'No offline copy') : chip('off', 'clock', 'Saving')) +
+    (s.installed ? chip('on', 'tick', 'Installed') : chip('off', 'install', 'Not installed yet')) +
+    (on ? chip('off', 'wifi', 'Online') : chip('warn', 'nowifi', s.state === 'saved' ? 'Offline now: using the saved copy' : 'Offline now'));
+  $('#in-acts').innerHTML = s.offer && !s.installed ? `<button type="button" class="in-go" data-ingo>${svg('install')}Install the guide</button>` : '';
+  $('#in-art').innerHTML = instHeroArt(art);
+  renderToolsInstall();
+}
+
+/* The Shift tools tile */
+function renderToolsInstall(){
+  const el = $('#tin'); if (!el) return;
+  const pwa = window.GZ_PWA, s = pwa ? pwa.info() : null;
+  const tag = !pwa ? 'Web app' : s.installed ? 'Installed' : s.state === 'saved' ? 'Ready offline' : 'Saving';
+  el.innerHTML = `<div class="row"><span class="ic">${svg('install')}</span><h2>Install the guide</h2><span class="tag">${tag}</span></div><p>On a phone, tablet or computer, opened like an app and used without a signal: the steps for every device and browser.</p>` +
+    `<ul class="gl">${INSTALL_PLAT.map(p => `<li><span>${esc(p.t)}</span>${p.k === DEVICE.plat && DEVICE.known ? '<b>This one</b>' : ''}</li>`).join('')}</ul><span class="go-l">How to install${svg('chev')}</span>`;
+}
+addEventListener('gz-pwa', () => { if (!instWeb && window.GZ_PWA) renderInstall(); else installLive(); });
+addEventListener('online', installLive); addEventListener('offline', installLive);
+$('#instbox').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.inplat){ instPlat = b.dataset.inplat; instBr = instPlat === DEVICE.plat ? DEVICE.br : null; renderInstall(); const n = $(`#in-plat [data-inplat="${instPlat}"]`); if (n) n.focus(); }
+  else if (b.dataset.inbr){ instBr = b.dataset.inbr; renderInstall(); const n = $(`#in-br [data-inbr="${instBr}"]`); if (n) n.focus(); }
+  else if (b.hasAttribute('data-ingo') && window.GZ_PWA) window.GZ_PWA.install();
+  else if (b.hasAttribute('data-incopy')) copyText(APP_URL + '#install', {btn:b, el:$('#in-url'), ok:'Link copied'});
+});
+
 /* ================= Routing ================= */
 function route(){
   stopReader(); pauseFilms();
@@ -11151,7 +11477,7 @@ function route(){
   if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'links', 'new', 'poster', 'about'].includes(h)) changed = showView(h);
+  else if (['rules', 'tools', 'numbers', 'links', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
   else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
     if (id && id !== calcTab){ calcTab = id; renderCalc(); }
@@ -11184,7 +11510,7 @@ $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
 IDX.push({href:'#links', title:'ED links', kind:'Tool', meta:'Forms, hospital systems and folders', body:'linktree ETD HKL link page forms hospital systems intranet folders ' + LINKS.flatMap(g => g.items.map(it => it.t + ' ' + it.d)).join(' · '), ic:'link', c:'c-flow'});
 LINKS.forEach(g => g.items.forEach(it => IDX.push({href:'#links', title:it.t, kind:'Link', meta:'ED links · ' + g.h, body:[it.d, it.k, g.h].join(' · '), ic:'link', c:'c-flow'})));
-renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout();
+renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderInstall();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
 document.addEventListener('click', e => {
@@ -11373,11 +11699,15 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
    - Keeps the browser bar's colour (theme-color) with the page's own background, Day and Night switch included.
    - On github.io and localhost only (nowhere else, not even 127.0.0.1 or a file opened from disk), registers sw.js, which
      saves the guide for use without a signal (see src/parts/sw.js).
-   - Adds an "Offline and install" row to Settings: whether the guide is saved, how many films and sounds are kept, and how
-     to install it (an Install button where the browser offers one).
+   - Gives the Install the guide page (#install, drawn by engine.js) its live state through window.GZ_PWA, and tells it of
+     every change with a 'gz-pwa' event: saved or saving, how much is kept, installed or not, and the browser's own
+     Install offer, which it can open.
+   - Adds an "Offline and install" row to Settings: whether the guide is saved, with Install where the browser offers it,
+     or a link to the steps.
+   - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
-  const PAGE = '410436a867d8'; /* this page's id, which build.js also writes into sw.js */
+  const PAGE = 'd3882d17ddc2'; /* this page's id, which build.js also writes into sw.js */
 
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };
@@ -11389,41 +11719,63 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
   if (!('serviceWorker' in navigator) || !(host === 'localhost' || /\.github\.io$/.test(host))) return;
   const sw = navigator.serviceWorker;
   let state = 'saving', last = null, offer = null;
+  const installed = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+
+  /* The live state, for the Install the guide page */
+  async function install(){
+    const o = offer; if (!o) return false;
+    offer = null; update();
+    try { await o.prompt(); const c = await o.userChoice; return !!c && c.outcome === 'accepted'; } catch (e) { return false; } finally { update(); }
+  }
+  window.GZ_PWA = {
+    info: () => ({state, saved: last ? last.saved : 0, of: last ? last.of : 0, bytes: last ? last.bytes : 0, played: last ? last.played : 0,
+      offer: !!offer, installed: installed(), online: navigator.onLine !== false}),
+    install
+  };
 
   /* Settings: Offline and install */
   const box = document.querySelector('#settings .dlg-box');
   if (box){
     const row = document.createElement('div');
     row.className = 'set'; row.id = 'st-offline';
-    row.innerHTML = '<div><b>Offline and install</b><small id="st-off" aria-live="polite"></small></div><button type="button" class="sm" id="st-inst" hidden>Install</button>';
+    row.innerHTML = '<div><b>Offline and install</b><small id="st-off" aria-live="polite"></small></div><button type="button" class="sm" id="st-inst" hidden>Install</button><a class="btn sm" id="st-how" href="#install">How to install</a>';
     box.insertBefore(row, box.querySelector('.dlg-f'));
-    row.querySelector('#st-inst').addEventListener('click', async () => {
-      const o = offer; offer = null; draw();
-      if (o) try { await o.prompt(); await o.userChoice; } catch (e) {}
-    });
+    row.querySelector('#st-inst').addEventListener('click', install);
     new MutationObserver(() => { if (!document.querySelector('#settings').hidden) ask(); }).observe(document.querySelector('#settings'), {attributes: true, attributeFilter: ['hidden']});
   }
-  const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  const installed = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  function draw(){
-    const s = document.querySelector('#st-off'), b = document.querySelector('#st-inst');
-    if (!s) return;
-    let t = state === 'failed' ? 'This browser could not save the guide for use without a signal.'
-      : state === 'saving' || !last ? 'Saving the guide on this device, so it opens without a signal.'
-      : 'Saved on this device: it opens without a signal.' +
-        (last.saved < last.of ? ` Pictures are saved as you view them (${last.saved} of ${last.of} so far).` : '') +
-        (last.played ? ` Films and sounds you have played through are kept (${last.played} so far).` : ' Films and sounds are kept once played through.');
-    if (installed()) t = 'Installed. ' + t;
-    else if (!offer) t += ios ? ' To install it: Share, then Add to Home Screen.' : " To install it: your browser's menu, Install app or Add to Home screen.";
-    s.textContent = t;
-    b.hidden = !offer || installed();
+  function update(){
+    const s = document.querySelector('#st-off');
+    if (s){
+      const t = state === 'failed' ? 'This browser could not save the guide for use without a signal.'
+        : state === 'saving' || !last ? 'Saving the guide on this device, so it opens without a signal.'
+        : 'Saved on this device: it opens without a signal.' +
+          (last.saved < last.of ? ` Pictures are saved as you view them (${last.saved} of ${last.of} so far).` : '') +
+          (last.played ? ` Films and sounds you have played through are kept (${last.played} so far).` : ' Films and sounds are kept once played through.');
+      s.textContent = (installed() ? 'Installed. ' : '') + t;
+      document.querySelector('#st-inst').hidden = !offer || installed();
+      document.querySelector('#st-how').hidden = !!offer || installed();
+    }
+    dispatchEvent(new Event('gz-pwa'));
   }
   function ask(){
     if (sw.controller) sw.controller.postMessage({gz: 'status'});
-    draw();
+    update();
   }
-  addEventListener('beforeinstallprompt', e => { offer = e; draw(); });
-  addEventListener('appinstalled', () => { offer = null; draw(); });
+  addEventListener('beforeinstallprompt', e => { offer = e; update(); });
+  addEventListener('appinstalled', () => { offer = null; update(); });
+
+  /* The connection drops: say whether the saved guide still works (once it has stayed down for a moment, at most once a minute) */
+  let downT = 0, toldAt = 0;
+  addEventListener('offline', () => {
+    clearTimeout(downT);
+    downT = setTimeout(() => {
+      if (navigator.onLine !== false || Date.now() - toldAt < 60000 || typeof toast !== 'function') return;
+      toldAt = Date.now();
+      toast(state === 'saved' && sw.controller ? 'Offline: the saved guide still works' : 'Offline, and this guide is not saved on this device yet');
+    }, 1500);
+    update();
+  });
+  addEventListener('online', () => { clearTimeout(downT); update(); });
 
   /* A newer version is saved while this older page is open: offer Reload */
   function offerReload(){
@@ -11439,7 +11791,7 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
   sw.addEventListener('message', e => {
     const d = e.data || {};
     if (d.gz === 'ready'){ state = 'saved'; if (d.page && d.page !== PAGE) offerReload(); ask(); }
-    else if (d.gz === 'status'){ state = 'saved'; last = d; draw(); }
+    else if (d.gz === 'status'){ state = 'saved'; last = d; update(); }
   });
   /* The first time the worker takes charge of this page, pass the fonts the page has already loaded through it once (they
      come from the browser's own cache), so the guide keeps its type offline from the first visit */
@@ -11453,10 +11805,11 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
      saved copy even when the phone runs short of space (Chrome grants this to installed apps without asking) */
   const go = () => {
     const r = sw.register('sw.js', {scope: './'});
-    Promise.resolve(r).then(reg => { if (!reg) state = 'failed'; else if (sw.controller) state = 'saved'; ask(); }, () => { state = 'failed'; draw(); });
+    Promise.resolve(r).then(reg => { if (!reg) state = 'failed'; else if (sw.controller) state = 'saved'; ask(); }, () => { state = 'failed'; update(); });
     if (installed() && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
   };
   if (document.readyState === 'complete') go(); else addEventListener('load', go);
+  update(); /* the install page, drawn before this script ran, now has its live state */
 })();
 </script>
 </body></html>
