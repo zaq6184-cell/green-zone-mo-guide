@@ -1143,7 +1143,8 @@ function draw(focus){
   const bar = Array.from({length:total}, (_, i) => `<i class="${n.end ? 'fin' : i <= steps ? 'on' : ''}"></i>`).join('');
   const count = Object.keys(p.nodes).length;
   const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.doc ? `<div class="see"><span>Source</span><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
-  /* A guideline can carry its own picture: the chips and title then sit on a jewel tile, with the loop behind them */
+  /* Every entry opens on a jewel banner: a guideline's own picture (hero), or its topic group's glass loop (a topic banner) */
+  const hk = p.hero || (c && c.k && TILE_KEYS.has(c.k) ? c.k : '');
   const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
       <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>`;
   withTiles($('#run'), `<div class="run-h">
@@ -1154,7 +1155,7 @@ function draw(focus){
           <button type="button" class="ib" data-link aria-label="Copy a link to this step" title="Copy link">${svg('link')}</button>
           <button type="button" class="ib" data-restart aria-label="Start again" title="Start again"${steps ? '' : ' disabled'}>${svg('restart')}</button>
         </div></div>
-      ${p.hero ? `<div class="tile ${p.heroj || c.j} run-hero">${tileMedia(p.hero)}${head}</div>` : head}
+      ${hk ? `<div class="tile ${p.heroj || c.j} run-hero${p.hero ? '' : ' topic'}">${tileMedia(hk)}${head}</div>` : head}
       ${about ? `<div class="about-t">${about}</div>` : ''}
     </div>
     <div class="run-grid">

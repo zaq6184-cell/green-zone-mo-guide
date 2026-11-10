@@ -373,6 +373,14 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/d-calc-gcs.png', fullPage:true});
   ok(await gz() === store0, 'using the calculators stores nothing');
   // The dengue CPG entry: tabs, the triage route, the leaflet in two languages, deep links and search
+  /* Every entry opens on a banner: an ebook pathway takes its topic's glass loop, and answering keeps the loop playing (10 Nov 2026) */
+  ok(await p.evaluate(() => Object.keys(P).every(id => P[id].hero || (catOf(id) && TILE_KEYS.has(catOf(id).k)))), 'every entry has a banner picture, its own or its topic picture');
+  await go(p, '#renal-colic', 400);
+  ok(await p.waitForFunction(() => { const h = document.querySelector('#run .run-hero.topic'), i = h && h.querySelector('.tm img'); return !!(h && h.classList.contains('t-teal') && i && i.complete && i.naturalWidth === 640 && /Renal colic/.test(h.textContent)); }, null, {timeout:5000}).then(() => true, () => false), 'an ebook pathway opens on its topic banner (renal colic: the teal abdomen picture)');
+  ok(await p.waitForFunction(() => !!document.querySelector('#run .run-hero .tm video'), null, {timeout:5000}).then(() => true, () => false), 'and its topic loop starts');
+  await p.evaluate(() => { document.querySelector('#run .run-hero .tm video').dataset.mark = 'kept'; });
+  await p.click('#cur button.opt'); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => { const v = document.querySelector('#run .run-hero .tm video'); return !!v && v.dataset.mark === 'kept' && state.trail.length === 1; }), 'answering keeps the same loop playing, it does not restart');
   await go(p, '#dengue-cpg', 400);
   const dtabs = await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'));
   ok(dtabs === 'Home care advice|Groups and zones|Fluids|Tests|Shock|Course and care|References', `the dengue CPG has its seven tabs (${dtabs})`);

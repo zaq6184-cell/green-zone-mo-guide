@@ -494,7 +494,7 @@ main{flex:1;outline:none}
 .run-hero{gap:12px;padding:18px 20px 22px;min-height:168px;justify-content:flex-end;box-shadow:var(--sh-2)}
 .run-hero h1{color:#fff;max-width:20ch;text-wrap:balance}
 .run-hero .chip.j{background:var(--glass-2)}
-@media (max-width:760px){.run-hero{min-height:0;padding:16px 16px 18px}.run-hero h1{max-width:min(20ch,58%)}}
+@media (max-width:760px){.run-hero{min-height:0;padding:16px 16px 18px}.run-hero h1{max-width:min(20ch,58%)}.run-hero.topic{gap:8px;padding:11px 14px 12px}#v-run .vw{padding-top:14px}.run-hero.topic h1{max-width:none;font-size:1.74rem}.run-hero.topic .chip{min-height:29px;padding:4px 10px;font-size:.74rem}}
 .run-h .lead{margin:0;color:var(--muted);max-width:70ch;font-size:1.03rem}
 .see{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font:700 .84rem var(--body);color:var(--muted)}
 .see .pill{min-height:34px;padding:5px 12px;font-size:.82rem}
@@ -9428,7 +9428,8 @@ function draw(focus){
   const bar = Array.from({length:total}, (_, i) => `<i class="${n.end ? 'fin' : i <= steps ? 'on' : ''}"></i>`).join('');
   const count = Object.keys(p.nodes).length;
   const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.doc ? `<div class="see"><span>Source</span><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
-  /* A guideline can carry its own picture: the chips and title then sit on a jewel tile, with the loop behind them */
+  /* Every entry opens on a jewel banner: a guideline's own picture (hero), or its topic group's glass loop (a topic banner) */
+  const hk = p.hero || (c && c.k && TILE_KEYS.has(c.k) ? c.k : '');
   const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
       <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>`;
   withTiles($('#run'), `<div class="run-h">
@@ -9439,7 +9440,7 @@ function draw(focus){
           <button type="button" class="ib" data-link aria-label="Copy a link to this step" title="Copy link">${svg('link')}</button>
           <button type="button" class="ib" data-restart aria-label="Start again" title="Start again"${steps ? '' : ' disabled'}>${svg('restart')}</button>
         </div></div>
-      ${p.hero ? `<div class="tile ${p.heroj || c.j} run-hero">${tileMedia(p.hero)}${head}</div>` : head}
+      ${hk ? `<div class="tile ${p.heroj || c.j} run-hero${p.hero ? '' : ' topic'}">${tileMedia(hk)}${head}</div>` : head}
       ${about ? `<div class="about-t">${about}</div>` : ''}
     </div>
     <div class="run-grid">
