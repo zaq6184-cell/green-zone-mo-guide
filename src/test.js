@@ -869,6 +869,16 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/pd-journey.png'});
   await go(p, '#new', 400);
   await p.screenshot({path:out + '/pd-new.png'});
+  /* Tapping a topic or group tile brings its list up under the top bar (Krishna, 10 Nov 2026) */
+  await go(p, '#pathways', 400);
+  await p.tap('#libcats [data-cat="infect"]'); await p.waitForTimeout(900);
+  ok(await p.evaluate(() => { const s = [...document.querySelectorAll('#libgrid .libsec')].find(x => !x.hidden), r = s && s.getBoundingClientRect(); return !!r && r.top >= 40 && r.top < innerHeight * 0.4 && /Infection/.test(s.textContent); }), 'phone: tapping a topic tile brings its list up under the top bar');
+  await go(p, '#calc', 400);
+  await p.tap('#cxcats [data-cg="kids"]'); await p.waitForTimeout(900);
+  ok(await p.evaluate(() => { const s = [...document.querySelectorAll('#cxlist .cxsec')].find(x => !x.hidden), r = s && s.getBoundingClientRect(); return !!r && r.top >= 40 && r.top < innerHeight * 0.4 && s.dataset.g === 'kids'; }), 'phone: tapping a calculator group brings its calculators up');
+  await go(p, '#home', 400);
+  const gc = await p.$('#bento [data-gocat="heart"]');
+  if (gc){ await gc.evaluate(el => el.click()); await p.waitForTimeout(1000); ok(await p.evaluate(() => { const s = [...document.querySelectorAll('#libgrid .libsec')].find(x => !x.hidden), r = s && s.getBoundingClientRect(); return location.hash === '#pathways' && !!r && r.top >= 40 && r.top < innerHeight * 0.4; }), 'phone: a topic chosen on the home tile opens the library with its list up'); }
   /* A long route trail: its hidden labels must not stretch the page sideways (audit, 10 Nov 2026) */
   for (const r of ['#acs-cpg--tmix', '#pneumonia--opd', '#gastroenteritis--admit']) { await go(p, r, 300); ok(await hscroll(p) <= 0, r + ': a long route trail does not scroll the page sideways'); }
   ok(await p.evaluate(() => !!document.querySelector('.trailx') && getComputedStyle(document.querySelector('.trailx')).position === 'relative'), 'the route trail contains its hidden labels');

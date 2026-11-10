@@ -872,6 +872,18 @@ function closePal(restore){
 const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
+/* A topic or group tile filters the list under it. On a phone the tiles fill the screen, so the list comes up to meet the
+   reader (Krishna, 10 Nov 2026): its first section settles just under the top bar, smoothly unless motion is reduced.
+   Nothing moves when the list already starts in the upper third of the screen. */
+const firstShown = sel => $$(sel).find(s => !s.hidden && s.offsetParent !== null) || null;
+let revealNext = null;
+function revealList(el){
+  if (!el) return;
+  const bar = $('#topbar'), under = bar && getComputedStyle(bar).display !== 'none' ? Math.max(0, bar.getBoundingClientRect().bottom) : 0;
+  const y = el.getBoundingClientRect().top;
+  if (y >= under && y <= under + innerHeight / 3) return;
+  window.scrollTo({top:Math.max(0, window.scrollY + y - under - 12), behavior:REDUCED ? 'auto' : 'smooth'});
+}
 function showView(name, sub){
   const from = curView, changed = name !== from;
   if (from && from !== 'run') SCROLL[from] = window.scrollY;
@@ -890,6 +902,8 @@ function showView(name, sub){
     const back = from === 'run' && SCROLL[name] && ['pathways', 'rules', 'home', 'numbers'].includes(name);
     window.scrollTo(0, back ? SCROLL[name] : 0);
   }
+  /* A topic chosen on the home tile: the library opens with that topic, its list brought up */
+  if (revealNext && name === revealNext[0]){ const s = revealNext[1]; revealNext = null; requestAnimationFrame(() => revealList(firstShown(s))); }
   if (name === 'new'){ store.set('gz-seen', 7); const d = $('#snav .dotn'); if (d) d.hidden = true; }
   return changed;
 }
@@ -2522,7 +2536,7 @@ function applyCxFilter(){
 }
 function markCxCurrent(){ $$('#cxlist .cxc').forEach(r => { const on = cxOpen && r.dataset.id === calcTab; r.classList.toggle('cur', on); const a = r.querySelector('a'); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }); }
 function setCxOpen(on){ cxOpen = on; $('#cx').classList.toggle('open', on); $('#calcbox').hidden = !on; markCxCurrent(); }
-$('#cxcats').addEventListener('click', e => { const b = e.target.closest('[data-cg]'); if (!b) return; cxGroup = b.dataset.cg; applyCxFilter(); });
+$('#cxcats').addEventListener('click', e => { const b = e.target.closest('[data-cg]'); if (!b) return; cxGroup = b.dataset.cg; applyCxFilter(); revealList(firstShown('#cxlist .cxsec') || $('#cxempty')); });
 $('#cxq').addEventListener('input', e => { cxQ = e.target.value; applyCxFilter(); });
 /* The Shift tools card that leads to the hub */
 function renderToolsCalc(){
@@ -3178,7 +3192,7 @@ $('#gq').addEventListener('keydown', e => {
 
 /* Home */
 $('#bento').addEventListener('click', e => {
-  const g = e.target.closest('[data-gocat]'); if (g){ libCat = g.dataset.gocat; libF = 'all'; $('#libq').value = ''; renderLib(); location.hash = '#pathways'; return; }
+  const g = e.target.closest('[data-gocat]'); if (g){ libCat = g.dataset.gocat; libF = 'all'; $('#libq').value = ''; renderLib(); revealNext = ['pathways', '#libgrid .libsec']; location.hash = '#pathways'; return; }
   const b = e.target.closest('[data-kcopy]'); if (b){ const i = +b.dataset.kcopy; copyText(NUMS[i].copy, {btn: b.hasAttribute('data-quiet') ? null : b, el:$('#kn' + i), ok:'Copied ' + NUMS[i].copy}); return; }
   const z = e.target.closest('[data-zs]'); if (z){ const i = +z.dataset.zs; zSel = zSel === i ? -1 : i; zoneMap(false); const nb = $(`#zmap [data-zs="${i}"]`); if (nb) nb.focus(); }
 });
@@ -3187,7 +3201,7 @@ $('#tip').addEventListener('click', e => { if (e.target.closest('[data-tipnext]'
 /* Library */
 $('#libq').addEventListener('input', renderLib);
 $('#libf').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b){ libF = b.dataset.f; renderLib(); } });
-$('#libcats').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b){ libCat = b.dataset.cat; renderLib(); } });
+$('#libcats').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b){ libCat = b.dataset.cat; renderLib(); revealList(firstShown('#libgrid .libsec') || $('#libgrid')); } });
 $('#libgrid').addEventListener('click', e => { const b = e.target.closest('[data-star]'); if (b){ e.preventDefault(); toggleSave(b.dataset.star); } });
 
 /* Runner */
