@@ -18,7 +18,8 @@ const leaflet = (id, key) => {
 };
 leaflet('dengue-cpg', 'dengue');
 leaflet('cancer-pain-cpg', 'cancerpain');
-for (const [id, key] of [['mild-tbi', 'tbi'], ['dengue', 'dengue'], ['asthma-zone', 'asthma']]) {
+// The four added on 10 Nov 2026 (premium round): the commonest Green Zone discharges whose advice is written for the patient
+for (const [id, key] of [['mild-tbi', 'tbi'], ['dengue', 'dengue'], ['asthma-zone', 'asthma'], ['gastroenteritis', 'gastro'], ['renal-colic', 'renal'], ['abdominal-pain', 'abdo'], ['hypoglycaemia', 'hypo']]) {
   const a = P[id].advice, clip = `adv-${key}-en`;
   const half = Math.ceil(a.length / 2);
   [a.slice(0, half), a.slice(half)].forEach((part, n) => part.length && segs.push({clip, seg:n, lang:'en', text:part.map(end).join(' '), parts:part.map(end)}));

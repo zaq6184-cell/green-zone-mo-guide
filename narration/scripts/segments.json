@@ -368,5 +368,90 @@
    "Wash the spacer once a week in soapy water, rinse and let it air dry; do not wipe it with a cloth or tissue or brush the inside.",
    "Know your triggers: smoke, animal fur, cold air, dust, exercise and infections."
   ]
+ },
+ {
+  "clip": "adv-gastro-en",
+  "seg": 0,
+  "lang": "en",
+  "text": "Continue taking prescribed medications as directed. Drink plenty of fluid (ORS, clear soups, diluted fruit juices) to prevent dehydration. Avoid caffeinated, alcoholic and sugary drinks, as they can worsen diarrhoea.",
+  "parts": [
+   "Continue taking prescribed medications as directed.",
+   "Drink plenty of fluid (ORS, clear soups, diluted fruit juices) to prevent dehydration.",
+   "Avoid caffeinated, alcoholic and sugary drinks, as they can worsen diarrhoea."
+  ]
+ },
+ {
+  "clip": "adv-gastro-en",
+  "seg": 1,
+  "lang": "en",
+  "text": "Get plenty of rest. Hand hygiene, especially after using the toilet and before eating. Seek medical help for persistent vomiting or inability to keep fluids down, blood in stools or persistent high fever, or severe abdominal pain or worsening symptoms.",
+  "parts": [
+   "Get plenty of rest.",
+   "Hand hygiene, especially after using the toilet and before eating.",
+   "Seek medical help for persistent vomiting or inability to keep fluids down, blood in stools or persistent high fever, or severe abdominal pain or worsening symptoms."
+  ]
+ },
+ {
+  "clip": "adv-renal-en",
+  "seg": 0,
+  "lang": "en",
+  "text": "Stay hydrated: drink 6 to 8 glasses of water a day as directed, to help decrease pain and flush blockages from the urinary tract. Strain urine every time you pass urine, and bring any stones passed to the doctor for investigation. Take regular pain medications as directed by the doctor.",
+  "parts": [
+   "Stay hydrated: drink 6 to 8 glasses of water a day as directed, to help decrease pain and flush blockages from the urinary tract.",
+   "Strain urine every time you pass urine, and bring any stones passed to the doctor for investigation.",
+   "Take regular pain medications as directed by the doctor."
+  ]
+ },
+ {
+  "clip": "adv-renal-en",
+  "seg": 1,
+  "lang": "en",
+  "text": "Seek help at the nearest hospital if pain, fever or vomiting worsens, or for changes in urine: less urine, cloudiness, foul smell. Keep active; kidney stones are more common if you are not active or sit much of the day. Rest, and abstain from alcohol and seafood.",
+  "parts": [
+   "Seek help at the nearest hospital if pain, fever or vomiting worsens, or for changes in urine: less urine, cloudiness, foul smell.",
+   "Keep active; kidney stones are more common if you are not active or sit much of the day.",
+   "Rest, and abstain from alcohol and seafood."
+  ]
+ },
+ {
+  "clip": "adv-abdo-en",
+  "seg": 0,
+  "lang": "en",
+  "text": "Return to hospital immediately if pain worsens or new symptoms appear, such as vomiting, diarrhoea, fever or bleeding from the back passage. Avoid caffeine, fatty foods and spicy foods.",
+  "parts": [
+   "Return to hospital immediately if pain worsens or new symptoms appear, such as vomiting, diarrhoea, fever or bleeding from the back passage.",
+   "Avoid caffeine, fatty foods and spicy foods."
+  ]
+ },
+ {
+  "clip": "adv-abdo-en",
+  "seg": 1,
+  "lang": "en",
+  "text": "Take simple analgesia such as paracetamol and anti-reflux medications. Return for follow-up at EMACC or EMWATCH in 24 to 48 hours.",
+  "parts": [
+   "Take simple analgesia such as paracetamol and anti-reflux medications.",
+   "Return for follow-up at EMACC or EMWATCH in 24 to 48 hours."
+  ]
+ },
+ {
+  "clip": "adv-hypo-en",
+  "seg": 0,
+  "lang": "en",
+  "text": "Avoid driving, cycling, swimming or heavy machinery for the next 24–48 hours. Hypoglycaemia awareness may be reduced for 48–72 hours: check blood sugar before meals, exercise and driving. Always carry quick-acting carbohydrate (hard candy, dextrose tablets).",
+  "parts": [
+   "Avoid driving, cycling, swimming or heavy machinery for the next 24–48 hours.",
+   "Hypoglycaemia awareness may be reduced for 48–72 hours: check blood sugar before meals, exercise and driving.",
+   "Always carry quick-acting carbohydrate (hard candy, dextrose tablets)."
+  ]
+ },
+ {
+  "clip": "adv-hypo-en",
+  "seg": 1,
+  "lang": "en",
+  "text": "Record all glucose readings and bring them to the next check-up. Seek medical help if a hypo causes unconsciousness or seizures, does not improve with quick-acting carbohydrate, or blood sugar stays low.",
+  "parts": [
+   "Record all glucose readings and bring them to the next check-up.",
+   "Seek medical help if a hypo causes unconsciousness or seizures, does not improve with quick-acting carbohydrate, or blood sugar stays low."
+  ]
  }
 ]

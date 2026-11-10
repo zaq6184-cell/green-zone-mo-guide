@@ -2071,5 +2071,342 @@
     "at": 9.093
    }
   ]
+ },
+ "adv-gastro-en#0": {
+  "clip": "adv-gastro-en",
+  "seg": 0,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Continue taking prescribed medications as directed.",
+    "say": "Continue taking prescribed medications as directed.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "continue taking prescribed medications as directed.",
+    "dur": 4.062,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Drink plenty of fluid (ORS, clear soups, diluted fruit juices) to prevent dehydration.",
+    "say": "Drink plenty of fluid (O. R. S., clear soups, diluted fruit juices) to prevent dehydration.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Drink plenty of fluid, O-R-S, clear soups, diluted fruit juices, to prevent dehydration.",
+    "dur": 6.485,
+    "at": 4.312
+   },
+   {
+    "k": 2,
+    "j": 0,
+    "file": "p2-0.wav",
+    "text": "Avoid caffeinated, alcoholic and sugary drinks, as they can worsen diarrhoea.",
+    "say": "Avoid caffeinated, alcoholic and sugary drinks, as they can worsen diarrhoea.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Avoid caffeinated, alcoholic, and sugary drinks as they can worsen diarrhea.",
+    "dur": 5.417,
+    "at": 11.047
+   }
+  ]
+ },
+ "adv-gastro-en#1": {
+  "clip": "adv-gastro-en",
+  "seg": 1,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Get plenty of rest.",
+    "say": "Get plenty of rest.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Get plenty of rest.",
+    "dur": 1.497,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Hand hygiene, especially after using the toilet and before eating.",
+    "say": "Hand hygiene, especially after using the toilet and before eating.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "hand hygiene, especially after using the toilet and before eating.",
+    "dur": 4.894,
+    "at": 1.747
+   },
+   {
+    "k": 2,
+    "j": 0,
+    "file": "p2-0.wav",
+    "text": "Seek medical help for persistent vomiting or inability to keep fluids down, blood in stools or persistent high fever, or severe abdominal pain or worsening symptoms.",
+    "say": "Seek medical help for persistent vomiting or inability to keep fluids down, blood in stools or persistent high fever, or severe abdominal pain or worsening symptoms.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Seek medical help for persistent vomiting or inability to keep fluids down, blood in stools, or persistent high fever, or severe abdominal pain or worsening symptoms.",
+    "dur": 12.663,
+    "at": 6.891
+   }
+  ]
+ },
+ "adv-renal-en#0": {
+  "clip": "adv-renal-en",
+  "seg": 0,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Stay hydrated: drink 6 to 8 glasses of water a day as directed, to help decrease pain and flush blockages from the urinary tract.",
+    "say": "Stay hydrated: drink 6 to 8 glasses of water a day as directed, to help decrease pain and flush blockages from the urinary tract.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Stay hydrated. Drink six to eight glasses of water a day as directed to help decrease pain and flush blockages from the urinary tract.",
+    "dur": 9.634,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Strain urine every time you pass urine, and bring any stones passed to the doctor for investigation.",
+    "say": "Strain urine every time you pass urine, and bring any stones passed to the doctor for investigation.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Strain urine every time you pass urine and bring any stones passed to the doctor for investigation.",
+    "dur": 7.321,
+    "at": 9.884
+   },
+   {
+    "k": 2,
+    "j": 0,
+    "file": "p2-0.wav",
+    "text": "Take regular pain medications as directed by the doctor.",
+    "say": "Take regular pain medications as directed by the doctor.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "take regular pain medications as directed by the doctor.",
+    "dur": 3.912,
+    "at": 17.455
+   }
+  ]
+ },
+ "adv-renal-en#1": {
+  "clip": "adv-renal-en",
+  "seg": 1,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Seek help at the nearest hospital if pain, fever or vomiting worsens, or for changes in urine: less urine, cloudiness, foul smell.",
+    "say": "Seek help at the nearest hospital if pain, fever or vomiting worsens, or for changes in urine: less urine, cloudiness, foul smell.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Seek help at the nearest hospital if pain, fever, or vomiting worsens, or for changes in urine, less urine, cloudiness, foul smell.",
+    "dur": 9.519,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Keep active; kidney stones are more common if you are not active or sit much of the day.",
+    "say": "Keep active; kidney stones are more common if you are not active or sit much of the day.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Keep active. Kidney stones are more common if you are not active or sit much of the day.",
+    "dur": 6.054,
+    "at": 9.769
+   },
+   {
+    "k": 2,
+    "j": 0,
+    "file": "p2-0.wav",
+    "text": "Rest, and abstain from alcohol and seafood.",
+    "say": "Rest, and abstain from alcohol and seafood.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Rest and abstain from alcohol and seafood.",
+    "dur": 2.909,
+    "at": 16.073
+   }
+  ]
+ },
+ "adv-abdo-en#0": {
+  "clip": "adv-abdo-en",
+  "seg": 0,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Return to hospital immediately if pain worsens or new symptoms appear, such as vomiting, diarrhoea, fever or bleeding from the back passage.",
+    "say": "Return to hospital immediately if pain worsens or new symptoms appear, such as vomiting, diarrhoea, fever or bleeding from the back passage.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Return to hospital immediately if pain worsens or new symptoms appear, such as vomiting, diarrhea, fever, or bleeding from the back passage.",
+    "dur": 10.193,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Avoid caffeine, fatty foods and spicy foods.",
+    "say": "Avoid caffeine, fatty foods and spicy foods.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Avoid caffeine, fatty foods, and spicy foods.",
+    "dur": 3.247,
+    "at": 10.443
+   }
+  ]
+ },
+ "adv-abdo-en#1": {
+  "clip": "adv-abdo-en",
+  "seg": 1,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Take simple analgesia such as paracetamol and anti-reflux medications.",
+    "say": "Take simple analgesia such as paracetamol and anti-reflux medications.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Take simple analgesia such as paracetamol and anti-reflux medications.",
+    "dur": 5.548,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Return for follow-up at EMACC or EMWATCH in 24 to 48 hours.",
+    "say": "Return for follow-up at E. M. A. C. C. or E. M. Watch in 24 to 48 hours.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Return for follow-up at EMACC or EM Watch in 24 to 48 hours.",
+    "dur": 5.927,
+    "at": 5.798
+   }
+  ]
+ },
+ "adv-hypo-en#0": {
+  "clip": "adv-hypo-en",
+  "seg": 0,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Avoid driving, cycling, swimming or heavy machinery for the next 24–48 hours.",
+    "say": "Avoid driving, cycling, swimming or heavy machinery for the next 24 to 48 hours.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Avoid driving, cycling, swimming, or heavy machinery for the next 24 to 48 hours.",
+    "dur": 7.32,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Hypoglycaemia awareness may be reduced for 48–72 hours: check blood sugar before meals, exercise and driving.",
+    "say": "Hypoglycaemia awareness may be reduced for 48 to 72 hours: check blood sugar before meals, exercise and driving.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "hypoglycemia awareness may be reduced for 48 to 72 hours. Check blood sugar before meals, exercise, and driving.",
+    "dur": 9.674,
+    "at": 7.57
+   },
+   {
+    "k": 2,
+    "j": 0,
+    "file": "p2-0.wav",
+    "text": "Always carry quick-acting carbohydrate (hard candy, dextrose tablets).",
+    "say": "Always carry quick-acting carbohydrate (hard candy, dextrose tablets).",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Always carry quick-acting carbohydrate. Hard candy. Dextrose tablets.",
+    "dur": 5.269,
+    "at": 17.494
+   }
+  ]
+ },
+ "adv-hypo-en#1": {
+  "clip": "adv-hypo-en",
+  "seg": 1,
+  "lang": "en",
+  "gap": 0.25,
+  "chunks": [
+   {
+    "k": 0,
+    "j": 0,
+    "file": "p0-0.wav",
+    "text": "Record all glucose readings and bring them to the next check-up.",
+    "say": "Record all glucose readings and bring them to the next check-up.",
+    "seed": 41,
+    "err": 0.167,
+    "bad": true,
+    "heard": "Record all glucose readings and bring them to the next checkup.",
+    "dur": 4.206,
+    "at": 0
+   },
+   {
+    "k": 1,
+    "j": 0,
+    "file": "p1-0.wav",
+    "text": "Seek medical help if a hypo causes unconsciousness or seizures, does not improve with quick-acting carbohydrate, or blood sugar stays low.",
+    "say": "Seek medical help if a hypo causes unconsciousness or seizures, does not improve with quick-acting carbohydrate, or blood sugar stays low.",
+    "seed": 7,
+    "err": 0,
+    "bad": false,
+    "heard": "Seek medical help if a hypo causes unconsciousness or seizures, does not improve with quick-acting carbohydrate, or blood sugar stays low.",
+    "dur": 10.313,
+    "at": 4.456
+   }
+  ]
  }
 }

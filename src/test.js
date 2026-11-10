@@ -417,7 +417,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => reader.paused), 'leaving the page stops the narration');
   await go(p, '#mild-tbi', 400); await p.click('#ptab [data-pt="advice"]'); await p.waitForTimeout(200);
   ok(await p.evaluate(() => (document.querySelector('#tp-advice .lsn') || {}).dataset?.read === 'adv-tbi-en' && READ['adv-tbi-en'].lines.length === document.querySelectorAll('#tp-advice #advlist > li').length), 'the mild head injury advice has its Listen bar, with a mark for each advice line');
-  for (const [h, k] of [['#dengue', 'adv-dengue-en'], ['#asthma-zone', 'adv-asthma-en']]){
+  for (const [h, k] of [['#dengue', 'adv-dengue-en'], ['#asthma-zone', 'adv-asthma-en'], ['#gastroenteritis', 'adv-gastro-en'], ['#renal-colic', 'adv-renal-en'], ['#abdominal-pain', 'adv-abdo-en'], ['#hypoglycaemia', 'adv-hypo-en']]){
     await go(p, h, 400); await p.click('#ptab [data-pt="advice"]'); await p.waitForTimeout(150);
     ok(await p.evaluate(k => (document.querySelector('#tp-advice .lsn') || {}).dataset?.read === k && READ[k].lines.length === document.querySelectorAll('#tp-advice #advlist > li').length, k), 'the advice of ' + h.slice(1) + ' has its Listen bar, with a mark for each advice line');
   }

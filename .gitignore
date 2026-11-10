@@ -61,3 +61,7 @@ video/dengue-home/work/*.md5
 video/dengue-home/assets/bg.mp4
 video/dengue-home/assets/vo-*.wav
 video/dengue-home-ms/
+# The strict check's working files (10 Nov 2026): the audio it extracts, its pieces and its take lists stay on this PC
+narration/scripts/ext/
+narration/scripts/piece-*.wav
+narration/scripts/items.json

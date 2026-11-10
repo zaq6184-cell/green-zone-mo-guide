@@ -26,6 +26,10 @@ function say(t, lg) {
   s = s.replace(/(\d)\s?g\b/g, lg === 'ms' ? '$1 gram' : '$1 grams');
   s = s.replace(/\s*&\s*/g, lg === 'ms' ? ' dan ' : ' and ').replace(/\bMoH\b/g, 'M. O. H.');
   s = s.replace(/([a-z])\s?\/\s?([a-z])/gi, lg === 'ms' ? '$1 atau $2' : '$1 or $2');
+  // The department's clinic names, as staff say them to patients (added 10 Nov 2026 with the four new advice clips)
+  s = s.replace(/\bEM ?WATCH\b/gi, 'E. M. Watch').replace(/\bEMACC\b/g, 'E. M. A. C. C.');
+  // A range of numbers with an en dash, "24–48 hours", read as "24 to 48"
+  s = s.replace(/(\d)\s?–\s?(\d)/g, lg === 'ms' ? '$1 hingga $2' : '$1 to $2');
   for (const a of ACR) s = s.replace(new RegExp('\\b' + a + '\\b', 'g'), spell(a, lg));
   s = s.replace(/\b([A-Z]{2,})\b/g, m => ACR.some(a => a.startsWith(m)) ? m : m.toLowerCase());
   if (lg === 'ms') s = s.replace(/\b\d+\b/g, d => msNum(+d));

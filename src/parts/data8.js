@@ -266,3 +266,6 @@ P['safe-practice'].refs = P['safe-practice'].refs.map(r => r === 'Code Blue Manu
 /* The rabies protocol (Krishna, 10 Nov 2026, sent again as MANAGEMENT_OF_RABIES__ABC_HKL.pdf, the same file): download it as well as open it */
 P['animal-bites'].docs = [['https://drive.google.com/uc?export=download&id=1k8Yh8oSoEMw3MPJ02kf19ujBnxCXMsX8', 'Download the protocol (PDF)']];
 P['animal-bites'].nodes.abc.links.push(['https://drive.google.com/uc?export=download&id=1k8Yh8oSoEMw3MPJ02kf19ujBnxCXMsX8', 'Download the protocol']);
+
+/* The rabies protocol's own banner: an amber glass paw print and a vaccine vial (Flow Studio, 10 Nov 2026) */
+P['animal-bites'].hero = 'rabies';
