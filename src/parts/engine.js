@@ -3335,14 +3335,31 @@ document.addEventListener('keydown', e => {
     } else if (e.key === 'Backspace' && state.trail.length){ e.preventDefault(); backTo(state.trail.length - 1); }
   }
 });
-/* Tiles catch the light under the pointer */
+/* Tiles, answer keys and the question card catch the light under the pointer, and under a finger while it is down:
+   a touch lights the spot it lands on (pointerdown), and the light goes out when the finger lifts or the page scrolls. */
 let glowT = null;
-document.addEventListener('pointermove', e => {
-  const t = e.target.closest ? e.target.closest('.tile') : null;
-  if (glowT && glowT !== t){ glowT.style.removeProperty('--mx'); glowT.style.removeProperty('--my'); }
+const glowOff = () => { if (glowT){ ['--mx', '--my', '--tx', '--ty', '--rx', '--ry'].forEach(k => glowT.style.removeProperty(k)); glowT.classList.remove('lit'); glowT = null; } };
+const glowAt = e => {
+  const t = e.target.closest ? e.target.closest('.tile,button.opt,.qc') : null;
+  if (glowT && glowT !== t) glowOff();
   glowT = t;
-  if (t){ const r = t.getBoundingClientRect(); t.style.setProperty('--mx', (e.clientX - r.left) + 'px'); t.style.setProperty('--my', (e.clientY - r.top) + 'px'); }
-}, {passive:true});
+  if (!t) return;
+  const r = t.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  t.style.setProperty('--mx', x + 'px'); t.style.setProperty('--my', y + 'px');
+  /* 3D: a tile with a picture leans toward a mouse or pen, and its picture shifts the other way for depth. --tx and --ty run
+     from -1 to 1 across the tile; the angle is smaller on a larger tile, so an edge never travels more than about 6 px.
+     Not for touch: a finger that lands on a tile to scroll the page would make it wobble. */
+  if (e.pointerType !== 'touch' && !REDUCED && r.width && t.classList.contains('tile') && t.querySelector(':scope > .tm')){
+    const nx = Math.max(-1, Math.min(1, x / r.width * 2 - 1)), ny = Math.max(-1, Math.min(1, y / r.height * 2 - 1));
+    t.style.setProperty('--tx', nx.toFixed(3)); t.style.setProperty('--ty', ny.toFixed(3));
+    t.style.setProperty('--ry', (nx * Math.min(4, 700 / r.width)).toFixed(2) + 'deg');
+    t.style.setProperty('--rx', (-ny * Math.min(4, 700 / r.height)).toFixed(2) + 'deg');
+    t.classList.add('lit');
+  }
+};
+document.addEventListener('pointermove', glowAt, {passive:true});
+document.addEventListener('pointerdown', glowAt, {passive:true});
+['pointerup', 'pointercancel'].forEach(k => document.addEventListener(k, e => { if (e.pointerType !== 'mouse') glowOff(); }, {passive:true}));
 window.addEventListener('hashchange', route);
 route();
 window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Image(); im.src = s.img; }));

@@ -23,9 +23,9 @@
               ranges, so they seek offline.
    Fonts      The Google Fonts stylesheet and font files are kept as the page loads them, so the guide keeps its type. */
 'use strict';
-const VERSION = '077c8d87c522', PAGE = '9f0ba2b44502';
+const VERSION = '09ebf8c97adb', PAGE = '24c425248544';
 const PRE = {
-  "": "91a810d9535ec829",
+  "": "a9ee5dc9c3fbff0b",
   "manifest.webmanifest": "3f4620e73fac5885",
   "img/gz-01-hero.webp": "e0db0e365820090d",
   "img/gz-02-triage.webp": "60e7adac5fc1ea89",

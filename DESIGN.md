@@ -8,6 +8,10 @@ colors:
   on-jewel: "#ffffff"
   surface-2: "#f5f7f6"
   surface-3: "#ebefed"
+  ground-light: "#f4f7f5"
+  pearl-1: "#ffffff"
+  pearl-2: "#f9fbfa"
+  key-2: "#f0f4f2"
   ink: "#0f1a15"
   ink-2: "#26352e"
   muted: "#53635b"
@@ -235,6 +239,7 @@ The density is phone-first. On a 390 px screen the bento is two columns, the zon
 **Key Characteristics:**
 - Jewel tiles by area over a pearl ground, each a live infographic of guide content.
 - One material for every jewel surface: diagonal gradient, grain, inner light edge, hue-tinted shadow, pointer specular.
+- One material for every neutral surface, the lit pearl (10 Nov 2026): a ground lit from above, a top-lit fill, a rim that is brightest along its top edge and a layered shadow. It is what makes the white cards, and the night cards above all, read as made rather than flat.
 - Flat outcome colours from the ebook, never finished like a jewel.
 - Figtree at 800 to 900 for display, Atkinson Hyperlegible Next for reading, Atkinson Hyperlegible Mono for figures.
 - Large radii (28 px tiles), generous touch targets (44 px and up), a floating glass tab bar on phones.
@@ -272,8 +277,9 @@ Two palettes with separate jobs: a jewel palette that tells the MO which area of
 - Each outcome also has a text tone and a soft tint (admit-text with admit-soft and so on) for checked states, notes and calculator readouts on light surfaces.
 
 ### Neutral
-- **Pearl Ground** (pearl-ground, pearl-ground-2): the page behind the bento; a cool grey-green, never pure white.
-- **Surface** (surface, surface-2, surface-3): white tiles and cards, then the recessed fill of options, fields and checklists, then the hover and segmented-control track.
+- **Pearl Ground** (pearl-ground, pearl-ground-2): the page behind the bento; a cool grey-green, never pure white. It is lit: a layer fixed to the screen behind the content column (`--ground`) lifts the top of the screen to ground-light (`--amb-3`) and lays two soft lights over it, signal mint from the top left (`--amb-1`) and sapphire from the top right (`--amb-2`), each fading out by about half the screen's height. By night the ground is near black with an emerald light. The sticky top bar and the safe-area strip paint the same lights (`--glow`, in viewport units), so the bar has no seam at the top of a page.
+- **Surface** (surface, surface-2, surface-3): the flat neutral tones: surface for small inner cards, then the recessed fill of fields and checklists, then the hover and segmented-control track.
+- **Pearl** (pearl-1, pearl-2) and **Key** (pearl-1 to key-2): the lit fills. Pearl (`--pearl`) is the fill of every neutral card and tile: pearl-1 at the top edge easing to pearl-2 by 180 px, so the light sits at the top of a card however tall it is. Key (`--key`) is the fill of every neutral control you press (buttons, pills, the back pill, the runner's icon buttons, the answer options): pearl-1 to key-2 over the control's own height.
 - **Ink** (ink, ink-2, muted, faint): text from headings down to tertiary metadata. Faint is for icons, chevrons and separators only: as text it falls under 4.5:1 in both themes, so metadata, small labels, chart axes and placeholders take muted.
 - **Lines** (line, line-2): 1 px inner rings and dividers; line-2 for dashed empties, kbd keys and field rings.
 - **Highlight** (highlight): search match marks.
@@ -283,7 +289,9 @@ Two palettes with separate jobs: a jewel palette that tells the MO which area of
 
 **The Flat Outcome Rule.** The outcome tokens (outcome-admit, -observe, -discharge, -refer, -neutral) are always flat fills: outcome cards, discharge verdicts, outcome dots, legend swatches, quiz right and wrong states, calculator scale bands. They never take a gradient, grain or specular. The ebook's boxes are flat and the answer must read as the ebook printed it.
 
-**The Two Theme Rule.** Every colour is a token on the root with a light value. The two dark blocks (device dark unless light is forced, and dark by choice) redefine ground, surface, ink, lines, accent, mint, gold, the outcome text and soft tones, highlight, scrim, inner edge and shadows, and nothing else. The jewel stops, the flat outcome fills, on-observe, gold-ink, glass and grain are the same in both themes. No colour is ever defined only in a dark block.
+**The Two Theme Rule.** Every colour is a token on the root with a light value. The two dark blocks (device dark unless light is forced, and dark by choice) redefine ground, surface, ink, lines, accent, mint, gold, the outcome text and soft tones, highlight, scrim, inner edge, shadows and the lit pearl's strengths (`--amb-1` to `--amb-3`, `--pearl-1`, `--pearl-2`, `--key-2`, `--rim-hi`, `--rim-lo`, `--press`), and nothing else. The jewel stops, the flat outcome fills, on-observe, gold-ink, glass and grain are the same in both themes. No colour is ever defined only in a dark block. The lit pearl's recipes (`--glow`, `--ground`, `--pearl`, `--key`, `--rim`, `--pearl-sh`, `--jewel-rim`) are written once, in the root block, from those strengths.
+
+**The Lit Pearl Rule.** A neutral surface that rises off the ground is never a flat fill with a line. A card or tile takes `--pearl` with `--pearl-sh` (the rim, then the Resting shadow); a control you press takes `--key` with the rim and the Hairline shadow; an overlay takes `--pearl` with the rim and the Raised shadow. What stays flat on purpose: recessed rows (fields, checklist rows, notes) on surface-2, the small cards inside figures, chips, and the outcome card. No neutral card takes a backdrop blur: blur belongs to the top bar and the tab bar only, so a long list scrolls cheaply on a phone.
 
 ## Typography
 
@@ -328,12 +336,14 @@ Views are capped at 1200 px. Side gutters always respect the safe area: max(16px
 A hybrid of tonal layering and soft, long shadows. The pearl ground sits lowest; white surfaces rise on a broad, low-opacity shadow with a 1 px inner ring instead of a border; jewel tiles rise on a shadow tinted with their own deepest stop, so depth reads in the tile's colour rather than grey. Overlays (search palette, settings, map sheet, open sidebar) take the strongest shadow over a scrim. In dark themes the shadows become plain deep black and the inner rings carry the edges.
 
 ### Shadow Vocabulary
-- **Hairline** (sh-1, `0 1px 2px rgba(15,26,21,.06)`): back pill, runner icon buttons, collapsible panels.
-- **Resting** (sh-2, `0 1px 2px rgba(15,26,21,.05), 0 18px 34px -20px rgba(15,26,21,.42)`): pearl tiles, cards, panels, the search pill, the library and tab panels.
-- **Raised** (sh-3, `0 2px 10px rgba(15,26,21,.08), 0 36px 70px -28px rgba(15,26,21,.5)`): hover on pearl surfaces, dialogs, the palette, the sheet, the toast.
+- **Rim** (`--rim`: `inset 0 1px 0 rim-hi, inset 0 -1px 0 rim-lo, inset 0 0 0 1px line`): the edge of every lit pearl surface. The top edge takes the light (white by day, white at 8% by night), the bottom edge a faint shade, the line ring the rest. On a 28 px corner the highlight thins out round the curve by itself.
+- **Jewel rim** (`--jewel-rim`: a white top light at 20% over the inner edge ring): the small jewel controls that are not tiles: the primary button, the suggested answer, the tab bar's Search square.
+- **Hairline** (sh-1, `0 1px 2px rgba(15,26,21,.07), 0 3px 8px -4px rgba(15,26,21,.1)`): back pill, runner icon buttons, answer options, collapsible panels.
+- **Resting** (sh-2, `0 1px 1px rgba(15,26,21,.04), 0 4px 10px -4px rgba(15,26,21,.09), 0 20px 36px -20px rgba(15,26,21,.4)`): three layers, a contact line, a near shadow and the long ambient one: pearl tiles, cards, panels, the search pill, the library and tab panels.
+- **Raised** (sh-3, `0 2px 4px rgba(15,26,21,.05), 0 12px 22px -10px rgba(15,26,21,.14), 0 38px 70px -28px rgba(15,26,21,.5)`): hover on pearl surfaces, dialogs, the palette, the sheet, the toast.
 - **Jewel** (`0 1px 1px rgba(0,0,0,.05), 0 22px 38px -24px <stop 3>`): every jewel tile at rest; on hover the blur opens to 44 px and the offset to 28 px.
 - **Outcome glow** (`0 22px 40px -26px <outcome colour>`): under the outcome card and verdicts, in the flat outcome colour.
-- **Glass bar** (`0 0 0 1px line at 80%, 0 20px 40px -18px rgba(15,26,21,.5)`): the floating tab bar.
+- **Glass bar** (`inset 0 1px 0 rim-hi, 0 0 0 1px line at 80%, 0 4px 10px -4px rgba(15,26,21,.16), 0 20px 40px -18px rgba(15,26,21,.5)`): the floating tab bar, with the lit top edge.
 
 ### Named Rules
 **The Tinted Shadow Rule.** A jewel surface casts a shadow in its own deepest stop, never in grey. Neutral surfaces use the sh-1 to sh-3 steps. In dark themes every tinted shadow (jewel tiles, emerald buttons, outcome cards and verdicts) mixes to black through the shade-k token (0% in light, 100% in both dark blocks), so no shadow lights the dark ground; the night films and night poster sheets do the same.
@@ -351,8 +361,8 @@ Circles mark places on a route: zone stops (50 to 58 px), journey stops, runner 
 ### Buttons
 Tactile and quiet: white with a ring, the colour arrives on intent.
 - **Shape:** gently rounded (12 px), minimum height 46 px; small 38 px; icon buttons 44 by 44 px at 14 px.
-- **Default:** surface fill, 1.5 px line-2 border, ink text at 700.
-- **Primary:** a 150 degree emerald gradient (emerald-1 to emerald-2), white text, an emerald-3 tinted shadow; brightens 8% on hover.
+- **Default:** the key fill (`--key`), 1.5 px line-2 border, ink text at 700.
+- **Primary:** a 150 degree emerald gradient (emerald-1 to emerald-2), white text, the jewel rim and an emerald-3 tinted shadow; brightens 8% on hover.
 - **Soft:** accent-soft fill, accent text, gains an accent border on hover.
 - **Ghost:** transparent; surface-3 on hover.
 - **Hover / Active:** border turns accent; press scales to 98%. Disabled drops to 42% opacity.
@@ -366,27 +376,29 @@ Tactile and quiet: white with a ring, the colour arrives on intent.
 - **Category chips in the runner:** the area's jewel gradient with white text; the Ebook page chip is white and mono.
 
 ### Cards / Containers
-- **Jewel tile (signature):** 28 px corners, 18 px padding, a 150 degree gradient through the area's three stops (stop 2 at 55%), a grain layer (an inline SVG noise tile at 180 px), a top-left radial sheen, a 1 px inner white edge, and the tinted Jewel shadow. A pointer handler writes the pointer position into --mx and --my on the tile under it, and a 280 px radial highlight follows. Linked tiles lift 2 px on hover over 350 ms and press to 98.5%.
-- **Pearl tile:** the same shape and behaviour in white with a line ring and the Resting shadow; the pointer highlight is mint at 9%; hover deepens to Raised.
-- **Cards and panels:** white, 22 to 28 px corners, Resting shadow plus inner line ring, 18 to 24 px padding.
-- **Tile media:** a topic tile, Code Blue and Code Stroke carry a Flow Studio still of their body system in jewel glass, under the sheen and grain, with an 8-second loop over it while Moving tiles is on and the tile is on screen. On topic tiles the picture fills the right 78% behind a fade in the tile's stop 2, so the title sits on calm colour; on the two number tiles it is a 40% background so the extension reads at a glance. The other home tiles have their own: Pathways (a glass book), Rules and protocols (a shield), Discharge check (a doorway) and Quick sums (a gauge) as a 40% background behind their lists; First shift (a compass) on the right 64% behind a fade; the Pearl tile (a pearl in its shell) at 55% behind a champagne fade. The Shift tools headers reuse the doorway and the gauge on the right 64%, and each Pathways section bar carries its topic's picture at the right, at most 250 px wide, blended into the bar. The calculator groups carry six more, on their tiles, section bars and calculator headers: a teddy bear (Kids), an ampoule (Doses), a balance scale (Scores), a feather (Pain and calm), a helmet (Injuries), a droplet (Dengue), a stethoscope (Heart) and an apothecary bottle (Poisoning and allergy). A phone plays at most six loops at once, the most visible first (twelve on wider screens). White cards and the Numbers page have none. Reduced motion keeps the still.
-- **Recessed rows:** options, checklist rows, notes and readouts sit on surface-2 with an inner line ring at 16 to 20 px.
+- **Jewel tile (signature):** 28 px corners, 18 px padding, a 150 degree gradient through the area's three stops (stop 2 at 55%), a grain layer (an inline SVG noise tile at 180 px), a top-left radial sheen, a 1 px inner white edge, and the tinted Jewel shadow. A pointer handler writes the pointer position into --mx and --my on the tile under it, and a 280 px radial highlight follows. The same handler lights an answer key (a 200 px mint light at 20%) and the question card (320 px at 10%) under the pointer, and under a finger while it is down: a touch lights the spot it lands on and the light goes out when the finger lifts. Linked tiles lift 2 px on hover over 350 ms and press to 98.5%. On a touch screen, where the browser can tie motion to scrolling (`animation-timeline: view()`), a soft band of light crosses each jewel tile once as the tile crosses the screen, so tiles catch the light on a phone as they do under a mouse; pearl tiles do not take it, and reduced motion removes it.
+- **Tiles in 3D (10 Nov 2026):** the glass sits in depth. Under a mouse or pen, a tile with a picture leans toward the pointer (`.tile.lit`: `perspective(900px)` with `--rx` and `--ry`, at most 4 degrees and less on a larger tile, so an edge never travels more than about 6 px) while its picture shifts up to 7 px the other way at 105%, so the sculpture reads as behind the words; it settles back over 350 ms when the pointer leaves. A touch does not tilt a tile (a finger landing to scroll would make it wobble). Instead, on a touch screen where motion can follow scrolling, each tile stands up as it enters the screen (`rise3`: from 11 degrees back, 18 px low and 35% opacity, over the first 140 px of its entry, backwards fill only so its press still works once it is in). Pearl tiles rise too but never tilt. Reduced motion removes all of it.
+- **Pearl tile:** the same shape and behaviour in the lit pearl: the pearl fill, the rim and the Resting shadow; the pointer highlight is mint at 9%; hover deepens to Raised.
+- **Cards and panels:** the lit pearl (`--pearl` with `--pearl-sh`), 22 to 28 px corners, 18 to 24 px padding: panels, the search pill, the library find, library sections, the route rail, the question card, the tab panel, rule lists, tool panels, the journey stage, the quiz card, the poster sheets, About and the What's new groups; the search palette and Settings take it with the Raised shadow.
+- **Tile media:** a topic tile, Code Blue and Code Stroke carry a Flow Studio still of their body system in jewel glass, under the sheen and grain, with an 8-second loop over it while Moving tiles is on and the tile is on screen. On topic tiles the picture fills the right 78% behind a fade in the tile's stop 2, so the title sits on calm colour; on the two number tiles it is a 40% background so the extension reads at a glance. The zone tile carries the Green Zone flow sculpture (the `flow` key: five lit beads on a one-way glass path, the same picture as the Green Zone flow topic) as a 30% background, quieter than the others because its small stop labels sit over it. With no stop open on a wide screen (1100 px and up) the route is the tile: the stops grow to 76 px and sit in the middle over the sculpture. The other home tiles have their own: Pathways (a glass book), Rules and protocols (a shield), Discharge check (a doorway) and Quick sums (a gauge) as a 40% background behind their lists; First shift (a compass) on the right 64% behind a fade; the Pearl tile (a pearl in its shell) at 55% behind a champagne fade. The Shift tools headers reuse the doorway and the gauge on the right 64%, and each Pathways section bar carries its topic's picture at the right, at most 250 px wide, blended into the bar. The calculator groups carry six more, on their tiles, section bars and calculator headers: a teddy bear (Kids), an ampoule (Doses), a balance scale (Scores), a feather (Pain and calm), a helmet (Injuries), a droplet (Dengue), a stethoscope (Heart) and an apothecary bottle (Poisoning and allergy). A phone plays at most six loops at once, the most visible first (twelve on wider screens). White cards and the Numbers page have none. Reduced motion keeps the still.
+- **Recessed rows:** checklist rows, notes and readouts sit on surface-2 with an inner line ring at 16 to 20 px. Answer options are no longer recessed: they are keys (below), so on a question card what you tick sits in and what you press stands out.
 
 ### Inputs / Fields
 - **Style:** 56 px tall, 16 px corners, surface-2 fill, inset line-2 ring, values in mono 700 at 1.25rem; selects in body 800. Placeholders take muted at full opacity in every field.
 - **Focus:** the ring becomes a 2 px accent inset and the fill lifts to surface; no outline glow.
-- **Checklists:** 50 px rows with an emerald accent-colour checkbox; checked rows turn accent-soft with an accent ring; stop-sign checklists use the admit red and admit-soft instead.
+- **Checklists:** 50 px rows; checked rows turn accent-soft with an accent ring; stop-sign checklists use the admit red and admit-soft instead. The box is drawn by the guide, not the browser, so it reads the same by day and night: 22 px, 7 px corners, a pearl-1 fill with a 1.5 px faint ring (3:1 against its row in both themes); ticked, it fills emerald (`--ck`: admit red on stop signs, discharge green on None of these) and a white tick pops in on the spring.
 - **Library find:** 52 px, 18 px corners, white with the Resting shadow and an accent search icon.
 
 ### Navigation
-- **Phone tab bar:** a floating glass bar 10 px from the sides and bottom (plus safe areas), 26 px corners, surface at 90% with an 18 px backdrop blur and 1.6 saturation. Five equal cells of icon over 0.72rem label at 800 in muted; the current cell fills accent-soft in accent. The centre Search cell is a 44 px emerald gradient square.
+- **Phone tab bar:** a floating glass bar 10 px from the sides and bottom (plus safe areas), 26 px corners, surface at 90% with an 18 px backdrop blur and 1.6 saturation. Five equal cells of icon over 0.72rem label at 800 in muted; the current cell fills accent-soft in accent with a faint accent ring and a mint light at its top edge (a 20 by 3 px bar, the same signal as the lit stop on the zone map). The centre Search cell is a 44 px emerald gradient square with the jewel rim. The bar's glass stays at 90% so its labels keep 4.5:1 over any tile that scrolls under it.
 - **Sidebar:** obsidian gradient from stop 1 to stop 3, light text, uppercase group heads, 44 px rows at 13 px corners; the current page gets white at 12% with a mint icon; counts in mono at 55%.
-- **Top bar (under 1100 px):** sticky, pearl at 84% with a 16 px blur and a hairline bottom line.
+- **Top bar (under 1100 px):** sticky, ground-light at 84% under the ground's own lights, with a 16 px blur and a hairline bottom line.
+- **Footer:** opens on a hairline that fades out at both ends.
 - **Focus:** a 3 px mint outline offset 2 px on every focusable element.
 - **Day and night switch:** in the home header, a 64 by 36 px track on surface-3 with a line-2 ring, a sun and a moon at 18 px, and a 28 px knob that slides 28 px on the spring: white with an observe-amber sun by day, indigo-2 with a gold moon at night. It is labelled "Night colours" from 761 px; below that it sits beside the title, icons only. It sets the same theme as Settings, and the tour film and poster sheets follow it.
 
 ### Pathway Runner (signature)
-One question card at a time on a white 28 px card with a ghost card stacked behind it. Answer options are 60 px rows with a mono number key; the option the checklist suggests becomes an emerald gradient with a mint key. A route rail beside the card (a vertical emerald to teal line with circle stops, the current one ringed in mint) shows the answers given and how the pathway can end; under 980 px it becomes a horizontal trail and a segmented progress bar.
+One question card at a time on a white 28 px card with a ghost card stacked behind it. Answer options are 60 px keys (the key fill, the rim, the Hairline shadow) with a mono number key; the option the checklist suggests becomes an emerald gradient with the jewel rim and a mint key. On the segmented progress bar the step you are on ends in mint with a soft mint light under it. A route rail beside the card (a vertical emerald to teal line with circle stops, the current one ringed in mint) shows the answers given and how the pathway can end; under 980 px it becomes a horizontal trail and a segmented progress bar.
 
 ### Outcome Card (signature)
 A flat block of the outcome colour at 28 px with a 58 px glass icon square, a display title, the kind label in uppercase underneath, tick-box items, glass link pills, any source gap on a 14% black panel, and a footer of glass actions with one inverted primary.
@@ -404,12 +416,13 @@ The library's filter row gains a Guidelines chip between Ebook and Rules and pro
 A right-hand sheet up to 560 px over a scrim, sapphire gradient header, every node on a vertical line: questions as circles, steps and outcomes as rounded squares, outcome nodes filled flat in their outcome colour, the current node in emerald with a mint halo and the untaken branches faded.
 
 ### Motion
-The ease is a long out-curve, cubic-bezier(.16, 1, .3, 1); a spring, cubic-bezier(.34, 1.56, .64, 1), is kept for stops and dots that pop. Views rise 10 px in over 400 ms. Question cards deal in from 22 px right with a 0.8 degree tilt over 450 ms. The outcome card turns over from -50 degrees about its top edge in 600 ms. The zone route fill draws over 1.2 s while the stops pop in 100 ms apart; the intro art draws its lines and pops its marks. Sheets slide 30 px in over 360 ms; the palette and dialogs drop 10 px in over 260 ms. Under reduced motion every animation and transition collapses to an instant end state.
+The ease is a long out-curve, cubic-bezier(.16, 1, .3, 1); a spring, cubic-bezier(.34, 1.56, .64, 1), is kept for stops and dots that pop. Views rise 10 px in over 400 ms. Question cards deal in in 3D: from 24 px right, swung 11 degrees back about their left edge, over 500 ms (`deal3`; the journey text keeps the flat `deal`). The outcome card turns over from -50 degrees about its top edge in 600 ms. The zone route fill draws over 1.2 s while the stops pop in 100 ms apart; the intro art draws its lines and pops its marks. Sheets slide 30 px in over 360 ms; the palette and dialogs drop 10 px in over 260 ms. The light arrives where you arrive: the tab bar's mint light opens out over 500 ms on the tab you land on, and the progress segment of the step you reach grows in from the left over 600 ms. An answer key sinks when pressed (an inner shade in `--press`, 99%). Under reduced motion every animation and transition collapses to an instant end state.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** give every jewel surface the full material: three-stop 150 degree gradient, grain, inner 1 px edge, a shadow in its own deepest stop, and the pointer highlight.
+- **Do** give every neutral surface that rises off the ground the lit pearl: `--pearl` and `--pearl-sh` for a card, `--key` with the rim for a control you press. Write a new card with these tokens, never with a flat surface fill and a line ring.
 - **Do** keep each area and library topic on its jewel: emerald zone, sapphire pathways, plum rules, garnet emergencies, obsidian shell and Code Stroke, teal tools, bronze sums, champagne for the shift's pearl; topics as keyed in Colors.
 - **Do** fill outcome surfaces flat with the outcome tokens, and set text on Outcome Yellow in on-observe.
 - **Do** make every tile show real content from the guide: a count, a route, a threshold, a number to copy.
@@ -426,6 +439,8 @@ The ease is a long out-curve, cubic-bezier(.16, 1, .3, 1); a spring, cubic-bezie
 - **Don't** set words in mono, or a copyable number in the body face.
 - **Don't** put an uppercase label line above a headline; uppercase labels sit beside a heading as a chip, under the outcome title, or as a navigation group head.
 - **Don't** use grey shadows under jewel tiles, or CSS borders where an inset ring belongs.
+- **Don't** put a backdrop blur on a card, or give the base `button` rule a box-shadow: many buttons (tab bar cells, segmented controls, tiles) clear only their border and fill, and would inherit it.
+- **Don't** thin the tab bar's or the top bar's glass below 84 to 90%: their small labels fall under 4.5:1 over a dark tile.
 - **Don't** define a colour only inside a dark block, or hard-code a hex in a component when a token exists.
 - **Don't** use glyph characters for icons; icons are inline SVG.
 - **Don't** let any element scroll the page sideways at 390 px.
