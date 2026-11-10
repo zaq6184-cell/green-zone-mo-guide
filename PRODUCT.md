@@ -27,7 +27,7 @@ The only guide built on the department's own approved ebook, *The Clinical Pathw
 - **On shift:** a phone in one hand, on mobile data, in a busy and brightly lit ED. On-shift lookup leads the home screen and the layout (confirmed with Krishna, 8 Nov 2026).
 - **Learning:** new staff at orientation or before a first shift, on a phone or a desktop.
 - **Zones:** the ED's zones are named by triage colour. The guide covers the Green Zone (MTS 4 and 5) and links to the Yellow Zone flow.
-- **Distribution:** a private claude.ai artifact (https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9) for Krishna, and the same app public on GitHub Pages (https://zaq6184-cell.github.io/green-zone-mo-guide/); an offline copy runs from `app/index.html`. The QR code on the A3 wall poster, and links copied in the app, open the public web app.
+- **Distribution:** a claude.ai artifact (https://claude.ai/artifact/RgdF1Ty9z9ZWhUeKti2HZ9), shared with anyone with the link since 10 Nov 2026, and the same app public on GitHub Pages (https://zaq6184-cell.github.io/green-zone-mo-guide/); an offline copy runs from `app/index.html`. The QR code on the A3 wall poster, and links copied in the app, open the public web app.
 - **Department terms:** Klinik Kesihatan (KK), slip hijau, PPP, CCA, EMACC, EM Watch, MAU, MTS, EP, IPR.
 
 ## Capabilities and Constraints
