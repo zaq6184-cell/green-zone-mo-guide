@@ -161,7 +161,7 @@
     gap:'Source: memo HKL/JK/98/188/3(5)24, 12 Mar 2024, from the Deputy Head of Department II, after the department\'s Mortality and Morbidity meeting report no. 5/2024 (23 Feb 2024); effective immediately. The memo gives no examples, age limit or first examination.'};
   R.nodes.orthoc.items.push(
     'LA OT, the decision: the orthopaedic MO on call decides the treatment within 2 hours of the referral. If not, call them again to speed it; the 2024 congestion plan has the EP make that call (memo (8)22, May 2022, 2.2; memo (17)24, 12 Nov 2024)',
-    'LA OT, the theatre: the emergency OT takes orthopaedic cases from 8 am to 9 pm only. The patient is called through the Google Sheet within 6 hours of the medical officer\'s examination; the policy does not say which MO (department policy 2026, 22.3.3 to 22.3.5, p57 to 58)',
+    'LA OT, the theatre: the emergency OT takes orthopaedic cases from 8 am to 9 pm only. The patient is called through the Google Sheet within 6 hours of the orthopaedic MO\'s examination (department policy 2026, 22.3.3 to 22.3.5, p57 to 58; it names the medical officer, which the guide owner confirmed on 10 Nov 2026 is the orthopaedic MO)',
     'LA OT, not called within 6 hours: the patient goes to the Orthopaedic Ward first (policy 2026, 22.3.6). The 2022 memo counted 4 hours from the orthopaedic decision (2.3), itself within 2 hours of the referral: about the same end point');
   R.nodes.orthoc.gap += ' LA OT: memo HKL/JK/98/188/3(8)22, May 2022 (2.2 and 2.3); action plan for congestion, memo HKL/JK/98/188/3(17)24, 12 Nov 2024 (part 3); Polisi Jabatan Kecemasan dan Trauma, issue 06, 2026, 22.3.';
   R.refs.push(
