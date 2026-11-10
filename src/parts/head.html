@@ -978,7 +978,7 @@ button.opt.sugg .gt{color:var(--mint)}
   .cbn-t{grid-area:t}.cbn-v{grid-area:v}.cbn .cpy{grid-area:c;justify-self:end}
   .cbt-g,.cc-g{grid-template-columns:1fr}.cbm-map{aspect-ratio:6/7}}
 @media (max-width:420px){.cbc-g{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:14px}.cbc:nth-child(2)::after{display:none}
-  .cbk-fork{grid-template-columns:1fr}.cbn.hot .cbn-v{font-size:1.8rem}.sh-t span{font-size:.56rem}.cbs li{grid-template-columns:28px minmax(0,1fr);row-gap:2px}.cbs em{grid-column:2}}
+  .cbk-fork{grid-template-columns:1fr}.cbn.hot .cbn-v{font-size:1.8rem}.sh-t span{font-size:.6rem}.cbs li{grid-template-columns:28px minmax(0,1fr);row-gap:2px}.cbs em{grid-column:2}}
 @media (prefers-reduced-motion:reduce){.cbk-fill,.cbc svg,.ii,.cbm-out>*{animation:none}.cbm-b{transition:none}}
 @media (max-width:420px){.figwc{grid-template-columns:1fr}.wc{grid-template-columns:72px minmax(0,1fr);column-gap:10px}.wc-sk{grid-row:1/4;margin:0}}
 .out .rxs{grid-column:1/-1;margin-top:10px}
@@ -1003,6 +1003,7 @@ button.opt.sugg .gt{color:var(--mint)}
 table{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums}
 th,td{padding:9px 11px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
 thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight:800;font-size:.8rem}
+@media (max-width:560px){th,td{padding:8px}table{font-size:.86rem}}
 .refs{font-size:.86rem;color:var(--muted)}
 #ptab,#cur{scroll-margin-top:84px}
 #calcbox{scroll-margin-top:84px}
@@ -1059,7 +1060,8 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .t-admit{--t1:#d83c30;--t2:#b3261d;--t3:#7e130c}
 .t-discharge{--t1:#13834c;--t2:#0f7343;--t3:#0a5f33}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips span{border-radius:999px;padding:3px 11px;font:800 .82rem var(--body);background:rgba(0,0,0,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.chips span{border-radius:999px;padding:3px 11px;font:800 .82rem var(--body);background:rgba(255,255,255,.18);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.rule .chips span{background:rgba(0,0,0,.16)}
 .rlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr));border-radius:var(--r-xl);overflow:hidden;background:var(--surface);box-shadow:var(--sh-2),inset 0 0 0 1px var(--line)}
 .rl{position:relative;display:flex;align-items:flex-start;gap:14px;padding:15px 18px;border-top:1px solid var(--line);min-width:0;transition:background-color .15s}
 .rl:hover{background:var(--surface-2)}
