@@ -84,6 +84,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **Tour film after a tap (live 10 Nov 2026):** the tour no longer downloads its film when a page opens; it waits for a tap, saving about 1 MB of mobile data on a first visit.
 - **Offline web app (live 10 Nov 2026):** the public web app installs on a phone (Android, iPhone and iPad, and computers) with the Green Zone mark as its icon, and opens without a signal. A service worker saves the guide and its pictures, keeps films and sounds once they have been played through, always prefers the newest guide when there is a signal, and offers Reload when a newer version has been saved. Settings has an Offline and install row, and Install the guide (`#install`) shows each phone, tablet and computer its own drawn steps, the live state and a QR code for your phone. The claude.ai copy links to it.
 - **Premium round (live 10 Nov 2026):** every pathway, rule and protocol opens on its topic's glass banner, compact on a phone; the rabies protocol has its own (an amber glass paw and a vaccine vial); the ED links, communication and interpreter banners move with Flow Studio; and the discharge advice of gastroenteritis, renal colic, abdominal pain and hypoglycaemia can be read aloud.
 - **Audit (live 10 Nov 2026):** the colour codes outcome shows its codes and extensions in day colours again; no step scrolls sideways on a phone; small text, low contrast, small targets and heading levels fixed across the app.
