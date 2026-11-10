@@ -660,6 +660,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.click('#cur button.opt[data-go="2"]'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => state.cur === 'move' && /5\.4d/.test(document.querySelector('#cur').textContent)), 'past 10 minutes with no one BLS-trained: start the transfer to the ED (5.4d)');
   await go(p, '#code-blue--codes', 400);
+  ok(await p.evaluate(() => { const n = document.querySelector('#cur .cc .cc-n'), c = n && n.closest('.cc'); return !!n && getComputedStyle(n).color !== getComputedStyle(c).backgroundColor && getComputedStyle(c.querySelector('.cc-t b')).color !== getComputedStyle(c).backgroundColor; }), 'the colour codes outcome shows each code and extension (not white on white)');
   ok(await p.evaluate(() => document.querySelectorAll('#cur .cc').length === 6 && !document.querySelector('#cur .res-b > ul.ticks') && /6000/.test(document.querySelector('#cur .cc.orange').textContent) && P['code-blue'].nodes.codes.items.length === 6), 'the colour codes show as six cards (Code Orange on 6000), with the list kept for Copy outcome');
   ok(await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(t => t.textContent).join('|') === 'Who covers where|Team and kit|Record|Bystander poster|Emergency codes|References'), 'Code Blue\'s tabs: who covers where, team and kit, record, bystander poster, emergency codes, references');
   if (guardRe('codeblue')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P['code-blue']) + JSON.stringify(P['interpreter']) + document.body.textContent), guardRe('codeblue')), 'no person in charge, signer or registration number is copied');
@@ -835,6 +836,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/pd-journey.png'});
   await go(p, '#new', 400);
   await p.screenshot({path:out + '/pd-new.png'});
+  /* A long route trail: its hidden labels must not stretch the page sideways (audit, 10 Nov 2026) */
+  for (const r of ['#acs-cpg--tmix', '#pneumonia--opd', '#gastroenteritis--admit']) { await go(p, r, 300); ok(await hscroll(p) <= 0, r + ': a long route trail does not scroll the page sideways'); }
+  ok(await p.evaluate(() => !!document.querySelector('.trailx') && getComputedStyle(document.querySelector('.trailx')).position === 'relative'), 'the route trail contains its hidden labels');
 
   /* ---------- Reduced motion, tablet width ---------- */
   p = await mk({viewport:{width:900, height:1100}, reducedMotion:'reduce', colorScheme:'light'}, 'tablet');

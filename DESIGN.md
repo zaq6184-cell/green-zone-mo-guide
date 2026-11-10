@@ -274,7 +274,7 @@ Two palettes with separate jobs: a jewel palette that tells the MO which area of
 ### Neutral
 - **Pearl Ground** (pearl-ground, pearl-ground-2): the page behind the bento; a cool grey-green, never pure white.
 - **Surface** (surface, surface-2, surface-3): white tiles and cards, then the recessed fill of options, fields and checklists, then the hover and segmented-control track.
-- **Ink** (ink, ink-2, muted, faint): text from headings down to tertiary metadata.
+- **Ink** (ink, ink-2, muted, faint): text from headings down to tertiary metadata. Faint is for icons, chevrons and separators only: as text it falls under 4.5:1 in both themes, so metadata, small labels, chart axes and placeholders take muted.
 - **Lines** (line, line-2): 1 px inner rings and dividers; line-2 for dashed empties, kbd keys and field rings.
 - **Highlight** (highlight): search match marks.
 
@@ -302,7 +302,7 @@ All three load from Google Fonts in one stylesheet request: Figtree 600 to 900, 
 - **Title** (Figtree 800 to 850, 1rem to 1.15rem, 1.15 to 1.2): tile headings, rail and sheet heads, rule and tool headings.
 - **Body** (Atkinson Hyperlegible Next 400, 1rem, 1.55): reading text; leads at 1.03rem; prose capped at 72ch, view intros at 74ch, runner leads at 70ch. Option buttons and list titles use the same face at 800.
 - **Control** (Atkinson Hyperlegible Next 700, 0.95rem, 1.2): buttons, pills (0.86rem), tab bar labels (0.72rem at 800).
-- **Label** (Atkinson Hyperlegible Next 800, 0.62rem to 0.76rem, tracking 0.08em to 0.14em, uppercase): short functional labels in four placements only: a chip beside a tile heading that carries a count or a fact (23 pathways, 7 stop signs, One way); New, Updated and Dept notes badges; the outcome kind under the outcome title (Discharge (green box)); and navigation group heads in the sidebar, the search palette and the route trail.
+- **Label** (Atkinson Hyperlegible Next 800, 0.69rem to 0.76rem, never under 11 px, tracking 0.08em to 0.14em, uppercase): short functional labels in four placements only: a chip beside a tile heading that carries a count or a fact (23 pathways, 7 stop signs, One way); New, Updated and Dept notes badges; the outcome kind under the outcome title (Discharge (green box)); and navigation group heads in the sidebar, the search palette and the route trail.
 - **Figure** (Atkinson Hyperlegible Mono 700, clamp(1.8rem, 7vw, 2.5rem), tabular): the emergency extensions on number tiles; 1.75rem on number cards, 1.2rem to 1.45rem in lists and calculator outputs, 1.25rem in number fields.
 - **Mono** (Atkinson Hyperlegible Mono 700, 0.7rem to 0.9rem, tabular): counts beside navigation and categories, keyboard keys, option numbers, the Ebook page chip in the runner, map node numbers, quick-sum thresholds, tour timecodes.
 
@@ -315,7 +315,7 @@ All three load from Google Fonts in one stylesheet request: Figtree 600 to 900, 
 
 The page is a single column of views inside an app shell. Under 1100 px a sticky glass top bar (60 px, blurred pearl) carries the menu, brand, current title, search and settings, and the obsidian sidebar slides in from the left over a scrim. At 1100 px and up the sidebar is a fixed 286 px column and the top bar disappears.
 
-Views are capped at 1200 px. Side gutters always respect the safe area: max(16px, env(safe-area-inset-left)) and the right-hand equivalent on phones, 28 px from 761 px, 40 px from 1100 px. Views pad 22 px above and 56 px below on phones, 32 px and 64 px wider up. Nothing may scroll sideways at 390 px: grids use minmax(0, 1fr) columns, long labels ellipsis or wrap, and horizontal trails and tab rows scroll inside themselves with hidden scrollbars.
+Views are capped at 1200 px. Side gutters always respect the safe area: max(16px, env(safe-area-inset-left)) and the right-hand equivalent on phones, 28 px from 761 px, 40 px from 1100 px. Views pad 22 px above and 56 px below on phones, 32 px and 64 px wider up. Nothing may scroll sideways at 390 px: grids use minmax(0, 1fr) columns, long labels ellipsis or wrap, and horizontal trails and tab rows scroll inside themselves with hidden scrollbars. Screen-reader text (`.vh`) is anchored to the top left of its containing block and clipped, and the route trail is positioned, so a hidden label inside a scrolled row can never widen the page (every view, step and calculator is crawled at 360 px with none). List items, like paragraphs, wrap with text-wrap: pretty.
 
 **The bento.** Two columns with 12 px gaps on phones; four columns with 14 px gaps from 761 px, with dense auto-flow. The zone tile spans the full width on phones and two by two on desktop; wide tiles span two columns; stat tiles hold at least 150 px. Order is set per breakpoint so on-shift lookup leads on phones: zone, the two emergency numbers, quick routes and saved, then the area tiles, then learning and reference tiles.
 
@@ -360,7 +360,8 @@ Tactile and quiet: white with a ring, the colour arrives on intent.
 
 ### Chips
 - **Pill links:** full pill, surface fill, 1.5 px ring, 0.86rem text at 700 with a trailing chevron; accent ring and text on hover. On jewels they turn to glass.
-- **Tags:** glass pill beside a tile heading, uppercase label type; on pearl tiles they sit on surface-3 in muted.
+- **Tags:** glass pill (white at 9%, so white type keeps 4.5:1 under the tile's sheen) beside a tile heading, uppercase label type; on pearl tiles they sit on surface-3 in muted.
+- **Rule tiles:** the three rule tiles take the admit, discharge and advice hues; the discharge tile's gradient starts at the outcome green itself, and chips and pills on all three sit on a dark glass (black at 16%) so their white labels read on every stop.
 - **Outcome legend:** a pill with a short bar swatch in the flat outcome colour and the kind in ink-2.
 - **Category chips in the runner:** the area's jewel gradient with white text; the Ebook page chip is white and mono.
 
@@ -372,7 +373,7 @@ Tactile and quiet: white with a ring, the colour arrives on intent.
 - **Recessed rows:** options, checklist rows, notes and readouts sit on surface-2 with an inner line ring at 16 to 20 px.
 
 ### Inputs / Fields
-- **Style:** 56 px tall, 16 px corners, surface-2 fill, inset line-2 ring, values in mono 700 at 1.25rem; selects in body 800.
+- **Style:** 56 px tall, 16 px corners, surface-2 fill, inset line-2 ring, values in mono 700 at 1.25rem; selects in body 800. Placeholders take muted at full opacity in every field.
 - **Focus:** the ring becomes a 2 px accent inset and the fill lifts to surface; no outline glow.
 - **Checklists:** 50 px rows with an emerald accent-colour checkbox; checked rows turn accent-soft with an accent ring; stop-sign checklists use the admit red and admit-soft instead.
 - **Library find:** 52 px, 18 px corners, white with the Resting shadow and an accent search icon.
@@ -430,7 +431,7 @@ The ease is a long out-curve, cubic-bezier(.16, 1, .3, 1); a spring, cubic-bezie
 - **Don't** let any element scroll the page sideways at 390 px.
 
 ### Protocol Infographics
-Where a protocol draws its content (the rabies protocol's flow charts and prescribing appendices), the guide redraws it as a quiet infographic inside the step or note it belongs to (`fig`), on surface-2 with a line edge, never as a picture of the page. The wound categories are three cards with a small skin cross-section and a 4 px top rule on a severity ramp (next-step slate, observe amber, admit red), saying what each category leads to. The vaccine schedules are a day strip from D0 to D28: an accent dot on each dose day, a soft accent bar for a window (D14 to D28), a mono count over a multi-site dose (×2, ×4), the course and its chart wording as the row label (above the strip on phones), with a front and back figure marking the sites (refer violet for IM, accent for ID) and the dose at each site in mono. RIG is four small cards with stroke icons, the one that forbids in admit red. The prescription writer repeats the strip for the course chosen under its result.
+Where a protocol draws its content (the rabies protocol's flow charts and prescribing appendices), the guide redraws it as a quiet infographic inside the step or note it belongs to (`fig`), on surface-2 with a line edge and its own ink, so it reads the same in a white card, a tab note or a coloured outcome card, never as a picture of the page. Captions are 0.8rem in muted; labels inside a drawing are at least 9.5 px. The Code Blue map is 10:7 on wide screens and 6:7 on phones, so its smallest block is 31 px tall at 360 px. The colour-code cards carry their colour in the icon square, with no side stripe. The wound categories are three cards with a small skin cross-section and a 4 px top rule on a severity ramp (next-step slate, observe amber, admit red), saying what each category leads to. The vaccine schedules are a day strip from D0 to D28: an accent dot on each dose day, a soft accent bar for a window (D14 to D28), a mono count over a multi-site dose (×2, ×4), the course and its chart wording as the row label (above the strip on phones), with a front and back figure marking the sites (refer violet for IM, accent for ID) and the dose at each site in mono. RIG is four small cards with stroke icons, the one that forbids in admit red. The prescription writer repeats the strip for the course chosen under its result.
 
 ### Read-aloud Bar and Leaflet Film
 Patient advice that can be read aloud (the two CPG leaflets in both languages, and the discharge advice of mild head injury, dengue and the Asthma Zone) opens with a **Listen bar**: an emerald jewel strip with a white round play button, the label and the time in mono, a 6 px track that fills in mint with a tick at each section, and white-ringed chips that start a section. While it plays, the section being read is outlined in the accent on accent-soft, and the line being read carries a soft mint marker (mint at 30%, with a 4 px spread of the same so the marker breathes past the text) that moves line by line with the voice; the page follows it only when it leaves the screen and the reader has not scrolled in the last four seconds. Nothing downloads before the play button is tapped. A leaflet with a film offers it under the bar as a small white card (a 72 px square cover with a white play disc, a display-face title and one muted line with the length); the tap swaps the card for a square player with the full cover, and starting either one stops the other.

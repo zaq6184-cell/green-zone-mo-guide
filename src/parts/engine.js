@@ -386,7 +386,7 @@ const CB_ROADS = [[0, 18.7, 100, 3.6], [0, 40.9, 100, 3.6], [27.6, 44.5, 1.8, 55
 const CBM_HINT = '<p class="cbm-h">Tap a block: who responds there, and the number. Not on the map: the Radiology department, 03-2615 7019 / 5928 (Table 1).</p>';
 function cbBlock(k){
   const b = CB_BLOCKS[k];
-  return `<h5>${esc(b.n)}<small>${esc(b.f)}</small></h5><p class="cbm-a${b.z ? ' z2' : ''}">${esc(b.a || 'Code Blue: ext 5333 (03-2615 5333)')}</p><ul>${b.l.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="cbm-src">Appendix ii and Table ${b.z ? 2 : 1}, Code Blue Manual 2022/2024</p>`;
+  return `<p class="cbm-name">${esc(b.n)}<small>${esc(b.f)}</small></p><p class="cbm-a${b.z ? ' z2' : ''}">${esc(b.a || 'Code Blue: ext 5333 (03-2615 5333)')}</p><ul>${b.l.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="cbm-src">Appendix ii and Table ${b.z ? 2 : 1}, Code Blue Manual 2022/2024</p>`;
 }
 /* Tap a block: it lights, and the panel under the map says who responds there; tap it again to clear */
 function cbPick(b){
@@ -1259,7 +1259,7 @@ function tabsOf(p){
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
-  const note = d => `<div class="deptnote"><h4>${esc(d.h)}</h4><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
+  const note = d => `<div class="deptnote"><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
   if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
   /* A national guideline's reference notes, several tabs of them, each note with its page */
@@ -2587,7 +2587,7 @@ function renderJourney(anim){
       <div class="cap" id="jcap" hidden></div>
       <div class="ctl"><button type="button" class="mbtn" id="jlisten" aria-pressed="false">${svg('volume')}<span class="bl">Listen</span></button><button type="button" class="mbtn" id="jclipbtn">${svg(clipsOn ? 'pause' : 'play')}<span class="bl">${clipsOn ? 'Pause clip' : 'Play clip'}</span></button></div></figure>
     <div class="txt">
-      <h3>${esc(s.title)}</h3>
+      <h2>${esc(s.title)}</h2>
       <span class="who${s.mo ? ' mo' : ''}${s.optional ? ' optional' : ''}">${esc(s.who)}</span>
       <ul>${s.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
       ${s.note ? `<a class="note" href="${s.note.href}"${nc}><b>${esc(s.note.k)}</b>${esc(s.note.t)}</a>` : ''}
@@ -2723,7 +2723,7 @@ function renderQuiz(focus){
   } else {
     const q = QUIZ[quiz.i], os = quiz.opts[quiz.i];
     box.innerHTML = `<div class="q-card" tabindex="-1" id="qcard"><div class="q-top"><span>Question ${quiz.i + 1} of ${n}</span><span>${quiz.score} right${best !== null ? ' · best ' + best : ''}</span></div>
-      <div class="q-prog"><i style="width:${quiz.i / n * 100}%"></i></div><h3>${esc(q.q)}</h3>
+      <div class="q-prog"><i style="width:${quiz.i / n * 100}%"></i></div><h2>${esc(q.q)}</h2>
       <div class="q-opts">${os.map((o, k) => `<button type="button" data-o="${k}"><b>${'ABCD'[k]}</b><span>${esc(o.t)}</span></button>`).join('')}</div><div id="qwhy"></div></div>`;
   }
   if (focus) $('#qcard').focus({preventScroll:true});
@@ -2755,14 +2755,14 @@ function renderDrive(){
     const rows = DRIVE.filter(d => d[1] === k); if (!rows.length) return '';
     return `<details class="dgrp"${open ? ' open' : ''}><summary>MO Drive: ${t} <small>${rows.length}</small></summary><ul class="drows">${rows.map(([f, , txt, links]) => row([f, txt, links])).join('')}</ul></details>`;
   }).join('');
-  h += `<div class="confirm tile t-champagne"><h3>Still to confirm</h3><ol>${CONFIRM.map(c => `<li>${esc(c)}</li>`).join('')}</ol></div>`;
+  h += `<div class="confirm tile t-champagne"><h2>Still to confirm</h2><ol>${CONFIRM.map(c => `<li>${esc(c)}</li>`).join('')}</ol></div>`;
   $('#drive').innerHTML = h;
 }
 
 /* ================= Sources and about ================= */
 function renderAbout(){
   const lst = ids => ids.map(id => `<a href="#${id}">${esc(P[id].title)}</a>${P[id].src ? ' · ' + esc(P[id].src) : ''}`);
-  const panel = (k, h, p, items) => `<section class="panel"><h3>${h}</h3><p class="src-k">${k}</p><p>${p}</p>${items && items.length ? `<ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</section>`;
+  const panel = (k, h, p, items) => `<section class="panel"><h2>${h}</h2><p class="src-k">${k}</p><p>${p}</p>${items && items.length ? `<ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>` : ''}</section>`;
   $('#srcs').innerHTML = [
     panel('Approved source', 'The ebook', '<i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025). The 23 pathways are built as written, and page numbers refer to that edition.', ['Outcome colours follow the ebook\'s boxes: red admit, green discharge, yellow observation, blue discharge advice', 'Department notes on a pathway are labelled as not in the ebook, with their source']),
     panel('Department notes', 'Green Zone flow and referrals', 'Memos, SOPs and flow charts from the department. Each entry names its source and date.', lst(FLOW_IDS)),
