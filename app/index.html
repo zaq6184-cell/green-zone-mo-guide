@@ -9286,7 +9286,7 @@ function showLearn(sub){
   const changed = showView('learn', sub);
   $$('#ltabs [data-lt]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lt === sub));
   $$('#v-learn [data-lp]').forEach(p => { p.hidden = p.dataset.lp !== sub; });
-  if (sub !== 'tour') pauseTour();
+  if (sub === 'tour') tourOpen(); else pauseTour();
   if (sub !== 'journey') stopJourney();
   setTopTitle({journey:'Patient journey', tour:'90-second tour', quiz:'Quick check'}[sub] || 'Learn');
   markNav();
@@ -11046,15 +11046,29 @@ const TOUR_LANGS = {
       h:'Zon Hijau <span>dalam 2 minit</span>', d:'1 minit 35 saat, dengan narasi dan sari kata pada skrin. Pilih satu bab, atau ketik satu baris transkrip untuk mendengarnya.', resume:'Sambung pada '}
 };
 const film = T => night() ? {src:T.nsrc, cover:T.ncover} : {src:T.src, cover:T.cover};
-let tourTheme = () => {};
+/* Set by setupTour: tourOpen when the tour is shown, tourTheme when the colours change */
+let tourTheme = () => {}, tourOpen = () => {};
 function pauseTour(){ const v = $('#vid'); if (v && !v.paused) v.pause(); }
 function setupTour(){
   const v = $('#vid'); let retried = false, lastSave = 0, lastLn = -1, lastCh = -1;
+  /* armed: the tour has been opened, so its film may go in. shown: the film in the player (still that film while a whole
+     copy plays from a blob after an error). startAt: the place to go back to when the film next loads */
+  let armed = false, shown = '', startAt = 0;
   let L = store.get('gz-tour-lang', 'en'); if (!TOUR_LANGS[L]) L = 'en';
   const sp = $('#speeds');
   [0.75, 1, 1.25, 1.5].forEach(r => sp.insertAdjacentHTML('beforeend', `<button type="button" data-rate="${r}" aria-pressed="${r === 1}">${r}×</button>`));
-  /* Draw the chosen language; with load, swap the film too (preload is none, so nothing downloads until play) */
-  const drawLang = load => {
+  /* The film for this language and these colours. Its cover goes in at once, the film only once the tour has opened, and
+     never with load(): Chrome treats a call to load() as overriding preload="none" and downloads the film (Chrome 157,
+     10 Nov 2026: the first 26 seconds, about 1 MB, on a first visit with no tap). With src alone, nothing downloads until
+     play, a chapter, a line of the transcript or Resume. */
+  const putFilm = () => {
+    const f = film(TOUR_LANGS[L]);
+    if (v.getAttribute('poster') !== f.cover) v.setAttribute('poster', f.cover);
+    startAt = 0;
+    if (armed){ shown = f.src; retried = false; $('#vmsg').hidden = true; v.src = f.src; }
+  };
+  /* Draw the chosen language, with its film */
+  const drawLang = () => {
     const T = TOUR_LANGS[L];
     $('#chaps').innerHTML = T.ch.map(([t, l], i) => `<button type="button" data-t="${t}" data-ch="${i}"><span>${fmt(t)}</span>${esc(l)}</button>`).join('');
     $('#tscript').innerHTML = T.cap.map(([t, l], i) => `<li><button type="button" data-t="${t}" data-ln="${i}"><span>${fmt(t)}</span>${esc(l)}</button></li>`).join('');
@@ -11065,26 +11079,31 @@ function setupTour(){
     const pos = store.get(T.key, 0);
     if (pos > 3) sp.insertAdjacentHTML('beforeend', `<button type="button" data-t="${pos}" id="resume">${T.resume}${fmt(pos)}</button>`);
     lastLn = -1; lastCh = -1;
-    if (load){ const f = film(T); v.pause(); retried = false; $('#vmsg').hidden = true; v.setAttribute('poster', f.cover); v.src = f.src; v.load(); }
+    v.pause(); putFilm();
   };
-  drawLang(true);
-  /* Day or night changed: swap to the matching film, keeping the place and, if it was playing, playing on */
+  drawLang();
+  tourOpen = () => { if (!armed){ armed = true; putFilm(); } };
+  /* Day or night changed: swap to the matching film, keeping the place and, if it was playing, playing on. A paused film
+     swaps without downloading; it goes back to its place when it next plays. */
   tourTheme = () => {
-    const f = film(TOUR_LANGS[L]); if (v.getAttribute('src') === f.src) return;
-    const t = v.currentTime || 0, playing = !v.paused && !v.ended;
-    retried = false; $('#vmsg').hidden = true;
-    v.setAttribute('poster', f.cover); v.src = f.src; v.load();
-    if (t > .5) v.addEventListener('loadedmetadata', () => { try { v.currentTime = t; } catch(e){} }, {once:true});
+    if (!armed){ putFilm(); return; }
+    if (shown === film(TOUR_LANGS[L]).src) return;
+    const t = v.currentTime || 0, playing = !v.paused && !v.ended, back = t > .5 && !v.ended;
+    putFilm(); if (back) startAt = t;
     if (playing) v.play().catch(() => {});
   };
-  const seek = t => { const goTo = () => { try { v.currentTime = t; } catch(e){} v.play().catch(() => {}); }; if (v.readyState >= 1) goTo(); else { v.addEventListener('loadedmetadata', goTo, {once:true}); v.load(); } };
+  v.addEventListener('loadedmetadata', () => { if (startAt){ try { v.currentTime = startAt; } catch(e){} startAt = 0; } });
+  const seek = t => { tourOpen(); const goTo = () => { try { v.currentTime = t; } catch(e){} v.play().catch(() => {}); }; if (v.readyState >= 1) goTo(); else { v.addEventListener('loadedmetadata', goTo, {once:true}); v.load(); } };
   $('#tourbox').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
-    if (b.dataset.lang){ if (b.dataset.lang !== L && TOUR_LANGS[b.dataset.lang]){ L = b.dataset.lang; store.set('gz-tour-lang', L); drawLang(true); } }
+    if (b.dataset.lang){ if (b.dataset.lang !== L && TOUR_LANGS[b.dataset.lang]){ L = b.dataset.lang; store.set('gz-tour-lang', L); drawLang(); } }
     else if (b.dataset.rate){ v.playbackRate = v.defaultPlaybackRate = +b.dataset.rate; $$('#speeds [data-rate]').forEach(x => x.setAttribute('aria-pressed', x === b)); }
     else if (b.dataset.t !== undefined){ seek(+b.dataset.t); if (b.id === 'resume') b.remove(); }
   });
   v.addEventListener('timeupdate', () => {
+    /* A new src first resets the time to 0, before the film has loaded: that keeps the lit chapter and line, and must not
+       wipe the saved place */
+    if (!v.readyState) return;
     const t = v.currentTime, T = TOUR_LANGS[L];
     let ln = -1; T.cap.forEach(([s], i) => { if (t >= s - .05) ln = i; });
     let ch = 0; T.ch.forEach(([s], i) => { if (t >= s) ch = i; });
@@ -11707,7 +11726,7 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
    - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
-  const PAGE = 'd3882d17ddc2'; /* this page's id, which build.js also writes into sw.js */
+  const PAGE = '5b67f6829ef8'; /* this page's id, which build.js also writes into sw.js */
 
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };

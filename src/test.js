@@ -58,8 +58,12 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const ctx = await b.newContext(opts); const p = await ctx.newPage();
     p.on('console', m => { if (m.type() === 'error') errs.push(name + ': ' + m.text()); });
     p.on('pageerror', e => errs.push(name + ' PAGEERROR: ' + e.message));
+    /* Every film from media/ this page asks for, from its own requests (the server is shared by pages left open, and the
+       resource timing buffer drops entries once full): none may load before a tap */
+    p.films = []; p.on('request', r => { const f = new URL(r.url()).pathname; if (/^\/media\/[^/]+\.mp4$/.test(f)) p.films.push(f); });
     return p;
   };
+  const noFilm = (p, msg) => ok(!p.films.length, msg + (p.films.length ? ': ' + [...new Set(p.films)].join(', ') : ''));
   const hscroll = p => p.evaluate(() => document.documentElement.scrollWidth - innerWidth);
   const visible = p => p.evaluate(() => [...document.querySelectorAll('#viewport > .view')].filter(v => !v.hidden).map(v => v.dataset.view).join(','));
   const go = async (p, h, wait = 350) => { await p.evaluate(x => { location.hash = x; }, h); await p.waitForTimeout(wait); };
@@ -75,7 +79,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => /5333/.test(document.querySelector('#kn-a').textContent)), 'Code Blue tile shows ext 5333');
   ok(await p.evaluate(() => document.querySelectorAll('#quick a .dots i').length) > 8, 'quick routes show how each can end');
   ok(await p.evaluate(() => { const s = document.querySelector('#daynight'); return !!s && s.getAttribute('role') === 'switch' && s.getAttribute('aria-checked') === 'false' && s.querySelectorAll('svg.i').length === 2; }), 'home shows the Day and Night switch, set to day');
-  ok(await p.evaluate(() => document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-poster.webp'), 'in day colours the tour has the day film and cover');
+  ok(await p.evaluate(() => { const v = document.querySelector('#vid'); return v.getAttribute('poster') === 'media/explainer-poster.webp' && !v.hasAttribute('src') && v.readyState === 0; }), 'in day colours the tour has the day cover, and no film until the tour opens');
+  noFilm(p, 'no film from media/ loads before a tap');
   ok(await p.evaluate(() => document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src') === 'poster/sheet1-thumb.webp'), 'in day colours the poster page has the day sheets');
   ok(await p.evaluate(() => APP_URL) === 'https://zaq6184-cell.github.io/green-zone-mo-guide/', 'Copy link builds links on the public web app');
   ok(await p.evaluate(() => document.querySelectorAll('#kn-a .tm img, #kn-b .tm img').length) === 2, 'Code Blue and Code Stroke tiles have their pictures');
@@ -95,6 +100,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await hscroll(p) <= 0, `#${v} no sideways scroll`);
     await p.screenshot({path:out + `/d-${v}.png`, fullPage:true});
   }
+  ok(await p.evaluate(() => { const v = document.querySelector('#vid'); return v.getAttribute('src') === 'media/green-zone-explainer-720p.mp4' && v.getAttribute('poster') === 'media/explainer-poster.webp' && v.readyState === 0; }), 'opening the tour puts in the day film, which waits for play (preload none)');
+  noFilm(p, 'every view, the tour included, loads no film from media/ before a tap');
   // Topic tiles: pictures, and loops while Moving tiles is on (on by default)
   await go(p, '#pathways', 900);
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length) === 10, 'the ten topic tiles have their pictures');
@@ -419,6 +426,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => { const box = document.querySelector('#leaf .lsn'), L = READ['leaf-dengue-en'].lines; return L.length === document.querySelectorAll('#leaf .leaf-t, #leaf .leaf-g > h5, #leaf .leaf-g > p, #leaf .leaf-g li').length && L.every(l => readLine(box, l[1], l[2])) && L.every((l, i) => !i || l[0] > L[i - 1][0]); }), 'every English leaflet line has its own mark, in order, on its own element');
   // The leaflet's film: a small card until tapped (nothing loads before), then the player, which stops the narration
   ok(await p.evaluate(() => { const b = document.querySelector('#leaf .lfilm-b'); return !!b && b.dataset.film === 'media/dengue-home-720.mp4' && !document.querySelector('#leaf video') && !performance.getEntriesByType('resource').some(e => e.name.includes('dengue-home') && e.name.includes('.mp4')); }), 'the leaflet offers its film as a small card, and no film loads before a tap');
+  noFilm(p, 'up to this first film tap, no film from media/ has loaded on this page');
   await p.click('#leaf .lfilm-b'); await p.waitForTimeout(400);
   ok(await p.evaluate(() => { const v = document.querySelector('#leaf .lfilm video'); return !!v && v.src.endsWith('media/dengue-home-720.mp4') && v.controls && reader.paused; }), 'tapping the film card swaps in the player and stops the narration');
   ok(Object.values(await p.evaluate(() => FILMS)).every(f => ['en', 'ms'].every(l => ['src', 'cover', 'thumb'].every(k => fs.existsSync(path.join(__dirname, '..', 'app', f[l][k]))) && !/FILM_/.test(f[l].d))), 'every leaflet film, cover and thumbnail exists, with its length written');
@@ -772,17 +780,18 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(dn.gap >= 4 && dn.clear >= -1 && dn.right >= 15 && dn.oneLine && dn.w >= 44, `phone: the switch sits beside a one-line title, clear of the greeting (${JSON.stringify(dn)})`);
   await p.tap('#daynight'); await p.waitForTimeout(450);
   const pn = await p.evaluate(() => ({theme:document.documentElement.dataset.theme, on:document.querySelector('#daynight').getAttribute('aria-checked'), saved:localStorage.getItem('gz-theme'),
-    src:document.querySelector('#vid').getAttribute('src'), thumb:document.querySelector('#v-poster [data-sheet="2"] img').getAttribute('src')}));
+    src:document.querySelector('#vid').getAttribute('src'), cover:document.querySelector('#vid').getAttribute('poster'), thumb:document.querySelector('#v-poster [data-sheet="2"] img').getAttribute('src')}));
   ok(pn.theme === 'dark' && pn.on === 'true' && pn.saved === '"dark"', 'phone: the home switch turns the night colours on and remembers it');
-  ok(pn.src === 'media/green-zone-explainer-night-720p.mp4' && pn.thumb === 'poster/sheet2-night-thumb.webp', 'night colours bring the night film and the night sheets');
+  ok(pn.cover === 'media/explainer-night-poster.webp' && pn.src === null && pn.thumb === 'poster/sheet2-night-thumb.webp', 'night colours bring the night film\'s cover (the film waits for the tour) and the night sheets');
   await p.screenshot({path:out + '/p-home-night.png'});
   await p.tap('#daynight'); await p.waitForTimeout(450);
-  ok(await p.evaluate(() => document.documentElement.dataset.theme === 'light' && document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4'), 'a second tap brings the day colours back');
+  ok(await p.evaluate(() => document.documentElement.dataset.theme === 'light' && document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-poster.webp'), 'a second tap brings the day colours back');
   for (const v of VIEWS.slice(1)){
     await go(p, '#' + v);
     ok(await hscroll(p) <= 0, `phone #${v} no sideways scroll`);
     await p.screenshot({path:out + `/p-${v}.png`, fullPage:true});
   }
+  noFilm(p, 'phone: Day and Night and every view, the tour included, load no film from media/ before a tap');
   await go(p, '#pathways', 600);
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 10 && document.querySelectorAll('#libcats .tm video').length > 0), 'on a phone the topic tiles move by default too');
   ok(await p.evaluate(() => { const n = document.querySelectorAll('.tm[data-play]').length; return n > 0 && n <= 6; }), 'a phone plays at most six loops at once');
@@ -843,14 +852,16 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   p = await mk({...phone, colorScheme:'dark'}, 'phone-dark');
   await p.goto(U, {waitUntil:'networkidle'}); await p.waitForTimeout(800);
   await p.screenshot({path:out + '/pd-home.png'});
-  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'true' && document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-night-720p.mp4' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-night-poster.webp'), 'on Auto, a dark phone gets the switch at night and the night film');
+  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'true' && !document.querySelector('#vid').hasAttribute('src') && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-night-poster.webp'), 'on Auto, a dark phone gets the switch at night and the night film\'s cover');
   await go(p, '#tour', 400);
+  ok(await p.evaluate(() => document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-night-720p.mp4'), 'opening the tour puts in the night film');
   await p.screenshot({path:out + '/pd-tour.png'});
   await go(p, '#poster', 400);
   ok(await hscroll(p) <= 0, 'phone dark poster no sideways scroll');
   await p.screenshot({path:out + '/pd-poster.png', fullPage:true});
   await p.emulateMedia({colorScheme:'light'}); await p.waitForTimeout(400);
-  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4' && document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src') === 'poster/sheet1-thumb.webp'), 'on Auto, when the device turns light the switch, film and sheets follow');
+  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-720p.mp4' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-poster.webp' && document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src') === 'poster/sheet1-thumb.webp'), 'on Auto, when the device turns light the switch, film and sheets follow');
+  noFilm(p, 'phone at night: opening the tour and the device turning light load no film from media/');
   await p.emulateMedia({colorScheme:'dark'}); await p.waitForTimeout(400);
   await go(p, '#referral-rules--ortho', 400);
   await p.screenshot({path:out + '/pd-run-ortho.png', fullPage:true});
@@ -871,6 +882,55 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/t-home.png'});
   await go(p, '#pathways', 500);
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 10 && !document.querySelector('.tm video')), 'with reduced motion the tiles stay as still pictures');
+
+  /* ---------- The tour film: it downloads only on a tap, and chapters, the transcript, Resume, the language and
+     Day/Night still work. Chrome treats a call to load() as overriding preload="none", so the film goes in only when the
+     tour opens and nothing calls load() before a tap. Played muted: the sound is not under test. ---------- */
+  {
+    const q = await mk({viewport:{width:1366, height:900}, colorScheme:'light'}, 'tour');
+    const vid = () => q.evaluate(() => { const v = document.querySelector('#vid'); return {src:v.getAttribute('src'), cover:v.getAttribute('poster'), t:v.currentTime, paused:v.paused, rs:v.readyState}; });
+    const plays = (from, src = 'media/green-zone-explainer-720p.mp4') => q.waitForFunction(([f, s]) => { const v = document.querySelector('#vid'); return v.getAttribute('src') === s && !v.paused && v.readyState >= 3 && v.currentTime >= f; }, [from, src], {timeout:12000, polling:100}).then(() => true, () => false);
+    await q.goto(U + '#tour', {waitUntil:'networkidle'}); await q.waitForTimeout(1500);
+    await q.evaluate(() => { document.querySelector('#vid').muted = true; });
+    let s = await vid();
+    ok(s.src === 'media/green-zone-explainer-720p.mp4' && s.cover === 'media/explainer-poster.webp' && s.rs === 0, 'tour: opened straight from #tour, it has the day film and cover, and the film waits for play');
+    noFilm(q, 'tour: opening it loads no film');
+    const ch = await q.evaluate(() => +document.querySelector('#chaps [data-ch="3"]').dataset.t);
+    await q.click('#chaps [data-ch="3"]');
+    ok(await plays(ch), `tour: tapping a chapter loads the film and plays it from that chapter (${ch} s)`);
+    ok(q.films.includes('/media/green-zone-explainer-720p.mp4'), 'tour: the film loads on that tap (so the checks above would have seen a film loading)');
+    ok(await q.evaluate(() => document.querySelector('#chaps [data-ch="3"]').getAttribute('aria-current') === 'true'), 'tour: and that chapter lights up');
+    const ln = await q.evaluate(() => +document.querySelector('#tscript [data-ln="30"]').dataset.t);
+    await q.click('#tscript [data-ln="30"]');
+    ok(await plays(ln) && await q.evaluate(() => document.querySelector('#tscript [data-ln="30"]').getAttribute('aria-current') === 'true'), `tour: a line of the transcript plays from that line (${ln} s) and lights it`);
+    await q.waitForTimeout(600);
+    await q.evaluate(() => document.querySelector('#vid').pause());
+    const pos = await q.evaluate(() => JSON.parse(localStorage.getItem('gz-tour-pos')));
+    await q.click('#tlang [data-lang="ms"]'); await q.waitForTimeout(1200);
+    s = await vid();
+    ok(s.src === 'media/green-zone-explainer-ms-720p.mp4' && s.cover === 'media/explainer-ms-poster.webp' && s.rs === 0 && s.paused && !q.films.some(f => f.includes('-ms-')), 'tour: Bahasa Melayu swaps in its film and cover, and downloads nothing before play');
+    ok(await q.evaluate(() => localStorage.getItem('gz-tour-pos-ms') === null && JSON.parse(localStorage.getItem('gz-tour-pos')) > 3), 'tour: the switch wipes neither language\'s saved place');
+    await q.click('#tlang [data-lang="en"]'); await q.waitForTimeout(300);
+    const rs = await q.evaluate(() => { const r = document.querySelector('#resume'); return r ? {t:+r.dataset.t, text:r.textContent} : null; });
+    ok(!!rs && rs.t === pos && pos >= Math.floor(ln) && /^Resume at \d:\d\d$/.test(rs.text), `tour: back in English, Resume offers the saved place (${rs ? rs.text : 'none'})`);
+    await q.click('#resume');
+    ok(await plays(pos), 'tour: Resume plays from the saved place');
+    const t1 = (await vid()).t;
+    await q.emulateMedia({colorScheme:'dark'});
+    ok(await plays(t1 - .5, 'media/green-zone-explainer-night-720p.mp4') && (await vid()).cover === 'media/explainer-night-poster.webp', 'tour: night colours while it plays: the night film plays on from the same place');
+    await q.waitForTimeout(400);
+    await q.evaluate(() => document.querySelector('#vid').pause());
+    const t2 = (await vid()).t, n = q.films.length;
+    await q.emulateMedia({colorScheme:'light'}); await q.waitForTimeout(1200);
+    s = await vid();
+    ok(s.src === 'media/green-zone-explainer-720p.mp4' && s.cover === 'media/explainer-poster.webp' && s.rs === 0 && !q.films.slice(n).includes('/media/green-zone-explainer-720p.mp4'), 'tour: day colours while paused: the day film and cover go in, with nothing downloaded');
+    ok(await q.evaluate(t => JSON.parse(localStorage.getItem('gz-tour-pos')) >= Math.floor(t) - 3 && +(document.querySelector('#chaps [aria-current="true"]') || {dataset:{ch:-1}}).dataset.ch === [...document.querySelectorAll('#chaps [data-t]')].filter(b => +b.dataset.t <= t).length - 1, t2), 'tour: and the saved place and the lit chapter are kept');
+    await q.evaluate(() => document.querySelector('#vid').play());
+    ok(await plays(t2 - .5), 'tour: play goes on from the same place');
+    await q.evaluate(() => document.querySelector('#vid').pause());
+    await q.screenshot({path:out + '/d-tour-played.png'});
+    await q.context().close();
+  }
 
   /* ---------- The public web app: manifest, service worker, offline, kept sounds, updates ----------
      On a server of its own (PORT + 1), whose log holds only this phone's requests and its worker's. With reduced motion
@@ -913,10 +973,10 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await until(p, () => !!navigator.serviceWorker.controller), 'web app: it takes charge of the open page');
     const saved = await p.evaluate(async c => (await (await caches.open(c)).keys()).map(r => r.url), CACHE);
     ok(saved.length === nPre && Object.keys(PRE).every(f => saved.includes(W + f)), `web app: the page, the manifest and the ${nPre - 2} small stills are saved, each matching the build`);
-    /* A whole film, sound or poster sheet fetched (no byte range) would be the worker's doing. The test browser's own tour
-       player may ask for a range of its film on load despite preload="none": that is the page, not the worker. */
-    const ahead = log.filter(l => (/\.(mp4|mp3) /.test(l) || /^\/poster\/sheet\d(-night)?\.webp /.test(l)) && !/ bytes=/.test(l));
-    ok(!ahead.length, 'web app: the worker fetched no film, sound, loop or full poster sheet ahead' + (ahead.length ? ': ' + ahead.join(', ') : ''));
+    /* Before any tap nothing asks for a film, sound or full poster sheet: not the worker (it would fetch one whole), and not
+       the page's own players (they ask in byte ranges; the tour's film goes in only when the tour opens) */
+    const ahead = log.filter(l => /\.(mp4|mp3) /.test(l) || /^\/poster\/sheet\d(-night)?\.webp /.test(l));
+    ok(!ahead.length, 'web app: nothing fetched a film, sound, loop or full poster sheet ahead, neither the worker nor the page' + (ahead.length ? ': ' + ahead.join(', ') : ''));
     const inst = await cdp.send('Page.getInstallabilityErrors').catch(e => ({installabilityErrors:[{errorId:'cdp: ' + e.message}]}));
     const instErr = inst.installabilityErrors.map(x => x.errorId).filter(x => x !== 'in-incognito');
     ok(!instErr.length, 'web app: Chrome finds nothing that stops it installing (besides the test browser being private)' + (instErr.length ? ': ' + instErr.join(', ') : ''));
