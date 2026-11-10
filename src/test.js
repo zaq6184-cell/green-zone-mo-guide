@@ -33,7 +33,7 @@ const srv = http.createServer((q, r) => {
   });
 }).listen(PORT);
 const U = `http://localhost:${PORT}/`;
-const VIEWS = ['home','pathways','rules','tools','calc','numbers','intro','journey','tour','quiz','new','poster','about'];
+const VIEWS = ['home','pathways','rules','tools','calc','numbers','links','intro','journey','tour','quiz','new','poster','about'];
 let fails = 0;
 const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!cond) fails++; };
 
@@ -93,7 +93,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // Library filter and stars
   await go(p, '#pathways');
   ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length === Object.keys(P).length && Object.keys(P).length >= 44), `library shows a card for each of the ${await p.evaluate(() => Object.keys(P).length)} entries`);
-  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '15' && document.querySelector('#libf [data-f="cpg"] small').textContent === String(Object.keys(P).filter(id => P[id].grp === 'cpg').length)), 'the Ebook filter still counts the 23 ebook pathways (the CPGs are not), rules 15, and Guidelines every CPG entry');
+  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '18' && document.querySelector('#libf [data-f="cpg"] small').textContent === String(Object.keys(P).filter(id => P[id].grp === 'cpg').length)), 'the Ebook filter still counts the 23 ebook pathways (the CPGs are not), rules 18, and Guidelines every CPG entry');
   await p.fill('#libq', 'colic'); await p.waitForTimeout(150);
   console.log('     filter colic ->', await p.evaluate(() => [...document.querySelectorAll('#libgrid .pc h3')].map(h => h.textContent).join(' | ')));
   await p.fill('#libq', ''); await p.waitForTimeout(100);
@@ -213,7 +213,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 30 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 30 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 32 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 32 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
@@ -615,6 +615,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => /Pre-exposure prophylaxis only/.test(document.querySelector('#cur h2').textContent) && /Not in the protocol/.test(document.querySelector('#cur .gap').textContent)), 'pre-exposure prophylaxis: no RIG, and the vaccine schedule is marked as not in the protocol');
   ok(await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(t => t.textContent).join('|') === 'How to prescribe|Risk checklist|Who does what|Signs to counsel|References' && !!document.querySelector('#tp-refs a.ext[href*="1k8Yh8oSoEMw3MPJ02kf19ujBnxCXMsX8"]')), 'its tabs: how to prescribe, the checklist, who does what, signs to counsel, and references with the PDF');
   if (guardRe('rabies')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P['animal-bites']) + document.body.textContent), guardRe('rabies')), 'no name, IC, passport or serial number from the sample prescriptions, and not the mobile number on the card');
+  ok(await p.evaluate(() => !/\b\d{6}-\d{2}-\d{4}\b/.test(JSON.stringify(P))), 'no IC-shaped number in any entry');
   /* The writer: the protocol's own example (Appendix 4B) must come out as printed */
   await go(p, '#calc-rabies', 500);
   await p.fill('#cf-d0', '2022-05-01'); await p.waitForTimeout(200);
@@ -628,6 +629,103 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => /Rabies Immunoglobulin 1 vial \(1000 units\) stat/.test(document.querySelector('#couts').textContent) && /accept verbal consent/.test(document.querySelector('#couts').textContent)), 'with RIG: one vial, after the ID trainee or consultant agrees');
   await p.click('[data-k="reg"][data-sv="short"]'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => [...document.querySelectorAll('[data-k="rt"]')].map(b => b.textContent).join('|') === 'IM, 1 site|ID, 1 site|ID, 4 sites' && /D0, D3/.test(document.querySelector('#couts .out b').textContent)), 'the shorter course offers 1 site on D0 and D3, or ID at 4 sites on D0');
+  await go(p, '#home', 300);
+
+  /* The orthopaedic referral memo, to show when a referral is declined: open and download, from both outcomes and References */
+  await go(p, '#referral-rules--orthoc', 400);
+  ok(await p.evaluate(() => { const a = [...document.querySelectorAll('#cur .res .links a.ext')].map(x => x.getAttribute('href')); return a.length === 2 && a[0].endsWith('/1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ/view') && a[1].includes('export=download&id=1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ') && [...document.querySelectorAll('#cur .res .links a.ext')].every(x => x.target === '_blank'); }), 'the on-call orthopaedic referral shows the memo, to open or download, in a new tab');
+  await p.click('#ptab [data-pt="refs"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelectorAll('#tp-refs .cpg-pdf a.ext').length === 2), 'the referral rules list the memo in References, to open or download');
+  await go(p, '#home', 300);
+
+  /* Code Blue (Code Blue Manual 2022/2024, 10 Nov 2026): the numbers, the block map, both zones, the 10 minutes, the colour codes */
+  await go(p, '#code-blue', 500);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .figcbn .cbn').length === 4 && /5333/.test(document.querySelector('#cur .cbn.hot').textContent) && document.querySelector('.run-hero').classList.contains('t-garnet')), 'Code Blue opens on its numbers, 5333 first, under a garnet banner');
+  await p.click('#cur .cbn.hot .cpy'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => /Copied|Selected/.test(document.querySelector('#cur .cbn.hot .cpy').textContent)), 'Copy on a Code Blue number answers');
+  await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .cbm-b').length === 10 && document.querySelectorAll('#cur .cbm-map .rd').length === 5), 'the block map shows the ten blocks and the roads of Appendix ii');
+  await p.click('#cur [data-cbb="hta"]'); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => document.querySelector('#cur [data-cbb="hta"]').getAttribute('aria-pressed') === 'true' && /03-2600 1050/.test(document.querySelector('#cur .cbm-out').textContent)), 'tapping HTA shows the WCH code blue team, 03-2600 1050');
+  await p.click('#cur [data-cbb="hta"]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => document.querySelector('#cur [data-cbb="hta"]').getAttribute('aria-pressed') === 'false' && /Tap a block/.test(document.querySelector('#cur .cbm-out').textContent)), 'tapping it again clears the panel');
+  await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .cbs li').length === 8 && /1133 \/ 1134/.test(document.querySelector('#cur .cbs li.an').textContent)), 'SCACC shows its eight levels, level 7 Anaesthesia on 1133 / 1134');
+  for (const k of [1, 1, 1]){ await p.click(`#cur button.opt[data-go="${k}"]`); await p.waitForTimeout(200); }
+  ok(await p.evaluate(() => state.cur === 'z2cpr' && document.querySelectorAll('#cur .cbc').length === 4), 'SCACC, not stable, not conscious, no pulse: initiate CPR, with the chain of survival');
+  await p.click('#cur button[data-next]'); await p.waitForTimeout(200); await p.click('#cur button[data-next]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => state.cur === 'z2t' && /EDHKL for transport: 5333/.test(document.querySelector('#cur .res h2').textContent)), 'then Anaesthesiology on 1133 / 1134, and EDHKL for transport on 5333');
+  await go(p, '#code-blue--ten', 400);
+  ok(await p.evaluate(() => !!document.querySelector('#cur .figcbk .cbk-fill') && document.querySelectorAll('#cur button.opt').length === 3), 'the 10-minute check shows its clock and three answers');
+  await p.click('#cur button.opt[data-go="2"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => state.cur === 'move' && /5\.4d/.test(document.querySelector('#cur').textContent)), 'past 10 minutes with no one BLS-trained: start the transfer to the ED (5.4d)');
+  await go(p, '#code-blue--codes', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .cc').length === 6 && !document.querySelector('#cur .res-b > ul.ticks') && /6000/.test(document.querySelector('#cur .cc.orange').textContent) && P['code-blue'].nodes.codes.items.length === 6), 'the colour codes show as six cards (Code Orange on 6000), with the list kept for Copy outcome');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(t => t.textContent).join('|') === 'Who covers where|Team and kit|Record|Bystander poster|Emergency codes|References'), 'Code Blue\'s tabs: who covers where, team and kit, record, bystander poster, emergency codes, references');
+  if (guardRe('codeblue')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P['code-blue']) + JSON.stringify(P['interpreter']) + document.body.textContent), guardRe('codeblue')), 'no person in charge, signer or registration number is copied');
+  ok(await p.evaluate(() => NUMS[0].href === '#code-blue' && NUMS.some(n => n.val === 'ext 6000') && NUMS.some(n => n.val === 'ext 5441') && NUMS.some(n => n.href === '#interpreter' && n.val === 'Line 0') && find('translator').r[0].href === '#interpreter'), 'Numbers carry the colour codes and the interpreter line; the Code Blue number opens the new entry; a search for translator finds the interpreters');
+
+  /* Snake bites (MOH guideline 2017, 10 Nov 2026): the entry, its drawings and timer, and the two calculators */
+  await go(p, '#snakebite-moh', 500);
+  ok(await p.evaluate(() => /Red Zone/.test(document.querySelector('#run').textContent) && document.querySelector('.run-hero .tm img') && P['snakebite-moh'].grp === 'cpg' && P['snakebite-moh'].own), 'snake bites opens under its glass viper banner, a guideline in the guide\'s own words, saying no snakebite stays in the Green Zone');
+  await go(p, '#snakebite-moh--labs', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .figwb .wb-s li').length === 4 && document.querySelector('#cur .wb-cd').textContent === '20:00'), 'the 20WBCT is drawn in four steps, with a 20-minute timer');
+  await p.click('#cur [data-wbct]'); await p.waitForTimeout(1300);
+  ok(await p.evaluate(() => /^19:5\d$/.test(document.querySelector('#cur .wb-cd').textContent) && /Tip the tube once at \d\d:\d\d/.test(document.querySelector('#cur .wb-at').textContent) && !Object.keys(localStorage).some(k => /wb|snake/i.test(k))), 'Start counts down and gives the clock time to tip the tube, storing nothing');
+  await go(p, '#snakebite-moh--mpv', 400);
+  ok(await p.evaluate(() => /4 vials/.test(document.querySelector('#cur').textContent) && document.querySelectorAll('#cur .figav .av-s li').length === 5 && /3 vials in all \(p37\)/.test(document.querySelector('#cur').textContent)), 'the Malayan pit viper: 4 vials, how to give it, and the 3 vials of the guideline\'s own photo flagged');
+  ok(await p.evaluate(() => ['ptosis', 'wbct', 'obs', 'avgive', 'react', 'rpp'].every(k => FIGS[k] && FIGS[k]().length > 200)), 'its six drawings exist');
+  await go(p, '#calc-snakeav', 500);
+  await p.click('[data-k="grp"][data-sv="pv"]'); await p.waitForTimeout(150); await p.click('[data-k="sp"][data-sv="mpv"]'); await p.waitForTimeout(150);
+  await p.click('[data-k="age"][data-sv="ch"]'); await p.waitForTimeout(150); await p.fill('#cf-wt', '18'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => { const x = document.querySelector('#couts').textContent; return /QSMI Malayan Pit Viper Antivenin/.test(x) && /4 vials/.test(x) && /0\.18 mg/.test(x) && /90-180 ml/.test(x) && /At 6 hours/.test(x); }), 'antivenom by snake: a child of 18 kg with a Malayan pit viper bite gets 4 vials, adrenaline 0.18 mg ready and 90-180 ml to dilute in');
+  await p.click('[data-k="reg"][data-sv="bor"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /Not in Borneo/.test(document.querySelector('#calcbox').textContent)), 'Sabah and Sarawak with a Malayan pit viper: the not-in-Borneo note');
+  await p.click('[data-k="grp"][data-sv="unk"]'); await p.waitForTimeout(150); await p.click('[data-k="syn"][data-sv="par"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /Not in the guideline/.test(document.querySelector('#couts').textContent)), 'an unidentified bite with paralysis: no polyvalent dose is invented');
+  await go(p, '#calc-snake20', 500);
+  await p.fill('#cf-at', '14:05'); await p.click('[data-k="res"][data-sv="no"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => { const x = document.querySelector('#couts').textContent; return /14:25/.test(x) && /coagulopathy is possible/.test(x); }), 'the 20WBCT calculator: blood in at 14:05, tip it at 14:25; not clotted, a coagulopathy is possible');
+  /* The ED links page (the ETD HKL link page, 10 Nov 2026) */
+  await go(p, '#links', 500);
+  ok(await p.evaluate(() => document.querySelectorAll('#lnks .lk-g').length === 6 && document.querySelectorAll('#lnks .lk-g.net [data-lcopy]').length === 7 && [...document.querySelectorAll('#lnks a.lk')].every(a => a.target === '_blank')), 'ED links: six groups, the seven hospital systems with Copy, every link in a new tab');
+  ok(await p.evaluate(() => ![...document.querySelectorAll('#lnks a.lk')].some(a => /1Y8JMu0egidQ6BekfTplSwCOZerw9gqv5GosyQpzJgws|1QHWVJken0gGngEdnH6K4LuL3CKRnDSzXTTaa-C5l8V8|1jVlYRpBn_NB4GIh42ZPUg1P6tE2L8_3dFSecIxiLMT4|1FDF7xjScfbY-rAye1cS4aq1wCFeZx0UrSqEruUOGMYw/.test(a.href))), 'the response registers that may hold patients\' details are not linked');
+  await p.fill('#lkq', 'porter'); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => document.querySelectorAll('#lnks a.lk').length === 1 && /Permohonan Porter/.test(document.querySelector('#lnks').textContent)), 'finding "porter" leaves the porter request');
+  await p.fill('#lkq', ''); await p.click('#lkf [data-lf="net"]'); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => document.querySelectorAll('#lnks .lk-g').length === 1 && document.querySelector('#lkf [data-lf="net"]').getAttribute('aria-pressed') === 'true'), 'the Hospital systems filter shows only them');
+  await p.click('#lkf [data-lf="all"]');
+  ok(await p.evaluate(() => find('porter').r.some(e => e.href === '#links')), 'search finds the porter request on the ED links page');
+  /* The rabies protocol downloads too; the 2022 orthopaedic memo is no longer cited */
+  ok(await p.evaluate(() => P['animal-bites'].nodes.abc.links.some(l => l[0].includes('export=download&id=1k8Yh8oSoEMw3MPJ02kf19ujBnxCXMsX8')) && !/3\(29\)22/.test(JSON.stringify(P))), 'the rabies protocol can be downloaded; the 2022 orthopaedic memo is cited nowhere');
+  await go(p, '#home', 300);
+  /* Communication on shift (10 Nov 2026): safety first, the card's three steps, the eight figures */
+  await go(p, '#communication', 500);
+  ok(await p.evaluate(() => document.querySelector('.run-hero .tm img') && document.querySelectorAll('#cur button.opt').length >= 6), 'communication opens under its lantern banner on the situation in front of you');
+  await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /weapon/i.test(document.querySelector('#cur h2').textContent)), 'an angry or aggressive person: the first question is a weapon or violence now');
+  await p.click('#cur button.opt[data-go="0"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => /5441/.test(document.querySelector('#cur').textContent) && !!document.querySelector('#cur .res')), 'a weapon or violence now: step away, Code Gray on ext 5441, at once');
+  ok(await p.evaluate(() => ['cmdanger', 'cmstance', 'cmdeesc', 'cmleap', 'cmsay', 'cmspikes', 'cmteach', 'cmisbar'].every(k => FIGS[k] && FIGS[k]().length > 200)), 'its eight figures exist');
+  await go(p, '#communication--talk', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .cm3 li').length === 3 && /I can see you\u2019re upset\./.test(document.querySelector('#cur .cm3').textContent)), 'the three steps, with the card\'s phrases');
+  await go(p, '#communication--isbar', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur .cmb li').length === 6), 'ISBAR for a phone referral, with the read-back');
+  await go(p, '#home', 300);
+  /* From the department's link page (10 Nov 2026): the new steps open, EM Watch booking, the corrected memo date */
+  for (const h of ['#gz-rules--glance', '#gz-rules--sepsis', '#safe-practice--leave', '#safe-practice--rx', '#safe-practice--dnr', '#referral-rules--psydc', '#referral-rules--fbt', '#code-blue--fire']){ await go(p, h, 300); ok(await p.evaluate(x => state.cur === x.split('--')[1] && !!document.querySelector('#cur h2'), h), h + ' opens'); }
+  ok(await p.evaluate(() => /6000/.test(document.querySelector('#cur').textContent) && /Parking Terbuka Cawangan Sumber/.test(document.querySelector('#cur').textContent)), 'Fire in the department: dial 6000, and the assembly point');
+  await go(p, '#em-watch--book', 300);
+  ok(await p.evaluate(() => (P['em-watch'].nodes.book.items || []).length >= 7 && /AK-15/.test(JSON.stringify(P['em-watch'].nodes.book))), 'EM Watch booking: the seven steps of AK-15');
+  ok(await p.evaluate(() => !/9 Jul 2024/.test(JSON.stringify(P))), 'memo (10)24 is no longer dated 9 Jul 2024');
+  await go(p, '#home', 300);
+  /* The medical interpreters (memo of 9 Jul 2026) */
+  await go(p, '#interpreter', 400);
+  ok(await p.evaluate(() => document.querySelectorAll('#cur button.opt').length === 5 && /Nepali · नेपाली/.test(document.querySelector('#cur').textContent)), 'interpreters: the four languages of the memo, each in its own script, and another language');
+  await p.click('#cur button.opt[data-go="2"]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => state.cur === 'call' && document.querySelectorAll('#cur .figint li').length === 5 && /line 0/.test(document.querySelector('#cur h2').textContent)), 'a language of the memo: call line 0, with the five steps of Lampiran 1');
+  await p.click('#cur button[data-next]'); await p.waitForTimeout(250);
+  ok(await p.evaluate(() => state.cur === 'talk' && /Lampiran 2/.test(document.querySelector('#cur .gap').textContent)), 'it ends on the interpreter, and says Lampiran 2 was not seen');
   await go(p, '#home', 300);
 
   /* ---------- Phone, light ---------- */

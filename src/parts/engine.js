@@ -60,6 +60,12 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['From the department\'s link page','What the 2026 department documents add for the Green Zone: the zone at a glance (seen by an MO in under 120 minutes; the referred team answers in 1 to 2 hours), sepsis goes up to the Yellow or Red Zone, how to book EM Watch step by step, the IV antibiotic flow chart of June 2026, leaving the department (own-risk discharge, absconded patients), prescriptions the pharmacy rejects, DNR, referral details, redirection at triage, and a Fire in the department card (dial 6000, the five steps, the assembly point). Each with its memo, policy or plan and date.',[['#gz-rules--glance','The Green Zone at a glance'],['#code-blue--fire','Fire in the department']]],
+  ['Communication on shift','Step by step from the situation in front of you: an angry or aggressive patient or relative (a weapon or violence now: step away and call Code Gray, ext 5441; otherwise a safe stance, calm yourself, the department\'s three steps), a complaint about the wait, bad news (SPIKES), explaining a discharge with teach-back, a phone referral by ISBAR, and no shared language. From the department\'s quick card and published sources, each named, with the phrases to say and not to say, in English and Bahasa Melayu.',[['#communication','Communication on shift']]],
+  ['Snake bites','The Ministry of Health snakebite guideline (2017) step by step, in the guide\'s own words with its pages: possible envenoming goes to the Red Zone; who to observe and for how long; the 20-minute whole blood clotting test, with a timer; the antivenom indications; which antivenom and how many vials by snake, for the Peninsula or Sabah and Sarawak; reactions; venom in the eye; and going home. Two calculators (the clotting test, and antivenom by snake with a child\'s doses by weight), drawings of the bedside checks, and a banner of a glass viper that turns in 3D.',[['#snakebite-moh','Snake bites'],['#calc-snakeav','Antivenom by snake']]],
+  ['ED links','The department\'s link page sorted for a shift: forms to request a porter or an ambulance, book emergency OT or acute HD, report an incident or broken equipment, the registries, the department\'s fire plan and disaster links, and the hospital systems, which open on the hospital network.',[['#links','ED links']]],
+  ['Code Blue, in full','The HKL Code Blue Manual 2022/2024 (5th edition) step by step: who to call and what to do from anywhere in the hospital grounds, Zone 1 or SCACC (Zone 2), in office hours or after 1700 hr; stay and play or move after 10 minutes; who comes, with the six roles; and death at the scene. A map of the blocks says who responds in each, with its number; SCACC is drawn level by level with its extensions; the crash cart, the clerking sheet and the bystander poster are in tabs. The hospital\'s other emergency colour codes (Black, Silver, Gray, Orange and Purple) are there too.',[['#code-blue','Code Blue'],['#code-blue--codes','Emergency codes']]],
+  ['Medical interpreters','The hospital\'s medical interpreter service (memo of 9 Jul 2026): Mandarin, Tamil, Nepali and Bangladeshi, through the operator on line 0, with its flow chart in Malay and English.',[['#interpreter','Interpreters']]],
   ['Rabies and the ABC, in full','The HKL protocol on rabies and the Animal Bite Clinic (Oct 2022) step by step: its risk checklist, the wound categories, the rabies vaccine and RIG flow charts, and how to write each prescription (IM, ID and RIG; ward chart, Malaysian or foreigner), with the schedules, sites and doses drawn. A prescription writer counts every dose date from Day 0. The protocol PDF opens from the entry.',[['#animal-bites','Animal bites and rabies'],['#calc-rabies','Write the prescription']]],
   ['Read aloud and watch','The patient advice, read aloud word for word for a patient to follow: both CPG leaflets (dengue and cancer pain) in English and Bahasa Melayu, and the discharge advice of mild head injury, dengue and the Asthma Zone. Tap Listen; the line being read is marked as the voice reaches it, and the chips start a section. The dengue leaflet also has a two-minute film in each language, every line on screen as it is read. Nothing downloads until you tap.',[['#dengue-cpg','Dengue CPG: Home care advice'],['#mild-tbi','Mild head injury: Discharge advice']]],
   ['National CPGs: nine more','Nine more national guidelines from the Academy of Medicine of Malaysia list, step by step, each beside the pathway or rule it belongs to, each with its own moving banner. Quoted with their page numbers: Chronic Kidney Disease in Adults (2nd edition, 2018), with dose changes by kidney function; Rhinosinusitis in Adolescents and Adults (2016); Avulsed Permanent Anterior Teeth (3rd edition, 2019), for the knocked-out front tooth; Geriatric Hip Fracture (2023); and Cancer Pain (2nd edition, 2023), with its patient leaflet in English and Bahasa Melayu. Summarised in the guide\'s own words with page numbers, because their copyright gives no permission to reproduce them: Type 2 Diabetes Mellitus (6th edition, 2020), Venous Thromboembolism (2013), COPD (2nd edition, 2009) and Sore Throat (2003). Hip fracture and the knocked-out tooth sit in a new Injuries and teeth group. New calculators: kidney function with drug doses, the cancer pain rescue dose and the McIsaac score. Where a CPG and the ebook differ is listed under Still to confirm.',[['#ckd-cpg','CKD CPG'],['#cancer-pain-cpg','Cancer pain CPG'],['#guidelines','All guidelines']]],
@@ -103,7 +109,7 @@ const ART = {
 const POPULAR = [['#renal-colic','Renal colic'],['#dengue','Dengue'],['#asthma-zone','Asthma Zone'],['#mau-admission','MAU criteria'],['#pneumonia','CURB-65'],['#mild-tbi','Head injury'],['#gz-rules--ivab','IV antibiotics, no bed'],['#referral-rules--ortho','Ortho referral']];
 
 const NUMS = [
-  {g:'Emergencies', hot:true, lbl:'Code Blue, outside the ED', val:'ext 5333', copy:'03-2615 5333', note:'ED Call Centre, for an emergency or arrest elsewhere in the hospital. Call Centre 2: ext 6700. SCACC Anaesthesia: ext 1133 / 1134.', href:'#safe-practice--blue', link:'Code Blue', src:'Code Blue Manual, 2019'},
+  {g:'Emergencies', hot:true, lbl:'Code Blue, outside the ED', val:'ext 5333', copy:'03-2615 5333', note:'ED Call Centre, for an emergency or arrest anywhere in the hospital grounds; the team arrives within 10 minutes. SCACC in office hours: Anaesthesia ext 1133 / 1134 with 5333. Call Centre 2: ext 6700. Forensic: ext 6695.', href:'#code-blue', link:'Code Blue', src:'Code Blue Manual 2022/2024'},
   {g:'Emergencies', hot:true, lbl:'Code Stroke', val:'ext 5999', copy:'ext 5999', note:'Onset under 9 hours. Say CODE STROKE, then the patient\'s name, your location and extension, COVID status and the ETD MO\'s name.', href:'#stroke-tia', link:'CVA and TIA', src:'Code Stroke pathway'},
   {g:'Emergencies', lbl:'ED Resus', val:'ext 5339 / 5326', copy:'ext 5339 / 5326', note:'Amber Zone: ext 5324 / 5360.', src:'MAU critical patient flow'},
   {g:'Admission and follow-up', lbl:'MAU mobile team', val:'ext 6682 / 6684', copy:'ext 6682 / 6684', note:'Office hours. After hours, the same extensions reach the MAU 1 (male), MAU 2 (female) and MAU 3 wards. Phone before you register the admission.', href:'#mau-admission', link:'Admission to MAU', src:'MAU flow chart, 18 Oct 2022'},
@@ -116,7 +122,11 @@ const NUMS = [
   {g:'Imaging', lbl:'Radiology on duty (ROTD)', val:'ext 7122', copy:'ext 7122', note:'Radiology MO EDCT: ext 5928. CT main counter: ext 7109. CT console: ext 7124.', href:'#trauma-walkins--ct', link:'HIT whole-body CT', src:'HIT protocol, Dec 2021'},
   {g:'Infection and protection', lbl:'Infection Control Unit (UKI)', val:'ext 6319 / 5621', copy:'ext 6319 / 5621', note:'Questions on Nipah and other infection alerts.', href:'#infection-alerts--nipah', link:'Nipah', src:'UKI memo, 3 Mar 2026'},
   {g:'Infection and protection', lbl:'SCAN team referral', val:'011-6384 8719', copy:'011-6384 8719', note:'Paediatric registrar, for suspected child abuse. New number in June 2026: check it is still current.', href:'#oscc--child', link:'Suspected child abuse', src:'REMINDER for OSCC, 26 Jun 2026'},
-  {g:'Infection and protection', lbl:'Animal Bite Clinic (ABC)', val:'ext 1017 / 1178', copy:'03-2615 5555 ext 1017 / 1178', note:'Physician Clinic, SCACC level 2. Monday to Thursday 2–4 pm, Friday 3–4:30 pm.', href:'#animal-bites', link:'Animal bites', src:'Rabies and ABC protocol, Oct 2022'}
+  {g:'Infection and protection', lbl:'Animal Bite Clinic (ABC)', val:'ext 1017 / 1178', copy:'03-2615 5555 ext 1017 / 1178', note:'Physician Clinic, SCACC level 2. Monday to Thursday 2–4 pm, Friday 3–4:30 pm.', href:'#animal-bites', link:'Animal bites', src:'Rabies and ABC protocol, Oct 2022'},
+  {g:'Emergencies', lbl:'Code Black, Silver, Gray or Purple', val:'ext 5441', copy:'ext 5441', note:'Black: a bomb threat or a CBRNE incident. Silver: an armed threat or hostages. Gray: physical violence involving visitors or staff. Purple: attempted suicide or self-harm.', href:'#code-blue--codes', link:'Emergency codes', src:'HKL colour codes card (undated)'},
+  {g:'Emergencies', lbl:'Fire or internal incident (Code Orange)', val:'ext 6000', copy:'ext 6000', note:'Line 6000: every internal disaster incident, such as a fire, 24 hours. An external mass casualty incident comes through MECC and the EP on call. The colour codes card calls it Code Orange.', href:'#code-blue--fire', link:'Fire in the department', src:'Pelan Tindakan Bencana HKL 2026, p56'},
+  {g:'Emergencies', lbl:'Forensic, death at the scene', val:'ext 6695', copy:'ext 6695', note:'A death at the scene of a Code Blue: the primary team declares it, and the body goes directly to Forensic.', href:'#code-blue--death', link:'Death at the scene', src:'Code Blue Manual 2022/2024'},
+  {g:'Patients and families', lbl:'Medical interpreter', val:'Line 0', note:'Mandarin, Tamil, Nepali or Bangladeshi: call line 0 (IbuSawat HKL); the telephonist puts you through to the interpreter.', href:'#interpreter', link:'Interpreters', src:'HKL memo, 9 Jul 2026'}
 ];
 const KEY_NUMS = [0, 1, 3, 4];
 
@@ -215,26 +225,26 @@ const V7 = [
   ['Down-triage memo HKL/JK/98/188/3(22)22, 4 Oct 2022','Down-triage is not allowed unless the MO has examined the patient first; the MO documents it on the triage form, and the PPP makes sure it is documented. Since 8 Nov 2026 the guide also says only the EP can allow a down-triage; that part\'s written source is still to be confirmed.',[['#gz-rules--down','Down-triage']]],
   ['IV antibiotic memo, 30 Jun 2026','No bed free in Yellow Obs, ISO or YZ Ext: IV antibiotics on a CCA chair, with one of four antibiotics only.',[['#gz-rules--ivab','IV antibiotics, no bed']]],
   ['KKM MTS announcement, Jul 2026','The EP may decide the admission within 4 hours if the primary team is delayed; non-emergency cases can be redirected to a Klinik Kesihatan or private GP.',[['#gz-rules--ep4','Primary team delayed'],['#gz-rules--kk','Redirect to a KK or GP']]],
-  ['Orthopaedic referral memo, 17 May 2024','The Lampiran 1 urgent criteria, on-call or clinic referral, CMR within 2 hours, duplicate notes and the referral register.',[['#referral-rules--ortho','Orthopaedic referral']]],
+  ['Orthopaedic referral memo, 17 May 2024','The Lampiran 1 urgent criteria, on-call or clinic referral, CMR within 2 hours, and the memo to show when a referral is declined.',[['#referral-rules--ortho','Orthopaedic referral']]],
   ['IPR admission criteria','Who can be transferred to IPR, the exclusions and the specialist on-call line.',[['#referral-rules--ipr','Transfer to IPR'],['#numbers','Numbers']]]
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
-  'How to book EM Watch: the training deck shows the recruitment step only as a picture.',
-  'The procedure for patients redirected to a Klinik Kesihatan or private GP.',
-  'Whether the EMACC SOP of 1 Feb 2018 (ext 7040, Monday to Friday 9 am to 4 pm) is still current.',
-  'Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents), the SCAN team line and the IPR on-call line.',
+  'EM Watch booking is now in the app from work instruction AK-15 (in force 16 Mar 2026, p12). Still to confirm: its two forms, the Pink Form (Lampiran 1) and the EM WATCH Appointment form (Lampiran 2), which are not attached to the copy seen; and the timing: AK-15 aims to reassess within 48 to 72 hours and to review CT brain reports within 48 hours of discharge, where the department policy (2026, 9.2.1) and the 2023 deck give 1 week; and the deck\'s online prescription against AK-15\'s documents collected at the Record Unit.',
+  'Redirection is in the app in part: a primary triage decision by the PPP for Level 5 (9XXX), with a Redirection Slip and the Redirection Book (AK-01, 2026; memo HKL/JK/98/188/3(2)24, 11 Jan 2024; the 2021 policy). Still to confirm: how a Green Zone MO redirects a patient already seen in the consultation room; whether private GPs are included; whether the 2021 hours (0730 to 1930, Monday to Friday), slip and list of Klinik Kesihatan are current; and the redirection procedure AK-01 cites (HKL/JK/PK 0x), which is not in the department\'s folder.',
+  'EMACC booking: the app follows the SOP of 1 Feb 2018 (ext 7040, the EMACC box, 40 a day, first review within 1 week). Memo HKL/JK/98/188/3(01)24 of 11 Jan 2024, which cancels memo (27)22, writes the TCA on the slip hijau and sends the patient to Counter 10: 7.30 am to 3.30 pm, 56 appointments a day, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EMWATCH. Work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge. The department policy (2026, 8.3.3) gives 9 am to 4 pm on working days. No 2026 document prints ext 7040.',
+  'Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents; a 2020 department table gives ext 5137 and 6838), the SCAN team line and the IPR on-call line.',
   'The MERS-CoV case definition, which is not in the PUI file.',
-  'A readable copy of the Malaysian snakebite guideline.',
+  'The MOH snakebite guideline (2017): Table 15 gives the Malayan pit viper 4 vials, where its own case photo (p37) and the MST book (p47) show 3; Table 17 prints the adrenaline infusion for a reaction as 1 microgm/kg/min, against the ebook\'s 1 mcg/min; Tables 15 and 16 leave four pit vipers and a krait\'s second choice blank, and give no dose for an unidentified bite and no maximum; and in HKL, where an observation-only or post-antivenom patient goes, who arranges the bloods at 5-7 days, the antivenom stock, and the RECS contact. CPG-REVIEW-SNAKEBITE.md.',
   'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
-  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen, the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
+  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen (the HKL ED Dilution Guide\'s three bags, 2018 to 2019, or the MOH Antidotes Quick Guide\'s two, 2022), the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
   'Which dengue source the Green Zone follows where the ebook (built from the CPG 3rd edition, 2015) and the CPG 4th edition (2026) differ: shock CRT over 2 or over 3 seconds; persistent vomiting over 2 times in 24 hours or over 3 a day; the list of warning signs (the ebook has persistent diarrhoea and a tender liver, the CPG liver enlargement over 2 cm, postural hypotension and reduced urine output); and oral fluids (2 litres a day, or 200 ml an hour while awake).',
   'Points inside the dengue CPG (4th edition) itself: Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.',
   'Which asthma source the Green Zone follows where the ebook (built from the 2017 CPG) and the Asthma in Adults CPG, 2nd edition (2024) differ: prednisolone 30 mg a day for 5 days, or 0.5 to 1 mg/kg with a maximum of 50 mg for 5 to 7 days; IV magnesium sulphate 2.47 g or 2 g; SC terbutaline, which the CPG keeps for critical care; ipratropium at moderate and every 20 minutes, or for severe only every 4 to 6 hours; a severe respiratory rate over 30 or over 25; grading and discharge on PEF, which Table 9 does not use; a discharge SpO2 over 95% or over 94%; and an observation route, which the CPG does not have. The full table is in CPG-REVIEW-ASTHMA.md.',
   'Points inside the asthma CPG (2nd edition) itself: Table 9 prints SpO2 <90% and PaO2 <60 mmHg under both severe and life-threatening, and the guide lists them as life-threatening by its note to classify using the most severe parameters; mild SpO2 is ≥95% in Table 9 but <95% in Algorithms 3 and 4; four oxygen targets (93 to 95%, ≥94%, >94% for improvement, 94 to 98% in pregnancy); prednisolone by the ideal body weight, with no formula; IV hydrocortisone 100 mg stat or 200 mg a day in divided doses; and follow-up within 1 to 2 weeks or within seven days.',
   'The gout CPG (2nd edition, 2021): the Green Zone gout rule (HKL letter, 29 Nov 2024) words several of Recommendation 12\'s rheumatology referral criteria differently (men under 30, against early onset at age <30 years; at least three months of allopurinol), which may come from the letter itself. The CPG gives no pathway for suspected septic arthritis or joint aspiration, no NSAID course length and no gastroprotection. Inside it: colchicine 1.2 mg then 0.6 mg in the trials (p35) but 1 mg then 0.5 mg in Appendix 5B (p68); no renal row for a CrCl of 90 or more; and NSAIDs in pregnancy restricted to the first and second trimester (Appendix 5C) but avoided from 20 weeks (FDA advice, p40). The full review is in CPG-REVIEW-GOUT.md.',
   'The head injury CPG (2015) against the ebook\'s mild TBI pathway: the CPG admits every patient aged 65 or over or on an anticoagulant or antiplatelet whatever the CT shows (a boxed statement, p19), where the ebook can send them home after a normal CT; it counts vomiting twice or more, the ebook more than twice; its advice card covers 24 hours, the ebook 48; it has six urgent-CT factors the ebook lacks, and no PTA charting. Inside it: three observation schedules, a six-hour observation with no start point, and no list of indications for neuro-trauma referral. The full review is in CPG-REVIEW-HEAD-INJURY.md.',
-  'The ACS CPG (1st edition, 2026) against the ebook\'s chest pain pathway: Key Recommendation 8 says a patient with chest pain suspected of ACS should NOT be triaged to a green or non-critical zone; it scores by HEART or by TIMI (TIMI only with a high-sensitivity troponin), with TIMI 0 or 1 to go home, where the Obsess protocol asks for TIMI under 1; it calls labelling troponin results positive or negative inappropriate; and low-risk unstable angina may go home. Inside it: Flowchart 6 gives no route for a conventional troponin taken under 6 hours from onset, a single hs-cTn is timed three ways, HEART has no row for exactly 3 risk factors, and the alteplase dose is printed up to 5 mg. Whether HKL\'s troponin is high-sensitivity, and its 99th percentile, are to confirm. The full review is in CPG-REVIEW-ACS.md.',
+  'The ACS CPG (1st edition, 2026) against the ebook\'s chest pain pathway: Key Recommendation 8 says a patient with chest pain suspected of ACS should NOT be triaged to a green or non-critical zone; it scores by HEART or by TIMI (TIMI only with a high-sensitivity troponin), with TIMI 0 or 1 to go home, where the Obsess protocol asks for TIMI under 1, and the department policy (2026, 19.1.2) prints "Skor TIMI ≤ 1"; it calls labelling troponin results positive or negative inappropriate; and low-risk unstable angina may go home. Inside it: Flowchart 6 gives no route for a conventional troponin taken under 6 hours from onset, a single hs-cTn is timed three ways, HEART has no row for exactly 3 risk factors, and the alteplase dose is printed up to 5 mg. Whether HKL\'s troponin is high-sensitivity, and its 99th percentile, are to confirm. The full review is in CPG-REVIEW-ACS.md.',
   'The diabetic foot CPG (2nd edition, 2018): which HKL team takes an urgent referral, and the route to Foot Protection Services; Algorithm B sends UT 0, IA and IB to outpatient care while Table 2 asks for every active problem to be seen within 24 hours; it gives no route for UT IIA or IIIA; erythema of exactly 2 cm fits neither infection band and SIRS is not defined; and its antibiotic table prints piperacillin/tazobactam 4.5 mg (moderate) and 4.5 g (severe). The full review is in CPG-REVIEW-DIABETIC-FOOT.md.',
   'The foreign body ingestion CPG (2025) against the department\'s swallowed foreign body step: the department sends every asymptomatic battery past the oesophagus home with stool checks and a Monday clinic, where the CPG removes a gastric button battery within 24 hours if the child is under 5 or the battery is 20 mm or more, and needs no stool checks; the department treats a single magnet as high risk, where the CPG allows discharge; and its width threshold is 2.5 cm against 20 mm. Inside it: five timings for a gastric battery (12, 24 and 48 hours), and no algorithm for a magnet with another metal object. The full review is in CPG-REVIEW-FB-CHILDREN.md.',
   'The national CPGs whose copyright gives no permission to reproduce (34 state no terms; the hypertension 2018 and menopause 2022 CPGs reserve all rights): four are summarised in the guide\'s own words with page numbers (type 2 diabetes, VTE, COPD and sore throat; the guide owner\'s decision of 9 Nov 2026), and the others stay as links to the Academy of Medicine\'s own files. Quoting any of them needs the publisher\'s permission.',
@@ -247,7 +257,18 @@ const CONFIRM = [
   'The VTE CPG (2013, summarised): it has no D-dimer step, because the assay most Malaysian laboratories run is not sensitive enough to rule out VTE: which assay HKL runs, and whether the Green Zone keeps the ebook\'s D-dimer step; disposition after a confirmed DVT, which neither source sets; and its two-band Wells against the ebook\'s three. CPG-REVIEW-VTE.md.',
   'The COPD CPG (2009, summarised): whether every Green Zone COPD flare-up gets the ABG it recommends; its oxygen target of 90 - 93% against the department\'s discharge at SpO2 95% or more; prednisolone 30 - 40 mg for 7 - 14 days against the department\'s 30 mg for 5 days; and its antibiotic triggers. CPG-REVIEW-COPD.md.',
   'The rabies and ABC protocol (Oct 2022): how a possible risk in its checklist (Table 1B, the animal can be observed for 14 days) changes the flow charts\' "Risk of rabies?", which the protocol does not say in words; the vaccine schedule after pre-exposure prophylaxis (the vaccine flow chart asks only about post-exposure prophylaxis, the RIG flow chart about either); which four sites the ID 4-site course uses; and whether the protocol is still current.',
-  'The sore throat CPG (2003, summarised): which team takes a suspected quinsy from the Green Zone (the CPG gives no red flags or admission criteria); whether the ED has a rapid strep test or sends throat cultures, and who acts on the result; and NSAIDs, which the ebook\'s pain ladder allows and this CPG advises against routinely. CPG-REVIEW-SORE-THROAT.md.'
+  'The sore throat CPG (2003, summarised): which team takes a suspected quinsy from the Green Zone (the CPG gives no red flags or admission criteria); whether the ED has a rapid strep test or sends throat cultures, and who acts on the result; and NSAIDs, which the ebook\'s pain ladder allows and this CPG advises against routinely. CPG-REVIEW-SORE-THROAT.md.',
+  'The Code Blue Manual 2022/2024 (5th edition): Table 1 prints no contact number for the Maternity Hospital and has no row 9; whether "on public holidays" covers only the main block\'s ground and first floors or the whole list; and its cross-references point to the wrong appendix (the SCACC chart is Appendix iv, the crash cart Appendix vi, the clerking sheet Appendix vii). Its chain of survival is numbered 1, 2, 4, 5.',
+  'The emergency colour codes card (shared 10 Nov 2026) prints no issuer or date: confirm Code Black, Silver, Gray and Purple on ext 5441 and Code Orange on ext 6000 against the hospital\'s own circular. The hospital disaster plan (2026) names no colour code but Code Blue: 6000 is its line for a fire or any internal disaster incident (p56), and an external mass casualty incident comes through MECC and the EP on call (p29 to 31).',
+  'The medical interpreter memo (9 Jul 2026): its Lampiran 2, the interpreters\' terms of reference, was not in the copy shared; and what to do for a language it does not cover.',
+  'Communication on shift: whether the department endorses the aggressive patient quick card (no issuer or date printed) and its Drive copy; a direct line to the Polis Bantuan post, and Code Gray or Grey; how the ED reports violence against staff and supports them; who in the ED hears a complaint; the department\'s own steps after a death in the ED; interpreters for other languages, and whether family or bilingual staff may interpret; a copy of the MOH Guidelines on Management of Aggressive Patients (2016), which the ebook cites; the Bahasa Melayu phrases; waiting-time targets; and the handover format. COMMUNICATION-REVIEW.md.',
+  'The Green Zone in the department\'s 2026 documents: a pain score of 7 or more (not chest pain) is a Green Zone criterion in work instruction AK-07 (p5, an unsigned copy) but a Yellow Zone one in the department policy (3.1.3, p20) and AK-06 (p5); AK-07 also prints "GCS > 15".',
+  'The Green Zone\'s target times: Level 4 within 60 minutes (the policy\'s charter, p8; AK-07, p6); Level 5 within 90 minutes (charter, p9) or within 120 minutes from start to finish (AK-07, p6); and under 120 minutes to be seen by an MO, for the whole zone (policy 4.2.1, p21). Which one is the zone audited against?',
+  'LA OT for orthopaedic cases: memo HKL/JK/98/188/3(8)22 (May 2022) and the congestion action plan (memo (17)24, 12 Nov 2024) give the orthopaedic decision within 2 hours and the LA OT within 4 hours, then ward admission; the department policy (2026, 22.3.3 to 22.3.6) calls orthopaedic cases to the emergency OT, 8 am to 9 pm, within 6 hours of the MO\'s examination, then the Orthopaedic Ward. Which limit applies?',
+  'The 48-hour EMWATCH appointment for a CT brain review (memo HKL/JK/98/188/3(21)23, 10 Oct 2023): which cases count as "neuromedical" (head injury?), and whether it stands beside AK-15\'s 48 to 72 hours.',
+  'Who makes the police report when the next of kin of a patient discharged by Psychiatry cannot be reached within 4 hours (memo HKL/JK/98/188/3(11)23), and for an absconded patient within 24 hours (department policy 2026, 32.4.2)?',
+  'The IV antibiotic flow chart (memo HKL/JK/98/188/3(10)26, 30 Jun 2026): note 1 gives the bed priority as Yellow Observation, Wad ISO or ISO 3, note 4 as Yellow Observation or "Wad ISO 2".',
+  'Mass casualty incidents: what counts as one (more than 2 casualties in the 2026 hospital plan, p30; 20 or more in PK-03, 2011; tag counts in the business continuity plan); what happens to the patients already in the Green Zone; and an action card for an MO or house officer, which none of the documents read has. The ED\'s internal disaster flow chart and the external disaster action cards on the disaster link page need an MOH sign-in.'
 ];
 
 /* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
@@ -348,6 +369,49 @@ const KIND_G = {admit:'Admit', discharge:'Discharge', observe:'Observation', ref
 const OUT_ORDER = ['admit','observe','discharge','refer','neutral'];
 const OUT_LBL = {admit:'Admit', observe:'Observation', discharge:'Discharge', refer:'Refer', neutral:'Next step'};
 const OUT_IC = {admit:'bed', discharge:'door', observe:'clock', refer:'send', neutral:'step'};
+/* The hospital blocks of the Code Blue Manual's Appendix ii (Response Locations By Block), placed as its schematic draws them
+   (left, top, width, height in %), with who responds there from Table 1 or Table 2. A block of the map is a button (cbmap). */
+const CB_BLOCKS = {
+  nephro:{n:'Nephro / Urology', f:'Institut Urologi & Nephrologi', p:[2.9, 6, 25.5, 9.5], l:['Response team: the Nephrology & Urology Department, for the Nephrology & Urology Institute and the Research & Finance blocks: 03-2615 5381 (Nephrology), 03-2615 6231 (Urology)', 'Code Blue team: Emergency']},
+  onco:{n:'Onco / Radio\u00ADtherapy', f:'Bangunan Radioterapi & Onkologi', p:[42, 3.5, 24.5, 12.5], l:['Response team: Nuclear Medicine / Radiotherapy, for the Oncology & Radiotherapy Institute: 03-2615 6816', 'Code Blue team: Emergency']},
+  park:{n:'Multi-level parking', f:'Bangunan "parking" bertingkat', p:[70, 3.5, 21, 12.5], l:['The 5333 number is given to the multi-storey car park and the auxiliary police (5.1)', 'Table 1 names no response team for it']},
+  main:{n:'Main block', f:'Bangunan Utama (Main Block HKL)', p:[30.6, 25.5, 20.2, 12.5], a:'Code Blue: ext 5333 (03-2615 5333). Wards: Anaesthesia, 03-2615 6510', l:['Wards (in-patient residents), ICU, HDW, CCU and CRW: the Anaesthesia team, 03-2615 6510 (Table 1)', 'The ED covers the main hospital lobby, and the "ground floor and first floor of main hospital block and overall coverage of the entire hospital grounds (On public holidays)" (3.0)']},
+  iktar:{n:'IKTAR', f:'Bangunan IKTAR', p:[53.2, 25.5, 15.8, 12.5], l:['Response team: Neurosurgery / Neuromedical / Psychiatry, for the Institut Kaji-saraf TAR: 03-2615 6656 / 5193', 'Code Blue team: Emergency']},
+  mhkl:{n:'MHKL', f:'Bangunan Hospital Bersalin (Maternity Hospital)', p:[71.4, 25.5, 26, 12.5], l:['Maternity Hospital: the Code Blue team is Emergency', 'Table 1 prints no contact number for it']},
+  hta:{n:'HTA', f:'Hospital Tunku Azizah', p:[31, 48, 25.5, 12.5], a:'WCH code blue team: 03-2600 1050', l:['Table 1 lists the Woman and Child Hospital (WCH): its own WCH code blue team covers WCH and the Paediatric Institute']},
+  wisma:{n:'Wisma Kayu / Ortho', f:'Bangunan Wisma Kayu dan Orthopedik', p:[71.6, 48.5, 25.4, 12.5], l:['Response team: the Orthopaedic outpatient clinic, for the clinic, the Wisma Kayu area, the mosque and the surrounding area (during office hours): 03-2615 5525', 'Code Blue team: Emergency']},
+  scacc:{n:'SCACC', f:'Specialist Centre & Ambulatory Care Centre', p:[1, 61, 25.4, 13], z:2, a:'Office hours: ext 1133 / 1134 and 5333 together. After 1700 hr: 5333', l:['Each level has a gazetted First Responder trained in BLS and high-quality CPR, and its own extension (Table 2)', 'After office hours the dialysis unit staff respond first, and the ED Code Blue team second (4.2)']},
+  iphkl:{n:'IPHKL', f:'Institut Paediatrik', p:[30.2, 76, 26.4, 13], a:'WCH code blue team: 03-2600 1050', l:['Table 1: the WCH code blue team covers the Woman and Child Hospital and the Paediatric Institute']}
+};
+const CB_ROADS = [[0, 18.7, 100, 3.6], [0, 40.9, 100, 3.6], [27.6, 44.5, 1.8, 55.5], [64.8, 44.5, 1.8, 23.7], [29.4, 68.2, 70.6, 3.4]];
+const CBM_HINT = '<p class="cbm-h">Tap a block: who responds there, and the number. Not on the map: the Radiology department, 03-2615 7019 / 5928 (Table 1).</p>';
+function cbBlock(k){
+  const b = CB_BLOCKS[k];
+  return `<h5>${esc(b.n)}<small>${esc(b.f)}</small></h5><p class="cbm-a${b.z ? ' z2' : ''}">${esc(b.a || 'Code Blue: ext 5333 (03-2615 5333)')}</p><ul>${b.l.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p class="cbm-src">Appendix ii and Table ${b.z ? 2 : 1}, Code Blue Manual 2022/2024</p>`;
+}
+/* Tap a block: it lights, and the panel under the map says who responds there; tap it again to clear */
+function cbPick(b){
+  const f = b.closest('.figcbm'), on = b.getAttribute('aria-pressed') !== 'true';
+  f.querySelectorAll('[data-cbb]').forEach(x => x.setAttribute('aria-pressed', String(x === b && on)));
+  f.querySelector('.cbm-out').innerHTML = on ? cbBlock(b.dataset.cbb) : CBM_HINT;
+}
+/* The 20WBCT timer in the snakebite figure (wbct): 20 minutes from Start, with the clock time to tip the tube. It lives in memory only,
+   so it keeps running while you move between steps; nothing is stored (rule 4). */
+let wbEnd = 0, wbT = null;
+const wbLeft = () => wbEnd ? Math.max(0, Math.round((wbEnd - Date.now()) / 1000)) : 1200;
+const wbFmt = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+const wbAt = s => !wbEnd ? 'Start it when the blood goes into the tube' : s ? 'Tip the tube once at ' + new Date(wbEnd).toTimeString().slice(0, 5) : 'Tip the tube once now';
+function wbTimer(){
+  const s = wbLeft();
+  if (wbEnd && s && !wbT) setTimeout(() => { if (!wbT) wbT = setInterval(wbTick, 1000); }, 0);
+  return `<div class="wb-tm${wbEnd && !s ? ' due' : ''}"><button type="button" class="soft sm" data-wbct>${wbEnd ? 'Restart the 20 minutes' : 'Start the 20 minutes'}</button><output class="wb-cd">${wbFmt(s)}</output><span class="wb-at">${wbAt(s)}</span></div>`;
+}
+function wbTick(){
+  const s = wbLeft();
+  $$('.wb-tm').forEach(t => { t.querySelector('.wb-cd').textContent = wbFmt(s); t.querySelector('.wb-at').textContent = wbAt(s); t.classList.toggle('due', !s); t.querySelector('[data-wbct]').textContent = 'Restart the 20 minutes'; });
+  if (!s){ clearInterval(wbT); wbT = null; }
+}
+function wbctStart(){ wbEnd = Date.now() + 1200000; clearInterval(wbT); wbT = null; wbTick(); wbT = setInterval(wbTick, 1000); }
 /* Infographics for the rabies protocol (10 Nov 2026), drawn from its flow charts and appendices; a node or note names one in fig */
 const FIGS = {
   /* The three wound categories of the flow charts (Appendices 2 and 3), with what each leads to */
@@ -379,7 +443,184 @@ const FIGS = {
     <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v3l-3 4v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-9l-3-4V3"/><path d="M7 13h10"/></svg><b>1 vial (1000 iu)</b><span>Max. dose: 1 vial/patient</span></div>
     <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12c3-4 13-4 16 0-3 4-13 4-16 0z"/><path d="M12 4v3M12 17v3M5 6l2 2M19 6l-2 2M5 18l2-2M19 18l-2-2"/></svg><b>Infiltrate around the wounds</b><span>Stat, in the ED when urgent</span></div>
     <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v5l3 4v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7l3-4z"/><path d="M6 15h12"/></svg><b>Equine RIG may be diluted</b><span>With normal saline, 2 – 3x volume</span></div>
-    <div class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><circle cx="12" cy="12" r="10"/><path d="m5 5 14 14"/></svg><b>Never in the same syringe</b><span>as the rabies vaccine</span></div></div>`
+    <div class="no"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><circle cx="12" cy="12" r="10"/><path d="m5 5 14 14"/></svg><b>Never in the same syringe</b><span>as the rabies vaccine</span></div></div>`,
+  /* ---- Code Blue (Code Blue Manual 2022/2024, 5th edition) ---- */
+  /* The numbers to call, each with Copy (section 14 and Appendices iv and v) */
+  cbcall:() => {
+    const R = [['hot', 'Activate Code Blue', 'Anywhere in the hospital grounds. Direct line 03-2615 5333', '5333', '03-2615 5333'],
+      ['z2', 'SCACC, office hours', 'Anaesthesia, with 5333 at the same time', '1133 / 1134', 'ext 1133 / 1134'],
+      ['', 'Death at the scene', 'Forensic Department', '6695', 'ext 6695'],
+      ['', 'Call Center 2', 'The MA in charge holds the kit key', '6700', 'ext 6700']];
+    return `<div class="fig figcbn"><div class="cbn-g">${R.map(([c, t, s, v, cp]) => `<div class="cbn${c ? ' ' + c : ''}"><span class="cbn-t"><b>${t}</b>${s}</span><span class="cbn-v"><small>ext</small>${v}</span><button type="button" class="cpy" data-cpy="${cp}" aria-label="Copy ${cp}">${svg('copy')}<span class="bl">Copy</span></button></div>`).join('')}</div><p class="fig-cap">Code Blue Manual 2022/2024: the phone directory (14, p21) and Appendices iv and v.</p></div>`;
+  },
+  /* The blocks of the hospital (Appendix ii), each a button that says who responds there */
+  cbmap:() => `<div class="fig figcbm"><div class="cbm-map" role="group" aria-label="The hospital blocks, from Appendix ii (a schematic, not to scale). Tap a block for who responds there">
+      ${CB_ROADS.map(([x, y, w, h]) => `<i class="rd" aria-hidden="true" style="--x:${x}%;--y:${y}%;--w:${w}%;--h:${h}%"></i>`).join('')}
+      ${Object.entries(CB_BLOCKS).map(([k, b]) => `<button type="button" class="cbm-b${b.z ? ' z2' : ''}" data-cbb="${k}" aria-pressed="false" style="--x:${b.p[0]}%;--y:${b.p[1]}%;--w:${b.p[2]}%;--h:${b.p[3]}%">${esc(b.n)}</button>`).join('')}</div>
+    <div class="cbm-key"><span class="z1">Zone 1: Code Blue on 5333</span><span class="z2">Zone 2, SCACC: 1133 / 1134 with 5333</span></div>
+    <div class="cbm-out" aria-live="polite">${CBM_HINT}</div></div>`,
+  /* SCACC, level by level, with each level's extension (Table 2) */
+  cbscacc:() => {
+    const L = [[8, 'Daycare Medical / Surgical, TSSU, OT, RHU', '1695 · 1704'], [7, 'Anaesthesia OT, and every floor as Secondary Responder', '1133 / 1134', 'an'],
+      [6, 'Ophthalmology, ORL, Dermatology, Plastic & Reconstructive Surgery, Oncology Day Care', '1478 / 5561'], [5, 'Neurosurgery and Neurology Clinics', '1046 / 1047'],
+      [4, 'Psychiatry Clinic, Satellite Pharmacy Area 1', '1043 / 1044'], [3, 'Dialysis Unit, Nephrology and Urology Clinics', '1035 / 1036'],
+      [2, 'Surgery and Medical Clinics, Dental Clinic, Welfare Unit, Cafeteria', '1021 / 1023'], [1, 'Orthopaedic Clinic, Foyer, Lobby, X-ray, Pathology lab, Cafeteria', '1007 / 1104']];
+    return `<div class="fig figcbs"><ol class="cbs" aria-label="SCACC levels 8 to 1 and each level's Code Blue extension (Table 2)">${L.map(([n, t, x, c]) => `<li${c ? ` class="${c}"` : ''}><b aria-label="Level ${n}">${n}</b><span>${esc(t)}</span><em>${x}</em></li>`).join('')}</ol><p class="fig-cap">Table 2, p13: on every level the Code Blue team is Anaesthesia & Emergency. Office hours: the floor's First Responder calls 1133 / 1134 and 5333 together. After 1700 hr: 5333.</p></div>`;
+  },
+  /* The 10-minute response, and what to do past it (5.3c, 5.4d and 5.4e) */
+  cbclock:() => `<div class="fig figcbk" role="img" aria-label="The 10-minute response: call 5333 and start BLS at once; the Code Blue team arrives within 10 minutes. Past 10 minutes, BLS-trained staff stay and play, continuing CPR; staff not trained in BLS start the transfer to the ED.">
+    <div class="cbk-bar"><span class="cbk-fill"></span></div>
+    <div class="cbk-ax"><span><b>0 min</b>Call 5333 · start BLS</span><span><b>≤ 10 min</b>The Code Blue team arrives</span></div>
+    <div class="cbk-fork"><p class="ok"><b>Past 10 min, BLS-trained</b>Stay & play: continue CPR until the team arrives (5.4e)</p><p class="no"><b>Past 10 min, no one BLS-trained</b>Start the transfer to the ED (5.4d)</p></div></div>`,
+  /* The chain of survival (2.1), as its four links are listed */
+  cbchain:() => {
+    const C = [['Recognition and activation of the emergency response system', '<path d="M6.5 3.5h3l1.6 4-2 1.3a10 10 0 0 0 6.1 6.1l1.3-2 4 1.6v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/>'],
+      ['Immediate high-quality CPR', '<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/><path d="M12 2.5v3M9.5 4.5 12 7l2.5-2.5"/>'],
+      ['Rapid defibrillation', '<path d="M13.5 2.5 5 13.5h6l-1.2 8L18.5 10h-6.2z"/>'],
+      ['Advanced life support and post-arrest care', '<path d="M2.5 12.5h4l2-5 3.5 10 2.5-6.5 1.5 1.5h5.5"/>']];
+    return `<div class="fig figcbc" role="img" aria-label="The chain of survival: ${C.map(c => c[0].toLowerCase()).join('; ')}"><div class="cbc-g">${C.map(([t, d], i) => `<div class="cbc" style="--d:${(i * .12).toFixed(2)}s"><svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg><span>${t}</span></div>`).join('')}</div><p class="fig-cap">The chain of survival, as rapidly as possible (2.1, p8).</p></div>`;
+  },
+  /* Who comes: the three teams and the six roles (6.0) */
+  cbteam:() => {
+    const T = [['ed', 'ED Code Blue team', 'Trained in BLS, ACLS and ATLS', [['Emergency Physician on call', 1], ['Red/yellow zone MO', 1], ['Runner SN and treatment room MA', 2], ['Attendant/porter', 1]]],
+      ['an', 'Anaesthesia team', 'SCACC, ICU, HDW, CCU, CRW and the wards', [['Specialist', 1], ['Medical Officer', 1], ['Medical Assistant', 1]]],
+      ['pr', 'Primary Responder', 'Trained in at least BLS', [['Specialist', 1], ['Medical officers', 2], ['Paramedics: SN or MA', 2]]]];
+    const roles = ['Team leader', 'Airway manager', 'Chest compression', 'Intravenous line', 'Drug preparation', 'Defibrillation'];
+    return `<div class="fig figcbt"><div class="cbt-g">${T.map(([c, h, s, m]) => `<div class="cbt ${c}"><div class="cbt-h"><b>${h}</b><em>${m.reduce((a, x) => a + x[1], 0)}</em></div><small>${s}</small><ul>${m.map(([t, k]) => `<li><span class="cbt-d" aria-hidden="true">${'<i></i>'.repeat(k)}</span>${t}${k > 1 ? ` (${k})` : ''}</li>`).join('')}</ul></div>`).join('')}</div>
+      <div class="cbt-r"><b>Roles</b>${roles.map((r, i) => `<span><i>${i + 1}</i>${r}</span>`).join('')}</div><p class="fig-cap">Code Blue team composition (6.0, p19). The team is available all the time.</p></div>`;
+  },
+  /* The hospital's emergency colour codes, from the rapid response card */
+  cbcodes:() => {
+    const C = [['black', 'Code Black', 'Bomb or CBRNE threat', 'Bomb threats, or chemical, biological, radiological, nuclear and explosive incidents', '5441', '', '<circle cx="12" cy="12" r="1.4"/><path d="M10.5 9.4 8 5.07a8 8 0 0 1 8 0l-2.5 4.33a3 3 0 0 0-3 0zM15 12h5a8 8 0 0 1-4 6.93l-2.5-4.33A3 3 0 0 0 15 12zM10.5 14.6 8 18.93A8 8 0 0 1 4 12h5a3 3 0 0 0 1.5 2.6z"/>'],
+      ['silver', 'Code Silver', 'Armed threat', 'Armed threats or hostages', '5441', '', '<path d="M12 3 5 6v5.5c0 4.4 3 8 7 9.5 4-1.5 7-5.1 7-9.5V6z"/><path d="M9 12h6"/>'],
+      ['gray', 'Code Gray', 'Physical violence', 'Physical violence involving visitors or staff', '5441', '', '<circle cx="8" cy="6" r="2.2"/><circle cx="16.5" cy="6" r="2.2"/><path d="M8 9v5l-2 6M8 14l2.5 6M16.5 9v5l2 6M16.5 14 14 20M10.5 11l3.5-1.5"/>'],
+      ['orange', 'Code Orange', 'Fire and mass disaster', 'Fires, or large-scale facility emergencies', '6000', '', '<path d="M12 21c-3.6 0-6-2.5-6-5.8 0-3.8 3.3-5.4 3.8-9.7 2.3 1.4 3.4 3.8 3.4 5.6 1-.6 1.6-1.7 1.7-3 1.9 1.7 3.1 4 3.1 6.9 0 3.5-2.4 6-6 6z"/>'],
+      ['blue', 'Code Blue', 'Medical emergency', 'Anyone found unconscious or in cardiac arrest', '5333', '1133 in SCACC', '<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/><path d="M7 12.5h2.5l1.2-2 2 4 1.3-2H17"/>'],
+      ['purple', 'Code Purple', 'Psychiatric emergency', 'Attempted suicide or self-harm', '5441', '', '<path d="M9.5 20v-3H8a2 2 0 0 1-2-2v-2.5L4.5 11l1.6-2.6A6.5 6.5 0 0 1 18.5 9c0 2.3-1 3.9-2.5 5v6"/><path d="M11.2 8.5a1.6 1.6 0 1 1 2.2 1.5c-.6.3-.9.7-.9 1.3M12.5 13.5v.01"/>']];
+    return `<div class="fig figcc"><div class="cc-g">${C.map(([k, n, t, d, x, x2, ic]) => `<div class="cc ${k}"><span class="cc-ic"><svg viewBox="0 0 24 24" aria-hidden="true">${ic}</svg></span><div class="cc-t"><b>${n}</b><span class="cc-s">${t}</span><span class="cc-d">${d}</span></div><div class="cc-x"><span class="cc-n"><small>ext</small>${x}</span>${x2 ? `<small>${x2}</small>` : ''}<button type="button" class="cpy" data-cpy="ext ${x}" aria-label="Copy ext ${x} for ${n}">${svg('copy')}<span class="bl">Copy</span></button></div></div>`).join('')}</div><p class="fig-cap">HKL Emergency Color Codes: Rapid Response Guide (no issuer or date printed; shared 10 Nov 2026). Check against the hospital's circular. The hospital disaster plan (2026) names no Code Orange: 6000 is its line for a fire or any internal incident (p56); an external mass casualty incident comes through MECC and the EP on call (p29 to 31).</p></div>`;
+  },
+  /* The Code Blue Record Clerking Sheet, drawn as its sections (Appendix vii) */
+  cbsheet:() => `<div class="fig figsh"><div class="sh" role="img" aria-label="The Code Blue Record Clerking Sheet, Code_blue/CS-01, version 2019: patient data; the type of emergency with CPR and ROSC times; observations; the Code Blue team's airway, breathing, ECG, DXT and diagnosis; the attending clinicians; and the DAMA section">
+      <div class="sh-h"><b>Code Blue clerking sheet, Hospital Kuala Lumpur</b><span>Code_blue/CS-01 · version 2019</span></div>
+      <div class="sh-r c2"><span>Patient demographic data</span><span>Date · time</span></div>
+      <div class="sh-r"><span>Primary responder area</span></div>
+      <div class="sh-r c3"><span><i>1</i>Medical emergency</span><span><i>2</i>Cardio respiratory arrest · CPR · ROSC</span><span><i>3</i>Trauma</span></div>
+      <div class="sh-t"><span>Time</span><span>BP</span><span>HR</span><span>SpO2</span><span>GCS</span><span>Drugs</span><span>IV fluids</span></div>
+      <div class="sh-b">To be filled by the Code Blue team</div>
+      <div class="sh-r c2"><span>Airway: intubated, suction, ETT/LMA</span><span>Breathing: regular, irregular, arrest, NpO2, HFMO2</span></div>
+      <div class="sh-r c3"><span>ECG</span><span>DXT</span><span>Diagnosis</span></div>
+      <div class="sh-r c2"><span>1st responder</span><span>2nd responder / Code Blue team</span></div>
+      <div class="sh-b dama">DAMA: the patient, the Code Blue team, a witness</div></div>
+    <p class="fig-cap">Appendix vii, p28. The primary responder and the Code Blue team fill it in (5.3f).</p></div>`,
+  /* ---- The medical interpreter service: the flow chart of the memo of 9 Jul 2026 (Lampiran 1) ---- */
+  interp:() => {
+    const S = [['Your department needs an interpreter', '<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 4.5h5v4h-2l-1.5 1.5V8.5h-1.5z"/>'],
+      ['Call line 0: IbuSawat HKL, the hospital operator', '<path d="M6.5 3.5h3l1.6 4-2 1.3a10 10 0 0 0 6.1 6.1l1.3-2 4 1.6v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/>'],
+      ['The telephonist calls the interpreter for the language, from the list HKL management appointed', '<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/>'],
+      ['The line is put through to the interpreter', '<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>'],
+      ['You and the interpreter talk, for the interpreter to attend in person', '<path d="M4 5h11v8H9l-4 3.5V13H4z"/><path d="M15 9h5v8h-1v3l-3.5-3H11v-2"/>']];
+    return `<div class="fig figint"><ol>${S.map(([t, d], i) => `<li style="--d:${(i * .1).toFixed(1)}s"><span class="ii"><svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg></span><span class="it"><b>${i + 1}</b>${t}</span></li>`).join('')}</ol>
+      <p class="int-l"><span lang="zh">华语</span><span lang="ta">தமிழ்</span><span lang="ne">नेपाली</span><span lang="bn">বাংলা</span></p><p class="fig-cap">Lampiran 1, the flow chart of the medical interpreter service (memo of 9 Jul 2026).</p></div>`;
+  },
+  /* ---- Snakebite (MOH Guideline: Management of Snakebite, 2017), drawn from the entry's own facts and pages ---- */
+  /* Looking for ptosis and weak eye movements at the bedside (4.2.4, p32; p46) */
+  ptosis:() => {
+    const face = (lid, eyeY, extra) => `<svg viewBox="0 0 120 92" aria-hidden="true"><ellipse cx="60" cy="50" rx="34" ry="38" class="sk"/>${[44, 76].map(x => `<ellipse cx="${x}" cy="46" rx="9" ry="6" class="ew"/><circle cx="${x}" cy="${eyeY}" r="3.2" class="ir"/><path d="M${x - 10} ${46 + lid}q10 ${-7 - lid / 2} 20 0" class="lid"/>`).join('')}${extra}</svg>`;
+    const up = '<path d="M60 14V4m0 0-4 4m4-4 4 4" class="ar"/><circle cx="60" cy="16" r="2.6" class="fi"/>';
+    return `<div class="fig figpt"><div class="pt-g">
+      <div class="pt n">${face(0, 43, up)}<b>Normal</b><span>Look up, head still: the upper lids lift fully</span></div>
+      <div class="pt y">${face(5, 45, up)}<b>Ptosis</b><span>The upper lids lift less, or not at all (p32)</span></div>
+      <div class="pt e">${face(0, 46, '<path d="M14 46H2m0 0 4-4m-4 4 4 4M106 46h12m0 0-4-4m4 4-4 4" class="ar"/>')}<b>Eye movements</b><span>Follow the finger side to side: an eye that cannot follow, double vision</span></div></div>
+      <p class="fig-cap">Paralysis descends, and ptosis comes first (p32). Also: fixed dilated pupils, the broken neck sign, difficulty swallowing, paradoxical breathing (p46).</p></div>`;
+  },
+  /* The 20WBCT, with a 20-minute timer that keeps nothing (4.5.9, p39; 7.5.3 and 7.6.1, p75) */
+  wbct:() => {
+    const tube = (f, tilt) => `<svg viewBox="0 0 40 64" aria-hidden="true"><g${tilt ? ' transform="rotate(-62 20 34)"' : ''}><path d="M12 6h16v44a8 8 0 0 1-16 0z" class="tb"/>${f}</g></svg>`;
+    const S = [['2 ml of fresh venous blood', '<svg viewBox="0 0 40 64" aria-hidden="true"><path d="M8 48 28 18m-4-6 8 8M22 10l10 10M10 50l-4 4" class="tb"/><path d="M12 42l12-18" class="bl2"/></svg>'],
+      ['A small, dry glass tube, new or heat-cleaned', tube('<path d="M12 38h16v12a8 8 0 0 1-16 0z" class="bf"/>')],
+      ['20 minutes, undisturbed, at room temperature', '<svg viewBox="0 0 40 64" aria-hidden="true"><circle cx="20" cy="34" r="15" class="tb"/><path d="M20 34V24m0 10 7 4" class="tb"/><path d="M16 12h8" class="tb"/></svg>'],
+      ['Then tip it once', tube('<path d="M12 38h16v12a8 8 0 0 1-16 0z" class="bf"/>', true)]];
+    return `<div class="fig figwb"><ol class="wb-s">${S.map(([t, s], i) => `<li><span class="wb-i">${s}</span><b>${i + 1}</b><span>${t}</span></li>`).join('')}</ol>
+      <div class="wb-r"><div class="ok">${tube('<path d="M12 22h16v28a8 8 0 0 1-16 0z" class="bf"/>', true)}<p><b>Clotted</b>The blood stays put as a clot. Repeat as needed (p39)</p></div>
+        <div class="no">${tube('<path d="M6 44q14 6 28-2v10H6z" class="bf"/><path d="M28 50q4 6 2 10" class="bf"/>', true)}<p><b>Not clotted</b>It runs: a coagulopathy is possible (p39)</p></div></div>
+      ${wbTimer()}
+      <p class="fig-cap">Not on its own for antivenom: read it with the patient (p39). After antivenom, clotting usually returns in 3-9 hours; recheck 6 hours after the infusion ended (p75). The timer stores nothing.</p></div>`;
+  },
+  /* Observation from arrival (chapter 5, p46; 6.3.8, p54; 4.2, p31; Appendix 2, p91; Table 11, p40; 9.1.2.1, p83) */
+  obs:() => {
+    const T = [['Acute', 'Every 5-15 minutes', 'Vital signs, pain score and PEFR; temperature 4-hourly; urine output hourly (6.3.8)'],
+      ['First 12 hours', 'At least hourly', 'Serial assessment on the snakebite chart (chapter 5; Appendix 2)'],
+      ['To 48 hours', 'Serial assessment', 'Bloods by the snake: pit viper or unidentified, FBC, clotting profile and CK 6-hourly (Table 11)'],
+      ['Species unknown', 'At least 24 hours', 'Of close observation (4.2, p31)'],
+      ['After antivenom', 'At least 1 hour', 'Of monitoring after the infusion (7.3.1, p69)'],
+      ['After discharge', '5-7 days', 'Blood tests after a pit viper envenoming, for recurrence (9.1.2.1, p83)']];
+    return `<div class="fig figob"><ol class="ob-l">${T.map(([w, b, s], i) => `<li style="--d:${(i * .08).toFixed(2)}s"><span class="ob-w">${w}</span><b>${b}</b><span>${s}</span></li>`).join('')}</ol></div>`;
+  },
+  /* Giving antivenom (7.3.1, p69) and what to expect (7.5, p75) */
+  avgive:() => {
+    const S = [['Adrenaline ready', 'Adult 0.5 mg; child 0.01 mg/kg, of 1 mg/ml'], ['Reconstitute', 'The solution supplied or 10 ml water for injection; swirl, never shake'], ['Dilute', 'Adult 250-500 ml NS or D5%; child 5-10 ml/kg'], ['Run slowly, then faster', '1-2 ml/min for 10-15 minutes; done within an hour'], ['Monitor', 'During it and for at least an hour after']];
+    const R = [['15-30 min', 'Bleeding stops'], ['30-60 min', 'Blood pressure may rise'], ['3-9 h', 'Clotting returns'], ['6 h after the end', 'Recheck clotting; still abnormal: repeat the starting dose']];
+    return `<div class="fig figav"><ol class="av-s">${S.map(([t, s], i) => `<li><b>${i + 1}</b><span><em>${t}</em>${s}</span></li>`).join('')}</ol>
+      <div class="av-r"><span class="av-h">Then expect (p75)</span>${R.map(([t, s]) => `<span><b>${t}</b>${s}</span>`).join('')}</div>
+      <p class="fig-cap">IV only, the same dose at every age (7.3.1, p69; 6.6, p58). Confirm the product and dose with the EP.</p></div>`;
+  },
+  /* Antivenom reactions on a time axis (Table 17, p76 to 77; 7.7, p76) */
+  react:() => `<div class="fig figrx" role="img" aria-label="Antivenom reactions: early, 2 to 180 minutes after starting, stop the antivenom and give adrenaline; pyrogenic, 1 to 2 hours after, cool, antipyretic and fluids; late, 1 to 12 days after, oral chlorpheniramine, then prednisolone">
+    <div class="rx-ax"><i></i></div>
+    <div class="rx-g"><div class="e"><b>Early</b><em>2-180 minutes</em><span>Stop the antivenom; adrenaline IM, adult 0.5 mg, child 0.01 mg/kg</span></div>
+      <div class="p"><b>Pyrogenic</b><em>1-2 hours after</em><span>Cool the patient, an antipyretic, IV fluids</span></div>
+      <div class="l"><b>Late</b><em>1-12 days after</em><span>Chlorpheniramine by mouth for 5 days; prednisolone if no response in 24-48 hours</span></div></div>
+    <p class="fig-cap">Restart more slowly once it has settled (7.7, p76). Doses: Table 17 in the Antivenom tab.</p></div>`,
+  /* Rate of proximal progression of the swelling (Table 10, p34; 5.4.8, p48 to 50) */
+  rpp:() => `<div class="fig figrp"><svg viewBox="0 0 320 96" role="img" aria-label="A forearm with two strips of tape at the proximal edge of the swelling, 4 hours apart and 2.5 cm apart: 0.6 cm an hour">
+      <path d="M8 40c40-10 120-12 200-8 40 2 70 6 104 4v34c-34 2-64 6-104 8-80 4-160 2-200-8z" class="lb"/>
+      <path d="M8 40c30-8 80-10 120-10v52c-40 0-90-2-120-10z" class="sw"/><path d="M100 30v52" class="ed"/><path d="M128 30v52" class="ed2"/>
+      <rect x="94" y="22" width="12" height="16" rx="2" class="tp"/><rect x="122" y="22" width="12" height="16" rx="2" class="tp"/>
+      <text x="100" y="16" class="tx">08:00</text><text x="128" y="16" class="tx">12:00</text>
+      <path d="M100 90h28" class="ms"/><text x="114" y="96" class="tx s">2.5 cm in 4 hours = 0.6 cm/h</text>
+      <circle cx="40" cy="58" r="3" class="bt"/><circle cx="48" cy="56" r="3" class="bt"/></svg>
+    <ul class="rp-l"><li>Tape the proximal edge of the swelling, with the date and time; never a permanent marker (p34, p50)</li><li>Measure between the two tapes: the distance over the interval, in cm an hour (p49)</li><li>Keep only the two latest tapes; limb girth adds nothing (p49 to 50)</li></ul></div>`,
+  /* ---- Communication on shift (10 Nov 2026): the department's quick card, Project BETA, SPIKES, AHRQ teach-back, ISBAR ---- */
+  /* How far it has gone, and what to do at each level (the card; the colour codes card; the ebook p5 to 9) */
+  cmdanger:() => `<div class="fig figcm"><div class="cmd">
+      <div class="cmd-b g"><b>Angry, but talking</b><span>Talk it down: a safe stance, calm yourself, the three steps</span></div>
+      <div class="cmd-b a"><b>Early danger signs</b><span>Clenched fists · pacing · invading personal space · verbal threats · throwing objects · sudden intense silence</span><em>Call senior staff or security now; talk only with backup</em></div>
+      <div class="cmd-b r"><b>A weapon, or violence now</b><span>Step away. Code Gray (violence) or Code Silver (armed threat); the ebook: Polis Bantuan and Code Grey (p5 to 9)</span><div class="cmd-x"><span class="cc-n"><small>ext</small>5441</span><button type="button" class="cpy" data-cpy="ext 5441" aria-label="Copy ext 5441">${svg('copy')}<span class="bl">Copy</span></button></div></div></div>
+    <p class="fig-cap">Never manage escalating aggression alone (the department's quick card). Ext 5441 is from the hospital's colour codes card.</p></div>`,
+  /* Where to stand (the card; Project BETA, domains 1 and 2) */
+  cmstance:() => `<div class="fig figcm"><div class="cms"><svg viewBox="0 0 300 170" role="img" aria-label="Seen from above: you stand at an angle to the patient, at least two arm's lengths away, with the door beside or behind you and a clear way out for both of you; a colleague stands back">
+      <rect x="6" y="6" width="288" height="158" rx="10" class="rm"/><path d="M6 128v-36" class="dr"/><text x="12" y="146" class="tx">door</text>
+      <path d="M40 110 C 90 120, 150 120, 200 96" class="pa"/><path d="M60 100 C 30 104, 14 108, 8 110" class="pa"/>
+      <circle cx="222" cy="64" r="16" class="pt"/><text x="222" y="98" class="tx c">patient</text>
+      <circle cx="96" cy="104" r="14" class="me"/><text x="96" y="134" class="tx c">you, at an angle</text>
+      <circle cx="58" cy="52" r="11" class="co"/><text x="58" y="34" class="tx c">a colleague, back</text>
+      <path d="M110 96 L206 70" class="gp"/><text x="136" y="60" class="tx c b">at least 2 arm's lengths</text><text x="136" y="72" class="tx c s">the card: 1 to 2</text></svg>
+    <ul class="cms-l"><li class="y">Hands visible, relaxed, side-on</li><li class="y">A clear way out for you, and one for them</li><li class="n">Crossed arms or finger pointing</li><li class="n">Standing over a seated patient</li></ul></div>
+    <p class="fig-cap">The card asks for 1 to 2 arm lengths; Project BETA, at least 2: the guide follows the wider gap.</p></div>`,
+  /* The card's three steps, with its phrases as printed */
+  cmdeesc:() => {
+    const S = [['Acknowledge the emotion', ['I can see you’re upset.', 'I understand this is frustrating.']], ['Set respectful limits', ['I want to help you, but I cannot do that if staff feel unsafe.']], ['Offer choices', ['Would you prefer to sit here or move to the assessment room?']]];
+    return `<div class="fig figcm"><ol class="cm3">${S.map(([h, q], i) => `<li style="--d:${(i * .1).toFixed(1)}s"><b><i>${i + 1}</i>${h}</b>${q.map(x => `<q>${x}</q>`).join('')}</li>`).join('')}</ol>
+      <p class="cm-strip">One person talks · short sentences · repeat yourself · promise only what you can give</p><p class="fig-cap">The three steps and their phrases: the department's quick card. The strip: Project BETA (Richmond et al., 2012).</p></div>`;
+  },
+  /* The card's L.E.A.P. */
+  cmleap:() => `<div class="fig figcm"><div class="cml">${[['L', 'Listen without interrupting'], ['E', 'Empathise'], ['A', 'Apologise for the situation'], ['P', 'Problem-solve together']].map(([k, t]) => `<div><b>${k}</b><span>${t}</span></div>`).join('')}</div>
+    <q class="cm-q">I’m sorry the wait has been long. Let me see what I can do to help.</q>
+    <p class="fig-cap">The card's own letters. The published LEAP (Amador) is Listen, Empathize, Agree, Partner.</p></div>`,
+  /* Never say, and say instead: the card's two lists, not matched pairs */
+  cmsay:() => `<div class="fig figcm"><div class="cmy"><div class="n"><b>Never say</b>${['Calm down!', 'It’s not my fault.', 'You have to wait.', 'If you don’t behave…'].map(x => `<q>${x}</q>`).join('')}</div>
+      <div class="y"><b>Say instead</b>${['I want to help you.', 'Let’s figure this out together.', 'Your safety is important to us.', 'Here’s what I can do right now.'].map(x => `<q>${x}</q>`).join('')}</div></div>
+    <p class="fig-cap">Both lists as the department's quick card prints them. Aggression is usually driven by fear, pain or loss of control, not by you.</p></div>`,
+  /* SPIKES, in the guide's own words (Baile et al., 2000) */
+  cmspikes:() => `<div class="fig figcm"><ol class="cmk">${[['S', 'Setting', 'A private place, seated'], ['P', 'Perception', 'Ask what they know first'], ['I', 'Invitation', 'How much do they want to know?'], ['K', 'Knowledge', 'Warn, then plain words, small pieces'], ['E', 'Emotions', 'Name the feeling, and pause'], ['S', 'Strategy', 'The plan, then sum up']].map(([k, h, t], i) => `<li style="--d:${(i * .07).toFixed(2)}s"><b>${k}</b><span><em>${h}</em>${t}</span></li>`).join('')}</ol>
+    <p class="fig-cap">SPIKES (Baile et al., The Oncologist, 2000), in the guide's own words.</p></div>`,
+  /* Teach-back as a loop (AHRQ Tool 5; Right Decision Service) */
+  cmteach:() => `<div class="fig figcm"><div class="cmt"><div class="lp"><span class="a">Explain one or two points, in plain words</span><span class="b">Ask them to say it back, in their own words</span><span class="c ok">Right: the next point, then the safety-net</span><span class="c no">Not quite: explain it another way, and ask again</span></div>
+      <div class="chips"><span class="y">“Show me”, for an inhaler or a new medicine</span><span class="n">“Do you understand?”</span></div></div>
+    <p class="fig-cap">Teach-back tests your explanation, not the patient (AHRQ Health Literacy Universal Precautions Toolkit, Tool 5).</p></div>`,
+  /* ISBAR for a phone referral (Marshall et al., 2009 and 2012; the NHS SBAR tool) */
+  cmisbar:() => `<div class="fig figcm"><ol class="cmb">${[['I', 'Identify', 'Yourself, where you are, and the patient'], ['S', 'Situation', 'Why you are calling'], ['B', 'Background', 'The history and results that matter'], ['A', 'Assessment', 'What you think; or “not sure, but worried”'], ['R', 'Request', 'What you need, and by when (SBAR: recommendation)'], ['↺', 'Read back', 'They repeat the plan back to you']].map(([k, h, t]) => `<li><b>${k}</b><span><em>${h}</em>${t}</span></li>`).join('')}</ol>
+    <p class="fig-cap">ISBAR (Marshall et al., 2009 and 2012), in the guide's own words.</p></div>`
 };
 const figHTML = k => FIGS[k] ? FIGS[k]() : '';
 
@@ -395,7 +636,7 @@ const store = {
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const kindOf = p => p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
 const metaOf = p => p.page ? 'Ebook p' + p.page : (p.src || '');
-const kindLabel = (p, k) => (p.grp === 'rules' ? KIND_R : p.grp === 'cpg' ? KIND_G : KIND)[k];
+const kindLabel = (p, k) => (p.kinds && p.kinds[k]) || (p.grp === 'rules' ? KIND_R : p.grp === 'cpg' ? KIND_G : KIND)[k];
 /* A guideline's neutral outcomes are its answers (the medicines), not a next step */
 const outLbl = (p, k) => p.grp === 'cpg' && k === 'neutral' ? 'Guidance' : OUT_LBL[k];
 const fmt = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
@@ -448,7 +689,7 @@ const CATS = [
   {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','behavioural-disturbance']},
   {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','gastroenteritis','biliary','renal-colic','ckd-cpg','scrotal-pain','fb-children-cpg']},
   {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis','sore-throat-cpg']},
-  {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','t2dm-cpg','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','pain','cancer-pain-cpg']},
+  {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','t2dm-cpg','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','snakebite-moh','pain','cancer-pain-cpg']},
   {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['hip-fracture-cpg','avulsed-tooth-cpg']},
   {k:'flow', t:'Green Zone flow and referrals', s:'Flow and referrals', ic:'route', c:'c-flow', j:'t-emerald', ids:FLOW_IDS},
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
@@ -479,7 +720,7 @@ function pathWords(p){
     ...(p.dept || []).flatMap(d => [d.h, ...(d.items || []), ...(d.table ? d.table.rows.flat() : [])]),
     ...(p.notes || []).flatMap(t => t.notes.flatMap(d => [d.h, ...(d.items || []), ...(d.table ? d.table.rows.flat() : [])])),
     ...(p.leaflet ? ['en', 'ms'].flatMap(k => p.leaflet[k].groups.flatMap(g => [g.h, g.p, ...g.items])) : []),
-    ...(p.see || []).map(s => s[1])].filter(Boolean);
+    ...(p.see || []).map(s => s[1]), p.kw].filter(Boolean);
 }
 const IDX = [];
 for (const [id, p] of Object.entries(P)){
@@ -714,7 +955,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -914,7 +1155,7 @@ function draw(focus){
           <button type="button" class="ib" data-link aria-label="Copy a link to this step" title="Copy link">${svg('link')}</button>
           <button type="button" class="ib" data-restart aria-label="Start again" title="Start again"${steps ? '' : ' disabled'}>${svg('restart')}</button>
         </div></div>
-      ${p.hero ? `<div class="tile ${c.j} run-hero">${tileMedia(p.hero)}${head}</div>` : head}
+      ${p.hero ? `<div class="tile ${p.heroj || c.j} run-hero">${tileMedia(p.hero)}${head}</div>` : head}
       ${about ? `<div class="about-t">${about}</div>` : ''}
     </div>
     <div class="run-grid">
@@ -948,7 +1189,7 @@ function card(n, p){
   if (n.end){
     const ic = n.end === 'neutral' && p.grp === 'rules' ? 'rule' : OUT_IC[n.end];
     return `<article class="res ${n.end}${land ? ' land' : ''}"><div class="res-h"><span class="ic">${svg(ic)}</span><div><h2>${esc(n.title)}</h2><div class="res-k">${kindLabel(p, n.end)}</div></div></div>
-      ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${list(n.items, 'ticks')}
+      ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${n.figOnly ? '' : list(n.items, 'ticks')}
         ${n.fig ? figHTML(n.fig) : ''}${n.links ? `<div class="links">${n.links.map(([href, t]) => /^https:/.test(href) ? `<a class="pill ext" href="${href}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>` : `<a class="pill" href="${href}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : ''}
         ${n.gap ? `<div class="gap">${svg('info')}<span>${esc(n.gap)}</span></div>` : ''}</div>` : ''}
       <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span><button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${(p.advice || p.leaflet) && n.end === 'discharge' ? `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
@@ -1027,7 +1268,7 @@ function tabsOf(p){
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
   /* A national CPG on the shelf opens its full PDF from its References tab */
   const pdf = p.grp === 'cpg' && CPG_SHELF.find(c => c.id && P[c.id] === p);
-  if (p.refs) T.push({k:'refs', l:'References', html:(p.doc ? `<div class="cx-links cpg-pdf"><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (pdf ? `<div class="cx-links cpg-pdf">${pdf.drive ? `<a class="pill ext" href="${GDRIVE + pdf.drive}/view" target="_blank" rel="noopener noreferrer">The full CPG, PDF in Google Drive${svg('ext')}</a>` : ''}<a class="pill ext" href="${ACAD + pdf.cpg}" target="_blank" rel="noopener noreferrer">Academy of Medicine${svg('ext')}</a>${pdf.qr ? `<a class="pill ext" href="${pdf.qrd ? GDRIVE + pdf.qrd + '/view' : ACAD + pdf.qr}" target="_blank" rel="noopener noreferrer">Quick reference${svg('ext')}</a>` : ''}</div>` : '') + `<ol class="refs">${p.refs.map(li).join('')}</ol>`});
+  if (p.refs) T.push({k:'refs', l:'References', html:(p.docs ? `<div class="cx-links cpg-pdf">${p.docs.map(([h, t]) => `<a class="pill ext" href="${h}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>`).join('')}</div>` : '') + (p.doc ? `<div class="cx-links cpg-pdf"><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (pdf ? `<div class="cx-links cpg-pdf">${pdf.drive ? `<a class="pill ext" href="${GDRIVE + pdf.drive}/view" target="_blank" rel="noopener noreferrer">The full CPG, PDF in Google Drive${svg('ext')}</a>` : ''}<a class="pill ext" href="${ACAD + pdf.cpg}" target="_blank" rel="noopener noreferrer">Academy of Medicine${svg('ext')}</a>${pdf.qr ? `<a class="pill ext" href="${pdf.qrd ? GDRIVE + pdf.qrd + '/view' : ACAD + pdf.qr}" target="_blank" rel="noopener noreferrer">Quick reference${svg('ext')}</a>` : ''}</div>` : '') + `<ol class="refs">${p.refs.map(li).join('')}</ol>`});
   return T;
 }
 function refTabs(p){
@@ -1901,6 +2142,111 @@ const CALCS = {
       return {outs, lists:[{h:'Drugs in anaphylaxis, as the ebook gives them', rows:tableOf('anaphylaxis', 'Drugs').rows.map(r => [r[0], r[1]])}],
         gap:'The ebook\'s table gives one dose for each drug and no child doses.'};
     }},
+  /* Snakebite (MOH Guideline: Management of Snakebite, 2017; spec in sources/snakebite/calc-spec.md). The 20-minute whole blood
+     clotting test (4.5.9, p39; 7.5.3 and 7.6.1, p75): when to tip the tube, how to read it, when to recheck after antivenom. */
+  snake20:{t:'Snakebite: 20-minute whole blood clotting test', g:'tox', src:'MOH snakebite guideline, p39 and p75', path:'#snakebite-moh--labs', kw:'snake bite snakebite ular 20wbct wbct clotting test whole blood coagulopathy pit viper bleeding antivenom',
+    sub:'The bedside clotting test: when to tip the tube, how to read it, and when to recheck after antivenom.',
+    fields:[{k:'at', type:'time', label:'Blood went into the tube at'}, {k:'res', type:'seg', label:'After 20 minutes, the tube tipped once', nodef:true, opts:[['clot', 'Clotted'], ['no', 'Not clotted'], ['part', 'Partly clotted']]}, {k:'end', type:'time', label:'After antivenom: the infusion ended at'}],
+    note:'Put 2 ml of freshly drawn venous blood into a small, dry glass tube, new or heat-cleaned. Leave it undisturbed at room temperature for 20 minutes, then tip it once (p39). A quick bedside test when the bite is unidentified or a pit viper is suspected, and when the laboratory cannot do a clotting profile. Nothing you enter is saved.',
+    run(v){
+      const add = (t, m) => { const [h, mi] = t.split(':').map(Number), d = (h * 60 + mi + m) % 1440; return String(Math.floor(d / 60)).padStart(2, '0') + ':' + String(d % 60).padStart(2, '0'); };
+      const outs = [], gaps = [];
+      if (v.at) outs.push(['Tip the tube once at', add(v.at, 20), 'good', 'Blood in at ' + v.at + ': 20 minutes undisturbed at room temperature (p39)']);
+      if (v.res === 'no') outs.push(['Result', 'Not clotted', 'bad', 'Still liquid: a coagulopathy is possible. Repeat as needed (p39)']);
+      else if (v.res === 'clot') { outs.push(['Result', 'Clotted', 'good', 'Repeat as needed (p39)']); gaps.push('Not in the guideline: what a clotted result rules out.'); }
+      else if (v.res === 'part') { outs.push(['Result', 'Partly clotted', 'warn', 'Not in the guideline: whether a partial clot counts. Do not choose: ask the EP']); gaps.push('Not in the guideline: whether a partial clot counts, a schedule for repeat tests, or what to use without a glass tube.'); }
+      if (v.end) outs.push(['Recheck the clotting at', add(v.end, 360), 'good', 'Still not clotting, or not clotting again, 6 hours after the infusion ended: repeat the starting dose (7.6.1, p75)']);
+      if (!outs.length) return null;
+      return {outs, lists:[{h:'Read it with the patient', rows:[['On its own', 'Do not decide antivenom on the 20WBCT alone: read it with the patient, and with the laboratory clotting profile when there is one (p39)'], ['And yet', 'A coagulopathy on the 20WBCT is also listed as an antivenom indication (7.2.1.1, p66): the guideline says both'], ['After antivenom', 'After an adequate dose, clotting usually returns in 3-9 hours (p75)']]}],
+        verdict:{cls:'next', h:v.res === 'no' ? 'A possible coagulopathy: check the antivenom indications with the EP' : 'Then: the rest of the assessment', p:'The indications, the product and the dose by snake are in the guideline\'s steps and the antivenom calculator.', href:'#snakebite-moh--env', link:'Antivenom indications'},
+        gap:gaps.join(' ') || null};
+    }},
+  /* Antivenom by snake: Tables 15 and 16 (p70 to 74), how to give it (7.3.1, p69), when to repeat (7.6, p75), reactions (Table 17, p76 to 77) */
+  snakeav:{t:'Snakebite: antivenom by snake', g:'tox', src:'MOH snakebite guideline, Tables 15 to 17', path:'#snakebite-moh--which', kw:'snake bite snakebite ular antivenom antivenin cobra king cobra krait sea snake pit viper malayan pit viper green pit viper coral keelback qsmi npav hpav vials',
+    sub:'The product and starting dose by snake and region, how to give it, when to repeat it, and the reaction doses, child doses by weight.',
+    fields:v => {
+      const bor = v.reg === 'bor', F = [
+        {k:'reg', type:'seg', label:'Where the bite happened', re:true, opts:[['pen', 'Peninsular Malaysia'], ['bor', 'Sabah and Sarawak']]},
+        {k:'grp', type:'seg', label:'The snake', nodef:true, re:true, opts:[['cobra', 'Cobra'], ['krait', 'Krait'], ['pv', 'Pit viper'], ['sea', 'Sea snake'], ['coral', 'Coral snake'], ['keel', 'Red-necked keelback'], ['unk', 'Not identified']]}];
+      if (v.grp === 'cobra') F.push({k:'sp', type:'seg', label:'Which cobra', nodef:true, re:true, opts:[['mono', 'Monocled'], ['spit', 'Equatorial spitting'], ['king', 'King cobra']]});
+      if (v.grp === 'cobra' && (v.sp === 'mono' || v.sp === 'spit')) F.push({k:'env', type:'seg', label:'Envenoming', nodef:true, opts:[['loc', 'Local'], ['sys', 'Systemic']]});
+      if (v.grp === 'krait') F.push({k:'sp', type:'seg', label:'Which krait', nodef:true, opts:[['mk', 'Malayan'], ['bk', 'Banded'], ['rhk', 'Red-headed']]});
+      if (v.grp === 'pv') F.push({k:'sp', type:'seg', label:'Which pit viper', nodef:true, opts:[['mpv', 'Malayan pit viper'], ['gpv', 'A green pit viper'], ['wag', bor ? 'Bornean keeled' : 'Wagler\'s (temple)'], ['blank', bor ? 'Sabah green' : 'Leaf-nose palm, Sumatran or mountain']]});
+      if (v.grp === 'unk') F.push({k:'syn', type:'seg', label:'The main syndrome', nodef:true, opts:[['par', 'Paralysis'], ['bleed', 'Bleeding or not clotting'], ['myo', 'Muscle pain, dark urine'], ['loc', 'Local swelling only']]});
+      F.push({k:'age', type:'seg', label:'Patient', re:true, opts:[['ad', 'Adult'], ['ch', 'Child']]});
+      if (v.age === 'ch') F.push(['wt', 'Weight', 'kg']);
+      F.push({k:'end', type:'time', label:'The infusion ended at (optional)'});
+      return F;
+    },
+    note:'The choice of antivenom is for a doctor trained in snakebite management (7.3.1, p69): confirm it with the EP. Stocks differ between hospitals: ask the pharmacist; RECS can help share stock (7.3, p67). Never the Indian polyvalent antivenom: it is not appropriate for Malaysian snakes (Table 14 note, p68). Nothing you enter is saved.',
+    run(v){
+      if (!v.grp) return null;
+      const bor = v.reg === 'bor', ch = v.age === 'ch', w = ch ? v.wt : null, gaps = [], outs = [];
+      const NPAV = 'QSMI Neuro Polyvalent Snake Antivenom (NPAV)', HPAV = 'QSMI Haemato Polyvalent Snake Antivenom (HPAV)';
+      let first = null, second = null, dose = null, next = null, src = '', clot = false, notes = [];
+      const sp = v.sp, notBorneo = bor && ['mono', 'mk', 'mpv'].includes(sp);
+      if (v.grp === 'cobra'){
+        if (!sp) return [['The snake', 'Choose the cobra', 'warn', '']];
+        if (sp === 'king'){ first = 'QSMI King Cobra Antivenin'; second = NPAV; dose = '10 vials'; next = 'After 1-2 hours'; src = bor ? 'Table 16, p73' : 'Table 15, p70'; }
+        else { first = 'QSMI Cobra Antivenin'; second = NPAV; dose = v.env === 'loc' ? '5-10 vials' : v.env === 'sys' ? '10 vials' : 'Local envenoming 5-10 vials; systemic 10 vials'; next = 'After 1-2 hours'; src = sp === 'spit' && bor ? 'Table 16, p73' : 'Table 15, p70'; if (sp === 'spit') notes.push(['Spitting cobra', 'The cobra antivenin cross-neutralises the equatorial spitting cobra (note, p72)']); }
+        notes.push(['Cross-cover', 'Cobra antivenom does not reliably cover the king cobra (p64)']);
+      } else if (v.grp === 'krait'){
+        if (!sp) return [['The snake', 'Choose the krait', 'warn', '']];
+        if (sp === 'rhk'){ first = NPAV + ': it cross-neutralises'; second = 'Nil'; dose = '5 vials'; }
+        else { first = sp === 'mk' ? 'QSMI Malayan Krait Antivenin' : 'QSMI Banded Krait Antivenin'; second = sp === 'bk' && bor ? NPAV : 'Blank in print (Table 15, p71)'; dose = '5 vials'; if (second.startsWith('Blank')) gaps.push('Not in the guideline: the second choice for this krait in Peninsular Malaysia; the cell is blank.'); }
+        next = 'After 1-2 hours'; src = bor ? 'Table 16, p73' : 'Table 15, p71';
+        notes.push(['Cross-cover', 'Neither krait antivenom reliably covers the other krait (p64)'], ['Paralysis', 'Krait and sea snake paralysis may not respond to antivenom: if it is not halted, urgent intubation and ventilation (7.5.5, p75)']);
+      } else if (v.grp === 'sea'){
+        first = 'CSL Polyvalent Sea Snake Antivenom'; second = 'Nil'; dose = '1-3 vials'; next = 'After 1-2 hours'; src = bor ? 'Table 16, p73' : 'Table 15, p71';
+        notes.push(['Paralysis', 'Krait and sea snake paralysis may not respond to antivenom: if it is not halted, urgent intubation and ventilation (7.5.5, p75)']);
+      } else if (v.grp === 'coral'){
+        return {outs:[['Antivenom', 'None available', 'warn', 'No antivenom is known to work against coral snakes (p64; Table 15, p71)']],
+          lists:[{h:'If paralysis develops: consider an anticholinesterase (6.5.4, p56 to 57)', rows:[['First', 'Record the baseline signs'], ['Atropine IV', ch ? (w > 0 ? `${r1(0.05 * w)} mg (50 µg/kg)` : '50 µg/kg: enter the weight') : '0.6 mg'], ['Then neostigmine IM', ch ? (w > 0 ? `${r1(0.04 * w * 100) / 100} mg (0.04 mg/kg)` : '0.04 mg/kg') : '0.02 mg/kg'], ['Watch', '30-60 minutes for less ptosis and better ventilatory capacity'], ['A clear response', 'Neostigmine 0.5-2.5 mg every 1-3 hours, at most 10 mg in 24 hours (child 0.01-0.04 mg/kg every 2-4 hours), with atropine']]}],
+          verdict:{cls:'refer', h:'No antivenom: support breathing, and ask the EP', p:'Coral: consider neostigmine with atropine (Table 15, p71).', href:'#snakebite-moh--coral', link:'Coral snakes in the guideline'},
+          gap:null};
+      } else if (v.grp === 'keel'){
+        return {outs:[['Antivenom', 'Anti-yamakagashi antivenom', 'warn', 'Sourced from Japan; no second choice (6.8, p59)'], ['Starting dose', 'Not in the guideline', 'warn', 'Get expert help']],
+          lists:[{h:'Until antivenom is available', rows:[['Bleeding', 'Blood products only for life-threatening bleeding (6.4.9, p55)']]}],
+          verdict:{cls:'refer', h:'Get expert help, and confirm with the EP', p:'The red-necked keelback causes a severe coagulopathy and needs its own antivenom (6.8, p59).', href:'#snakebite-moh--keel', link:'The keelback in the guideline'},
+          gap:'Not in the guideline: the dose of the anti-yamakagashi antivenom.'};
+      } else if (v.grp === 'pv'){
+        if (!sp) return [['The snake', 'Choose the pit viper', 'warn', '']];
+        if (sp === 'wag') return {outs:[['Antivenom', 'None available', 'warn', 'Usually not indicated: no antivenom, HPAV included, has been shown to neutralise its venom, and bites are generally not lethal (p65)']], verdict:{cls:'next', h:'No antivenom: observe and treat the bite', p:'Those pit vipers: usually not indicated (Tables 15 and 16).', href:'#snakebite-moh--wag', link:'In the guideline'}, gap:null};
+        if (sp === 'blank') return {outs:[['Antivenom and dose', 'Blank in print', 'warn', bor ? 'Table 16 leaves the Sabah green pit viper blank (p73)' : 'Table 15 leaves the leaf-nose palm, Sumatran and mountain pit vipers blank (p71)']],
+          lists:[{h:'Facts beside it, not a dose', rows:[['Sabah and Sarawak', 'Table 16 gives the Sumatran pit viper the green pit viper antivenin, 3 vials (p74)'], ['Cross-cover', 'Green pit viper antivenom and HPAV are considered to cross-neutralise most Trimeresurus species (p65)']]}],
+          verdict:{cls:'refer', h:'Ask the EP or an expert', p:'The guideline\'s cell is blank at the page break.', href:'#snakebite-moh--gpv', link:'Pit vipers in the guideline'}, gap:'Not in the guideline: the cell is blank. Ask the EP or an expert.'};
+        clot = true;
+        if (sp === 'mpv'){ first = 'QSMI Malayan Pit Viper Antivenin'; second = HPAV; dose = '4 vials'; next = 'At 6 hours'; src = 'Table 15, p71'; notes.push(['Cross-cover', 'Malayan pit viper antivenom does not cover the green pit vipers (p64)']); gaps.push('The guideline\'s own case photo shows 3 vials (p37), and the MST book prints 3 (p47): Table 15 says 4 vials. Listed under Still to confirm.'); }
+        else { first = 'QSMI Green Pit Viper Antivenin'; second = HPAV; dose = '3 vials'; next = 'At 6 hours'; src = bor ? 'Table 16, p73 to 74' : 'Table 15, p72'; notes.push(['Which green pit vipers', bor ? 'Kinabalu brown, Kinabalu green, Sumatran and Bornean palm pit vipers (Table 16)' : 'Hagen\'s green, white-lipped green, mangrove, Thai peninsula, Tioman island and Cameron pit vipers (Table 15)']); }
+      } else if (v.grp === 'unk'){
+        if (!v.syn) return [['The syndrome', 'Choose the main syndrome', 'warn', '']];
+        const S = {par:[NPAV + ': polyvalents are usually used when the species is uncertain (p64)', 'Not in the guideline', 'Elapid antivenoms neutralise less per vial: up to 10 vials to start in confirmed envenoming (p65). 5 vials is given only as the red-headed krait\'s first-choice dose (p71, p73)'],
+          bleed:[HPAV + ': raised against the Malayan pit viper, white-lipped green pit viper and Russell\'s viper (p64)', 'Not in the guideline', 'HPAV is a second choice with no dose of its own in Tables 15 and 16 (p71 to 74)'],
+          myo:['If a sea snake is suspected: CSL Polyvalent Sea Snake Antivenom', '1-3 vials; next after 1-2 hours', 'Coral snakes also cause muscle pain and have no antivenom; how to tell them apart when neither was seen is not in the guideline'],
+          loc:['Not in the guideline', 'Not in the guideline', 'Cobras and pit vipers both cause severe pain, spreading swelling and blisters (Table 12, p41): ask the EP or RECS']}[v.syn];
+        outs.push(['Antivenom', S[0], S[0].startsWith('Not') ? 'warn' : 'good', ''], ['Starting dose', S[1], S[1].startsWith('Not') ? 'warn' : 'good', S[2]]);
+        if (v.syn === 'bleed') clot = true;
+        gaps.push('Starting dose for an unidentified bite: not in the guideline. Do not work out a polyvalent dose.');
+      }
+      if (first){
+        outs.push(['Antivenom', first, 'good', 'First choice · ' + src], ['Second choice', second, second === 'Nil' || second.startsWith('Blank') ? 'warn' : 'good', ''], ['Starting dose', dose, 'good', 'The same dose at every age, in pregnancy and with comorbidities; no contraindication (6.6, p58)'], ['Next dose', next, 'good', 'According to the clinical signs and symptoms (Tables 15 and 16)']);
+      }
+      if (notBorneo) notes.unshift(['Region', 'Not in Borneo: the Malayan pit viper, monocled cobra and Malayan krait (p74). The guideline gives no instruction for this case']);
+      /* how to give it, with a child's doses by weight */
+      const wOk = !ch || (w > 0 && w <= 100);
+      if (ch && !(w > 0)) outs.push(['Child', 'Enter the weight', 'warn', 'For the adrenaline and the dilution volume; the antivenom dose itself does not change']);
+      if (ch && w > 100) outs.push(['Weight', 'Enter 1 to 100 kg', 'warn', '']);
+      outs.push(['Adrenaline ready before starting', ch ? (wOk && w ? r1(0.01 * w * 100) / 100 + ' mg' : '0.01 mg/kg') : '0.5 mg', 'good', ch ? '0.01 mg/kg of 1 mg/ml (1 in 1,000); the guideline gives no child maximum (adult 0.5 mg)' : '0.5 ml of 1 mg/ml (1 in 1,000) (p69)']);
+      outs.push(['Dilute in', ch ? (wOk && w ? `${Math.round(5 * w)}-${Math.round(10 * w)} ml` : '5-10 ml/kg') : '250-500 ml', 'good', 'Normal saline or D5%' + (ch ? ', 5-10 ml/kg' : '') + '; with a volume concern, 5-10 ml/kg or undiluted (6.6.3 to 6.6.4, p58)']);
+      if (v.end && clot){ const [h, mi] = v.end.split(':').map(Number), d = (h * 60 + mi + 360) % 1440; outs.push(['Recheck the clotting at', String(Math.floor(d / 60)).padStart(2, '0') + ':' + String(d % 60).padStart(2, '0'), 'good', '6 hours after the infusion ended (7.6.1, p75)']); }
+      const lists = [{h:'How to give it (7.3.1, p69)', rows:[['Premedication', 'None: hydrocortisone and antihistamines only for signs of allergy (6.4.3, p55)'], ['Reconstitute', 'Each vial with the solution supplied or 10 ml water for injection; swirl gently, never shake'], ['Route', 'IV only'], ['Rate', 'Run at 1-2 ml/min for 10-15 minutes; with no reaction, faster, to finish within an hour'], ['Monitor', 'During the infusion and for at least an hour after']]},
+        {h:'Repeat the starting dose (7.6, p75)', rows:[['Clotting', 'Still unclotted, or unclotted again, 6 hours after the infusion ended'], ['Bleeding', 'Within 1-2 hours if bleeding stays brisk'], ['Paralysis or circulation', 'After 1-2 hours if they worsen, with full support'], ['Maximum', 'No maximum dose or number of repeats is given']]},
+        {h:'Reactions (Table 17, p76 to 77)', rows:[['Early, 2-180 minutes', 'Stop the antivenom. Adrenaline IM ' + (ch ? (wOk && w ? r1(0.01 * w * 100) / 100 + ' mg (0.01 mg/kg)' : '0.01 mg/kg') : '0.5 mg') + ', every 5-10 minutes; IV straight away with a coagulopathy'], ['Chlorpheniramine IV', ch ? (wOk && w ? r1(0.2 * w) + ' mg (0.2 mg/kg)' : '0.2 mg/kg') : '10 mg'], ['Ranitidine IV', ch ? (wOk && w ? r1(1 * w) + ' mg (1 mg/kg)' : '1 mg/kg') : '50 mg'], ['Hydrocortisone IV', (wOk && w ? `${Math.round(2 * w)}-${Math.min(Math.round(4 * w), ch ? 200 : 1e9)} mg` : '2-4 mg/kg') + (ch ? ', at most 200 mg' : '')], ['Infusion', 'Table 17 prints the adrenaline infusion as 1 microgm/kg/min: check with the EP (the ebook\'s anaphylaxis pathway gives 1 mcg/min)'], ['Pyrogenic, 1-2 hours after', 'Cool the patient, an antipyretic, IV fluids'], ['Late, 1-12 days after', 'Chlorpheniramine by mouth for 5 days: ' + (ch ? '0.25 mg/kg/day in divided doses' : '2 mg six-hourly') + '; prednisolone if no response in 24-48 hours: ' + (ch ? '0.7-1 mg/kg/day' : '30-60 mg/day') + ', divided, for 5-7 days']]}];
+      if (notes.length) lists.unshift({h:'Notes for this snake', rows:notes});
+      if (!v.end && clot) gaps.push('Enter when the infusion ended to get the time to recheck the clotting.');
+      if (ch && w > 0 && Math.round(4 * w) > 200) gaps.push('Hydrocortisone is capped at the child maximum of 200 mg.');
+      return {outs, lists, verdict:{cls:'refer', h:'Confirm with the EP before you give it', p:'The choice of antivenom is for a doctor trained in snakebite management (7.3.1, p69). Never the Indian polyvalent antivenom (p68).', href:'#snakebite-moh--which', link:'Antivenom in the guideline'}, gap:gaps.join(' ') || null};
+    }},
   kids:{t:'Child doses', g:'kids', src:'Department posters', path:'#children', kw:'paediatric prednisolone salbutamol puffs ipratropium croup dexamethasone adrenaline ors',
     sub:'Asthma, croup and ORS doses by weight, from the department\'s posters and notes.',
     fields:[['wt','Weight','kg'],['age','Age','',[['u6','Under 6 years'],['o6','Over 6 years']]]],
@@ -1945,6 +2291,7 @@ const CALCS = {
 };
 /* Every number above must still be in the source text: the test checks each of these phrases against the pathway data */
 const CALC_FACTS = [
+  ['snakebite-moh', 'Put 2 ml of freshly drawn venous blood into a small, dry glass tube, new or heat-cleaned'], ['snakebite-moh', 'Leave it undisturbed at room temperature for 20 minutes, then tip it once'], ['snakebite-moh', 'Still liquid: a coagulopathy is possible. Repeat as needed'], ['snakebite-moh', 'a quick bedside test when the bite is unidentified or a pit viper is suspected'], ['snakebite-moh', 'Do not decide antivenom on the 20WBCT alone'], ['snakebite-moh', 'Yet a coagulopathy on the 20WBCT is also listed as an antivenom indication (p66)'], ['snakebite-moh', 'After an adequate dose, clotting usually returns in 3-9 hours (p75)'], ['snakebite-moh', 'Still not clotting, or not clotting again, 6 hours after the infusion ended: repeat the starting dose (p75)'], ['snakebite-moh', 'Not in the guideline: whether a partial clot counts, a schedule for repeat tests, or what to use without a glass tube'], ['snakebite-moh', 'Local envenoming 5-10 vials, systemic 10 vials; next after 1-2 hours'], ['snakebite-moh', '10 vials; next after 1-2 hours'], ['snakebite-moh', '5 vials; next after 1-2 hours'], ['snakebite-moh', 'Red-headed krait 5 vials; next after 1-2 hours. No dose as a second choice'], ['snakebite-moh', '1-3 vials; next after 1-2 hours'], ['snakebite-moh', '4 vials; next at 6 hours'], ['snakebite-moh', '3 vials; next at 6 hours'], ['snakebite-moh', 'Second choice for the pit vipers'], ['snakebite-moh', 'Coral: consider neostigmine with atropine. Those pit vipers: usually not indicated'], ['snakebite-moh', 'Starting dose for an unidentified bite: not in the guideline'], ['snakebite-moh', 'Not in Borneo: the Malayan pit viper, monocled cobra and Malayan krait (p74)'], ['snakebite-moh', 'Printed blank, so ask the EP or an expert: the leaf-nose palm, Sumatran and mountain pit vipers in Table 15 (p71), the Sabah green pit viper in Table 16 (p73)'], ['snakebite-moh', 'Its antivenom is the anti-yamakagashi antivenom, sourced from Japan; no second choice and no dose in the guideline'], ['snakebite-moh', 'Never the Indian polyvalent antivenom'], ['snakebite-moh', 'Elapid antivenoms neutralise less per vial: up to 10 vials to start in confirmed envenoming (p65)'], ['snakebite-moh', 'Adrenaline drawn up before starting: adult 0.5 mg, child 0.01 mg/kg, of 1 mg/ml (1 in 1,000) (p69)'], ['snakebite-moh', 'Reconstitute each vial with the solution supplied or 10 ml water for injection; swirl gently, never shake (p69)'], ['snakebite-moh', 'Dilute: adult 250-500 ml normal saline or D5%; child 5-10 ml/kg'], ['snakebite-moh', 'or give it undiluted'], ['snakebite-moh', 'Run at 1-2 ml/min for 10-15 minutes; with no reaction, faster, to finish within an hour (p69)'], ['snakebite-moh', 'Monitor during the infusion and for at least an hour after'], ['snakebite-moh', 'The same dose at every age, in pregnancy and with comorbidities; no contraindication'], ['snakebite-moh', 'Some severely envenomed children may need a larger volume of antivenom, given their lower volume of distribution'], ['snakebite-moh', 'Repeat the starting dose: still unclotted, or unclotted again, 6 hours after the infusion ended; within 1-2 hours if bleeding stays brisk; after 1-2 hours if paralysis or the circulation worsens, with full support'], ['snakebite-moh', 'No maximum dose or number of repeats is given'], ['snakebite-moh', 'Krait and sea snake paralysis does not respond like this'], ['snakebite-moh', 'Table 17 prints the adrenaline infusion as 1 microgm/kg/min'],
   ['animal-bites', 'IM: 1 site; D0,3,7,14-28'], ['animal-bites', 'ID: 2 sites; D0,3,7'], ['animal-bites', 'IM/ID: 1 site; D0,3'], ['animal-bites', 'ID: 4 sites; D0'],
   ['animal-bites', 'Intramuscular (IM): 0.5 ml'], ['animal-bites', 'Intradermal (ID): 0.1 ml'], ['animal-bites', 'Deltoid (IM/ID)'], ['animal-bites', 'Suprascapular (ID)'], ['animal-bites', 'Anterolateral thigh (ID)'],
   ['animal-bites', 'IM Rabies Vaccine 0.5 ml stat D0'], ['animal-bites', 'ID Rabies Vaccine 0.1 ml x 2 sites stat D0'], ['animal-bites', 'Intradermal Rabies Vaccine 0.1 ml x 2 sites stat D0'], ['animal-bites', '0.1 ml x 2 sites (each deltoid)'],
@@ -2171,6 +2518,63 @@ function renderNums(){
   $('#nums').innerHTML = groups.map(g => `<h2 class="num-group">${esc(g)}</h2><div class="nums">` + NUMS.map((n, i) => n.g !== g ? '' :
     `<article class="tile num-card ${NUM_JI[i] || NUM_J[g] || 't-obsidian'}"><span class="lbl">${esc(n.lbl)}</span><span class="val" id="nv${i}">${esc(n.val)}</span><p>${esc(n.note)}</p>
       <div class="row">${n.copy ? `<button type="button" data-copy="${i}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}${n.href ? `<a class="pill" href="${n.href}">${esc(n.link)}${svg('chev')}</a>` : ''}<span class="src">${esc(n.src)}</span></div></article>`).join('') + '</div>').join('');
+}
+
+/* ================= ED links (10 Nov 2026): the ETD HKL link page, sorted for a shift =================
+   From the department's link page (https://sites.google.com/moh.gov.my/etdhkl-linktree), read 10 Nov 2026. The hospital systems are
+   on the hospital network only (Krishna asked for them, 10 Nov 2026): they open from a hospital computer, and each has Copy for its
+   address. The page's response registers (Google Sheets that may hold patients' details) are left out: open them from the link page. */
+const LINKTREE = 'https://sites.google.com/moh.gov.my/etdhkl-linktree';
+const GFORM = id => 'https://docs.google.com/forms/d/e/' + id + '/viewform';
+const LINKS = [
+  {k:'net', h:'Hospital systems', s:'On the hospital network only: open them from a hospital computer. Copy an address to type it in there.', ic:'grid', j:'t-obsidian', items:[
+    {t:'HKL-LIMS', d:'Laboratory information system', u:'http://10.44.161.64:5083/login', k:'System'},
+    {t:'Bedwatcher', d:'Bed watch', u:'http://10.44.161.147/bedwatchv2/', k:'System'},
+    {t:'Pharmacy Information System (PHIS)', d:'', u:'http://10.44.161.30:8080/iphis/login.zul', k:'System'},
+    {t:'Doctor2u', d:'', u:'http://10.44.161.189:8090/Account/Login/', k:'System'},
+    {t:'Nephrology CKD', d:'', u:'http://10.44.161.201/CKD/', k:'System'},
+    {t:'SPRP', d:'', u:'http://10.44.161.159/SPRP/', k:'System'},
+    {t:'E-Kehadiran', d:'Attendance', u:'http://10.44.161.91/', k:'System'}]},
+  {k:'book', h:'Request and book', s:'Google Forms of the department: they open with your MOH Google account.', ic:'send', j:'t-teal', items:[
+    {t:'Permohonan Porter', d:'Request a porter', u:GFORM('1FAIpQLSf2KxiZ8TU0M1yebkOeXgwRrY9AuPzpT2pi9zhUgPb293WqDg'), k:'Form'},
+    {t:'Permohonan Ambulans', d:'Request an ambulance', u:GFORM('1FAIpQLSfDHJrOwLhOXgUMO8y0pLvdghcpkz9mxDuuVXzrlxSfEgmOFw'), k:'Form'},
+    {t:'Emergency OT Booking', d:'Book an emergency operating theatre slot', u:GFORM('1FAIpQLSdEE5uLKVeRa5cIwictmfhQSTLMvGHBdiCIiAZO-7D8e0tGhw'), k:'Form'},
+    {t:'Acute HD Booking', d:'Book acute haemodialysis', u:'https://docs.google.com/forms/d/15bJbrAUJaz6Jhmk1DJPO0f5SuM9MxomTxmepjCsiK00/viewform', k:'Form'}]},
+  {k:'report', h:'Report', s:'', ic:'flag', j:'t-garnet', items:[
+    {t:'Pelaporan Incident Reporting', d:'Report an incident', u:'https://forms.gle/ttzA1Q3t1WqPTa9y9', k:'Form'},
+    {t:'Borang Kerosakan BEMS/FEMS', d:'Report broken medical equipment (BEMS) or facilities (FEMS)', u:GFORM('1FAIpQLScdbB9xkN87_eR_FKXxYlSuUUyEi2wLTfmRNnr5whw3pujdsg'), k:'Form'}]},
+  {k:'reg', h:'Registries and audits', s:'', ic:'todo', j:'t-plum', items:[
+    {t:'Tranexamic Acid Form', d:'The department\'s tranexamic acid form', u:GFORM('1FAIpQLScZdlHU2QHMHmXkBRfSb6SJxB5qc1yQVSwvzcxCCvmUAyF2Mw'), k:'Form'},
+    {t:'Stroke Patient Registry', d:'Register a stroke patient', u:GFORM('1FAIpQLSeupQ_emKdULAM5_a_b9KfUU-s_hhSnjG8xSj6aFOe4K-P-0g'), k:'Form'},
+    {t:'Procedural Sedation Anesthesia (PSA) Form', d:'Record a procedural sedation', u:GFORM('1FAIpQLSfY6gmfoQFNhjpRkpXq3VUuIP0tueMK8TDjNUsjauIKyGaqNA'), k:'Form'},
+    {t:'COVID-19 Linelisting Form', d:'COVID-19 line listing', u:GFORM('1FAIpQLSefanuVML-CMtYDl4l2G6lRl41ZRagZoDlYE6qxqYE5oy6otw'), k:'Form'}]},
+  {k:'dept', h:'The department', s:'', ic:'prot', j:'t-emerald', items:[
+    {t:'Laman Web Jabatan Kecemasan dan Trauma', d:'The department\'s website', u:'https://sites.google.com/view/edhkl/home', k:'Site'},
+    {t:'Pelan Kebakaran Jabatan', d:'The department\'s fire plan', u:'https://docs.google.com/presentation/d/1lMQxmwXbNylrX6I6XUbZX3KuZ6TVSlhan0ivsiX_eLg/edit?usp=sharing', k:'Slides'},
+    {t:'Linktree Bencana ETDHKL', d:'The department\'s disaster links', u:'https://linktr.ee/ibniesan', k:'Links'},
+    {t:'Aktiviti hari ini', d:'Today\'s department calendar', u:'https://www.google.com/calendar/embed?src=avedhkl@moh.gov.my', k:'Calendar'},
+    {t:'Clinical Pathways and Slides', d:'The department\'s pathways and teaching slides', u:'https://drive.google.com/drive/folders/1G9rbJP1vzSVhs4-TpchtCubXMcVQIc9E?usp=sharing', k:'Folder'},
+    {t:'Memo Jabatan', d:'The department\'s list of memos', u:'https://docs.google.com/spreadsheets/d/1ZCxDjxd5fgTGWx6fFNzJBDYvlIgTbdIyB-hIJUxCkA4/edit?usp=drive_link', k:'Sheet'}]},
+  {k:'staff', h:'Hospital and staff', s:'', ic:'home', j:'t-sapphire', items:[
+    {t:'Laman Web HKL', d:'Hospital Kuala Lumpur', u:'https://hkl.moh.gov.my/', k:'Site'},
+    {t:'MyCPD', d:'CPD points', u:'https://www.mycpd2.moh.gov.my/', k:'Site'},
+    {t:'HRMIS', d:'Staff records', u:'https://hrmis2.eghrmis.gov.my/HRMISNET/Common/Main/Login.aspx', k:'Site'},
+    {t:'SIMKA', d:'', u:'https://simka2.moh.gov.my/result/', k:'Site'},
+    {t:'BLESS', d:'', u:'https://www.bless.gov.my/bless/action/login', k:'Site'}]}
+];
+const LK_IC = {System:'grid', Form:'todo', Site:'home', Slides:'poster', Links:'link', Calendar:'clock', Folder:'path', Sheet:'grid'};
+let lkF = 'all';
+const lkHost = u => u.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+function renderLinks(){
+  const q = ($('#lkq').value || '').trim().toLowerCase();
+  $('#lkf').innerHTML = [['all', 'All'], ...LINKS.map(g => [g.k, g.h])].map(([k, t]) => `<button type="button" data-lf="${k}" aria-pressed="${lkF === k}">${esc(t)}</button>`).join('');
+  const gs = LINKS.filter(g => lkF === 'all' || g.k === lkF).map(g => ({...g, items:g.items.filter(it => !q || (it.t + ' ' + it.d + ' ' + it.k + ' ' + g.h).toLowerCase().includes(q))})).filter(g => g.items.length);
+  $('#lnks').innerHTML = gs.length ? gs.map(g => `<section class="lk-g${g.k === 'net' ? ' net' : ''}"><div class="lk-gh"><span class="ic j ${g.j}">${svg(g.ic)}</span><div><h2>${esc(g.h)}</h2>${g.s ? `<p>${esc(g.s)}</p>` : ''}</div></div>
+    <ul class="lk-l">${g.items.map(it => `<li><a class="lk" href="${esc(it.u)}" target="_blank" rel="noopener noreferrer"><span class="lk-i">${svg(LK_IC[it.k] || 'link')}</span><span class="lk-t"><b>${esc(it.t)}</b>${it.d ? `<small>${esc(it.d)}</small>` : ''}${g.k === 'net' ? `<code class="lk-u">${esc(lkHost(it.u))}</code>` : ''}</span><span class="lk-k">${esc(it.k)}</span>${svg('ext')}</a>${g.k === 'net' ? `<button type="button" class="cpy" data-lcopy="${esc(it.u)}" aria-label="Copy the address of ${esc(it.t)}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</li>`).join('')}</ul></section>`).join('')
+    : '<p class="empty">No link matches. Try a form, a system or a folder.</p>';
+}
+function renderToolsLinks(){
+  withTiles($('#tlk'), `${tileMedia('links')}<div class="row"><span class="ic">${svg('link')}</span><h2>ED links</h2><span class="tag">${LINKS.reduce((a, g) => a + g.items.length, 0)}</span></div><p>The department's forms, hospital systems and folders, from the ETD HKL link page.</p><ul class="gl">${LINKS.map(g => `<li><span>${esc(g.h)}</span><b>${g.items.length}</b></li>`).join('')}</ul>`);
 }
 
 /* ================= Journey: looping clips and narration ================= */
@@ -2442,8 +2846,8 @@ function route(){
   if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'new', 'poster', 'about'].includes(h)) changed = showView(h);
-  else if ((m = h.match(/^calc(?:-([a-z]+))?$/))){
+  else if (['rules', 'tools', 'numbers', 'links', 'new', 'poster', 'about'].includes(h)) changed = showView(h);
+  else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
     if (id && id !== calcTab){ calcTab = id; renderCalc(); }
     setCxOpen(!!id);
@@ -2469,7 +2873,12 @@ $('#cnt-path').textContent = Object.keys(P).length;
 $('#cnt-rule').textContent = FLOW_IDS.length + PROT_IDS.length;
 $('#cnt-calc').textContent = Object.keys(CALCS).length;
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
-renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums();
+renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks();
+withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
+$('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
+/* the links are found by search, each opening the ED links page */
+IDX.push({href:'#links', title:'ED links', kind:'Tool', meta:'Forms, hospital systems and folders', body:'linktree ETD HKL link page forms hospital systems intranet folders ' + LINKS.flatMap(g => g.items.map(it => it.t + ' ' + it.d)).join(' · '), ic:'link', c:'c-flow'});
+LINKS.forEach(g => g.items.forEach(it => IDX.push({href:'#links', title:it.t, kind:'Link', meta:'ED links · ' + g.h, body:[it.d, it.k, g.h].join(' · '), ic:'link', c:'c-flow'})));
 renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
@@ -2531,6 +2940,10 @@ $('#run').addEventListener('click', e => {
   else if (b.dataset.leaf){ stopReader(); leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }
   else if (b.hasAttribute('data-showadvice')){ selectTab(p.leaflet ? 'leaflet' : 'advice'); $('#ptab').scrollIntoView({block:'start', behavior: REDUCED ? 'auto' : 'smooth'}); }
   else if (b.dataset.pt !== undefined) selectTab(b.dataset.pt);
+  else if (b.dataset.cbb) cbPick(b);
+  else if (b.hasAttribute('data-wbct')) wbctStart();
+  /* a figure's number: if the clipboard is blocked, the number itself is selected to copy by hand */
+  else if (b.dataset.cpy) copyText(b.dataset.cpy, {btn:b, el:b.parentElement.querySelector('.cbn-v, .cc-n'), ok:'Copied'});
 });
 $('#run').addEventListener('keydown', e => {
   const b = e.target.closest && e.target.closest('[role="tab"]'); if (!b) return;
@@ -2542,6 +2955,9 @@ $('#run').addEventListener('keydown', e => {
 
 /* Tools and numbers */
 $('#nums').addEventListener('click', e => { const b = e.target.closest('button[data-copy]'); if (b){ const i = +b.dataset.copy; copyText(NUMS[i].copy, {btn:b, el:$('#nv' + i)}); } });
+$('#lkq').addEventListener('input', renderLinks);
+$('#lkf').addEventListener('click', e => { const b = e.target.closest('[data-lf]'); if (b){ lkF = b.dataset.lf; renderLinks(); const nb = $(`#lkf [data-lf="${lkF}"]`); if (nb) nb.focus(); } });
+$('#lnks').addEventListener('click', e => { const b = e.target.closest('[data-lcopy]'); if (b) copyText(b.dataset.lcopy, {btn:b, el:b.closest('li').querySelector('.lk-u'), ok:'Copied'}); });
 
 /* Learn */
 $('#ltabs').addEventListener('click', e => { const b = e.target.closest('[data-lt]'); if (!b) return; const h = '#' + b.dataset.lt; if (location.hash === h) route(); else location.hash = h; });

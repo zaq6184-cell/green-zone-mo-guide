@@ -709,11 +709,8 @@ P['referral-rules'] = {
     menu:{q:'Which referral?', opts:[['Orthopaedics and joint dislocation','ortho'],['Physician Clinic (PC)','pc'],['GI bleed, cholecystitis or jaundice','gi'],['Admission to General Medicine','med'],['Psychiatry','psy'],['Other departments and clinics','dept'],['Transfer to IPR','ipr']]},
     ortho:{end:'refer', title:'Orthopaedic referrals', items:[
       'Joint dislocation, including the shoulder: refer to the on-call Orthopaedic team before or after reduction, not to the Orthopaedic clinic',
-      'Clinic referrals from the ED go to the Orthopaedic clinic at Wisma Kayu (not SCACC)',
-      'From the Green Zone, write the treatment notes in duplicate (carbon copy): the original with a patient ID sticker goes into the Orthopaedic file, the copy stays in the ED notes',
-      'Only the Orthopaedic file and the X-ray films go with the patient to the Orthopaedic consultation room',
-      'Record every Orthopaedic referral in the Orthopaedic referral register book'],
-      gap:'Sources: joint dislocation reminder 26 Jun 2023; Orthopaedic Department letter 17 Jan 2018; memo HKL/JK/98/188/3(29)22, 20 Dec 2022.'},
+      'Clinic referrals from the ED go to the Orthopaedic clinic at Wisma Kayu (not SCACC)'],
+      gap:'Sources: joint dislocation reminder 26 Jun 2023; Orthopaedic Department letter 17 Jan 2018; orthopaedic referral memo HKL/JK/98/188/3(8)24, 17 May 2024.'},
     pc:{end:'refer', title:'Physician Clinic (PC) referral', items:['If the patient has an ECG, attach it to the referral letter','Document the referral in the BHT'], gap:'Source: PC referral note, 28 Aug 2023.'},
     gi:{end:'refer', title:'GI bleed, cholecystitis and jaundice', items:[
       'Non-variceal upper or lower GI bleed with a medical cause: refer to Gastroenterology',
@@ -745,7 +742,7 @@ P['referral-rules'] = {
     iprok:{end:'refer', title:'Suitable for transfer to IPR', items:['Follow the ED HKL approach to respiratory cases for IPR referral'], gap:'Source: Flow 3, Approach to respiratory cases in ED HKL to IPR (2021). Only the transfer criteria could be read from the file; the flow chart itself is an image.'},
     iprno:{end:'neutral', title:'Not suitable for IPR transfer', items:['Manage in HKL']}
   },
-  refs:['Joint dislocation referral reminder, 26 Jun 2023','Orthopaedic Department letter: ED referrals to Wisma Kayu clinic, 17 Jan 2018','Memo HKL/JK/98/188/3(29)22: Orthopaedic referral system, 20 Dec 2022','PC referral note, 28 Aug 2023','Combined Endoscopy Unit: GI bleed and cholecystitis referrals, Dec 2018','Director\'s memo: admission to General Medicine from the ED, Jan 2026','Minutes: management of psychiatric patients in the ED, 7 Feb 2023','Interdepartment referral and transfer reminder, 17 May 2022','Approach to respiratory cases in ED HKL to IPR, 2021','HKL Interhospital Referral and Transfer Policy, 2019']
+  refs:['Joint dislocation referral reminder, 26 Jun 2023','Orthopaedic Department letter: ED referrals to Wisma Kayu clinic, 17 Jan 2018','Memo HKL/JK/98/188/3(8)24: Pengurusan kes-kes rujukan ke Jabatan Ortopedik, 17 May 2024, with Lampiran 1 (the referral criteria) and the work process for orthopaedic trauma referrals','PC referral note, 28 Aug 2023','Combined Endoscopy Unit: GI bleed and cholecystitis referrals, Dec 2018','Director\'s memo: admission to General Medicine from the ED, Jan 2026','Minutes: management of psychiatric patients in the ED, 7 Feb 2023','Interdepartment referral and transfer reminder, 17 May 2022','Approach to respiratory cases in ED HKL to IPR, 2021','HKL Interhospital Referral and Transfer Policy, 2019']
 };
 
 

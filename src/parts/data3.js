@@ -55,16 +55,14 @@
     'Make a formal referral: "opinion only" referrals are not accepted',
     'Joint dislocation, including the shoulder: refer to the ortho MO on call 1 or 2, before or after reduction, not to the clinic',
     'A fracture that needs closed manipulation and reduction (CMR): ortho should do it within 2 hours; if not, tell the EP on duty. The ED does the procedural sedation (PSA)',
-    'From the Green Zone, write the treatment notes in duplicate: the original with a patient ID sticker goes into the Orthopaedic file, the copy stays in the ED notes',
-    'Only the Orthopaedic file and the X-ray films go with the patient to the Orthopaedic consultation room',
-    'Record every referral in the Orthopaedic referral register book'],
-    gap:'Sources: orthopaedic referral memo, 17 May 2024 (Lampiran 1); joint dislocation reminder, 26 Jun 2023; memo HKL/JK/98/188/3(29)22, 20 Dec 2022.'};
+    'Declined although the case meets Lampiran 1? Show the memo itself: it says every referral to the orthopaedic MO on call is a formal referral, and that every fracture is referred to the orthopaedic team (Lampiran 1)'],
+    links:[['https://drive.google.com/file/d/1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ/view','Show the memo (PDF)'],['https://drive.google.com/uc?export=download&id=1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ','Download the memo']],
+    gap:'Sources: orthopaedic referral memo HKL/JK/98/188/3(8)24, 17 May 2024 (Lampiran 1); joint dislocation reminder, 26 Jun 2023. Showing the memo when a referral is declined is the guide owner\'s note, 10 Nov 2026.'};
   R.nodes.orthcl = {end:'refer', title:'Refer to the orthopaedic clinic', items:[
     'For fractures that do not meet the urgent criteria, stable ligament injuries, and a prolapsed disc (PID) without severe pain',
-    'Give a referral letter: ED referrals go to the Orthopaedic clinic at Wisma Kayu, not SCACC',
-    'Record every referral in the Orthopaedic referral register book'],
-    links:[['#emacc','EMACC follow-up for a suspected fracture with a normal X-ray']],
-    gap:'Sources: orthopaedic referral memo, 17 May 2024 (Lampiran 1); Orthopaedic Department letter, 17 Jan 2018.'};
+    'Give a referral letter: ED referrals go to the Orthopaedic clinic at Wisma Kayu, not SCACC'],
+    links:[['#emacc','EMACC follow-up for a suspected fracture with a normal X-ray'],['https://drive.google.com/file/d/1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ/view','Show the memo (PDF)'],['https://drive.google.com/uc?export=download&id=1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ','Download the memo']],
+    gap:'Sources: orthopaedic referral memo HKL/JK/98/188/3(8)24, 17 May 2024 (Lampiran 1); Orthopaedic Department letter, 17 Jan 2018.'};
   R.nodes.ipr = {check:'all', q:'Meets the criteria for transfer to IPR (respiratory)?', hint:'IPR takes, for example, known IPR patients, complicated TB, bronchiectasis, pleural effusion, pneumothorax, asthma, COPD and respiratory palliative care.', items:[
     'Haemodynamically stable',
     'Not on inotropic support',
@@ -75,5 +73,7 @@
     'Call the IPR specialist on call: 03-4023 2966',
     'Follow the ED HKL approach to respiratory cases for IPR referral'],
     gap:'Sources: IPR admission criteria (triage course folder); Flow 3, Approach to respiratory cases in ED HKL to IPR, 2021.'};
-  R.refs.push('Orthopaedic referral memo with Lampiran 1, 17 May 2024', 'IPR admission criteria (triage course folder)');
+  R.refs.push('IPR admission criteria (triage course folder)');
+  /* The memo itself, to open or download (the triage course folder copy, which anyone with the link can view) */
+  R.docs = [['https://drive.google.com/file/d/1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ/view', 'Orthopaedic referral memo, 17 May 2024 (PDF)'], ['https://drive.google.com/uc?export=download&id=1KNToAW7LBSnZ3ckP3XHyZj6slNuothGQ', 'Download it']];
 })();

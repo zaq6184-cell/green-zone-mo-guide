@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Build the Green Zone MO Guide.
 
-   Joins parts/head.html with the eight scripts, in this order: data.js, data2.js, data3.js, data4.js, data5.js, data6.js, data7.js, engine.js.
+   Joins parts/head.html with the twelve scripts, in this order: data.js, data2.js, data3.js, data4.js, data5.js, data6.js, data7.js, data8.js, data9.js, data10.js, data11.js, engine.js.
    Writes two files into the folder above src/ (or into the folder given as the first argument):
 
      green-zone-pathways.html   The page that is published as the claude.ai artifact. It has no doctype,
@@ -16,7 +16,7 @@ const path = require('path');
 
 const PARTS = path.join(__dirname, 'parts');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
-const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'engine.js'];
+const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'engine.js'];
 
 const read = f => fs.readFileSync(path.join(PARTS, f), 'utf8');
 const js = SCRIPTS.map(read).join('\n');
