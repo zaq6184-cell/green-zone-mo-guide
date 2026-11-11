@@ -86,6 +86,17 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => document.querySelectorAll('#kn-a .tm img, #kn-b .tm img').length) === 2, 'Code Blue and Code Stroke tiles have their pictures');
   ok(await p.evaluate(() => ['#t-paths', '#t-rules', '#t-dc', '#t-calc', '#t-intro', '#tl-tip'].every(s => document.querySelector(s + ' .tm img'))), 'the six home tiles have their pictures');
   ok(await p.evaluate(() => { const t = document.querySelector('#t-inst'); return !!t && !t.hidden && !!t.querySelector('.ph3-i svg') && !!t.querySelector('.tag') && !!t.querySelector('a[href="#install"]'); }), 'home has the Install tile: its state, its 3D phone and a link to the steps');
+  // Printed pages (12 Nov 2026): an ebook pathway links to its own pages of the ebook; a page image loads only on a tap
+  { const q = await p.context().newPage(); const seen = []; q.on('request', r => { if (/\/ebook\/p\d+\.webp/.test(r.url())) seen.push(r.url()); });
+    await q.goto(p.url().split('#')[0] + '#renal-colic'); await q.waitForTimeout(700);
+    const tab = q.locator('#ptab [role="tab"]', {hasText:'Printed pages'}); await tab.click(); await q.waitForTimeout(200);
+    const n = await q.locator('#ptab [data-epage]').count(), before = seen.length;
+    await q.locator('#ptab [data-epage="53"]').click(); await q.waitForTimeout(600);
+    const st = await q.evaluate(() => ({open:!document.querySelector('#lb').hidden, src:document.querySelector('#lbimg').getAttribute('src'), ok:document.querySelector('#lbimg').naturalWidth > 0, t:document.querySelector('#lbt').textContent}));
+    ok(n === 2 && before === 0 && st.open && st.src === 'ebook/p53.webp' && st.ok && /page 53/.test(st.t), 'renal colic has a Printed pages tab: two pages, none loaded before a tap, page 53 opens full size' + (n === 2 && before === 0 && st.open && st.ok ? '' : ' ' + JSON.stringify({n, before, st})));
+    ok(await q.evaluate(() => !tabsOf(P['gz-rules']).some(t => t.k === 'pages') && !tabsOf(P['dengue-cpg']).some(t => t.k === 'pages')), 'rules and guidelines have no Printed pages tab');
+    ok(await q.evaluate(() => { const a = document.querySelector('#ptab .epg a.pill'); return !!a && a.getAttribute('href').startsWith('https://drive.google.com/file/d/') && a.getAttribute('href').endsWith('/view') && a.target === '_blank' && /noopener/.test(a.rel); }), 'Printed pages links to the whole ebook as a PDF in Google Drive, in a new tab');
+    await q.close(); }
   ok(await p.evaluate(() => { const on = ['#t-paths', '#t-rules', '#t-dc', '#t-calc', '#t-intro', '#tl-tip'].map(s => document.querySelector(s + ' .tm')).filter(el => { const r = el.getBoundingClientRect(); return (Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height >= .5; }); return on.length > 0 && on.every(el => el.querySelector('video')); }), 'the home tiles on screen start their loops');
   await p.screenshot({path:out + '/d-home.png'});
   await p.click('#zmap [data-zs="3"]'); await p.waitForTimeout(250);

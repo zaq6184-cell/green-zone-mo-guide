@@ -1492,6 +1492,8 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .prose p{margin:0 0 10px}
 
 /* ---------- Poster ---------- */
+.epg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.epg .pill svg{width:16px;height:16px}
 .sheets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:840px}
 .sheets figure{margin:0;display:grid;gap:10px}
 .sheets button{display:block;padding:0;border:0;border-radius:18px;overflow:hidden;background:var(--pearl);cursor:zoom-in;min-height:0;box-shadow:var(--pearl-sh);transition:transform .3s var(--ease)}
@@ -10239,6 +10241,8 @@ if (P['missed-fractures']) (P['xray-guide'].see = P['xray-guide'].see || []).pus
 
 /* The public web app on GitHub Pages. Copy link builds its links on this address, so anyone they are sent to can open them. */
 const APP_URL = 'https://zaq6184-cell.github.io/green-zone-mo-guide/';
+/* The whole ebook as a PDF, in Krishna's Google Drive (12 Nov 2026: "Already uploaded the pdf file to the google drive. Can use it") */
+const EBOOK_PDF = 'https://drive.google.com/file/d/1VrOsrSTS10YKPrXE5Krgw4wn6EmUEu_j/view';
 
 /* ================= Content: journey, rules, numbers, tour, quiz, Drive run-through ================= */
 const JOURNEY = [
@@ -10291,6 +10295,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['The ebook\'s own pages','Each of the 23 ebook pathways has a Printed pages tab: a button for every page of the ebook that covers it, opening that page as printed, full size, so you can check the guide against the book. A page loads only when you tap it. The tab also links to the full ebook as a PDF.',[['#renal-colic','Renal colic'],['#pain','Pain management']]],
   ['The ebook, checked line by line','Every printed line of the ebook\'s 23 pathways (pages 5 to 63) was checked against the guide, and what had been shortened or left out is back, as printed, with its page: the definition, restraint monitoring and the drugs\' time to peak and half-life for acute behavioural disturbance; the written asthma action plan; the risk factors, symptoms and signs of Fournier\'s gangrene, scrotal abscess and epididymo-orchitis; the side effects in the choice of analgesia; and the full esmolol, adenosine and amiodarone lines for SVT. Where the print looks like a slip, or two of its pages disagree, the guide keeps its reading and quotes the print beside it; the two that bear on a number are under Still to confirm.',[['#asthma','Bronchial asthma'],['#scrotal-pain','Acute scrotal pain'],['#behavioural-disturbance','Acute behavioural disturbance']]],
   ['Reading X-rays, one check at a time','A new guide for the films you read alone: the checks before you read, a set search, then chest, ankle and foot, knee, wrist and scaphoid, hand, elbow, shoulder, hip and pelvis, and when an abdominal film is and is not indicated. The Ottawa ankle, foot and knee rules and the elbow extension test are checklists that suggest the answer. It is written in the guide\'s own words from named online sources, each linked, and where those sources disagree it says so; it does not replace the radiologist\'s report or the EP\'s review. Shift tools has a tile for it.',[['#xray-guide','Reading X-rays'],['#xray-guide--ank','Ottawa ankle rule']]],
   ['From the triage course','The TAG Warrior Course decks (ETD HKL, 2026) as department notes, each with its deck and slide: handing over at the end of the shift, the fractures most often missed on X-ray and the recall of a missed film, nine case discussions to work through, the referral map and how to make a referral, uptriaging with the Green Zone thinking framework, and discharge, follow-up and own-risk discharge checks. Slides that differ from the ebook or a dated department protocol are not in the guide: they are listed under Still to confirm.',[['#handover','Handing over'],['#missed-fractures','Commonly missed fractures'],['#cbd-2','Case discussions']]],
@@ -11533,6 +11538,8 @@ function tabsOf(p){
   /* A national guideline's reference notes, several tabs of them, each note with its page */
   (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + (p.notesFoot ? `<p class="hint">${esc(p.notesFoot)}</p>` : p.own ? `<p class="hint">From the ${esc(p.src)}, with its page numbers, in the guide's own words: the CPG gives no permission to reproduce it, so nothing here is quoted.</p>` : `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to ${esc(p.ack || 'MaHTAS')}.</p>`)}));
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
+  const epg = ebookPages(p);
+  if (epg.length) T.push({k:'pages', l:'Printed pages', html:`<p class="hint">The ebook's own ${epg.length === 1 ? 'page' : 'pages'} for this pathway, as printed. A page loads when you tap it; tap the page to zoom.</p><div class="epg">${epg.map(n => `<button type="button" class="pill" data-epage="${n}">${svg('poster')}Page ${n}</button>`).join('')}<a class="pill" href="${EBOOK_PDF}" target="_blank" rel="noopener">Full ebook (PDF)${svg('ext')}</a></div>`});
   /* A national CPG on the shelf opens its full PDF from its References tab */
   const pdf = p.grp === 'cpg' && CPG_SHELF.find(c => c.id && P[c.id] === p);
   if (p.refs) T.push({k:'refs', l:'References', html:(p.docs ? `<div class="cx-links cpg-pdf">${p.docs.map(([h, t]) => `<a class="pill ext" href="${h}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>`).join('')}</div>` : '') + (p.doc ? `<div class="cx-links cpg-pdf"><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (pdf ? `<div class="cx-links cpg-pdf">${pdf.drive ? `<a class="pill ext" href="${GDRIVE + pdf.drive}/view" target="_blank" rel="noopener noreferrer">The full CPG, PDF in Google Drive${svg('ext')}</a>` : ''}<a class="pill ext" href="${ACAD + pdf.cpg}" target="_blank" rel="noopener noreferrer">Academy of Medicine${svg('ext')}</a>${pdf.qr ? `<a class="pill ext" href="${pdf.qrd ? GDRIVE + pdf.qrd + '/view' : ACAD + pdf.qr}" target="_blank" rel="noopener noreferrer">Quick reference${svg('ext')}</a>` : ''}</div>` : '') + `<ol class="refs">${p.refs.map(li).join('')}</ol>`});
@@ -13081,6 +13088,7 @@ let lbFrom = null, lbI = 0;
 const sheetSrc = (i, thumb) => `poster/sheet${i}${night() ? '-night' : ''}${thumb ? '-thumb' : ''}.webp`;
 function openSheet(i){
   lbFrom = document.activeElement; lbI = i;
+  $('#lb').setAttribute('aria-label', 'Poster sheet');
   $('#lbimg').src = sheetSrc(i, false);
   $('#lbimg').alt = i === 1 ? 'Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know' : 'Poster sheet 2: the 23 pathways, EMACC follow-up, Asthma Zone flow and referrals';
   $('#lbt').textContent = i === 1 ? 'Sheet 1 · Patient flow (A3)' : 'Sheet 2 · Pathways and referrals (A3)';
@@ -13088,6 +13096,20 @@ function openSheet(i){
   $('#lb').hidden = false; document.documentElement.style.overflow = 'hidden';
   $('#lbs').scrollTo(0, 0); $('#lbclose').focus();
 }
+/* The ebook's own pages, as printed (12 Nov 2026, at Krishna's request): each ebook pathway has a Printed pages tab whose
+   buttons open that page in the same full-size viewer. The images (ebook/pNN.webp, pages 5 to 63) load only on a tap. */
+const ebookPages = p => { if (p.grp || !p.page) return []; const m = String(p.page).match(/^(\d+)(?:\D+(\d+))?$/); if (!m) return []; const a = +m[1], b = +(m[2] || m[1]); return Array.from({length:b - a + 1}, (_, i) => a + i); };
+function openEbookPage(n){
+  lbFrom = document.activeElement; lbI = 0;
+  $('#lbimg').src = `ebook/p${String(n).padStart(2, '0')}.webp`;
+  $('#lbimg').alt = `Page ${n} of the ebook, as printed`;
+  $('#lbt').textContent = `Ebook · page ${n}`;
+  $('#lb').setAttribute('aria-label', 'Ebook page');
+  $('#lbs').classList.remove('zoom'); $('#lbzoom').textContent = 'Zoom in';
+  $('#lb').hidden = false; document.documentElement.style.overflow = 'hidden';
+  $('#lbs').scrollTo(0, 0); $('#lbclose').focus();
+}
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-epage]'); if (b) openEbookPage(+b.dataset.epage); });
 function closeSheet(){ if ($('#lb').hidden) return; $('#lb').hidden = true; document.documentElement.style.overflow = ''; if (lbFrom && lbFrom.focus) lbFrom.focus(); }
 function toggleZoom(){ const z = $('#lbs').classList.toggle('zoom'); $('#lbzoom').textContent = z ? 'Fit to screen' : 'Zoom in'; }
 
