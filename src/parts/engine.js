@@ -115,7 +115,7 @@ const ART = {
     '<path pathLength="1" d="M28 150 H292" class="ln draw" style="stroke:rgba(255,255,255,.3);stroke-width:5"/>' + [0, 1, 2, 3, 4, 5].map(i => `<circle cx="${28 + i * 52.8}" cy="150" r="10" class="pop" style="fill:${i < 4 ? 'var(--mint)' : 'var(--teal-2)'};stroke:#fff;stroke-width:2.5;--d:${(.6 + i * .1).toFixed(1)}s"/>`).join('') +
     '<text x="28" y="190" style="font:700 13px var(--body);fill:rgba(255,255,255,.8)">Discharge check: 4 of 6 done</text>'
 };
-const POPULAR = [['#renal-colic','Renal colic'],['#dengue','Dengue'],['#asthma-zone','Asthma Zone'],['#mau-admission','MAU criteria'],['#pneumonia','CURB-65'],['#mild-tbi','Head injury'],['#gz-rules--ivab','IV antibiotics, no bed'],['#referral-rules--ortho','Ortho referral']];
+const POPULAR = [['#renal-colic','Renal colic'],['#dengue-cpg','Dengue'],['#asthma-zone','Asthma Zone'],['#mau-admission','MAU criteria'],['#pneumonia','CURB-65'],['#mild-tbi','Head injury'],['#gz-rules--ivab','IV antibiotics, no bed'],['#referral-rules--ortho','Ortho referral']];
 
 const NUMS = [
   {g:'Emergencies', hot:true, lbl:'Code Blue, outside the ED', val:'ext 5333', copy:'03-2615 5333', note:'ED Call Centre, for an emergency or arrest anywhere in the hospital grounds; the team arrives within 10 minutes. SCACC in office hours: Anaesthesia ext 1133 / 1134 with 5333. Call Centre 2: ext 6700. Forensic: ext 6695.', href:'#code-blue', link:'Code Blue', src:'Code Blue Manual 2022/2024'},
@@ -645,6 +645,27 @@ const FIGS = {
   cmisbar:() => `<div class="fig figcm"><ol class="cmb">${[['I', 'Identify', 'Yourself, where you are, and the patient'], ['S', 'Situation', 'Why you are calling'], ['B', 'Background', 'The history and results that matter'], ['A', 'Assessment', 'What you think; or “not sure, but worried”'], ['R', 'Request', 'What you need, and by when (SBAR: recommendation)'], ['↺', 'Read back', 'They repeat the plan back to you']].map(([k, h, t]) => `<li><b>${k}</b><span><em>${h}</em>${t}</span></li>`).join('')}</ol>
     <p class="fig-cap">ISBAR (Marshall et al., 2009 and 2012), in the guide's own words.</p></div>`
 };
+/* X-ray films with the normal anatomy outlined (data14.js, XFILMS): the film, the guide's own outlines over it, a key of the
+   parts (tap one to light it on the film), a switch to hide the outlines, and the credit the film's licence asks for. */
+function filmHTML(k){
+  const f = XFILMS[k]; if (!f) return '';
+  const pts = p => p.map(q => q.join(',')).join(' ');
+  return `<figure class="fig xf" data-xf="${k}"><div class="xf-bar"><b>${esc(f.t)}</b><button type="button" class="sm" data-xf-toggle aria-pressed="true">Outlines on</button></div>` +
+    `<div class="xf-stage" style="aspect-ratio:${f.w}/${f.h}"><img src="xray/${k}.webp" width="${f.w}" height="${f.h}" loading="lazy" decoding="async" alt="${esc(f.alt || f.t)}"><svg viewBox="0 0 ${f.w} ${f.h}" aria-hidden="true" focusable="false">${f.parts.map(p => `<polygon data-xp="${p.k}" points="${pts(p.p)}"/>`).join('')}</svg></div>` +
+    `<ul class="xf-key" aria-label="Parts outlined on the film">${f.parts.map((p, i) => `<li><button type="button" data-xk="${p.k}" aria-pressed="false"><i>${i + 1}</i>${esc(p.t)}</button></li>`).join('')}</ul>` +
+    `<figcaption>Tap a name to light that part on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
+}
+if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); });
+document.addEventListener('click', e => {
+  const t = e.target.closest && e.target.closest('[data-xf-toggle],[data-xk]'); if (!t) return;
+  const fig = t.closest('.xf'); if (!fig) return;
+  const tg = fig.querySelector('[data-xf-toggle]');
+  if (t === tg){ const on = t.getAttribute('aria-pressed') !== 'true'; t.setAttribute('aria-pressed', on); t.textContent = on ? 'Outlines on' : 'Outlines off'; fig.classList.toggle('xf-off', !on); return; }
+  const was = t.getAttribute('aria-pressed') === 'true';
+  fig.querySelectorAll('[data-xk]').forEach(b => b.setAttribute('aria-pressed', 'false')); fig.querySelectorAll('[data-xp]').forEach(p => p.classList.remove('on'));
+  fig.classList.toggle('xf-pick', !was);
+  if (!was){ t.setAttribute('aria-pressed', 'true'); const p = fig.querySelector(`[data-xp="${t.dataset.xk}"]`); if (p) p.classList.add('on'); fig.classList.remove('xf-off'); tg.setAttribute('aria-pressed', 'true'); tg.textContent = 'Outlines on'; }
+});
 const figHTML = k => FIGS[k] ? FIGS[k]() : '';
 
 const $ = s => document.querySelector(s);
@@ -1303,7 +1324,7 @@ function tabsOf(p){
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
   if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
   /* A national guideline's reference notes, several tabs of them, each note with its page */
-  (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + (p.notesFoot ? `<p class="hint">${esc(p.notesFoot)}</p>` : p.own ? `<p class="hint">From the ${esc(p.src)}, with its page numbers, in the guide's own words: the CPG gives no permission to reproduce it, so nothing here is quoted.</p>` : `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to ${esc(p.ack || 'MaHTAS')}.</p>`)}));
+  (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + (t.foot ? `<p class="hint">${esc(t.foot)}</p>` : p.notesFoot ? `<p class="hint">${esc(p.notesFoot)}</p>` : p.own ? `<p class="hint">From the ${esc(p.src)}, with its page numbers, in the guide's own words: the CPG gives no permission to reproduce it, so nothing here is quoted.</p>` : `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to ${esc(p.ack || 'MaHTAS')}.</p>`)}));
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
   const epg = ebookPages(p);
   if (epg.length) T.push({k:'pages', l:'Printed pages', html:`<p class="hint">The ebook's own ${epg.length === 1 ? 'page' : 'pages'} for this pathway, as printed. A page loads when you tap it; tap the page to zoom.</p><div class="epg">${epg.map(n => `<button type="button" class="pill" data-epage="${n}">${svg('poster')}Page ${n}</button>`).join('')}<a class="pill" href="${EBOOK_PDF}" target="_blank" rel="noopener">Full ebook (PDF)${svg('ext')}</a></div>`});

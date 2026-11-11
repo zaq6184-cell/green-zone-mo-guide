@@ -416,7 +416,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => { const v = document.querySelector('#run .run-hero .tm video'); return !!v && v.dataset.mark === 'kept' && state.trail.length === 1; }), 'answering keeps the same loop playing, it does not restart');
   await go(p, '#dengue-cpg', 400);
   const dtabs = await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(b => b.textContent).join('|'));
-  ok(dtabs === 'Home care advice|Groups and zones|Fluids|Tests|Shock|Course and care|References', `the dengue CPG has its seven tabs (${dtabs})`);
+  ok(dtabs === 'Home care advice|Groups and zones|Fluids|Tests|Shock|Course and care|Quick Reference, 2026|References', `the dengue CPG has its eight tabs (${dtabs})`);
   ok(await p.waitForFunction(() => { const i = document.querySelector('#run .run-hero .tm img'); return i && i.complete && i.naturalWidth === 640 && document.querySelector('#run .run-hero h1').textContent === 'Dengue in adults: CPG 4th edition'; }, null, {timeout:5000}).then(() => true, () => false), 'the dengue CPG banner carries its own picture under the title');
   ok(await p.waitForFunction(() => !!document.querySelector('#run .run-hero .tm video'), null, {timeout:5000}).then(() => true, () => false), 'and starts its own loop (Moving tiles is on by default)');
   ok(await p.evaluate(() => P.dengue.see.some(s => s[0] === '#dengue-cpg') && P['dengue-cpg'].see.some(s => s[0] === '#dengue')), 'the ebook dengue pathway and the CPG link to each other');

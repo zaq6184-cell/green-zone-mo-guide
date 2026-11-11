@@ -23,9 +23,9 @@
               ranges, so they seek offline.
    Fonts      The Google Fonts stylesheet and font files are kept as the page loads them, so the guide keeps its type. */
 'use strict';
-const VERSION = '36790380da42', PAGE = '74d9b430abf4';
+const VERSION = '88eb0ae0d0cc', PAGE = 'cde42d51c05a';
 const PRE = {
-  "": "006e9aa50f3f8722",
+  "": "78896621d2ccdd78",
   "manifest.webmanifest": "3f4620e73fac5885",
   "img/gz-01-hero.webp": "e0db0e365820090d",
   "img/gz-02-triage.webp": "60e7adac5fc1ea89",
@@ -231,7 +231,8 @@ const KEEP = {
   "tiles/tip.mp4": "319cc9d631af5e30",
   "tiles/toothcpg.mp4": "8bb44e9b22035dd8",
   "tiles/tox.mp4": "d0ad6cf4aea9d93f",
-  "tiles/vtecpg.mp4": "6662710bc80d6b32"
+  "tiles/vtecpg.mp4": "6662710bc80d6b32",
+  "xray/wrist-pa.webp": "7ac3ccb38fbdcdd5"
 }; /* path: hash, kept once used */
 const NAME = 'green-zone-mo-guide-', CACHE = NAME + VERSION, KEPT = NAME + 'kept', FONTS = NAME + 'fonts';
 const BASE = new URL('./', self.location.href).href;
