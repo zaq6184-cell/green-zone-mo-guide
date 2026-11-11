@@ -23,9 +23,9 @@
               ranges, so they seek offline.
    Fonts      The Google Fonts stylesheet and font files are kept as the page loads them, so the guide keeps its type. */
 'use strict';
-const VERSION = '88eb0ae0d0cc', PAGE = 'cde42d51c05a';
+const VERSION = '28e03a551859', PAGE = 'ef3a6c4bf545';
 const PRE = {
-  "": "78896621d2ccdd78",
+  "": "a12c292e2cca2b43",
   "manifest.webmanifest": "3f4620e73fac5885",
   "img/gz-01-hero.webp": "e0db0e365820090d",
   "img/gz-02-triage.webp": "60e7adac5fc1ea89",
@@ -232,6 +232,23 @@ const KEEP = {
   "tiles/toothcpg.mp4": "8bb44e9b22035dd8",
   "tiles/tox.mp4": "d0ad6cf4aea9d93f",
   "tiles/vtecpg.mp4": "6662710bc80d6b32",
+  "xray/ankle-ap.webp": "a7280cd774d24143",
+  "xray/ankle-lat.webp": "a0db7a5de24f844f",
+  "xray/ankle-mortise.webp": "634b91a60244b462",
+  "xray/chest-pa.webp": "449c4bf46282846a",
+  "xray/elbow-ap.webp": "e29e7d7d7b210b0c",
+  "xray/elbow-lat.webp": "fc517d6ee25c1445",
+  "xray/foot-dp.webp": "369cc101371d3c61",
+  "xray/foot-lat.webp": "f46ee45b43aa2cc3",
+  "xray/foot-oblique.webp": "b38c776dcdee5ea3",
+  "xray/hand-oblique.webp": "5f4aeaaed2c5130d",
+  "xray/hand-pa.webp": "34891b033b8539fe",
+  "xray/knee-ap.webp": "905fc898f33925a8",
+  "xray/knee-lat.webp": "a5da541f45bd65dd",
+  "xray/pelvis-ap.webp": "ebfecbf9625ce3d4",
+  "xray/shoulder-ap.webp": "3eae70c8572f4f24",
+  "xray/shoulder-y.webp": "7c7045dbb59a6149",
+  "xray/wrist-lat.webp": "4a47b03f7c2007c4",
   "xray/wrist-pa.webp": "7ac3ccb38fbdcdd5"
 }; /* path: hash, kept once used */
 const NAME = 'green-zone-mo-guide-', CACHE = NAME + VERSION, KEPT = NAME + 'kept', FONTS = NAME + 'fonts';

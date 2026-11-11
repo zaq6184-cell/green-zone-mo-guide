@@ -62,6 +62,8 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['Real X-ray films, with the normal anatomy outlined','Reading X-rays now shows a normal film on each step: chest, pelvis, shoulder, elbow, wrist, hand, knee, ankle and foot, eighteen films in all. Each bone is outlined on the film: tap a name to light it, or switch the outlines off to read the film bare. The outlines are this guide\'s own tracing by eye, a teaching aid; some are marked approximate where bones lie over each other. A film loads only when you open its step.',[['#xray-guide--wrj','Wrist'],['#xray-guide--hd','Hand'],['#xray-guide--ankv','Ankle']]],
+  ['Dengue follows the 2026 CPG','The Dengue route opens the CPG entry (4th edition), which has a Quick Reference tab. Pregnancy, age 65 and over, and obesity are triaged to Group B1 (MTS level 4, Green), as the Quick Reference prints them. The ebook\'s dengue pathway is kept as printed, with a notice.',[['#dengue-cpg','Dengue CPG']]],
   ['The ebook\'s own pages','Each of the 23 ebook pathways has a Printed pages tab: a button for every page of the ebook that covers it, opening that page as printed, full size, so you can check the guide against the book. A page loads only when you tap it. The tab also links to the full ebook as a PDF.',[['#renal-colic','Renal colic'],['#pain','Pain management']]],
   ['The ebook, checked line by line','Every printed line of the ebook\'s 23 pathways (pages 5 to 63) was checked against the guide, and what had been shortened or left out is back, as printed, with its page: the definition, restraint monitoring and the drugs\' time to peak and half-life for acute behavioural disturbance; the written asthma action plan; the risk factors, symptoms and signs of Fournier\'s gangrene, scrotal abscess and epididymo-orchitis; the side effects in the choice of analgesia; and the full esmolol, adenosine and amiodarone lines for SVT. Where the print looks like a slip, or two of its pages disagree, the guide keeps its reading and quotes the print beside it; the two that bear on a number are under Still to confirm.',[['#asthma','Bronchial asthma'],['#scrotal-pain','Acute scrotal pain'],['#behavioural-disturbance','Acute behavioural disturbance']]],
   ['Reading X-rays, one check at a time','A new guide for the films you read alone: the checks before you read, a set search, then chest, ankle and foot, knee, wrist and scaphoid, hand, elbow, shoulder, hip and pelvis, and when an abdominal film is and is not indicated. The Ottawa ankle, foot and knee rules and the elbow extension test are checklists that suggest the answer. It is written in the guide\'s own words from named online sources, each linked, and where those sources disagree it says so; it does not replace the radiologist\'s report or the EP\'s review. Shift tools has a tile for it.',[['#xray-guide','Reading X-rays'],['#xray-guide--ank','Ottawa ankle rule']]],
@@ -650,21 +652,32 @@ const FIGS = {
 function filmHTML(k){
   const f = XFILMS[k]; if (!f) return '';
   const pts = p => p.map(q => q.join(',')).join(' ');
+  /* The key: a pill per part; a film with many parts (the hand) groups them (f.groups), and a group opens to its parts */
+  const pill = p => `<li><button type="button" data-xk="${p.k}" aria-pressed="false"><i>${f.parts.indexOf(p) + 1}</i>${esc(p.t)}</button></li>`;
+  const grouped = new Set((f.groups || []).flatMap(g => g[1]));
+  const key = (f.groups || []).map(g => `<li class="xf-g"><button type="button" data-xg="${g[1].join(' ')}" aria-expanded="false"><i>${g[1].length}</i>${esc(g[0])}</button><ul hidden>${g[1].map(x => pill(f.parts.find(p => p.k === x))).join('')}</ul></li>`).join('') + f.parts.filter(p => !grouped.has(p.k)).map(pill).join('');
   return `<figure class="fig xf" data-xf="${k}"><div class="xf-bar"><b>${esc(f.t)}</b><button type="button" class="sm" data-xf-toggle aria-pressed="true">Outlines on</button></div>` +
     `<div class="xf-stage" style="aspect-ratio:${f.w}/${f.h}"><img src="xray/${k}.webp" width="${f.w}" height="${f.h}" loading="lazy" decoding="async" alt="${esc(f.alt || f.t)}"><svg viewBox="0 0 ${f.w} ${f.h}" aria-hidden="true" focusable="false">${f.parts.map(p => `<polygon data-xp="${p.k}" points="${pts(p.p)}"/>`).join('')}</svg></div>` +
-    `<ul class="xf-key" aria-label="Parts outlined on the film">${f.parts.map((p, i) => `<li><button type="button" data-xk="${p.k}" aria-pressed="false"><i>${i + 1}</i>${esc(p.t)}</button></li>`).join('')}</ul>` +
-    `<figcaption>Tap a name to light that part on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
+    `<ul class="xf-key" aria-label="Parts outlined on the film">${key}</ul>` +
+    `<figcaption>Tap a name to light that part on the film${f.groups ? '; a group opens to its bones' : ''}. The outlines are this guide's own tracing by eye, a teaching aid and not a measurement; where one part runs on into the next, the line between them is a guide, not an edge on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
 }
 if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); });
+/* A step that reads several films shows them one after another (XGROUPS, data15.js) */
+if (typeof XGROUPS !== 'undefined') Object.keys(XGROUPS).forEach(n => { FIGS['xg-' + n] = () => XGROUPS[n].map(filmHTML).join(''); });
 document.addEventListener('click', e => {
-  const t = e.target.closest && e.target.closest('[data-xf-toggle],[data-xk]'); if (!t) return;
+  const t = e.target.closest && e.target.closest('[data-xf-toggle],[data-xk],[data-xg]'); if (!t) return;
   const fig = t.closest('.xf'); if (!fig) return;
   const tg = fig.querySelector('[data-xf-toggle]');
   if (t === tg){ const on = t.getAttribute('aria-pressed') !== 'true'; t.setAttribute('aria-pressed', on); t.textContent = on ? 'Outlines on' : 'Outlines off'; fig.classList.toggle('xf-off', !on); return; }
-  const was = t.getAttribute('aria-pressed') === 'true';
+  const grp = t.hasAttribute('data-xg');
+  const was = grp ? t.getAttribute('aria-expanded') === 'true' : t.getAttribute('aria-pressed') === 'true';
   fig.querySelectorAll('[data-xk]').forEach(b => b.setAttribute('aria-pressed', 'false')); fig.querySelectorAll('[data-xp]').forEach(p => p.classList.remove('on'));
+  /* One group open at a time; a part's pill leaves its own group open */
+  fig.querySelectorAll('[data-xg]').forEach(b => { if (grp || !b.parentNode.contains(t)){ b.setAttribute('aria-expanded', 'false'); b.nextElementSibling.hidden = true; } });
   fig.classList.toggle('xf-pick', !was);
-  if (!was){ t.setAttribute('aria-pressed', 'true'); const p = fig.querySelector(`[data-xp="${t.dataset.xk}"]`); if (p) p.classList.add('on'); fig.classList.remove('xf-off'); tg.setAttribute('aria-pressed', 'true'); tg.textContent = 'Outlines on'; }
+  if (!was){ const ks = grp ? t.dataset.xg.split(' ') : [t.dataset.xk];
+    if (grp){ t.setAttribute('aria-expanded', 'true'); t.nextElementSibling.hidden = false; } else t.setAttribute('aria-pressed', 'true');
+    ks.forEach(x => { const p = fig.querySelector(`[data-xp="${x}"]`); if (p) p.classList.add('on'); }); fig.classList.remove('xf-off'); tg.setAttribute('aria-pressed', 'true'); tg.textContent = 'Outlines on'; }
 });
 const figHTML = k => FIGS[k] ? FIGS[k]() : '';
 

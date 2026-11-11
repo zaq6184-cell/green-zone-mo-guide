@@ -1505,8 +1505,12 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .xf-key{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .xf-key button{min-height:44px;padding:6px 12px 6px 8px;border-radius:999px;font-size:.84rem;gap:8px;text-align:left}
 .xf-key button i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--surface-3);font:700 .74rem var(--mono);font-style:normal;color:var(--muted);flex:none}
-.xf-key button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
-.xf-key button[aria-pressed="true"] i{background:var(--accent);color:var(--accent-ink)}
+.xf-key button[aria-pressed="true"],.xf-key button[aria-expanded="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.xf-key button[aria-pressed="true"] i,.xf-key button[aria-expanded="true"] i{background:var(--accent);color:var(--accent-ink)}
+.xf-key .xf-g{display:contents}
+.xf-key .xf-g>ul{list-style:none;margin:0;padding:8px 0 8px 12px;display:flex;flex-wrap:wrap;gap:6px;flex:1 0 100%;border-left:2px solid var(--accent)}
+.xf-key .xf-g>ul[hidden]{display:none}
+.xf-key .xf-g>button i{border-radius:8px}
 .xf figcaption{margin:10px 2px 0;font-size:.8rem;line-height:1.45;color:var(--muted)}
 .epg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .epg .pill svg{width:16px;height:16px}
