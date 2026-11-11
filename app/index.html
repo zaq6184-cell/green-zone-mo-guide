@@ -1512,6 +1512,31 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .xf-key .xf-g>ul{list-style:none;margin:0;padding:8px 0 8px 12px;display:flex;flex-wrap:wrap;gap:6px;flex:1 0 100%;border-left:2px solid var(--accent)}
 .xf-key .xf-g>ul[hidden]{display:none}
 .xf-key .xf-g>button i{border-radius:8px}
+/* The 3D abdomen map: the torso, the nine regions to tap (gold when lit), the turn slider */
+.a3{padding:12px;overflow:hidden}
+.a3-bar{margin:0 0 10px}
+.a3-bar b{font:850 1rem/1.2 var(--display)}
+.a3-stage{position:relative;width:100%;max-width:420px;margin:0 auto;border-radius:16px;overflow:hidden;background:var(--emerald-3);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.a3-stage img,.a3-stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.a3-g{cursor:pointer;outline:none}
+.a3-g polygon{fill:transparent;stroke:transparent;stroke-width:3;vector-effect:non-scaling-stroke;transition:fill .2s,stroke .2s}
+.a3-g text{font:800 34px var(--display);fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(6,61,40,.65);stroke-width:5px;pointer-events:none}
+.a3-g:hover polygon,.a3-g:focus-visible polygon{stroke:#fff}
+.a3-g.on polygon{fill:color-mix(in srgb,var(--gold) 35%,transparent);stroke:var(--gold)}
+.a3-g.on text{fill:var(--gold-ink);stroke:var(--gold)}
+.a3-s{position:absolute;top:10px;padding:4px 9px;border-radius:999px;background:rgba(6,20,14,.62);color:#fff;font:800 .72rem/1 var(--body);letter-spacing:.04em}
+.a3-sr{left:10px}
+.a3-sl{right:10px}
+.a3-turn{display:flex;align-items:center;gap:12px;max-width:420px;margin:12px auto 0;font:800 .86rem var(--body);color:var(--muted)}
+.a3-turn input{flex:1;min-height:44px;accent-color:var(--accent)}
+.a3-info{max-width:420px;margin:8px auto 0}
+.a3-info h4{margin:4px 0 4px;font:850 1rem/1.25 var(--display)}
+.a3-info ul{margin:0 0 10px;padding-left:20px}
+.a3 figcaption{margin:10px 2px 0;font-size:.8rem;line-height:1.45;color:var(--muted)}
+.srcl{margin:10px 0 0;padding-left:22px;display:grid;gap:8px;font-size:.9rem;line-height:1.45}
+.srcl a{display:inline-flex;align-items:center;gap:4px;font-weight:700;white-space:nowrap}
+.srcl a svg{width:14px;height:14px}
+.tab-h{margin:0 0 10px;font:850 1.05rem/1.25 var(--display)}
 .xf figcaption{margin:10px 2px 0;font-size:.8rem;line-height:1.45;color:var(--muted)}
 .epg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .epg .pill svg{width:16px;height:16px}
@@ -10368,6 +10393,495 @@ Object.assign(XFILMS, {"chest-pa":{"t":"Normal chest, PA view","w":874,"h":1000,
 const XGROUPS = {"cxd":["chest-pa"],"ankv":["ankle-ap","ankle-mortise","ankle-lat"],"ftv":["foot-dp","foot-oblique","foot-lat"],"knv":["knee-ap","knee-lat"],"wrl":["wrist-lat"],"hd":["hand-pa","hand-oblique"],"elr":["elbow-ap","elbow-lat"],"sh":["shoulder-ap","shoulder-y"],"hp2":["pelvis-ap"]};
 if (P['xray-guide']) Object.keys(XGROUPS).forEach(n => { const node = P['xray-guide'].nodes[n]; if (node && XGROUPS[n].every(k => XFILMS[k])) node.fig = 'xg-' + n; });
 
+/* ================= Abdominal pain in the ED: the visual handbook (12 Nov 2026) =================
+   Krishna, 12 Nov 2026: "review in detail line by line this 2 pdf on the approach to abdominal pain in emergency department.
+   add it fully, incorporate it into the app, make it interactive and premium". The two PDFs are his own teaching handbook,
+   made with AI ("Approach to Abdominal Pain in the Emergency Department - Malaysia-context visual handbook", 29 pages, and its
+   2-page quick reference; reviewed v2, 12 Nov 2026). Rules 8 and 5 were quoted back; he chose "Checked, as printed": the
+   handbook is quoted as printed with its page, every dose and number checked against the source it cites first
+   (sources/abdo/SOURCE-CHECK.md, ABDO-REVIEW.md), anything that cannot be confirmed left out with a gap and an open item.
+   It does not replace the ebook's own Abdominal pain pathway (pp. 10-11), which stays as printed; where the two differ is
+   an open item. Credit (his choice): "Teaching handbook prepared for the Green Zone guide (AI-assisted synthesis)".
+   Bracketed numbers [n] are the handbook's own reference numbers: the Sources tab lists them with their links. */
+const HB_SRC = 'Teaching handbook prepared for the Green Zone guide (AI-assisted synthesis), reviewed v2, 12 Nov 2026';
+const hbp = (pg, refs) => 'Handbook p. ' + pg + (refs ? '. Its evidence: [' + refs + '] (Sources tab)' : '') + '. A teaching aid, not an official MOH/HKL protocol.';
+const hbx = s => ' Left out or changed after checking the sources it cites: ' + s;
+const HB_REFS = [
+  ['[1] MOH Malaysia. Pain Management in Emergency & Trauma Department, 2nd ed. (2020). Abdominal pain and renal colic; Appendix 2 morphine protocol, printed pp. 20, 22, 42.', 'https://www.moh.gov.my/images/04-penerbitan/penerbitan-klinikal/Program-Bebas-Kesakitan/Pain_Management_in_ETD_2020_2nd_Ed._.pdf'],
+  ['[2] MOH Malaysia. National Antimicrobial Guideline, 4th ed. (2024), live A4 chapter. Gastrointestinal and hepatobiliary infections; online update banner Jan 2026.', 'https://sites.google.com/moh.gov.my/nag/contents/section-a-adult/a4-gastrointestinal-infections'],
+  ['[3] MOH Malaysia. Handbook of Obstetrics Guideline (2024). Early-pregnancy bleeding, pregnancy of unknown location and obstetric emergencies.', 'https://www.moh.gov.my/images/04-penerbitan/penerbitan-klinikal/perkhidmatan-OG-dan-pediatrik/FINAL_DRAF_LAYOUT_Handbook_of_Obstetrics_Guideline_PDF_compressed.pdf'],
+  ['[4] MaHTAS, MOH Malaysia. Management of Dengue in Adults, 4th ed. (2026). Full text read via the PDF linked by PKD Melaka Tengah. Chapters 4, 8, 9; Appendix 8. (The printed link is another site\'s Drive copy; here it opens this guide\'s own Dengue CPG entry.)', '#dengue-cpg'],
+  ['[5] NSW Agency for Clinical Innovation. Adult ECAT: Abdominal pain (updated 2024). Front-door assessment, red flags and early treatment; nursing protocol used for assessment principles.', 'https://aci.health.nsw.gov.au/ecat/adult/abdominal-pain'],
+  ['[6] NSW Agency for Clinical Innovation. Adult abdominal assessment. Pain location, referred symptoms and examination.', 'https://aci.health.nsw.gov.au/ecat/adult/assessment/abdominal'],
+  ['[7] RCEMLearning. Abdominal Pain without Shock. Differential diagnosis, investigations, reassessment and discharge. Indexed text accessed; site in maintenance.', 'https://www.rcemlearning.org/reference/abdominal-pain-without-shock/'],
+  ['[8] RCEM. Adults who may require emergency laparotomy (2024). Early senior/surgical review, high-risk groups, timely CT and negative-scan pathways.', 'https://rcem.ac.uk/wp-content/uploads/2024/10/RCEM-Advisory-Statement-regarding-the-management-of-adults-presenting-to-the-Emergency-Department-who-may-require-an-emergency-laparotomy-2-2.pdf'],
+  ['[9] Surviving Sepsis Campaign. Adult international guidelines (2026). Antibiotic timing, balanced crystalloid, reassessment, vasopressors and source control. DOI: 10.1097/CCM.0000000000007075.', 'https://www.sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026'],
+  ['[10] American College of Radiology. Acute Nonlocalized Abdominal Pain. Appropriateness criteria; variants for acute nonlocalised pain.', 'https://acsearch.acr.org/docs/69467/Narrative/'],
+  ['[11] American College of Radiology. Right Upper Quadrant Pain (2022). Ultrasound for suspected biliary disease; further imaging after equivocal studies.', 'https://acsearch.acr.org/docs/69474/Narrative/'],
+  ['[12] American College of Radiology. Right Lower Quadrant Pain (2022). CT with IV contrast in adults; ultrasound/MRI options including pregnancy.', 'https://acsearch.acr.org/docs/69357/Narrative/'],
+  ['[13] Podda M, et al. WSES Jerusalem appendicitis guidelines, 2025 edition (published 2026). JAMA Surgery 161:283-295. DOI: 10.1001/jamasurg.2025.6218. Indexed abstract used; full text not accessible.', 'https://doi.org/10.1001/jamasurg.2025.6218'],
+  ['[14] Bala M, et al. WSES acute mesenteric ischaemia guidelines (2022). Urgent CTA; limitations of lactate and other biomarkers. DOI: 10.1186/s13017-022-00443-x.', 'https://link.springer.com/article/10.1186/s13017-022-00443-x'],
+  ['[15] NICE NG126. Ectopic pregnancy and miscarriage (updated June 2026). Pregnancy of unknown location: symptoms take priority; hCG cannot determine location.', 'https://www.nice.org.uk/guidance/NG126/chapter/diagnosis-of-viable-intrauterine-pregnancy-and-of-tubal-ectopic-pregnancy'],
+  ['[16] NICE NG118. Renal and ureteric stones: assessment and management (2019). Urgent imaging; NSAIDs first line for appropriate patients.', 'https://www.nice.org.uk/guidance/ng118/chapter/recommendations'],
+  ['[17] European Association of Urology. Urolithiasis guideline (2026). Infected obstruction/anuria: urgent decompression and immediate antibiotics.', 'https://uroweb.org/guidelines/urolithiasis/chapter/guidelines'],
+  ['[18] Tenner S, et al. American College of Gastroenterology: Acute pancreatitis (2024). Diagnosis, selective CT, lactated Ringer solution, nutrition and antibiotics. DOI: 10.14309/ajg.0000000000002645.', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC13221274/'],
+  ['[19] ten Broek RPG, et al. Bologna adhesive small bowel obstruction guideline, 2017 update (2018). CT, decompression, fluid replacement and operative red flags. DOI: 10.1186/s13017-018-0185-2.', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6006983/'],
+  ['[20] Tarasconi A, et al. WSES perforated and bleeding peptic ulcer guidelines (2020). CT for suspected perforation; urgent surgical and resuscitative care. DOI: 10.1186/s13017-019-0283-9.', 'https://link.springer.com/article/10.1186/s13017-019-0283-9'],
+  ['[21] NICE NG156. Abdominal aortic aneurysm: diagnosis and management (2020). Immediate aortic ultrasound, vascular discussion and transfer.', 'https://www.nice.org.uk/guidance/ng156/chapter/Recommendations'],
+  ['[22] ACOG Committee Opinion 783. Adnexal torsion in adolescents (2019). Urgent assessment; Doppler flow alone does not exclude torsion. Adolescent-specific evidence.', 'https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2019/08/adnexal-torsion-in-adolescents'],
+  ['[23] Royal Children\'s Hospital Melbourne. Abdominal pain - acute. Paediatric assessment, serial examination, analgesia and referral.', 'https://www.rch.org.au/clinicalguide/guideline_index/Abdominal_pain/'],
+  ['[24] Royal Children\'s Hospital Melbourne. Acute scrotal pain or swelling (updated Jan 2026). Torsion/irreducible hernia need urgent surgical evaluation; avoid imaging delay.', 'https://www.rch.org.au/clinicalguide/guideline_index/Acute_Scrotal_Pain_or_Swelling/'],
+  ['[25] RCEM. Management of Acute Pain in Adults in the ED (2024). Pain reassessment; paracetamol, opioid monitoring and prescribing cautions.', 'https://rcem.ac.uk/wp-content/uploads/2024/10/Management_of_Acute_Pain_in_Adults_2024_v1.pdf'],
+  ['[26] Sartelli M, et al. WSES acute colonic diverticulitis guidelines (2020). CT classification; selective antibiotics; complicated disease. DOI: 10.1186/s13017-020-00313-4.', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7206757/'],
+  ['[27] IDSA. Clinical Practice Guideline for Infectious Diarrhea (2017). Rehydration, stool-test indications and selective antimicrobials.', 'https://www.idsociety.org/practice-guideline/infectious-diarrhea'],
+  ['[28] Umpierrez GE, et al. Hyperglycemic Crises in Adults With Diabetes: Consensus Report (2024). ADA/EASD/JBDS/AACE/DTS. Euglycaemic DKA, ketones and acidosis. DOI: 10.2337/dci24-0032.', 'https://diabetesjournals.org/care/article/47/8/1257/156811/Hyperglycemic-Crises-in-Adults-With-Diabetes-A'],
+  ['[29] MOH Malaysia. National Antimicrobial Guideline: A16 Tropical Infections. Leptospirosis exposure and severity-based treatment; live online reference.', 'https://sites.google.com/moh.gov.my/nag/contents/section-a-adult/a16-tropical-infections'],
+  ['[30] Miura F, et al. Tokyo Guidelines 2018: Initial management of acute biliary infection. Cholangitis resuscitation and severity-based biliary drainage. DOI: 10.1002/jhbp.509.', 'https://onlinelibrary.wiley.com/doi/full/10.1002/jhbp.509'],
+  ['[31] BSG/BASL. Guidelines on the management of ascites in cirrhosis (2021). Diagnostic paracentesis, ascitic neutrophils and spontaneous bacterial peritonitis.', 'https://gut.bmj.com/content/70/1/9'],
+  ['[32] American College of Emergency Physicians. Sonoguide: Abdominal Aortic Aneurysm (2020). Systematic aortic views and limitations of focused ultrasound.', 'https://www.acep.org/sonoguide/basic/aorta'],
+  ['[33] American College of Emergency Physicians. Sonoguide: RUSH (2021). Focused ultrasound in undifferentiated shock; integrate with clinical findings.', 'https://www.acep.org/sonoguide/advanced/rush/'],
+  ['[34] NICE CG141. Acute upper gastrointestinal bleeding in over 16s. Unstable severe bleeding: endoscopy immediately after resuscitation.', 'https://www.nice.org.uk/guidance/cg141/chapter/Recommendations'],
+  ['[35] NICE CG174. Intravenous fluid therapy in adults in hospital. Crystalloid resuscitation and reassessment of response/overload.', 'https://www.nice.org.uk/guidance/cg174/chapter/recommendations'],
+  ['[36] ACOG Committee Opinion 723. Diagnostic imaging during pregnancy and lactation (2017). Ultrasound/MRI preferred when appropriate; necessary CT should not be withheld.', 'https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/10/guidelines-for-diagnostic-imaging-during-pregnancy-and-lactation'],
+  ['[37] CDC. STI Treatment Guidelines: Pelvic Inflammatory Disease (2021). Clinical suspicion, testing and indications for inpatient treatment.', 'https://www.cdc.gov/std/treatment-guidelines/pid.htm'],
+  ['[38] Society for Endocrinology. Adrenal crisis emergency guidance. Prompt recognition and emergency steroid/fluid treatment; do not delay for diagnostic tests.', 'https://www.endocrinology.org/clinical-practice/clinical-guidance/adrenal-crisis/'],
+  ['[39] ACG. Acute Pancreatitis Guideline Highlights (2024). Official visual summary: fluids, early feeding, selective antibiotics and biliary treatment.', 'https://webfiles.gi.org/links/journals/AJG-Clinical-Guidelines-Highlights-Acute-Pancreatitis-2024-FINAL.pdf'],
+  ['[40] Banks PA, et al. Revised Atlanta classification of acute pancreatitis (2013). Diagnostic criteria: two of three; pancreatic enzyme activity at least three times the upper limit. DOI: 10.1136/gutjnl-2012-302779. (Not read for this guide: its page sits behind a bot check. ACG 2024 [18] prints "greater than 3 times the upper limit of normal", which the steps show.)', 'https://gut.bmj.com/content/62/1/102'],
+  ['[41] HerniaSurge Group. Update of international guidelines for groin hernia management (2023). Acutely irreducible hernia: reduction only without suspicion of bowel ischaemia; emergency surgery for suspected strangulation. DOI: 10.1093/bjsopen/zrad080.', 'https://academic.oup.com/bjsopen/article/7/5/zrad080/7325871'],
+  ['[42] NICE NG148. Acute kidney injury: prevention, detection and management. Urgent urology referral for pyonephrosis, obstructed solitary kidney, bilateral obstruction or complications of obstruction-related AKI.', 'https://www.nice.org.uk/guidance/ng148/chapter/Recommendations']
+];
+const HB_TRIG = [
+  ['Shock / syncope / significant bleed', 'ABCDE, monitored care, IV access/crossmatch; consider AAA or ruptured ectopic; senior/specialty now.'],
+  ['Peritonism / tender irreducible hernia', 'Urgent surgical review. Resuscitate, nil by mouth and antibiotics when indicated. If strangulation is suspected, do not attempt hernia reduction.'],
+  ['Severe pain with few early signs', 'Consider mesenteric ischaemia; urgent CTA. A normal lactate cannot rule it out.'],
+  ['Pregnancy possible / pelvic pain', 'Pregnancy test, appropriate pelvic US; unstable = O&G immediately. Unknown location needs an explicit O&G follow-up plan.'],
+  ['Fever/sepsis + urinary obstruction', 'Cultures, immediate IV antibiotics and urgent urology/drainage. Sepsis with an obstructing stone requires urgent decompression.'],
+  ['Anuria / obstructed solitary kidney', 'Immediate senior/urology review; urgent assessment of obstruction and renal function.'],
+  ['Jaundice + systemic illness', 'Consider cholangitis; antibiotics and early biliary drainage assessment.'],
+  ['Epigastric pain / deep breathing', 'Think ACS or DKA: ECG/appropriate troponin pathway; glucose, ketones and VBG when indicated.'],
+  ['Suspected dengue + worsening pain', 'Assess CCTVR, BP/pulse pressure, HCT trend and urine output; escalate. Avoid NSAIDs; use the dengue fluid pathway.']
+];
+const HB_QR_GAP = 'Quick reference, back page (p. 2). Its selected original sources: MOH National Antimicrobial Guideline; MOH adult dengue CPG, 4th ed. 2026; WSES mesenteric ischaemia; EAU urolithiasis; NICE ectopic pregnancy. A teaching aid, not an official MOH/HKL protocol.';
+/* The Malay discharge script, as printed on p. 23; it is read aloud from the Malay script tab */
+const HB_SCRIPT = [
+  'Punca sakit perut anda belum dapat dipastikan sepenuhnya.',
+  'Datang semula ke Jabatan Kecemasan dengan segera jika sakit bertambah teruk, pitam, demam, muntah berterusan, tidak boleh minum, muntah atau najis berdarah, perut membuncit, susah bernafas atau air kencing berkurang.',
+  'Jika ada kemungkinan hamil dan sakit atau pendarahan bertambah, datang segera.',
+  'Jangan tunggu tarikh temujanji jika keadaan semakin teruk.',
+  'Semakan semula: [tarikh/masa] di [tempat].',
+  'Jika rebah atau terlalu lemah untuk datang dengan selamat, hubungi 999.'
+];
+/* The nine regions of p. 7, numbered as printed (the patient's right on the left of the page) */
+const HB_REGIONS = [
+  ['1 | Right upper', ['Biliary / liver disease', 'Kidney / lung base'], [['up','Biliary disease or pancreatitis'],['flk','Flank, urinary and scrotal pain']]],
+  ['2 | Epigastrium', ['Peptic / pancreatic / biliary', 'ACS / aortic disease'], [['up','Biliary disease or pancreatitis'],['mim','Important mimics'],['vas','Vascular and bleeding threats']]],
+  ['3 | Left upper', ['Spleen / stomach / pancreas', 'Kidney / lung base'], [['up','Biliary disease or pancreatitis'],['flk','Flank, urinary and scrotal pain'],['mim','Important mimics']]],
+  ['4 | Right flank', ['Stone / pyelonephritis', 'Retrocaecal appendix'], [['flk','Flank, urinary and scrotal pain'],['app','Appendicitis and diverticulitis']]],
+  ['5 | Central', ['Early appendix / obstruction', 'Ischaemia / AAA'], [['app','Appendicitis and diverticulitis'],['sbo','Obstruction and perforation'],['vas','Vascular and bleeding threats']]],
+  ['6 | Left flank', ['Stone / pyelonephritis', 'Colon / retroperitoneum'], [['flk','Flank, urinary and scrotal pain'],['app','Appendicitis and diverticulitis'],['vas','Vascular and bleeding threats']]],
+  ['7 | Right lower', ['Appendix / ileitis / hernia', 'Ectopic / torsion / stone'], [['app','Appendicitis and diverticulitis'],['preg','Pregnancy and pelvic pain'],['sbo','Obstruction, perforation and the groin']]],
+  ['8 | Suprapubic', ['Bladder / retention / PID', 'Ectopic / pelvic cause'], [['preg','Pregnancy and pelvic pain'],['flk','Flank, urinary and scrotal pain']]],
+  ['9 | Left lower', ['Diverticulitis / colitis', 'Ectopic / torsion / stone'], [['app','Appendicitis and diverticulitis'],['preg','Pregnancy and pelvic pain'],['flk','Flank, urinary and scrotal pain']]]
+];
+const HB_LOC = 'Location is a clue. Organs and pain can overlap. Referred pain: shoulder-tip pain may reflect diaphragmatic irritation; back radiation can occur with pancreatic or aortic disease. Migration: early appendicitis may begin centrally before localising.';
+const hbl = (k, t) => ['#abdo-handbook--' + k, t];
+
+P['abdo-handbook'] = {
+  title:'Abdominal pain in the ED: the visual handbook', grp:'cpg', kind:'Handbook', isnew:true, hero:'abdohb',
+  src:HB_SRC,
+  lead:'Stabilise. Find the threat. Reassess. Treat the patient while you work out the diagnosis: a teaching handbook for junior MOs on adult acute non-traumatic abdominal pain, in a Malaysian context, with its quick reference.',
+  kw:'abdominal pain handbook visual handbook quick reference acute abdomen surgical abdomen severity red flags appendicitis diverticulitis biliary colic cholecystitis cholangitis pancreatitis Atlanta lipase bowel obstruction perforation strangulated hernia irreducible hernia mesenteric ischaemia AAA aortic aneurysm GI bleed ectopic pregnancy pregnancy of unknown location PUL adnexal torsion ovarian torsion testicular torsion PID renal colic stone infected obstruction anuria SBP spontaneous bacterial peritonitis ascites POCUS ultrasound CTA CT imaging lactate morphine fentanyl paracetamol NSAID antibiotics NAG sepsis leptospirosis dengue CCTVR mimic DKA euglycaemic SGLT2 ACS adrenal crisis zoster nonspecific abdominal pain NSAP ISBAR handover sakit perut skrip discaj',
+  kinds:{neutral:'What the handbook says'},
+  notesFoot:'Quoted from the handbook as printed, with its page; its doses and numbers were checked against the sources it cites. It calls itself an educational synthesis, not an official MOH/HKL protocol. The HKL ebook\'s Abdominal pain pathway (pp. 10-11) stays the department\'s pathway.',
+  start:'menu',
+  nodes:{
+    menu:{q:'What do you need?',
+      hint:'A teaching handbook made with AI, quoted as printed and checked against its sources: "an educational synthesis, not an official MOH/HKL protocol". The HKL ebook\'s Abdominal pain pathway stays the department\'s; much of this goes beyond the Green Zone. Scope and use: the Sources tab.',
+      opts:[
+      ['Bedside pathway: the first decision is severity','sev'],
+      ['The checks that prevent a miss','trig'],
+      ['Patterns that cannot wait','danger'],
+      ['Stabilise first','stab'],
+      ['History and examination','hx'],
+      ['Where is the pain? A map of possibilities','loc'],
+      ['Tests, imaging and focused ultrasound','inv'],
+      ['Pain relief and antibiotics','tx'],
+      ['By presentation','pres'],
+      ['Patients who need extra caution','caut'],
+      ['Disposition, handover and the Malay script','disp'],
+      ['Six short cases','cases']]},
+
+    /* ---------- p. 2: the bedside pathway ---------- */
+    sev:{q:'Unstable, peritonitic, bleeding, or a time-critical concern?',
+      info:['First look + first touch: Vitals, mental state, perfusion, glucose and pain score. Shock can occur with preserved blood pressure.'],
+      hint:'Run stabilisation and diagnostic assessment in parallel. Reassess whenever the story changes. (Handbook p. 2)',
+      opts:[['Yes / uncertain','resus'],['No: currently stable','focus']]},
+    resus:{step:'Resuscitate + call', items:[
+      'Monitored area; ABCDE; IV access; targeted fluids/blood; early analgesia.',
+      'Call ED senior and relevant specialty now.',
+      'Focused bedside imaging must not delay source control.',
+      hbp(2, '5,7-10,14,15,21')], next:'reas'},
+    focus:{step:'Focused assessment', items:[
+      'History, whole-patient examination, pregnancy test when relevant, ECG/glucose as indicated.',
+      'Rank: most likely cause, dangerous alternative, important mimic.',
+      'Select tests to answer these questions.',
+      hbp(2, '5,7-10,14,15,21')], next:'reas'},
+    reas:{q:'Reassess + check that the data fit: where now?',
+      info:['Repeat vitals, perfusion, pain and abdominal examination. Review every result.', 'Persistent pain, discordant findings or deterioration: senior review, further imaging or observation.'],
+      hint:'Reassessment is a treatment step. Set a review time and a responsible clinician. Repeat attendance is new information. (Handbook pp. 2 and 22)',
+      opts:[['Admit / intervene','adm'],['Observe','obs'],['Discharge','dcq']]},
+    adm:{end:'admit', title:'Admit / intervene', items:[
+      'Threat, organ dysfunction, evolving focal signs or treatment needs.',
+      'Admit / urgent specialty: Shock, peritonism, organ dysfunction, significant bleeding, infected obstruction, torsion or another time-critical diagnosis.',
+      'Admit / urgent specialty: Persistent vomiting/dehydration, uncontrolled pain, high-risk comorbidity, failed outpatient plan or unreliable follow-up.',
+      'Make the next action explicit. Use a short structured handover and a discharge explanation the patient understands. (p. 23)'],
+      links:[hbl('isbar','ISBAR example'),hbl('rec','Minimum record'),['#abdominal-pain--admit','Ebook: admit (p. 11)'],['#referral-rules','Referral rules']],
+      gap:hbp('2 and 22', '5,7,8,15,17,23')},
+    obs:{end:'observe', title:'Observe', items:[
+      'Diagnosis uncertain; serial examination and a timed senior review.',
+      'Observe / review: Uncertain diagnosis, evolving pain, discordant results or persistent symptoms despite initial treatment.',
+      'Observe / review: Serial vitals/examination, response to treatment and result review; senior input and explicit next action if not improving.',
+      'If the scan is negative but the patient is not well: Review whether the right study/protocol was used, revisit the differential and discuss with the senior/radiologist. Observation, repeat examination or further targeted investigation may still be needed. [8]'],
+      links:[['#em-watch','EM Watch'],['#yellow-zone','Yellow Zone']],
+      gap:hbp('2 and 22', '5,7,8,15,17,23')},
+    dcq:{check:'all', q:'Discharge only if: all of these?',
+      hint:'Discharge: low risk after reassessment; oral intake, follow-up and return advice. (Handbook pp. 2 and 22)',
+      items:['Stable repeat observations', 'Reassuring reassessment', 'Urgent causes reasonably excluded', 'Oral fluids tolerated', 'Symptoms manageable with oral treatment', 'Safe support, clear follow-up and understandable return advice'],
+      opts:[['All met','dis'],['Not all met: observe or review','obs'],['Not all met: admit / urgent specialty','adm']]},
+    dis:{end:'discharge', title:'Discharge', items:[
+      'Before the patient leaves: Repeat and document vital signs and abdominal findings. Review pending results and name who will act on them. Explain the working diagnosis, medication plan, review location/time and emergency return triggers; ask the patient to repeat the plan back.',
+      'Before discharge (quick reference): Repeat observations and examination. Check that dangerous causes have been reasonably excluded, symptoms are controlled, oral intake is adequate and follow-up is feasible. Give written return advice; assign ownership of pending results.',
+      'A diagnosis of uncertainty is acceptable; an unclear plan is not. "Non-specific abdominal pain" can be used after appropriate assessment. Record what has been excluded, what remains possible and how deterioration will be detected. Arrange a time-bound review, often within 12-24 h if unresolved, according to risk and local access. [7]',
+      'Department pathway: the HKL ebook (p. 11) gives follow-up at EMACC or EMWATCH in 24 to 48 hours. Follow the department\'s pathway; the difference is under Still to confirm.'],
+      links:[hbl('script','Malay discharge script'),['#abdominal-pain--home','Ebook: discharge with follow-up'],['#emacc','EMACC follow-up'],['#safe-practice','Safe practice: before discharge']],
+      gap:hbp('22; quick reference p. 2', '5,7,8,15,17,23')},
+
+    /* ---------- Quick reference, back page ---------- */
+    trig:{q:'The checks that prevent a miss: which trigger?',
+      hint:'Adult non-traumatic abdominal pain. Use with the full handbook and local departmental pathways. (Quick reference, back page)',
+      opts:HB_TRIG.map((t, i) => [t[0], 'tg' + (i + 1)])},
+
+    /* ---------- p. 3: patterns that cannot wait ---------- */
+    danger:{check:'any', q:'Any pattern that cannot wait?',
+      hint:'A normal temperature, white cell count or single blood pressure does not clear a patient. (Handbook p. 3)',
+      info:['Escalate on physiology or clinical concern: Hypotension or a falling BP, altered consciousness, poor peripheral perfusion, respiratory distress, oliguria, rising lactate, worsening pain or repeat attendance all justify prompt senior reassessment. Do not wait for every classic feature.'],
+      items:[
+        'Bleeding / vascular: collapse, syncope, pallor, back pain, GI bleeding or pregnancy-related pain: consider AAA, ectopic pregnancy and major haemorrhage.',
+        'Peritonitis: involuntary guarding, rigidity or pain with movement: consider perforation, infarction or advanced inflammation. Call surgery early.',
+        'Ischaemia: severe pain with few early signs, especially with AF or vascular disease: think mesenteric ischaemia; request urgent CTA.',
+        'Infected obstruction: fever/organ dysfunction plus urinary obstruction or biliary obstruction: antibiotics and urgent drainage assessment.',
+        'Strangulation / torsion: obstruction with continuous pain, tender irreducible hernia, sudden unilateral pelvic pain or testicular pain: urgent specialty review.',
+        'Systemic mimic: epigastric pain with sweating/dyspnoea; abdominal pain with deep breathing or acidosis: evaluate ACS and DKA alongside abdominal causes.'],
+      opts:[['One or more present','esc'],['None of these','sev']]},
+    esc:{end:'admit', title:'Act on the pattern, and escalate', items:[
+      'Each pattern ticked carries its own first action, as printed beside it.',
+      'Escalate on physiology or clinical concern: Hypotension or a falling BP, altered consciousness, poor peripheral perfusion, respiratory distress, oliguria, rising lactate, worsening pain or repeat attendance all justify prompt senior reassessment. Do not wait for every classic feature.'],
+      links:[hbl('vas','Vascular and bleeding threats'),hbl('sbo','Obstruction and perforation'),hbl('flk','A stone plus infection'),hbl('preg','Pregnancy and pelvic pain'),hbl('mim','Important mimics')],
+      gap:hbp(3, '8,14,17,20,21,24,28,30')},
+
+    /* ---------- p. 4: the first 10 minutes ---------- */
+    stab:{step:'Stabilise: assess, and act while assessing', items:[
+      'A suggested workflow, not a national timing target. Allocate tasks and document response.',
+      'A / B: Airway, respiratory rate, work of breathing and SpO2. Support ventilation and give oxygen when indicated; titrate to the appropriate target.',
+      'C: Pulse, BP trend, skin temperature/colour, capillary refill and mental state. Monitor; obtain IV lines when shock/bleeding is likely. Send urgent targeted bloods; crossmatch if bleeding.',
+      'D / E: Glucose, consciousness, temperature and pain score. Expose sufficiently to inspect abdomen, back and groins while preserving dignity.',
+      'Parallel actions: Analgesia, antiemetic if needed, pregnancy test when relevant, early ECG if ACS is plausible. Keep nil by mouth if surgery, obstruction or urgent procedure is likely.',
+      hbp(4, '4,5,9,21,28,35') + hbx('the page\'s title, "The first 10 minutes" (uncited), and "two" IV lines (none of its sources gives a number).')], next:'fluid'},
+    fluid:{end:'neutral', title:'If IV resuscitation is needed: make every bolus a decision', items:[
+      'For hypovolaemia requiring resuscitation, a typical adult crystalloid bolus is 500 mL over less than 15 min, then reassess. Mild dehydration may be managed orally. [27,35]',
+      'Bleeding or special pathway: Major bleeding needs blood-product and haemorrhage pathways. Suspected ruptured AAA needs urgent vascular advice. Dengue, DKA and cardiac dysfunction require their own fluid strategy. [4,21,28]',
+      'Make every bolus a decision: Record the indication, volume, rate and response. Persistent shock: re-evaluate the cause, seek critical-care support and avoid repeated unassessed fluid loading. Septic shock may need early vasopressor support. [9]'],
+      links:[['#dengue-cpg','Dengue CPG: fluids'],['#hyperglycaemia','Hyperglycaemia and DKA'],hbl('sev','Back to the bedside pathway')],
+      gap:hbp(4, '4,5,9,21,28,35') + hbx('"Use smaller aliquots in frailty/cardiorenal disease": NICE CG174 lowers volumes for maintenance fluids only, not for resuscitation boluses.')},
+
+    /* ---------- pp. 5 and 6: history and examination ---------- */
+    hx:{step:'Ask questions that change risk', items:[
+      'Start open-ended, then clarify chronology and associated symptoms.',
+      'When and how? Exact onset; sudden maximal pain or gradual progression? What happened first: pain, vomiting, fever or diarrhoea? Was there a pain-free interval?',
+      'Where and where next? Site, migration, radiation to back/shoulder/groin; constant or colicky; pain on movement. Severity and functional effect matter more than a descriptive label.',
+      'GI / urinary? Vomiting: bilious or bloody? Last stool and flatus? Melena/rectal blood? Dysuria, haematuria, retention or low urine output?',
+      'Pregnancy / pelvic? Last menstrual period, pregnancy possibility, contraception, vaginal bleeding/discharge, prior ectopic, fertility treatment. Ask privately and obtain consent for testing.',
+      'Risk / exposure? Previous operations or hernia; AF, vascular disease, diabetes, renal disease, cirrhosis, malignancy, immunosuppression. Recent travel, floodwater, shared meals, dengue exposure.',
+      'Medicines? Anticoagulants, NSAIDs, steroids, immunosuppressants, recent antibiotics, insulin omission and SGLT2 inhibitors. Allergies and previous contrast reactions.',
+      'Write one problem representation. Example: "Older adult with AF, abrupt severe diffuse pain and little tenderness, currently maintaining BP." This description keeps mesenteric ischaemia visible even when the abdomen feels soft.',
+      hbp(5, '5-8,14,15,28,29')], next:'ex'},
+    ex:{step:'Examine the whole patient: a soft abdomen is only one finding', items:[
+      'Explain, consent, offer a chaperone for intimate examinations, and reassess after analgesia.',
+      'Look before touching: General appearance, hydration, jaundice, rash, scars, distension, hernias and breathing. Reluctance to move may suggest peritoneal irritation; restlessness can occur with colic.',
+      'Palpate gently: Start away from pain. Localise tenderness; assess involuntary guarding, rigidity and masses. Gentle percussion or cough may reveal peritonism without repeatedly provoking rebound.',
+      'Complete the exam: Assess groins and hernial orifices, renal angles and bladder. Examine testes when lower pain is unexplained or symptoms suggest torsion. Check chest, heart and peripheral pulses.',
+      'Select intimate exams: Rectal examination when bleeding, impaction or relevant pathology is suspected. Pelvic/speculum examination when it will change management; do not delay resuscitation or referral.',
+      'Signs support a hypothesis: Murphy, McBurney, Rovsing, psoas and obturator findings can support localisation. No single sign, including normal bowel sounds, safely excludes urgent pathology.',
+      'Repeat and compare: Document findings before and after treatment. Older, immunocompromised and pregnant patients may have muted or altered signs. The trend can matter more than one examination.',
+      hbp(6, '6-8,22-24,31')], next:'exend'},
+    exend:{end:'neutral', title:'Then name three: likely, dangerous, mimic', items:[
+      'Name a likely diagnosis, a dangerous alternative and an extra-abdominal mimic.',
+      'Cirrhosis + ascites + acute illness: Consider spontaneous bacterial peritonitis even without dramatic tenderness. Arrange diagnostic paracentesis promptly with cell count/differential and culture; an ascitic neutrophil count >250 cells/mm3 supports treatment. [31]'],
+      links:[hbl('loc','Where is the pain?'),hbl('inv','Tests and imaging'),hbl('mim','Important mimics')],
+      gap:hbp('6 and 7', '6,7,8,31') + hbx('the handbook prints "at least 250 cells/mm3"; BSG/BASL [31] prints ">250 cells/mm3", which is shown here.')},
+
+    /* ---------- p. 7: the nine regions, with the 3D map ---------- */
+    loc:{q:'Where is the pain?', fig:'abdo3d',
+      hint:'Anterior view: the patient\'s RIGHT is on the LEFT of the page. Schematic regions only. ' + HB_LOC + ' (Handbook p. 7)',
+      opts:HB_REGIONS.map((r, i) => [r[0], 'rg' + (i + 1)]).concat([['Diffuse pain','rgd']])},
+    rgd:{end:'neutral', title:'Diffuse pain', items:[
+      'Diffuse pain: consider gastroenteritis, obstruction, peritonitis, ischaemia, DKA and systemic infection.',
+      'Name a likely diagnosis, a dangerous alternative and an extra-abdominal mimic.'],
+      links:[hbl('sbo','Obstruction and perforation'),hbl('vas','Vascular and bleeding threats'),hbl('mim','Important mimics'),['#gastroenteritis','Ebook: gastroenteritis']],
+      gap:hbp(7, '6,10-12,14,15,17,18,20,26')},
+
+    /* ---------- pp. 8 to 10: tests, imaging, ultrasound ---------- */
+    inv:{q:'Which?', hint:'No universal "abdominal panel". Choose according to illness severity and working differential. (Handbook p. 8)',
+      opts:[['Tests: order to answer a question','tests'],['Imaging: match the scan to the threat','img'],['Focused ultrasound (POCUS)','pocus']]},
+    tests:{end:'neutral', title:'Order tests to answer a question', items:[
+      'Bedside glucose (metabolic problem?): Add blood ketones and VBG for diabetes, SGLT2 use, tachypnoea or unexplained illness. Near-normal glucose does not exclude DKA.',
+      'UPT / serum beta-hCG (could this be pregnancy?): Test when pregnancy is possible. If urine testing is negative but suspicion remains, consider serum testing. A single hCG value cannot locate a pregnancy.',
+      'ECG ± troponin (could this be ACS?): Use for plausible cardiac/epigastric presentations, especially with vascular risk, sweating, dyspnoea or shock; follow the serial ACS pathway.',
+      'FBC ± CRP: Anaemia, infection, platelets and trends. Normal inflammatory markers do not exclude early appendicitis or serious pathology; an initial Hb can underestimate acute blood loss.',
+      'Renal profile / LFT: Dehydration, AKI, electrolyte disturbance, cholestasis or hepatitis; guide treatment and contrast planning without delaying life-saving imaging.',
+      'Lipase: Order for compatible upper pain. Revised Atlanta diagnosis requires two of: typical pain, enzyme activity >3 times the upper limit, compatible imaging. [18,40]',
+      'VBG / lactate: Acidosis and hypoperfusion in an unwell patient. Normal lactate does not exclude early mesenteric ischaemia.',
+      'Urine / other tests: Urinalysis ± culture for urinary causes; blood cultures for sepsis; coagulation/crossmatch for bleeding. Paracentesis for suspected SBP; stool tests for selected diarrhoeal illness.',
+      'Interpret in context: pyuria can accompany nearby inflammation; haematuria neither proves nor excludes a stone. Never use one reassuring result as a discharge rule.'],
+      links:[hbl('img','Imaging'),['#abdominal-pain','Ebook: emergent tests (p. 10)'],['#blood-tests','Blood tests in the Green Zone']],
+      gap:hbp(8, '7-9,14,15,18,28,31') + hbx('the handbook prints "at least 3 times"; ACG 2024 [18] prints "greater than 3 times the upper limit of normal", which is shown here; [40] could not be read (a bot check on its page).')},
+    img:{end:'neutral', title:'Match the scan to the threat', items:[
+      'Tell radiology the suspected diagnosis and the question that needs answering.',
+      'Biliary / RUQ: Ultrasound first for suspected biliary disease. Caveat: equivocal scan with ongoing concern: further imaging and senior discussion.',
+      'Adult RLQ / diffuse serious pain: CT abdomen-pelvis, usually with IV contrast. Caveat: protocol depends on suspected pathology. Children/pregnancy often begin with US.',
+      'Mesenteric ischaemia / aortic emergency: Urgent CT angiography. Caveat: explicitly request the vascular protocol. Do not substitute routine non-contrast CT.',
+      'Suspected renal colic: Low-dose non-contrast CT in adults. Caveat: ultrasound first in pregnancy/children. Fever, AKI or atypical symptoms change urgency.',
+      'Early-pregnancy or pelvic cause: Pelvic US, usually TVUS when appropriate. Caveat: resuscitate and call O&G first if unstable; an indeterminate scan needs a follow-up plan.',
+      'Obstruction / perforation: CT if clinically appropriate and stable enough. Caveat: normal plain films do not exclude either; urgent surgical involvement can precede CT.',
+      'Pregnancy: protect the mother by making the diagnosis. Use US or MRI when they can answer the question promptly. Necessary CT should not be withheld when delay would be harmful. Discuss with the senior clinician and radiologist. [36]',
+      'If the patient is unstable: Bedside US may guide immediate treatment. Decide with the relevant specialty whether CT is safe and useful, or whether theatre/intervention/transfer is the priority. A scan queue must not become the management plan.'],
+      links:[hbl('pocus','Focused ultrasound'),['#xray-guide--ab','Abdominal film: when it is indicated']],
+      gap:hbp(9, '10-12,14,16,19,20,21,36')},
+    pocus:{end:'neutral', title:'POCUS answers focused questions', items:[
+      'Use only within your competence. Save findings, acknowledge limitations and seek definitive imaging when needed.',
+      'Aorta: Is the aorta aneurysmal? Examine its accessible length. POCUS can detect AAA; it cannot reliably exclude rupture or dissection. A non-diagnostic study is not negative.',
+      'Free fluid: Is there intraperitoneal fluid in a shocked patient? Interpret with pregnancy, trauma and other causes. No free fluid does not exclude retroperitoneal bleeding or an early ectopic.',
+      'Heart / lungs: Can cardiac dysfunction, pericardial fluid or pulmonary congestion help explain shock or limit further fluids? Integrate with perfusion and dynamic response.',
+      'Biliary / renal: Look for gallbladder abnormalities or hydronephrosis. Gallstones alone do not prove cholecystitis; absent hydronephrosis does not exclude a ureteric stone.',
+      'Pelvis: Can a definite intrauterine pregnancy be identified? An empty uterus or indeterminate view is not a location diagnosis. Suspected torsion still requires urgent O&G review.',
+      'Dengue: Look for pleural fluid, ascites and gallbladder wall oedema as adjuncts to plasma-leakage assessment. Combine with CCTVR, haematocrit and urine output. [4]',
+      'Write the limitation: Prefer "Aorta incompletely visualised; AAA not excluded" to "US normal". Do not rule out appendicitis, ischaemia or torsion from a generic negative bedside scan.'],
+      links:[['#dengue-cpg','Dengue CPG'],hbl('vas','AAA and bleeding')],
+      gap:hbp(10, '4,11,15,17,21,22,32,33')},
+
+    /* ---------- pp. 11 and 12: pain relief, antibiotics ---------- */
+    tx:{q:'Which?', opts:[['Pain relief: treat pain early, then reassess','pain'],['Antibiotics and source control','abx']]},
+    pain:{end:'neutral', title:'Treat pain early, then reassess', items:[
+      'Analgesia does not need to wait for a surgeon or a final diagnosis. Adult examples below.',
+      'Paracetamol: for the dose, use the HKL ebook\'s table (Pain management) or Analgesia by weight. Safety check: Use a lower/weight-based regimen for low body weight or hepatic risk; check previous doses. IV if oral route is unsuitable, per formulary.',
+      'Titrated IV morphine: MOH 2020 Appendix 2 uses 1 mg if age <60, or 0.5 mg if 60 or older, reassessed at 5-min intervals while severe pain persists. Safety check: Only with an approved monitored protocol. Recheck BP, respiration and sedation before each repeat. Reduce/seek alternatives in frailty, renal impairment or instability.',
+      'Department pathway: the HKL ebook\'s morphine protocol (Pain management) gives 1 mg at 60 years old or below and 0.5 mg above 60. At exactly 60 the two differ: follow the ebook; the difference is under Still to confirm.',
+      'IV fentanyl: MOH lists 25-50 micrograms as an initial alternative when morphine is unsuitable. Safety check: Titrate under local protocol; monitor airway, ventilation, sedation and BP. Do not confuse micrograms with milligrams.',
+      'Department pathway: the HKL ebook\'s table (Pain management) lists fentanyl IV/IM 50–100 mcg. The difference is under Still to confirm.',
+      'NSAID: First-line option for renal colic when safe; choose a locally approved preparation. Safety check: Avoid with AKI/dehydration, GI bleeding/ulcer risk, relevant allergy or pregnancy; avoid in suspected dengue.',
+      'Supportive care: Treat nausea when present; choose antiemetic by contraindications and local formulary. Use nil by mouth for likely surgery/obstruction; allow oral fluids when clinically appropriate. Consider NG decompression for significant obstructive vomiting/distension.',
+      'Reassess the diagnosis as well as the pain: Review pain, vital signs and examination after treatment. New sedation or respiratory depression requires immediate review. Pain relief alone cannot prove a benign cause. [25]'],
+      links:[['#pain','Ebook: pain management (pp. 45-51)'],['#calc-analgesia','Analgesia by weight'],['#renal-colic','Ebook: renal colic']],
+      gap:hbp(11, '1,4,16,25') + hbx('the paracetamol line ("Typical adult at least 50 kg: 1 g PO every 6 h as needed; maximum 4 g/24 h from all products"): MOH 2020 [1] prints 1 g 4-hourly prn (max 4 g/24 h) on its abdominal pain page and 6-hourly elsewhere, and RCEM [25] applies the 50 kg threshold to IV paracetamol only. Morphine 1 mg/0.5 mg, the 5-minute loop and fentanyl 25-50 micrograms were confirmed in MOH 2020 (printed pp. 20, 22 and 42).')},
+    abx:{end:'neutral', title:'Antibiotics are only part of treatment', items:[
+      'Choose the syndrome, assess severity, check allergy/renal function and plan source control.',
+      'Sepsis timing (2026 international guidance): Possible/probable/definite septic shock, or probable/definite sepsis without shock: start antimicrobials immediately, ideally within 1 hour. Possible sepsis without shock: rapid time-limited assessment, with antibiotics within 3 hours if concern persists. Collect cultures first when this will not meaningfully delay treatment. [9]',
+      'MOH NAG adult example, community biliary infection, without sepsis: Amoxicillin/clavulanate 1.2 g IV every 6 h.',
+      'MOH NAG adult example, biliary infection with sepsis / organ failure: Piperacillin/tazobactam 4.5 g IV every 6-8 h. NAG specifies 3-4 h infusion for q8h regimens and for cholangitis; follow local administration guidance.',
+      'MOH NAG adult example, complicated appendicitis/diverticulitis without sepsis: alternative: Ceftriaxone 2 g IV every 24 h PLUS metronidazole 500 mg IV every 8 h.',
+      'Prescribing boundary: Examples are for adults with usual organ function, not a universal abdominal-pain prescription. Confirm indication, loading/infusion method, renal adjustment, allergy, resistance risk and local availability. Check the live NAG; severe beta-lactam allergy needs an alternative plan. [2]',
+      'Resuscitate to response: Conditional SSC recommendation: at least 30 mL/kg crystalloid in the first 3 h for sepsis-induced hypoperfusion/shock. Individualise volume, monitor fluid tolerance and reassess frequently. Balanced crystalloid is preferred. [9]',
+      'Control the source: Drain an infected obstruction, remove/repair an infected or perforated focus, or obtain urgent surgical treatment. Call the team early; do not wait for antibiotics to solve a mechanical problem.'],
+      links:[['#gz-rules--ivab','IV antibiotics, no bed free'],hbl('up','Cholangitis'),hbl('app','Appendicitis and diverticulitis')],
+      gap:hbp(12, '2,9,17,20,30')},
+
+    /* ---------- pp. 13 to 20: by presentation ---------- */
+    pres:{q:'Which presentation?', opts:[
+      ['Focal lower pain: appendicitis and diverticulitis','app'],
+      ['Upper pain: biliary disease or pancreatitis','up'],
+      ['Obstruction, perforation and the groin','sbo'],
+      ['Vascular and bleeding threats','vas'],
+      ['Flank, urinary and scrotal pain','flk'],
+      ['Pregnancy and pelvic pain','preg'],
+      ['Dengue and tropical differentials','deng'],
+      ['Important mimics','mim']]},
+    app:{q:'Appendicitis or diverticulitis: which decision?',
+      info:['Appendicitis: Pain may migrate from central abdomen to the right lower quadrant, with anorexia or vomiting. Retrocaecal/pelvic positions and pregnancy can change the pattern. Diarrhoea or urinary findings do not exclude it.',
+        'Diverticulitis: Often left-sided pain and bowel change; right-sided disease also occurs. CT helps confirm the diagnosis and identify abscess, perforation or another cause.'],
+      hint:'Use clinical evolution, risk assessment and imaging together. (Handbook p. 13)',
+      opts:[['Peritonism, shock or organ dysfunction','ap1'],['Stable but focal persistent pain','ap2'],['Risk score used','ap3'],['Uncomplicated disease confirmed','ap4']]},
+    ap1:{end:'admit', title:'Immediate senior/surgical review', items:['Immediate senior/surgical review; resuscitation, nil by mouth and antibiotics when indicated.'],
+      links:[hbl('abx','Antibiotics and source control'),hbl('stab','Stabilise first')], gap:hbp(13, '2,7,12,13,26')},
+    ap2:{end:'refer', title:'Local imaging pathway and surgical input', items:['Use the local imaging pathway and obtain surgical input. Do not discharge on a normal WBC/CRP alone.',
+      'Avoid the "low score = safe" shortcut: Escalate persistent localised tenderness, worsening symptoms, uncertain imaging, frailty or immunosuppression.'],
+      links:[hbl('img','Imaging'),['#abdominal-pain','Ebook: abdominal pain, with the department notes']], gap:hbp(13, '2,7,12,13,26')},
+    ap3:{end:'neutral', title:'A score supports, it does not decide', items:['AIR/AAS or another locally adopted score can support appendicitis risk stratification; it does not replace judgement or imaging in an atypical/high-risk patient.',
+      'Avoid the "low score = safe" shortcut: Escalate persistent localised tenderness, worsening symptoms, uncertain imaging, frailty or immunosuppression. Non-operative treatment is a selected management pathway with explicit follow-up, not a default ED discharge decision.'],
+      gap:hbp(13, '2,7,12,13,26')},
+    ap4:{end:'neutral', title:'Uncomplicated disease confirmed', items:['Selected appendicitis patients may receive antibiotics under a surgical plan.',
+      'For diverticulitis, no-antibiotic care is for selected low-risk immunocompetent patients without systemic inflammation. MOH NAG favours antibiotics with systemic signs, older age, significant comorbidity or immunocompromise; ensure follow-up. [2,26]',
+      'Non-operative treatment is a selected management pathway with explicit follow-up, not a default ED discharge decision.'],
+      gap:hbp(13, '2,7,12,13,26')},
+    up:{end:'neutral', title:'Biliary disease or pancreatitis?', items:[
+      'Epigastric pain still needs consideration of ACS, perforation and vascular causes.',
+      'Biliary colic: Episodic pain that settles, without systemic illness: analgesia, US and follow-up.',
+      'Cholecystitis: Persistent RUQ pain/tenderness ± fever: US, bloods, surgical review and indicated antibiotics.',
+      'Cholangitis: Systemic illness with biliary obstruction/cholestasis: resuscitate, antibiotics and urgent drainage review. The full triad may be absent.',
+      'Pancreatitis, two of three: Revised Atlanta criteria: compatible pain; lipase/amylase >3 times the upper limit; characteristic imaging. Typical pain plus a qualifying enzyme rise usually makes immediate diagnostic CT unnecessary. [18,40]',
+      'Initial pancreatitis care: Analgesia; moderate, reassessed crystalloid therapy, preferably lactated Ringer solution; assess organ dysfunction and biliary cause. Begin oral feeding early as tolerated in mild disease. [18,39]',
+      'When to escalate: Shock, hypoxia, oliguria or other organ failure needs higher-level care. CT if diagnosis is unclear or failure to improve after 48-72 h. No routine prophylactic antibiotics for sterile pancreatitis. [18,39]',
+      'Cholangitis: moderate/severe disease needs early/urgent drainage; mild disease failing initial treatment also needs drainage review. Pancreatitis with cholangitis needs an urgent ERCP pathway, usually within 24 h. [30,39]'],
+      links:[['#biliary','Ebook: biliary colic'],hbl('abx','Biliary antibiotics (NAG)'),['#acs','Ebook: ACS']],
+      gap:hbp(14, '2,11,18,30,39') + hbx('the handbook prints "at least 3 times"; ACG 2024 [18] prints "greater than 3 times the upper limit of normal", which is shown here; [40] could not be read.')},
+    sbo:{end:'neutral', title:'Obstruction and perforation', items:[
+      'Do not wait for every textbook sign before referring.',
+      'Suspect obstruction: Colicky pain, vomiting, distension and reduced stool/flatus. Ask about surgery, hernia and cancer. Early or partial obstruction may still allow stool or diarrhoea.',
+      'Suspect perforation: Sudden severe pain, pain with movement, guarding/rigidity or sepsis. Signs may be modest in older people or those taking steroids.',
+      'Obstruction, initial package: Nil by mouth, IV fluid/electrolyte replacement, analgesia and surgical review. Consider NG decompression for vomiting/distension and aspiration risk. CT helps find the transition point, cause and complications. [19]',
+      'Strangulation / ischaemia, call now: Continuous or worsening pain, peritonism, shock, fever, metabolic acidosis or concerning CT findings are red flags. Peritonitis, strangulation or ischaemia make routine conservative observation unsafe. [19]',
+      'Perforation, CT when appropriate; source control early: Start resuscitation and broad-spectrum IV antibiotics; urgent surgical review. If CT is not promptly available, chest/abdominal radiography may show free air, but a normal film cannot exclude perforation. [20]',
+      'Do not miss the groin: An acutely painful irreducible hernia needs urgent surgical review. Do not attempt reduction when strangulation/bowel ischaemia is suspected: arrange emergency surgery. Reduction in suitable cases without these features requires an experienced clinician and observation afterwards. [41]'],
+      links:[hbl('abx','Antibiotics and source control'),['#xray-guide--ab','Abdominal film']],
+      gap:hbp(15, '8,19,20')},
+    vas:{end:'neutral', title:'Vascular and bleeding threats: think beyond inflammation', items:[
+      'These diagnoses can deteriorate before laboratory abnormalities become obvious.',
+      'Abdominal aortic aneurysm: New abdominal/back/flank pain with collapse or syncope, especially with vascular risk: consider symptomatic or ruptured AAA. Obtain bedside aortic US and contact vascular surgery immediately if AAA is found or suspicion persists despite an unavailable/non-diagnostic scan. CTA only if clinically appropriate; avoid delaying definitive care. [21]',
+      'Acute mesenteric ischaemia: Disproportionately severe pain, AF, atherosclerosis or low-flow states raise suspicion. Later peritonitis suggests advanced injury. Request urgent CTA and surgical/vascular input; normal lactate cannot exclude early disease. Do not delay CTA solely to await renal tests when ischaemia is suspected. [14]',
+      'Major GI bleeding: Haematemesis, melena or brisk rectal bleeding may accompany pain. Assess perfusion, anticoagulants and liver disease; obtain IV access, crossmatch and activate the bleeding pathway when needed. Severe unstable upper GI bleeding requires endoscopy immediately after resuscitation. [34]',
+      'Senior decision required: Bleeding resuscitation and blood pressure targets depend on the cause. Suspected ruptured AAA may use a restrictive resuscitation strategy while definitive treatment is arranged. [21]',
+      'Do not reassure yourself: A normal early Hb, temporary pain relief or a soft abdomen cannot independently exclude a major bleed or bowel ischaemia. Recheck physiology and the clinical story.'],
+      links:[hbl('pocus','POCUS: the aorta'),hbl('isbar','ISBAR: suspected mesenteric ischaemia')],
+      gap:hbp(16, '14,20,21,32,34')},
+    flk:{q:'Flank, urinary or scrotal pain: which presentation?',
+      hint:'A stone plus infection is an emergency. Separate uncomplicated colic from sepsis, threatened renal function and alternative diagnoses. (Handbook p. 17)',
+      opts:[['Typical colic, no red flags','fk1'],['Fever/sepsis with urinary obstruction','fk2'],['Anuria / obstruction threatening renal function','fk3'],['Uncontrolled pain or vomiting','fk4'],['Older patient with first "renal colic"','fk5'],['Lower abdominal or scrotal pain in a boy or young man','fk6']]},
+    fk1:{end:'neutral', title:'Typical colic, no red flags', items:['Analgesia: NSAID if safe. NICE recommends low-dose non-contrast CT within 24 h in adults; US first in pregnancy/children. Adapt to local imaging access. [16]',
+      'Department pathway: the HKL ebook (Renal colic, pp. 53-54) uses POCUS for hydronephrosis, an urgent KUB ultrasound by the radiology team, and an early TCA for KUB ultrasound at discharge. Follow the ebook; the difference is under Still to confirm.',
+      'Before discharging colic: Confirm stable observations, controlled symptoms, adequate oral intake and urine output, and a clear imaging/follow-up plan. Fever, rigors, anuria, worsening pain or persistent vomiting require urgent return.'],
+      links:[['#renal-colic','Ebook: renal colic'],hbl('pain','Pain relief')], gap:hbp(17, '16,17,21,24,42')},
+    fk2:{end:'admit', title:'Infected obstruction: an emergency', items:['Cultures and immediate IV antibiotics; urgent urology and drainage. Sepsis with an obstructing stone requires urgent decompression by stent or nephrostomy. Delay definitive stone treatment until sepsis resolves. [17]'],
+      links:[hbl('abx','Sepsis timing')], gap:hbp(17, '16,17,21,24,42')},
+    fk3:{end:'refer', title:'Obstruction threatening renal function', items:['Immediate senior/urology review for obstructed solitary kidney, bilateral obstruction or complications of obstruction-related AKI; arrange urgent drainage as indicated. [17,42]'],
+      gap:hbp(17, '16,17,21,24,42') + hbx('"Anuria alone is not an indication for antibiotics: assess for infection": EAU [17] places "start antibiotics immediately" under the management of sepsis and anuria together, so the line is not shown.')},
+    fk4:{end:'refer', title:'Uncontrolled pain or vomiting', items:['Urgent reassessment and urology input; consider admission/intervention if symptoms remain uncontrolled.'],
+      gap:hbp(17, '16,17,21,24,42')},
+    fk5:{end:'neutral', title:'Older patient with a first "renal colic"', items:['Consider AAA and other vascular/abdominal causes before committing to the stone pathway. [21]'],
+      links:[hbl('vas','AAA'),hbl('pocus','POCUS: the aorta')], gap:hbp(17, '16,17,21,24,42')},
+    fk6:{end:'refer', title:'Testicular torsion can present as lower abdominal pain', items:['Ask about and examine the scrotum when relevant, particularly in boys/young men. Sudden pain, nausea/vomiting or an abnormal testicular lie requires urgent surgical/urology review. Do not wait for ultrasound when clinical suspicion is high. [24]'],
+      links:[['#scrotal-pain','Ebook: scrotal pain']], gap:hbp(17, '16,17,21,24,42')},
+    preg:{q:'Pregnancy possible: unstable, significant bleeding or peritonism?',
+      hint:'First establish pregnancy possibility. Pain can precede vaginal bleeding. Atypical symptoms do not exclude ectopic pregnancy. (Handbook p. 18)',
+      opts:[['Yes','pg0'],['No: stable patient','pgq'],['Later pregnancy or postpartum','pg6']]},
+    pg0:{end:'admit', title:'Resuscitate, crossmatch and call O&G immediately', items:['Resuscitate, crossmatch and call O&G immediately. Consider ruptured ectopic or another haemorrhagic cause. Bedside imaging must not delay definitive care. [3]'],
+      gap:hbp(18, '3,15,22,36,37')},
+    pgq:{q:'Stable patient: which situation?', opts:[['Pregnancy possible','pg1'],['Positive test; no pregnancy located on TVUS','pg2'],['Follow-up for unknown location','pg3'],['Sudden unilateral pelvic pain ± vomiting','pg4'],['Pelvic pain with discharge / cervical or adnexal tenderness','pg5']]},
+    pg1:{end:'neutral', title:'Pregnancy possible', items:['UPT; serum beta-hCG if needed. Pelvic US/TVUS with consent and expertise. Assess uterus and adnexae: an intrauterine pregnancy does not exclude a coexisting heterotopic pregnancy. [15]'],
+      links:[['#abdominal-pain','Ebook: abdominal pain, with the department notes']], gap:hbp(18, '3,15,22,36,37')},
+    pg2:{end:'refer', title:'Pregnancy of unknown location', items:['Treat as pregnancy of unknown location. Ectopic remains possible until resolved. Symptoms override hCG trends; a single hCG value cannot establish location.'],
+      links:[hbl('pg3','Follow-up for unknown location')], gap:hbp(18, '3,15,22,36,37')},
+    pg3:{end:'refer', title:'Follow-up for unknown location', items:['O&G-led plan: two hCG tests near 48 h apart, not earlier, with repeat US as indicated. Give written 24-hour access/return instructions; worsening symptoms need immediate review, without waiting for repeat hCG. [15]'],
+      gap:hbp(18, '3,15,22,36,37')},
+    pg4:{end:'refer', title:'Consider adnexal torsion', items:['Consider adnexal torsion even with preserved Doppler flow. Urgent O&G assessment; imaging alone cannot safely settle a strong clinical suspicion. [22]'],
+      gap:hbp(18, '3,15,22,36,37')},
+    pg5:{end:'neutral', title:'Consider PID after dangerous alternatives', items:['Consider PID after dangerous alternatives. Obtain relevant STI tests; treat under local guidance. Severe illness, abscess, pregnancy or uncertain surgical diagnosis favours admission. [37]'],
+      gap:hbp(18, '3,15,22,36,37')},
+    pg6:{end:'refer', title:'Later pregnancy / postpartum', items:['Consider abruption, labour, uterine complications and pre-eclampsia/HELLP (especially RUQ/epigastric pain with hypertension). Seek early obstetric assessment and continue to evaluate non-obstetric causes. [3]'],
+      gap:hbp(18, '3,15,22,36,37')},
+    deng:{end:'neutral', title:'Dengue and tropical differentials', items:[
+      'A falling fever does not necessarily mean recovery.',
+      'Dengue + abdominal pain = reassess severity: In a compatible febrile illness, intense abdominal pain/tenderness or persistent vomiting is a warning feature. Look for worsening condition as fever settles, bleeding, fluid accumulation, oliguria and altered behaviour. Assess for admission and escalate promptly. [4]',
+      'CCTVR: Colour, Capillary refill, skin Temperature, pulse Volume, pulse Rate.',
+      'Assess and trend: CCTVR plus BP/pulse pressure, breathing, mental state and urine output. Check FBC/haematocrit, dengue rapid testing and glucose; add organ-function/coagulation/gas tests in severe illness. [4]',
+      'Use the dengue pathway: POCUS can support assessment of leakage and fluid tolerance. Fluids must follow phase, perfusion and response. Avoid NSAIDs. Do not use a generic sepsis fluid volume as a dengue prescription. [4]',
+      'Leptospirosis, ask about exposure: Floodwater, freshwater recreation or contaminated environments with a febrile systemic illness should prompt consideration. Check for renal, hepatic and respiratory involvement; follow the MOH tropical-infection pathway and seek senior/medical review. [29]',
+      'Avoid anchoring: a positive dengue test does not exclude appendicitis, cholangitis, ectopic pregnancy or another surgical problem. Persistent focal peritonism still needs the appropriate assessment.'],
+      links:[['#dengue-cpg','Dengue CPG: triage and fluids'],['#calc-dassess','Dengue one-screen assessment'],['#infection-alerts','Infection alerts']],
+      gap:hbp(19, '4,29')},
+    mim:{q:'Look above, below and outside the gut: which clue?',
+      hint:'Abdominal pain can be the presenting symptom of a systemic emergency. If pain persists after correcting a metabolic abnormality: re-examine and investigate a coexisting abdominal cause. A medical diagnosis and a surgical diagnosis can coexist. [28] (Handbook p. 20)',
+      opts:[['Epigastric discomfort, diaphoresis, dyspnoea, vascular risk','mi1'],['Pleuritic symptoms, hypoxia, cough or fever','mi2'],['Diabetes/SGLT2 use, vomiting, tachypnoea, dehydration','mi3'],['Steroid dependence, hypotension, vomiting, electrolyte disturbance','mi4'],['Cirrhosis with ascites and acute deterioration','mi5'],['Dermatomal pain/rash or pain linked to movement','mi6'],['Diarrhoea','mi7']]},
+    mi1:{end:'neutral', title:'ACS', items:['ACS: ECG early and serial testing according to clinical risk. Do not let an antacid response rule it out.'], links:[['#acs','Ebook: ACS'],['#acs-cpg','ACS CPG']], gap:hbp(20, '5,7,8,27,28,31,38')},
+    mi2:{end:'neutral', title:'Pneumonia or pulmonary embolism', items:['Lower-lobe pneumonia; pulmonary embolism when clinically plausible. Examine the chest and use the relevant risk pathway.'], links:[['#pneumonia','Ebook: pneumonia'],['#vte-cpg','VTE CPG']], gap:hbp(20, '5,7,8,27,28,31,38')},
+    mi3:{end:'neutral', title:'DKA, including euglycaemic DKA', items:['DKA: blood ketones, glucose, VBG/electrolytes. Euglycaemic DKA can occur. Treat by the DKA pathway and look for a precipitant.'], links:[['#hyperglycaemia','Ebook: hyperglycaemia'],['#t2dm-cpg','T2DM CPG']], gap:hbp(20, '5,7,8,27,28,31,38')},
+    mi4:{end:'admit', title:'Consider adrenal crisis', items:['Consider adrenal crisis; obtain senior input and begin the emergency steroid/resuscitation pathway without waiting for test results. [38]'], gap:hbp(20, '5,7,8,27,28,31,38')},
+    mi5:{end:'neutral', title:'Spontaneous bacterial peritonitis', items:['SBP: prompt diagnostic paracentesis and medical review; pain/fever may be limited.', 'Cirrhosis + ascites + acute illness: an ascitic neutrophil count >250 cells/mm3 supports treatment. [31] (p. 6)'], gap:hbp('20 and 6', '31') + hbx('the handbook prints "at least 250"; BSG/BASL [31] prints ">250 cells/mm3", which is shown here.')},
+    mi6:{end:'neutral', title:'Zoster or abdominal-wall pain', items:['Zoster or abdominal-wall pain may explain symptoms, but first assess for urgent intra-abdominal causes.'], gap:hbp(20, '5,7,8,27,28,31,38')},
+    mi7:{end:'neutral', title:'Diarrhoea does not guarantee gastroenteritis', items:['Consider appendicitis, ischaemia, inflammatory colitis and drug-related illness. Uncomplicated watery diarrhoea usually needs rehydration rather than antibiotics. Fever, blood, severe tenderness, sepsis or immunocompromise can justify stool testing and a broader work-up. [27]'], links:[['#gastroenteritis','Ebook: gastroenteritis']], gap:hbp(20, '27')},
+
+    /* ---------- p. 21: extra caution ---------- */
+    caut:{q:'Patients who need extra caution: which?', hint:'A mild-looking examination can coexist with serious disease. (Handbook p. 21)',
+      opts:[['Older people / frailty','ca1'],['Immunocompromised','ca2'],['Pregnancy','ca3'],['Recent surgery / procedure','ca4'],['Children','ca5']]},
+    ca1:{end:'neutral', title:'Older people / frailty', items:['Look for vague symptoms, confusion, falls, reduced intake and functional decline. Seek collateral history. Lower the threshold for senior review, CT and admission when serious pathology remains possible.'], gap:hbp(21, '3,8,22-24,26,36')},
+    ca2:{end:'neutral', title:'Immunocompromised', items:['Steroids, chemotherapy or transplant treatment may blunt fever and peritonism. Consider neutropenic infection/enterocolitis; escalate promptly and follow the neutropenic sepsis pathway.'], gap:hbp(21, '3,8,22-24,26,36')},
+    ca3:{end:'neutral', title:'Pregnancy', items:['Changed anatomy and physiology alter presentation. Consider obstetric and non-obstetric causes together. Early O&G involvement and appropriate imaging protect both mother and fetus. [3,36]'], links:[hbl('preg','Pregnancy and pelvic pain')], gap:hbp(21, '3,36')},
+    ca4:{end:'neutral', title:'Recent surgery / procedure', items:['Consider leak, obstruction, bleeding, abscess or a procedure complication. Contact the relevant surgical team early; establish the operation and date.'], gap:hbp(21, '3,8,22-24,26,36')},
+    ca5:{end:'refer', title:'Children: use a paediatric pathway', items:['Bilious vomiting, distension, shock, peritonism, episodic severe pain with lethargy, or scrotal symptoms require urgent review. Think malrotation/volvulus, intussusception, appendicitis and torsion. Young children may present atypically; repeated examination is valuable. [23,24]',
+      'Practical paediatric rules: Use weight-based medicines/fluids, age-adjusted vital signs and paediatric/surgical advice. Most well children do not need a broad test panel. Ultrasound is often first-line when imaging is indicated. Adult drug doses in this handbook do not apply. [23]'],
+      links:[['#children','Children in the Green Zone'],['#scrotal-pain','Ebook: scrotal pain']], gap:hbp(21, '23,24')},
+
+    /* ---------- pp. 22 and 23: disposition, handover, the Malay script ---------- */
+    disp:{q:'Which?', opts:[['Where does the patient go?','reas'],['Handover: ISBAR','isbar'],['The minimum record','rec'],['Malay discharge script','script']]},
+    isbar:{end:'neutral', title:'ISBAR example: suspected mesenteric ischaemia', items:[
+      'I / S: "I am the ED MO. This patient needs urgent review for possible mesenteric ischaemia."',
+      'B: "Older adult with AF; severe diffuse pain started suddenly. No previous similar episode."',
+      'A: "BP is currently maintained, but pain is severe despite little tenderness. I am concerned despite a normal initial lactate. Monitoring and analgesia have started."',
+      'R: "Please review urgently. I am discussing CTA with radiology. If deterioration occurs, we will move to resuscitation. Who will review, and by when?"'],
+      links:[['#handover','Handing over (TAG Warrior Course)'],['#communication','Communication on shift']],
+      gap:hbp(23, '7,8,15')},
+    rec:{end:'neutral', title:'Minimum record', items:['Time/onset and key negatives; risk factors; complete observations and examination; pregnancy assessment; working differential; tests and results; treatment/dose/response; senior/specialty discussions; reassessment; disposition and follow-up ownership.'],
+      gap:hbp(23, '7,8,15')},
+    script:{end:'neutral', title:'Malay discharge script: adapt to the patient', items:HB_SCRIPT.concat(['Document understanding, language/interpreter needs, transport and the agreed review arrangement. This script is a teaching template, not an official MOH patient leaflet.']),
+      links:[['#interpreter','Medical interpreters']],
+      gap:'Handbook p. 23. Fill in the review date, time and place. The Malay script tab below holds it to copy, and reads it aloud in Bahasa Melayu (all but the review line, which you fill in). 999 is the emergency number the ebook names in its mild head injury discharge criteria; the handbook cites no source for it.'},
+
+    /* ---------- p. 24: six short cases ---------- */
+    cases:{q:'Pick a case', hint:'Pause before reading the answer. Ask: what is dangerous, what is next, and what could falsely reassure me? Four questions to ask on every shift: Did I identify the dangerous alternative? Did I treat symptoms promptly? Did I repeat the examination and observations? Does someone clearly own the next step? (Handbook p. 24)',
+      opts:[['1 | AF, severe pain, soft abdomen','cs1'],['2 | Pregnancy test positive, empty uterus','cs2'],['3 | "Renal colic" with fever','cs3'],['4 | Fever settles, abdominal pain worsens','cs4'],['5 | SGLT2 drug, vomiting, normal-ish glucose','cs5'],['6 | Boy with lower abdominal pain','cs6']]},
+    cs1:{q:'A 74-year-old has abrupt diffuse pain; lactate is normal.', hint:'What is dangerous, what is next, and what could falsely reassure you?', opts:[['Show the answer','cs1a']]},
+    cs2:{q:'A stable patient has pelvic pain and no pregnancy located on TVUS.', hint:'What is dangerous, what is next, and what could falsely reassure you?', opts:[['Show the answer','cs2a']]},
+    cs3:{q:'A patient has flank pain, fever and obstructed collecting system.', hint:'What is dangerous, what is next, and what could falsely reassure you?', opts:[['Show the answer','cs3a']]},
+    cs4:{q:'Suspected dengue with vomiting, cold extremities and reduced urine.', hint:'What is dangerous, what is next, and what could falsely reassure you?', opts:[['Show the answer','cs4a']]},
+    cs5:{q:'Abdominal pain and deep breathing occur during an acute illness.', hint:'An SGLT2 drug, vomiting, normal-ish glucose. What is dangerous, what is next, and what could falsely reassure you?', opts:[['Show the answer','cs5a']]},
+    cs6:{q:'Sudden pain and vomiting, no obvious abdominal diagnosis.', hint:'A boy with lower abdominal pain. What is dangerous, what is next, and what could falsely reassure you?', opts:[['Show the answer','cs6a']]},
+    cs1a:{end:'neutral', title:'Urgent senior review and CTA', items:['Next: urgent senior review and CTA for possible mesenteric ischaemia. Normal lactate does not clear it. [14]'], links:[hbl('cs2','Next case'),hbl('vas','Vascular threats')], gap:hbp(24, '14')},
+    cs2a:{end:'neutral', title:'O&G-led pregnancy-of-unknown-location plan', items:['Next: O&G-led pregnancy-of-unknown-location plan. A single hCG or empty uterus cannot exclude ectopic. [15]'], links:[hbl('cs3','Next case'),hbl('pg2','Pregnancy of unknown location')], gap:hbp(24, '15')},
+    cs3a:{end:'neutral', title:'Cultures, IV antibiotics and urgent urology/drainage', items:['Next: cultures, IV antibiotics and urgent urology/drainage. Sepsis with obstruction requires urgent decompression. [17]'], links:[hbl('cs4','Next case'),hbl('fk2','Infected obstruction')], gap:hbp(24, '17')},
+    cs4a:{end:'neutral', title:'Assess perfusion and severe dengue; escalate', items:['Next: assess perfusion/CCTVR and severe dengue; escalate and use the dengue fluid pathway. [4]'], links:[hbl('cs5','Next case'),['#dengue-cpg','Dengue CPG']], gap:hbp(24, '4')},
+    cs5a:{end:'neutral', title:'Blood ketones and VBG', items:['Next: blood ketones and VBG; consider euglycaemic DKA and a coexisting trigger. [28]'], links:[hbl('cs6','Next case'),hbl('mi3','DKA')], gap:hbp(24, '28')},
+    cs6a:{end:'neutral', title:'Assess the testes', items:['Next: assess testes; suspected torsion requires urgent surgical review without waiting for ultrasound. [24]',
+      'Four questions to ask on every shift: Did I identify the dangerous alternative? Did I treat symptoms promptly? Did I repeat the examination and observations? Does someone clearly own the next step?'],
+      links:[hbl('cases','All six cases'),hbl('fk6','Testicular torsion')], gap:hbp(24, '24')}
+  },
+  notes:[
+    {l:'Quick reference', notes:[
+      {h:'The checks that prevent a miss', src:'Quick reference, back page (p. 2). Adult non-traumatic abdominal pain. Use with the full handbook and local departmental pathways.', table:{head:['Trigger','Immediate thought / action'], rows:HB_TRIG}},
+      {h:'Before discharge', src:'Quick reference, back page (p. 2)', items:['Repeat observations and examination. Check that dangerous causes have been reasonably excluded, symptoms are controlled, oral intake is adequate and follow-up is feasible. Give written return advice; assign ownership of pending results.']},
+      {h:'Selected original sources', src:'Quick reference, back page (p. 2); the full bibliography is in the Sources tab', items:['MOH National Antimicrobial Guideline', 'MOH adult dengue CPG, 4th ed. 2026', 'WSES mesenteric ischaemia', 'EAU urolithiasis', 'NICE ectopic pregnancy', 'Teaching aid, not an official MOH/HKL protocol. Source-checked revision 2, 12 November 2026. Adult doses, special populations and detailed caveats are in the handbook.']}]},
+    {l:'Sources', notes:[
+      {h:'Scope and use', src:'Handbook p. 1', items:['Primarily adults with acute non-traumatic abdominal pain. Children and pregnancy have dedicated cautions. This is an educational synthesis, not an official MOH/HKL protocol. Apply local triage, formulary, referral and imaging pathways; involve your senior when risk or uncertainty persists.', 'Source-checked revision 2: 12 November 2026. This review is not independent clinical peer review. Original schematic graphics; no patient images. References support recommendations; checklists and cases are teaching aids.', 'Malaysian context: Uses MOH guidance for pain care, antimicrobials, obstetrics and the 2026 fourth-edition adult dengue CPG, supported by international specialty guidance. English clinical notes include a Malay discharge script.']},
+      {h:'Evidence and further reading', src:'Handbook pp. 25 to 29: numbered references throughout the handbook, rechecked 12 November 2026', items:['Targeted review of official Malaysian publications and international specialty guidelines. This is not a systematic review.', 'Algorithms are an educational synthesis; local capability and approved protocols determine implementation.'], refs:HB_REFS},
+      {h:'How to keep the notes current', src:'Handbook p. 29', items:['Recheck live MOH NAG recommendations before prescribing. Update the dengue, obstetric and local referral pathways when your department adopts a revised version. This synthesis is not an endorsement by any cited organisation.']}]}
+  ],
+  /* The Malay script tab, read aloud (READ['abdo-script-ms']) */
+  script:{h:'Malay discharge script: adapt to the patient', read:'abdo-script-ms', lines:HB_SCRIPT,
+    note:'Handbook p. 23. Fill in the review date, time and place before you give it. Document understanding, language/interpreter needs, transport and the agreed review arrangement. This script is a teaching template, not an official MOH patient leaflet.'},
+  /* Printed pages: the handbook's own pages, and the quick reference's back page (its front page is handbook p. 2) */
+  pages:{dir:'abdo', name:'Handbook', list:Array.from({length:29}, (_, i) => ['p' + String(i + 1).padStart(2, '0'), 'p. ' + (i + 1)]).concat([['q02', 'Quick reference, back']]),
+    pdf:[['https://drive.google.com/file/d/137AMrXJFdi7xS4lUv2kQbmv5wsnQtkyS/view', 'Full handbook (PDF)'], ['https://drive.google.com/file/d/19MXO-Ez-MImg0pMi9RO8ydA3Y74spVsF/view', 'Quick reference (PDF)']]},
+  see:[['#abdominal-pain','HKL ebook: Abdominal pain (pp. 10-11)'],['#renal-colic','Ebook: renal colic'],['#biliary','Ebook: biliary colic'],['#gastroenteritis','Ebook: gastroenteritis'],['#scrotal-pain','Ebook: scrotal pain'],['#pain','Ebook: pain management'],['#dengue-cpg','Dengue CPG']]
+};
+/* The trigger outcomes of the quick reference */
+HB_TRIG.forEach((t, i) => { P['abdo-handbook'].nodes['tg' + (i + 1)] = {end:'neutral', title:t[0], items:[t[1]], links:[hbl('trig','Another trigger'),hbl('sev','The bedside pathway')], gap:HB_QR_GAP + (i === 5 ? hbx('"Antibiotics only when infection is suspected": EAU [17] places "start antibiotics immediately" under sepsis and anuria together.') : '')}; });
+/* The region outcomes of p. 7 */
+HB_REGIONS.forEach((r, i) => { P['abdo-handbook'].nodes['rg' + (i + 1)] = {end:'neutral', title:r[0], items:r[1].concat([HB_LOC, 'Name a likely diagnosis, a dangerous alternative and an extra-abdominal mimic.']), links:r[2].map(l => hbl(l[0], l[1])), gap:hbp(7, '6,10-12,14,15,17,18,20,26')}; });
+/* The ebook's pathway points to the handbook; the ebook stays the department's pathway (rule 5) */
+if (P['abdominal-pain']) P['abdominal-pain'].see = (P['abdominal-pain'].see || []).concat([['#abdo-handbook','Visual handbook: abdominal pain in the ED (teaching)']]);
+
+/* ================= The 3D abdomen map: region outlines per turntable frame, generated by src/abdo3d.js (do not edit by hand) =================
+   25 frames from yaw -36 to +36 degrees (3 degrees a step; positive turns toward the patient's left); frame 12 is the front view, where the
+   patient's right is on the screen's left. Each frame: [yaw, [region 1 outline, ..., region 9 outline]] in 720 x 900 image pixels. */
+const A3D = {"w":720,"h":900,"front":12,"frames":[[-36,["311,193 372,194 380,251 374,313 358,368 297,371 233,370 220,315 224,252 245,194","458,194 503,196 505,250 499,308 487,360 443,365 394,366 384,312 390,251 408,195","561,196 577,198 567,247 557,302 551,350 541,355 512,358 507,308 512,249 529,196","297,382 358,381 372,435 373,496 361,551 302,556 238,556 221,500 219,437 233,383","443,375 487,373 495,424 496,481 487,533 443,541 395,547 383,495 382,435 394,380","541,366 550,362 548,408 555,461 561,511 544,521 513,529 503,480 503,423 512,370","303,568 361,564 377,616 379,676 366,731 308,739 246,741 230,687 227,625 239,570","443,552 487,546 498,595 500,651 490,704 447,715 400,724 389,674 386,615 396,560","545,531 562,522 566,568 570,621 567,671 548,685 516,697 507,650 505,593 513,541"]],[-33,["300,193 362,194 370,251 366,313 349,368 287,371 224,370 210,314 214,251 233,194","451,194 498,196 502,250 496,308 483,361 437,365 386,367 376,313 381,251 399,195","561,196 580,197 571,247 561,302 555,351 542,356 510,359 504,308 509,249 526,196","287,382 349,381 363,435 365,496 352,551 292,556 228,555 212,498 210,436 223,382","437,376 483,374 492,425 493,482 483,535 437,542 387,547 375,495 374,435 386,380","542,366 554,363 553,409 559,462 564,513 545,523 511,530 500,481 500,423 510,371","293,567 352,564 368,616 370,676 356,731 298,738 235,739 220,685 217,623 229,568","438,553 484,547 495,597 497,653 486,706 441,717 391,725 380,674 378,615 388,560","545,533 565,524 570,570 573,624 570,674 548,688 513,699 504,652 503,595 511,542"]],[-30,["288,193 352,194 361,251 357,313 340,368 278,370 215,369 202,314 204,251 222,194","444,194 493,196 498,250 492,309 479,361 431,365 378,367 367,313 372,251 390,195","560,196 582,197 575,248 565,303 558,352 542,357 508,360 501,309 506,250 523,196","278,382 340,381 355,435 356,496 343,551 282,555 219,554 203,497 202,435 215,382","431,376 479,374 489,425 489,483 479,536 431,543 379,547 366,495 365,435 378,380","542,367 557,363 557,410 563,464 567,515 545,525 508,532 497,482 497,424 507,372","283,566 343,564 359,616 361,676 347,731 288,737 225,737 210,683 207,621 219,567","431,554 479,549 491,598 493,655 482,708 434,718 383,725 371,675 369,615 380,561","545,535 568,526 574,572 576,626 572,677 547,691 510,702 501,654 499,597 508,544"]],[-27,["278,193 341,194 352,251 348,313 332,368 269,370 207,368 193,313 195,251 212,194","436,194 488,196 493,250 488,309 475,362 424,366 370,367 359,313 363,251 380,195","559,195 584,197 578,248 568,303 561,353 542,358 505,360 497,309 502,250 519,196","268,381 331,381 346,435 347,496 334,551 273,554 210,552 195,496 195,434 207,381","424,377 475,375 485,426 485,484 475,537 425,544 371,547 358,495 357,435 370,380","542,368 560,364 560,411 566,466 569,517 545,527 505,533 494,483 494,425 505,373","273,565 334,563 350,616 352,676 338,730 278,736 215,735 200,681 198,619 210,565","425,554 475,550 487,600 488,657 477,710 428,719 375,726 362,675 361,615 372,561","545,537 570,528 577,575 579,629 574,680 547,694 507,704 497,656 496,598 505,545"]],[-24,["267,193 331,194 342,251 339,313 323,368 260,370 199,367 186,313 186,251 202,194","428,194 482,195 488,250 484,309 470,362 418,366 362,367 350,313 353,251 371,195","557,195 586,197 580,248 571,304 563,354 541,359 502,361 493,309 497,250 514,196","260,381 323,381 338,435 339,496 325,550 263,553 201,550 188,494 188,433 199,380","418,377 470,376 481,427 481,485 470,538 418,544 363,548 350,495 349,435 362,380","541,369 562,365 563,412 569,467 571,519 544,529 501,535 490,485 490,426 501,373","264,564 325,563 341,616 343,676 329,730 268,734 206,732 191,678 189,617 202,563","418,555 470,551 482,601 484,659 472,711 421,720 366,726 354,675 352,615 364,561","544,539 572,531 579,577 581,632 575,683 545,697 503,706 493,658 491,600 502,547"]],[-21,["257,193 321,194 333,251 330,313 314,368 251,369 192,367 179,312 179,251 193,194","420,194 476,195 483,250 479,310 465,363 411,366 354,367 342,313 344,251 362,195","555,195 586,197 582,248 573,304 565,355 540,359 498,362 488,310 492,250 509,195","251,380 314,381 329,435 330,495 316,550 254,552 193,549 181,493 181,432 192,379","411,377 465,376 476,428 476,486 465,539 411,545 355,548 341,495 340,435 354,380","540,370 564,366 565,413 571,469 572,521 542,530 498,536 486,486 485,427 497,374","255,563 317,563 333,616 334,676 320,729 259,733 198,730 183,676 182,615 194,562","411,556 465,552 478,603 479,660 466,713 414,721 358,726 345,675 343,615 355,561","542,541 573,533 581,580 583,635 576,686 543,699 499,708 488,659 487,601 498,548"]],[-18,["247,193 311,194 324,251 322,313 306,368 243,369 185,366 172,312 171,251 185,194","412,194 469,195 477,250 474,310 460,363 404,366 346,367 333,312 335,251 352,195","552,195 586,197 583,248 575,305 566,355 539,360 494,362 483,310 487,250 504,195","243,380 306,380 321,434 322,495 308,549 246,551 186,547 174,491 175,430 186,379","404,377 459,377 471,429 471,487 459,540 404,545 347,547 333,495 332,434 346,380","538,371 565,367 567,415 573,470 573,523 540,532 493,537 481,487 481,428 493,375","246,562 308,562 324,615 325,675 311,729 250,731 190,727 176,673 174,613 186,560","404,556 459,553 472,604 473,662 461,715 406,722 350,726 336,674 335,615 347,561","540,543 574,535 582,582 584,638 577,690 541,702 494,710 483,661 482,603 493,550"]],[-15,["237,193 302,194 315,251 313,313 298,367 235,368 179,365 167,311 165,251 177,195","404,194 462,195 471,250 468,310 454,364 397,367 338,367 325,312 326,251 343,195","549,195 586,196 584,249 576,305 567,356 536,361 489,363 478,310 481,250 498,195","235,379 297,380 313,434 314,495 300,549 238,550 179,545 168,489 170,429 180,378","397,378 454,377 466,429 466,488 453,541 397,546 339,547 325,494 324,434 338,380","536,371 566,368 569,416 574,472 573,525 537,534 488,539 476,488 476,428 489,375","238,561 300,561 316,615 317,675 302,728 241,729 182,724 169,670 168,610 180,558","397,557 453,554 466,606 467,664 454,716 399,723 341,726 328,674 327,615 339,561","537,544 574,537 582,585 584,641 576,693 538,705 489,713 477,663 476,604 489,551"]],[-12,["229,193 292,194 306,251 305,313 289,367 228,367 174,364 161,311 159,250 170,195","395,194 455,195 465,251 462,311 448,364 390,367 330,366 316,312 318,251 334,195","545,195 584,196 584,249 577,306 567,357 533,362 484,363 472,311 475,250 492,195","228,378 289,380 305,434 306,494 291,548 230,548 173,543 163,488 165,428 174,377","390,378 448,377 460,430 460,489 447,542 390,546 331,547 317,494 316,434 330,380","533,372 566,369 570,417 575,474 573,527 534,536 483,540 470,489 470,429 484,376","230,559 292,561 307,614 308,674 294,727 233,727 176,721 163,668 162,608 173,556","390,557 447,555 460,607 461,665 448,718 391,723 333,725 319,673 318,614 331,560","534,546 573,539 582,587 584,644 575,696 534,708 484,715 471,664 471,606 483,552"]],[-9,["220,194 283,194 298,251 297,312 282,367 221,367 169,363 157,310 154,250 163,195","386,194 447,195 458,251 456,311 441,365 382,367 322,366 308,312 309,251 324,195","540,194 583,196 584,249 577,307 566,358 530,363 479,364 466,311 469,250 485,195","221,378 282,379 297,433 298,494 283,547 223,547 168,541 159,486 161,427 170,376","382,378 441,378 454,431 454,490 441,543 383,546 323,547 309,494 308,434 322,380","530,373 565,370 570,419 575,476 572,529 530,537 478,541 464,490 464,430 478,377","223,558 284,560 299,613 300,673 285,726 225,725 170,718 157,665 156,605 168,554","383,557 441,556 454,608 454,666 441,719 383,724 325,725 311,673 310,613 323,560","530,548 572,541 581,590 583,647 574,699 530,710 478,716 465,666 464,607 478,554"]],[-6,["212,194 274,194 289,251 289,312 274,366 214,366 165,363 153,310 149,250 157,195","378,194 439,195 451,251 449,311 435,365 375,367 314,366 300,312 301,251 315,195","535,194 580,196 582,249 576,307 565,359 526,363 473,364 460,311 462,250 478,195","215,377 274,379 289,433 290,493 276,546 216,545 163,539 155,484 158,425 166,375","375,378 435,378 448,431 447,490 434,544 375,547 315,546 301,493 301,433 314,379","526,374 564,371 569,420 574,477 570,531 526,539 472,542 458,490 458,431 473,377","216,556 276,559 291,612 292,672 278,724 218,723 164,715 152,662 152,603 163,552","375,557 434,557 447,609 448,668 434,720 376,724 317,724 303,672 302,613 315,559","526,550 571,543 580,593 581,650 571,703 526,713 471,718 458,667 458,608 472,555"]],[-3,["205,194 266,195 281,251 281,312 267,366 209,365 162,362 150,309 145,250 152,195","369,194 431,195 443,251 442,311 428,365 367,367 307,366 293,312 292,251 306,195","529,194 577,196 580,249 575,308 563,360 522,364 467,365 453,312 454,251 471,195","209,376 267,379 282,432 283,493 268,546 210,544 159,537 152,483 155,424 162,374","367,378 428,379 441,432 441,491 427,545 368,547 308,546 294,492 293,433 307,379","522,375 563,372 569,421 573,479 568,533 521,541 465,544 451,491 452,431 466,378","210,555 269,558 283,612 284,671 270,723 211,720 159,712 148,659 148,600 159,550","368,557 427,558 440,610 440,669 427,721 368,724 309,723 295,671 294,612 308,559","521,551 568,546 578,595 579,653 568,706 520,716 465,720 451,669 451,610 465,556"]],[0,["198,194 257,195 273,251 274,312 260,365 203,365 159,361 147,308 142,250 147,195","360,194 422,195 436,251 435,312 421,366 360,367 299,366 285,312 284,251 298,195","522,194 573,195 578,250 573,308 561,361 517,365 460,365 446,312 447,251 463,195","203,375 260,378 275,432 275,492 261,545 204,542 155,535 149,481 153,423 159,373","360,378 421,379 434,432 434,492 420,545 360,547 300,545 286,492 286,432 299,379","517,375 561,373 567,423 571,481 565,535 516,542 459,545 445,492 445,432 460,378","204,553 261,557 276,611 276,670 262,722 205,718 155,709 144,656 144,598 155,548","360,558 420,558 433,611 433,670 419,723 360,724 301,723 287,670 287,611 300,558","516,553 565,548 575,598 576,656 565,709 515,718 458,722 444,670 444,611 459,557"]],[3,["191,194 249,195 266,251 267,312 253,365 198,364 157,360 145,308 140,249 143,196","351,194 414,195 428,251 427,312 413,366 352,367 292,365 278,311 277,251 289,195","515,194 568,195 575,250 570,309 558,362 511,365 453,366 439,312 439,251 454,195","198,375 254,378 268,431 269,491 255,544 199,541 152,533 147,479 151,421 157,372","353,378 413,379 427,433 426,492 412,546 352,547 293,545 279,491 279,432 292,379","511,376 558,374 565,424 568,483 561,537 510,544 452,546 437,493 438,432 453,379","199,551 255,556 269,610 269,669 255,720 200,716 152,706 141,653 142,595 152,546","352,557 412,559 426,612 425,671 411,723 352,724 293,721 280,669 280,610 293,558","510,555 561,550 572,600 572,659 561,712 509,720 450,723 436,671 437,612 451,558"]],[6,["185,194 242,195 258,250 260,311 247,364 194,363 155,359 144,307 138,249 140,196","342,194 405,195 419,251 420,312 406,366 345,367 285,365 271,311 269,251 281,195","508,194 563,195 571,250 567,310 555,363 506,366 446,366 431,312 431,251 446,194","194,374 247,377 262,431 262,490 248,542 194,539 150,531 146,477 151,420 156,371","345,378 406,379 419,433 419,493 405,546 345,547 286,544 273,490 272,431 285,378","505,377 554,375 562,425 565,484 557,539 504,545 444,546 430,493 431,433 446,379","194,550 248,555 262,608 262,667 249,718 194,713 149,703 139,650 140,593 149,543","345,557 405,559 418,613 417,672 403,724 344,724 286,720 272,668 273,609 286,557","504,556 557,552 568,603 568,662 556,715 502,723 442,724 428,672 429,612 444,559"]],[9,["180,194 235,195 251,250 254,311 241,364 190,363 154,358 143,307 136,249 137,196","334,194 396,195 411,251 412,312 398,366 338,367 279,365 264,311 262,251 273,195","500,194 557,195 566,250 563,310 551,363 499,367 438,367 423,312 422,251 437,194","190,373 242,377 256,430 256,490 242,541 190,537 148,529 145,476 150,419 155,370","338,378 398,380 412,434 411,494 397,547 337,546 279,543 266,490 266,431 279,378","499,378 550,376 559,427 561,486 552,541 497,547 437,547 422,494 423,433 438,379","190,548 242,554 256,607 255,666 242,716 190,710 146,699 137,647 138,590 148,541","337,557 397,560 410,613 409,673 395,725 337,724 279,719 266,666 266,608 279,556","497,558 552,554 564,605 563,665 550,718 495,725 434,726 420,673 421,613 436,560"]],[12,["175,195 228,195 245,250 248,311 236,363 187,362 153,357 143,306 136,249 136,196","325,194 386,195 402,251 404,312 390,366 330,367 272,364 258,311 255,251 265,195","491,193 550,195 561,250 559,311 546,364 492,367 431,367 415,313 414,251 428,194","187,372 236,376 250,429 250,489 237,540 186,536 147,527 145,474 150,417 154,369","330,378 390,380 404,434 403,494 389,547 330,546 273,542 260,489 260,430 272,377","492,378 546,377 555,428 557,488 547,543 490,548 429,548 414,494 415,434 431,380","186,546 237,552 249,606 249,664 236,714 186,708 145,696 136,644 138,587 147,539","330,557 389,560 402,614 401,673 387,725 329,723 272,718 259,665 260,607 273,555","490,559 547,556 558,608 557,668 544,721 487,727 426,727 412,674 413,614 428,561"]],[15,["171,195 222,195 239,250 242,310 231,363 184,361 153,356 144,305 136,249 134,196","316,194 377,195 394,251 395,312 382,367 323,367 266,364 252,310 249,250 258,195","483,193 543,195 555,251 553,311 541,365 485,368 422,367 407,313 405,251 418,194","184,371 231,375 244,428 244,488 232,539 183,534 147,525 146,472 151,416 154,368","323,378 382,380 396,434 395,494 381,547 323,546 267,541 254,488 254,429 266,377","485,379 540,378 550,429 552,489 541,545 482,550 420,549 406,495 407,434 423,380","183,544 231,551 244,604 243,663 231,713 182,705 144,693 136,641 138,585 146,537","323,557 381,561 393,615 392,674 379,726 321,723 266,716 253,664 254,606 267,554","482,561 540,558 552,610 551,670 538,724 479,729 418,728 403,675 404,615 420,561"]],[18,["168,195 216,195 233,250 237,310 226,362 181,360 154,355 145,305 137,248 134,197","308,194 368,195 385,251 387,312 374,367 316,366 260,363 246,310 243,250 251,195","473,193 535,194 549,251 548,312 535,366 477,369 414,368 398,313 396,251 409,194","182,371 227,375 239,428 239,487 227,537 180,532 147,523 147,470 153,415 155,367","316,377 374,380 388,434 387,495 373,547 316,545 261,540 249,487 249,429 261,377","477,380 534,379 545,430 546,491 534,547 474,551 412,549 398,495 399,434 414,380","180,543 227,550 238,603 237,661 226,710 179,702 143,690 136,638 138,582 146,535","316,556 373,561 385,615 384,674 370,726 314,722 259,715 247,662 248,604 261,553","474,562 534,560 546,613 544,673 530,727 470,731 409,729 395,675 396,615 412,562"]],[21,["165,195 211,195 228,250 232,310 222,362 180,359 155,355 147,304 138,248 134,197","300,194 358,195 376,251 378,313 366,367 309,366 255,363 241,310 237,250 244,195","463,193 527,194 541,251 541,312 528,367 469,369 406,368 390,313 387,251 399,194","180,370 223,374 235,427 234,486 222,536 178,530 148,521 149,469 155,413 156,366","309,377 366,380 380,435 379,495 365,548 309,545 255,539 244,486 244,428 255,376","469,380 528,379 539,432 539,493 527,549 466,552 404,550 390,495 391,435 406,381","178,541 222,548 233,601 232,659 221,708 177,699 144,686 137,635 139,580 147,533","309,556 365,561 377,615 375,675 362,726 306,721 254,713 241,660 242,603 255,552","465,563 526,562 538,615 537,676 522,730 461,733 400,729 386,676 387,616 403,563"]],[24,["163,195 206,196 223,250 227,309 218,361 179,359 157,354 149,304 140,248 134,197","292,194 349,195 367,251 370,313 358,367 302,366 250,362 236,309 232,250 238,195","453,193 518,194 534,251 534,313 521,367 460,370 397,368 381,313 378,251 389,194","179,369 219,373 230,426 230,485 219,535 176,529 149,519 151,467 157,412 158,365","302,377 358,380 371,435 370,495 357,548 302,544 250,538 239,485 239,427 250,376","460,381 521,380 532,433 532,494 519,550 457,553 395,550 381,496 382,435 397,381","176,539 218,547 229,600 227,658 217,706 175,697 145,683 139,632 141,577 148,531","302,555 356,561 368,615 366,675 354,726 299,720 248,711 236,659 238,601 250,551","456,564 518,563 531,617 529,678 514,732 452,734 391,730 377,676 379,616 395,563"]],[27,["161,195 201,196 218,250 223,309 215,360 178,358 159,353 152,303 142,248 136,197","284,194 340,195 357,251 361,313 350,367 296,366 245,362 232,309 227,250 232,196","442,193 508,194 525,251 527,313 513,368 451,370 388,368 372,313 368,251 379,194","178,368 215,373 226,425 226,483 215,533 175,527 151,517 154,466 160,411 160,364","296,377 350,380 363,435 362,495 349,547 295,544 245,537 235,484 235,426 245,375","452,381 513,381 525,434 525,496 510,552 447,554 386,551 373,496 374,435 389,381","175,537 215,545 224,598 223,656 213,704 173,694 146,680 141,629 143,575 150,528","295,554 348,561 359,615 358,675 345,726 292,719 243,710 232,657 233,600 245,550","447,565 510,565 522,619 520,681 505,735 442,736 382,730 368,676 370,616 386,563"]],[30,["160,196 197,196 214,250 219,309 212,360 178,357 162,352 155,303 145,248 138,197","276,194 330,195 348,251 353,313 342,367 289,365 241,361 228,309 222,250 227,196","432,193 498,194 516,251 518,314 505,369 442,370 380,368 363,313 359,251 368,194","178,367 213,372 223,424 223,482 212,532 175,525 153,515 157,464 163,410 163,363","289,376 342,380 355,435 354,495 341,547 289,543 241,536 231,483 231,425 241,374","442,382 505,382 518,435 517,497 501,554 438,555 377,551 364,496 365,435 380,381","175,535 212,544 221,597 219,654 210,702 173,691 148,677 144,626 146,572 152,526","289,554 340,561 351,615 349,675 337,725 286,718 238,708 227,655 229,598 241,549","437,566 501,567 513,621 510,683 495,737 432,737 373,731 359,676 361,616 377,564"]],[33,["159,196 194,196 211,249 216,308 210,359 178,356 165,351 159,302 149,247 140,197","269,194 321,195 339,251 344,313 334,367 283,365 237,361 224,308 218,250 222,196","420,193 487,194 506,251 510,314 496,370 433,371 371,368 354,313 350,251 358,194","178,366 210,371 220,423 220,481 209,530 175,523 156,513 161,462 167,409 166,363","283,376 334,380 346,435 345,495 333,547 283,542 237,535 227,482 228,425 237,374","433,382 497,382 510,436 508,498 492,555 428,556 368,551 355,496 357,435 371,381","175,533 209,542 217,595 216,652 207,699 172,688 150,674 147,624 150,570 155,524","282,553 332,560 342,615 340,674 329,725 279,717 234,706 223,653 225,597 236,547","427,567 491,568 503,623 500,685 485,739 422,738 364,731 350,676 352,616 368,564"]],[36,["159,196 191,196 208,249 213,308 208,358 179,355 169,350 163,302 153,247 143,198","262,194 312,195 330,251 336,312 326,366 277,365 233,360 221,308 215,250 217,196","409,193 475,194 496,252 500,315 487,370 423,371 362,368 346,313 340,251 348,194","179,366 208,370 217,423 217,480 207,529 176,521 159,511 165,461 172,407 170,362","277,375 326,380 338,435 337,495 325,547 277,541 233,533 224,481 225,424 233,373","423,382 487,383 501,437 499,500 482,556 418,556 359,551 347,496 348,435 362,381","175,531 207,541 215,593 213,650 204,697 172,685 153,671 150,621 154,568 158,522","277,552 324,560 334,615 331,674 320,724 273,715 230,704 220,651 222,595 233,546","417,568 481,570 493,625 490,687 474,741 412,739 354,731 341,676 343,616 359,564"]]]};
+
 
 /* ================= Green Zone MO Guide, version 8: the engine =================
    One page, one view at a time, routed on the hash:
@@ -10432,6 +10946,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['Abdominal pain: the visual handbook','A teaching handbook on adult abdominal pain in the ED, with its quick reference: the bedside pathway, the checks that prevent a miss, red flags, tests and imaging, pain relief and antibiotics, eight presentations, six cases, and a 3D map of the nine regions to tap and turn. Every number was checked against the source the handbook cites; the HKL ebook\'s Abdominal pain pathway stays the department\'s. The Malay discharge script can be read aloud.',[['#abdo-handbook','Open the handbook'],['#abdo-handbook--loc','The 3D map'],['#abdo-handbook--trig','The checks that prevent a miss']]],
   ['Real X-ray films, with the normal anatomy outlined','Reading X-rays now shows a normal film on each step: chest, pelvis, shoulder, elbow, wrist, hand, knee, ankle and foot, eighteen films in all. Each bone is outlined on the film: tap a name to light it, or switch the outlines off to read the film bare. The outlines are this guide\'s own tracing by eye, a teaching aid; some are marked approximate where bones lie over each other. A film loads only when you open its step.',[['#xray-guide--wrj','Wrist'],['#xray-guide--hd','Hand'],['#xray-guide--ankv','Ankle']]],
   ['Dengue follows the 2026 CPG','The Dengue route opens the CPG entry (4th edition), which has a Quick Reference tab. Pregnancy, age 65 and over, and obesity are triaged to Group B1 (MTS level 4, Green), as the Quick Reference prints them. The ebook\'s dengue pathway is kept as printed, with a notice.',[['#dengue-cpg','Dengue CPG']]],
   ['The ebook\'s own pages','Each of the 23 ebook pathways has a Printed pages tab: a button for every page of the ebook that covers it, opening that page as printed, full size, so you can check the guide against the book. A page loads only when you tap it. The tab also links to the full ebook as a PDF.',[['#renal-colic','Renal colic'],['#pain','Pain management']]],
@@ -10655,6 +11170,7 @@ const CONFIRM = [
   "Triage course, Lecture 6 (Approach to abdominal pain) (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 23's safety-net script (\"don't keep taking the pain killer\", no follow-up date) differs from the ebook's abdominal pain advice (paracetamol; EMACC or EM Watch in 24 to 48 hours): the script is left out. (2) Slide 17's \"Amylase – Consider if there's guarding, vomiting\" differs from safe-practice--abd (\"Epigastric pain: ECG ± amylase\"). (3) Slide 15's gloss \"(asymptomatic elevated blood pressure)\" on hypertensive urgency adds a word the ebook's hypertensive-urgency lead does not use. (4) The deck's true case of a missed appendicitis is in the abdominal pain notes without an exact age, hospital or doses; three readings are kept because the teaching turns on them. Say if it should be cut further.",
   "Triage course, CBD 2 (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 15 (rabies) differs from the HKL protocol of October 2022 in animal-bites on dose (1 ml IM), schedule (days 0, 3, 7, 14 and 28, alternative day 30; days 0 and 3 if fully immunised), exposure categories, immunoglobulin for every Category 3 and a stop rule: the whole slide is left out. (2) Slide 23's \"IV Morphine 4mg STAT\" for a 65-year-old differs from the ebook's morphine pain protocol in pain (0.5 mg steps over 60 years). (3) Slide 24's pain score row (under 6 keep, 6 or more uptriage) differs from the ebook's \"Pain score over 6?\" and the policy's 7; the table's other three rows are in. (4) Slide 6's \"CORRECT TRIAGE: LEVEL 3 = YZ/ Y OBS … redirect immediately to Y OBS\" differs from gz-rules--dengue (memo of 23 Mar 2023: direct to the Observation Ward). (5) Slide 6's \"Dengue fever without warning sign with/without special population ONLY allowed to be triaged to GREEN ZONE\" differs from the Dengue SOP 2.0 note in dengue. Its \"Platelet <50\" point is kept as printed although the case's count is 80. (6) Slide 9's antibiotics (\"IV cefepime or IV tazocin\"; \"IV ceftriaxone or IV tazocin\") include two not on the IV antibiotic memo's list of 30 Jun 2026: the names are left out. (7) Slide 11's FBC intervals (\"EOD FBC in KK or GP\" if the combo is negative, \"daily FBC\" if positive) are left out: the ebook gives none, and the dengue CPG says daily follow-up. (8) Slide 16's speaker note grades the foot ulcer by Wagner, where diabetic-foot-cpg uses the University of Texas classification. (9) Kept as the slides print them, from outside sources the decks do not name: the bite slide's figures (5% and 80% infection risk, cat-scratch at 7 to 12 days, \"Does not transmit leptospirosis\", cloxacillin and Augmentin with no dose), \"IM diclofenac\" for the sudden headache with no dose, SNOOP4 and the low-risk headache criteria, the burn points and the six tibial plateau types. Confirm each, or name its source. (10) Does the \"wrong triage QR\" register in case 2 exist?",
   "Reading X-rays is built from named online sources in the guide's own words (Krishna, 10 Nov 2026), not from a department document. Still to confirm with the department: (1) Hot reporting: does HKL have it, and who reviews a late radiology report, and by when? (NICE NG38 wants a report before discharge; RCEM, 2023, sets a 72-hour review of abnormal reports.) (2) Who reviews a doubtful film? No source lists the findings that must go to a senior; the guide only has \"ask the EP first\" in referral-rules--ortho. (3) Ottawa ankle and foot rules: which ages and exclusions does the department follow (under 18 excluded on the NHS Scotland sheet; over 5 years in NICE NG38; under 6 or over 55 on WikEM)? The rule's wording comes from secondary sources, because the original papers are not open. (4) Ottawa knee rule: is the age \"55 or over\" (ACR) or \"over 55\" (WikEM)? Is weight-bearing one criterion or two? The checklist follows the ACR narrative; what is the youngest age it applies to? (5) A suspected scaphoid fracture with a normal film: the sources give MRI first, MRI at 10 days, repeat films at 10 to 14 days or at 2 to 3 weeks, and the guide's EMACC entry reviews within 3 days. Which next test, and when? (6) Occult hip fracture and hip views are kept out of the X-ray guide, because the hip fracture CPG entry holds the local answer (CT as the local choice; its own views) and NICE CG124 and Radiology Masterclass differ from it. (7) Abdominal film: the ebook's abdominal pain pathway lists \"CXR (erect) with or without abdominal X-ray\"; the RCR's list of indications does not include abdominal pain alone. xray-guide--abno says so and points to the ebook as the approved pathway. (8) Elbow extension test (Appelboam, BMJ 2008): how would a Green Zone patient be brought back at 7 to 10 days? (9) The adult cervical spine film is left out (Krishna, 10 Nov 2026): the head injury CPG (2015) still uses three-view films, where NICE and the ACR now send adults who need imaging to CT.",
+  "The abdominal pain handbook against the ebook (12 Nov 2026): the handbook is a teaching synthesis and the ebook stays the department's pathway; where they differ, the department should say which to teach. (1) Follow-up of non-specific abdominal pain: the handbook (p22, after RCEMLearning) arranges a time-bound review \"often within 12-24 h if unresolved\"; the ebook (p11) gives EMACC or EMWATCH in 24 to 48 hours. (2) IV morphine titration: the ebook gives 1 mg at 60 years old or below; MOH Pain Management in ETD 2020, Appendix 2, which the handbook quotes, gives 0.5 mg at 60 or older, so a patient of exactly 60 gets a different dose. (3) IV fentanyl: the ebook's table lists 50-100 mcg; MOH 2020 lists 25-50 micrograms as the initial alternative. (4) Renal colic imaging: the handbook cites NICE NG118 (low-dose non-contrast CT within 24 h in adults); the ebook's pathway uses POCUS, an urgent KUB ultrasound by radiology and an early TCA for KUB ultrasound.",
   "The ebook against the guide (checked line by line, 12 Nov 2026): two printed numbers where the guide or a calculator reads the print one way and the department should confirm it. (1) Acute behavioural disturbance, p8: midazolam for a child is printed \"IM 0.1-0.2 mg/kg – 0.5mg/kg\" in the Starting Dose column; the guide and its calculator read the 0.5 mg/kg as a maximum. (2) Pain, p50: paracetamol under 50 kg is printed \"Max 60mg/kg/dose\"; the guide and its calculator say 60 mg/kg/day."
 ];
 
@@ -11032,6 +11548,56 @@ function filmHTML(k){
     `<figcaption>Tap a name to light that part on the film${f.groups ? '; a group opens to its bones' : ''}. The outlines are this guide's own tracing by eye, a teaching aid and not a measurement; where one part runs on into the next, the line between them is a guide, not an edge on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
 }
 if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); });
+/* ================= The 3D abdomen map (12 Nov 2026) =================
+   The handbook's nine regions (p. 7) on a glass torso rendered with Blender for this guide (sources/abdo/abdo3d.blend): the front
+   view first (abdo3d/poster.webp), the patient's right on the screen's left, labelled. Tap a region to light it and see what to
+   think of there. The slider, or a sideways drag, turns the torso through 72 degrees: the 25 frames (abdo3d/fNN.webp, about
+   19 KB each) download only when it is first turned. A3D (data17.js) holds each region's outline on each frame. */
+const A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : [];
+const a3pad = i => String(i).padStart(2, '0');
+const a3c = pts => { const a = pts.split(' ').map(s => s.split(',').map(Number)); return [a.reduce((t, q) => t + q[0], 0) / a.length, a.reduce((t, q) => t + q[1], 0) / a.length]; };
+function a3svg(i, on){
+  return A3D.frames[i][1].map((pts, r) => { const [x, y] = a3c(pts); return `<g class="a3-g${on === r + 1 ? ' on' : ''}" data-a3r="${r + 1}" role="button" tabindex="0" aria-label="Region ${esc(A3_REG[r][0])}"><polygon points="${pts}"/><text x="${x.toFixed(0)}" y="${(y + 14).toFixed(0)}">${r + 1}</text></g>`; }).join('');
+}
+function abdo3dHTML(){
+  if (typeof A3D === 'undefined') return '';
+  return `<figure class="fig a3" data-a3 data-i="${A3D.front}" data-on="0"><div class="a3-bar"><b>The nine regions, in 3D</b></div>` +
+    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions">` +
+    `<svg viewBox="0 0 ${A3D.w} ${A3D.h}">${a3svg(A3D.front, 0)}</svg><span class="a3-s a3-sr">Patient's right</span><span class="a3-s a3-sl">Patient's left</span></div>` +
+    `<label class="a3-turn"><span>Turn</span><input type="range" min="0" max="${A3D.frames.length - 1}" step="1" value="${A3D.front}" data-a3yaw aria-label="Turn the torso"></label>` +
+    `<div class="a3-info" aria-live="polite"><p class="hint">Tap a region to light it and see what to think of there.</p></div>` +
+    `<figcaption>Schematic regions only, as the handbook (p. 7) draws them: organs and pain can overlap. The glass torso is this guide's own model, made in Blender.</figcaption></figure>`;
+}
+FIGS.abdo3d = abdo3dHTML;
+const a3loaded = new Set();
+function a3frame(fig, i){
+  i = Math.max(0, Math.min(A3D.frames.length - 1, i));
+  const on = +fig.dataset.on || 0;
+  fig.dataset.i = i;
+  if (!a3loaded.size) A3D.frames.forEach((_, k) => { const im = new Image(); im.src = `abdo3d/f${a3pad(k)}.webp`; a3loaded.add(im); });
+  fig.querySelector('.a3-img').src = i === A3D.front && on ? `abdo3d/front-lit/r${on}.webp` : `abdo3d/f${a3pad(i)}.webp`;
+  fig.querySelector('svg').innerHTML = a3svg(i, on);
+  const yaw = A3D.frames[i][0], r = fig.querySelector('[data-a3yaw]'); if (+r.value !== i) r.value = i;
+  r.setAttribute('aria-valuetext', yaw === 0 ? 'Front view' : Math.abs(yaw) + ' degrees toward the patient\'s ' + (yaw > 0 ? 'left' : 'right'));
+}
+function a3pick(fig, r){
+  const was = +fig.dataset.on || 0, on = was === r ? 0 : r;
+  fig.dataset.on = on;
+  const i = +fig.dataset.i;
+  fig.querySelectorAll('.a3-g').forEach(g => g.classList.toggle('on', +g.dataset.a3r === on));
+  fig.classList.toggle('a3-pick', !!on);
+  if (i === A3D.front) fig.querySelector('.a3-img').src = on ? `abdo3d/front-lit/r${on}.webp` : (a3loaded.size ? `abdo3d/f${a3pad(i)}.webp` : 'abdo3d/poster.webp');
+  const R = A3_REG[on - 1];
+  fig.querySelector('.a3-info').innerHTML = on ? `<h4>${esc(R[0])}</h4><ul>${R[1].map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="links"><a class="pill" href="#abdo-handbook--rg${on}">Open region ${on}${svg('chev')}</a>${R[2].map(l => `<a class="pill" href="#abdo-handbook--${l[0]}">${esc(l[1])}</a>`).join('')}</div>` : '<p class="hint">Tap a region to light it and see what to think of there.</p>';
+}
+document.addEventListener('click', e => { const g = e.target.closest && e.target.closest('.a3-g'); if (g) a3pick(g.closest('[data-a3]'), +g.dataset.a3r); });
+document.addEventListener('keydown', e => { const g = e.target.closest && e.target.closest('.a3-g'); if (g && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); a3pick(g.closest('[data-a3]'), +g.dataset.a3r); } });
+document.addEventListener('input', e => { const r = e.target.closest && e.target.closest('[data-a3yaw]'); if (r) a3frame(r.closest('[data-a3]'), +r.value); });
+/* A sideways drag on the torso turns it, a step every 14 px; an upward or downward swipe still scrolls the page */
+let a3drag = null;
+document.addEventListener('pointerdown', e => { const s = e.target.closest && e.target.closest('.a3-stage'); if (s && e.isPrimary) a3drag = {s, x:e.clientX, i:+s.closest('[data-a3]').dataset.i, moved:false}; });
+document.addEventListener('pointermove', e => { if (!a3drag) return; const d = Math.round((e.clientX - a3drag.x) / 14); if (d){ a3drag.moved = true; a3frame(a3drag.s.closest('[data-a3]'), a3drag.i - d); } });
+['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, () => { a3drag = null; }));
 /* A step that reads several films shows them one after another (XGROUPS, data15.js) */
 if (typeof XGROUPS !== 'undefined') Object.keys(XGROUPS).forEach(n => { FIGS['xg-' + n] = () => XGROUPS[n].map(filmHTML).join(''); });
 document.addEventListener('click', e => {
@@ -11061,7 +11627,7 @@ const store = {
   del(k){ try { localStorage.removeItem(k); } catch(e){} }
 };
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const kindOf = p => p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
+const kindOf = p => p.kind ? p.kind : p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
 const metaOf = p => p.page ? 'Ebook p' + p.page : (p.src || '');
 const kindLabel = (p, k) => (p.kinds && p.kinds[k]) || (p.grp === 'rules' ? KIND_R : p.grp === 'cpg' ? KIND_G : KIND)[k];
 /* A guideline's neutral outcomes are its answers (the medicines), not a next step */
@@ -11114,7 +11680,7 @@ const CATS = [
   {k:'heart', t:'Heart and vessels', s:'Heart', ic:'heart', c:'c-heart', j:'t-garnet', ids:['acs','acs-cpg','heart-failure','hypertensive-urgency','svt','syncope','dvt','vte-cpg']},
   {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','asthma-cpg','copd-cpg','pneumonia','sinusitis-cpg','anaphylaxis']},
   {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','behavioural-disturbance']},
-  {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','gastroenteritis','biliary','renal-colic','ckd-cpg','scrotal-pain','fb-children-cpg']},
+  {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','abdo-handbook','gastroenteritis','biliary','renal-colic','ckd-cpg','scrotal-pain','fb-children-cpg']},
   {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis','sore-throat-cpg']},
   {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','t2dm-cpg','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','snakebite-moh','pain','cancer-pain-cpg']},
   {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['xray-guide','hip-fracture-cpg','avulsed-tooth-cpg']},
@@ -11397,7 +11963,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -11703,12 +12269,14 @@ function tabsOf(p){
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
-  const note = d => `<div class="deptnote"><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
+  const note = d => `<div class="deptnote"><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}${d.refs ? `<ol class="srcl">${d.refs.map(r => `<li>${esc(r[0])} ${r[1][0] === '#' ? `<a href="${r[1]}">Open in this guide</a>` : `<a href="${r[1]}" target="_blank" rel="noopener noreferrer">Open source${svg('ext')}</a>`}</li>`).join('')}</ol>` : ''}</div>`;
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
   if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
   /* A national guideline's reference notes, several tabs of them, each note with its page */
   (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + (t.foot ? `<p class="hint">${esc(t.foot)}</p>` : p.notesFoot ? `<p class="hint">${esc(p.notesFoot)}</p>` : p.own ? `<p class="hint">From the ${esc(p.src)}, with its page numbers, in the guide's own words: the CPG gives no permission to reproduce it, so nothing here is quoted.</p>` : `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to ${esc(p.ack || 'MaHTAS')}.</p>`)}));
+  if (p.script) T.push({k:'script', l:'Malay script', cls:'t-advice', html:`<h3 class="tab-h">${esc(p.script.h)}</h3>` + (READ[p.script.read] ? listenBar(p.script.read, 'Dengar skrip ini') : '') + `<ol id="advlist" lang="ms">${p.script.lines.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyscript>${svg('copy')}<span class="bl">Copy script</span></button></div><p class="hint">${esc(p.script.note)}</p>`});
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
+  if (p.pages) T.push({k:'pages', l:'Printed pages', html:`<p class="hint">The ${esc(p.pages.name.toLowerCase())}'s own pages, as printed. A page loads when you tap it; tap the page to zoom.</p><div class="epg">${p.pages.list.map(([f, t]) => `<button type="button" class="pill" data-ppage="${p.pages.dir}/${f}" data-pname="${esc(p.pages.name + ' · ' + t)}">${svg('poster')}${esc(t)}</button>`).join('')}${p.pages.pdf.map(([h, t]) => `<a class="pill" href="${h}" target="_blank" rel="noopener">${esc(t)}${svg('ext')}</a>`).join('')}</div>`});
   const epg = ebookPages(p);
   if (epg.length) T.push({k:'pages', l:'Printed pages', html:`<p class="hint">The ebook's own ${epg.length === 1 ? 'page' : 'pages'} for this pathway, as printed. A page loads when you tap it; tap the page to zoom.</p><div class="epg">${epg.map(n => `<button type="button" class="pill" data-epage="${n}">${svg('poster')}Page ${n}</button>`).join('')}<a class="pill" href="${EBOOK_PDF}" target="_blank" rel="noopener">Full ebook (PDF)${svg('ext')}</a></div>`});
   /* A national CPG on the shelf opens its full PDF from its References tab */
@@ -11731,6 +12299,9 @@ function selectTab(k, focus){
    (narration/README.md) and played from app/audio/ (mono MP3). dur, marks (the start of each section, in seconds) and lines
    (the start of each line, as [seconds, section, element]) are written by narration/scripts/fill-read.cjs. */
 const READ = {
+  /* The abdominal pain handbook's Malay discharge script (p. 23): Malay Kore over a quiet Flow Music bed; line 5 of the screen (the review date and place) is left for the MO to fill in, so it is not read. Times are the word starts. */
+  'abdo-script-ms':{src:'audio/abdo-script-ms.mp3', dur:38.1, marks:[0],
+    lines:[[1.98,0,0],[5.82,0,1],[20.8,0,2],[26.03,0,3],[30.77,0,5]]},
   'leaf-dengue-en':{src:'audio/leaf-dengue-en.mp3', dur:108.5, marks:[0, 2.29, 46.86, 70.02],
     lines:[[0,0,0],[2.29,1,0],[3.82,1,1],[18.55,1,2],[24.99,1,3],[26.68,1,4],[30.6,1,5],[34.72,1,6],[38.21,1,7],[46.86,2,0],[47.97,2,1],[59.64,2,2],[63.43,2,3],[66.58,2,4],[70.02,3,0],[72.15,3,1],[84.82,3,2],[89.61,3,3],[91.95,3,4],[93.52,3,5],[95.32,3,6],[98.27,3,7],[100.17,3,8],[105.26,3,9]]},
   'leaf-dengue-ms':{src:'audio/leaf-dengue-ms.mp3', dur:101.49, marks:[0, 3.28, 42.31, 64.11],
@@ -13281,6 +13852,15 @@ function openEbookPage(n){
   $('#lbs').scrollTo(0, 0); $('#lbclose').focus();
 }
 document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-epage]'); if (b) openEbookPage(+b.dataset.epage); });
+function openPageImg(src, name){
+  lbFrom = document.activeElement; lbI = 0;
+  $('#lbimg').src = src + '.webp'; $('#lbimg').alt = name + ', as printed';
+  $('#lbt').textContent = name; $('#lb').setAttribute('aria-label', 'Printed page');
+  $('#lbs').classList.remove('zoom'); $('#lbzoom').textContent = 'Zoom in';
+  $('#lb').hidden = false; document.documentElement.style.overflow = 'hidden';
+  $('#lbs').scrollTo(0, 0); $('#lbclose').focus();
+}
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-ppage]'); if (b) openPageImg(b.dataset.ppage, b.dataset.pname); });
 function closeSheet(){ if ($('#lb').hidden) return; $('#lb').hidden = true; document.documentElement.style.overflow = ''; if (lbFrom && lbFrom.focus) lbFrom.focus(); }
 function toggleZoom(){ const z = $('#lbs').classList.toggle('zoom'); $('#lbzoom').textContent = z ? 'Fit to screen' : 'Zoom in'; }
 
@@ -13686,6 +14266,7 @@ $('#run').addEventListener('click', e => {
   else if (b.hasAttribute('data-link')) copyText(APP_URL + '#' + state.id + (state.cur === p.start ? '' : '--' + state.cur), {ok:'Link to this step copied', fail:'Copying is blocked here. Use Share to copy the link.'});
   else if (b.hasAttribute('data-copyout')) copyText([p.title + ': ' + n.title, ...(n.items || []).map(i => '- ' + i)].join('\n'), {btn:b, el:b.closest('.res').querySelector('.res-b') || b.closest('.res').querySelector('h2')});
   /* Advice is copied for the patient: page references stay on screen but not in the copied text */
+  else if (b.hasAttribute('data-copyscript')) copyText(p.script.lines.join('\n'), {btn:b, el:$('#advlist')});
   else if (b.hasAttribute('data-copyadvice')) copyText(p.advice.map((a, i) => (i + 1) + '. ' + a.replace(/\s*\([^()]*\bp\s?(?:\d|[ivxl]+\b)[^()]*\)/g, '')).join('\n'), {btn:b, el:$('#advlist')});
   else if (b.hasAttribute('data-copyleaf')) copyText(leafletText(p), {btn:b, el:$('#leaf')});
   else if (b.dataset.leaf){ stopReader(); leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }
@@ -13844,7 +14425,7 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
    - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
-  const PAGE = 'ef3a6c4bf545'; /* this page's id, which build.js also writes into sw.js */
+  const PAGE = '5cc0427926ac'; /* this page's id, which build.js also writes into sw.js */
 
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };

@@ -97,6 +97,33 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await q.evaluate(() => !tabsOf(P['gz-rules']).some(t => t.k === 'pages') && !tabsOf(P['dengue-cpg']).some(t => t.k === 'pages')), 'rules and guidelines have no Printed pages tab');
     ok(await q.evaluate(() => { const a = document.querySelector('#ptab .epg a.pill'); return !!a && a.getAttribute('href').startsWith('https://drive.google.com/file/d/') && a.getAttribute('href').endsWith('/view') && a.target === '_blank' && /noopener/.test(a.rel); }), 'Printed pages links to the whole ebook as a PDF in Google Drive, in a new tab');
     await q.close(); }
+  // The abdominal pain handbook (12 Nov 2026): its 3D map loads its frames only when turned, its tabs, its own printed pages, the Malay script read aloud
+  { const q = await p.context().newPage(); const seen = []; q.on('request', r => { const u = r.url(); if (/\/(abdo3d|abdo)\/|abdo-script-ms/.test(u)) seen.push(u.replace(/^.*?\/(abdo3d|abdo|audio)\//, '$1/')); });
+    await q.goto(p.url().split('#')[0] + '#abdo-handbook'); await q.waitForTimeout(700);
+    ok(await q.locator('#run button[data-go]').count() === 12 && await q.evaluate(() => kindOf(P['abdo-handbook']) === 'Handbook' && CAT_OF['abdo-handbook'] && CAT_OF['abdo-handbook'].k === 'abdo'), 'the abdominal pain handbook opens on its twelve sections, labelled a handbook, in the abdomen group');
+    await q.goto(p.url().split('#')[0] + '#abdo-handbook--loc'); await q.waitForTimeout(900);
+    const f0 = seen.filter(u => /abdo3d\/f\d/.test(u)).length;
+    ok(await q.locator('[data-a3] .a3-g').count() === 9 && f0 === 0 && await q.evaluate(() => /poster\.webp$/.test(document.querySelector('.a3-img').getAttribute('src'))), 'the 3D map shows its front view and nine regions, with no turntable frame loaded' + (f0 ? ' (' + f0 + ' frames)' : ''));
+    ok(await q.evaluate(() => { const g = [...document.querySelectorAll('.a3-g')].map(x => { const b = x.getBBox(); return b.x + b.width / 2; }); return g[0] < g[1] && g[1] < g[2] && document.querySelector('.a3-sr').getBoundingClientRect().left < document.querySelector('.a3-sl').getBoundingClientRect().left && /right/i.test(document.querySelector('.a3-sr').textContent); }), 'the 3D map keeps the patient\'s right on the screen\'s left, labelled');
+    await q.locator('.a3-g[data-a3r="7"]').click(); await q.waitForTimeout(300);
+    ok(await q.evaluate(() => /front-lit\/r7\.webp$/.test(document.querySelector('.a3-img').getAttribute('src')) && /Right lower/.test(document.querySelector('.a3-info').textContent) && !!document.querySelector('.a3-info a[href="#abdo-handbook--rg7"]')), 'tapping region 7 lights it and lists what to think of there, with a link to its step');
+    await q.locator('[data-a3yaw]').fill('3'); await q.locator('[data-a3yaw]').dispatchEvent('input'); await q.waitForTimeout(900);
+    ok(await q.evaluate(() => /abdo3d\/f03\.webp$/.test(document.querySelector('.a3-img').getAttribute('src')) && document.querySelector('.a3-g.on').dataset.a3r === '7') && seen.filter(u => /abdo3d\/f\d/.test(u)).length === 25, 'turning loads the 25 frames once and keeps the lit region on the new frame');
+    await q.goto(p.url().split('#')[0] + '#abdo-handbook--pain'); await q.waitForTimeout(700);
+    const tabs = await q.locator('#ptab [role="tab"]').allInnerTexts();
+    ok(JSON.stringify(tabs) === JSON.stringify(['Quick reference', 'Sources', 'Malay script', 'Printed pages']), 'the handbook has its four tabs: Quick reference, Sources, Malay script, Printed pages (' + tabs.join(', ') + ')');
+    await q.locator('#ptab [data-pt="n1"]').click(); await q.waitForTimeout(200);
+    ok(await q.evaluate(() => { const a = [...document.querySelectorAll('#ptab .srcl a')]; return a.length === 42 && a.filter(x => x.target === '_blank').length === 41 && a.some(x => x.getAttribute('href') === '#dengue-cpg'); }), 'Sources lists the 42 references, each with its link (the dengue CPG opens in the guide)');
+    await q.locator('#ptab [data-pt="pages"]').click(); await q.waitForTimeout(200);
+    const pb = seen.filter(u => /^abdo\//.test(u)).length;
+    await q.locator('#ptab [data-ppage="abdo/p07"]').click(); await q.waitForTimeout(700);
+    const st = await q.evaluate(() => ({n:document.querySelectorAll('#ptab [data-ppage]').length, open:!document.querySelector('#lb').hidden, src:document.querySelector('#lbimg').getAttribute('src'), ok:document.querySelector('#lbimg').naturalWidth > 0}));
+    ok(st.n === 30 && pb === 0 && st.open && st.src === 'abdo/p07.webp' && st.ok, 'the handbook\'s 30 printed pages: none loaded before a tap, page 7 opens full size' + (st.ok && pb === 0 ? '' : ' ' + JSON.stringify({pb, st})));
+    await q.keyboard.press('Escape'); await q.waitForTimeout(150);
+    await q.locator('#ptab [data-pt="script"]').click(); await q.waitForTimeout(200);
+    ok(await q.locator('#ptab #advlist li').count() === 6 && await q.locator('#ptab .lsn[data-read="abdo-script-ms"]').count() === 1 && !seen.some(u => /abdo-script-ms/.test(u)), 'the Malay script tab has its six lines and a Listen bar, and its sound has not loaded');
+    ok(await q.evaluate(() => P['abdo-handbook'].nodes.fk3.items.every(i => !/not an indication for antibiotics/.test(i)) && /Left out or changed/.test(P['abdo-handbook'].nodes.fk3.gap) && !/two IV lines/.test(P['abdo-handbook'].nodes.stab.items.join(' '))), 'the lines the source check could not confirm are left out, and their nodes say so');
+    await q.close(); }
   ok(await p.evaluate(() => { const on = ['#t-paths', '#t-rules', '#t-dc', '#t-calc', '#t-intro', '#tl-tip'].map(s => document.querySelector(s + ' .tm')).filter(el => { const r = el.getBoundingClientRect(); return (Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height >= .5; }); return on.length > 0 && on.every(el => el.querySelector('video')); }), 'the home tiles on screen start their loops');
   await p.screenshot({path:out + '/d-home.png'});
   await p.click('#zmap [data-zs="3"]'); await p.waitForTimeout(250);

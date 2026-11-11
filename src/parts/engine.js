@@ -62,6 +62,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['Abdominal pain: the visual handbook','A teaching handbook on adult abdominal pain in the ED, with its quick reference: the bedside pathway, the checks that prevent a miss, red flags, tests and imaging, pain relief and antibiotics, eight presentations, six cases, and a 3D map of the nine regions to tap and turn. Every number was checked against the source the handbook cites; the HKL ebook\'s Abdominal pain pathway stays the department\'s. The Malay discharge script can be read aloud.',[['#abdo-handbook','Open the handbook'],['#abdo-handbook--loc','The 3D map'],['#abdo-handbook--trig','The checks that prevent a miss']]],
   ['Real X-ray films, with the normal anatomy outlined','Reading X-rays now shows a normal film on each step: chest, pelvis, shoulder, elbow, wrist, hand, knee, ankle and foot, eighteen films in all. Each bone is outlined on the film: tap a name to light it, or switch the outlines off to read the film bare. The outlines are this guide\'s own tracing by eye, a teaching aid; some are marked approximate where bones lie over each other. A film loads only when you open its step.',[['#xray-guide--wrj','Wrist'],['#xray-guide--hd','Hand'],['#xray-guide--ankv','Ankle']]],
   ['Dengue follows the 2026 CPG','The Dengue route opens the CPG entry (4th edition), which has a Quick Reference tab. Pregnancy, age 65 and over, and obesity are triaged to Group B1 (MTS level 4, Green), as the Quick Reference prints them. The ebook\'s dengue pathway is kept as printed, with a notice.',[['#dengue-cpg','Dengue CPG']]],
   ['The ebook\'s own pages','Each of the 23 ebook pathways has a Printed pages tab: a button for every page of the ebook that covers it, opening that page as printed, full size, so you can check the guide against the book. A page loads only when you tap it. The tab also links to the full ebook as a PDF.',[['#renal-colic','Renal colic'],['#pain','Pain management']]],
@@ -285,6 +286,7 @@ const CONFIRM = [
   "Triage course, Lecture 6 (Approach to abdominal pain) (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 23's safety-net script (\"don't keep taking the pain killer\", no follow-up date) differs from the ebook's abdominal pain advice (paracetamol; EMACC or EM Watch in 24 to 48 hours): the script is left out. (2) Slide 17's \"Amylase – Consider if there's guarding, vomiting\" differs from safe-practice--abd (\"Epigastric pain: ECG ± amylase\"). (3) Slide 15's gloss \"(asymptomatic elevated blood pressure)\" on hypertensive urgency adds a word the ebook's hypertensive-urgency lead does not use. (4) The deck's true case of a missed appendicitis is in the abdominal pain notes without an exact age, hospital or doses; three readings are kept because the teaching turns on them. Say if it should be cut further.",
   "Triage course, CBD 2 (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 15 (rabies) differs from the HKL protocol of October 2022 in animal-bites on dose (1 ml IM), schedule (days 0, 3, 7, 14 and 28, alternative day 30; days 0 and 3 if fully immunised), exposure categories, immunoglobulin for every Category 3 and a stop rule: the whole slide is left out. (2) Slide 23's \"IV Morphine 4mg STAT\" for a 65-year-old differs from the ebook's morphine pain protocol in pain (0.5 mg steps over 60 years). (3) Slide 24's pain score row (under 6 keep, 6 or more uptriage) differs from the ebook's \"Pain score over 6?\" and the policy's 7; the table's other three rows are in. (4) Slide 6's \"CORRECT TRIAGE: LEVEL 3 = YZ/ Y OBS … redirect immediately to Y OBS\" differs from gz-rules--dengue (memo of 23 Mar 2023: direct to the Observation Ward). (5) Slide 6's \"Dengue fever without warning sign with/without special population ONLY allowed to be triaged to GREEN ZONE\" differs from the Dengue SOP 2.0 note in dengue. Its \"Platelet <50\" point is kept as printed although the case's count is 80. (6) Slide 9's antibiotics (\"IV cefepime or IV tazocin\"; \"IV ceftriaxone or IV tazocin\") include two not on the IV antibiotic memo's list of 30 Jun 2026: the names are left out. (7) Slide 11's FBC intervals (\"EOD FBC in KK or GP\" if the combo is negative, \"daily FBC\" if positive) are left out: the ebook gives none, and the dengue CPG says daily follow-up. (8) Slide 16's speaker note grades the foot ulcer by Wagner, where diabetic-foot-cpg uses the University of Texas classification. (9) Kept as the slides print them, from outside sources the decks do not name: the bite slide's figures (5% and 80% infection risk, cat-scratch at 7 to 12 days, \"Does not transmit leptospirosis\", cloxacillin and Augmentin with no dose), \"IM diclofenac\" for the sudden headache with no dose, SNOOP4 and the low-risk headache criteria, the burn points and the six tibial plateau types. Confirm each, or name its source. (10) Does the \"wrong triage QR\" register in case 2 exist?",
   "Reading X-rays is built from named online sources in the guide's own words (Krishna, 10 Nov 2026), not from a department document. Still to confirm with the department: (1) Hot reporting: does HKL have it, and who reviews a late radiology report, and by when? (NICE NG38 wants a report before discharge; RCEM, 2023, sets a 72-hour review of abnormal reports.) (2) Who reviews a doubtful film? No source lists the findings that must go to a senior; the guide only has \"ask the EP first\" in referral-rules--ortho. (3) Ottawa ankle and foot rules: which ages and exclusions does the department follow (under 18 excluded on the NHS Scotland sheet; over 5 years in NICE NG38; under 6 or over 55 on WikEM)? The rule's wording comes from secondary sources, because the original papers are not open. (4) Ottawa knee rule: is the age \"55 or over\" (ACR) or \"over 55\" (WikEM)? Is weight-bearing one criterion or two? The checklist follows the ACR narrative; what is the youngest age it applies to? (5) A suspected scaphoid fracture with a normal film: the sources give MRI first, MRI at 10 days, repeat films at 10 to 14 days or at 2 to 3 weeks, and the guide's EMACC entry reviews within 3 days. Which next test, and when? (6) Occult hip fracture and hip views are kept out of the X-ray guide, because the hip fracture CPG entry holds the local answer (CT as the local choice; its own views) and NICE CG124 and Radiology Masterclass differ from it. (7) Abdominal film: the ebook's abdominal pain pathway lists \"CXR (erect) with or without abdominal X-ray\"; the RCR's list of indications does not include abdominal pain alone. xray-guide--abno says so and points to the ebook as the approved pathway. (8) Elbow extension test (Appelboam, BMJ 2008): how would a Green Zone patient be brought back at 7 to 10 days? (9) The adult cervical spine film is left out (Krishna, 10 Nov 2026): the head injury CPG (2015) still uses three-view films, where NICE and the ACR now send adults who need imaging to CT.",
+  "The abdominal pain handbook against the ebook (12 Nov 2026): the handbook is a teaching synthesis and the ebook stays the department's pathway; where they differ, the department should say which to teach. (1) Follow-up of non-specific abdominal pain: the handbook (p22, after RCEMLearning) arranges a time-bound review \"often within 12-24 h if unresolved\"; the ebook (p11) gives EMACC or EMWATCH in 24 to 48 hours. (2) IV morphine titration: the ebook gives 1 mg at 60 years old or below; MOH Pain Management in ETD 2020, Appendix 2, which the handbook quotes, gives 0.5 mg at 60 or older, so a patient of exactly 60 gets a different dose. (3) IV fentanyl: the ebook's table lists 50-100 mcg; MOH 2020 lists 25-50 micrograms as the initial alternative. (4) Renal colic imaging: the handbook cites NICE NG118 (low-dose non-contrast CT within 24 h in adults); the ebook's pathway uses POCUS, an urgent KUB ultrasound by radiology and an early TCA for KUB ultrasound.",
   "The ebook against the guide (checked line by line, 12 Nov 2026): two printed numbers where the guide or a calculator reads the print one way and the department should confirm it. (1) Acute behavioural disturbance, p8: midazolam for a child is printed \"IM 0.1-0.2 mg/kg – 0.5mg/kg\" in the Starting Dose column; the guide and its calculator read the 0.5 mg/kg as a maximum. (2) Pain, p50: paracetamol under 50 kg is printed \"Max 60mg/kg/dose\"; the guide and its calculator say 60 mg/kg/day."
 ];
 
@@ -662,6 +664,56 @@ function filmHTML(k){
     `<figcaption>Tap a name to light that part on the film${f.groups ? '; a group opens to its bones' : ''}. The outlines are this guide's own tracing by eye, a teaching aid and not a measurement; where one part runs on into the next, the line between them is a guide, not an edge on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
 }
 if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); });
+/* ================= The 3D abdomen map (12 Nov 2026) =================
+   The handbook's nine regions (p. 7) on a glass torso rendered with Blender for this guide (sources/abdo/abdo3d.blend): the front
+   view first (abdo3d/poster.webp), the patient's right on the screen's left, labelled. Tap a region to light it and see what to
+   think of there. The slider, or a sideways drag, turns the torso through 72 degrees: the 25 frames (abdo3d/fNN.webp, about
+   19 KB each) download only when it is first turned. A3D (data17.js) holds each region's outline on each frame. */
+const A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : [];
+const a3pad = i => String(i).padStart(2, '0');
+const a3c = pts => { const a = pts.split(' ').map(s => s.split(',').map(Number)); return [a.reduce((t, q) => t + q[0], 0) / a.length, a.reduce((t, q) => t + q[1], 0) / a.length]; };
+function a3svg(i, on){
+  return A3D.frames[i][1].map((pts, r) => { const [x, y] = a3c(pts); return `<g class="a3-g${on === r + 1 ? ' on' : ''}" data-a3r="${r + 1}" role="button" tabindex="0" aria-label="Region ${esc(A3_REG[r][0])}"><polygon points="${pts}"/><text x="${x.toFixed(0)}" y="${(y + 14).toFixed(0)}">${r + 1}</text></g>`; }).join('');
+}
+function abdo3dHTML(){
+  if (typeof A3D === 'undefined') return '';
+  return `<figure class="fig a3" data-a3 data-i="${A3D.front}" data-on="0"><div class="a3-bar"><b>The nine regions, in 3D</b></div>` +
+    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions">` +
+    `<svg viewBox="0 0 ${A3D.w} ${A3D.h}">${a3svg(A3D.front, 0)}</svg><span class="a3-s a3-sr">Patient's right</span><span class="a3-s a3-sl">Patient's left</span></div>` +
+    `<label class="a3-turn"><span>Turn</span><input type="range" min="0" max="${A3D.frames.length - 1}" step="1" value="${A3D.front}" data-a3yaw aria-label="Turn the torso"></label>` +
+    `<div class="a3-info" aria-live="polite"><p class="hint">Tap a region to light it and see what to think of there.</p></div>` +
+    `<figcaption>Schematic regions only, as the handbook (p. 7) draws them: organs and pain can overlap. The glass torso is this guide's own model, made in Blender.</figcaption></figure>`;
+}
+FIGS.abdo3d = abdo3dHTML;
+const a3loaded = new Set();
+function a3frame(fig, i){
+  i = Math.max(0, Math.min(A3D.frames.length - 1, i));
+  const on = +fig.dataset.on || 0;
+  fig.dataset.i = i;
+  if (!a3loaded.size) A3D.frames.forEach((_, k) => { const im = new Image(); im.src = `abdo3d/f${a3pad(k)}.webp`; a3loaded.add(im); });
+  fig.querySelector('.a3-img').src = i === A3D.front && on ? `abdo3d/front-lit/r${on}.webp` : `abdo3d/f${a3pad(i)}.webp`;
+  fig.querySelector('svg').innerHTML = a3svg(i, on);
+  const yaw = A3D.frames[i][0], r = fig.querySelector('[data-a3yaw]'); if (+r.value !== i) r.value = i;
+  r.setAttribute('aria-valuetext', yaw === 0 ? 'Front view' : Math.abs(yaw) + ' degrees toward the patient\'s ' + (yaw > 0 ? 'left' : 'right'));
+}
+function a3pick(fig, r){
+  const was = +fig.dataset.on || 0, on = was === r ? 0 : r;
+  fig.dataset.on = on;
+  const i = +fig.dataset.i;
+  fig.querySelectorAll('.a3-g').forEach(g => g.classList.toggle('on', +g.dataset.a3r === on));
+  fig.classList.toggle('a3-pick', !!on);
+  if (i === A3D.front) fig.querySelector('.a3-img').src = on ? `abdo3d/front-lit/r${on}.webp` : (a3loaded.size ? `abdo3d/f${a3pad(i)}.webp` : 'abdo3d/poster.webp');
+  const R = A3_REG[on - 1];
+  fig.querySelector('.a3-info').innerHTML = on ? `<h4>${esc(R[0])}</h4><ul>${R[1].map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="links"><a class="pill" href="#abdo-handbook--rg${on}">Open region ${on}${svg('chev')}</a>${R[2].map(l => `<a class="pill" href="#abdo-handbook--${l[0]}">${esc(l[1])}</a>`).join('')}</div>` : '<p class="hint">Tap a region to light it and see what to think of there.</p>';
+}
+document.addEventListener('click', e => { const g = e.target.closest && e.target.closest('.a3-g'); if (g) a3pick(g.closest('[data-a3]'), +g.dataset.a3r); });
+document.addEventListener('keydown', e => { const g = e.target.closest && e.target.closest('.a3-g'); if (g && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); a3pick(g.closest('[data-a3]'), +g.dataset.a3r); } });
+document.addEventListener('input', e => { const r = e.target.closest && e.target.closest('[data-a3yaw]'); if (r) a3frame(r.closest('[data-a3]'), +r.value); });
+/* A sideways drag on the torso turns it, a step every 14 px; an upward or downward swipe still scrolls the page */
+let a3drag = null;
+document.addEventListener('pointerdown', e => { const s = e.target.closest && e.target.closest('.a3-stage'); if (s && e.isPrimary) a3drag = {s, x:e.clientX, i:+s.closest('[data-a3]').dataset.i, moved:false}; });
+document.addEventListener('pointermove', e => { if (!a3drag) return; const d = Math.round((e.clientX - a3drag.x) / 14); if (d){ a3drag.moved = true; a3frame(a3drag.s.closest('[data-a3]'), a3drag.i - d); } });
+['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, () => { a3drag = null; }));
 /* A step that reads several films shows them one after another (XGROUPS, data15.js) */
 if (typeof XGROUPS !== 'undefined') Object.keys(XGROUPS).forEach(n => { FIGS['xg-' + n] = () => XGROUPS[n].map(filmHTML).join(''); });
 document.addEventListener('click', e => {
@@ -691,7 +743,7 @@ const store = {
   del(k){ try { localStorage.removeItem(k); } catch(e){} }
 };
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const kindOf = p => p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
+const kindOf = p => p.kind ? p.kind : p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
 const metaOf = p => p.page ? 'Ebook p' + p.page : (p.src || '');
 const kindLabel = (p, k) => (p.kinds && p.kinds[k]) || (p.grp === 'rules' ? KIND_R : p.grp === 'cpg' ? KIND_G : KIND)[k];
 /* A guideline's neutral outcomes are its answers (the medicines), not a next step */
@@ -744,7 +796,7 @@ const CATS = [
   {k:'heart', t:'Heart and vessels', s:'Heart', ic:'heart', c:'c-heart', j:'t-garnet', ids:['acs','acs-cpg','heart-failure','hypertensive-urgency','svt','syncope','dvt','vte-cpg']},
   {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','asthma-cpg','copd-cpg','pneumonia','sinusitis-cpg','anaphylaxis']},
   {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','behavioural-disturbance']},
-  {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','gastroenteritis','biliary','renal-colic','ckd-cpg','scrotal-pain','fb-children-cpg']},
+  {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','abdo-handbook','gastroenteritis','biliary','renal-colic','ckd-cpg','scrotal-pain','fb-children-cpg']},
   {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis','sore-throat-cpg']},
   {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','t2dm-cpg','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','snakebite-moh','pain','cancer-pain-cpg']},
   {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['xray-guide','hip-fracture-cpg','avulsed-tooth-cpg']},
@@ -1027,7 +1079,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -1333,12 +1385,14 @@ function tabsOf(p){
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
-  const note = d => `<div class="deptnote"><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}</div>`;
+  const note = d => `<div class="deptnote"><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}${d.refs ? `<ol class="srcl">${d.refs.map(r => `<li>${esc(r[0])} ${r[1][0] === '#' ? `<a href="${r[1]}">Open in this guide</a>` : `<a href="${r[1]}" target="_blank" rel="noopener noreferrer">Open source${svg('ext')}</a>`}</li>`).join('')}</ol>` : ''}</div>`;
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
   if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
   /* A national guideline's reference notes, several tabs of them, each note with its page */
   (p.notes || []).forEach((t, i) => T.push({k:'n' + i, l:t.l, cls:'t-cpg', html:t.notes.map(note).join('') + (t.foot ? `<p class="hint">${esc(t.foot)}</p>` : p.notesFoot ? `<p class="hint">${esc(p.notesFoot)}</p>` : p.own ? `<p class="hint">From the ${esc(p.src)}, with its page numbers, in the guide's own words: the CPG gives no permission to reproduce it, so nothing here is quoted.</p>` : `<p class="hint">From the ${esc(p.src)}, with its page numbers. Reproduced with acknowledgement to ${esc(p.ack || 'MaHTAS')}.</p>`)}));
+  if (p.script) T.push({k:'script', l:'Malay script', cls:'t-advice', html:`<h3 class="tab-h">${esc(p.script.h)}</h3>` + (READ[p.script.read] ? listenBar(p.script.read, 'Dengar skrip ini') : '') + `<ol id="advlist" lang="ms">${p.script.lines.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyscript>${svg('copy')}<span class="bl">Copy script</span></button></div><p class="hint">${esc(p.script.note)}</p>`});
   (p.tables || []).forEach((t, i) => T.push({k:'t' + i, l:t.title, html:table(t)}));
+  if (p.pages) T.push({k:'pages', l:'Printed pages', html:`<p class="hint">The ${esc(p.pages.name.toLowerCase())}'s own pages, as printed. A page loads when you tap it; tap the page to zoom.</p><div class="epg">${p.pages.list.map(([f, t]) => `<button type="button" class="pill" data-ppage="${p.pages.dir}/${f}" data-pname="${esc(p.pages.name + ' · ' + t)}">${svg('poster')}${esc(t)}</button>`).join('')}${p.pages.pdf.map(([h, t]) => `<a class="pill" href="${h}" target="_blank" rel="noopener">${esc(t)}${svg('ext')}</a>`).join('')}</div>`});
   const epg = ebookPages(p);
   if (epg.length) T.push({k:'pages', l:'Printed pages', html:`<p class="hint">The ebook's own ${epg.length === 1 ? 'page' : 'pages'} for this pathway, as printed. A page loads when you tap it; tap the page to zoom.</p><div class="epg">${epg.map(n => `<button type="button" class="pill" data-epage="${n}">${svg('poster')}Page ${n}</button>`).join('')}<a class="pill" href="${EBOOK_PDF}" target="_blank" rel="noopener">Full ebook (PDF)${svg('ext')}</a></div>`});
   /* A national CPG on the shelf opens its full PDF from its References tab */
@@ -1361,6 +1415,9 @@ function selectTab(k, focus){
    (narration/README.md) and played from app/audio/ (mono MP3). dur, marks (the start of each section, in seconds) and lines
    (the start of each line, as [seconds, section, element]) are written by narration/scripts/fill-read.cjs. */
 const READ = {
+  /* The abdominal pain handbook's Malay discharge script (p. 23): Malay Kore over a quiet Flow Music bed; line 5 of the screen (the review date and place) is left for the MO to fill in, so it is not read. Times are the word starts. */
+  'abdo-script-ms':{src:'audio/abdo-script-ms.mp3', dur:38.1, marks:[0],
+    lines:[[1.98,0,0],[5.82,0,1],[20.8,0,2],[26.03,0,3],[30.77,0,5]]},
   'leaf-dengue-en':{src:'audio/leaf-dengue-en.mp3', dur:108.5, marks:[0, 2.29, 46.86, 70.02],
     lines:[[0,0,0],[2.29,1,0],[3.82,1,1],[18.55,1,2],[24.99,1,3],[26.68,1,4],[30.6,1,5],[34.72,1,6],[38.21,1,7],[46.86,2,0],[47.97,2,1],[59.64,2,2],[63.43,2,3],[66.58,2,4],[70.02,3,0],[72.15,3,1],[84.82,3,2],[89.61,3,3],[91.95,3,4],[93.52,3,5],[95.32,3,6],[98.27,3,7],[100.17,3,8],[105.26,3,9]]},
   'leaf-dengue-ms':{src:'audio/leaf-dengue-ms.mp3', dur:101.49, marks:[0, 3.28, 42.31, 64.11],
@@ -2911,6 +2968,15 @@ function openEbookPage(n){
   $('#lbs').scrollTo(0, 0); $('#lbclose').focus();
 }
 document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-epage]'); if (b) openEbookPage(+b.dataset.epage); });
+function openPageImg(src, name){
+  lbFrom = document.activeElement; lbI = 0;
+  $('#lbimg').src = src + '.webp'; $('#lbimg').alt = name + ', as printed';
+  $('#lbt').textContent = name; $('#lb').setAttribute('aria-label', 'Printed page');
+  $('#lbs').classList.remove('zoom'); $('#lbzoom').textContent = 'Zoom in';
+  $('#lb').hidden = false; document.documentElement.style.overflow = 'hidden';
+  $('#lbs').scrollTo(0, 0); $('#lbclose').focus();
+}
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-ppage]'); if (b) openPageImg(b.dataset.ppage, b.dataset.pname); });
 function closeSheet(){ if ($('#lb').hidden) return; $('#lb').hidden = true; document.documentElement.style.overflow = ''; if (lbFrom && lbFrom.focus) lbFrom.focus(); }
 function toggleZoom(){ const z = $('#lbs').classList.toggle('zoom'); $('#lbzoom').textContent = z ? 'Fit to screen' : 'Zoom in'; }
 
@@ -3316,6 +3382,7 @@ $('#run').addEventListener('click', e => {
   else if (b.hasAttribute('data-link')) copyText(APP_URL + '#' + state.id + (state.cur === p.start ? '' : '--' + state.cur), {ok:'Link to this step copied', fail:'Copying is blocked here. Use Share to copy the link.'});
   else if (b.hasAttribute('data-copyout')) copyText([p.title + ': ' + n.title, ...(n.items || []).map(i => '- ' + i)].join('\n'), {btn:b, el:b.closest('.res').querySelector('.res-b') || b.closest('.res').querySelector('h2')});
   /* Advice is copied for the patient: page references stay on screen but not in the copied text */
+  else if (b.hasAttribute('data-copyscript')) copyText(p.script.lines.join('\n'), {btn:b, el:$('#advlist')});
   else if (b.hasAttribute('data-copyadvice')) copyText(p.advice.map((a, i) => (i + 1) + '. ' + a.replace(/\s*\([^()]*\bp\s?(?:\d|[ivxl]+\b)[^()]*\)/g, '')).join('\n'), {btn:b, el:$('#advlist')});
   else if (b.hasAttribute('data-copyleaf')) copyText(leafletText(p), {btn:b, el:$('#leaf')});
   else if (b.dataset.leaf){ stopReader(); leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }

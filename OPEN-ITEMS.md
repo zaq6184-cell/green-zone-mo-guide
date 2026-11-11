@@ -16,6 +16,23 @@ Still to confirm with the department (the app lists them under Still to confirm 
 - Pneumonia and cellulitis, p27 and p30: "Manage as outpatient**" has no footnote for its two asterisks.
 - Five lines of narrated discharge advice are a few words short of the print and were left as recorded, so the voice and the text still match: mild head injury ("must be accompanied", "plenty of rest", "Don't drive alone"), dengue ("If possible" before the mosquito repellent line) and hypoglycaemia ("confusion", "with or without symptoms"). Re-record them, or leave them?
 
+**The abdominal pain handbook (`abdo-handbook`, `data16.js`, added 12 Nov 2026).** Krishna's own teaching handbook, made with AI, admitted on 12 Nov 2026 "checked, as printed": quoted with its page, every number checked against the source it cites (`sources/abdo/SOURCE-CHECK.md`, `ABDO-REVIEW.md`). Where it differs from the ebook (still to confirm with the department, also in the app):
+
+- Follow-up of non-specific abdominal pain: the handbook (p22, after RCEMLearning) gives a time-bound review "often within 12-24 h if unresolved"; the ebook (p11) gives EMACC or EMWATCH in 24 to 48 hours (and the department note on the pathway, EMACC within 3 days).
+- IV morphine titration: the ebook gives 1 mg at 60 years old or below; MOH Pain Management in ETD 2020, Appendix 2 (printed p42), gives 0.5 mg at 60 or older. At exactly 60 the doses differ.
+- IV fentanyl: the ebook's analgesia table lists 50-100 mcg; MOH 2020 (printed pp20, 22) lists 25-50 micrograms as the initial alternative.
+- Renal colic imaging: the handbook (p17) cites NICE NG118, low-dose non-contrast CT within 24 h in adults; the ebook's pathway (pp53-54) uses POCUS, urgent KUB ultrasound by radiology and an early TCA for KUB ultrasound.
+
+For Krishna as the handbook's editor (not department questions; the app shows the source's own wording or leaves the line out, as noted on each step):
+
+- p4: "two IV lines" and "Use smaller aliquots in frailty/cardiorenal disease" are in none of the page's sources (NICE CG174 lowers volumes for maintenance only); "The first 10 minutes" is uncited.
+- p6 and p20: BSG/BASL [31] prints ">250 cells/mm3", the handbook "at least 250".
+- p8 and p14: ACG 2024 [18] prints "greater than 3 times the upper limit of normal", the handbook "at least 3 times"; [40] (Revised Atlanta) could not be read through its bot check.
+- p11: paracetamol "1 g PO every 6 h": MOH 2020 [1] prints 1 g 4-hourly prn on its abdominal pain page (p22) and 6-hourly elsewhere (pp9, 19, 24, 27); RCEM [25] applies the 50 kg threshold to IV paracetamol only.
+- p17 and quick reference p2: "Anuria alone is not an indication for antibiotics" / "Antibiotics only when infection is suspected": EAU [17] places "start antibiotics immediately" under sepsis and anuria together.
+- Wording softer than the source: p22 "often within 12-24 h" (RCEMLearning: "may also be appropriate"); p14 ERCP "usually within 24 h" (ACG: within 24 h); p12 cultures "when this will not meaningfully delay treatment" (SSC 2026: "as soon as possible and ideally before" antibiotics).
+- Not checked: [30] Tokyo 2018 and [40] Revised Atlanta (bot checks; the abstracts lack the figures), and [38] adrenal crisis guidance (not reachable). [7] RCEMLearning now lands on a maintenance page (read from a 2024 snapshot). [4] links to someone else's Drive copy of the dengue CPG; the app links its own dengue CPG entry instead.
+
 **Reading X-rays (`xray-guide`, from the named online sources in `XRAY-RESEARCH.md`, added 11 Nov 2026).** Krishna admitted these sources on 10 Nov 2026 as sources of facts, in the guide's own words. Where they disagree, or differ from what the guide already says, the guide names both and the department's answer is still needed:
 
 - Hot reporting: does HKL have it, and who reviews a late radiology report, and by when? (NICE NG38 wants a report before discharge; RCEM, 2023, sets a 72-hour review of abnormal reports.)

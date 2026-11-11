@@ -84,6 +84,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **Abdominal pain: the visual handbook (12 Nov 2026):** a teaching handbook on adult abdominal pain in the ED, with its quick reference: the bedside pathway, the checks that prevent a miss, red flags, tests, imaging, pain relief, antibiotics, eight presentations, six cases, a 3D map of the nine regions to tap and turn, its printed pages, its 42 sources with links, and a Malay discharge script read aloud. Every number was checked against the source the handbook cites; the ebook's own abdominal pain pathway stays the department's.
 - **Dengue follows the 2026 CPG (web app, 12 Nov 2026):** the Dengue route opens the CPG entry, which has a new Quick Reference tab, and pregnancy, age 65 and over, and obesity are triaged to Group B1 (Green) as the Quick Reference prints them. The ebook's dengue pathway is kept as printed, with a notice.
 - **Real X-ray films with the anatomy outlined (11 Nov 2026 by the PC's clock):** seventeen more normal films in Reading X-rays (chest, pelvis, shoulder, elbow, lateral wrist, hand, knee, ankle, foot), each bone outlined by the guide; the hand films' list opens by finger, metacarpals and carpal bones.
 - **A first real X-ray film (web app, 12 Nov 2026):** the wrist step of Reading X-rays shows a normal wrist film with each bone outlined; tap a name to light the bone, or switch the outlines off. More films are on the way.
