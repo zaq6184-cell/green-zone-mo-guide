@@ -1041,6 +1041,105 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await p.evaluate(() => !Object.values(P).some(e => /Krishna/.test(JSON.stringify(e))) && !CONFIRM.some(c => /Krishna/.test(c))), 'review: the app text says "the guide owner", not a name');
   }
 
+  /* ---------- The ED extension directory (12 Nov 2026, data22.js) ---------- */
+  {
+    await go(p, '#numbers', 500);
+    ok(await p.evaluate(() => EXTDIR.groups.length === 5 && document.querySelectorAll('#extl .ext-l li').length === 34 && document.querySelectorAll('#extl [data-ext]').length === 46 && !!document.querySelector('#exthero [data-ext="6705"]') && document.querySelector('#exthero .tm').dataset.tm === 'extdir' && TILE_KEYS.has('extdir')) && ['mp4', 'webp'].every(x => fs.existsSync(path.join(__dirname, '..', 'app', 'tiles', 'extdir.' + x))) && await hscroll(p) === 0, 'extensions: the directory lists 34 rooms and 46 extension keys in five areas, with 6705 on its Flow banner (a still and its loop), and nothing scrolls sideways');
+    await p.fill('#extq', 'resus'); await p.waitForTimeout(200);
+    ok(await p.evaluate(() => [...document.querySelectorAll('#extl .ext-t b')].map(b => b.textContent).join('|') === 'Resus I|Resus II'), 'extensions: "resus" finds Resus I and Resus II');
+    await p.fill('#extq', '5359'); await p.waitForTimeout(200);
+    ok(await p.evaluate(() => [...document.querySelectorAll('#extl .ext-t b')].map(b => b.textContent).join('|') === 'Observation Ward' && !!document.querySelector('#extl .ext-x mark')), 'extensions: digits find the room, with the digits marked');
+    await p.fill('#extq', ''); await p.evaluate(() => document.querySelector('#extf [data-ef="ucc"]').click()); await p.waitForTimeout(150);
+    ok(await p.evaluate(() => document.querySelectorAll('#extl .ext-l li').length === 4), 'extensions: the UCC / PHC filter shows its four rooms');
+    await p.evaluate(() => document.querySelector('#extf [data-ef="all"]').click()); await p.waitForTimeout(150);
+    ok(await p.evaluate(() => CONFIRM.some(c => /6699 for Bilik Porter PPK and Pejabat Rekod Kecemasan/.test(c)) && [...document.querySelectorAll('#extl small')].filter(x => /same number/.test(x.textContent)).length === 6 && /no issuer or date printed/.test(document.querySelector('#extsrc').textContent)), 'extensions: the three numbers printed for two rooms are marked on all six rows and under Still to confirm, and the source line says what the list lacks');
+    await p.evaluate(() => openPal()); await p.fill('#gq', 'observation ward'); await p.waitForTimeout(250);
+    await p.keyboard.press('Enter'); await p.waitForTimeout(400);
+    ok(await p.evaluate(() => location.hash === '#numbers' && document.querySelector('#extq').value === 'Observation Ward' && document.querySelectorAll('#extl .ext-l li').length === 1), 'search: "observation ward" opens the directory on its row');
+    await p.evaluate(() => { document.querySelector('#extq').value = ''; renderExt(); });
+  }
+
+  /* ---------- Seven features of 12 Nov 2026: forgiving search, voice, home care advice by QR, Copy route, saving
+     everything (in the web app section below), Ask in your own words and Flag this step ---------- */
+  {
+    const fm = q => p.evaluate(q => { const x = findMore(q); return {fixed:x.fixed, also:x.also, r:x.r.map(e => e.href)}; }, q);
+    let r = await fm('renal colic');
+    ok(r.r[0] === '#renal-colic' && !r.fixed && !r.also.length, 'forgiving search: a query that already matches is left as it is (renal colic)');
+    r = await fm('paracetmol'); ok(r.fixed === 'paracetamol' && r.r[0] === '#paracetamol-overdose', 'forgiving search: "paracetmol" finds paracetamol overdose, as a corrected word');
+    r = await fm('renal collic'); ok(r.fixed === 'renal colic' && r.r[0] === '#renal-colic', 'forgiving search: "renal collic" finds renal colic');
+    r = await fm('asthama'); ok(r.fixed === 'asthma' && r.r[0] === '#asthma', 'forgiving search: "asthama" finds asthma');
+    r = await fm('hypoglycemia'); ok(r.fixed === 'hypoglycaemia' && r.r[0] === '#hypoglycaemia', 'forgiving search: the American spelling hypoglycemia finds hypoglycaemia');
+    r = await fm('diarrhea'); ok(r.fixed === 'diarrhoea' && r.r.slice(0, 3).includes('#gastroenteritis'), 'forgiving search: diarrhea finds diarrhoea and gastroenteritis');
+    r = await fm('sakit dada'); ok(r.also.includes('chest pain') && r.r.slice(0, 3).includes('#acs'), 'forgiving search: Malay "sakit dada" adds chest pain, with the ACS pathway in the top 3');
+    r = await fm('kencing batu'); ok(r.r[0] === '#renal-colic', 'forgiving search: "kencing batu" opens with renal colic');
+    r = await fm('cirit-birit'); ok(r.r.slice(0, 3).includes('#gastroenteritis'), 'forgiving search: "cirit-birit" finds gastroenteritis');
+    r = await fm('darah tinggi'); ok(r.r[0] === '#hypertensive-urgency', 'forgiving search: "darah tinggi" opens with hypertensive urgency');
+    r = await fm('AGE'); ok(r.r[0] === '#gastroenteritis', 'forgiving search: AGE in capitals opens with gastroenteritis');
+    r = await fm('age'); ok(!r.also.length && !r.fixed, 'forgiving search: "age" in small letters stays the word age');
+    r = await fm('5359'); ok(!r.fixed && r.r[0] === '#numbers', 'forgiving search: digits are never corrected (an extension finds its room)');
+    r = await fm('dengue'); ok(r.r[0] === '#dengue-cpg' && !r.also.length, 'forgiving search: dengue still opens with the CPG');
+    await p.evaluate(() => openPal()); await p.fill('#gq', 'metoclopromide'); await p.waitForTimeout(250);
+    ok(/Nothing for .metoclopromide.\. Showing results for metoclopramide/.test(await p.textContent('#gfix').catch(() => '')), 'forgiving search: a corrected word is always shown, so a corrected drug name is never silent');
+    await p.fill('#gq', 'sakit perut'); await p.waitForTimeout(250);
+    ok(/Including results for abdominal pain/.test(await p.textContent('#gfix').catch(() => '')) && await p.evaluate(() => [...document.querySelectorAll('#gres a')].slice(0, 3).some(a => a.getAttribute('href') === '#abdominal-pain')), 'forgiving search: "sakit perut" says it includes abdominal pain, with the ebook pathway in the top 3');
+    ok(await p.evaluate(() => !!(window.SpeechRecognition || window.webkitSpeechRecognition) === !document.querySelector('#gmic').hidden && /not a patient's name/.test(MIC_HINT.en) && /bukan nama atau butiran pesakit/.test(MIC_HINT.ms)), 'voice: the microphone shows where the browser can listen, and its hint says not to speak a patient\'s details');
+    ok(await p.evaluate(() => askFn === null && askBtn('dengue in pregnancy') === '' && !document.querySelector('#gask')), 'ask: outside claude.ai there is no Ask button');
+    await p.keyboard.press('Escape');
+
+    /* Copy route: walk renal colic to its discharge by tapping, then copy */
+    await go(p, '#renal-colic', 500);
+    const plan = await p.evaluate(() => { const q = P['renal-colic']; const end = Object.keys(q.nodes).find(k => q.nodes[k].end === 'discharge'); return {end, labels:pathTo('renal-colic', end).map(t => t.label)}; });
+    for (const l of plan.labels){
+      const sel = await p.evaluate(l => { const n = P[state.id].nodes[state.cur]; return l === 'Done' ? '#run [data-next]' : `#run [data-go="${n.opts.findIndex(o => o[0] === l)}"]`; }, l);
+      await p.click(sel); await p.waitForTimeout(120);
+    }
+    const rt = await p.evaluate(() => routeText(P[state.id], P[state.id].nodes[state.cur]));
+    ok(await p.evaluate(e => state.cur === e, plan.end) && !!(await p.$('#run [data-copyroute]')) && /^Renal colic: route through the pathway\n1\. .+ Answer: Yes/.test(rt) && /\nOutcome: .+\n- /.test(rt) && /pages 53–54/.test(rt) && !/—/.test(rt), 'copy route: after walking renal colic, the outcome offers Copy route: each question with the answer chosen, the outcome and its pages');
+    await go(p, '#renal-colic--' + plan.end, 500);
+    ok(!(await p.$('#run [data-copyroute]')), 'copy route: a step opened by a link has no route to copy (no answer is made up)');
+
+    /* Home care advice by QR: the outcome's Show to patient, the code and the patient's page */
+    await p.click('#run [data-ptqr]'); await p.waitForTimeout(250);
+    ok(await p.evaluate(() => !document.querySelector('#ptq').hidden && document.querySelector('#ptq .ptq-c path').getAttribute('d') === PT_QR['renal-colic'].en.d && document.querySelector('#ptqu').textContent === APP_URL + '#pt-renal-colic'), 'patient QR: Show to patient on the discharge outcome brings up the code for the web app\'s #pt-renal-colic');
+    await p.keyboard.press('Escape'); await p.waitForTimeout(150);
+    const qrm2 = require('./qr.js');
+    const codes = await p.evaluate(() => Object.entries(PT_QR).flatMap(([id, o]) => Object.entries(o).map(([lg, q]) => ({id, lg, ...q}))));
+    const grid = q => { const m = Array.from({length:q.n}, () => Array(q.n).fill(false)); for (const [, x, y, n] of q.d.matchAll(/M(\d+) (\d+)h(\d+)/g)) for (let i = 0; i < +n; i++) m[+y][+x + i] = true; return m; };
+    ok(codes.length === 10 && codes.every(q => { const d = qrm2.decode(grid(q)); return d.eccOk && d.text === q.u && q.u === 'https://zaq6184-cell.github.io/green-zone-mo-guide/#pt-' + q.id + (q.lg === 'ms' ? '-ms' : ''); }), 'patient QR: all 10 codes read back as their own #pt- address on the web app');
+    ok(await p.evaluate(() => Object.keys(PT_QR).every(id => (P[id].leaflet && READ_LEAF[id]) || (P[id].advice && READ_ADV[id])) && Object.keys(READ_ADV).every(id => ptKey(id)) && ptKey('dengue') === 'dengue-cpg' && !ptKey('cellulitis')), 'patient QR: only advice written for the patient (the two leaflets and the read-aloud advice); the ebook\'s dengue hands out the CPG leaflet; none for cellulitis');
+    await go(p, '#pt-dengue-cpg-ms', 600);
+    ok(await p.evaluate(() => document.documentElement.classList.contains('pt-mode') && curView === 'pt' && getComputedStyle(document.querySelector('#topbar')).display === 'none' && getComputedStyle(document.querySelector('#tabbar')).display === 'none' && document.querySelector('#h-pt').textContent === 'Nasihat penjagaan di rumah' && !!document.querySelector('#ptbody .lsn[data-read="leaf-dengue-ms"]') && document.querySelectorAll('#ptbody .leaf-g').length === P['dengue-cpg'].leaflet.ms.groups.length) && await hscroll(p) <= 0, 'patient page: #pt-dengue-cpg-ms shows the Malay leaflet with Listen, and nothing else from the guide, with no sideways scroll');
+    await p.screenshot({path:out + '/p-pt.png'});
+    await go(p, '#pt-renal-colic', 500);
+    ok(await p.evaluate(() => document.querySelectorAll('#ptbody .pt-list li').length === P['renal-colic'].advice.length && ![...document.querySelectorAll('#ptbody .pt-list li')].some(li => /\(p\s?\d/.test(li.textContent))), 'patient page: the advice lines are all there, without the ebook\'s page references');
+    await go(p, '#home', 400);
+    ok(await p.evaluate(() => !document.documentElement.classList.contains('pt-mode') && document.title === 'Green Zone MO Guide'), 'patient page: leaving it brings the guide back, with its title');
+
+    /* Flag this step: preset reasons, no box to type in, a report to send */
+    await go(p, '#renal-colic', 500);
+    await p.click('#run [data-flag]'); await p.waitForTimeout(200);
+    await p.click('#flagbody [data-fw="2"]'); await p.waitForTimeout(120);
+    const ft = await p.textContent('#flagt');
+    ok(/Where: Renal colic: /.test(ft) && /#renal-colic\n/.test(ft) && /What: It is unclear/.test(ft) && !(await p.$('#flagdlg input, #flagdlg textarea, #flagdlg [contenteditable]')) && (await p.getAttribute('#flagwa', 'href')).startsWith('https://wa.me/?text=Green%20Zone'), 'flag: Something wrong on this step offers preset reasons only, and a report with the step\'s link to send on WhatsApp or copy');
+    await p.screenshot({path:out + '/p-flag.png'});
+    await p.keyboard.press('Escape');
+
+    /* Ask in your own words, with a stand-in for the claude.ai host: the guide's own entries only */
+    const ac2 = await b.newContext({...phone, reducedMotion:'reduce'});
+    await ac2.addInitScript(() => {
+      const fake = Object.assign(async () => ({text:''}), {json: async input => { window.__askIn = input; return {picks:['c2', 'c1', 'c99', '#made-up', 'c2']}; }});
+      window.claude = {use: async n => n === 'sample' ? fake : null};
+    });
+    const aq = await ac2.newPage(); aq.on('pageerror', e => errs.push('ask PAGEERROR: ' + e.message));
+    await aq.goto(U + '#home', {waitUntil:'load'}); await aq.waitForTimeout(600);
+    await aq.evaluate(() => openPal()); await aq.fill('#gq', 'pregnant dengue patient which zone'); await aq.waitForTimeout(300);
+    ok(await aq.isVisible('#gask') && /Don't type a patient's name or details/.test(await aq.textContent('#gask')), 'ask: in claude.ai the Ask button shows, and says not to type a patient\'s details');
+    await aq.click('#gask'); await aq.waitForTimeout(500);
+    const asked = await aq.evaluate(() => ({n:(window.__askIn.match(/^c\d+ \|/gm) || []).length, q:/pregnant dengue patient which zone/.test(window.__askIn), picks:[...document.querySelectorAll('#gaskres a')].map(a => a.getAttribute('href')), cands:askCands('pregnant dengue patient which zone').map(e => e.href)}));
+    ok(asked.q && asked.n > 0 && asked.n <= 40 && asked.picks.length === 2 && asked.picks[0] === asked.cands[1] && asked.picks[1] === asked.cands[0] && asked.picks.every(h => /^#[a-z0-9-]+(--\w+)?$/.test(h)), 'ask: Claude is sent the question and at most 40 of the guide\'s own places, and only its valid picks show, as the guide\'s own entries (a made-up pick is ignored)');
+    await ac2.close();
+  }
+
   /* ---------- Phone, dark ---------- */
   p = await mk({...phone, colorScheme:'dark'}, 'phone-dark');
   await p.goto(U, {waitUntil:'networkidle'}); await p.waitForTimeout(800);
@@ -1194,7 +1293,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#home', 300);
     await p.tap('#topbar [data-settings]');
     ok(await until(p, () => /^Saved on this device: it opens without a signal\. Films and sounds are kept once played through\./.test((document.querySelector('#st-off') || {}).textContent || ''), null, 5000), 'Settings: Offline and install says the guide is saved on this device');
-    ok(await p.evaluate(() => document.querySelector('#st-inst').hidden && !document.querySelector('#st-how').hidden && document.querySelector('#st-how').getAttribute('href') === '#install' && document.querySelector('#st-offline').nextElementSibling.classList.contains('dlg-f')), 'Settings: with no install offer from the browser, it links to How to install (the row sits above the footnote)');
+    ok(await p.evaluate(() => document.querySelector('#st-inst').hidden && !document.querySelector('#st-how').hidden && document.querySelector('#st-how').getAttribute('href') === '#install' && document.querySelector('#st-offline').nextElementSibling.id === 'st-all' && document.querySelector('#st-all').nextElementSibling.classList.contains('dlg-f')), 'Settings: with no install offer from the browser, it links to How to install (the row, then Save everything, sit above the footnote)');
     ok(await hscroll(p) <= 0, 'Settings with the offline row: no sideways scroll');
     await p.evaluate(() => document.querySelector('#st-offline').scrollIntoView({block:'center'}));
     await p.screenshot({path:out + '/p-settings-offline.png'});
@@ -1276,6 +1375,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await p.evaluate(L => { const a = document.querySelector('#shbox a[href^="https://wa.me/"]'), t = document.querySelector('#shbox a[href^="https://t.me/share/url"]'); return !!a && decodeURIComponent(a.href).includes(L) && a.target === '_blank' && !!t && decodeURIComponent(t.href).includes(L); }, LIVE), 'share: WhatsApp and Telegram open with the web app\'s address, in a new tab');
     await p.tap('#shbox [data-shcopy]'); await p.waitForTimeout(250);
     ok(await p.evaluate(() => navigator.clipboard.readText()) === LIVE, 'share: Copy link copies the web app\'s address');
+    await go(p, '#numbers', 400);
+    await p.tap('#extl [data-ext="5359"]'); await p.waitForTimeout(250);
+    ok(await p.evaluate(() => navigator.clipboard.readText()) === '5359', 'extensions: tapping an extension copies it');
     ok(await p.evaluate(async () => { const calls = []; Object.defineProperty(navigator, 'share', {value:d => { calls.push(d); return Promise.reject(Object.assign(new Error('cancelled'), {name:'AbortError'})); }, configurable:true}); shareGuide(null); await new Promise(r => setTimeout(r, 80)); return calls.length === 1 && calls[0].url === APP_URL && /Green Zone/.test(calls[0].title); }), 'share: the share sheet is given the web app\'s address, and a cancel is not an error');
     await p.screenshot({path:out + '/p-share-web.png', fullPage:true});
     await go(p, '#home', 500);
@@ -1371,6 +1473,27 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const q = await ctx.newPage();
     await q.goto(`http://127.0.0.1:${PORT + 1}/`, {waitUntil:'load'}); await q.waitForTimeout(1200);
     ok(await q.evaluate(async () => 'serviceWorker' in navigator && (await navigator.serviceWorker.getRegistrations()).length === 0 && !document.querySelector('#st-offline')), 'web app: served from anywhere but github.io or localhost (here 127.0.0.1), it registers no service worker and adds no offline row');
+    /* Save everything (12 Nov 2026): only on a tap, in a fresh browser; then every kept file is on the device, matching the build */
+    swNewer = null;
+    {
+      const sc = await b.newContext({...phone, reducedMotion:'reduce'}), sp = await sc.newPage();
+      await sp.goto(W + '#home', {waitUntil:'load'});
+      await until(sp, () => !!navigator.serviceWorker.controller, null, 20000);
+      await sp.evaluate(() => document.querySelector('[data-settings]').click());
+      ok(await until(sp, () => /^Save all \(\d/.test(document.querySelector('#st-allb').textContent) && !document.querySelector('#st-allb').disabled, null, 15000), 'save everything: Settings offers to save the rest, with its size');
+      await sp.click('#st-allb');
+      ok(await until(sp, () => /Everything is saved/.test(document.querySelector('#st-allt').textContent), null, 180000), 'save everything: it saves, then says everything is on this device');
+      const all = await sp.evaluate(async ([k, keep, w]) => { const c = await caches.open(k); let n = 0; for (const [f, h] of Object.entries(keep)){ const r = await c.match(w + f); if (r && r.headers.get('X-GZ-Hash') === h) n++; } return n; }, [KEPT, KEEP, W]);
+      ok(all === Object.keys(KEEP).length, `save everything: all ${Object.keys(KEEP).length} films, sounds, loops and pages are kept, each matching the build`);
+      await sc.close();
+    }
+    /* A patient's phone: the advice page registers no worker and saves nothing */
+    {
+      const pc = await b.newContext({...phone, reducedMotion:'reduce'}), pq = await pc.newPage();
+      await pq.goto(W + '#pt-renal-colic', {waitUntil:'load'}); await pq.waitForTimeout(1500);
+      ok(await pq.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).length === 0 && (await caches.keys()).length === 0 && document.documentElement.classList.contains('pt-mode') && document.querySelectorAll('.pt-list li').length > 0), 'patient page: on the web app it shows the advice, registers no worker and saves nothing on the patient\'s phone');
+      await pc.close();
+    }
     await ctx.close(); srv2.close();
 
     /* The claude.ai artifact never gets any of it */

@@ -64,6 +64,12 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 12 Nov 2026';
 const V8 = [
+  ['Search that forgives, and search by voice','Search now finds a misspelt word (paracetmol, renal collic), American spellings (hypoglycemia, diarrhea), Malay and everyday words (sakit dada, kencing batu, stomach ache) and abbreviations (AGE, PCM, HTN), and says which words it used. A microphone in the search box listens in English or Bahasa Melayu: say a topic, never a patient\'s details.',[['#search','Search the guide']]],
+  ['Home care advice on the patient\'s own phone','On a discharge outcome and on the advice tabs, Show to patient brings up a QR code. The patient scans it and the advice opens on their phone, with Listen, in English or Bahasa Melayu where the leaflet has both. Nothing about them is sent or kept: the code holds only the address.',[['#renal-colic','Renal colic'],['#dengue-cpg','Dengue CPG']]],
+  ['Copy the route, and flag a step','At the end of a pathway, Copy route copies each question with the answer you chose, then the outcome and its pages, for your notes. Under every step, Something wrong on this step? writes a short report for the guide owner: pick a reason, then send it on WhatsApp or copy it.',[['#renal-colic','Try it on renal colic']]],
+  ['Save everything for no signal','In the web app, Settings can now save every film, sound and printed page in one go (about 68 MB, best on Wi-Fi), so all of it opens without a signal.',[['#install','Install the guide']]],
+  ['Ask in your own words','In the claude.ai copy of the guide, type a question in your own words and tap Ask: Claude picks the steps in the guide that fit, and you see the guide\'s own text. It runs on your own Claude account, so never type a patient\'s details.',[['#search','Search the guide']]],
+  ['ED extensions','The department\'s extension list is at the top of Numbers: 34 rooms in five areas, found by room or by the first digits of a number, each extension copied with a tap. Search finds every room.',[['#numbers','Numbers']]],
   ['Share the guide','Send the guide to a colleague from its own page or the home tile: the link\'s card rises out of a phone in 3D, with the share sheet, Copy link, WhatsApp, Telegram and a QR code. A link to the web app now shows a preview card in messaging apps: the guide on three phones.',[['#share','Share the guide']]],
   ['Antibiotics and medicines from an animal source','Prescribing at HKL has two more topics, in the guide\'s own words: the hospital\'s antimicrobial stewardship policy (the request form, restricted agents, the 72-hour review, and OPAT patients who come back through the ED) and the good practice for a medicine from an animal source, the emergency case included. The dilution guide notes the general ICU\'s own guide as a special case.',[['#prescribing--ams','Antibiotics'],['#prescribing--animal','Animal source'],['#dilution','Dilution guide']]],
   ['The ED dosing and dilution guide','The department\'s own guide to the injectable drugs used in the ED (3rd edition, January 2026), 116 drugs: find a drug as you type, filter the 31 on the hospital\'s high alert list, and open its pages as printed, with the dose, dilution, rate and nursing notes. Search finds each drug by name.',[['#dilution','Open the guide'],['#tools','Shift tools']]],
@@ -250,6 +256,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'The ED extension directory (Nombor Sambungan Jabatan – ED, added 12 Nov 2026) prints no issuer or date. Still to confirm: (1) three numbers are printed for two rooms each: 6699 for Bilik Porter PPK and Pejabat Rekod Kecemasan, 6590 for the MOIC (Bilik Pegawai Perubatan (YM)) and Bilik PPK (YM), and 5346 for Bilik Ketua Jururawat and Pejabat Pengurusan (Penyelia/Matron): shared lines, or slips? (2) Who keeps the list, and its date.',
   'The ED dosing and dilution guide (3rd edition, January 2026; added 12 Nov 2026) is shown as printed. Still to confirm with its authors: (1) midazolam, page 126: the high-dose Midafentanyl syringe prints "60 mg midazolam + 600 mg fentanyl to 60 ml", while the same page prints 300 mcg fentanyl in 30 ml and a final 10 mcg/ml of fentanyl (the general ICU\'s own dilution guide, 5th edition, April 2026, p12, also dilutes fentanyl to a final 10 mcg/ml); (2) the guide\'s own high alert badge and the hospital\'s 2026 list differ (dextrose 20%, diazepam and phenobarbital carry the badge but are not on the list; potassium dihydrogen phosphate and sodium bicarbonate 8.4% are on the list without the badge).',
   'From the HKL doctors starter pack (added 12 Nov 2026). Still to confirm: (1) medicines on one outpatient prescription: eight (Director\'s memo, 27 May 2019) or five (MOH quick guide 2020, p21; the hospital\'s Good Prescribing Practice slides)? (2) the death certificate duplicate: within 72 hours of discharge (the Medical Records video, Oct 2022) or within 24 hours (the form\'s own header)? (3) abbreviations: the pharmacy\'s accepted list and the MOH guide accept PCM and EES; the 2025 Good Prescribing Practice rules say write paracetamol, not PCM; (4) the GXM video (2023) asks for at least 5 ml in an adult and a printed label on the back of the form; the March 2026 transfusion memo in the guide says EDTA 3 to 4 ml and handwritten labels only.',
   'Department memos added on 12 Nov 2026 (Green Zone memos and the Yellow Zone menu). Still to confirm: (1) the elderly memo HKL/JK/98/188/3(14)2021 of 12 May 2021 (no IV tramadol over 65; elderly waiting for a primary team in the Yellow Zone): still in force? (2) the POCT memo HKL/JK/98/188/1(24)2023 of 8 Nov 2023 was issued for a reagent shortage: are its limits on stat FBC and ABG still in force? (3) repeat BP, ECG and DXT: memo HKL/JK/98/188/3(9)24 says Bilik 9, the one-way flow note says the Procedure Room: the same room? (4) is the LA OT Google Form (memo HKL/JK/98/188/3(23)22) still the way to book?',
@@ -379,6 +386,8 @@ const ICONS = {
   map:'<path d="M4 6.5 9 4l6 2.5L20 4v13.5L15 20l-6-2.5L4 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
   stop:'<path d="M8.3 3.5h7.4l4.8 4.8v7.4l-4.8 4.8H8.3l-4.8-4.8V8.3z"/><path d="M12 8v5M12 16.2h.01"/>',
   flag:'<path d="M5 21V4"/><path d="M5 4h11l-2 3.5 2 3.5H5"/>',
+  mic:'<rect x="9" y="3" width="6" height="11.5" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v3"/>',
+  qr:'<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14zM17.5 17.5H20V20h-2.5zM14 19.5h1.5M19.5 14H20"/>',
   grid:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
   gauge:'<path d="M4 16a8 8 0 0 1 16 0"/><path d="m12 16 4-5"/><circle cx="12" cy="16" r="1.4"/>',
   kid:'<circle cx="12" cy="5" r="2.4"/><path d="M12 8.5v6.5M8 11l4-2 4 2M9.5 21l2.5-6 2.5 6"/>',
@@ -920,6 +929,92 @@ function search(q, loose){
 }
 /* Word starts first; if nothing matches, fall back to matching inside words ("glycaemia") */
 function find(q){ const r = search(q); return r.length ? {r, loose:false} : {r:search(q, true), loose:true}; }
+/* ================= Forgiving search (12 Nov 2026) =================
+   Today's search runs first and is never rescored. Then:
+   - Words people use for a topic (Malay, everyday words, abbreviations) add the results for the guide's own words, first,
+     labelled "Including results for ...". Each alias points only to words the guide itself uses; it is a search word, not
+     clinical content. Abbreviations that are also English words (AGE, PE, OD, MI) count only typed in capitals.
+   - American spellings are tried in the British spelling the guide uses (hypoglycemia, diarrhea, edema, pediatric).
+   - Only when nothing at all matches, a misspelt word (4 letters or more, no digits) is corrected to the nearest word in the
+     guide, labelled "Nothing for ... Showing results for ...", so a corrected drug name is always visible. */
+const ALIASES = [
+  /* Malay */
+  ['sakit perut', 'abdominal pain'], ['sakit dada', 'chest pain'], ['sesak nafas', 'breathless'], ['semput', 'asthma'], ['lelah', 'asthma'],
+  ['demam denggi', 'dengue'], ['denggi', 'dengue'], ['cirit birit', 'diarrhoea'], ['muntah', 'vomiting'], ['kencing batu', 'renal colic'], ['batu karang', 'renal colic'],
+  ['gigitan anjing', 'dog bite'], ['gigitan kucing', 'cat bite'], ['gigitan ular', 'snake bite'], ['patukan ular', 'snake bite'], ['patah', 'fracture'],
+  ['kepala terhantuk', 'head injury'], ['kecederaan kepala', 'head injury'], ['pengsan', 'syncope'], ['gula rendah', 'hypoglycaemia'], ['kencing manis', 'diabetes'],
+  ['darah tinggi', 'hypertensive'], ['sakit tekak', 'sore throat'], ['resdung', 'rhinosinusitis'], ['gigi tercabut', 'avulsed tooth'], ['tertelan', 'ingestion'],
+  ['alahan', 'anaphylaxis'], ['buah zakar', 'scrotal'], ['angin ahmar', 'stroke'], ['strok', 'stroke'], ['serangan jantung', 'acute coronary syndrome'], ['sakit sendi', 'gout'],
+  ['jangkitan kulit', 'cellulitis'], ['keracunan', 'poisoning'], ['terlebih dos', 'overdose'],
+  /* everyday words and brands */
+  ['stomach ache', 'abdominal pain'], ['tummy ache', 'abdominal pain'], ['heart attack', 'acute coronary syndrome'], ['kidney stone', 'renal colic'],
+  ['panadol', 'paracetamol'], ['fainting', 'syncope'], ['faint', 'syncope'], ['wheeze', 'asthma'],
+  ['blood sugar', 'glucose'], ['low sugar', 'hypoglycaemia'], ['high sugar', 'hyperglycaemia'], ['broken bone', 'fracture'], ['allergy', 'anaphylaxis'],
+  /* abbreviations */
+  ['sob', 'breathless'], ['pcm', 'paracetamol'], ['htn', 'hypertensive'], ['loc', 'loss of consciousness'], ['cva', 'stroke'], ['dm', 'diabetes'],
+  ['fb', 'foreign body'], ['hpt', 'hypertensive'], ['ugib', 'bleeding'], ['age', 'gastroenteritis', 1], ['pe', 'pulmonary embolism', 1], ['od', 'overdose', 1], ['mi', 'myocardial infarction', 1]
+].map(([a, to, caps]) => ({a, to, caps:!!caps, re:new RegExp('(^|\\s)' + reEsc(caps ? a.toUpperCase() : a) + '(?=\\s|$)', caps ? '' : 'i')}));
+const US_UK = [[/([^a])emi(a|c)/, '$1aemi$2'], [/^hem(a|o)/, 'haem$1'], [/^edema/, 'oedema'], [/^esophag/, 'oesophag'], [/^diarrhea/, 'diarrhoea'], [/^pediat/, 'paediat'],
+  [/^orthoped/, 'orthopaed'], [/^gynec/, 'gynaec'], [/^anesth/, 'anaesth'], [/^tumor/, 'tumour'], [/^labor$/, 'labour'], [/^fetal/, 'foetal'], [/^cesarean/, 'caesarean']];
+const ukOf = w => { for (const [re, to] of US_UK) if (re.test(w)) return w.replace(re, to); return w; };
+/* The alias phrase as typed: Malay "cirit-birit" is written with a hyphen too */
+const aliasQ = q => q.replace(/(\w)-(\w)/g, '$1 $2');
+function aliasesOf(q){
+  const t = aliasQ(q), hit = [];
+  for (const x of ALIASES){
+    const src = x.caps ? t : t.toLowerCase();
+    if (x.re.test(src) && !hit.some(h => h.to === x.to)) hit.push({a:x.a, to:x.to, q:src.replace(x.re, '$1' + x.to).trim()});
+  }
+  return hit;
+}
+let VOCAB = null;
+function vocab(){
+  if (VOCAB) return VOCAB;
+  const n = new Map();
+  for (const e of IDX) for (const w of (e.title + ' ' + (e.kw || '') + ' ' + e.body).toLowerCase().match(/[a-z]{4,}/g) || []) n.set(w, (n.get(w) || 0) + 1);
+  return VOCAB = [...n.entries()];
+}
+/* Optimal string alignment distance (a swap of two letters counts as one) */
+function osa(a, b){
+  const m = a.length, n = b.length, d = Array.from({length:m + 1}, (_, i) => [i, ...Array(n).fill(0)]);
+  for (let j = 1; j <= n; j++) d[0][j] = j;
+  for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++){
+    const c = a[i - 1] === b[j - 1] ? 0 : 1;
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + c);
+    if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+  }
+  return d[m][n];
+}
+/* The nearest word in the guide to a misspelt one: a whole word, or the start of one (for a word still being typed) */
+function nearest(t){
+  const max = t.length >= 6 ? 2 : 1;
+  let best = null;
+  for (const [w, f] of vocab()){
+    if (Math.abs(w.length - t.length) > max && w.length < t.length) continue;
+    let d = Math.abs(w.length - t.length) <= max ? osa(t, w) : 99;
+    if (d > max) for (let L = Math.max(4, t.length - 1); L <= Math.min(w.length, t.length + 1); L++){ const dp = osa(t, w.slice(0, L)) + .5; if (dp < d) d = dp; }
+    if (d <= max && (!best || d < best.d || (d === best.d && f > best.f))) best = {w, d, f};
+  }
+  return best && best.w;
+}
+const known = t => vocab().some(([w]) => w.startsWith(t));
+function findMore(q){
+  const base = find(q), out = {r:base.r, loose:base.loose, also:[], fixed:null};
+  /* Aliases: the guide's own words first, then what the typed words found */
+  const al = aliasesOf(q);
+  if (al.length){
+    const seen = new Set(), r = [];
+    for (const a of al) for (const e of find(a.q).r) if (!seen.has(e.href)){ seen.add(e.href); r.push(e); }
+    if (r.some(e => !base.r.includes(e))){ out.r = [...r, ...base.r.filter(e => !seen.has(e.href))].slice(0, 14); out.also = al.map(a => a.to); out.loose = false; }
+  }
+  if (out.r.length) return out;
+  /* American spellings, then misspellings: only when nothing matched */
+  const ts = terms(q), uk = ts.map(ukOf);
+  if (uk.some((w, i) => w !== ts[i])){ const r = find(uk.join(' ')); if (r.r.length) return {...out, r:r.r, loose:r.loose, fixed:uk.join(' ')}; }
+  const fx = uk.map(w => w.length >= 4 && /^[a-z]+$/.test(w) && !known(w) ? (nearest(w) || w) : w);
+  if (fx.some((w, i) => w !== uk[i])){ const r = find(fx.join(' ')); if (r.r.length) return {...out, r:r.r, loose:r.loose, fixed:fx.join(' ')}; }
+  return out;
+}
 function snippet(body, ts, loose){
   let at = -1;
   for (const w of ts){ const m = termRe(w, loose).exec(body); if (m){ const k = m.index + m[1].length; if (at < 0 || k < at) at = k; } }
@@ -978,7 +1073,7 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose){
-  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -992,10 +1087,13 @@ function renderPal(){
       palEntry({href:'#tools', title:'Discharge safety check', kind:'Tool', meta:'Shift tools', ic:'check', c:'c-meta'}) +
       palEntry({href:'#numbers', title:'Numbers to know', kind:'Number', meta:'Code Blue, Code Stroke, MAU, EMACC, IPR', ic:'phone', c:'c-abdo'}) + '</ul>';
   } else {
-    const ts = terms(q), {r, loose} = find(q);
-    h = r.length ? `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose)).join('') + '</ul>'
-      : `<div class="pal-none">Nothing found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`;
+    const {r, loose, also, fixed} = findMore(q), ts = terms(fixed || q).concat(also.flatMap(terms));
+    const note = fixed ? `<div class="pal-fix" id="gfix">Nothing for “${esc(q)}”. Showing results for <b>${esc(fixed)}</b>.</div>`
+      : also.length ? `<div class="pal-fix" id="gfix">Including results for <b>${also.map(esc).join('</b>, <b>')}</b>.</div>` : '';
+    h = askBtn(q) + (r.length ? note + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose)).join('') + '</ul>'
+      : `<div class="pal-none">Nothing found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`);
   }
+  if (askCtl && q){ askCtl.abort(); askCtl = null; }
   body.innerHTML = h;
   palSel = 0; markSel();
 }
@@ -1010,9 +1108,72 @@ function openPal(){
 }
 function closePal(restore){
   if ($('#pal').hidden) return;
+  if (typeof micStop === 'function' && micOn) micStop();
   $('#pal').hidden = true; document.documentElement.style.overflow = '';
   if (restore && palFrom && palFrom.focus) palFrom.focus();
 }
+
+/* ================= Voice search (12 Nov 2026) =================
+   A microphone in the search box: say a topic and it is typed for you, in English or Bahasa Melayu. The web app uses the
+   browser's own speech recognition (Chrome sends the sound to its speech service; nothing is kept by the guide). The claude.ai
+   artifact, where a framed page cannot reach the microphone, uses the viewer's dictation when the host offers it. The hint
+   says not to speak a patient's name or details (standing rule 4). If the microphone cannot start, the button goes away. */
+const SPEECH = window.SpeechRecognition || window.webkitSpeechRecognition;
+const FRAMED = (() => { try { return window.top !== window; } catch(e){ return true; } })();
+let micLang = 'en', micRec = null, micDict = null, micOn = false, micBase = '', micDead = false;
+const MIC_HINT = {en:'Listening in English. Say a topic, not a patient\'s name or details.', ms:'Mendengar dalam Bahasa Melayu. Sebut topik sahaja, bukan nama atau butiran pesakit.'};
+function micShow(){
+  const can = !micDead && (!!micDict || (!!SPEECH && !FRAMED));
+  $('#gmic').hidden = !can; $('#gmlang').hidden = !can;
+}
+function micUI(on){
+  micOn = on;
+  const b = $('#gmic'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  b.setAttribute('aria-label', on ? 'Stop listening' : 'Search by voice');
+  const h = $('#gmhint'); h.hidden = !on; h.textContent = on ? MIC_HINT[micLang] : '';
+}
+function micType(text){ $('#gq').value = (micBase + ' ' + text).replace(/\s+/g, ' ').trim(); renderPal(); }
+function micFail(hard){ micUI(false); if (hard){ micDead = true; micShow(); toast('Voice search is not available here'); } }
+function micStart(){
+  if (micOn) return micStop();
+  micBase = $('#gq').value.trim();
+  if (micDict){
+    micUI(true);
+    micDict.start({language: micLang === 'ms' ? 'ms' : 'en'}).catch(e => micFail(e && (e.code === 'not_granted' || e.code === 'unavailable')));
+    return;
+  }
+  if (!SPEECH) return;
+  try {
+    const r = micRec = new SPEECH();
+    r.lang = micLang === 'ms' ? 'ms-MY' : 'en-GB'; r.interimResults = true; r.maxAlternatives = 1; r.continuous = false;
+    r.onresult = e => { let t = ''; for (let i = 0; i < e.results.length; i++) t += e.results[i][0].transcript; micType(t); };
+    r.onerror = e => micFail(['not-allowed', 'service-not-allowed', 'audio-capture', 'language-not-supported'].includes(e.error));
+    r.onend = () => { micRec = null; micUI(false); };
+    micUI(true); r.start();
+  } catch(e){ micFail(true); }
+}
+function micStop(){
+  if (micRec){ try { micRec.stop(); } catch(e){} }
+  if (micDict && micOn) micDict.stop().catch(() => {});
+  micUI(false);
+}
+$('#gmic').addEventListener('click', micStart);
+$('#gmlang').addEventListener('click', () => {
+  micLang = micLang === 'en' ? 'ms' : 'en';
+  const b = $('#gmlang'); b.textContent = micLang === 'en' ? 'EN' : 'BM';
+  b.setAttribute('aria-label', 'Voice language: ' + (micLang === 'en' ? 'English' : 'Bahasa Melayu') + '. Tap to change.');
+  if (micOn){ micStop(); }
+});
+micShow();
+/* In the claude.ai artifact: the host's dictation, when it offers it to this viewer */
+if (window.claude && typeof window.claude.use === 'function') window.claude.use('dictation').then(d => {
+  if (!d) return;
+  micDict = d;
+  d.onPartial(({text}) => micType(text));
+  d.onFinal(({text}) => { micBase = (micBase + ' ' + text).trim(); micType(''); });
+  d.onState(({state, reason}) => { if (state === 'idle'){ micUI(false); if (reason === 'not_granted' || reason === 'unavailable'){ micDead = true; micShow(); } } });
+  micShow();
+}).catch(() => {});
 
 /* ================= Views ================= */
 const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy', dilution:'Dilution guide', share:'Share the guide', links:'ED links'};
@@ -1125,10 +1286,10 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir']);
 /* Stills without a loop yet (the 12 Nov 2026 review: Flow Studio stills for What's new, Sources and about, the wall poster
    and the dilution guide): shown like a tile's still, never asked for a video. Move a key to TILE_KEYS once its loop is in tiles/. */
-const STILL_KEYS = new Set([]); /* empty since the four review banners' loops went in (12 Nov 2026) */
+const STILL_KEYS = new Set([]); /* empty: the four review banners' loops and the ED extension directory's (extdir) went in on 12 Nov 2026 */
 const tileMedia = k => TILE_KEYS.has(k) || STILL_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -1287,10 +1448,21 @@ function pathTo(id, target){
   while (prev[k]){ trail.unshift({node:prev[k][0], label:prev[k][1]}); k = prev[k][0]; }
   return trail;
 }
+/* Copy route (12 Nov 2026): the questions answered on this visit, each with the answer chosen, then the outcome and its source,
+   as plain text for the clerking notes. Only steps walked here are copied; a link that opened part-way through says so.
+   Nothing is stored (standing rule 4). */
+function routeText(p, n){
+  const walked = state.trail.filter(t => !t.auto), skipped = walked.length < state.trail.length;
+  const src = p.page ? `Source: The Clinical Pathway in Emergency for Medical Officer, ETD HKL (2025), page${String(p.page).includes('–') ? 's' : ''} ${p.page}` : p.src ? 'Source: ' + p.src : '';
+  return [p.title + ': route through the pathway', ...(skipped ? ['(Opened part-way through by a link: the earlier steps are not listed.)'] : []),
+    ...walked.map((t, i) => `${i + 1}. ${nodeText(p.nodes[t.node])} ${t.label === 'Done' ? '(done)' : 'Answer: ' + t.label}`),
+    'Outcome: ' + n.title, ...(n.items || []).map(i => '- ' + i), ...(src ? [src] : []), 'Green Zone MO Guide, ' + APP_VER].join('\n');
+}
 function showPath(id, node){
   if (state.id !== id) ptabSel = null;
   state = {id, trail:[], cur:P[id].start};
-  if (node && node !== state.cur){ const t = pathTo(id, node); if (t){ state.trail = t; state.cur = node; } }
+  /* A link to a step fills in one way of reaching it; those answers are marked auto, so Copy route never copies an answer nobody gave */
+  if (node && node !== state.cur){ const t = pathTo(id, node); if (t){ state.trail = t.map(x => ({...x, auto:true})); state.cur = node; } }
   remember(id); renderMine();
   showView('run');
   land = false;
@@ -1344,6 +1516,7 @@ function draw(focus){
         <div class="strip">${steps ? `<div class="trailx" role="group" aria-label="Your answers so far"><span class="tlbl">Route</span>${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"><span><span class="vh">Change: </span>${esc(t.label)}</span></button>`).join('')}</div>` : ''}${endsHTML(p, n)}</div>
         <div class="progress" aria-hidden="true"${n.end ? ` style="--oc:var(--b-${n.end})"` : ''}><span>${n.end ? `Outcome after ${steps} step${steps === 1 ? '' : 's'}` : 'Step ' + (steps + 1)}</span>${bar}</div>
         <div id="cur" tabindex="-1" class="cur-in">${card(n, p)}</div>
+        <div class="flagrow"><button type="button" class="flagb" data-flag>${svg('flag')}<span>Something wrong on this step?</span></button></div>
         ${about ? `<details class="about about-m"><summary>About this pathway</summary><div>${about}</div></details>` : ''}
         ${refTabs(p)}
       </div>
@@ -1366,7 +1539,7 @@ function card(n, p){
       ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${n.figOnly ? '' : list(n.items, 'ticks')}
         ${n.fig ? figHTML(n.fig) : ''}${n.links ? `<div class="links">${n.links.map(([href, t]) => /^https:/.test(href) ? `<a class="pill ext" href="${href}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>` : `<a class="pill" href="${href}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : ''}
         ${n.gap ? `<div class="gap">${svg('info')}<span>${esc(n.gap)}</span></div>` : ''}</div>` : ''}
-      <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span><button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${(p.advice || p.leaflet) && n.end === 'discharge' ? `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
+      <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span>${state.trail.some(t => !t.auto) ? `<button type="button" data-copyroute>${svg('route')}<span class="bl">Copy route</span></button>` : ''}<button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${(p.advice || p.leaflet) && n.end === 'discharge' ? ptqBtn(state.id, '') + `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
   }
   if (n.step){
     const obs = n.kind === 'observe';
@@ -1432,7 +1605,7 @@ function closeMap(restore){
 function tabsOf(p){
   const T = [], li = a => `<li>${esc(a)}</li>`;
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-  if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button></div>`});
+  if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(state.id)}</div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
   const note = d => `<div class="deptnote"><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}${d.refs ? `<ol class="srcl">${d.refs.map(r => `<li>${esc(r[0])} ${r[1][0] === '#' ? `<a href="${r[1]}">Open in this guide</a>` : `<a href="${r[1]}" target="_blank" rel="noopener noreferrer">Open source${svg('ext')}</a>`}</li>`).join('')}</ol>` : ''}</div>`;
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
@@ -1501,8 +1674,10 @@ function listenBar(key, label, chips){
     <div class="lsn-bar" aria-hidden="true"><i></i>${r.marks.slice(1).map(m => `<s style="--x:${(m / r.dur * 100).toFixed(1)}%"></s>`).join('')}</div>
     ${chips && chips.length ? `<div class="lsn-ch${chips.length > 4 ? ' many' : ''}">${chips.map((c, i) => r.marks[i + 1] != null ? `<button type="button" data-seek="${r.marks[i + 1]}">${esc(c)}</button>` : '').join('')}</div>` : ''}</div>`;
 }
+/* The listen bar on screen: the patient page can carry the same narration as a hidden pathway tab */
+const lsnBox = k => $$(`.lsn[data-read="${k}"]`).find(b => b.offsetParent !== null) || $(`.lsn[data-read="${k}"]`);
 function readerUI(){
-  const box = $(`.lsn[data-read="${readKey}"]`); if (!box) return;
+  const box = lsnBox(readKey); if (!box) return;
   const r = READ[readKey], t = reader.currentTime || 0, on = !reader.paused;
   const b = box.querySelector('.lsn-b'); b.innerHTML = svg(on ? 'pause' : 'play'); b.setAttribute('aria-pressed', on ? 'true' : 'false');
   box.classList.toggle('on', on);
@@ -1534,7 +1709,7 @@ function readerUI(){
    an advice tab's elements are its advice lines */
 function readLine(box, s, e){
   const leaf = box.closest('.leaf');
-  if (!leaf){ const tab = box.closest('[role="tabpanel"]'); return tab ? tab.querySelectorAll('#advlist > li')[e] || null : null; }
+  if (!leaf){ const tab = box.closest('[role="tabpanel"], .pt-adv'); return tab ? tab.querySelectorAll('#advlist > li, .pt-list > li')[e] || null : null; }
   if (s === 0) return leaf.querySelector('.leaf-t');
   const g = leaf.querySelectorAll('.leaf-g')[s - 1];
   return g ? g.querySelectorAll(':scope > h5, :scope > p, :scope > ul > li')[e] || null : null;
@@ -1544,7 +1719,7 @@ let readScrolled = 0;
 function stopReader(){
   if (!readKey) return;
   reader.pause();
-  const box = $(`.lsn[data-read="${readKey}"]`);
+  const box = lsnBox(readKey);
   if (box){ box.classList.remove('on'); const b = box.querySelector('.lsn-b'); b.innerHTML = svg('play'); b.setAttribute('aria-pressed', 'false'); }
   document.querySelectorAll('.reading, .lsn-ch button.on, .rl-on').forEach(el => el.classList.remove('reading', 'on', 'rl-on'));
 }
@@ -1592,7 +1767,7 @@ function leafletHTML(p){
     ${READ_LEAF[state.id] ? listenBar(READ_LEAF[state.id] + '-' + leafLang, leafLang === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen in English', d.groups.map(g => g.h.length > 28 ? g.h.slice(0, 26).replace(/\s+\S*$/, '') + '…' : g.h)) : ''}
     ${filmCard(state.id, leafLang)}
     <h4 class="leaf-t">${esc(d.title)}</h4>${d.groups.map(g => `<section class="leaf-g${g.warn ? ' warn' : ''}"><h5>${g.warn ? svg('stop') : ''}${esc(g.h)}</h5>${g.p ? `<p>${esc(g.p)}</p>` : ''}<ul>${g.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}
-    <p class="src">${esc(L.src)}</p></div><div class="pbar"><button type="button" class="sm" data-copyleaf>${svg('copy')}<span class="bl">Copy advice</span></button></div>`;
+    <p class="src">${esc(L.src)}</p></div><div class="pbar"><button type="button" class="sm" data-copyleaf>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(state.id)}</div>`;
 }
 const leafletText = p => { const L = p.leaflet, d = L[leafLang]; return [d.title.toUpperCase(), ...d.groups.flatMap(g => ['', g.h.toUpperCase(), ...(g.p ? [g.p] : []), ...g.items.map(x => '- ' + x)]), '', L.src].join('\n'); };
 
@@ -3502,13 +3677,193 @@ document.addEventListener('click', e => {
 IDX.push({href:'#share', title:'Share the guide', kind:'Setting', meta:'One link, a QR code, and the card messaging apps show', body:'share send colleague friend recommend whatsapp telegram link copy link qr code new staff house officer', ic:'share', c:'c-meta'});
 renderHomeShare();
 
+/* ================= Ask in your own words (12 Nov 2026) =================
+   Only in the claude.ai artifact, where the host lets a page ask Claude (the sample capability), and only on a tap. The guide
+   first finds up to 40 candidate entries and steps for the question in its own index; Claude is asked only which of those (by
+   number) answer it, and the page shows the guide's own titles and text for the ones it picks: Claude writes nothing that
+   appears on screen (standing rule 8), and a pick that is not on the list is ignored. The question goes to Claude under the
+   viewer's own account, so the button says not to type a patient's name or details (standing rule 4). Elsewhere the button
+   is not shown. */
+let askFn = null, askDead = false, askCtl = null;
+const ASK_STOP = new Set('a an the of to in on for and or with is are was be by at as it its this that what which who how do does did should can could would will i we my me our you your patient pt please if when then than there any about from into get give need needs'.split(' '));
+function askCands(q){
+  const ws = [...new Set([...terms(aliasQ(q)).map(w => ukOf(w.replace(/[^a-z0-9-]/g, ''))), ...aliasesOf(q).flatMap(a => terms(a.to))].filter(w => w.length > 1 && !ASK_STOP.has(w)))];
+  if (!ws.length) return [];
+  const res = ws.map(w => new RegExp('(^|[^a-z0-9])' + reEsc(w), 'i')), out = [];
+  for (const e of IDX){
+    let s = 0; for (const re of res) s += re.test(e.title) ? 3 : re.test(e.kw || '') ? 2 : re.test(e.body) ? 1 : 0;
+    if (s) out.push({e, s});
+  }
+  for (const [id, p] of Object.entries(P)) for (const [k, n] of Object.entries(p.nodes)){
+    if (k === p.start) continue;
+    const t = nodeWords(n).join(' · ');
+    let s = 0; for (const re of res) if (re.test(t)) s++;
+    if (s >= Math.min(2, res.length)){ const c = catOf(id); out.push({e:{href:`#${id}--${k}`, title:nodeText(n), kind:'Step', meta:p.title, body:t, ic:c.ic, c:c.c, j:c.j}, s:s + .2}); }
+  }
+  const seen = new Set();
+  return out.sort((a, b) => b.s - a.s).filter(x => !seen.has(x.e.href) && seen.add(x.e.href)).slice(0, 40).map(x => x.e);
+}
+const askBtn = q => askFn && !askDead && q.trim().split(/\s+/).length >= 2 ? `<button type="button" class="pal-ask" id="gask">${svg('spark')}<span><b>Ask in your own words</b><small>Claude picks the steps in the guide that fit your question; what you see is the guide's own text. Don't type a patient's name or details.</small></span></button>` : '';
+async function askGuide(){
+  const q = $('#gq').value.trim(), body = $('#palbody');
+  const cands = askCands(q);
+  if (!cands.length){ body.innerHTML = `<div class="pal-none">The guide has nothing that matches “${esc(q)}”. Try other words.</div>`; return; }
+  if (askCtl) askCtl.abort();
+  const ctl = askCtl = new AbortController();
+  body.innerHTML = `<div class="pal-asking" role="status">${svg('spark')}<span>Finding the steps in the guide for “${esc(q)}”…</span><button type="button" class="sm" id="gaskstop">Stop</button></div>`;
+  $('#gaskstop').addEventListener('click', () => { ctl.abort(); renderPal(); });
+  const list = cands.map((e, i) => `c${i + 1} | ${e.title} | ${e.kind} | ${e.meta || ''} | ${(e.body || '').slice(0, 220).replace(/\s+/g, ' ')}`).join('\n');
+  const input = `You help a doctor in a Malaysian emergency department find the right place in a clinical reference guide. Do not give clinical advice.
+
+The doctor's question: "${q.replace(/"/g, "'")}"
+
+Candidate places in the guide, one per line (id | title | kind | where | the guide's own text, cut short):
+${list}
+
+Reply with JSON only, in this form: {"picks": ["c3", "c1"]}. List up to 3 candidate ids, best first, that would best answer the question. Use an empty list if none fits. Pick only ids from the list above.`;
+  try {
+    const r = await askFn.json(input, {modelTier:'default', signal:ctl.signal});
+    if (ctl !== askCtl || $('#pal').hidden) return;
+    const picks = (r && Array.isArray(r.picks) ? r.picks : []).map(id => /^c(\d+)$/.exec(String(id))).filter(Boolean).map(m => cands[+m[1] - 1]).filter(Boolean).filter((e, i, a) => a.indexOf(e) === i).slice(0, 3);
+    const ts = terms(q);
+    body.innerHTML = picks.length ? `<div class="pal-fix" id="gaskn">Picked by Claude from the guide for “${esc(q)}”. The words below are the guide's own: open the step and check it before you act.</div><ul class="pal-res" id="gaskres" role="listbox">${picks.map(e => palEntry(e, ts, true)).join('')}</ul>`
+      : `<div class="pal-none" id="gaskn">Claude found nothing in the guide that answers “${esc(q)}”. Try search with other words.</div>`;
+    palSel = 0; markSel();
+  } catch(e){
+    if (ctl.signal.aborted || $('#pal').hidden) return;
+    if (e && e.code === 'not_granted'){ askDead = true; renderPal(); return; }
+    body.innerHTML = `<div class="pal-none">${e && e.code === 'rate_limited' ? 'Too many questions just now. Try again in a minute.' : 'Claude could not be asked just now. Search still works.'}</div>`;
+  }
+}
+$('#palbody').addEventListener('click', e => { if (e.target.closest('#gask')) askGuide(); });
+if (window.claude && typeof window.claude.use === 'function') window.claude.use('sample').then(s => { if (s && typeof s.json === 'function'){ askFn = s; if (!$('#pal').hidden) renderPal(); } }).catch(() => {});
+
+/* ================= Flag this step (12 Nov 2026) =================
+   An MO who finds a number that looks wrong, a line out of date, an unclear step or a broken link picks one reason, and the
+   guide writes a short report (where: the entry, the step and its link; what: the reason; the guide's version) to send to the
+   guide owner on WhatsApp or the phone's share sheet, or to copy. Preset reasons only, no box to type in, nothing stored, and
+   nothing is sent unless the MO sends it (standing rule 4). */
+const FLAG_WHY = ['A number or dose looks wrong', 'It looks out of date', 'It is unclear', 'A link or picture does not work', 'Something else (I will explain)'];
+let flagWhy = 0, flagFrom = null;
+function flagText(){
+  const p = P[state.id], n = p.nodes[state.cur];
+  return `Green Zone MO Guide: please check this step.\nWhere: ${p.title}: ${nodeText(n)}\n${APP_URL}#${state.id}${state.cur === p.start ? '' : '--' + state.cur}\nWhat: ${FLAG_WHY[flagWhy]}\n(${APP_VER})`;
+}
+function drawFlag(){
+  const share = !FRAMED && typeof navigator.share === 'function';
+  $('#flagbody').innerHTML = `<div class="flag-w" role="group" aria-label="What is wrong">${FLAG_WHY.map((w, i) => `<button type="button" data-fw="${i}" aria-pressed="${i === flagWhy}">${esc(w)}</button>`).join('')}</div>
+    <pre class="flag-t" id="flagt">${esc(flagText())}</pre>
+    <p class="ptq-how">Send it to the guide owner. Don't add a patient's name or details.</p>
+    <div class="ptq-a"><a class="btn sm" id="flagwa" href="https://wa.me/?text=${encodeURIComponent(flagText())}" target="_blank" rel="noopener noreferrer">${svg('send')}<span>WhatsApp</span></a>${share ? `<button type="button" class="sm" data-flagshare>${svg('share')}<span>Share</span></button>` : ''}<button type="button" class="sm" data-flagcopy>${svg('copy')}<span class="bl">Copy</span></button></div>`;
+}
+function openFlag(){
+  if (!state.id) return;
+  flagWhy = 0; flagFrom = document.activeElement; drawFlag();
+  $('#flagdlg').hidden = false; document.documentElement.style.overflow = 'hidden';
+  $('#flagclose').focus();
+}
+function closeFlag(restore){
+  if ($('#flagdlg').hidden) return;
+  $('#flagdlg').hidden = true; document.documentElement.style.overflow = '';
+  if (restore && flagFrom && flagFrom.focus) flagFrom.focus();
+}
+$('#flagclose').addEventListener('click', () => closeFlag(true));
+$('#flagdlg').addEventListener('click', e => {
+  if (e.target === $('#flagdlg')) return closeFlag(true);
+  const b = e.target.closest('[data-fw], [data-flagcopy], [data-flagshare]'); if (!b) return;
+  if (b.dataset.fw){ flagWhy = +b.dataset.fw; drawFlag(); const nb = $(`#flagbody [data-fw="${flagWhy}"]`); if (nb) nb.focus(); }
+  else if (b.hasAttribute('data-flagcopy')) copyText(flagText(), {btn:b, el:$('#flagt'), ok:'Report copied'});
+  else if (b.hasAttribute('data-flagshare')) navigator.share({text:flagText()}).catch(() => {});
+});
+
+/* ================= Home care advice on the patient's own phone (12 Nov 2026) =================
+   "Show to patient" brings up a QR code; the patient scans it and the advice opens on their phone, on the public web app's
+   #pt-<id> page (#pt-<id>-ms in Bahasa Melayu): the advice as the guide gives it, with Listen where it was recorded, and
+   nothing else from the guide on screen. Only advice written for the patient: the two CPG leaflets and the advice tabs that
+   are read aloud (PT_QR, from src/ptqr.js). Nothing about the patient is sent or kept: the code holds only the address.
+   The ebook's dengue pathway hands out the CPG's leaflet, since the dengue topic follows the CPG (Krishna, 12 Nov 2026). */
+const PT_ALIAS = {dengue:'dengue-cpg'}, DOC_TITLE = document.title;
+const ptKey = id => { const k = PT_ALIAS[id] || id; return typeof PT_QR !== 'undefined' && PT_QR[k] && P[k] ? k : null; };
+const stripPages = a => a.replace(/\s*\([^()]*\bp\s?(?:\d|[ivxl]+\b)[^()]*\)/g, '');
+const PT_TXT = {
+  en:{dept:'Emergency & Trauma Department, Hospital Kuala Lumpur', h:'Home care advice', size:'Larger text', foot:'Given to you by your doctor in the Emergency Department. This page keeps nothing about you.'},
+  ms:{dept:'Jabatan Kecemasan & Trauma, Hospital Kuala Lumpur', h:'Nasihat penjagaan di rumah', size:'Tulisan lebih besar', foot:'Diberikan oleh doktor anda di Jabatan Kecemasan. Halaman ini tidak menyimpan sebarang maklumat tentang anda.'}
+};
+let ptCur = null, ptBack = false;
+function renderPt(id, lang, back){
+  ptCur = id;
+  const p = P[id], lg = lang === 'ms' && p.leaflet && PT_QR[id].ms ? 'ms' : 'en', T = PT_TXT[lg];
+  let body;
+  if (p.leaflet){
+    const L = p.leaflet, d = L[lg];
+    body = `<div class="leaf pt-leaf" lang="${lg}">${PT_QR[id].ms ? `<div class="seg leaf-lang" role="group" aria-label="Language">${['en', 'ms'].map(k => `<button type="button" data-ptlang="${k}" aria-pressed="${lg === k}" lang="${k}">${esc(L[k].lang)}</button>`).join('')}</div>` : ''}
+      ${READ_LEAF[id] ? listenBar(READ_LEAF[id] + '-' + lg, lg === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen in English') : ''}
+      ${filmCard(id, lg)}
+      <h2 class="leaf-t">${esc(d.title)}</h2>${d.groups.map(g => `<section class="leaf-g${g.warn ? ' warn' : ''}"><h5>${g.warn ? svg('stop') : ''}${esc(g.h)}</h5>${g.p ? `<p>${esc(g.p)}</p>` : ''}<ul>${g.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}
+      <p class="src">${esc(L.src)}</p></div>`;
+  } else {
+    body = `<div class="pt-adv" lang="en">${READ_ADV[id] ? listenBar(READ_ADV[id], 'Listen to this advice') : ''}
+      <h2 class="leaf-t">${esc(p.title)}</h2><ol class="pt-list">${p.advice.map(a => `<li>${esc(stripPages(a))}</li>`).join('')}</ol>
+      <p class="src">From <i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025).</p></div>`;
+  }
+  $('#ptbody').innerHTML = (back ? `<button type="button" class="sm pt-back" data-ptback>${svg('back')}<span>Back to the guide</span></button>` : '') + `<header class="pt-h"><span class="mark" aria-hidden="true" data-mark></span><div class="pt-ht"><small>${esc(T.dept)}</small><h1 id="h-pt">${esc(T.h)}</h1></div>
+    <button type="button" class="sm pt-size" data-ptsize aria-pressed="${prefs.size === 'large'}" aria-label="${esc(T.size)}"><b class="aa" aria-hidden="true">Aa</b><span aria-hidden="true">${esc(T.size)}</span></button></header>${body}<p class="pt-f">${esc(T.foot)}</p>`;
+  fillIcons($('#ptbody'));
+  document.title = (lg === 'ms' ? 'Nasihat penjagaan di rumah' : 'Home care advice') + ' · HKL';
+}
+$('#ptbody').addEventListener('click', e => {
+  if (e.target.closest('[data-ptback]')){ history.length > 1 ? history.back() : (location.hash = '#home'); return; }
+  const l = e.target.closest('[data-ptlang]');
+  if (l && ptCur){ location.hash = '#pt-' + ptCur + (l.dataset.ptlang === 'ms' ? '-ms' : ''); return; }
+  const b = e.target.closest('[data-ptsize]'); if (!b) return;
+  prefs.size = prefs.size === 'large' ? 'std' : 'large'; store.set('gz-size', prefs.size); applyPrefs();
+  b.setAttribute('aria-pressed', prefs.size === 'large');
+});
+/* The QR dialog, opened from a discharge outcome, the Discharge advice tab or the Home care advice tab */
+let ptqId = null, ptqLang = 'en', ptqFrom = null;
+function drawPtq(){
+  const k = ptqId, q = PT_QR[k][ptqLang] || PT_QR[k].en, p = P[k], n = q.n;
+  $('#ptqbody').innerHTML = `<p class="ptq-t"><b>${esc(p.leaflet ? p.leaflet[q === PT_QR[k].ms ? 'ms' : 'en'].title : p.title)}</b></p>
+    ${PT_QR[k].ms ? `<div class="seg" id="ptqlang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(x => `<button type="button" data-ptql="${x}" aria-pressed="${ptqLang === x}" lang="${x}">${esc(p.leaflet[x].lang)}</button>`).join('')}</div>` : ''}
+    <div class="ptq-c"><svg viewBox="-4 -4 ${n + 8} ${n + 8}" role="img" aria-label="QR code that opens this advice on the patient's phone"><rect x="-4" y="-4" width="${n + 8}" height="${n + 8}" fill="#fff"/><path d="${q.d}" fill="#000" shape-rendering="crispEdges"/></svg></div>
+    <p class="ptq-how">Ask the patient to point their phone camera at the code. The advice opens on their phone${READ_LEAF[k] || READ_ADV[k] ? ', with Listen' : ''}, and nothing about them is sent or kept.</p>
+    <div class="ptq-a"><span class="ptq-u" id="ptqu">${esc(q.u)}</span><button type="button" class="sm" data-ptqcopy>${svg('copy')}<span class="bl">Copy link</span></button><a class="btn sm" href="#pt-${k}${q === PT_QR[k].ms ? '-ms' : ''}" data-ptqopen>${svg('ext')}<span>See what they see</span></a></div>`;
+}
+function openPtq(id, lang){
+  const k = ptKey(id); if (!k) return;
+  ptqId = k; ptqLang = lang === 'ms' && PT_QR[k].ms ? 'ms' : 'en'; ptqFrom = document.activeElement;
+  drawPtq();
+  $('#ptq').hidden = false; document.documentElement.style.overflow = 'hidden';
+  $('#ptqclose').focus();
+}
+function closePtq(restore){
+  if ($('#ptq').hidden) return;
+  $('#ptq').hidden = true; document.documentElement.style.overflow = '';
+  if (restore && ptqFrom && ptqFrom.focus) ptqFrom.focus();
+}
+$('#ptqclose').addEventListener('click', () => closePtq(true));
+$('#ptq').addEventListener('click', e => {
+  if (e.target === $('#ptq')) return closePtq(true);
+  const b = e.target.closest('[data-ptql], [data-ptqcopy], [data-ptqopen]'); if (!b) return;
+  if (b.dataset.ptql){ ptqLang = b.dataset.ptql; drawPtq(); const nb = $(`#ptqlang [data-ptql="${ptqLang}"]`); if (nb) nb.focus(); }
+  else if (b.hasAttribute('data-ptqcopy')) copyText($('#ptqu').textContent, {btn:b, el:$('#ptqu'), ok:'Link copied'});
+  else if (b.hasAttribute('data-ptqopen')) closePtq(false);
+});
+document.addEventListener('click', e => { const b = e.target.closest('[data-ptqr]'); if (b) openPtq(b.dataset.ptqr, b.dataset.lang || (typeof leafLang !== 'undefined' ? leafLang : 'en')); });
+const ptqBtn = (id, cls) => ptKey(id) ? `<button type="button" class="${cls || 'sm'}" data-ptqr="${id}">${svg('qr')}<span class="bl">Show to patient</span></button>` : '';
+
 /* ================= Routing ================= */
 function route(){
   stopReader(); pauseFilms();
   const h = decodeURIComponent(location.hash.slice(1));
   let m, changed = false;
-  closePal(false); closeSettings(false); closeSheet(); closeMap(false);
-  if (P[h]) showPath(h);
+  closePal(false); closeSettings(false); closeSheet(); closeMap(false); closePtq(false); closeFlag(false);
+  const pt = h.match(/^pt-([\w-]+?)(-ms)?$/), ptId = pt && ptKey(pt[1]) === pt[1] ? pt[1] : null;
+  document.documentElement.classList.toggle('pt-mode', !!ptId);
+  if (!ptId && document.title !== DOC_TITLE) document.title = DOC_TITLE;
+  /* Opened from inside the guide (See what they see), the page offers the way back; on the patient's own phone it does not */
+  if (ptId){ if (curView !== 'pt') ptBack = routed; renderPt(ptId, pt[2] ? 'ms' : 'en', ptBack); changed = showView('pt'); }
+  else if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
   else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
@@ -3612,6 +3967,8 @@ $('#run').addEventListener('click', e => {
     b.setAttribute('aria-label', on ? 'Saved. Tap to remove from your list' : 'Save to your list');
   }
   else if (b.hasAttribute('data-link')) copyText(APP_URL + '#' + state.id + (state.cur === p.start ? '' : '--' + state.cur), {ok:'Link to this step copied', fail:'Copying is blocked here. Use Share to copy the link.'});
+  else if (b.hasAttribute('data-flag')) openFlag();
+  else if (b.hasAttribute('data-copyroute')) copyText(routeText(p, n), {btn:b, ok:'Route copied'});
   else if (b.hasAttribute('data-copyout')) copyText([p.title + ': ' + n.title, ...(n.items || []).map(i => '- ' + i)].join('\n'), {btn:b, el:b.closest('.res').querySelector('.res-b') || b.closest('.res').querySelector('h2')});
   /* Advice is copied for the patient: page references stay on screen but not in the copied text */
   else if (b.hasAttribute('data-copyscript')) copyText(p.script.lines.join('\n'), {btn:b, el:$('#advlist')});
@@ -3646,6 +4003,47 @@ $('#palbody').addEventListener('click', e => dgFrom(e.target.closest('a[data-dg]
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) dgFrom(palLinks()[palSel]); }, true);
 $('#rxf').addEventListener('click', e => { const b = e.target.closest('[data-rf]'); if (b){ rxF = b.dataset.rf; renderRx(); const nb = $(`#rxf [data-rf="${rxF}"]`); if (nb) nb.focus(); } });
 $('#rxaz').addEventListener('click', e => { const b = e.target.closest('[data-rl]'); if (b){ const s = document.getElementById('rx-' + b.dataset.rl); if (s) s.scrollIntoView({block:'start'}); } });
+/* ================= The ED extension directory (12 Nov 2026, data22.js) =================
+   The department's extensions, by room: find a room or a number as you type (digits find the room an extension belongs to),
+   filter by area, and tap an extension to copy it. A department note, as printed, with its source; nothing is stored. */
+let extF = 'all';
+const EXT_TILE = () => TILE_KEYS.has('extdir') || STILL_KEYS.has('extdir') ? 'extdir' : 'links';
+const extBtn = (x, label, cls = '', inner = x) => `<button type="button" class="ext-x${cls}" data-ext="${x}" aria-label="Copy extension ${x}${label ? ', ' + esc(label) : ''}"><span class="bl">${inner}</span>${svg('copy')}</button>`;
+function renderExtStatic(){
+  if (typeof EXTDIR === 'undefined' || !$('#extdir')) return;
+  const rows = EXTDIR.groups.flatMap(g => g.rows), n = new Set(rows.flatMap(r => r[1])).size;
+  withTiles($('#exthero'), `${tileMedia(EXT_TILE())}<span class="lbl">${esc(EXTDIR.top[0])}</span><h2 class="ext-big">${EXTDIR.top[1].map(x => extBtn(x, EXTDIR.top[0], ' big')).join('')}</h2><p>${n} extensions in ${rows.length} rooms. Type a room or a number, and tap an extension to copy it.</p>`);
+  $('#extsrc').textContent = 'Source: ' + EXTDIR.src + '. A department note (standing rule 6), as printed: check an extension against the hospital directory before you rely on it. Where the list prints one number for two rooms, both rows say so, and it is under Still to confirm.';
+}
+function renderExt(){
+  if (typeof EXTDIR === 'undefined' || !$('#extl')) return;
+  const q = ($('#extq').value || '').trim().toLowerCase(), digits = /^\d+$/.test(q);
+  const all = EXTDIR.groups.flatMap(g => g.rows.map(r => ({g, r})));
+  const match = ({r}) => !q || (digits ? r[1].some(x => x.startsWith(q)) : (r[0] + ' ' + (r[2] || '')).toLowerCase().includes(q));
+  $('#extf').innerHTML = [['all', 'All', all.length], ...EXTDIR.groups.map(g => [g.k, g.h, g.rows.length])].map(([k, t, n]) => `<button type="button" data-ef="${k}" aria-pressed="${extF === k}">${esc(t)} <span class="n">${n}</span></button>`).join('');
+  const hits = all.filter(x => (extF === 'all' || x.g.k === extF) && match(x));
+  const re = q && !digits ? new RegExp('(' + reEsc(q) + ')', 'ig') : null;
+  const hl = s => re ? s.split(re).map((x, k) => k % 2 ? `<mark>${esc(x)}</mark>` : esc(x)).join('') : esc(s);
+  const hx = x => digits && x.startsWith(q) ? `<mark>${q}</mark>${x.slice(q.length)}` : x;
+  $('#extn').textContent = q || extF !== 'all' ? `${hits.length} of ${all.length} rooms` : `${all.length} rooms, as the list prints them`;
+  $('#extl').innerHTML = hits.length ? EXTDIR.groups.filter(g => hits.some(h => h.g === g)).map(g => `<section class="tile t-pearl ext-g" aria-labelledby="ext-h-${g.k}"><h2 id="ext-h-${g.k}"><i class="jd ${g.j}" aria-hidden="true"></i>${esc(g.h)}<span class="n">${g.rows.length}</span></h2><ul class="ext-l">` +
+    hits.filter(h => h.g === g).map(({r}) => `<li><span class="ext-t"><b>${hl(r[0])}</b>${r[3] ? `<small>${esc(r[3])}</small>` : ''}</span><span class="ext-xs">${r[1].map(x => extBtn(x, r[0], '', hx(x))).join('')}</span></li>`).join('') + `</ul></section>`).join('')
+    : '<p class="empty">No room or extension on the list matches. Try a room name, or the first digits of an extension.</p>';
+}
+if ($('#extdir')){
+  $('#extq').addEventListener('input', renderExt);
+  $('#extf').addEventListener('click', e => { const b = e.target.closest('[data-ef]'); if (b){ extF = b.dataset.ef; renderExt(); const nb = $(`#extf [data-ef="${extF}"]`); if (nb) nb.focus(); } });
+  $('#extdir').addEventListener('click', e => { const b = e.target.closest('[data-ext]'); if (b) copyText(b.dataset.ext, {btn:b, ok:'Copied'}); });
+}
+/* Search finds the directory and each room on it; opening a room fills the directory's find box */
+if (typeof EXTDIR !== 'undefined'){
+  IDX.push({href:'#numbers', title:'ED extension directory', kind:'Tool', meta:'The department\'s extensions, by room', body:'extension extensions sambungan telephone phone number directory ' + EXTDIR.groups.flatMap(g => g.rows.map(r => r[0] + ' ' + r[1].join(' '))).join(' · '), ic:'phone', c:'c-abdo'});
+  EXTDIR.groups.forEach(g => g.rows.forEach(r => IDX.push({href:'#numbers', title:`${r[0]}: ext ${r[1].join(' / ')}`, kind:'Number', meta:'ED extensions · ' + g.h, body:[r[1].join(' '), r[2] || '', g.h, 'extension sambungan'].join(' · '), ic:'phone', c:'c-abdo', ext:r[0]})));
+  renderExtStatic(); renderExt();
+}
+const extFrom = a => { if (a && a.dataset.extq){ extF = 'all'; $('#extq').value = a.dataset.extq; renderExt(); } };
+$('#palbody').addEventListener('click', e => extFrom(e.target.closest('a[data-extq]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) extFrom(palLinks()[palSel]); }, true);
 const rxFrom = a => { if (a && a.dataset.rx){ rxF = 'all'; $('#rxq').value = a.dataset.rx; renderRx(); } };
 $('#palbody').addEventListener('click', e => rxFrom(e.target.closest('a[data-rx]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) rxFrom(palLinks()[palSel]); }, true);
@@ -3728,10 +4126,12 @@ document.addEventListener('keydown', e => {
     if (!$('#pal').hidden) return closePal(true);
     if (!$('#pmap').hidden) return closeMap(true);
     if (!$('#settings').hidden) return closeSettings(true);
+    if (!$('#ptq').hidden) return closePtq(true);
+    if (!$('#flagdlg').hidden) return closeFlag(true);
     if (!$('#lb').hidden) return closeSheet();
     if ($('#side').classList.contains('open')) return closeDrawer(true);
   }
-  const overlay = !$('#pal').hidden || !$('#lb').hidden || !$('#settings').hidden || !$('#pmap').hidden;
+  const overlay = !$('#pal').hidden || !$('#lb').hidden || !$('#settings').hidden || !$('#pmap').hidden || !$('#ptq').hidden || !$('#flagdlg').hidden;
   if (typing || e.ctrlKey || e.metaKey || e.altKey || overlay) return;
   if (e.key === '/'){ e.preventDefault(); openPal(); return; }
   if (curView === 'intro' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')){ e.preventDefault(); introStep(e.key === 'ArrowRight' ? 1 : -1); return; }

@@ -21,11 +21,15 @@
               that same download, so nothing is fetched twice; a poster sheet once it has been opened. Each must match
               the build. Kept files survive updates while they are unchanged, and films and sounds are served in byte
               ranges, so they seek offline.
-   Fonts      The Google Fonts stylesheet and font files are kept as the page loads them, so the guide keeps its type. */
+   Fonts      The Google Fonts stylesheet and font files are kept as the page loads them, so the guide keeps its type.
+   Everything Settings, "Save everything" (12 Nov 2026): on a tap only, the page asks which kept files are still missing
+              (with their sizes) and fetches each one in full; the fetch passes through this worker, which keeps it as above.
+              Nothing is fetched ahead without that tap. */
 'use strict';
 const VERSION = '__VERSION__', PAGE = '__PAGE__';
 const PRE = __PRE__;   /* path: hash, saved at install ('' is the page) */
 const KEEP = __KEEP__; /* path: hash, kept once used */
+const SIZE = __SIZE__; /* path: bytes, for the kept files: what Save everything would download */
 const NAME = 'green-zone-mo-guide-', CACHE = NAME + VERSION, KEPT = NAME + 'kept', FONTS = NAME + 'fonts';
 const BASE = new URL('./', self.location.href).href;
 const WAIT = 4000;
@@ -72,6 +76,13 @@ self.addEventListener('activate', e => e.waitUntil((async () => {
 
 /* pwa.js asks what is saved, for Settings and the Install the guide page: how many files, and their size in bytes */
 self.addEventListener('message', e => {
+  /* Save everything: which kept files this device does not hold yet, and their sizes */
+  if (e.data && e.data.gz === 'missing' && e.source) return e.waitUntil((async () => {
+    const kept = await caches.open(KEPT), have = new Set();
+    for (const r of await kept.keys()){ const res = await kept.match(r), p = pathOf(r.url); if (res && res.headers.get('X-GZ-Hash') === KEEP[p]) have.add(p); }
+    const list = Object.keys(KEEP).filter(p => !have.has(p)).map(p => [p, SIZE[p] || 0]);
+    e.source.postMessage({gz: 'missing', list, of: Object.keys(KEEP).length, bytes: Object.values(SIZE).reduce((s, n) => s + n, 0)});
+  })());
   if (!e.data || e.data.gz !== 'status' || !e.source) return;
   e.waitUntil((async () => {
     const [pre, kept] = await Promise.all([CACHE, KEPT].map(async n => {

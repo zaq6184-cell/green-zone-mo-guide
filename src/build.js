@@ -27,7 +27,7 @@ const crypto = require('crypto');
 const PARTS = path.join(__dirname, 'parts');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const APP = path.join(OUT, 'app');
-const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'data20.js', 'data21.js', 'engine.js'];
+const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'data20.js', 'data21.js', 'data22.js', 'data23.js', 'engine.js'];
 const stop = msg => { console.error(msg); process.exit(1); };
 
 /* LF line endings throughout, as git keeps the files (.gitattributes), so the hashes in sw.js match what GitHub Pages serves */
@@ -127,18 +127,18 @@ const walk = dir => fs.existsSync(dir) ? fs.readdirSync(dir, {withFileTypes: tru
 const files = ['img', 'tiles', 'media', 'poster', 'ebook', 'xray', 'abdo', 'abdo3d', 'memo', 'sp', 'og', 'clips', 'audio'].flatMap(d => walk(path.join(APP, d))).map(f => path.relative(APP, f).split(path.sep).join('/')).sort();
 const SMALL = /^(img\/[^/]+|tiles\/[^/]+|media\/[^/]+|poster\/[^/]+-thumb)\.webp$/; /* the small stills: saved at install */
 const LATER = /^(og\/[^/]+\.jpg|poster\/[^/]+\.webp|ebook\/[^/]+\.webp|xray\/[^/]+\.webp|abdo\/[^/]+\.webp|abdo3d\/.+\.webp|memo\/[^/]+\.webp|sp\/[^/]+\.webp|(media|clips|audio|tiles)\/[^/]+\.(mp4|mp3))$/; /* poster sheets, films and sounds: kept once used */
-const PRE = {'': hash16(app), 'manifest.webmanifest': hash16(manifest)}, KEEP = {};
+const PRE = {'': hash16(app), 'manifest.webmanifest': hash16(manifest)}, KEEP = {}, SIZE = {};
 let preBytes = Buffer.byteLength(app) + Buffer.byteLength(manifest), keepBytes = 0;
 for (const f of files){
   const buf = fs.readFileSync(path.join(APP, f));
   if (SMALL.test(f)){ PRE[f] = hash16(buf); preBytes += buf.length; }
-  else if (LATER.test(f)){ KEEP[f] = hash16(buf); keepBytes += buf.length; }
+  else if (LATER.test(f)){ KEEP[f] = hash16(buf); SIZE[f] = buf.length; keepBytes += buf.length; }
 }
 const json = o => JSON.stringify(o, null, 1).replace(/\n /g, '\n  ');
 let sw = read('sw.js');
-['__PRE__', '__KEEP__', "'__VERSION__'", "'__PAGE__'"].forEach(k => one(sw, k, 'parts/sw.js'));
+['__PRE__', '__KEEP__', '__SIZE__', "'__VERSION__'", "'__PAGE__'"].forEach(k => one(sw, k, 'parts/sw.js'));
 const VERSION = hash16(sw + JSON.stringify(PRE) + JSON.stringify(KEEP)).slice(0, 12);
-sw = sw.replace("'__VERSION__'", () => `'${VERSION}'`).replace("'__PAGE__'", () => `'${PAGE_ID}'`).replace('__PRE__', () => json(PRE)).replace('__KEEP__', () => json(KEEP));
+sw = sw.replace("'__VERSION__'", () => `'${VERSION}'`).replace("'__PAGE__'", () => `'${PAGE_ID}'`).replace('__PRE__', () => json(PRE)).replace('__KEEP__', () => json(KEEP)).replace('__SIZE__', () => JSON.stringify(SIZE));
 
 fs.mkdirSync(APP, {recursive: true});
 fs.writeFileSync(path.join(OUT, 'green-zone-pathways.html'), page);

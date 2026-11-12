@@ -8,6 +8,9 @@
      Install offer, which it can open.
    - Adds an "Offline and install" row to Settings: whether the guide is saved, with Install where the browser offers it,
      or a link to the steps.
+   - Adds "Save everything" (12 Nov 2026): on a tap, downloads every film, sound, loop and printed page this device does not
+     hold yet, so all of it opens without a signal. It says the size first and that Wi-Fi is best, shows progress, can be
+     stopped, and counts only what the worker has actually kept.
    - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
@@ -45,6 +48,11 @@
     row.innerHTML = '<div><b>Offline and install</b><small id="st-off" aria-live="polite"></small></div><button type="button" class="sm" id="st-inst" hidden>Install</button><a class="btn sm" id="st-how" href="#install">How to install</a>';
     box.insertBefore(row, box.querySelector('.dlg-f'));
     row.querySelector('#st-inst').addEventListener('click', install);
+    const all = document.createElement('div');
+    all.className = 'set'; all.id = 'st-all';
+    all.innerHTML = '<div><b>Save everything for no signal</b><small id="st-allt" aria-live="polite">Films, sounds and printed pages are saved as you open them. Save them all now, best on Wi-Fi.</small><span class="st-allbar" id="st-allbar" hidden><i></i></span></div><button type="button" class="sm" id="st-allb" disabled>Save all</button>';
+    box.insertBefore(all, box.querySelector('.dlg-f'));
+    all.querySelector('#st-allb').addEventListener('click', () => saving ? stopAll() : saveAll());
     new MutationObserver(() => { if (!document.querySelector('#settings').hidden) ask(); }).observe(document.querySelector('#settings'), {attributes: true, attributeFilter: ['hidden']});
   }
   function update(){
@@ -62,9 +70,48 @@
     dispatchEvent(new Event('gz-pwa'));
   }
   function ask(){
-    if (sw.controller) sw.controller.postMessage({gz: 'status'});
+    if (sw.controller){ sw.controller.postMessage({gz: 'status'}); if (!saving) sw.controller.postMessage({gz: 'missing'}); }
     update();
   }
+
+  /* Save everything: the page fetches each missing file in full, three at a time; the worker keeps each one it passes */
+  let missing = null, saving = false, stopNow = false;
+  const mbs = n => (n / 1048576).toFixed(n < 10485760 ? 1 : 0) + ' MB';
+  function allUI(t){
+    const b = document.querySelector('#st-allb'), s = document.querySelector('#st-allt'), bar = document.querySelector('#st-allbar');
+    if (!b) return;
+    const left = missing ? missing.list.reduce((a, x) => a + x[1], 0) : 0;
+    if (t){ s.textContent = t; }
+    else if (!missing){ s.textContent = 'Films, sounds and printed pages are saved as you open them. Save them all now, best on Wi-Fi.'; }
+    else if (!missing.list.length){ s.textContent = `Everything is saved on this device (${missing.of} files, ${mbs(missing.bytes)}): it all opens without a signal.`; }
+    else { const cell = navigator.connection && (navigator.connection.type === 'cellular' || navigator.connection.saveData);
+      s.textContent = `${missing.list.length} films, sounds and pages (${mbs(left)}) are not on this device yet. ${cell ? 'You seem to be on mobile data: Wi-Fi is better for this.' : 'Best on Wi-Fi.'}`; }
+    b.disabled = !saving && (!missing || !missing.list.length || state !== 'saved');
+    b.textContent = saving ? 'Stop' : missing && missing.list.length ? `Save all (${mbs(left)})` : 'Save all';
+    bar.hidden = !saving;
+  }
+  async function saveAll(){
+    if (saving || !missing || !missing.list.length) return;
+    saving = true; stopNow = false;
+    const list = missing.list.slice(), count = list.length, total = list.reduce((a, x) => a + x[1], 0), bar = document.querySelector('#st-allbar i');
+    let done = 0, bytes = 0, failed = 0;
+    const one = async () => {
+      while (list.length && !stopNow){
+        const [p, n] = list.shift();
+        try { const r = await fetch(p); if (!r.ok) throw 0; await r.arrayBuffer(); } catch (e) { failed++; }
+        done++; bytes += n;
+        bar.style.width = (bytes / total * 100).toFixed(1) + '%';
+        allUI(`Saving ${done} of ${count} (${mbs(bytes)} of ${mbs(total)})…`);
+      }
+    };
+    allUI('Saving…');
+    await Promise.all([one(), one(), one()]);
+    saving = false;
+    /* Count what the worker actually kept, once its last copies have landed */
+    setTimeout(() => { if (sw.controller) sw.controller.postMessage({gz: 'missing'}); }, 1200);
+    allUI(stopNow ? 'Stopped. What was saved stays saved.' : failed ? `${failed} could not be saved. Try again on a steadier connection.` : 'Checking what was saved…');
+  }
+  function stopAll(){ stopNow = true; }
   addEventListener('beforeinstallprompt', e => { offer = e; update(); });
   addEventListener('appinstalled', () => { offer = null; update(); });
 
@@ -96,6 +143,7 @@
     const d = e.data || {};
     if (d.gz === 'ready'){ state = 'saved'; if (d.page && d.page !== PAGE) offerReload(); ask(); }
     else if (d.gz === 'status'){ state = 'saved'; last = d; update(); }
+    else if (d.gz === 'missing'){ missing = d; if (!saving) allUI(); }
   });
   /* The first time the worker takes charge of this page, pass the fonts the page has already loaded through it once (they
      come from the browser's own cache), so the guide keeps its type offline from the first visit */
@@ -108,6 +156,8 @@
   /* Register once the page has loaded, so saving it never slows the first view. Installed, ask the browser to keep the
      saved copy even when the phone runs short of space (Chrome grants this to installed apps without asking) */
   const go = () => {
+    /* A patient opening home care advice from a QR code (#pt-...) gets the advice only: no worker, nothing saved ahead */
+    if (/^#pt-/.test(location.hash)) return;
     const r = sw.register('sw.js', {scope: './'});
     Promise.resolve(r).then(reg => { if (!reg) state = 'failed'; else if (sw.controller) state = 'saved'; ask(); }, () => { state = 'failed'; update(); });
     if (installed() && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});

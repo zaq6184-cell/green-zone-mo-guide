@@ -4,6 +4,8 @@ Moved from `CLAUDE.md` on 10 Nov 2026. The questions still to confirm with the d
 
 Still to confirm with the department (the app lists them under Still to confirm on its What's new page, from `CONFIRM` in `engine.js`):
 
+**The ED extension directory (12 Nov 2026)** (also in the app): the list ("Nombor Sambungan Jabatan – ED") prints no issuer or date. Three numbers are printed for two rooms each: 6699 (Bilik Porter PPK; Pejabat Rekod Kecemasan), 6590 (the MOIC, Bilik Pegawai Perubatan (YM); Bilik PPK (YM)) and 5346 (Bilik Ketua Jururawat; Pejabat Pengurusan (Penyelia/Matron)): shared lines, or slips? Who keeps the list, and its date?
+
 **From the review of 12 Nov 2026** (also in the app):
 - Obesity in dengue sits in three zones across the sources: morbid obesity to Red (the department's Dengue SOP 2.0 note, `data2.js`), the high-risk line of Appendix 7 to Yellow, and Group B1, Green, in the Quick Reference (p5) and Tables 6 and 8, which the guide follows since 12 Nov 2026. Which does the department use for morbid obesity?
 - A CT brain review: the guide's rules, discharge check, journey and quiz say "an EM Watch or EMACC appointment", while the memo of 10 Oct 2023 asks for EM Watch within 48 hours and EMACC now sees patients from day 4 (memo (01)24). Should EMACC stay in that line?
