@@ -8,7 +8,7 @@
    - every link (node links, "see also") points to an entry, a step (#entry--node), a view of the app, or a source PDF in Google Drive;
    - a scored checklist (check:'score') has a suggest function.
 
-   Expected result since the third CPG round (9 Nov 2026): "54 entries; rules: 15" and "no errors".
+   Expected result since the starter pack round (12 Nov 2026): "65 entries; rules: 23" and "no errors".
    Usage: node check-data.js [folder with the data files]     (npm run check) */
 const fs = require('fs');
 const path = require('path');
@@ -21,7 +21,7 @@ new Function('module', src)(m);
 const P = m.exports;
 
 /* Views of the app that a link may point to (see the route list at the top of engine.js) */
-const VIEWS = ['top', 'home', 'search', 'tour', 'video', 'journey', 'learn', 'rules', 'pathways', 'saved', 'quiz', 'numbers', 'links', 'tools', 'poster', 'new', 'about', 'intro', 'install', 'pharmacy', 'dilution'];
+const VIEWS = ['top', 'home', 'search', 'tour', 'video', 'journey', 'learn', 'rules', 'pathways', 'saved', 'quiz', 'numbers', 'links', 'tools', 'poster', 'new', 'about', 'intro', 'install', 'pharmacy', 'dilution', 'share', 'guidelines'];
 /* Every calculator the engine defines: the keys of its CALCS object */
 const CALC_IDS = (() => { const e = fs.readFileSync(path.join(dir, 'engine.js'), 'utf8'), b = e.slice(e.indexOf('const CALCS = {'), e.indexOf('\n};', e.indexOf('const CALCS = {'))); return [...b.matchAll(/^  ([a-z0-9]+):\{t:'/gm)].map(m => m[1]); })();
 const okHref = h => {

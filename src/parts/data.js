@@ -343,7 +343,7 @@ P['dengue'] = {
     dc:{end:'discharge', title:'Discharge with dengue monitoring record and home care advice', items:[]}
   },
   advice:['Do: adequate bed rest','Do: adequate fluid intake (more than 8 glasses or 2 litres for an average person)','Do: take paracetamol (not more than 4 g a day)','Do: tepid sponging','Do: use mosquito repellent or rest under a mosquito net, even in the daytime','Do: look for and remove mosquito breeding places in and around the home',"Don't take NSAIDs (painkillers); if already taking them, consult your doctor","Antibiotics are not required","Don't use massage, cupping or quasa"],
-  tables:[{title:'Important points', head:['Item','Formula'], rows:[['Obese patient (BMI over 27.5 kg/m²)','Use adjusted body weight'],['Adjusted body weight','Ideal body weight + 0.4 × (actual weight − ideal body weight)'],['Ideal body weight, female','45.5 kg + 0.98 × (height in cm − 152), as the ebook prints it (p31). The dengue CPG, 4th edition, prints 0.91, and the calculators follow the CPG (Krishna, 12 Nov 2026)'],['Ideal body weight, male','50.0 kg + 0.91 × (height in cm − 152)']]}],
+  tables:[{title:'Important points', head:['Item','Formula'], rows:[['Obese patient (BMI over 27.5 kg/m²)','Use adjusted body weight'],['Adjusted body weight','Ideal body weight + 0.4 × (actual weight − ideal body weight)'],['Ideal body weight, female','45.5 kg + 0.98 × (height in cm − 152), as the ebook prints it (p31). The dengue CPG, 4th edition, prints 0.91, and the calculators follow the CPG (the guide owner, 12 Nov 2026)'],['Ideal body weight, male','50.0 kg + 0.91 × (height in cm − 152)']]}],
   refs:['CPG Management of Dengue Infection in Adults, 3rd edition 2015, MOH/P/PAK/302.15(GU)']
 };
 

@@ -282,3 +282,34 @@ const SP_PAGE = 'https://linktr.ee/hkldoctors_starterpack', SP_FARM = 'https://l
   /* ---------------- Look-alike pairs on the ED pharmacy list (the Emergency Pharmacy's top 10, 20 Aug 2026) ---------------- */
   Object.assign(EDRX_LASA, {133:14, 14:133, 1:2, 2:1, 108:107, 107:108, 15:16, 16:15, 4:5, 5:4, 138:141, 141:138, 69:151, 151:69, 28:65, 65:28, 42:44, 44:42});
 })();
+
+/* ---------------- The 12 Nov 2026 review: repeated topics joined ----------------
+   Where the same memo or rule is written out in two places, one place keeps it in full and the other points to it, so every
+   #id--node link still opens. The ebook pathways and the CPG entries are not merged (standing rule 5, and their own source
+   labels): they are joined by links instead. */
+(function(){
+  const node = (id, k) => P[id] && P[id].nodes[k];
+  const link = (id, k, l) => { const n = node(id, k); if (n && !(n.links || []).some(x => x[0] === l[0])) n.links = [...(n.links || []), l]; };
+  /* The notifiable disease memo (3 Mar 2023) is written out on the Green Zone rules page, with its pages; the infection page keeps its dengue lines */
+  const nf = node('infection-alerts', 'notify');
+  if (nf && node('gz-rules', 'notif') && nf.items.length === 5 && /^Complete the communicable disease notification form/.test(nf.items[0])){
+    nf.items = ['The form, the Shift Supervisor\'s room, the Notification Record Book and the forms to UKA at 8 am and 4 pm: the memo\'s steps are on the Green Zone rules page, with the memo itself', ...nf.items.slice(3)];
+    link('infection-alerts', 'notify', ['#gz-rules--notif', 'Notifying a disease: the memo']);
+  }
+  /* Prescriptions: the ED memo of 21 Dec 2023 and the hospital's rules (2024 to 2026) point to each other */
+  link('safe-practice', 'rx', ['#prescribing--check', 'Prescribing at HKL: the check before you sign']);
+  link('prescribing', 'allergy', ['#safe-practice--rx', 'The ED memo of 21 Dec 2023']);
+  /* Dengue: the CPG leads the topic; the direct admission to the observation ward is a department route beside it */
+  link('dengue-cpg', 'yellow', ['#gz-rules--dengue', 'Direct admission to the observation ward (department memo)']);
+  link('gz-rules', 'dnot', ['#dengue-cpg', 'Dengue CPG, 4th edition (2026)']);
+  /* The angry or aggressive visitor: the HKL code and number are on Communication on shift */
+  const gr = node('new-hkl', 'grey');
+  if (gr && !gr.items.some(i => /5441/.test(i))){
+    gr.items = [...gr.items, 'In HKL, the emergency colour codes card gives Code Gray on ext 5441 for physical violence (still to confirm): see Communication on shift'];
+    link('new-hkl', 'grey', ['#communication--help', 'Getting help: the HKL codes']);
+  }
+  /* Handing over, from the admission memo */
+  link('gz-rules', 'adm24', ['#handover', 'Handing over']);
+  /* EM Watch and EMACC, the two follow-up clinics */
+  if (P['em-watch'] && !(P['em-watch'].see || []).some(x => x[0] === '#emacc')) P['em-watch'].see = [...(P['em-watch'].see || []), ['#emacc', 'EMACC follow-up'], ['#gz-rules--reas', 'Before you admit, discharge or transfer']];
+})();

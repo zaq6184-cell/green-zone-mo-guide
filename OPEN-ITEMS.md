@@ -4,6 +4,10 @@ Moved from `CLAUDE.md` on 10 Nov 2026. The questions still to confirm with the d
 
 Still to confirm with the department (the app lists them under Still to confirm on its What's new page, from `CONFIRM` in `engine.js`):
 
+**From the review of 12 Nov 2026** (also in the app):
+- Obesity in dengue sits in three zones across the sources: morbid obesity to Red (the department's Dengue SOP 2.0 note, `data2.js`), the high-risk line of Appendix 7 to Yellow, and Group B1, Green, in the Quick Reference (p5) and Tables 6 and 8, which the guide follows since 12 Nov 2026. Which does the department use for morbid obesity?
+- A CT brain review: the guide's rules, discharge check, journey and quiz say "an EM Watch or EMACC appointment", while the memo of 10 Oct 2023 asks for EM Watch within 48 hours and EMACC now sees patients from day 4 (memo (01)24). Should EMACC stay in that line?
+
 **The ebook against the app (the line-by-line review of 12 Nov 2026: `EBOOK-REVIEW-1.md` to `-3.md`, changes in `EBOOK-CHANGES.md`).** The guide now carries what the ebook prints. These are the places where the print looks like a slip, or two of its pages disagree, so the guide keeps its reading and quotes the print beside it. They are review points for the ebook's editors, which standing rule 5 keeps apart from the app: only the two still open that bear on a number the guide or a calculator gives (the midazolam dose and the paracetamol maximum; the dengue weight factor was decided on 12 Nov 2026) are in the app's Still to confirm; the rest are here until Krishna says whether they go to the editors' review-points page:
 
 - Dengue, p31: the ebook prints the ideal body weight for women as "45.5 kg + 0.98 (height in cm - 152 )" and for men "50.0 kg + 0.91"; the dengue CPG, 4th edition, prints 0.91 for both. The pathway table now shows the print, and the weight and dengue fluid calculators use 0.91, as the CPG does. **Decided by Krishna on 12 Nov 2026: "Follow dengue cpg."** The calculators stay on 0.91 and this is no longer in the app's Still to confirm.

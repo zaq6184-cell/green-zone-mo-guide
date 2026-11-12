@@ -1013,6 +1013,34 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#calc-dengue', 400);
   await p.screenshot({path:out + '/p-calc.png'});
 
+  /* ---------- The 12 Nov 2026 review (content, design and function) ---------- */
+  {
+    const tiles = []; p.on('request', r => { const f = new URL(r.url()).pathname; if (/^\/tiles\/(whatsnew|sources|poster|dilute)\.mp4$/.test(f)) tiles.push(f); });
+    await go(p, '#renal-colic', 500);
+    await p.evaluate(() => document.querySelector('#cur button[data-go="0"]').click());
+    let wide = 0; for (let i = 0; i < 12; i++){ wide = Math.max(wide, await hscroll(p)); await p.waitForTimeout(45); }
+    ok(wide <= 1, 'review: a question card dealt on a phone never pushes the page sideways (' + wide + ' px)');
+    await go(p, '#cancer-pain-cpg', 500);
+    await p.evaluate(() => { const t = [...document.querySelectorAll('#v-run button, #v-run [role="tab"]')].find(b => /Home care advice/.test(b.textContent)); if (t) t.click(); });
+    await p.waitForTimeout(400);
+    ok(await p.evaluate(() => { const l = document.querySelector('.leaf'); return !!l && !!l.offsetParent && l.getBoundingClientRect().right <= innerWidth + 0.5 && document.documentElement.scrollWidth <= innerWidth; }), 'review: the cancer pain leaflet and its listen bar stay inside a phone screen');
+    const top = async q => { await p.evaluate(() => openPal()); await p.fill('#gq', ''); await p.fill('#gq', q); await p.waitForTimeout(250); const h = await p.$$eval('#palbody a', as => as.slice(0, 3).map(a => a.getAttribute('href'))); await p.keyboard.press('Escape'); await p.waitForTimeout(100); return h; };
+    const cp = await top('chest pain'), tops = [(await top('asthma'))[0], (await top('dengue'))[0], (await top('MC'))[0], (await top('renal colic'))[0]];
+    ok(cp.includes('#acs') && tops.join(' ') === '#asthma #dengue-cpg #emacc #renal-colic', 'review: search finds the ACS pathway in the top three for "chest pain", and puts the ebook asthma pathway first for "asthma", the dengue CPG for "dengue", EMACC for "MC" and renal colic for "renal colic" (' + cp.join(' ') + '; ' + tops.join(' ') + ')');
+    ok(await p.evaluate(() => TIPS.every(t => !!t.src) && /Dengue in Adults/.test(TIPS[0].src) && TIPS.find(t => /cannot walk/.test(t.t)).l === 'Limbs and fractures' && typeof TIP_SRC === 'undefined'), 'review: every pearl carries its own source (the dengue pearl names the CPG)');
+    await go(p, '#pathways', 300);
+    ok(await p.evaluate(() => /the 23 rules and protocols/.test(document.querySelector('#v-pathways .vhead p').textContent) && [...document.querySelectorAll('[data-ver]')].every(e => /^Version 8, updated /.test(e.textContent)) && INTRO.every(i => !/\{(calcs|nums)\}/.test(i.p) || /calculators/.test(i.p))), 'review: the counts in the views\' own text follow the data, and the version line is current');
+    for (const v of ['#new', '#about', '#poster', '#dilution']) await go(p, v, 450);
+    await p.waitForTimeout(600);
+    ok(await p.evaluate(() => [['newhero', 'whatsnew'], ['abouthero', 'sources'], ['posterhero', 'poster'], ['dghero', 'dilute']].every(([id, k]) => { const t = document.querySelector('#' + id + ' .tm'); return !!t && t.dataset.tm === k && TILE_KEYS.has(k) && !!t.querySelector('img'); })) && ['dilute', 'whatsnew', 'sources', 'poster'].every(k => fs.existsSync(path.join(__dirname, '..', 'app', 'tiles', k + '.mp4')) && fs.existsSync(path.join(__dirname, '..', 'app', 'tiles', k + '.webp'))), 'review: What\'s new, Sources and about, the wall poster and the dilution guide open on their own Flow banners, each a still and its loop');
+    ok(await p.evaluate(() => P['infection-alerts'].nodes.notify.links.some(l => l[0] === '#gz-rules--notif') && P['new-hkl'].nodes.grey.items.some(i => /5441/.test(i)) && P['dengue-cpg'].nodes.yellow.links.some(l => l[0] === '#gz-rules--dengue') && P['safe-practice'].nodes.rx.links.some(l => l[0] === '#prescribing--check')), 'review: repeated topics point to their one full copy, and every old link still opens');
+    await go(p, '#links', 300);
+    const tl = await p.evaluate(() => document.querySelector('#toptitle').textContent);
+    await go(p, '#share', 300);
+    ok(tl === 'ED links' && await p.evaluate(() => document.querySelector('#toptitle').textContent) === 'Share the guide', 'review: the top bar names ED links and Share the guide');
+    ok(await p.evaluate(() => !Object.values(P).some(e => /Krishna/.test(JSON.stringify(e))) && !CONFIRM.some(c => /Krishna/.test(c))), 'review: the app text says "the guide owner", not a name');
+  }
+
   /* ---------- Phone, dark ---------- */
   p = await mk({...phone, colorScheme:'dark'}, 'phone-dark');
   await p.goto(U, {waitUntil:'networkidle'}); await p.waitForTimeout(800);

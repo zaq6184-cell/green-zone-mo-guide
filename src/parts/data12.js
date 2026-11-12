@@ -280,7 +280,7 @@
   S.nodes.dcfu = {q:'Which follow-up?',
     hint:'Follow-up in the ED is given only through EM WATCH or EMACC (department policy 2026, 32.2.5, p75). The slide says what each is for. ' + S27,
     opts:[['EMACC: the after-care clinic', 'fuemacc'], ['EM Watch: telemedicine', 'fuwatch']]};
-  const FUGAP = S27 + ' The slide\'s lines on which results each clinic reviews are left out: they differ from the EMACC and EM Watch entries in this guide, and the point ' + WAIT + '.';
+  const FUGAP = S27 + ' Which results each clinic reviews: the slide gives X-ray reports to EMACC and investigations to EM Watch, as memo (01)24 of 11 Jan 2024 now does (blood results to EM Watch): see the EMACC and EM Watch entries.';
   S.nodes.fuemacc = {end:'refer', title:'Discharge with EMACC follow-up', items:[
     'EMACC (Emergency Medicine After-Care Clinic): to follow up a condition',
     '"Do not include clear cut cases to be referred": a case that clearly needs a referral is referred, not booked into EMACC',

@@ -713,7 +713,7 @@ button.opt:not(.sugg):active{box-shadow:inset 0 2px 5px var(--press),inset 0 0 0
 button.opt.sugg{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:var(--jewel-rim),0 14px 26px -16px var(--emerald-3);box-shadow:var(--jewel-rim),0 14px 26px -16px color-mix(in srgb,var(--emerald-3),#000 var(--shade-k))}
 button.opt.sugg kbd{background:var(--mint);color:var(--emerald-3);box-shadow:none}
 button.opt.sugg .gt{color:var(--mint)}
-@media (prefers-reduced-motion:no-preference){.cur-in{animation:deal3 .5s var(--ease);transform-origin:0 50%}@keyframes deal3{from{opacity:0;transform:perspective(1100px) translateX(24px) rotateY(-11deg)}to{opacity:1;transform:none}}@keyframes deal{from{opacity:0;transform:translateX(22px) rotate(.8deg)}to{opacity:1;transform:none}}}
+@media (prefers-reduced-motion:no-preference){.cur-in{animation:deal3 .5s var(--ease);transform-origin:0 50%}@keyframes deal3{from{opacity:0;transform:perspective(1100px) translateY(14px) rotateY(-11deg)}to{opacity:1;transform:none}}@keyframes deal{from{opacity:0;transform:translateX(22px) rotate(.8deg)}to{opacity:1;transform:none}}}
 /* Outcome card */
 .res{position:relative;overflow:hidden;border-radius:var(--r-xl);background:var(--oc);color:var(--oi);box-shadow:0 22px 40px -26px var(--oc);box-shadow:0 22px 40px -26px color-mix(in srgb,var(--oc),#000 var(--shade-k))}
 .res-h{display:flex;align-items:center;gap:16px;padding:22px 22px 14px}
@@ -1819,6 +1819,61 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 #viewport:focus,#viewport:focus-visible,#cur:focus,#cur:focus-visible,#qcard:focus,#qcard:focus-visible,#run-title:focus-visible,#introbox:focus{outline:none}
 @media (max-width:560px){.top.has-title .brand .bt{display:none}.top-title{color:var(--ink)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* ---------- The 12 Nov 2026 design review ---------- */
+/* Long words, links and chip rows stay inside their cards on a phone */
+.leaf{grid-template-columns:minmax(0,1fr)}
+.ptab-p li{min-width:0;overflow-wrap:anywhere}
+/* Home tile lists: a column that never grows past the tile, so long titles take the ellipsis and the arrow stays in */
+.gl{grid-template-columns:minmax(0,1fr)}
+/* The discharge outcome: its label at full strength and its buttons on dark glass, readable on the green fill */
+.res-k{opacity:1}
+.res.discharge .res-f button:not(.primary){background:rgba(0,0,0,.16)}
+.res.discharge .res-f button:not(.primary):hover{background:rgba(0,0,0,.26)}
+/* Small lines on coloured tiles, at a readable contrast */
+.num-card .src{opacity:.9}
+.chaps button span{opacity:.9}
+.tool .foot{color:var(--ink-2)}
+/* Words in the body face (mono is for numbers and doses) */
+.srcs .panel .src-k{font:800 .72rem/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase}
+.tool-go .gl b.me{font:800 .78rem/1.2 var(--body)}
+/* Shift tools: a tool's longer row takes two lines instead of an ellipsis */
+.tool-go .gl li span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* Share: the code card sits at the top of its row */
+.sh-more{align-items:start}
+@media (max-width:760px){
+  /* A long entry title (over 26 characters, such as the CPG titles) a size smaller on a phone, so its first question still starts high */
+  .run-hero h1.long{font-size:1.36rem;line-height:1.15}
+  /* An entry's banner chips stay on one line each */
+  .run-hero .run-cat{flex-wrap:nowrap;min-width:0}
+  .run-hero .run-cat > *{flex:none}
+  .run-hero .chip{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .run-hero .run-cat > .chip:not(.j){flex:0 1 auto;min-width:0}
+}
+@media (max-width:560px){
+  /* The list filters scroll inside themselves in one row, rather than wrapping into ragged rows (the install page's device and
+     browser pickers keep wrapping: every choice stays in view there) */
+  #libf,#rxf,#lkf,#dgf{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;overscroll-behavior-x:contain}
+  #libf::-webkit-scrollbar,#rxf::-webkit-scrollbar,#lkf::-webkit-scrollbar,#dgf::-webkit-scrollbar{display:none}
+  #libf button,#rxf button,#lkf button,#dgf button{flex:none}
+  /* On the on-shift lists the banner says the rest: the intro keeps to two lines, so the list starts sooner */
+  .vhead:has(+ .phx-hero) p,.vhead:has(+ .lk-hero) p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .phx-hero,.lk-hero{min-height:104px}
+}
+@media (pointer:coarse){
+  /* Bigger targets for the on-shift lists' own buttons */
+  .dg-p .pill{min-height:40px}
+  .phx-go{width:40px;height:40px}
+  .phx-az button{min-width:36px;height:36px}
+}
+@media (max-width:380px){
+  /* Home at 360 px: the zone map's stop labels keep apart */
+  .zm b{font-size:.68rem}
+  .zm small{font-size:.62rem}
+}
+/* The pressed filter at night: a mint edge, since the dark fill is close to its track */
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{box-shadow:var(--sh-2),inset 0 0 0 1.5px rgba(91,232,157,.55)}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{box-shadow:var(--sh-2),inset 0 0 0 1.5px rgba(91,232,157,.55)}
+
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -1899,7 +1954,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Pathway library -->
       <section class="view" data-view="pathways" id="v-pathways" hidden aria-labelledby="h-lib"><div class="vw">
         <header class="vhead"><div><h1 id="h-lib">Pathways</h1>
-          <p>The 23 ebook pathways, the 15 rules and protocols, and the national CPGs. Each runs one question at a time to its outcome card. Ebook pathways are built as written; department notes and CPGs are labelled with their source.</p></div></header>
+          <p>The <span data-cnt="ebook">23</span> ebook pathways, the <span data-cnt="rules">23</span> rules and protocols, and the national guidelines. Each runs one question at a time to its outcome card. Ebook pathways are built as written; department notes and CPGs are labelled with their source.</p></div></header>
         <div class="libbar">
           <label class="find"><span data-icon="search"></span><span class="vh">Filter pathways</span><input id="libq" type="search" placeholder="Filter by name, symptom or drug" autocomplete="off"></label>
           <div class="seg" id="libf" role="group" aria-label="Show"></div>
@@ -2025,7 +2080,8 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- What's new -->
       <section class="view" data-view="new" id="v-new" hidden aria-labelledby="h-new"><div class="vw">
         <header class="vhead"><div><h1 id="h-new">What's new in the guide</h1>
-          <p>Version 8 is a new design with the zone map, whole-pathway maps, visual tools and a first-shift intro. Below it, what came in from the MO Drive and the triage course folder, what did not and why, and what is still to confirm.</p></div></header>
+          <p>Every round since the version 8 redesign of 8 Nov 2026, newest first. Below them, what came in from the MO Drive and the triage course folder, what did not and why, and what is still to confirm.</p></div></header>
+        <div class="tile t-sapphire phx-hero" id="newhero"></div>
         <div id="drive"></div>
       </div></section>
 
@@ -2033,6 +2089,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="poster" id="v-poster" hidden aria-labelledby="h-post"><div class="vw">
         <header class="vhead"><div><h1 id="h-post">The wall poster</h1>
           <p>Two A3 sheets for the Green Zone wall: the patient flow, rules and numbers on the first, and the pathways, EMACC, Asthma Zone and referrals on the second. Tap a sheet to read it full size. With night colours on, you see the night versions; the sheets on the wall keep the day colours.</p></div></header>
+        <div class="tile t-plum phx-hero" id="posterhero"></div>
         <div class="sheets">
           <figure><button type="button" data-sheet="1" aria-label="Open sheet 1 full size"><img src="poster/sheet1-thumb.webp" width="560" height="791" loading="lazy" alt="Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know"></button><figcaption><b>Sheet 1</b> · Patient flow</figcaption></figure>
           <figure><button type="button" data-sheet="2" aria-label="Open sheet 2 full size"><img src="poster/sheet2-thumb.webp" width="560" height="791" loading="lazy" alt="Poster sheet 2: the 23 pathways, EMACC follow-up, Asthma Zone flow and referrals"></button><figcaption><b>Sheet 2</b> · Pathways and referrals</figcaption></figure>
@@ -2043,6 +2100,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="about" id="v-about" hidden aria-labelledby="h-about"><div class="vw">
         <header class="vhead"><div><h1 id="h-about">Sources and about</h1>
           <p>Everything in this guide and where it comes from. It is a reference tool only and holds no patient data. Use clinical judgement and consult the Emergency Physician on duty when unsure.</p></div></header>
+        <div class="tile t-slate phx-hero" id="abouthero"></div>
         <div class="srcs" id="srcs"></div>
         <div class="shead"><h2>Privacy</h2></div>
         <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
@@ -2069,7 +2127,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 
     <footer class="foot"><div class="vw">
       <p><b>Reference tool only.</b> Pathways follow <i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025), as written, and page numbers refer to that edition. Green Zone rules and department protocols follow the memos, SOPs and notes in the department's drives, with each source and date named on its entry.</p>
-      <p>Use clinical judgement and consult the Emergency Physician on duty when unsure. Version 8, 8 Nov 2026.</p>
+      <p>Use clinical judgement and consult the Emergency Physician on duty when unsure. <span data-ver>Version 8</span>.</p>
     </div></footer>
   </div>
 </div>
@@ -2109,7 +2167,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
     <div class="set"><div><b>Moving tiles</b><small>The tiles, section bars and tool headers move silently. Off keeps still pictures and saves mobile data.</small></div><div class="seg" id="st-tiles" role="group" aria-label="Moving tiles"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Moving clips</b><small>The patient journey clips loop silently. Off saves mobile data.</small></div><div class="seg" id="st-clips" role="group" aria-label="Moving clips"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Saved, recent and quiz score</b><small id="st-count">Kept in this browser only.</small></div><button type="button" id="st-clear" class="sm">Clear</button></div>
-    <p class="dlg-f">Settings are kept in this browser only. Version 8, 8 Nov 2026.</p>
+    <p class="dlg-f">Settings are kept in this browser only. <span data-ver>Version 8</span>.</p>
   </div>
 </div>
 
@@ -2465,7 +2523,7 @@ P['dengue'] = {
     dc:{end:'discharge', title:'Discharge with dengue monitoring record and home care advice', items:[]}
   },
   advice:['Do: adequate bed rest','Do: adequate fluid intake (more than 8 glasses or 2 litres for an average person)','Do: take paracetamol (not more than 4 g a day)','Do: tepid sponging','Do: use mosquito repellent or rest under a mosquito net, even in the daytime','Do: look for and remove mosquito breeding places in and around the home',"Don't take NSAIDs (painkillers); if already taking them, consult your doctor","Antibiotics are not required","Don't use massage, cupping or quasa"],
-  tables:[{title:'Important points', head:['Item','Formula'], rows:[['Obese patient (BMI over 27.5 kg/m²)','Use adjusted body weight'],['Adjusted body weight','Ideal body weight + 0.4 × (actual weight − ideal body weight)'],['Ideal body weight, female','45.5 kg + 0.98 × (height in cm − 152), as the ebook prints it (p31). The dengue CPG, 4th edition, prints 0.91, and the calculators follow the CPG (Krishna, 12 Nov 2026)'],['Ideal body weight, male','50.0 kg + 0.91 × (height in cm − 152)']]}],
+  tables:[{title:'Important points', head:['Item','Formula'], rows:[['Obese patient (BMI over 27.5 kg/m²)','Use adjusted body weight'],['Adjusted body weight','Ideal body weight + 0.4 × (actual weight − ideal body weight)'],['Ideal body weight, female','45.5 kg + 0.98 × (height in cm − 152), as the ebook prints it (p31). The dengue CPG, 4th edition, prints 0.91, and the calculators follow the CPG (the guide owner, 12 Nov 2026)'],['Ideal body weight, male','50.0 kg + 0.91 × (height in cm − 152)']]}],
   refs:['CPG Management of Dengue Infection in Adults, 3rd edition 2015, MOH/P/PAK/302.15(GU)']
 };
 
@@ -3602,7 +3660,7 @@ P['dengue-cpg'] = {
       {h:'Interpreting warning signs', src:'CPG p15', items:['Warning signs are most predictive for severe dengue during the critical phase.','Symptom such as persistent vomiting during febrile phase should not be interpreted as warning signs.','Interpretation should be integrated with: haemodynamic state, haematocrit trend, urine output, perfusion markers (e.g. CRT >3 sec).','Phase-based interpretation of symptoms and signs reduces over-triaging.']},
       {h:'Predictors of severe dengue', src:'CPG 8.1.4 (p25–26)', items:['Patient\'s factor: older age; overweight/obesity (BMI >25 kg/m²); co-morbid conditions: type-2 DM with poor glycaemic control, presence of one or more co-morbidities','Clinical signs: presence of multiple warning signs; gastrointestinal bleeding; clinical features suggestive of plasma leakage; altered mental status; in-hospital complications e.g., acute kidney injury or pneumonia','Laboratory markers: early decline in platelet count in febrile phase, severe thrombocytopenia (platelet count <50 × 10⁹/L), leucocytosis or rising haematocrit with rapid drop in platelet; early elevation of AST/ALT in febrile phase or severe hepatitis >1000 U/L; prolonged PT','Imaging: gallbladder wall oedema/ increased gallbladder wall thickness, pleural effusion, ascites and/or organomegaly']},
       {h:'Special populations', src:'CPG key recommendations (p iii) and chapter 10 (p70–79)', items:['All pregnant patients with confirmed dengue should be hospitalised and managed by a multidisciplinary team (Recommendation 11, p73).','In pregnancy, paracetamol is safe; avoid NSAIDs and aspirin due to bleeding risk (p72).','Heart failure: early admission despite absence of warning signs; modify the volume of fluid therapy to reduce the risk of fluid overload (p74).','CKD stage 3b and above: early admission despite absence of warning signs for close monitoring; modify the fluid volume; early nephrologist consultation in oliguric patients at risk of fluid overload (p75).','Elderly patients with dengue particularly those with underlying comorbidities, or inadequate social support should be hospitalised for monitoring and management to prevent complication (Recommendation 15, p78).','Obese patients with dengue should be considered for admission to ensure early escalation of care is feasible (p78).','The CPG uses three age cut-offs: ≥65 years (Table 6), > 65 years (Appendix 7 and Table 7) and ≥60 years for older adults (10.7, p77).','In dengue patients with heart failure, end-stage kidney disease and liver cirrhosis, fluid management should be individualised with close monitoring.','In dengue patients with DKA/HHS, fluid requirement should follow the DKA/HHS regimen.','Hospitalised dengue patients with diabetes: early and serial metabolic assessment to distinguish dengue shock from DKA and HHS; stop oral hypoglycaemics and consider insulin (Recommendation 13, p76).','In dengue patients with hypertension, blood pressure should be interpreted carefully relative to baseline.','In acutely unwell elderly patients with leucopenia, dengue fever should be considered, even in the absence of classical dengue features.','In obese dengue patients in shock, fluid management should be done with caution by applying adjusted body weight-based fluid dosing with frequent monitoring.']},
-      {h:'Where the CPG words the same item differently', src:'Appendix 7 (p108) against Table 6 (p28) and 7.1 (p17). Each is quoted as printed.', items:['Age: "> 65 years old" (Appendix 7); "≥65 years old" (Table 6)','Obesity: "Morbid obesity" (Appendix 7); "Obesity" (Table 6)','Bleeding: "Mucosal bleed" (Appendix 7); "Bleeding manifestation" (Table 6)','Haematocrit: "Rising hematocrit > 20% from the baseline" (Appendix 7); "A rising HCT (≥20% from baseline)" (p17)','High risk: Appendix 7 asks about high risk with the warning signs (MTS level 3); Tables 6 and 8 put pregnancy, age and obesity in Group B1 (MTS level 4). The Green Zone follows Appendix 7 (the guide owner\'s decision, 9 Nov 2026)']}
+      {h:'Where the CPG words the same item differently', src:'Appendix 7 (p108) against Table 6 (p28) and 7.1 (p17). Each is quoted as printed.', items:['Age: "> 65 years old" (Appendix 7); "≥65 years old" (Table 6)','Obesity: "Morbid obesity" (Appendix 7); "Obesity" (Table 6)','Bleeding: "Mucosal bleed" (Appendix 7); "Bleeding manifestation" (Table 6)','Haematocrit: "Rising hematocrit > 20% from the baseline" (Appendix 7); "A rising HCT (≥20% from baseline)" (p17)','High risk: Appendix 7 asks about high risk with the warning signs (MTS level 3); Tables 6 and 8 put pregnancy, age and obesity in Group B1 (MTS level 4). The Green Zone follows Tables 6 and 8 and the Quick Reference (p5): Group B1, MTS level 4, Green (the guide owner\'s decision, 12 Nov 2026, in place of the choice of 9 Nov 2026 for Appendix 7)']}
     ]},
     {l:'Fluids', notes:[
       {h:'Algorithm 1: dengue with warning signs (Group B2), in the critical phase', src:'CPG p xiv', items:['Start IV crystalloid 3-5ml/kg/hr for 1 hour','Clinical improvement: gradual reduction of IV crystalloid, to IV crystalloid 2-3ml/kg/hr for 1-2 hour','Still improving: reduce to 1-2ml/kg/hr or maintenance fluid; stop IV fluid if able to tolerate orally','No improvement at either check: is the patient in shock? If yes, refer to Algorithm 2/3/4','Not in shock: take FBC/VBG/lactate; increase fluid regimen to 5-7ml/kg/hr while awaiting result and titrate accordingly','Improvement in blood and clinical condition: back to the gradual reduction. No improvement: refer to Algorithm 2/3/4','Status of improvement: assessed by reevaluating the patient\'s clinical condition, vital signs, CCTVR, and urine output','FBC should be taken every 4-12 hourly in critical phase','Total fluid given should be within fluid quota for 48 hours (M+5%)']},
@@ -5607,7 +5665,7 @@ P['hip-fracture-cpg'] = {
       'National Institute for Health and Care Excellence (NICE) recommends MRI to be offered if hip fracture is suspected despite negative plain radiograph of the hip. If it is not available within 24 hours or is contraindicated, CT scan should be considered (p5)',
       'Algorithm (p x): possible occult hip fracture (normal x-ray), refer to orthopaedics, computed tomography scan/magnetic resonance imaging required and done. Fracture: ward admission and pre-operative optimisation (medical/anaesthesia). No fracture: treat accordingly'],
       links:[['#hip-fracture-cpg--frx','Fracture found: start in the ED'],['#hip-fracture-cpg--pain','Analgesia in the elderly'],['#safe-practice--limb','Department: tenderness with a normal X-ray'],['#emacc','EMACC follow-up (department)']],
-      gap:'CPG Recommendation 1 (p6), chapters 4 and 5 (p5–6) and the Algorithm (p x). The CPG does not say whether the ED or the orthopaedic team orders the CT or MRI, how soon, or what treat accordingly means when it shows no fracture. The department\'s notes treat localised tenderness with a normal X-ray as a fracture with a follow-up X-ray, and EMACC reviews a suspected fracture with a normal X-ray within 3 days: which the Green Zone follows for an older adult is an open item.'},
+      gap:'CPG Recommendation 1 (p6), chapters 4 and 5 (p5–6) and the Algorithm (p x). The CPG does not say whether the ED or the orthopaedic team orders the CT or MRI, how soon, or what treat accordingly means when it shows no fracture. The department\'s notes treat localised tenderness with a normal X-ray as a fracture with a follow-up X-ray, and EMACC reviews a suspected fracture with a normal X-ray (the first visit on day 4 or 5, memo (01)24): which the Green Zone follows for an older adult is an open item.'},
 
     /* Hip fracture confirmed: 6.1 (p7–10), chapter 5 (p6), Recommendation 11 (p23) */
     frx:{step:'Start in the ED: hip fracture confirmed', items:[
@@ -8980,7 +9038,7 @@ P['communication'].hero = 'comms';
   S.nodes.dcfu = {q:'Which follow-up?',
     hint:'Follow-up in the ED is given only through EM WATCH or EMACC (department policy 2026, 32.2.5, p75). The slide says what each is for. ' + S27,
     opts:[['EMACC: the after-care clinic', 'fuemacc'], ['EM Watch: telemedicine', 'fuwatch']]};
-  const FUGAP = S27 + ' The slide\'s lines on which results each clinic reviews are left out: they differ from the EMACC and EM Watch entries in this guide, and the point ' + WAIT + '.';
+  const FUGAP = S27 + ' Which results each clinic reviews: the slide gives X-ray reports to EMACC and investigations to EM Watch, as memo (01)24 of 11 Jan 2024 now does (blood results to EM Watch): see the EMACC and EM Watch entries.';
   S.nodes.fuemacc = {end:'refer', title:'Discharge with EMACC follow-up', items:[
     'EMACC (Emergency Medicine After-Care Clinic): to follow up a condition',
     '"Do not include clear cut cases to be referred": a case that clearly needs a referral is referred, not booked into EMACC',
@@ -11358,15 +11416,15 @@ const MEMOS = {
     'The patient brings the slip hijau back to you: record the appointment date in the RPP, clip the slip hijau outside the RPP or the X-ray envelope, and hand over the discharge package (the medication slip, an MC if any, a referral letter if any) before the patient goes home (11; Lampiran B1)',
     'Tell the patient: at most 2 EMACC visits within 1 month of discharge; refer to a specialist clinic if needed (8)',
     'Late or missed: seen if a walk-in slot is free while the clinic is open; otherwise a new date on the next clinic day. No appointment card: to the Registration Counter first (13 to 15)',
-    'EMACC runs Monday to Friday, 8 am to 3 pm (Krishna, 12 Nov 2026)'];
+    'EMACC runs Monday to Friday, 8 am to 3 pm (the guide owner, 12 Nov 2026)'];
   E.nodes.bku = {end:'refer', title:'Urgent: EMACC on day 4 at the earliest, 12 pm to 3 pm', fig:'emtl', items:HOW, links:[['#emacc--clinic', 'The clinic: hours and slots']], gap:E24('Lampiran A, 7 to 15, and Lampiran B1')};
   E.nodes.bkn = {end:'refer', title:'Not urgent: EMACC on day 5 at the earliest, 8 am to 3 pm', fig:'emtl', items:HOW, links:[['#emacc--clinic', 'The clinic: hours and slots']], gap:E24('Lampiran A, 7 to 15, and Lampiran B1')};
   E.nodes.clinic = {end:'neutral', title:'The EMACC clinic: 8 am to 3 pm, Monday to Friday', fig:'memo-2024-02', items:[
-    'EMACC runs 8 am to 3 pm, Monday to Friday (Krishna, 12 Nov 2026). The memo prints the MOs\' hours as 7.30 am to 3.30 pm and consultations from 8.00 am to 3.30 pm, and the triage counter takes the last EMACC patient at 3.00 pm (1, 3, 4)',
+    'EMACC runs 8 am to 3 pm, Monday to Friday (the guide owner, 12 Nov 2026). The memo prints the MOs\' hours as 7.30 am to 3.30 pm and consultations from 8.00 am to 3.30 pm, and the triage counter takes the last EMACC patient at 3.00 pm (1, 3, 4)',
     'Appointments: 8 an hour across 2 consultation rooms, 8.00 am to 3.00 pm, 56 a day not counting walk-ins; about 56 to 60 patients a day in all (10)',
     'A walk-in with no appointment who is still unwell or still unfit for work and needs a doctor: registered as an EMACC patient, or as a copy card after EMACC hours (16)',
     'The second visit follows up the first, or bridges to a specialist clinic appointment; the patient is discharged after it (8.2)'],
-    gap:E24('Lampiran A') + ' The hours, 8 am to 3 pm on Monday to Friday, are Krishna\'s instruction of 12 Nov 2026; their written source is under Still to confirm.'};
+    gap:E24('Lampiran A') + ' The hours, 8 am to 3 pm on Monday to Friday, are the guide owner\'s instruction of 12 Nov 2026; their written source is under Still to confirm.'};
   delete E.nodes.book;
   E.tables[0].title = 'Cases the 2018 SOP sends to EMACC. Its review times are replaced: the first visit is day 4 (urgent) or day 5 at the earliest, and blood results go to EM WATCH (memo (01)24, Jan 2024)';
   E.refs = ['Memo HKL/JK/98/188/3(01)24: Penyelarasan semula proses kerja pengurusan pesakit Klinik Ulangan (EMACC), 11 Jan 2024, with Lampiran A, A1, B1, B2 and B3', 'Emergency Medicine After Care Clinic (EMACC) Standard Operating Procedure, ETD HKL, 1 Feb 2018 (MO Drive, Clinical / EMACC): who EMACC is for, and its case list'];
@@ -11825,6 +11883,37 @@ const SP_PAGE = 'https://linktr.ee/hkldoctors_starterpack', SP_FARM = 'https://l
   Object.assign(EDRX_LASA, {133:14, 14:133, 1:2, 2:1, 108:107, 107:108, 15:16, 16:15, 4:5, 5:4, 138:141, 141:138, 69:151, 151:69, 28:65, 65:28, 42:44, 44:42});
 })();
 
+/* ---------------- The 12 Nov 2026 review: repeated topics joined ----------------
+   Where the same memo or rule is written out in two places, one place keeps it in full and the other points to it, so every
+   #id--node link still opens. The ebook pathways and the CPG entries are not merged (standing rule 5, and their own source
+   labels): they are joined by links instead. */
+(function(){
+  const node = (id, k) => P[id] && P[id].nodes[k];
+  const link = (id, k, l) => { const n = node(id, k); if (n && !(n.links || []).some(x => x[0] === l[0])) n.links = [...(n.links || []), l]; };
+  /* The notifiable disease memo (3 Mar 2023) is written out on the Green Zone rules page, with its pages; the infection page keeps its dengue lines */
+  const nf = node('infection-alerts', 'notify');
+  if (nf && node('gz-rules', 'notif') && nf.items.length === 5 && /^Complete the communicable disease notification form/.test(nf.items[0])){
+    nf.items = ['The form, the Shift Supervisor\'s room, the Notification Record Book and the forms to UKA at 8 am and 4 pm: the memo\'s steps are on the Green Zone rules page, with the memo itself', ...nf.items.slice(3)];
+    link('infection-alerts', 'notify', ['#gz-rules--notif', 'Notifying a disease: the memo']);
+  }
+  /* Prescriptions: the ED memo of 21 Dec 2023 and the hospital's rules (2024 to 2026) point to each other */
+  link('safe-practice', 'rx', ['#prescribing--check', 'Prescribing at HKL: the check before you sign']);
+  link('prescribing', 'allergy', ['#safe-practice--rx', 'The ED memo of 21 Dec 2023']);
+  /* Dengue: the CPG leads the topic; the direct admission to the observation ward is a department route beside it */
+  link('dengue-cpg', 'yellow', ['#gz-rules--dengue', 'Direct admission to the observation ward (department memo)']);
+  link('gz-rules', 'dnot', ['#dengue-cpg', 'Dengue CPG, 4th edition (2026)']);
+  /* The angry or aggressive visitor: the HKL code and number are on Communication on shift */
+  const gr = node('new-hkl', 'grey');
+  if (gr && !gr.items.some(i => /5441/.test(i))){
+    gr.items = [...gr.items, 'In HKL, the emergency colour codes card gives Code Gray on ext 5441 for physical violence (still to confirm): see Communication on shift'];
+    link('new-hkl', 'grey', ['#communication--help', 'Getting help: the HKL codes']);
+  }
+  /* Handing over, from the admission memo */
+  link('gz-rules', 'adm24', ['#handover', 'Handing over']);
+  /* EM Watch and EMACC, the two follow-up clinics */
+  if (P['em-watch'] && !(P['em-watch'].see || []).some(x => x[0] === '#emacc')) P['em-watch'].see = [...(P['em-watch'].see || []), ['#emacc', 'EMACC follow-up'], ['#gz-rules--reas', 'Before you admit, discharge or transfer']];
+})();
+
 /* ================= GENERATED by src/edd.js: do not edit by hand =================
    The ED dosing and dilution guide: "Dosing and Dilution Guide of Injectable Drugs (Adult) Used in Emergency & Trauma
    Department, Hospital Kuala Lumpur", 3rd edition, January 2026 (Pharmacy Department HKL, reviewed by the department's
@@ -12015,7 +12104,11 @@ const RULES = [
 const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage'],['#gz-rules--ivab','IV antibiotics, no bed free'],['#gz-rules--ep4','Primary team delayed'],['#gz-rules--kk','Redirect to a KK or GP'],['#asthma-zone','Asthma Zone flow'],['#mau-admission','Admission to MAU'],['#referral-rules--ortho','Orthopaedic referral'],['#referral-rules--ipr','Transfer to IPR'],['#emacc','EMACC follow-up'],['#em-watch','EM Watch'],['#outpatient-referral','Clinic referrals'],['#gz-rules--dengue','Dengue from a KK to OW'],['#yellow-zone--flow','Yellow Zone flow'],['#safe-practice','Million Ringgit Habits']];
 
 /* Version 8: the redesign, for the home card and What's new */
+/* The version line in the footer and Settings: change it with each round */
+const APP_VER = 'Version 8, updated 12 Nov 2026';
 const V8 = [
+  ['Share the guide','Send the guide to a colleague from its own page or the home tile: the link\'s card rises out of a phone in 3D, with the share sheet, Copy link, WhatsApp, Telegram and a QR code. A link to the web app now shows a preview card in messaging apps: the guide on three phones.',[['#share','Share the guide']]],
+  ['Antibiotics and medicines from an animal source','Prescribing at HKL has two more topics, in the guide\'s own words: the hospital\'s antimicrobial stewardship policy (the request form, restricted agents, the 72-hour review, and OPAT patients who come back through the ED) and the good practice for a medicine from an animal source, the emergency case included. The dilution guide notes the general ICU\'s own guide as a special case.',[['#prescribing--ams','Antibiotics'],['#prescribing--animal','Animal source'],['#dilution','Dilution guide']]],
   ['The ED dosing and dilution guide','The department\'s own guide to the injectable drugs used in the ED (3rd edition, January 2026), 116 drugs: find a drug as you type, filter the 31 on the hospital\'s high alert list, and open its pages as printed, with the dose, dilution, rate and nursing notes. Search finds each drug by name.',[['#dilution','Open the guide'],['#tools','Shift tools']]],
   ['New to HKL, and Prescribing at HKL','From the HKL doctors starter pack and its pharmacy pages, every link reviewed: New to HKL (the site plan, reporting for duty, scrubs, incident and medication error reports, the PD301 and the death certificate, sharps, de-escalation, public statements, locum, PhIS) and Prescribing at HKL (a check before you sign, allergy status, STAT doses, countersigning, the eight-medicine limit, verbal orders, imprest stock, high alert and look-alike medicines, administration times, what the pharmacy sends back, private pharmacy memos). The paracetamol overdose entry adds the hospital\'s NAC regimen with a calculator, and the ED pharmacy list marks its look-alike pairs. Each step shows its source.',[['#new-hkl','New to HKL'],['#prescribing','Prescribing at HKL'],['#calc-nac','NAC by weight']]],
   ['The ED pharmacy drug list','The Emergency Pharmacy\'s own list of 14 Apr 2025, 155 drugs, found as you type: is it on the list, and who may start it? Each drug shows its prescriber category in the MOH Medicines Formulary (B and C: a medical officer may start it; A/KK, A and A*: a specialist), with a link to the formulary\'s own entry. Search finds a drug by name and opens the list on it.',[['#pharmacy','Open the list'],['#tools','Shift tools']]],
@@ -12059,7 +12152,7 @@ const INTRO = [
   {h:'Find it in one search', p:'Type a symptom, rule, dose or number, or press /. Saved and recent pathways wait on your home screen.', art:'search'},
   {h:'One question at a time', p:'Each pathway asks one question per card and shows how it can still end. It finishes in the ebook\'s outcome colours: red admit, yellow observation, green discharge, violet refer.', art:'path'},
   {h:'Patients move one way', p:'Triage, you the MO, the treatment room, the CCA only if needed, then review. Tap any stop on the zone map for what happens there and the rules that apply.', art:'zone'},
-  {h:'Tools and numbers, one tap away', p:'The discharge safety check, 29 calculators and 14 numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
+  {h:'Tools and numbers, one tap away', p:'The discharge safety check, {calcs} calculators and {nums} numbers with Copy. Nothing you tick or type is saved.', art:'tools'}
 ];
 const ART = {
   search:'<rect x="18" y="34" width="284" height="56" rx="28" style="fill:#fff"/><circle cx="50" cy="62" r="10" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><path d="m57.5 69.5 7 7" class="ln" style="stroke:var(--emerald-1);stroke-width:3.5"/><text x="76" y="69" style="font:700 19px var(--body);fill:#14211b">renal colic</text><rect x="184" y="50" width="3" height="25" class="blink" style="fill:var(--emerald-1)"/>' +
@@ -12170,7 +12263,7 @@ const DRIVE = [
   ['TRAUMA, ATLS','added','T-RACS Tier 1 criteria for walk-ins, the HIT whole-body CT protocol and the Aug 2023 trauma lessons.',[['#trauma-walkins','Trauma walk-ins']]],
   ['PAEDS EMERGENCY','added','Where to triage a child, croup, dehydration and swallowed objects; weight-based doses in Tools.',[['#children','Children in the ED'],['#calc-kids','Child doses']]],
   ['MEDICOLEGAL','added','Million Ringgit Habits and the medicolegal tip, also built into the discharge safety check.',[['#safe-practice','Safe practice'],['#tools','Safety check']]],
-  ['CODE BLUE','added','The Code Blue numbers and who responds.',[['#safe-practice--blue','Code Blue']]],
+  ['CODE BLUE','added','The Code Blue numbers and who responds.',[['#code-blue','Code Blue']]],
   ['STROKE PROTOCOL PATHWAY','updated','Code Stroke ext 5999 steps, and the discharge medicines for Neuro patients, as department notes.',[['#stroke-tia','CVA and TIA']]],
   ['STRESS TEST / OBSESS','updated','Trop T tubes, the Thursday stress test and what to do if it is positive, as department notes.',[['#acs','ACS']]],
   ['STEMI NETWORK','updated','Ticagrelor loading rules, and how to talk to patients about IJN charges.',[['#acs','ACS']]],
@@ -12206,12 +12299,12 @@ const CONFIRM = [
   'The ED pharmacy drug list (added 12 Nov 2026) is the Emergency Pharmacy\'s list of 14 Apr 2025, with each drug\'s MOH formulary category. Still to confirm: (1) is a later list out? (2) how the ED applies the categories A/KK, A and A* when an MO writes the prescription (the formulary says who may start one; does the EP countersign?); (3) row 72, Gamma Benzene Hexachloride: the scan\'s decimal mark is unclear (read as 0.1%), and the formulary lists only 1%.',
   'EM Watch booking is now in the app from work instruction AK-15 (in force 16 Mar 2026, p12). Still to confirm: its two forms, the Pink Form (Lampiran 1) and the EM WATCH Appointment form (Lampiran 2), which are not attached to the copy seen; and the timing: AK-15 aims to reassess within 48 to 72 hours and to review CT brain reports within 48 hours of discharge, where the department policy (2026, 9.2.1) and the 2023 deck give 1 week; and the deck\'s online prescription against AK-15\'s documents collected at the Record Unit.',
   'Redirection is in the app in part: a primary triage decision by the PPP for Level 5 (9XXX), with a Redirection Slip and the Redirection Book (AK-01, 2026; memo HKL/JK/98/188/3(2)24, 11 Jan 2024; the 2021 policy). Still to confirm: how a Green Zone MO redirects a patient already seen in the consultation room; whether private GPs are included; whether the 2021 hours (0730 to 1930, Monday to Friday), slip and list of Klinik Kesihatan are current; and the redirection procedure AK-01 cites (HKL/JK/PK 0x), which is not in the department\'s folder.',
-  'EMACC follows memo HKL/JK/98/188/3(01)24 of 11 Jan 2024 since 12 Nov 2026 (Krishna\'s decision), in place of the SOP of 1 Feb 2018: the TCA on the slip hijau and Counter 10, 7.30 am to 3.30 pm, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EM WATCH; and EMACC runs 8 am to 3 pm, Monday to Friday (Krishna, 12 Nov 2026). Still to confirm: a written source for those hours (the memo prints 7.30 am to 3.30 pm for the MOs, and the department policy, 2026, 8.3.3, 9 am to 4 pm on working days); work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge; no 2026 document prints ext 7040; who EMACC is for still comes from the 2018 SOP; and the ebook\'s "EMACC or EMWATCH in 24 to 48 hours" (for example abdominal pain) against the memo\'s first EMACC visit on day 4 or day 5.',
+  'EMACC follows memo HKL/JK/98/188/3(01)24 of 11 Jan 2024 since 12 Nov 2026 (the guide owner\'s decision), in place of the SOP of 1 Feb 2018: the TCA on the slip hijau and Counter 10, 7.30 am to 3.30 pm, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EM WATCH; and EMACC runs 8 am to 3 pm, Monday to Friday (the guide owner, 12 Nov 2026). Still to confirm: a written source for those hours (the memo prints 7.30 am to 3.30 pm for the MOs, and the department policy, 2026, 8.3.3, 9 am to 4 pm on working days); work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge; no 2026 document prints ext 7040; who EMACC is for still comes from the 2018 SOP; and the ebook\'s "EMACC or EMWATCH in 24 to 48 hours" (for example abdominal pain) against the memo\'s first EMACC visit on day 4 or day 5.',
   'Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents; a 2020 department table gives ext 5137 and 6838), the SCAN team line and the IPR on-call line.',
   'The MERS-CoV case definition, which is not in the PUI file.',
   'The MOH snakebite guideline (2017): Tables 15 and 16 leave four pit vipers and a krait\'s second choice blank, and give no dose for an unidentified bite and no maximum; and in HKL, where an observation-only or post-antivenom patient goes, who arranges the bloods at 5-7 days, the antivenom stock, and the RECS contact. CPG-REVIEW-SNAKEBITE.md.',
   'The written source for "only the EP can allow a down-triage": the down-triage memo of 4 Oct 2022 says the MO must examine first and document it, but does not mention the EP.',
-  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen (the HKL ED Dilution Guide\'s three bags, 2018 to 2019, or the MOH Antidotes Quick Guide\'s two, 2022), the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
+  'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen (answered in part on 12 Nov 2026: the hospital\'s circular of 10 Jan 2022, on the paracetamol overdose entry and its calculator, gives three bags, or two with fluid restriction or under 40 kg; the MOH Antidotes Quick Guide, 2022, gives two), the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
   'Which dengue source the Green Zone follows where the ebook (built from the CPG 3rd edition, 2015) and the CPG 4th edition (2026) differ: shock CRT over 2 or over 3 seconds; persistent vomiting over 2 times in 24 hours or over 3 a day; the list of warning signs (the ebook has persistent diarrhoea and a tender liver, the CPG liver enlargement over 2 cm, postural hypotension and reduced urine output); and oral fluids (2 litres a day, or 200 ml an hour while awake).',
   'Points inside the dengue CPG (4th edition) itself: Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.',
   'Which asthma source the Green Zone follows where the ebook (built from the 2017 CPG) and the Asthma in Adults CPG, 2nd edition (2024) differ: prednisolone 30 mg a day for 5 days, or 0.5 to 1 mg/kg with a maximum of 50 mg for 5 to 7 days; IV magnesium sulphate 2.47 g or 2 g; SC terbutaline, which the CPG keeps for critical care; ipratropium at moderate and every 20 minutes, or for severe only every 4 to 6 hours; a severe respiratory rate over 30 or over 25; grading and discharge on PEF, which Table 9 does not use; a discharge SpO2 over 95% or over 94%; and an observation route, which the CPG does not have. The full table is in CPG-REVIEW-ASTHMA.md.',
@@ -12225,9 +12318,9 @@ const CONFIRM = [
   'The CKD CPG (2018): which HKL clinic takes a Recommendation 12 referral, and who takes AKI on CKD (the CPG: a nephrologist now; the department\'s colic note: Urology urgently); NSAIDs, which the CPG says to avoid in CKD and the ebook gives for renal colic; whether to dose by creatinine clearance (Appendix 3, unless marked #) or the lab\'s eGFR; and metformin, which the ebook contraindicates under an eGFR of 45 and the CPG halves at 30 - 45. CPG-REVIEW-CKD.md.',
   'The rhinosinusitis CPG (2016), written for primary care and non-ORL centres: how its urgent referral within 24 hours maps to the ORL on-call; early referral within one week (6.1) or two weeks (Algorithm 3); where the 3-day review of Algorithm 1 happens; and prednisolone 30 mg for 7 days in Appendix 5 against no oral steroid in Recommendation 5; amoxicillin for 5 - 7 days or 5 - 10 days. CPG-REVIEW-RHINOSINUSITIS.md.',
   'The avulsed tooth CPG (2019): which HKL dental team takes a knocked-out permanent tooth from the ED, in and out of office hours, for adults and children, and whether the ED MO replants or stores and refers; whether the walk-in is fast-tracked from MTS 4 or 5 (15 minutes dry, 60 minutes in all); and antibiotics, which it gives only "if indicated" with no dose, and tetanus, which it lists only on its form. CPG-REVIEW-AVULSED-TOOTH.md.',
-  'The geriatric hip fracture CPG (2023): with a normal X-ray but a fracture still suspected it asks for CT or MRI and an orthopaedic referral, where the department\'s notes give a repeat X-ray, EMACC within 3 days or the orthopaedic clinic: who orders the CT; its Appendix 3 doses for the elderly against the ebook and the analgesia calculator; and which clinic takes the older faller without a fracture. CPG-REVIEW-HIP-FRACTURE.md.',
+  'The geriatric hip fracture CPG (2023): with a normal X-ray but a fracture still suspected it asks for CT or MRI and an orthopaedic referral, where the department\'s notes give a repeat X-ray, EMACC (the first visit on day 4 or 5 since memo (01)24) or the orthopaedic clinic: who orders the CT; its Appendix 3 doses for the elderly against the ebook and the analgesia calculator; and which clinic takes the older faller without a fracture. CPG-REVIEW-HIP-FRACTURE.md.',
   'The cancer pain CPG (2023): the starting dose of oral immediate-release morphine (5 mg, 5 - 10 mg or 3 - 5 mg); its Algorithm 2 against the ebook\'s morphine protocol, and which zone runs it; which naloxone regimen (40 mcg every 1 - 3 minutes, or 20 mcg every two minutes); which team takes cancer pain referrals; and its p24 conversion ratio against Table 4, so the app converts no opioid doses. CPG-REVIEW-CANCER-PAIN.md.',
-  'The type 2 diabetes CPG (2020, summarised): which total daily insulin dose and split to use outside DKA (the ebook\'s 0.2 - 0.5 unit/kg/day, the CPG\'s split after DKA, or its basal start), which answers part of item 8 only for that case; its hypoglycaemia doses and the ebook\'s admission and discharge rules, which it lacks; metformin under an eGFR of 45; SGLT2 inhibitors under 30; and euglycaemic ketoacidosis in the blood gas rule. CPG-REVIEW-T2DM.md.',
+  'The type 2 diabetes CPG (2020, summarised): which total daily insulin dose and split to use outside DKA (the ebook\'s 0.2 - 0.5 unit/kg/day, the CPG\'s split after DKA, or its basal start), which answers part of the calculators item above only for that case; its hypoglycaemia doses and the ebook\'s admission and discharge rules, which it lacks; metformin under an eGFR of 45; SGLT2 inhibitors under 30; and euglycaemic ketoacidosis in the blood gas rule. CPG-REVIEW-T2DM.md.',
   'The VTE CPG (2013, summarised): it has no D-dimer step, because the assay most Malaysian laboratories run is not sensitive enough to rule out VTE: which assay HKL runs, and whether the Green Zone keeps the ebook\'s D-dimer step; disposition after a confirmed DVT, which neither source sets; and its two-band Wells against the ebook\'s three. CPG-REVIEW-VTE.md.',
   'The COPD CPG (2009, summarised): whether every Green Zone COPD flare-up gets the ABG it recommends; its oxygen target of 90 - 93% against the department\'s discharge at SpO2 95% or more; prednisolone 30 - 40 mg for 7 - 14 days against the department\'s 30 mg for 5 days; and its antibiotic triggers. CPG-REVIEW-COPD.md.',
   'The rabies and ABC protocol (Oct 2022): how a possible risk in its checklist (Table 1B, the animal can be observed for 14 days) changes the flow charts\' "Risk of rabies?", which the protocol does not say in words; the vaccine schedule after pre-exposure prophylaxis (the vaccine flow chart asks only about post-exposure prophylaxis, the RIG flow chart about either); which four sites the ID 4-site course uses; and whether the protocol is still current.',
@@ -12238,40 +12331,38 @@ const CONFIRM = [
   'Communication on shift: whether the department endorses the aggressive patient quick card (no issuer or date printed) and its Drive copy; a direct line to the Polis Bantuan post, and Code Gray or Grey; how the ED reports violence against staff and supports them; who in the ED hears a complaint; the department\'s own steps after a death in the ED; interpreters for other languages, and whether family or bilingual staff may interpret; a copy of the MOH Guidelines on Management of Aggressive Patients (2016), which the ebook cites; the Bahasa Melayu phrases; waiting-time targets; and the handover format. COMMUNICATION-REVIEW.md.',
   'The Green Zone in the department\'s 2026 documents: a pain score of 7 or more (not chest pain) is a Green Zone criterion in work instruction AK-07 (p5, an unsigned copy) but a Yellow Zone one in the department policy (3.1.3, p20) and AK-06 (p5); AK-07 also prints "GCS > 15".',
   'The Green Zone\'s target times: Level 4 within 60 minutes (the policy\'s charter, p8; AK-07, p6); Level 5 within 90 minutes (charter, p9) or within 120 minutes from start to finish (AK-07, p6); and under 120 minutes to be seen by an MO, for the whole zone (policy 4.2.1, p21). Which one is the zone audited against?',
-  'The 48-hour EMWATCH appointment for a CT brain review (memo HKL/JK/98/188/3(21)23, 10 Oct 2023): which cases count as "neuromedical" (head injury?), and whether it stands beside AK-15\'s 48 to 72 hours.',
+  'The 48-hour EMWATCH appointment for a CT brain review (memo HKL/JK/98/188/3(21)23, 10 Oct 2023): which cases count as "neuromedical" (head injury?), and whether it stands beside AK-15\'s 48 to 72 hours. The guide\'s rules, discharge check, journey and quiz say "an EM Watch or EMACC appointment" for a CT brain review, while EMACC now sees patients from day 4 (memo (01)24): should EMACC stay in that line?',
+  'Obesity in dengue sits in three zones across the sources: morbid obesity to Red (the department\'s Dengue SOP 2.0 note), the high-risk line of Appendix 7 to Yellow, and Group B1, Green, in the Quick Reference (p5) and Tables 6 and 8, which the guide follows since 12 Nov 2026. Which does the department use for morbid obesity?',
   'Who makes the police report when the next of kin of a patient discharged by Psychiatry cannot be reached within 4 hours (memo HKL/JK/98/188/3(11)23), and for an absconded patient within 24 hours (department policy 2026, 32.4.2)?',
   'The IV antibiotic flow chart (memo HKL/JK/98/188/3(10)26, 30 Jun 2026): note 1 gives the bed priority as Yellow Observation, Wad ISO or ISO 3, note 4 as Yellow Observation or "Wad ISO 2".',
   'Mass casualty incidents: what counts as one (more than 2 casualties in the 2026 hospital plan, p30; 20 or more in PK-03, 2011; tag counts in the business continuity plan); what happens to the patients already in the Green Zone; and an action card for an MO or house officer, which none of the documents read has. The ED\'s internal disaster flow chart and the external disaster action cards on the disaster link page need an MOH sign-in.',
-  "Triage course, Lecture 4 (Referral System) (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 3's footnote \"Low threshold for admission if have recurrent visit to ed or multiple health care facilities in 48 hours\" differs from safe-practice--dc (\"Came back within 48 hours, or after several GP visits: admit\") and gz-rules--reas (a senior look at 24 hours). (2) Slide 3 sends \"Investigating palpitation\" to the Klinik Kesihatan, where its own slide 13 and the outpatient-referral table send palpitations to the MAU FAST clinic. (3) Slide 3 sends \"Thyroid swelling\" to the Klinik Kesihatan (kept in the referral map as printed); the guide sends suspected hyperthyroidism with a TFT pending to MAU FAST. Confirm the two do not overlap. (4) Slide 3's fractures for the on-call MO (\"Long bone fracture, fracture involving joint or growth plate, displaced fracture\") are not the Lampiran 1 list of the memo of 17 May 2024. (5) Slide 3's \"Special situation: early TCA\" under the on-call MO is unclear. (6) Slide 9, memo point 2.1.1 (the ETD team does the CMR first if Orthopaedics cannot reduce a dislocation at once) goes further than referral-rules--orthoc. (7) Slide 10's Lampiran 1 urgent list is wider than the referral-rules--ortho checklist: wounds involving muscle or dirty wounds, ligament injury with gross swelling, fractures with dislocation, angulation or overriding. (8) Slide 13 says \"CURB score 0,1 only\" where outpatient-referral says CURB-65 of 0 to 1. (9) Slide 14's IPR poster lists \"Needing further investigation (CT Scan, OGDS, Colonoscopy)\" and \"biggest diameter >60CM\", which referral-rules--ipr lacks, and does not carry the guide's \"Not on inotropic support\". (10) Slide 27 gives EMACC \"Result: x-ray report\" and EM Watch \"Result: investigation, CT report\", where the guide lists blood results under both emacc and em-watch. (11) The memo points in referral-rules--orthmemo (2.1.4, 2.6 to 2.10) were read from a slide image in Malay: check them against the memo PDF.",
+  "Triage course, Lecture 4 (Referral System) (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 3's footnote \"Low threshold for admission if have recurrent visit to ed or multiple health care facilities in 48 hours\" differs from safe-practice--dc (\"Came back within 48 hours, or after several GP visits: admit\") and gz-rules--reas (a senior look at 24 hours). (2) Slide 3 sends \"Investigating palpitation\" to the Klinik Kesihatan, where its own slide 13 and the outpatient-referral table send palpitations to the MAU FAST clinic. (3) Slide 3 sends \"Thyroid swelling\" to the Klinik Kesihatan (kept in the referral map as printed); the guide sends suspected hyperthyroidism with a TFT pending to MAU FAST. Confirm the two do not overlap. (4) Slide 3's fractures for the on-call MO (\"Long bone fracture, fracture involving joint or growth plate, displaced fracture\") are not the Lampiran 1 list of the memo of 17 May 2024. (5) Slide 3's \"Special situation: early TCA\" under the on-call MO is unclear. (6) Slide 9, memo point 2.1.1 (the ETD team does the CMR first if Orthopaedics cannot reduce a dislocation at once) goes further than referral-rules--orthoc. (7) Slide 10's Lampiran 1 urgent list is wider than the referral-rules--ortho checklist: wounds involving muscle or dirty wounds, ligament injury with gross swelling, fractures with dislocation, angulation or overriding. (8) Slide 13 says \"CURB score 0,1 only\" where outpatient-referral says CURB-65 of 0 to 1. (9) Slide 14's IPR poster lists \"Needing further investigation (CT Scan, OGDS, Colonoscopy)\" and \"biggest diameter >60CM\", which referral-rules--ipr lacks, and does not carry the guide's \"Not on inotropic support\". (10) Slide 27 gives EMACC \"Result: x-ray report\" and EM Watch \"Result: investigation, CT report\": answered on 12 Nov 2026, since memo (01)24 also sends X-ray reports to EMACC and blood results to EM Watch. (11) The memo points in referral-rules--orthmemo (2.1.4, 2.6 to 2.10) were read from a slide image in Malay: check them against the memo PDF.",
   "Triage course, Lecture 4 (Handing over) (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 4's shift and registration times for MOs and the TL are mistyped (\"230am\", \"730pm\", \"700pm\") and cannot be used as typed. (2) Slide 13's \"NBA>6h to EP\" has no dated department document behind it in the guide; the nearest lines are the 4-hour ones in the dengue notes and gz-rules--ep4. (3) Slides 8 and 9 hand over by a list (Patient, History and DDX, IX, Referral), where communication--hand teaches ISBAR: which format does the department want, and are the two \"Future updates & improvements\" paper forms in use? (4) \"30 minutes before end for the shift\" (in handover--chk, as typed) is ambiguous.",
   "Triage course, Lecture 5 (Commonly missed fracture) (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 29's knee X-ray rule prints \"Age ≥55 years\" in its table and \">55\" beside it, and quotes the Ottawa knee rules from outside the department: the whole rule is left out of missed-fractures.",
   "Triage course, Lecture 6 (Approach to abdominal pain) (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 23's safety-net script (\"don't keep taking the pain killer\", no follow-up date) differs from the ebook's abdominal pain advice (paracetamol; EMACC or EM Watch in 24 to 48 hours): the script is left out. (2) Slide 17's \"Amylase – Consider if there's guarding, vomiting\" differs from safe-practice--abd (\"Epigastric pain: ECG ± amylase\"). (3) Slide 15's gloss \"(asymptomatic elevated blood pressure)\" on hypertensive urgency adds a word the ebook's hypertensive-urgency lead does not use. (4) The deck's true case of a missed appendicitis is in the abdominal pain notes without an exact age, hospital or doses; three readings are kept because the teaching turns on them. Say if it should be cut further.",
   "Triage course, CBD 2 (TAG Warrior Course, ETD HKL, 2026): these slides differ from the ebook or a dated department document, or need a source, so they are not in the guide as rules until the department confirms them. (1) Slide 15 (rabies) differs from the HKL protocol of October 2022 in animal-bites on dose (1 ml IM), schedule (days 0, 3, 7, 14 and 28, alternative day 30; days 0 and 3 if fully immunised), exposure categories, immunoglobulin for every Category 3 and a stop rule: the whole slide is left out. (2) Slide 23's \"IV Morphine 4mg STAT\" for a 65-year-old differs from the ebook's morphine pain protocol in pain (0.5 mg steps over 60 years). (3) Slide 24's pain score row (under 6 keep, 6 or more uptriage) differs from the ebook's \"Pain score over 6?\" and the policy's 7; the table's other three rows are in. (4) Slide 6's \"CORRECT TRIAGE: LEVEL 3 = YZ/ Y OBS … redirect immediately to Y OBS\" differs from gz-rules--dengue (memo of 23 Mar 2023: direct to the Observation Ward). (5) Slide 6's \"Dengue fever without warning sign with/without special population ONLY allowed to be triaged to GREEN ZONE\" differs from the Dengue SOP 2.0 note in dengue. Its \"Platelet <50\" point is kept as printed although the case's count is 80. (6) Slide 9's antibiotics (\"IV cefepime or IV tazocin\"; \"IV ceftriaxone or IV tazocin\") include two not on the IV antibiotic memo's list of 30 Jun 2026: the names are left out. (7) Slide 11's FBC intervals (\"EOD FBC in KK or GP\" if the combo is negative, \"daily FBC\" if positive) are left out: the ebook gives none, and the dengue CPG says daily follow-up. (8) Slide 16's speaker note grades the foot ulcer by Wagner, where diabetic-foot-cpg uses the University of Texas classification. (9) Kept as the slides print them, from outside sources the decks do not name: the bite slide's figures (5% and 80% infection risk, cat-scratch at 7 to 12 days, \"Does not transmit leptospirosis\", cloxacillin and Augmentin with no dose), \"IM diclofenac\" for the sudden headache with no dose, SNOOP4 and the low-risk headache criteria, the burn points and the six tibial plateau types. Confirm each, or name its source. (10) Does the \"wrong triage QR\" register in case 2 exist?",
-  "Reading X-rays is built from named online sources in the guide's own words (Krishna, 10 Nov 2026), not from a department document. Still to confirm with the department: (1) Hot reporting: does HKL have it, and who reviews a late radiology report, and by when? (NICE NG38 wants a report before discharge; RCEM, 2023, sets a 72-hour review of abnormal reports.) (2) Who reviews a doubtful film? No source lists the findings that must go to a senior; the guide only has \"ask the EP first\" in referral-rules--ortho. (3) Ottawa ankle and foot rules: which ages and exclusions does the department follow (under 18 excluded on the NHS Scotland sheet; over 5 years in NICE NG38; under 6 or over 55 on WikEM)? The rule's wording comes from secondary sources, because the original papers are not open. (4) Ottawa knee rule: is the age \"55 or over\" (ACR) or \"over 55\" (WikEM)? Is weight-bearing one criterion or two? The checklist follows the ACR narrative; what is the youngest age it applies to? (5) A suspected scaphoid fracture with a normal film: the sources give MRI first, MRI at 10 days, repeat films at 10 to 14 days or at 2 to 3 weeks, and the guide's EMACC entry reviews within 3 days. Which next test, and when? (6) Occult hip fracture and hip views are kept out of the X-ray guide, because the hip fracture CPG entry holds the local answer (CT as the local choice; its own views) and NICE CG124 and Radiology Masterclass differ from it. (7) Abdominal film: the ebook's abdominal pain pathway lists \"CXR (erect) with or without abdominal X-ray\"; the RCR's list of indications does not include abdominal pain alone. xray-guide--abno says so and points to the ebook as the approved pathway. (8) Elbow extension test (Appelboam, BMJ 2008): how would a Green Zone patient be brought back at 7 to 10 days? (9) The adult cervical spine film is left out (Krishna, 10 Nov 2026): the head injury CPG (2015) still uses three-view films, where NICE and the ACR now send adults who need imaging to CT.",
+  "Reading X-rays is built from named online sources in the guide's own words (the guide owner, 10 Nov 2026), not from a department document. Still to confirm with the department: (1) Hot reporting: does HKL have it, and who reviews a late radiology report, and by when? (NICE NG38 wants a report before discharge; RCEM, 2023, sets a 72-hour review of abnormal reports.) (2) Who reviews a doubtful film? No source lists the findings that must go to a senior; the guide only has \"ask the EP first\" in referral-rules--ortho. (3) Ottawa ankle and foot rules: which ages and exclusions does the department follow (under 18 excluded on the NHS Scotland sheet; over 5 years in NICE NG38; under 6 or over 55 on WikEM)? The rule's wording comes from secondary sources, because the original papers are not open. (4) Ottawa knee rule: is the age \"55 or over\" (ACR) or \"over 55\" (WikEM)? Is weight-bearing one criterion or two? The checklist follows the ACR narrative; what is the youngest age it applies to? (5) A suspected scaphoid fracture with a normal film: the sources give MRI first, MRI at 10 days, repeat films at 10 to 14 days or at 2 to 3 weeks, and the guide's EMACC entry gives the first visit on day 4 or 5 (memo (01)24). Which next test, and when? (6) Occult hip fracture and hip views are kept out of the X-ray guide, because the hip fracture CPG entry holds the local answer (CT as the local choice; its own views) and NICE CG124 and Radiology Masterclass differ from it. (7) Abdominal film: the ebook's abdominal pain pathway lists \"CXR (erect) with or without abdominal X-ray\"; the RCR's list of indications does not include abdominal pain alone. xray-guide--abno says so and points to the ebook as the approved pathway. (8) Elbow extension test (Appelboam, BMJ 2008): how would a Green Zone patient be brought back at 7 to 10 days? (9) The adult cervical spine film is left out (the guide owner, 10 Nov 2026): the head injury CPG (2015) still uses three-view films, where NICE and the ACR now send adults who need imaging to CT.",
   "The abdominal pain handbook against the ebook (12 Nov 2026): the handbook is a teaching synthesis and the ebook stays the department's pathway; where they differ, the department should say which to teach. (1) Follow-up of non-specific abdominal pain: the handbook (p22, after RCEMLearning) arranges a time-bound review \"often within 12-24 h if unresolved\"; the ebook (p11) gives EMACC or EMWATCH in 24 to 48 hours. (2) IV morphine titration: the ebook gives 1 mg at 60 years old or below; MOH Pain Management in ETD 2020, Appendix 2, which the handbook quotes, gives 0.5 mg at 60 or older, so a patient of exactly 60 gets a different dose. (3) IV fentanyl: the ebook's table lists 50-100 mcg; MOH 2020 lists 25-50 micrograms as the initial alternative. (4) Renal colic imaging: the handbook cites NICE NG118 (low-dose non-contrast CT within 24 h in adults); the ebook's pathway uses POCUS, an urgent KUB ultrasound by radiology and an early TCA for KUB ultrasound.",
   "The ebook against the guide (checked line by line, 12 Nov 2026): two printed numbers where the guide or a calculator reads the print one way and the department should confirm it. (1) Acute behavioural disturbance, p8: midazolam for a child is printed \"IM 0.1-0.2 mg/kg – 0.5mg/kg\" in the Starting Dose column; the guide and its calculator read the 0.5 mg/kg as a maximum. (2) Pain, p50: paracetamol under 50 kg is printed \"Max 60mg/kg/dose\"; the guide and its calculator say 60 mg/kg/day."
 ];
 
-/* A pearl for each shift, from Million Ringgit Habits and the one-way flow */
-const TIPS = [
-  {t:'Persistent vomiting in the febrile phase is not a dengue warning sign: warning signs are most predictive in the critical phase, when the fever settles.', href:'#dengue-cpg', l:'Dengue CPG, p15'},
-  {t:'Discharge abdominal pain only when the pain score is 0, with a clear diagnosis and safety-net advice.', href:'#safe-practice--abd', l:'Million Ringgit Habits'},
-  {t:'Pain out of proportion in a limb: think of ischaemia or compartment syndrome, check the distal pulses and refer early.', href:'#safe-practice--limb', l:'Limbs and fractures'},
-  {t:'Came back within 48 hours, or after several GP visits? Admit.', href:'#safe-practice--dc', l:'Before any discharge'},
-  {t:'Stroke can be subtle: persistent dizziness, sudden blurred vision, or one weak limb. Lower your threshold to scan or admit.', href:'#safe-practice--subtle', l:'Subtle stroke'},
-  {t:'Admit any febrile infant under 3 months.', href:'#safe-practice--subtle', l:'Children'},
-  {t:'If it is not written, it is not done: record timings, vital signs, counselling and the follow-up advice you gave.', href:'#safe-practice--notes', l:'Notes and records'},
-  {t:'Localised tenderness with a normal X-ray: treat it as a fracture, explain, and arrange a follow-up X-ray.', href:'#safe-practice--limb', l:'Limbs and fractures'},
-  {t:'Record the LMP of every woman of reproductive age, and think of ectopic pregnancy whatever her marital status.', href:'#safe-practice--abd', l:'Abdominal pain'},
-  {t:'Men with abdominal pain: examine the testes. The torsion window is 6 hours.', href:'#safe-practice--abd', l:'Abdominal pain'},
-  {t:'Do not discharge a patient who cannot walk. Ask whether they have been to the toilet, and document it.', href:'#safe-practice--limb', l:'Before any discharge'},
-  {t:'Do not repeat the ECG, dressing or vital signs after secondary triage unless they were missed.', href:'#gz-rules--oneway', l:'One-way flow'}
-];
-
-/* The source behind each pearl, in the same order as TIPS (checked against the safe-practice entry and its references) */
+/* A pearl for each shift, each with its own source (12 Nov 2026: the sources were a separate list matched by position,
+   which slipped by one when the dengue pearl went first) */
 const MRH = 'Million Ringgit Habits, ETD HKL';
-const TIP_SRC = [MRH, MRH, MRH, MRH, MRH, 'Medicolegal tip of the day, MO Drive, Jun 2026', MRH, MRH + '; KKM circular on ectopic pregnancy, 31 May 2018', MRH, MRH, 'HKL ED one-way procedure flow (Green Zone); KKM MTS announcement, Jul 2026'];
-if (TIP_SRC.length !== TIPS.length) console.warn('TIP_SRC and TIPS differ in length');
+const TIPS = [
+  {t:'Persistent vomiting in the febrile phase is not a dengue warning sign: warning signs are most predictive in the critical phase, when the fever settles.', href:'#dengue-cpg', l:'Dengue CPG, p15', src:'CPG Management of Dengue in Adults, 4th edition (MaHTAS, 2026), p15'},
+  {t:'Discharge abdominal pain only when the pain score is 0, with a clear diagnosis and safety-net advice.', href:'#safe-practice--abd', l:'Million Ringgit Habits', src:MRH},
+  {t:'Pain out of proportion in a limb: think of ischaemia or compartment syndrome, check the distal pulses and refer early.', href:'#safe-practice--limb', l:'Limbs and fractures', src:MRH},
+  {t:'Came back within 48 hours, or after several GP visits? Admit.', href:'#safe-practice--dc', l:'Before any discharge', src:MRH},
+  {t:'Stroke can be subtle: persistent dizziness, sudden blurred vision, or one weak limb. Lower your threshold to scan or admit.', href:'#safe-practice--subtle', l:'Subtle stroke', src:MRH},
+  {t:'Admit any febrile infant under 3 months.', href:'#safe-practice--subtle', l:'Children', src:MRH},
+  {t:'If it is not written, it is not done: record timings, vital signs, counselling and the follow-up advice you gave.', href:'#safe-practice--notes', l:'Notes and records', src:'Medicolegal tip of the day, MO Drive, Jun 2026'},
+  {t:'Localised tenderness with a normal X-ray: treat it as a fracture, explain, and arrange a follow-up X-ray.', href:'#safe-practice--limb', l:'Limbs and fractures', src:MRH},
+  {t:'Record the LMP of every woman of reproductive age, and think of ectopic pregnancy whatever her marital status.', href:'#safe-practice--abd', l:'Abdominal pain', src:MRH + '; KKM circular on ectopic pregnancy, 31 May 2018'},
+  {t:'Men with abdominal pain: examine the testes. The torsion window is 6 hours.', href:'#safe-practice--abd', l:'Abdominal pain', src:MRH},
+  {t:'Do not discharge a patient who cannot walk. Ask whether they have been to the toilet, and document it.', href:'#safe-practice--limb', l:'Limbs and fractures', src:MRH},
+  {t:'Do not repeat the ECG, dressing or vital signs after secondary triage unless they were missed.', href:'#gz-rules--oneway', l:'One-way flow', src:'HKL ED one-way procedure flow (Green Zone); KKM MTS announcement, Jul 2026'}
+];
 
 /* ================= Icons ================= */
 const ICONS = {
@@ -12818,10 +12909,15 @@ function pathWords(p){
     ...(p.leaflet ? ['en', 'ms'].flatMap(k => p.leaflet[k].groups.flatMap(g => [g.h, g.p, ...g.items])) : []),
     ...(p.see || []).map(s => s[1]), p.kw].filter(Boolean);
 }
+/* Words people type for an entry beyond its own text (the 12 Nov 2026 review): a whole-word match on an entry's kw counts like
+   its title, so "chest pain" finds the ACS pathway, "asthma" the ebook's asthma pathway, "dengue" the CPG first (it leads the
+   topic since 12 Nov 2026), and "MC" the medical certificate lines rather than every "mcg" */
+const KW_MORE = {acs:'chest pain', asthma:'asthma wheeze', 'missed-fractures':'fracture', 'dengue-cpg':'dengue', emacc:'MC medical certificate sick leave', 'safe-practice':'MC medical certificate sick leave'};
+Object.entries(KW_MORE).forEach(([id, w]) => { if (P[id]) P[id].kw = ((P[id].kw || '') + ' ' + w).trim(); });
 const IDX = [];
 for (const [id, p] of Object.entries(P)){
   const c = catOf(id);
-  IDX.push({href:'#' + id, title:p.title, kind:kindOf(p), meta:metaOf(p), body:pathWords(p).join(' · '), ic:c.ic, c:c.c, j:c.j});
+  IDX.push({href:'#' + id, title:p.title, kind:kindOf(p), meta:metaOf(p), body:pathWords(p).join(' · '), kw:p.kw || '', ic:c.ic, c:c.c, j:c.j});
   const m = p.nodes[p.start];
   if ((p.grp === 'rules' || p.grp === 'cpg') && m.opts && m.opts.length > 2) m.opts.forEach(([label, to]) => {
     IDX.push({href:`#${id}--${to}`, title:label, kind:kindOf(p), meta:p.title, body:nodeWords(p.nodes[to]).join(' · '), ic:c.ic, c:c.c, j:c.j});
@@ -12852,14 +12948,18 @@ function search(q, loose){
     for (let i = 0; i < ts.length; i++){
       const inT = res[i].test(e.title), inB = res[i].test(e.body);
       if (!inT && !inB) return null;
-      if (e.title.toLowerCase().startsWith(ts[i])) s += 7; else if (inT) s += 5;
+      /* A title that starts with the word scores most; a one- or two-letter start only counts in full as a whole word ("MC", not "McIsaac") */
+      const t0 = e.title.toLowerCase();
+      if (t0.startsWith(ts[i])) s += ts[i].length > 2 || new RegExp('^' + reEsc(ts[i]) + '($|[^a-z0-9])').test(t0) ? 7 : 3; else if (inT) s += 5;
+      /* An entry's own search words (kw): a whole-word match counts like a title word, a little less when the title matched too */
+      if (e.kw && new RegExp('(^|[^a-z0-9])' + reEsc(ts[i]) + '($|[^a-z0-9])', 'i').test(e.kw)) s += inT ? 3 : 5;
       if (inB) s += 1;
     }
     if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
     /* An ED pharmacy drug comes after the pathways, rules and guidelines that mention it (the list keeps its own order) */
     if (e.kind === 'Drug' || e.kind === 'Dilution') s = Math.min(s, 1);
     return {e, s};
-  }).filter(Boolean).sort((a, b) => b.s - a.s).slice(0, 14).map(r => r.e);
+  }).filter(Boolean).sort((a, b) => (b.s - a.s) || (a.e.href.includes('--') - b.e.href.includes('--'))).slice(0, 14).map(r => r.e);
 }
 /* Word starts first; if nothing matches, fall back to matching inside words ("glycaemia") */
 function find(q){ const r = search(q); return r.length ? {r, loose:false} : {r:search(q, true), loose:true}; }
@@ -12958,7 +13058,7 @@ function closePal(restore){
 }
 
 /* ================= Views ================= */
-const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy', dilution:'Dilution guide'};
+const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy', dilution:'Dilution guide', share:'Share the guide', links:'ED links'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
 /* A topic or group tile filters the list under it. On a phone the tiles fill the screen, so the list comes up to meet the
@@ -13038,7 +13138,7 @@ function closeDrawer(restore){
 /* ================= Home ================= */
 let tipI = Math.floor(Date.now() / 864e5) % TIPS.length;
 function tipSource(t){
-  const s = TIP_SRC[TIPS.indexOf(t)];
+  const s = t.src;
   return s ? (s.includes(';') ? 'Sources: ' : 'Source: ') + s + '.' : '';
 }
 function renderTip(){
@@ -13068,8 +13168,11 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr']);
-const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster']);
+/* Stills without a loop yet (the 12 Nov 2026 review: Flow Studio stills for What's new, Sources and about, the wall poster
+   and the dilution guide): shown like a tile's still, never asked for a video. Move a key to TILE_KEYS once its loop is in tiles/. */
+const STILL_KEYS = new Set([]); /* empty since the four review banners' loops went in (12 Nov 2026) */
+const tileMedia = k => TILE_KEYS.has(k) || STILL_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
 const TILE_MAX = matchMedia('(max-width: 760px)').matches ? 6 : 12;
@@ -13260,7 +13363,7 @@ function draw(focus){
   /* Every entry opens on a jewel banner: a guideline's own picture (hero), or its topic group's glass loop (a topic banner) */
   const hk = p.hero || (c && c.k && TILE_KEYS.has(c.k) ? c.k : '');
   const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
-      <h1 id="run-title" tabindex="-1">${esc(p.title)}</h1>`;
+      <h1 id="run-title" tabindex="-1"${p.title.length > 26 ? ' class="long"' : ''}>${esc(p.title)}</h1>`;
   withTiles($('#run'), `<div class="run-h">
       <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg('back')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
         <div class="run-acts">
@@ -13694,7 +13797,7 @@ const CALCS = {
       {k:'fev', type:'seg', label:'Fever now', opts:[['on','Still febrile'], ['down','Fever subsiding'], ['off','Afebrile, recovering']], nodef:true},
       ['hct','Haematocrit now','%'], ['hct0','An earlier haematocrit (baseline), if known','%'], ['plt','Platelets','× 10⁹/L'],
       {k:'sex', type:'seg', label:'For the median haematocrit (p17)', opts:[['m','Male ≤60 years'], ['mo','Male > 60 years'], ['f','Female']], nodef:true}],
-    note:'CPG Management of Dengue in Adults, 4th edition (MaHTAS, 2026). Appendix 7 (p108) triages in order: life-threatening features, then unstable vital signs, then warning signs, unstable co-morbids or high risk, then co-morbids or social risk. The first one present sets the zone, MTS level and group (Table 8, p35), so tick None of these for each list once you have checked it: a lower level shows only when every earlier step is done. The vital signs use the triage vital signs calculator\'s rules. A rising haematocrit is measured from the patient\'s own baseline (≥20%, p17); the median values are for reference only, and the CPG does not use them as a baseline. Nothing you tick or type is saved.',
+    note:'CPG Management of Dengue in Adults, 4th edition (MaHTAS, 2026). Appendix 7 (p108) triages in order: life-threatening features, then unstable vital signs, then warning signs, unstable co-morbids or high risk, then co-morbids or social risk. This guide asks pregnancy, age 65 and over, and obesity with the co-morbids (Group B1, MTS level 4, Green), as the Quick Reference prints them on p5 (the guide owner\'s decision, 12 Nov 2026). The first one present sets the zone, MTS level and group (Table 8, p35), so tick None of these for each list once you have checked it: a lower level shows only when every earlier step is done. The vital signs use the triage vital signs calculator\'s rules. A rising haematocrit is measured from the patient\'s own baseline (≥20%, p17); the median values are for reference only, and the CPG does not use them as a baseline. Nothing you tick or type is saved.',
     run(v){
       const N = P['dengue-cpg'].nodes, out = [], lists = [];
       const st = k => v[k + '_n'] ? 'yes' : v[k + '_none'] ? 'none' : '';
@@ -13753,7 +13856,7 @@ const CALCS = {
   weight:{t:'Adjusted weight', g:'dengue', src:'Ebook p31–32', path:'#dengue', kw:'obese bmi ideal body weight dengue fluid',
     sub:'Ideal and adjusted body weight for an obese patient, for dengue fluid calculations.',
     fields:[['sex','Sex','',[['f','Female'],['m','Male']]],['ht','Height','cm'],['wt','Weight','kg']],
-    note:'From the ebook\'s dengue table: for an obese patient (BMI over 27.5) use the adjusted body weight. Ideal weight: female 45.5 kg, male 50 kg, plus 0.91 × (height − 152 cm). Adjusted = ideal + 0.4 × (actual − ideal). For women the ebook prints 0.98 where the dengue CPG, 4th edition, prints 0.91 (ebook p31; the fluid notes of the CPG entry): this calculator follows the CPG and uses 0.91 for both (Krishna, 12 Nov 2026).',
+    note:'From the ebook\'s dengue table: for an obese patient (BMI over 27.5) use the adjusted body weight. Ideal weight: female 45.5 kg, male 50 kg, plus 0.91 × (height − 152 cm). Adjusted = ideal + 0.4 × (actual − ideal). For women the ebook prints 0.98 where the dengue CPG, 4th edition, prints 0.91 (ebook p31; the fluid notes of the CPG entry): this calculator follows the CPG and uses 0.91 for both (the guide owner, 12 Nov 2026).',
     run(v){
       if (!v.ht || !v.wt) return null;
       if (v.ht < 120 || v.ht > 220 || v.wt < 20 || v.wt > 300) return [['Check the numbers', 'Height 120–220 cm, weight 20–300 kg', 'warn', '']];
@@ -13790,7 +13893,7 @@ const CALCS = {
       const verdict = bad.length ? {cls:'stop', h:'Unstable vital signs: Red Zone, MTS level 2', p:`${bad.join('; ')}. Table 8: compensated dengue shock syndrome; emergency treatment, IV fluid therapy and admission (Group C).`, href:'#dengue-cpg--red2', link:'Open the triage outcome'}
         : lowDia ? {cls:'next', h:'Check the blood pressure', p:`The diastolic is under 60 with a systolic of 90 or more. Appendix 7 writes BP < 90/60 mmHg and does not say whether a low diastolic alone counts: judge it with the rest of the triage.${todo.length ? ' Still to check: ' + todo.join(', ') + '.' : ''}`, href:'#dengue-cpg--vit', link:'Open the triage question'}
         : todo.length ? {cls:'next', h:'None unstable so far', p:'Still to check: ' + todo.join(', ') + '.'}
-        : {cls:'ok', h:'No unstable vital signs', p:'Go on to the next triage question: warning signs, unstable co-morbids or high risk.', href:'#dengue-cpg--ws', link:'Next triage question'};
+        : {cls:'ok', h:'No unstable vital signs', p:'Go on to the next triage question: warning signs or unstable co-morbids.', href:'#dengue-cpg--ws', link:'Next triage question'};
       return {outs:out, verdict};
     }},
   dfluid:{t:'Dengue fluids by weight', g:'dengue', src:'CPG 4th ed., Algorithm 1, Tables 11–13', path:'#dengue-cpg', kw:'dengue fluid quota m+5% maintenance holliday segar 48 hours critical phase warning signs group b2 iv rate ml/kg/hr crystalloid 70 kg limit obese bmi adjusted body weight cpg',
@@ -14760,7 +14863,7 @@ function renderToolsRx(){
    An index of the department's guide (3rd ed., Jan 2026): find a drug, open its own pages as printed. The doses are read from
    the pages, never retyped. "High alert" marks a drug on the hospital's 2026 list. */
 let dgF = 'all';
-const DG_TILE = () => TILE_KEYS.has('prescr') ? 'prescr' : 'doses';
+const DG_TILE = () => TILE_KEYS.has('dilute') || STILL_KEYS.has('dilute') ? 'dilute' : TILE_KEYS.has('prescr') ? 'prescr' : 'doses';
 /* The claude.ai artifact holds at most 511 files, so the guide's 227 pages are not among them (Krishna, 12 Nov 2026: "Yes,
    publish", with its pages opening the web app's copies). There each page opens from the web app in a new tab; the artifact
    cannot show another site's picture in its own viewer. A let, so the test can try it. */
@@ -14986,7 +15089,7 @@ function renderIntro(focus){
   const s = INTRO[introI], last = introI === INTRO.length - 1;
   $('#introbox').innerHTML = `<article class="tile t-sapphire intro-card"><div class="intro-art"><svg class="art" viewBox="0 0 320 220" role="img" aria-label="${esc(s.h)}">${ART[s.art]}</svg></div>
     <div class="intro-txt"><ol class="intro-steps" aria-label="Screen ${introI + 1} of ${INTRO.length}">${INTRO.map((_, i) => `<li class="${i <= introI ? 'on' : ''}"></li>`).join('')}</ol>
-      <h2 id="h-intro">${esc(s.h)}</h2><p>${esc(s.p)}</p>
+      <h2 id="h-intro">${esc(s.h)}</h2><p>${esc(s.p.replace('{calcs}', Object.keys(CALCS).length).replace('{nums}', NUMS.length))}</p>
       <div class="intro-nav"><button type="button" data-intro="back"${introI ? '' : ' hidden'}>${svg('back')}Back</button><span>${introI + 1} of ${INTRO.length}</span><button type="button" class="go" data-intro="${last ? 'done' : 'next'}">${last ? 'Start using the guide' : 'Next'}${svg('chev')}</button></div></div></article><nav class="intro-index" aria-label="Intro screens">${INTRO.map((x, i) => `<button type="button" class="tile ${INTRO_J[i]}" data-intro-go="${i}"${i === introI ? ' aria-current="step"' : ''}><b>${i + 1}</b><span>${esc(x.h)}</span></button>`).join('')}</nav>`;
   if (focus) $('#introbox').focus({preventScroll:true});
 }
@@ -14998,8 +15101,8 @@ function renderDrive(){
   const count = s => DRIVE.filter(d => d[1] === s).length;
   const newIds = Object.keys(P).filter(id => P[id].isnew).length, upd = Object.keys(P).filter(id => P[id].dept || P[id].upd).length;
   const row = ([f, txt, links]) => `<li><span class="f">${esc(f)}</span><div><p>${esc(txt)}</p>${links.length ? `<div class="links">${links.map(([href, l]) => `<a class="pill" href="${href}">${esc(l)}${svg('chev')}</a>`).join('')}</div>` : ''}</div></li>`;
-  let h = `<div class="stats"><div class="tile t-sapphire"><b>${newIds}</b><span>new rules and protocols from the MO Drive</span></div><div class="tile t-plum"><b>${upd}</b><span>pathways with department notes or updates</span></div><div class="tile t-teal"><b>${V7.length}</b><span>documents added in version 7 from the triage course folder</span></div><div class="tile t-obsidian"><b>31</b><span>MO Drive subfolders read, plus 2 files; ${count('unreadable')} could not be read</span></div></div>`;
-  h += `<details class="dgrp" open><summary>New in version 8: the redesign <small>${V8.length}</small></summary><ul class="drows">${V8.map(row).join('')}</ul></details>`;
+  let h = `<div class="stats"><div class="tile t-sapphire"><b>${newIds}</b><span>entries marked New: rules, protocols, guidelines and the starter pack</span></div><div class="tile t-plum"><b>${upd}</b><span>pathways with department notes or updates</span></div><div class="tile t-teal"><b>${V7.length}</b><span>documents added in version 7 from the triage course folder</span></div><div class="tile t-obsidian"><b>31</b><span>MO Drive subfolders read, plus 2 files; ${count('unreadable')} could not be read</span></div></div>`;
+  h += `<details class="dgrp" open><summary>Since version 8 (8 Nov 2026), newest first <small>${V8.length}</small></summary><ul class="drows">${V8.map(row).join('')}</ul></details>`;
   h += `<details class="dgrp" open><summary>New in version 7: the triage course folder <small>${V7.length}</small></summary><ul class="drows">${V7.map(row).join('')}</ul></details>`;
   h += DRIVE_GROUPS.map(([k, t, open]) => {
     const rows = DRIVE.filter(d => d[1] === k); if (!rows.length) return '';
@@ -15009,6 +15112,16 @@ function renderDrive(){
   $('#drive').innerHTML = h;
 }
 
+/* Banners for What's new, Sources and about, and the wall poster (the 12 Nov 2026 review): a Flow Studio loop in the style of
+   the on-shift lists' banners, each falling back to an existing picture if its own is missing */
+function renderViewHeroes(){
+  const hero = (sel, key, alt, lbl, h, p) => { const el = $(sel); if (el) withTiles(el, `${tileMedia(TILE_KEYS.has(key) || STILL_KEYS.has(key) ? key : alt)}<span class="lbl">${lbl}</span><h2>${h}</h2><p>${p}</p>`); };
+  const ebook = Object.values(P).filter(x => !x.grp).length, cpg = Object.values(P).filter(x => x.grp === 'cpg').length;
+  hero('#newhero', 'whatsnew', 'intro', 'Since 8 Nov 2026', `${V8.length} rounds since version 8`, `Newest first, then the MO Drive and the triage course, and ${CONFIRM.length} points still to confirm with the department.`);
+  hero('#abouthero', 'sources', 'paths', 'Where every line comes from', 'The ebook first', `${ebook} ebook pathways as written, ${cpg} national guidelines, and the department\'s own memos, lists and notes, each with its source and date.`);
+  hero('#posterhero', 'poster', 'flow', 'Two A3 sheets', 'The wall poster', 'The patient\'s route, the rules and the numbers on one wall, with the code that opens the guide.');
+}
+
 /* ================= Sources and about ================= */
 function renderAbout(){
   const lst = ids => ids.map(id => `<a href="#${id}">${esc(P[id].title)}</a>${P[id].src ? ' · ' + esc(P[id].src) : ''}`);
@@ -15016,7 +15129,9 @@ function renderAbout(){
   $('#srcs').innerHTML = [
     panel('Approved source', 'The ebook', '<i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025). The 23 pathways are built as written, and page numbers refer to that edition.', ['Outcome colours follow the ebook\'s boxes: red admit, green discharge, yellow observation, blue discharge advice', 'Department notes on a pathway are labelled as not in the ebook, with their source']),
     panel('Department notes', 'Green Zone flow and referrals', 'Memos, SOPs and flow charts from the department. Each entry names its source and date.', lst(FLOW_IDS)),
-    panel('MO Drive, 3. CLINICAL, read 7 Nov 2026', 'Department protocols', 'Every subfolder of the MO Drive was read; what went in, what did not and why is listed under What\'s new.', lst(PROT_IDS)),
+    panel('MO Drive, department memos and the starter pack', 'Department protocols', 'From the MO Drive (read in full on 7 Nov 2026), the department\'s memos, the triage course and the HKL doctors starter pack. Each entry names its source and date; what went in, what did not and why is listed under What\'s new.', lst(PROT_IDS)),
+    panel('National guidelines and named sources', 'Guidelines, handbook and the X-ray guide', 'National CPGs quoted as printed with their page and acknowledgement, or summarised in the guide\'s own words where their copyright gives no permission; a teaching handbook checked against its sources; and Reading X-rays from named online sources. None replaces the ebook: where they differ is under Still to confirm.', Object.keys(P).filter(id => P[id].grp === 'cpg').map(id => `<a href="#${id}">${esc(P[id].title)}</a>${P[id].src ? ' · ' + esc(P[id].src) : ''}`)),
+    panel('Department lists', 'Drug lists and the dilution guide', 'The Emergency Pharmacy\'s drug list (14 Apr 2025) with the MOH formulary categories, and the department\'s dosing and dilution guide (3rd edition, January 2026), each shown as printed.', ['<a href="#pharmacy">ED pharmacy drug list</a>', '<a href="#dilution">ED dosing and dilution guide</a>']),
     panel('Version 7', 'The triage course folder', 'Six documents summarised in the Green Zone workflow map (7 Nov 2026), added as department notes.', V7.map(([f]) => esc(f))),
     panel('Media', 'Illustrations, clips and narration', 'The illustrations and the eight-second clips are generated artwork and show no real staff or patients. The tour narration is a synthetic voice.', null),
     panel('Design', 'Why it works this way', 'In Ely and colleagues\' study, family doctors left 64% of their clinical questions unpursued and spent under two minutes on those they did pursue (BMJ 1999;319:358). So every answer here is one search or a few taps away, and the outcome box can be copied straight into the notes. The tour is short, chaptered and captioned, with a transcript and speed control, following guidance on effective educational video (Brame, CBE Life Sci Educ 2016) and accessible video players.', null)
@@ -15332,7 +15447,7 @@ function renderToolsInstall(){
   const pwa = window.GZ_PWA, s = pwa ? pwa.info() : null;
   const tag = !pwa ? 'Web app' : s.installed ? 'Installed' : s.state === 'saved' ? 'Ready offline' : 'Saving';
   el.innerHTML = `<div class="row"><span class="ic">${svg('install')}</span><h2>Install the guide</h2><span class="tag">${tag}</span></div><p>On a phone, tablet or computer, opened like an app and used without a signal: the steps for every device and browser.</p>` +
-    `<ul class="gl">${INSTALL_PLAT.map(p => `<li><span>${esc(p.t)}</span>${p.k === DEVICE.plat && DEVICE.known ? '<b>This one</b>' : ''}</li>`).join('')}</ul><span class="go-l">How to install${svg('chev')}</span>`;
+    `<ul class="gl">${INSTALL_PLAT.map(p => `<li><span>${esc(p.t)}</span>${p.k === DEVICE.plat && DEVICE.known ? '<b class="me">This one</b>' : ''}</li>`).join('')}</ul><span class="go-l">How to install${svg('chev')}</span>`;
 }
 addEventListener('gz-pwa', () => { if (!instWeb && window.GZ_PWA) renderInstall(); else installLive(); });
 addEventListener('online', installLive); addEventListener('offline', installLive);
@@ -15466,6 +15581,9 @@ clipsOn = prefs.clips === 'on';
 $('#cnt-path').textContent = Object.keys(P).length;
 $('#cnt-rule').textContent = FLOW_IDS.length + PROT_IDS.length;
 $('#cnt-calc').textContent = Object.keys(CALCS).length;
+$$('[data-ver]').forEach(e => { e.textContent = APP_VER; });
+/* Counts written in the views' own text (12 Nov 2026: they had drifted from the data) */
+$$('[data-cnt]').forEach(e => { const n = {ebook:Object.values(P).filter(x => !x.grp).length, rules:FLOW_IDS.length + PROT_IDS.length}[e.dataset.cnt]; if (n) e.textContent = n; });
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
 renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks(); renderRxStatic(); renderRx(); renderToolsRx(); renderDgStatic(); renderDg(); renderToolsDg();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
@@ -15483,7 +15601,7 @@ if (typeof EDRX !== 'undefined'){
   }
   Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
 }
-renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderInstall();
+renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderViewHeroes(); renderInstall();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
 document.addEventListener('click', e => {
@@ -15711,7 +15829,7 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
    - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
-  const PAGE = 'f0e605cf62fa'; /* this page's id, which build.js also writes into sw.js */
+  const PAGE = '8eabbd0223a5'; /* this page's id, which build.js also writes into sw.js */
 
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };

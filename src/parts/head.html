@@ -712,7 +712,7 @@ button.opt:not(.sugg):active{box-shadow:inset 0 2px 5px var(--press),inset 0 0 0
 button.opt.sugg{background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));color:#fff;box-shadow:var(--jewel-rim),0 14px 26px -16px var(--emerald-3);box-shadow:var(--jewel-rim),0 14px 26px -16px color-mix(in srgb,var(--emerald-3),#000 var(--shade-k))}
 button.opt.sugg kbd{background:var(--mint);color:var(--emerald-3);box-shadow:none}
 button.opt.sugg .gt{color:var(--mint)}
-@media (prefers-reduced-motion:no-preference){.cur-in{animation:deal3 .5s var(--ease);transform-origin:0 50%}@keyframes deal3{from{opacity:0;transform:perspective(1100px) translateX(24px) rotateY(-11deg)}to{opacity:1;transform:none}}@keyframes deal{from{opacity:0;transform:translateX(22px) rotate(.8deg)}to{opacity:1;transform:none}}}
+@media (prefers-reduced-motion:no-preference){.cur-in{animation:deal3 .5s var(--ease);transform-origin:0 50%}@keyframes deal3{from{opacity:0;transform:perspective(1100px) translateY(14px) rotateY(-11deg)}to{opacity:1;transform:none}}@keyframes deal{from{opacity:0;transform:translateX(22px) rotate(.8deg)}to{opacity:1;transform:none}}}
 /* Outcome card */
 .res{position:relative;overflow:hidden;border-radius:var(--r-xl);background:var(--oc);color:var(--oi);box-shadow:0 22px 40px -26px var(--oc);box-shadow:0 22px 40px -26px color-mix(in srgb,var(--oc),#000 var(--shade-k))}
 .res-h{display:flex;align-items:center;gap:16px;padding:22px 22px 14px}
@@ -1818,6 +1818,61 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 #viewport:focus,#viewport:focus-visible,#cur:focus,#cur:focus-visible,#qcard:focus,#qcard:focus-visible,#run-title:focus-visible,#introbox:focus{outline:none}
 @media (max-width:560px){.top.has-title .brand .bt{display:none}.top-title{color:var(--ink)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* ---------- The 12 Nov 2026 design review ---------- */
+/* Long words, links and chip rows stay inside their cards on a phone */
+.leaf{grid-template-columns:minmax(0,1fr)}
+.ptab-p li{min-width:0;overflow-wrap:anywhere}
+/* Home tile lists: a column that never grows past the tile, so long titles take the ellipsis and the arrow stays in */
+.gl{grid-template-columns:minmax(0,1fr)}
+/* The discharge outcome: its label at full strength and its buttons on dark glass, readable on the green fill */
+.res-k{opacity:1}
+.res.discharge .res-f button:not(.primary){background:rgba(0,0,0,.16)}
+.res.discharge .res-f button:not(.primary):hover{background:rgba(0,0,0,.26)}
+/* Small lines on coloured tiles, at a readable contrast */
+.num-card .src{opacity:.9}
+.chaps button span{opacity:.9}
+.tool .foot{color:var(--ink-2)}
+/* Words in the body face (mono is for numbers and doses) */
+.srcs .panel .src-k{font:800 .72rem/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase}
+.tool-go .gl b.me{font:800 .78rem/1.2 var(--body)}
+/* Shift tools: a tool's longer row takes two lines instead of an ellipsis */
+.tool-go .gl li span{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* Share: the code card sits at the top of its row */
+.sh-more{align-items:start}
+@media (max-width:760px){
+  /* A long entry title (over 26 characters, such as the CPG titles) a size smaller on a phone, so its first question still starts high */
+  .run-hero h1.long{font-size:1.36rem;line-height:1.15}
+  /* An entry's banner chips stay on one line each */
+  .run-hero .run-cat{flex-wrap:nowrap;min-width:0}
+  .run-hero .run-cat > *{flex:none}
+  .run-hero .chip{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .run-hero .run-cat > .chip:not(.j){flex:0 1 auto;min-width:0}
+}
+@media (max-width:560px){
+  /* The list filters scroll inside themselves in one row, rather than wrapping into ragged rows (the install page's device and
+     browser pickers keep wrapping: every choice stays in view there) */
+  #libf,#rxf,#lkf,#dgf{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;overscroll-behavior-x:contain}
+  #libf::-webkit-scrollbar,#rxf::-webkit-scrollbar,#lkf::-webkit-scrollbar,#dgf::-webkit-scrollbar{display:none}
+  #libf button,#rxf button,#lkf button,#dgf button{flex:none}
+  /* On the on-shift lists the banner says the rest: the intro keeps to two lines, so the list starts sooner */
+  .vhead:has(+ .phx-hero) p,.vhead:has(+ .lk-hero) p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .phx-hero,.lk-hero{min-height:104px}
+}
+@media (pointer:coarse){
+  /* Bigger targets for the on-shift lists' own buttons */
+  .dg-p .pill{min-height:40px}
+  .phx-go{width:40px;height:40px}
+  .phx-az button{min-width:36px;height:36px}
+}
+@media (max-width:380px){
+  /* Home at 360 px: the zone map's stop labels keep apart */
+  .zm b{font-size:.68rem}
+  .zm small{font-size:.62rem}
+}
+/* The pressed filter at night: a mint edge, since the dark fill is close to its track */
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{box-shadow:var(--sh-2),inset 0 0 0 1.5px rgba(91,232,157,.55)}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{box-shadow:var(--sh-2),inset 0 0 0 1.5px rgba(91,232,157,.55)}
+
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -1898,7 +1953,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- Pathway library -->
       <section class="view" data-view="pathways" id="v-pathways" hidden aria-labelledby="h-lib"><div class="vw">
         <header class="vhead"><div><h1 id="h-lib">Pathways</h1>
-          <p>The 23 ebook pathways, the 15 rules and protocols, and the national CPGs. Each runs one question at a time to its outcome card. Ebook pathways are built as written; department notes and CPGs are labelled with their source.</p></div></header>
+          <p>The <span data-cnt="ebook">23</span> ebook pathways, the <span data-cnt="rules">23</span> rules and protocols, and the national guidelines. Each runs one question at a time to its outcome card. Ebook pathways are built as written; department notes and CPGs are labelled with their source.</p></div></header>
         <div class="libbar">
           <label class="find"><span data-icon="search"></span><span class="vh">Filter pathways</span><input id="libq" type="search" placeholder="Filter by name, symptom or drug" autocomplete="off"></label>
           <div class="seg" id="libf" role="group" aria-label="Show"></div>
@@ -2024,7 +2079,8 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <!-- What's new -->
       <section class="view" data-view="new" id="v-new" hidden aria-labelledby="h-new"><div class="vw">
         <header class="vhead"><div><h1 id="h-new">What's new in the guide</h1>
-          <p>Version 8 is a new design with the zone map, whole-pathway maps, visual tools and a first-shift intro. Below it, what came in from the MO Drive and the triage course folder, what did not and why, and what is still to confirm.</p></div></header>
+          <p>Every round since the version 8 redesign of 8 Nov 2026, newest first. Below them, what came in from the MO Drive and the triage course folder, what did not and why, and what is still to confirm.</p></div></header>
+        <div class="tile t-sapphire phx-hero" id="newhero"></div>
         <div id="drive"></div>
       </div></section>
 
@@ -2032,6 +2088,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="poster" id="v-poster" hidden aria-labelledby="h-post"><div class="vw">
         <header class="vhead"><div><h1 id="h-post">The wall poster</h1>
           <p>Two A3 sheets for the Green Zone wall: the patient flow, rules and numbers on the first, and the pathways, EMACC, Asthma Zone and referrals on the second. Tap a sheet to read it full size. With night colours on, you see the night versions; the sheets on the wall keep the day colours.</p></div></header>
+        <div class="tile t-plum phx-hero" id="posterhero"></div>
         <div class="sheets">
           <figure><button type="button" data-sheet="1" aria-label="Open sheet 1 full size"><img src="poster/sheet1-thumb.webp" width="560" height="791" loading="lazy" alt="Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know"></button><figcaption><b>Sheet 1</b> · Patient flow</figcaption></figure>
           <figure><button type="button" data-sheet="2" aria-label="Open sheet 2 full size"><img src="poster/sheet2-thumb.webp" width="560" height="791" loading="lazy" alt="Poster sheet 2: the 23 pathways, EMACC follow-up, Asthma Zone flow and referrals"></button><figcaption><b>Sheet 2</b> · Pathways and referrals</figcaption></figure>
@@ -2042,6 +2099,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="about" id="v-about" hidden aria-labelledby="h-about"><div class="vw">
         <header class="vhead"><div><h1 id="h-about">Sources and about</h1>
           <p>Everything in this guide and where it comes from. It is a reference tool only and holds no patient data. Use clinical judgement and consult the Emergency Physician on duty when unsure.</p></div></header>
+        <div class="tile t-slate phx-hero" id="abouthero"></div>
         <div class="srcs" id="srcs"></div>
         <div class="shead"><h2>Privacy</h2></div>
         <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
@@ -2068,7 +2126,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 
     <footer class="foot"><div class="vw">
       <p><b>Reference tool only.</b> Pathways follow <i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025), as written, and page numbers refer to that edition. Green Zone rules and department protocols follow the memos, SOPs and notes in the department's drives, with each source and date named on its entry.</p>
-      <p>Use clinical judgement and consult the Emergency Physician on duty when unsure. Version 8, 8 Nov 2026.</p>
+      <p>Use clinical judgement and consult the Emergency Physician on duty when unsure. <span data-ver>Version 8</span>.</p>
     </div></footer>
   </div>
 </div>
@@ -2108,7 +2166,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
     <div class="set"><div><b>Moving tiles</b><small>The tiles, section bars and tool headers move silently. Off keeps still pictures and saves mobile data.</small></div><div class="seg" id="st-tiles" role="group" aria-label="Moving tiles"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Moving clips</b><small>The patient journey clips loop silently. Off saves mobile data.</small></div><div class="seg" id="st-clips" role="group" aria-label="Moving clips"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Saved, recent and quiz score</b><small id="st-count">Kept in this browser only.</small></div><button type="button" id="st-clear" class="sm">Clear</button></div>
-    <p class="dlg-f">Settings are kept in this browser only. Version 8, 8 Nov 2026.</p>
+    <p class="dlg-f">Settings are kept in this browser only. <span data-ver>Version 8</span>.</p>
   </div>
 </div>
 

@@ -23,9 +23,9 @@
               ranges, so they seek offline.
    Fonts      The Google Fonts stylesheet and font files are kept as the page loads them, so the guide keeps its type. */
 'use strict';
-const VERSION = '2dd536ce5d22', PAGE = 'f0e605cf62fa';
+const VERSION = '9e1df8bc3f8f', PAGE = '8eabbd0223a5';
 const PRE = {
-  "": "ca0bf9bcdf3d4880",
+  "": "6d45e1979e7b3f51",
   "manifest.webmanifest": "3f4620e73fac5885",
   "img/gz-01-hero.webp": "e0db0e365820090d",
   "img/gz-02-triage.webp": "60e7adac5fc1ea89",
@@ -63,6 +63,7 @@ const PRE = {
   "tiles/dc.webp": "3556cfe56537f675",
   "tiles/dcpg.webp": "ae2b6b9197d440d2",
   "tiles/dengue.webp": "f387b9a8760b6fea",
+  "tiles/dilute.webp": "aa66a9b23f6a9e49",
   "tiles/doses.webp": "59d96908b62074a5",
   "tiles/fbcpg.webp": "490eddbff8f686de",
   "tiles/flow.webp": "d7cc3a055d9ba7a7",
@@ -83,6 +84,7 @@ const PRE = {
   "tiles/paincpg.webp": "d4665b5cad2b6396",
   "tiles/paths.webp": "1271dc88458c23eb",
   "tiles/pharm.webp": "6575ddf3b073ec91",
+  "tiles/poster.webp": "a565852c874da0cc",
   "tiles/prescr.webp": "8bf6ae0b74920d99",
   "tiles/prot.webp": "031ac0f96762bd53",
   "tiles/rabies.webp": "82d5e094bf4825f2",
@@ -90,12 +92,14 @@ const PRE = {
   "tiles/scores.webp": "88c54116569f7e61",
   "tiles/sinuscpg.webp": "5e5c3b11e9837028",
   "tiles/snakecpg.webp": "233c9a6c490480fe",
+  "tiles/sources.webp": "226027a89cf455e7",
   "tiles/t2dmcpg.webp": "8a62f2923a2680ba",
   "tiles/throatcpg.webp": "c77ed1c3a693d447",
   "tiles/tip.webp": "f66ac75367591572",
   "tiles/toothcpg.webp": "c8205f70cec67503",
   "tiles/tox.webp": "2b262a85b15fbfbc",
-  "tiles/vtecpg.webp": "9bf4a719eafc769c"
+  "tiles/vtecpg.webp": "9bf4a719eafc769c",
+  "tiles/whatsnew.webp": "651f87cc9228152f"
 };   /* path: hash, saved at install ('' is the page) */
 const KEEP = {
   "abdo/p01.webp": "062dde6cee433832",
@@ -592,6 +596,7 @@ const KEEP = {
   "tiles/dc.mp4": "59412911b4488323",
   "tiles/dcpg.mp4": "34e84b4920e7e166",
   "tiles/dengue.mp4": "d951f6aef8cec099",
+  "tiles/dilute.mp4": "7884213adad81d41",
   "tiles/doses.mp4": "17d76ed842362da6",
   "tiles/fbcpg.mp4": "1b3e44f90abcfec0",
   "tiles/flow.mp4": "e14a2d738b2a5137",
@@ -612,6 +617,7 @@ const KEEP = {
   "tiles/paincpg.mp4": "79f6ad1724e03e30",
   "tiles/paths.mp4": "3bcea33492350e52",
   "tiles/pharm.mp4": "12077a0e1a04075c",
+  "tiles/poster.mp4": "fb8e4ff22479e1df",
   "tiles/prescr.mp4": "6e0d0a6ae647f801",
   "tiles/prot.mp4": "849294b15f0801a7",
   "tiles/rabies.mp4": "f7a970bee6141025",
@@ -619,12 +625,14 @@ const KEEP = {
   "tiles/scores.mp4": "98eceab48dfdd02f",
   "tiles/sinuscpg.mp4": "846bf32d1570c611",
   "tiles/snakecpg.mp4": "81a539c561ca46c0",
+  "tiles/sources.mp4": "99866ad1ff5b1599",
   "tiles/t2dmcpg.mp4": "13795d5f44b6ccc5",
   "tiles/throatcpg.mp4": "67bf77fbc63f3fa3",
   "tiles/tip.mp4": "319cc9d631af5e30",
   "tiles/toothcpg.mp4": "8bb44e9b22035dd8",
   "tiles/tox.mp4": "d0ad6cf4aea9d93f",
   "tiles/vtecpg.mp4": "6662710bc80d6b32",
+  "tiles/whatsnew.mp4": "8f3ffc220deaf8c6",
   "xray/ankle-ap.webp": "a7280cd774d24143",
   "xray/ankle-lat.webp": "a0db7a5de24f844f",
   "xray/ankle-mortise.webp": "634b91a60244b462",

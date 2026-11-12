@@ -305,15 +305,15 @@ const MEMOS = {
     'The patient brings the slip hijau back to you: record the appointment date in the RPP, clip the slip hijau outside the RPP or the X-ray envelope, and hand over the discharge package (the medication slip, an MC if any, a referral letter if any) before the patient goes home (11; Lampiran B1)',
     'Tell the patient: at most 2 EMACC visits within 1 month of discharge; refer to a specialist clinic if needed (8)',
     'Late or missed: seen if a walk-in slot is free while the clinic is open; otherwise a new date on the next clinic day. No appointment card: to the Registration Counter first (13 to 15)',
-    'EMACC runs Monday to Friday, 8 am to 3 pm (Krishna, 12 Nov 2026)'];
+    'EMACC runs Monday to Friday, 8 am to 3 pm (the guide owner, 12 Nov 2026)'];
   E.nodes.bku = {end:'refer', title:'Urgent: EMACC on day 4 at the earliest, 12 pm to 3 pm', fig:'emtl', items:HOW, links:[['#emacc--clinic', 'The clinic: hours and slots']], gap:E24('Lampiran A, 7 to 15, and Lampiran B1')};
   E.nodes.bkn = {end:'refer', title:'Not urgent: EMACC on day 5 at the earliest, 8 am to 3 pm', fig:'emtl', items:HOW, links:[['#emacc--clinic', 'The clinic: hours and slots']], gap:E24('Lampiran A, 7 to 15, and Lampiran B1')};
   E.nodes.clinic = {end:'neutral', title:'The EMACC clinic: 8 am to 3 pm, Monday to Friday', fig:'memo-2024-02', items:[
-    'EMACC runs 8 am to 3 pm, Monday to Friday (Krishna, 12 Nov 2026). The memo prints the MOs\' hours as 7.30 am to 3.30 pm and consultations from 8.00 am to 3.30 pm, and the triage counter takes the last EMACC patient at 3.00 pm (1, 3, 4)',
+    'EMACC runs 8 am to 3 pm, Monday to Friday (the guide owner, 12 Nov 2026). The memo prints the MOs\' hours as 7.30 am to 3.30 pm and consultations from 8.00 am to 3.30 pm, and the triage counter takes the last EMACC patient at 3.00 pm (1, 3, 4)',
     'Appointments: 8 an hour across 2 consultation rooms, 8.00 am to 3.00 pm, 56 a day not counting walk-ins; about 56 to 60 patients a day in all (10)',
     'A walk-in with no appointment who is still unwell or still unfit for work and needs a doctor: registered as an EMACC patient, or as a copy card after EMACC hours (16)',
     'The second visit follows up the first, or bridges to a specialist clinic appointment; the patient is discharged after it (8.2)'],
-    gap:E24('Lampiran A') + ' The hours, 8 am to 3 pm on Monday to Friday, are Krishna\'s instruction of 12 Nov 2026; their written source is under Still to confirm.'};
+    gap:E24('Lampiran A') + ' The hours, 8 am to 3 pm on Monday to Friday, are the guide owner\'s instruction of 12 Nov 2026; their written source is under Still to confirm.'};
   delete E.nodes.book;
   E.tables[0].title = 'Cases the 2018 SOP sends to EMACC. Its review times are replaced: the first visit is day 4 (urgent) or day 5 at the earliest, and blood results go to EM WATCH (memo (01)24, Jan 2024)';
   E.refs = ['Memo HKL/JK/98/188/3(01)24: Penyelarasan semula proses kerja pengurusan pesakit Klinik Ulangan (EMACC), 11 Jan 2024, with Lampiran A, A1, B1, B2 and B3', 'Emergency Medicine After Care Clinic (EMACC) Standard Operating Procedure, ETD HKL, 1 Feb 2018 (MO Drive, Clinical / EMACC): who EMACC is for, and its case list'];
