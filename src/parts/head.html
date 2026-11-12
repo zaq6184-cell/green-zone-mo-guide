@@ -921,6 +921,37 @@ button.opt.sugg .gt{color:var(--mint)}
 .lk-g.net .lk-i{background:var(--surface-3);color:var(--ink-2)}
 .lk-note{margin:4px 2px 0;font-size:.8rem;line-height:1.4;color:var(--muted)}
 @media (max-width:480px){.lk{grid-template-columns:32px minmax(0,1fr) 15px;gap:9px}.lk-k{display:none}.lk-i{width:32px;height:32px}}
+/* ---------- The ED pharmacy drug list (12 Nov 2026) ---------- */
+.phx-hero{min-height:136px;justify-content:flex-end;gap:4px;margin:0 0 14px}
+.phx-hero .lbl{font:800 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.94)}
+.phx-hero h2{margin:0;font:800 1.25rem/1.2 var(--display);color:#fff}
+.phx-hero p{margin:0;max-width:min(38ch,60%);font-size:.84rem;line-height:1.35;color:rgba(255,255,255,.86)}
+.phx-hero .tm img,.phx-hero .tm video{left:auto;width:64%}
+.phx-hero .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
+.phx-kh{margin:18px 2px 8px;font:800 1rem/1.2 var(--display)}
+.phx-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 12px}
+.phx-c{display:grid;gap:3px;align-content:start;padding:9px 10px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);font-size:.74rem;line-height:1.3;color:var(--muted)}
+.phx-c b{display:flex;align-items:center;gap:6px;font:800 .78rem/1.2 var(--body);color:var(--ink)}
+.phx-b{display:inline-grid;place-items:center;min-width:2.9em;padding:3px 7px;border-radius:999px;font:800 .72rem/1 var(--mono);letter-spacing:.02em;white-space:nowrap}
+.phx-b.mo{background:var(--discharge-soft);color:var(--discharge)}
+.phx-b.sp{background:var(--observe-soft);color:var(--observe)}
+.phx-b.no{background:var(--surface-3);color:var(--muted)}
+.phx-az{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 10px}
+.phx-az button{display:grid;place-items:center;min-width:32px;height:32px;padding:0;border:0;border-radius:9px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-2);font:800 .8rem/1 var(--body);cursor:pointer}
+.phx-az button:hover{box-shadow:inset 0 0 0 1.5px var(--accent);color:var(--accent)}
+.phx-count{margin:0 2px 8px;font-size:.8rem;color:var(--muted)}
+.phx-g{margin:0 0 12px;padding:12px;border-radius:var(--r-lg);background:var(--pearl);box-shadow:var(--rim),var(--sh-1);scroll-margin-top:84px}
+.phx-g h2{margin:0 0 8px 4px;font:800 1rem/1 var(--display);color:var(--accent)}
+.phx-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.phx{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px;padding:9px 10px 9px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.phx-t{display:grid;gap:2px;min-width:0}
+.phx-t b{font:700 .9rem/1.3 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.phx-t small{font-size:.74rem;line-height:1.3;color:var(--muted)}
+.phx-t mark{background:var(--accent-soft);color:inherit;border-radius:3px;padding:0 1px}
+.phx-go{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--surface-3);color:var(--ink-2)}
+.phx-go svg{width:15px;height:15px}
+.phx-go:hover{color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+@media (max-width:480px){.phx-cats{grid-template-columns:1fr}.phx-c{grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:8px}.phx-c b{grid-row:span 2}}
 /* ---------- Code Blue and the interpreters (10 Nov 2026): figures drawn from the Code Blue Manual and the memo ---------- */
 .fig-cap{margin:8px 2px 0;font-size:.8rem;line-height:1.35;color:var(--muted)}
 .cpy{min-height:36px;padding:6px 11px;font-size:.8rem;border-radius:10px;gap:5px}
@@ -1050,6 +1081,32 @@ button.opt.sugg .gt{color:var(--mint)}
 @media (max-width:420px){.cbc-g{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:14px}.cbc:nth-child(2)::after{display:none}
   .cbk-fork{grid-template-columns:1fr}.cbn.hot .cbn-v{font-size:1.8rem}.sh-t span{font-size:.6rem}.cbs li{grid-template-columns:28px minmax(0,1fr);row-gap:2px}.cbs em{grid-column:2}}
 @media (prefers-reduced-motion:reduce){.cbk-fill,.cbc svg,.ii,.cbm-out>*{animation:none}.cbm-b{transition:none}}
+/* Department memos (data18.js): the memo card and the team leader's shift chart */
+.figmemo{padding:12px 14px;box-shadow:inset 0 0 0 1px var(--line),inset 3px 0 0 var(--refer)}
+.mm-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.mm-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:999px;background:var(--refer-soft);color:var(--refer);font:800 .7rem/1.4 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.mm-chip .i{width:14px;height:14px}
+.mm-ref{font:600 .78rem/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.mm-t{margin:8px 0 10px;font:700 .92rem/1.35 var(--body);color:var(--ink)}
+.mm-p{display:flex;flex-wrap:wrap;gap:6px}
+.figtl{padding:10px;display:grid;gap:8px}
+.tl-r{display:grid;grid-template-columns:5.6em auto minmax(20px,1fr) auto;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);animation:tlin .5s var(--ease) var(--d) both}
+.tl-r b{font:800 .84rem/1.2 var(--body);color:var(--ink)}
+.tl-a,.tl-b{display:grid;gap:1px;font:700 .95rem/1.15 var(--mono);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tl-a em,.tl-b em{font:800 .62rem/1.2 var(--body);font-style:normal;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tl-b{text-align:right}
+.tl-bar{height:8px;border-radius:4px;background:var(--surface-3);overflow:hidden}
+.tl-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--b-discharge),var(--b-observe));transform-origin:left;animation:cbk 1.6s var(--ease) var(--d) both}
+@keyframes tlin{from{opacity:0;transform:translateY(6px)}}
+@media (max-width:380px){.tl-r{grid-template-columns:auto minmax(16px,1fr) auto}.tl-r b{grid-column:1/-1}}
+.figemt{padding:10px}
+.emt{list-style:none;margin:0;padding:0;display:grid;gap:6px;position:relative}
+.emt li{display:grid;grid-template-columns:4.2em minmax(0,1fr);gap:10px;align-items:baseline;padding:8px 10px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font-size:.84rem;line-height:1.35;color:var(--ink-2)}
+.emt b{font:800 .8rem/1.2 var(--mono);color:var(--muted);white-space:nowrap}
+.emt li.u{box-shadow:inset 0 0 0 1.5px var(--observe);background:var(--observe-soft)}
+.emt li.n{box-shadow:inset 0 0 0 1.5px var(--discharge);background:var(--discharge-soft)}
+.emt li.u b{color:var(--observe)}.emt li.n b{color:var(--discharge)}
+@media (prefers-reduced-motion:reduce){.tl-r,.tl-bar i{animation:none}}
 @media (max-width:420px){.figwc{grid-template-columns:1fr}.wc{grid-template-columns:72px minmax(0,1fr);column-gap:10px}.wc-sk{grid-row:1/4;margin:0}}
 .out .rxs{grid-column:1/-1;margin-top:10px}
 .rxs .sc-t{margin:0 12px}
@@ -1789,7 +1846,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -1823,6 +1880,21 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <div class="seg" id="lkf" role="group" aria-label="Show a group"></div></div>
         <div id="lnks"></div>
         <p class="lk-note">Left out on purpose: the link page's response registers (Google Sheets that may hold patients' details). Open them from the link page itself.</p>
+      </div></section>
+
+      <!-- ED pharmacy drug list (12 Nov 2026): data19.js, built by src/edrx.js -->
+      <section class="view" data-view="pharmacy" id="v-pharmacy" hidden aria-labelledby="h-pharmacy"><div class="vw">
+        <header class="vhead"><div><h1 id="h-pharmacy">ED pharmacy drug list</h1>
+          <p>What the Emergency Pharmacy supplies, as its own list prints it, with each drug's prescriber category in the MOH Medicines Formulary. Find a drug before you write it on a discharge prescription. Nothing here is stored.</p></div></header>
+        <div class="tile t-emerald phx-hero" id="rxhero"></div>
+        <div class="lk-top"><label class="find"><span data-icon="search"></span><span class="vh">Find a drug</span><input id="rxq" type="search" placeholder="Find a drug, for example amoxicillin" autocomplete="off" spellcheck="false"></label>
+          <div class="seg" id="rxf" role="group" aria-label="Show by prescriber category"></div></div>
+        <nav class="phx-az" id="rxaz" aria-label="Jump to a letter"></nav>
+        <p class="phx-count" id="rxn" aria-live="polite"></p>
+        <div id="rxl"></div>
+        <h2 class="phx-kh">What the categories mean</h2>
+        <div class="phx-cats" id="rxcats"></div>
+        <p class="lk-note" id="rxsrc"></p>
       </div></section>
 
       <!-- First-shift intro -->

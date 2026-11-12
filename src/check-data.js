@@ -14,7 +14,7 @@ const fs = require('fs');
 const path = require('path');
 
 const dir = path.resolve(process.argv[2] || path.join(__dirname, 'parts'));
-const parts = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js'].filter(f => fs.existsSync(path.join(dir, f)));
+const parts = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js'].filter(f => fs.existsSync(path.join(dir, f)));
 const src = parts.map(f => fs.readFileSync(path.join(dir, f), 'utf8')).join('\n') + '\nmodule.exports = P;';
 const m = {exports: {}};
 new Function('module', src)(m);

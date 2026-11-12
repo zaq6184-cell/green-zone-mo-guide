@@ -445,7 +445,7 @@ P['snakebite-moh'] = {
     'Summarised, not reproduced: the guideline states no reuse terms. Read the full guideline for the wording. Its photographs are copyright of their photographers.',
     'Ahmad Khaldun Ismail, Teo Eng Wah, Indraneil Das, Taksa Vasaruchapong and Scott A. Weinstein. Land Snakes of Medical Significance in Malaysia, 2nd edition, July 2017, with the support of the Malaysian Society on Toxinology. ISBN 978-967-0250-26-7. All rights reserved: used for facts only, in the guide\'s own words (the MST book).',
     'Remote Envenomation Consultation Services (RECS): 24-hour phone advice from emergency physicians, named in the guideline (p iii, p vi, p vii, p3, p67) without a contact.'],
-  see:[['#calc-snake20','20-minute whole blood clotting test'],['#calc-snakeav','Antivenom by snake'],['#anaphylaxis','Anaphylaxis (ebook pathway)'],['#animal-bites','Other animal bites and rabies'],['#mau-admission','Admission to MAU: it lists snake bite'],['#referral-rules--med','Admission to General Medicine'],['#yellow-zone','Yellow Zone patient flow'],['#gz-rules--wait','Patients who should not wait outside'],['#children--pat','Where to triage a child']]
+  see:[['#calc-snake20','20-minute whole blood clotting test'],['#calc-snakeav','Antivenom by snake'],['#anaphylaxis','Anaphylaxis (ebook pathway)'],['#animal-bites','Other animal bites and rabies'],['#mau-admission','Admission to MAU: it lists snake bite'],['#referral-rules--med','Admission to General Medicine'],['#yellow-zone--flow','Yellow Zone patient flow'],['#gz-rules--wait','Patients who should not wait outside'],['#children--pat','Where to triage a child']]
 };
 
 /* Links from related entries (links only: their content stays as written). Guarded, so the file also loads on its own. */

@@ -264,7 +264,7 @@ P['hip-fracture-cpg'] = {
     icu:{end:'refer', title:'Refer and treat accordingly at Intensive Care Unit/High Dependency Unit', items:[
       'Life-threatening medical conditions: refer and treat accordingly at Intensive Care Unit/High Dependency Unit (Algorithm, p x)',
       '*Stable cases i.e. without life-threatening medical conditions; unstable cases should be referred to emergency department (Algorithm, p x)'],
-      links:[['#trauma-walkins','Trauma walk-ins: T-RACS and HIT CT'],['#yellow-zone','Yellow Zone flow']],
+      links:[['#trauma-walkins','Trauma walk-ins: T-RACS and HIT CT'],['#yellow-zone--flow','Yellow Zone flow']],
       gap:'CPG Algorithm (p x). The CPG does not list the life-threatening medical conditions, and names units, not an MTS level or zone. The department\'s uptriage and trauma walk-in rules are linked.'},
 
     /* Chapter 3, Signs and symptoms (p4) */
@@ -1424,7 +1424,7 @@ P['cancer-pain-cpg'] = {
       'No adverse events: pain relief acceptable to patient OR reduction of pain score by 2 points? No: the arrow returns to the next dose. Yes: record total dose of morphine used from the start of titration, then convert to regular 4-hourly morphine',
       '*For patients already on opioids, the bolus dose of morphine should be 10% of the total 24-hour morphine requirement converted to intravenous/subcutaneous equivalent. For elderly, frail or renal impaired patients, use lower dose of the given range',
       '**For details on sedation score, see Appendix 3 in the CPG: the Sedation tab'],
-      links:[['#pain--mp','Ebook: morphine pain protocol (consult EP)'],['#yellow-zone','Yellow Zone flow']],
+      links:[['#pain--mp','Ebook: morphine pain protocol (consult EP)'],['#yellow-zone--flow','Yellow Zone flow']],
       gap:'CPG Algorithm 2 (p xi), adapted from the 2010 CPG. The CPG names no MTS level or zone for it; this guide places repeated IV or SC doses with checks every 5 to 30 minutes above the Green Zone (MTS levels 4 and 5): still to confirm. The algorithm gives no number of doses, no rule to convert the titration total to 4-hourly morphine, and does not define elderly or frail. A sedation score >2 is score 3 only, which Appendix 3 already describes as severe respiratory depression.'},
 
     /* 4.4.5, Opioid rotation (p24–26), Table 4 (p25), Recommendations 5, 8, 9 and 11 */

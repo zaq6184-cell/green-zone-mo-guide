@@ -118,7 +118,7 @@ P['communication'] = {
       'Score the agitation with BARS (ebook)',
       'Known psychiatric history, a relapse and no other medical problem: refer directly to the Psychiatry MO on call, who should see the patient within 45 minutes',
       'An aggressive patient with a psychiatric history only: the Yellow Zone PSY corner first'],
-      links:[['#behavioural-disturbance', 'Behavioural disturbance pathway'], ['#calc-calm', 'BARS and RASS'], ['#referral-rules--psy', 'Psychiatry referral'], ['#yellow-zone', 'Yellow Zone flow']],
+      links:[['#behavioural-disturbance', 'Behavioural disturbance pathway'], ['#calc-calm', 'BARS and RASS'], ['#referral-rules--psy', 'Psychiatry referral'], ['#yellow-zone--flow', 'Yellow Zone flow']],
       gap:'Sources: the ebook, Acute behavioural disturbance, p5–9; minutes of the ED, Psychiatry and Radiology meeting, 7 Feb 2023; Aliran pesakit di Zon Kuning, 13 Jul 2026 (MO Drive).'},
 
     /* ---- A complaint about the wait: the card's L.E.A.P., then the department's rules on who should not wait ---- */

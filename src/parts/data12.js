@@ -63,7 +63,7 @@
     'You, the Green Zone MO, complete the initial clerking and document accordingly in your notes',
     'The slide\'s end point: "PT SAFELY UPTRIAGED"',
     'Involve the EP for prompt intervention if needed'],
-    links:[['#gz-rules--upex', 'The worked example'], ['#yellow-zone', 'Yellow Zone patient flow'], ['#gz-rules--sepsis', 'Sepsis found in the Green Zone'], ['#cbd-2--c1', 'A case: worse after 4 hours of waiting']],
+    links:[['#gz-rules--upex', 'The worked example'], ['#yellow-zone--flow', 'Yellow Zone patient flow'], ['#gz-rules--sepsis', 'Sepsis found in the Green Zone'], ['#cbd-2--c1', 'A case: worse after 4 hours of waiting']],
     gap:src(A, 'slides 23 and 24')};
   G.nodes.upex = {end:'refer', title:'Worked example: post-traumatic pneumothorax, Green Zone to R2', items:[
     'The case: a 21-year-old man, motorbike against car 2 hours ago. Left chest wall pain with mild shortness of breath, speaking in phrases, RR 28, reduced breath sounds on the left, the left chest hyperresonant on percussion. X-ray not done yet',
@@ -657,7 +657,7 @@
         'In this case, uptriage is appropriate',
         'Your role as the MO: alert the PPP to repeat the vital signs; alert the PPK to get a trolley or bed; alert the TL of R2 or the Yellow Zone that the patient needs uptriage',
         '"MUTUAL PROMPT ACTION FROM ALL PIHAK": prompt action from everyone, together'],
-        links:[['#gz-rules--uptri', 'Uptriage: think it through, then who to tell'], ['#gz-rules--wait', 'Patients who should not wait outside'], ['#yellow-zone', 'Yellow Zone patient flow']],
+        links:[['#gz-rules--uptri', 'Uptriage: think it through, then who to tell'], ['#gz-rules--wait', 'Patients who should not wait outside'], ['#yellow-zone--flow', 'Yellow Zone patient flow']],
         gap:src(E, 'slides 2 to 4, headed "Scenario 1"')},
 
       /* ---- Case 2: dengue triaged to the Green Zone (slides 5 and 6). Where he goes, and who may be in the Green Zone, are left out. ---- */

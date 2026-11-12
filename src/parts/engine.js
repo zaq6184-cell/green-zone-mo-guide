@@ -37,7 +37,7 @@ const JOURNEY = [
    alt:'Illustration: patients seated in rows of chairs in the Chair Centric Area while a nurse checks a monitor',
    who:'Only if results are pending, or for observation or referral', title:'CCA, the Chair Centric Area',
    items:['PPP escorts the patient to the CCA and hands over to Yellow Zone Extension staff','Staff seat the patient, write the details on the whiteboard, record vital signs on the slip and monitor','When observation ends they send the patient back to the doctor\'s room, and the slip returns to the Green Zone MO','You stay responsible for the patient you sent, and the BHT goes with them'],
-   links:[['#gz-rules--wait','Where to seat patients who cannot wait outside'],['#gz-rules--ivab','IV antibiotics on a CCA chair'],['#yellow-zone','Uptriage: the Yellow Zone flow']]},
+   links:[['#gz-rules--wait','Where to seat patients who cannot wait outside'],['#gz-rules--ivab','IV antibiotics on a CCA chair'],['#yellow-zone--flow','Uptriage: the Yellow Zone flow']]},
   {short:'Review and finish', ic:'review', sub:'Back to you', img:'img/gz-06-review.webp', clip:'clips/stop5-review.mp4', audio:'audio/stop5.mp3', mo:true,
    say:'Before discharge, reassess and review every result. After a CT brain, ask the EP to review, and book EMACC or EMWATCH follow-up. Unsure, or the disposition is stuck? Call the EP in charge.',
    alt:'Illustration: two doctors review a CT brain image on a screen while a patient waits nearby',
@@ -58,10 +58,12 @@ const RULES = [
    items:['Several disciplines and no disposition after a long wait: inform the EP','External referral: discuss with the EP before accepting','Pending at the end of your shift: hand over to the next MO and document who'],
    links:[['#gz-rules--delay','Open the rule'],['#gz-rules--ext','External referrals']]}
 ];
-const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage'],['#gz-rules--ivab','IV antibiotics, no bed free'],['#gz-rules--ep4','Primary team delayed'],['#gz-rules--kk','Redirect to a KK or GP'],['#asthma-zone','Asthma Zone flow'],['#mau-admission','Admission to MAU'],['#referral-rules--ortho','Orthopaedic referral'],['#referral-rules--ipr','Transfer to IPR'],['#emacc','EMACC follow-up'],['#em-watch','EM Watch'],['#outpatient-referral','Clinic referrals'],['#gz-rules--dengue','Dengue from a KK to OW'],['#yellow-zone','Yellow Zone flow'],['#safe-practice','Million Ringgit Habits']];
+const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage'],['#gz-rules--ivab','IV antibiotics, no bed free'],['#gz-rules--ep4','Primary team delayed'],['#gz-rules--kk','Redirect to a KK or GP'],['#asthma-zone','Asthma Zone flow'],['#mau-admission','Admission to MAU'],['#referral-rules--ortho','Orthopaedic referral'],['#referral-rules--ipr','Transfer to IPR'],['#emacc','EMACC follow-up'],['#em-watch','EM Watch'],['#outpatient-referral','Clinic referrals'],['#gz-rules--dengue','Dengue from a KK to OW'],['#yellow-zone--flow','Yellow Zone flow'],['#safe-practice','Million Ringgit Habits']];
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['The ED pharmacy drug list','The Emergency Pharmacy\'s own list of 14 Apr 2025, 155 drugs, found as you type: is it on the list, and who may start it? Each drug shows its prescriber category in the MOH Medicines Formulary (B and C: a medical officer may start it; A/KK, A and A*: a specialist), with a link to the formulary\'s own entry. Search finds a drug by name and opens the list on it.',[['#pharmacy','Open the list'],['#tools','Shift tools']]],
+  ['Department memos for the Green and Yellow Zones','Twenty-two of the department\'s own memos, 2021 to 2024, as steps you can work through: EMACC booking now follows the memo of 11 Jan 2024 (Counter 10, day 4 or day 5); the team leader\'s shift, admitting from the Green Zone, elderly patients, the records to finish, critical lab results, notification, STEMI to IJN, police detainees, stat FBC and ABG, LA OT and tourniquets; in the Yellow Zone, transfusion, sedation, central lines with the care bundle, referred patients, transfers by EWS, albumin, dangerous drugs and unknown patients; and a missed fracture on a reported film. Each shows its memo\'s own pages, with the signature, registration numbers and any incident background covered, and links to the department\'s own memo list.',[['#gz-rules--tl','Team leader of the shift'],['#gz-rules--gzm','Green Zone memos'],['#yellow-zone','Yellow Zone memos']]],
   ['Abdominal pain: the visual handbook','A teaching handbook on adult abdominal pain in the ED, with its quick reference: the bedside pathway, the checks that prevent a miss, red flags, tests and imaging, pain relief and antibiotics, eight presentations, six cases, and a 3D map of the nine regions to tap and turn. Every number was checked against the source the handbook cites; the HKL ebook\'s Abdominal pain pathway stays the department\'s. The Malay discharge script can be read aloud.',[['#abdo-handbook','Open the handbook'],['#abdo-handbook--loc','The 3D map'],['#abdo-handbook--trig','The checks that prevent a miss']]],
   ['Real X-ray films, with the normal anatomy outlined','Reading X-rays now shows a normal film on each step: chest, pelvis, shoulder, elbow, wrist, hand, knee, ankle and foot, eighteen films in all. Each bone is outlined on the film: tap a name to light it, or switch the outlines off to read the film bare. The outlines are this guide\'s own tracing by eye, a teaching aid; some are marked approximate where bones lie over each other. A film loads only when you open its step.',[['#xray-guide--wrj','Wrist'],['#xray-guide--hd','Hand'],['#xray-guide--ankv','Ankle']]],
   ['Dengue follows the 2026 CPG','The Dengue route opens the CPG entry (4th edition), which has a Quick Reference tab. Pregnancy, age 65 and over, and obesity are triaged to Group B1 (MTS level 4, Green), as the Quick Reference prints them. The ebook\'s dengue pathway is kept as printed, with a notice.',[['#dengue-cpg','Dengue CPG']]],
@@ -125,7 +127,7 @@ const NUMS = [
   {g:'Emergencies', hot:true, lbl:'Code Stroke', val:'ext 5999', copy:'ext 5999', note:'Onset under 9 hours. Say CODE STROKE, then the patient\'s name, your location and extension, COVID status and the ETD MO\'s name.', href:'#stroke-tia', link:'CVA and TIA', src:'Code Stroke pathway'},
   {g:'Emergencies', lbl:'ED Resus', val:'ext 5339 / 5326', copy:'ext 5339 / 5326', note:'Amber Zone: ext 5324 / 5360.', src:'MAU critical patient flow'},
   {g:'Admission and follow-up', lbl:'MAU mobile team', val:'ext 6682 / 6684', copy:'ext 6682 / 6684', note:'Office hours. After hours, the same extensions reach the MAU 1 (male), MAU 2 (female) and MAU 3 wards. Phone before you register the admission.', href:'#mau-admission', link:'Admission to MAU', src:'MAU flow chart, 18 Oct 2022'},
-  {g:'Admission and follow-up', lbl:'EMACC follow-up', val:'ext 7040', copy:'03-2615 5555 ext 7040', note:'Call 03-2615 5555 ext 7040 and speak to the EMACC MO in charge.', href:'#emacc', link:'EMACC follow-up', src:'EMACC SOP, 1 Feb 2018'},
+  {g:'Admission and follow-up', lbl:'EMACC follow-up', val:'Counter 10', copy:'Counter 10, the ED Registration Counter', note:'Write the TCA date on the slip hijau and send the patient to Counter 10, the ED Registration Counter (memo (01)24, Jan 2024). EMACC runs 8 am to 3 pm, Monday to Friday. The 2018 SOP\'s line to the EMACC MO, ext 7040, is in no 2026 document.', href:'#emacc', link:'EMACC follow-up', src:'Memo (01)24, Jan 2024'},
   {g:'Admission and follow-up', lbl:'IPR specialist on call', val:'03-4023 2966', copy:'03-4023 2966', note:'For a respiratory patient who meets the IPR transfer criteria: stable, no inotropes, Venturi 40% or less, and none of the exclusions.', href:'#referral-rules--ipr', link:'IPR criteria', src:'IPR admission criteria (triage course folder)'},
   {g:'Admission and follow-up', lbl:'IJN hotline', val:'03-2617 8996', copy:'03-2617 8996', note:'ACS that meets the IJN referral criteria, with the patient\'s consent. Do not promise free treatment.', href:'#acs', link:'ACS pathway', src:'Ebook p12–14; IJN update'},
   {g:'Admission and follow-up', lbl:'MAU FAST clinic', val:'MHKL level 2', note:'8 am to 4:30 pm. For example low-risk chest pain with an ECG copy, or CAP with CURB-65 0–1 with a CXR copy.', href:'#outpatient-referral', link:'Clinic referrals', src:'FAST clinic criteria (draft)'},
@@ -202,7 +204,7 @@ const DRIVE = [
   ['EMWATCH','added','What EM Watch is, who can use it and which conditions it takes. This answers the open EMWATCH question.',[['#em-watch','EM Watch']]],
   ['MAU','added','The 11 admission criteria, the exclusions, the diagnoses MAU considers and how to phone it; the draft MAU FAST and Physician\'s Clinic criteria.',[['#mau-admission','Admission to MAU'],['#outpatient-referral','Clinic referrals']]],
   ['ARDS / ASTHMA','updated','The Asthma Zone flow follows the 13 Nov 2025 memo: you do the final assessment and discharge. Adult and children\'s MDI doses and the patient action plan are added.',[['#asthma-zone','Asthma Zone flow']]],
-  ['YELLOW ZONE','added','The July 2026 patient flow, and where patients go when the zone is full.',[['#yellow-zone','Yellow Zone flow']]],
+  ['YELLOW ZONE','added','The July 2026 patient flow, and where patients go when the zone is full.',[['#yellow-zone--flow','Yellow Zone flow']]],
   ['OSCC','added','Sexual assault, domestic violence, suspected child abuse, and the June 2026 reminders on forms and police reports.',[['#oscc','OSCC']]],
   ['ABG','added','When to run a blood gas, and when not to.',[['#blood-tests--gas','Blood gas']]],
   ['PDN / BLOOD TRANSFUSION','added','The mandatory pre-transfusion checklist (Mar 2026), bedside labelling and why requests are rejected.',[['#blood-tests--gxm','GXM sample'],['#blood-tests--reject','Rejections']]],
@@ -220,7 +222,7 @@ const DRIVE = [
   ['UROLOGY','updated','More reasons for urgent referral, and the discharge bundle for ureteric colic. The acute scrotum flow matches the ebook.',[['#renal-colic','Renal colic']]],
   ['Root files','added','How to import an imaging CD from another hospital. The resus round template is not Green Zone work.',[['#safe-practice--cd','Imaging CDs']]],
   ['GREEN ZONE','checked','The Green Zone Warrior note is already in the guide; nothing new.',[['#gz-rules','Green Zone rules']]],
-  ['EMACC','checked','The 2018 SOP is still the only version. The EMACC video (104 MB) was not opened.',[['#emacc','EMACC']]],
+  ['EMACC','checked','The SOP of 2018. Since 12 Nov 2026 the guide follows the department memo of 11 Jan 2024 for the work process. The EMACC video (104 MB) was not opened.',[['#emacc','EMACC']]],
   ['CLINICAL PATHWAY EDHKL','checked','Version 8.5 is the same file as the ebook this guide is built from.',[]],
   ['SNAKES BITE','unreadable','The Malaysian snakebite guideline is a scanned PDF with no readable text. The snake atlas was not opened.',[]],
   ['PDN: transfusion reaction guide','unreadable','The blood taking and transfusion reaction guide is a picture only.',[]],
@@ -242,9 +244,11 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'Department memos added on 12 Nov 2026 (Green Zone memos and the Yellow Zone menu). Still to confirm: (1) the elderly memo HKL/JK/98/188/3(14)2021 of 12 May 2021 (no IV tramadol over 65; elderly waiting for a primary team in the Yellow Zone): still in force? (2) the POCT memo HKL/JK/98/188/1(24)2023 of 8 Nov 2023 was issued for a reagent shortage: are its limits on stat FBC and ABG still in force? (3) repeat BP, ECG and DXT: memo HKL/JK/98/188/3(9)24 says Bilik 9, the one-way flow note says the Procedure Room: the same room? (4) is the LA OT Google Form (memo HKL/JK/98/188/3(23)22) still the way to book?',
+  'The ED pharmacy drug list (added 12 Nov 2026) is the Emergency Pharmacy\'s list of 14 Apr 2025, with each drug\'s MOH formulary category. Still to confirm: (1) is a later list out? (2) how the ED applies the categories A/KK, A and A* when an MO writes the prescription (the formulary says who may start one; does the EP countersign?); (3) row 72, Gamma Benzene Hexachloride: the scan\'s decimal mark is unclear (read as 0.1%), and the formulary lists only 1%.',
   'EM Watch booking is now in the app from work instruction AK-15 (in force 16 Mar 2026, p12). Still to confirm: its two forms, the Pink Form (Lampiran 1) and the EM WATCH Appointment form (Lampiran 2), which are not attached to the copy seen; and the timing: AK-15 aims to reassess within 48 to 72 hours and to review CT brain reports within 48 hours of discharge, where the department policy (2026, 9.2.1) and the 2023 deck give 1 week; and the deck\'s online prescription against AK-15\'s documents collected at the Record Unit.',
   'Redirection is in the app in part: a primary triage decision by the PPP for Level 5 (9XXX), with a Redirection Slip and the Redirection Book (AK-01, 2026; memo HKL/JK/98/188/3(2)24, 11 Jan 2024; the 2021 policy). Still to confirm: how a Green Zone MO redirects a patient already seen in the consultation room; whether private GPs are included; whether the 2021 hours (0730 to 1930, Monday to Friday), slip and list of Klinik Kesihatan are current; and the redirection procedure AK-01 cites (HKL/JK/PK 0x), which is not in the department\'s folder.',
-  'EMACC booking: the app follows the SOP of 1 Feb 2018 (ext 7040, the EMACC box, 40 a day, first review within 1 week). Memo HKL/JK/98/188/3(01)24 of 11 Jan 2024, which cancels memo (27)22, writes the TCA on the slip hijau and sends the patient to Counter 10: 7.30 am to 3.30 pm, 56 appointments a day, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EMWATCH. Work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge. The department policy (2026, 8.3.3) gives 9 am to 4 pm on working days. No 2026 document prints ext 7040.',
+  'EMACC follows memo HKL/JK/98/188/3(01)24 of 11 Jan 2024 since 12 Nov 2026 (Krishna\'s decision), in place of the SOP of 1 Feb 2018: the TCA on the slip hijau and Counter 10, 7.30 am to 3.30 pm, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EM WATCH; and EMACC runs 8 am to 3 pm, Monday to Friday (Krishna, 12 Nov 2026). Still to confirm: a written source for those hours (the memo prints 7.30 am to 3.30 pm for the MOs, and the department policy, 2026, 8.3.3, 9 am to 4 pm on working days); work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge; no 2026 document prints ext 7040; who EMACC is for still comes from the 2018 SOP; and the ebook\'s "EMACC or EMWATCH in 24 to 48 hours" (for example abdominal pain) against the memo\'s first EMACC visit on day 4 or day 5.',
   'Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents; a 2020 department table gives ext 5137 and 6838), the SCAN team line and the IPR on-call line.',
   'The MERS-CoV case definition, which is not in the PUI file.',
   'The MOH snakebite guideline (2017): Tables 15 and 16 leave four pit vipers and a krait\'s second choice blank, and give no dose for an unidentified bite and no maximum; and in HKL, where an observation-only or post-antivenom patient goes, who arranges the bloods at 5-7 days, the antivenom stock, and the RECS contact. CPG-REVIEW-SNAKEBITE.md.',
@@ -363,6 +367,7 @@ const ICONS = {
   triage:'<path d="M4 9.5 10.5 3H19a1 1 0 0 1 1 1v8.5L13.5 19a1.8 1.8 0 0 1-2.5 0L4 12a1.8 1.8 0 0 1 0-2.5z"/><circle cx="15.5" cy="7.5" r="1.5"/>',
   stetho:'<path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10.5" r="2"/>',
   syringe:'<path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><path d="m4 20 2.4-2.4M10 10.5l3.5 3.5"/>',
+  pill:'<path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7z"/><path d="m8.5 8.5 7 7"/>',
   chair:'<path d="M7 4v8.5h10V20M7 12.5V20M17 12.5V8"/><path d="M5 12.5h14"/>',
   review:'<path d="M14 3.5H7A2 2 0 0 0 5 5.5v13a2 2 0 0 0 2 2h4"/><path d="M8.5 8h6M8.5 11.5h3"/><circle cx="16" cy="15.5" r="3.3"/><path d="m18.5 18 2 2"/>',
   map:'<path d="M4 6.5 9 4l6 2.5L20 4v13.5L15 20l-6-2.5L4 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
@@ -664,6 +669,26 @@ function filmHTML(k){
     `<figcaption>Tap a name to light that part on the film${f.groups ? '; a group opens to its bones' : ''}. The outlines are this guide's own tracing by eye, a teaching aid and not a measurement; where one part runs on into the next, the line between them is a guide, not an edge on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
 }
 if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); });
+/* ================= Department memos (12 Nov 2026, data18.js) =================
+   A memo card on the step that quotes it: its number, date and title as printed, and its own scanned pages
+   (app/memo/<key>-p<N>.webp, with the signature and registration numbers covered), each opened with a tap in the
+   page viewer. Nothing loads before the tap. */
+const memoHTML = k => { const m = MEMOS[k];
+  return `<div class="fig figmemo"><div class="mm-h"><span class="mm-chip">${svg('rule')}Department memo</span><span class="mm-ref">${esc(m.ref)} · ${esc(m.date)}</span></div>
+    <p class="mm-t" lang="ms">${esc(m.t)}</p>
+    <div class="mm-p">${m.pages.map(([n, l]) => `<button type="button" class="pill" data-ppage="memo/${k}-p${n}" data-pname="${esc('Memo ' + m.ref + ' · ' + l)}">${svg('poster')}${esc(l)}</button>`).join('')}<a class="pill" href="${MEMO_LIST}" target="_blank" rel="noopener noreferrer">The department's memo list${svg('ext')}</a></div>
+    <p class="fig-cap">The memo as scanned, a page at a tap: signatures, registration numbers and any incident background are covered. The department's own list holds every memo.</p></div>`; };
+if (typeof MEMOS !== 'undefined') Object.keys(MEMOS).forEach(k => { FIGS['memo-' + k] = () => memoHTML(k); });
+/* On a question or a step the memo card goes below the options, so the question stays at the top of a phone screen */
+const memoFig = n => !!(n.fig && /^memo-/.test(n.fig));
+/* EMACC's first visit (memo HKL/JK/98/188/3(01)24, Lampiran A, 12): why it is day 4 or day 5, as the memo's own timeline draws it */
+FIGS.emtl = () => { const D = [['1', 'The patient is discharged', ''], ['2', '9 am: PPK Rekod sends the X-ray for reporting', ''], ['3', 'X-ray reporting', ''], ['4', '9 am: PPK Rekod collects the reported X-ray. 10 am: missed fracture review by an ED MO. 12 pm to 3 pm: EMACC, urgent cases', 'u'], ['5', 'EMACC, cases that are not urgent (the first appointment)', 'n']];
+  return `<div class="fig figemt"><ol class="emt">${D.map(([d, t, k]) => `<li class="${k}"><b>Day ${d}</b><span>${esc(t)}</span></li>`).join('')}</ol><p class="fig-cap">The first EMACC visit waits for the X-ray report (memo (01)24, Lampiran A, 12).</p></div>`; };
+/* The team leader's room through the day (memo HKL/JK/98/188/3(1)23, Lampiran 1): first and last case of each shift */
+FIGS.tlclock = () => { const R = [['Morning', '8.00 am', '2.00 pm'], ['Afternoon', '3.00 pm', '9.00 pm'], ['Night', '10.00 pm', '7.00 am']];
+  return `<div class="fig figtl" role="img" aria-label="Your room as team leader: cases start at ${R.map(r => r[1]).join(', ')} and the last case comes at ${R.map(r => r[2]).join(', ')}">
+    ${R.map(([s, a, b], i) => `<div class="tl-r" style="--d:${(i * .12).toFixed(2)}s"><b>${s}</b><span class="tl-a"><em>First case</em>${a}</span><span class="tl-bar" aria-hidden="true"><i></i></span><span class="tl-b"><em>Last case</em>${b}</span></div>`).join('')}
+    <p class="fig-cap">Your room as team leader: when its cases start and when the last one comes. After the last case, share out the unseen cases.</p></div>`; };
 /* ================= The 3D abdomen map (12 Nov 2026) =================
    The handbook's nine regions (p. 7) on a glass torso rendered with Blender for this guide (sources/abdo/abdo3d.blend): the front
    view first (abdo3d/poster.webp), the patient's right on the screen's left, labelled. Tap a region to light it and see what to
@@ -869,6 +894,8 @@ function search(q, loose){
       if (inB) s += 1;
     }
     if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
+    /* An ED pharmacy drug comes after the pathways, rules and guidelines that mention it (the list keeps its own order) */
+    if (e.kind === 'Drug') s = Math.min(s, 1);
     return {e, s};
   }).filter(Boolean).sort((a, b) => b.s - a.s).slice(0, 14).map(r => r.e);
 }
@@ -932,7 +959,7 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose){
-  return `<li><a href="${e.href}" role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -969,7 +996,7 @@ function closePal(restore){
 }
 
 /* ================= Views ================= */
-const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide'};
+const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
 /* A topic or group tile filters the list under it. On a phone the tiles fill the screen, so the list comes up to meet the
@@ -1079,7 +1106,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -1321,7 +1348,7 @@ function card(n, p){
   }
   if (n.step){
     const obs = n.kind === 'observe';
-    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig ? figHTML(n.fig) : ''}${list(n.items)}
+    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) ? figHTML(n.fig) : ''}
       <div class="opts"><button type="button" class="opt sugg" data-next><kbd>1</kbd><span>Done, continue</span>${svg('chev', 'gt')}</button></div></div></div>`;
   }
   const sc = n.check === 'score';
@@ -1330,8 +1357,8 @@ function card(n, p){
     n.items.map((i, k) => `<li><label><input type="checkbox" id="c${k}"><span>${sc ? esc(i[0]) + ` <b class="pts">(${pts(i[1])})</b>` : esc(i)}</span></label></li>`).join('') + '</ul>' + (sc ? '<p class="score">Score <b id="scv">0</b></p>' : '') : '';
   const info = n.info ? '<ul class="info">' + n.info.map(i => `<li>${esc(i)}</li>`).join('') + '</ul>' : '';
   return `<div class="stack"><div class="qc"><h2>${esc(n.q)}</h2>
-    ${n.hint ? `<p class="hint">${esc(n.hint)}</p>` : ''}${n.fig ? figHTML(n.fig) : ''}${info}${checks}
-    <div class="opts">${n.opts.map(([l], k) => `<button type="button" class="opt" data-go="${k}">${k < 9 ? `<kbd>${k + 1}</kbd>` : ''}<span>${esc(l)}</span>${svg('chev', 'gt')}</button>`).join('')}</div></div></div>`;
+    ${n.hint ? `<p class="hint">${esc(n.hint)}</p>` : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${info}${checks}
+    <div class="opts">${n.opts.map(([l], k) => `<button type="button" class="opt" data-go="${k}">${k < 9 ? `<kbd>${k + 1}</kbd>` : ''}<span>${esc(l)}</span>${svg('chev', 'gt')}</button>`).join('')}</div>${memoFig(n) ? figHTML(n.fig) : ''}</div></div>`;
 }
 function wireChecks(n){
   const boxes = $$('#cur .checks input'), btns = $$('#cur button.opt');
@@ -2713,6 +2740,44 @@ function renderLinks(){
     <ul class="lk-l">${g.items.map(it => `<li><a class="lk" href="${esc(it.u)}" target="_blank" rel="noopener noreferrer"><span class="lk-i">${svg(LK_IC[it.k] || 'link')}</span><span class="lk-t"><b>${esc(it.t)}</b>${it.d ? `<small>${esc(it.d)}</small>` : ''}${g.k === 'net' ? `<code class="lk-u">${esc(lkHost(it.u))}</code>` : ''}</span><span class="lk-k">${esc(it.k)}</span>${svg('ext')}</a>${g.k === 'net' ? `<button type="button" class="cpy" data-lcopy="${esc(it.u)}" aria-label="Copy the address of ${esc(it.t)}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</li>`).join('')}</ul></section>`).join('')
     : '<p class="empty">No link matches. Try a form, a system or a folder.</p>';
 }
+/* ================= The ED pharmacy drug list (12 Nov 2026, data19.js) =================
+   The Emergency Pharmacy's own list as printed, found as you type, with each drug's prescriber category in the MOH
+   Medicines Formulary and a link to the formulary's own entry. A category says who may start the prescription
+   (MOH Pharmaceutical Services Programme): B and C include medical officers; A/KK, A and A* are for specialists. */
+const RX_TIER = c => !c ? 'no' : /^(B|C\+?)$/.test(c) ? 'mo' : 'sp';
+const RX_TILE = () => TILE_KEYS.has('pharm') ? 'pharm' : 'doses';
+/* Who may start (initiate) the prescription, as the MOH Pharmaceutical Services Programme's MOHMF page defines each category */
+const RX_DEF = {'A*':'consultants and specialists, for specific indications only', 'A':'consultants and specialists', 'A/KK':'consultants, specialists and family medicine specialists', 'B':'medical officers, as well as specialists', 'C':'paramedics and medical officers, as well as specialists', 'C+':'paramedics doing midwifery too'};
+const rxGeneric = t => t.split(/\s(?=\d)|,\s|\s&\s|\s\(/)[0].trim();
+let rxF = 'all';
+function renderRx(){
+  if (typeof EDRX === 'undefined') return;
+  const q = ($('#rxq').value || '').trim().toLowerCase(), all = EDRX.items, cnt = t => all.filter(i => RX_TIER(i[2]) === t).length;
+  $('#rxf').innerHTML = [['all', 'All'], ['mo', 'MO may start'], ['sp', 'Specialist categories'], ['no', 'Not in the formulary']].map(([k, t]) => `<button type="button" data-rf="${k}" aria-pressed="${rxF === k}">${t} <span class="n">${k === 'all' ? all.length : cnt(k)}</span></button>`).join('');
+  const hits = all.filter(i => (rxF === 'all' || RX_TIER(i[2]) === rxF) && (!q || i[1].toLowerCase().includes(q)));
+  const L0 = i => i[1][0].toUpperCase(), letters = [...new Set(hits.map(L0))];
+  $('#rxaz').innerHTML = hits.length > 12 ? letters.map(L => `<button type="button" data-rl="${L}" aria-label="Drugs starting with ${L}">${L}</button>`).join('') : '';
+  $('#rxn').textContent = q || rxF !== 'all' ? `${hits.length} of ${all.length} drugs` : `${all.length} drugs, in the list's own order`;
+  const re = q ? new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
+  const hl = s => re ? s.split(re).map((x, k) => k % 2 ? `<mark>${esc(x)}</mark>` : esc(x)).join('') : esc(s);
+  const tip = c => !c ? 'Not found in the formulary\'s public list at this strength or form' : `MOH formulary category ${c}${RX_DEF[c] ? ': ' + RX_DEF[c] : ', by indication'}`;
+  $('#rxl').innerHTML = hits.length ? letters.map(L => `<section class="phx-g" id="rx-${L}"><h2>${L}</h2><ul class="phx-l">${hits.filter(i => L0(i) === L).map(([n, t, c, u, note]) => `<li class="phx" data-rxn="${n}"><span class="phx-t"><b>${hl(t)}</b>${note ? `<small>${esc(note)}</small>` : ''}</span><span class="phx-b ${RX_TIER(c)}" title="${esc(tip(c))}"><span class="vh">${esc(tip(c))}. </span><span aria-hidden="true">${c ? esc(c) : '·'}</span></span>${u ? `<a class="phx-go" href="${esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(t)} in the MOH formulary">${svg('ext')}</a>` : '<span aria-hidden="true"></span>'}</li>`).join('')}</ul></section>`).join('')
+    : '<p class="empty">No drug on the ED pharmacy\'s list of 14 Apr 2025 matches. Ask the pharmacy, or check the MOH formulary.</p>';
+}
+function renderRxStatic(){
+  if (typeof EDRX === 'undefined') return;
+  const all = EDRX.items, n = all.filter(i => i[2]).length;
+  withTiles($('#rxhero'), `${tileMedia(RX_TILE())}<span class="lbl">Jabatan Farmasi HKL · 14 Apr 2025</span><h2>${all.length} drugs on the ED list</h2><p>${n} with their MOH formulary category. Tap ${svg('ext')} for the formulary's own entry.</p>`);
+  $('#rxcats').innerHTML = `<div class="phx-c"><b><span class="phx-b mo">B · C</span>MO may start</b>B: medical officers and specialists. C and C+: paramedics too.</div>
+    <div class="phx-c"><b><span class="phx-b sp">A/KK · A</span>Specialist</b>A/KK: consultants, specialists and family medicine specialists. A: consultants and specialists. A*: specialists, for specific indications only.</div>
+    <div class="phx-c"><b><span class="phx-b no">·</span>Not found</b>Not in the formulary's public list at the strength or form printed here.</div>`;
+  $('#rxsrc').innerHTML = `Source: ${esc(EDRX.src)}, a department document: ${all.length} drugs, names and strengths as printed. Categories: the <a href="https://pharmacy.moh.gov.my/en/documents/ministry-health-medicines-formulary-mohmf.html" target="_blank" rel="noopener noreferrer">MOH Medicines Formulary</a> (who may start a prescription), matched by name and strength in its MyFormulary data of 5 Nov 2026; where the formulary prints a different form or strength, the drug says so. The formulary is the authority: open its entry before you prescribe. Indications and doses are not copied here.`;
+}
+function renderToolsRx(){
+  if (typeof EDRX === 'undefined' || !$('#trx')) return;
+  const all = EDRX.items, c = t => all.filter(i => RX_TIER(i[2]) === t).length;
+  withTiles($('#trx'), `${tileMedia(RX_TILE())}<div class="row"><span class="ic">${svg('pill')}</span><h2>ED pharmacy drug list</h2><span class="tag">${all.length}</span></div><p>Is it on the Emergency Pharmacy's list, and who may start it? The list of 14 Apr 2025, with the MOH formulary categories.</p><ul class="gl"><li><span>MO may start</span><b>${c('mo')}</b></li><li><span>Specialist</span><b>${c('sp')}</b></li><li><span>Not found</span><b>${c('no')}</b></li></ul><span class="go-l">Open the list${svg('chev')}</span>`);
+}
 function renderToolsLinks(){
   withTiles($('#tlk'), `${tileMedia('links')}<div class="row"><span class="ic">${svg('link')}</span><h2>ED links</h2><span class="tag">${LINKS.reduce((a, g) => a + g.items.length, 0)}</span></div><p>The department's forms, hospital systems and folders, from the ETD HKL link page.</p><ul class="gl">${LINKS.map(g => `<li><span>${esc(g.h)}</span><b>${g.items.length}</b></li>`).join('')}</ul>`);
   /* Reading X-rays (11 Nov 2026): the tile lists the films from the guide's own start menu, so it never drifts from the entry */
@@ -3293,7 +3358,7 @@ function route(){
   if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'links', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
+  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
   else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
     if (id && id !== calcTab){ calcTab = id; renderCalc(); }
@@ -3320,12 +3385,18 @@ $('#cnt-path').textContent = Object.keys(P).length;
 $('#cnt-rule').textContent = FLOW_IDS.length + PROT_IDS.length;
 $('#cnt-calc').textContent = Object.keys(CALCS).length;
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
-renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks();
+renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks(); renderRxStatic(); renderRx(); renderToolsRx();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
 $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
 IDX.push({href:'#links', title:'ED links', kind:'Tool', meta:'Forms, hospital systems and folders', body:'linktree ETD HKL link page forms hospital systems intranet folders ' + LINKS.flatMap(g => g.items.map(it => it.t + ' ' + it.d)).join(' · '), ic:'link', c:'c-flow'});
 LINKS.forEach(g => g.items.forEach(it => IDX.push({href:'#links', title:it.t, kind:'Link', meta:'ED links · ' + g.h, body:[it.d, it.k, g.h].join(' · '), ic:'link', c:'c-flow'})));
+/* the ED pharmacy list: the page, and each drug by its generic name (all strengths together), opening the list on it */
+if (typeof EDRX !== 'undefined'){
+  IDX.push({href:'#pharmacy', title:'ED pharmacy drug list', kind:'Tool', meta:'What the Emergency Pharmacy supplies, with the MOH formulary categories', body:'pharmacy farmasi ubat drug list stock available discharge prescription formulary FUKKM category ' + EDRX.items.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta'});
+  const G = {}; EDRX.items.forEach(i => { const g = rxGeneric(i[1]); (G[g] = G[g] || []).push(i); });
+  Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
+}
 renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderInstall();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
@@ -3404,6 +3475,13 @@ $('#run').addEventListener('keydown', e => {
 /* Tools and numbers */
 $('#nums').addEventListener('click', e => { const b = e.target.closest('button[data-copy]'); if (b){ const i = +b.dataset.copy; copyText(NUMS[i].copy, {btn:b, el:$('#nv' + i)}); } });
 $('#lkq').addEventListener('input', renderLinks);
+/* The ED pharmacy list: find as you type, filter by category, jump to a letter; a drug found by search opens the list on it */
+$('#rxq').addEventListener('input', renderRx);
+$('#rxf').addEventListener('click', e => { const b = e.target.closest('[data-rf]'); if (b){ rxF = b.dataset.rf; renderRx(); const nb = $(`#rxf [data-rf="${rxF}"]`); if (nb) nb.focus(); } });
+$('#rxaz').addEventListener('click', e => { const b = e.target.closest('[data-rl]'); if (b){ const s = document.getElementById('rx-' + b.dataset.rl); if (s) s.scrollIntoView({block:'start'}); } });
+const rxFrom = a => { if (a && a.dataset.rx){ rxF = 'all'; $('#rxq').value = a.dataset.rx; renderRx(); } };
+$('#palbody').addEventListener('click', e => rxFrom(e.target.closest('a[data-rx]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) rxFrom(palLinks()[palSel]); }, true);
 $('#lkf').addEventListener('click', e => { const b = e.target.closest('[data-lf]'); if (b){ lkF = b.dataset.lf; renderLinks(); const nb = $(`#lkf [data-lf="${lkF}"]`); if (nb) nb.focus(); } });
 $('#lnks').addEventListener('click', e => { const b = e.target.closest('[data-lcopy]'); if (b) copyText(b.dataset.lcopy, {btn:b, el:b.closest('li').querySelector('.lk-u'), ok:'Copied'}); });
 

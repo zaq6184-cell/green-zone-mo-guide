@@ -124,6 +124,68 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await q.locator('#ptab #advlist li').count() === 6 && await q.locator('#ptab .lsn[data-read="abdo-script-ms"]').count() === 1 && !seen.some(u => /abdo-script-ms/.test(u)), 'the Malay script tab has its six lines and a Listen bar, and its sound has not loaded');
     ok(await q.evaluate(() => P['abdo-handbook'].nodes.fk3.items.every(i => !/not an indication for antibiotics/.test(i)) && /Left out or changed/.test(P['abdo-handbook'].nodes.fk3.gap) && !/two IV lines/.test(P['abdo-handbook'].nodes.stab.items.join(' '))), 'the lines the source check could not confirm are left out, and their nodes say so');
     await q.close(); }
+  // The department memos (12 Nov 2026): Green Zone memo steps, the Yellow Zone menu, memo cards whose pages load only on a tap
+  { const q = await p.context().newPage(); const seen = []; q.on('request', r => { const u = r.url(); if (/\/memo\//.test(u)) seen.push(u.replace(/^.*?\/memo\//, 'memo/')); });
+    const base = p.url().split('#')[0];
+    await q.goto(base + '#gz-rules'); await q.waitForTimeout(700);
+    const gopts = await q.locator('#run button[data-go]').allInnerTexts();
+    ok(gopts.some(t => /Team leader of the shift/.test(t)) && gopts.some(t => /More department memos/.test(t)), 'the Green Zone rules offer the team leader and the department memos');
+    await q.goto(base + '#gz-rules--gzm'); await q.waitForTimeout(700);
+    ok(await q.locator('#run button[data-go]').count() === 11, 'the Green Zone memo menu has eleven memos');
+    await q.goto(base + '#gz-rules--tl'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => { const o = document.querySelector('#cur .opts'), c = document.querySelector('#cur .figmemo'); return !!o && !!c && !!(o.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING) && c.querySelectorAll('[data-ppage]').length === 2 && /3\(1\)23/.test(c.textContent); }) && seen.length === 0, 'the team leader step shows its memo card below the options, with two pages and none loaded');
+    for (const b of await q.locator('#cur .checks input').all()) await b.check();
+    ok(await q.evaluate(() => document.querySelector('#cur button.opt[data-go="0"]').classList.contains('sugg')), 'ticking the three start-of-shift checks suggests running the shift');
+    await q.locator('#cur button.opt[data-go="0"]').click(); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => document.querySelectorAll('#cur .figtl .tl-r').length === 3 && /2\.00 pm/.test(document.querySelector('#cur .figtl').textContent) && /7\.00 am/.test(document.querySelector('#cur .figtl').textContent)), 'the shift chart shows the three shifts, with the first and last case');
+    await q.goto(base + '#yellow-zone'); await q.waitForTimeout(700);
+    ok(await q.locator('#run button[data-go]').count() === 10, 'the Yellow Zone opens on its menu of ten');
+    await q.goto(base + '#yellow-zone--flow'); await q.waitForTimeout(600);
+    ok(await q.evaluate(() => /Aliran pesakit di Zon Kuning/.test(document.querySelector('#cur').textContent)), 'the old Yellow Zone flow link still opens the flow');
+    await q.goto(base + '#yellow-zone--cvcb'); await q.waitForTimeout(700);
+    ok(await q.locator('#cur .checks input').count() === 21, 'the CVC care bundle lists its 21 critical steps');
+    await q.locator('#cur [data-ppage="memo/2022-09-p2"]').click(); await q.waitForTimeout(800);
+    const st = await q.evaluate(() => ({open:!document.querySelector('#lb').hidden, src:document.querySelector('#lbimg').getAttribute('src'), ok:document.querySelector('#lbimg').naturalWidth > 0}));
+    ok(st.open && st.src === 'memo/2022-09-p2.webp' && st.ok && seen.length === 1, 'a memo page opens full size on a tap, and only then loads' + (st.ok && seen.length === 1 ? '' : ' ' + JSON.stringify({st, seen})));
+    await q.keyboard.press('Escape'); await q.waitForTimeout(150);
+    const mf = await q.evaluate(() => Object.entries(MEMOS).flatMap(([k, m]) => m.pages.map(([n]) => `memo/${k}-p${n}.webp`)));
+    const onDisk = fs.readdirSync(path.join(__dirname, '..', 'app', 'memo')).map(f => 'memo/' + f).sort();
+    ok(mf.length === 41 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos, and nothing else (' + onDisk.length + ' on disk)');
+    ok(await q.evaluate(() => { const d = document.createElement('div'); d.innerHTML = FIGS['memo-2022-19'](); const a = d.querySelector('a.pill'); return !!a && a.href === MEMO_LIST && a.target === '_blank'; }), 'each memo card links to the department\'s own memo list');
+    // EMACC follows memo (01)24 of 11 Jan 2024 (Krishna, 12 Nov 2026)
+    await q.goto(base + '#emacc--need'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => /blood result/i.test(document.querySelector('#cur').textContent) && !!document.querySelector('#cur .figmemo') && /3\(01\)24/.test(document.querySelector('#cur .figmemo').textContent)), 'EMACC asks what the follow-up reviews, with the 2024 memo');
+    await q.goto(base + '#emacc--bku'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => /day 4/.test(document.querySelector('#cur h2, #cur h3') ? document.querySelector('#cur').textContent : '') && document.querySelectorAll('#cur .emt li').length === 5 && /Counter 10/.test(document.querySelector('#cur').textContent) && !/ext 7040|EMACC box/.test(document.querySelector('#cur').textContent)), 'an urgent EMACC booking is day 4 at the earliest, at Counter 10, with the memo\'s timeline, and no 2018 booking line');
+    ok(await q.evaluate(() => !P['emacc'].nodes.book && NUMS.some(n => n.lbl === 'EMACC follow-up' && n.val === 'Counter 10')), 'the 2018 booking step is gone, and Numbers sends EMACC to Counter 10');
+    ok(await q.evaluate(() => Object.keys(P).every(id => Object.values(P[id].nodes).every(n => !n.fig || !/^memo-/.test(n.fig) || !!MEMOS[n.fig.slice(5)]))), 'every memo card points to a memo');
+    await q.goto(base + '#missed-fractures--mf1'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => /Does it show a fracture/.test(document.querySelector('#cur h2').textContent)), 'missed fractures has the department memo\'s flow');
+    await q.close(); }
+  // The ED pharmacy drug list (12 Nov 2026): 155 drugs as printed, found as you type, filtered by formulary category, reached from search
+  { const q = await p.context().newPage(); const base = p.url().split('#')[0];
+    await q.goto(base + '#pharmacy'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => document.querySelectorAll('#rxl .phx').length === 155 && EDRX.items.length === 155 && EDRX.items.every((i, k) => i[0] === k + 1) && document.querySelector('#rxl .phx b').textContent === 'Acetylsalicylic Acid 100mg, Glycine 45mg Tablet' && document.querySelectorAll('#rxl .phx b')[154].textContent === 'Zinc Oxide, Benzyl Benzoate & Balsam Peru Suppository'), 'the ED pharmacy page lists the 155 drugs as printed, first to last');
+    const chips = await q.locator('#rxf button').allInnerTexts();
+    ok(chips.join('|').replace(/\s+/g, ' ') === 'All 155|MO may start 113|Specialist categories 28|Not in the formulary 14', 'the category filters count 155, 113, 28 and 14 (' + chips.join(', ') + ')');
+    await q.locator('#rxq').fill('amox'); await q.waitForTimeout(150);
+    ok(await q.evaluate(() => { const r = [...document.querySelectorAll('#rxl .phx')]; return r.length === 2 && r.every(x => x.querySelector('mark')) && r[1].querySelector('.phx-b').textContent.includes('B') && /^https:\/\/pharmacy\.moh\.gov\.my\/en\/apps\/fukkm\?generic=/.test(r[1].querySelector('a.phx-go').href) && r[1].querySelector('a.phx-go').target === '_blank'; }), 'finding "amox" leaves two drugs, highlighted, each with its category and a link to the MOH formulary');
+    await q.locator('#rxq').fill(''); await q.locator('#rxf [data-rf="no"]').click(); await q.waitForTimeout(150);
+    ok(await q.evaluate(() => document.querySelectorAll('#rxl .phx').length === 14 && !document.querySelector('#rxl a.phx-go')), 'Not in the formulary shows the 14, with no formulary link');
+    await q.locator('#rxf [data-rf="all"]').click(); await q.waitForTimeout(150);
+    await q.locator('#rxaz [data-rl="T"]').click(); await q.waitForTimeout(600);
+    ok(await q.evaluate(() => { const s = document.getElementById('rx-T').getBoundingClientRect(); return s.top < innerHeight / 2 && s.top > -10; }), 'the letter T jumps to the drugs starting with T');
+    ok(await q.evaluate(() => /14 Apr 2025/.test(document.querySelector('#rxsrc').textContent) && document.querySelectorAll('#rxcats .phx-c').length === 3), 'the source line gives the list\'s date, and the three categories are explained');
+    ok(await hscroll(q) <= 0, 'the pharmacy page has no sideways scroll');
+    await q.goto(base + '#tools'); await q.waitForTimeout(600);
+    ok(await q.evaluate(() => { const t = document.querySelector('#trx'); return !!t && t.getAttribute('href') === '#pharmacy' && /155/.test(t.textContent); }), 'Shift tools has the ED pharmacy tile');
+    await q.goto(base + '#search'); await q.waitForTimeout(500);
+    await q.keyboard.type('celecoxib'); await q.waitForTimeout(400);
+    ok(await q.evaluate(() => { const a = [...document.querySelectorAll('#palbody a')]; const k = a.findIndex(x => x.dataset.rx === 'Celecoxib'); return k > 0 && a[k].getAttribute('href') === '#pharmacy' && !a[0].dataset.rx; }), 'searching a drug offers it on the ED pharmacy list, after the pathways that mention it');
+    await q.locator('#palbody a[data-rx="Celecoxib"]').click(); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => location.hash === '#pharmacy' && document.querySelector('#rxq').value === 'Celecoxib' && document.querySelectorAll('#rxl .phx').length === 1), 'opening it shows the list filtered to that drug');
+    await q.close(); }
+  if (guardRe('pharmacy')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(EDRX) + document.body.textContent), guardRe('pharmacy')), 'no name or registration number of the pharmacists who signed the list is copied');
   ok(await p.evaluate(() => { const on = ['#t-paths', '#t-rules', '#t-dc', '#t-calc', '#t-intro', '#tl-tip'].map(s => document.querySelector(s + ' .tm')).filter(el => { const r = el.getBoundingClientRect(); return (Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height >= .5; }); return on.length > 0 && on.every(el => el.querySelector('video')); }), 'the home tiles on screen start their loops');
   await p.screenshot({path:out + '/d-home.png'});
   await p.click('#zmap [data-zs="3"]'); await p.waitForTimeout(250);
@@ -732,6 +794,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => { const n = document.querySelector('#cur .cc .cc-n'), c = n && n.closest('.cc'); return !!n && getComputedStyle(n).color !== getComputedStyle(c).backgroundColor && getComputedStyle(c.querySelector('.cc-t b')).color !== getComputedStyle(c).backgroundColor; }), 'the colour codes outcome shows each code and extension (not white on white)');
   ok(await p.evaluate(() => document.querySelectorAll('#cur .cc').length === 6 && !document.querySelector('#cur .res-b > ul.ticks') && /6000/.test(document.querySelector('#cur .cc.orange').textContent) && P['code-blue'].nodes.codes.items.length === 6), 'the colour codes show as six cards (Code Orange on 6000), with the list kept for Copy outcome');
   ok(await p.evaluate(() => [...document.querySelectorAll('#ptab [role="tab"]')].map(t => t.textContent).join('|') === 'Who covers where|Team and kit|Record|Bystander poster|Emergency codes|References'), 'Code Blue\'s tabs: who covers where, team and kit, record, bystander poster, emergency codes, references');
+  if (guardRe('memos')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('memos')), 'no signer, staff name, registration or phone number from the department memos is copied');
   if (guardRe('codeblue')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P['code-blue']) + JSON.stringify(P['interpreter']) + document.body.textContent), guardRe('codeblue')), 'no person in charge, signer or registration number is copied');
   ok(await p.evaluate(() => NUMS[0].href === '#code-blue' && NUMS.some(n => n.val === 'ext 6000') && NUMS.some(n => n.val === 'ext 5441') && NUMS.some(n => n.href === '#interpreter' && n.val === 'Line 0') && find('translator').r[0].href === '#interpreter'), 'Numbers carry the colour codes and the interpreter line; the Code Blue number opens the new entry; a search for translator finds the interpreters');
 

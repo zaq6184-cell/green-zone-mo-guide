@@ -37,7 +37,7 @@
   G.nodes.sepsis = {end:'admit', title:'Sepsis found in the Green Zone: uptriage to the Yellow or Red Zone', items:[
     '"Pesakit-pesakit yang diberi diagnosis Sepsis di Zon Hijau hendaklah di Uptriage ke Zon Kuning atau Zon Merah (mengikut keadaan pesakit) untuk rawatan dan pemeriksaan lanjut"',
     'In English: a patient diagnosed with sepsis in the Green Zone is uptriaged to the Yellow Zone or the Red Zone, by the patient\'s condition, for further treatment and examination'],
-    gap:'Source: memo HKL/JK/98/188/3(9)24, 30 May 2024, paragraph 2.3.1, issued after a patient death in the Green Zone; effective immediately. The memo does not define sepsis or give criteria for it.'};
+    gap:'Source: memo HKL/JK/98/188/3(9)24, 30 May 2024, paragraph 2.3.1; effective immediately. The memo does not define sepsis or give criteria for it.'};
 
   /* 3, with 5. Before you admit, discharge or transfer: the corrected date of memo (10)24, and the 48-hour EM Watch rule */
   G.nodes.reas.items.push('Neuromedical cases that need a CT brain review: give the EMWATCH appointment within 48 hours, to pick up a fracture or brain bleed missed at the first examination (memo HKL/JK/98/188/3(21)23, 10 Oct 2023)');
@@ -158,7 +158,7 @@
   R.nodes.fbt = {end:'refer', title:'Foreign body in the throat: refer to the ORL MO on call', items:[
     '"semua kes benda asing di tekak (foreign body in throat) wajib dirujuk kepada Pegawai Perubatan Atas Panggilan Jabatan Otorinologi untuk pemeriksaan lanjut"',
     'In English: every foreign body in the throat must be referred to the on-call MO of the Otorhinolaryngology (ORL) Department for further examination'],
-    gap:'Source: memo HKL/JK/98/188/3(5)24, 12 Mar 2024, from the Deputy Head of Department II, after the department\'s Mortality and Morbidity meeting report no. 5/2024 (23 Feb 2024); effective immediately. The memo gives no examples, age limit or first examination.'};
+    gap:'Source: memo HKL/JK/98/188/3(5)24, 12 Mar 2024, from the Deputy Head of Department II; effective immediately. The memo gives no examples, age limit or first examination.'};
   R.nodes.orthoc.items.push(
     'LA OT, the decision: the orthopaedic MO on call decides the treatment within 2 hours of the referral. If not, call them again to speed it; the 2024 congestion plan has the EP make that call (memo (8)22, May 2022, 2.2; memo (17)24, 12 Nov 2024)',
     'LA OT, the theatre: the emergency OT takes orthopaedic cases from 8 am to 9 pm only. The patient is called through the Google Sheet within 6 hours of the orthopaedic MO\'s examination (department policy 2026, 22.3.3 to 22.3.5, p57 to 58; it names the medical officer, which the guide owner confirmed on 10 Nov 2026 is the orthopaedic MO)',

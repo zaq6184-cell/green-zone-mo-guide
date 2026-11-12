@@ -16,6 +16,18 @@ Still to confirm with the department (the app lists them under Still to confirm 
 - Pneumonia and cellulitis, p27 and p30: "Manage as outpatient**" has no footnote for its two asterisks.
 - Five lines of narrated discharge advice are a few words short of the print and were left as recorded, so the voice and the text still match: mild head injury ("must be accompanied", "plenty of rest", "Don't drive alone"), dengue ("If possible" before the mosquito repellent line) and hypoglycaemia ("confusion", "with or without symptoms"). Re-record them, or leave them?
 
+**Department memos for the Green and Yellow Zones (`data18.js`, added 12 Nov 2026).** Twenty-two memos from the department's memo index went in as department notes (`MEMO-RUN-THROUGH.md`, on this PC only). Krishna decided the same day that EMACC follows memo HKL/JK/98/188/3(01)24 of 11 Jan 2024, and that the memos' incident background is covered. Still to confirm with the department (also in the app):
+- The elderly memo HKL/JK/98/188/3(14)2021 of 12 May 2021 (no IV tramadol over 65; elderly waiting for a primary team placed in the Yellow Zone): still in force?
+- The POCT memo HKL/JK/98/188/1(24)2023 of 8 Nov 2023 was issued for a reagent shortage, with no end date: are its limits on stat FBC and ABG still in force?
+- Repeat BP, ECG and DXT: memo HKL/JK/98/188/3(9)24 says Bilik 9; the one-way flow note says the Procedure Room. The same room?
+- Is the LA OT Google Form (memo HKL/JK/98/188/3(23)22) still the way to book?
+- EMACC (decided: the guide follows memo (01)24 of 2024; and EMACC runs 8 am to 3 pm, Monday to Friday, Krishna's instruction of 12 Nov 2026). Still open: a written source for those hours (the memo prints 7.30 am to 3.30 pm for the MOs, the 2026 policy, 8.3.3, 9 am to 4 pm); work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge; no 2026 document prints ext 7040; who EMACC is for still comes from the 2018 SOP; and the ebook's "EMACC or EMWATCH in 24 to 48 hours" against the memo's first visit on day 4 or day 5.
+
+**The ED pharmacy drug list (`#pharmacy`, `data19.js`, added 12 Nov 2026).** The Emergency Pharmacy's list of 14 Apr 2025 (155 drugs), with each drug's prescriber category in the MOH Medicines Formulary (all 141 matches checked against the formulary's own data). Still to confirm (also in the app):
+- Is a later list out?
+- How does the ED apply the categories A/KK, A and A* when an MO writes the prescription? The formulary says who may start one; does the EP countersign?
+- Row 72, Gamma Benzene Hexachloride: the scan's decimal mark is unclear (read as 0.1%), and the formulary lists only 1%.
+
 **The abdominal pain handbook (`abdo-handbook`, `data16.js`, added 12 Nov 2026).** Krishna's own teaching handbook, made with AI, admitted on 12 Nov 2026 "checked, as printed": quoted with its page, every number checked against the source it cites (`sources/abdo/SOURCE-CHECK.md`, `ABDO-REVIEW.md`). Where it differs from the ebook (still to confirm with the department, also in the app):
 
 - Follow-up of non-specific abdominal pain: the handbook (p22, after RCEMLearning) gives a time-bound review "often within 12-24 h if unresolved"; the ebook (p11) gives EMACC or EMWATCH in 24 to 48 hours (and the department note on the pathway, EMACC within 3 days).

@@ -921,6 +921,37 @@ button.opt.sugg .gt{color:var(--mint)}
 .lk-g.net .lk-i{background:var(--surface-3);color:var(--ink-2)}
 .lk-note{margin:4px 2px 0;font-size:.8rem;line-height:1.4;color:var(--muted)}
 @media (max-width:480px){.lk{grid-template-columns:32px minmax(0,1fr) 15px;gap:9px}.lk-k{display:none}.lk-i{width:32px;height:32px}}
+/* ---------- The ED pharmacy drug list (12 Nov 2026) ---------- */
+.phx-hero{min-height:136px;justify-content:flex-end;gap:4px;margin:0 0 14px}
+.phx-hero .lbl{font:800 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.94)}
+.phx-hero h2{margin:0;font:800 1.25rem/1.2 var(--display);color:#fff}
+.phx-hero p{margin:0;max-width:min(38ch,60%);font-size:.84rem;line-height:1.35;color:rgba(255,255,255,.86)}
+.phx-hero .tm img,.phx-hero .tm video{left:auto;width:64%}
+.phx-hero .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
+.phx-kh{margin:18px 2px 8px;font:800 1rem/1.2 var(--display)}
+.phx-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 12px}
+.phx-c{display:grid;gap:3px;align-content:start;padding:9px 10px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);font-size:.74rem;line-height:1.3;color:var(--muted)}
+.phx-c b{display:flex;align-items:center;gap:6px;font:800 .78rem/1.2 var(--body);color:var(--ink)}
+.phx-b{display:inline-grid;place-items:center;min-width:2.9em;padding:3px 7px;border-radius:999px;font:800 .72rem/1 var(--mono);letter-spacing:.02em;white-space:nowrap}
+.phx-b.mo{background:var(--discharge-soft);color:var(--discharge)}
+.phx-b.sp{background:var(--observe-soft);color:var(--observe)}
+.phx-b.no{background:var(--surface-3);color:var(--muted)}
+.phx-az{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 10px}
+.phx-az button{display:grid;place-items:center;min-width:32px;height:32px;padding:0;border:0;border-radius:9px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink-2);font:800 .8rem/1 var(--body);cursor:pointer}
+.phx-az button:hover{box-shadow:inset 0 0 0 1.5px var(--accent);color:var(--accent)}
+.phx-count{margin:0 2px 8px;font-size:.8rem;color:var(--muted)}
+.phx-g{margin:0 0 12px;padding:12px;border-radius:var(--r-lg);background:var(--pearl);box-shadow:var(--rim),var(--sh-1);scroll-margin-top:84px}
+.phx-g h2{margin:0 0 8px 4px;font:800 1rem/1 var(--display);color:var(--accent)}
+.phx-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.phx{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px;padding:9px 10px 9px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.phx-t{display:grid;gap:2px;min-width:0}
+.phx-t b{font:700 .9rem/1.3 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.phx-t small{font-size:.74rem;line-height:1.3;color:var(--muted)}
+.phx-t mark{background:var(--accent-soft);color:inherit;border-radius:3px;padding:0 1px}
+.phx-go{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--surface-3);color:var(--ink-2)}
+.phx-go svg{width:15px;height:15px}
+.phx-go:hover{color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+@media (max-width:480px){.phx-cats{grid-template-columns:1fr}.phx-c{grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:8px}.phx-c b{grid-row:span 2}}
 /* ---------- Code Blue and the interpreters (10 Nov 2026): figures drawn from the Code Blue Manual and the memo ---------- */
 .fig-cap{margin:8px 2px 0;font-size:.8rem;line-height:1.35;color:var(--muted)}
 .cpy{min-height:36px;padding:6px 11px;font-size:.8rem;border-radius:10px;gap:5px}
@@ -1050,6 +1081,32 @@ button.opt.sugg .gt{color:var(--mint)}
 @media (max-width:420px){.cbc-g{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:14px}.cbc:nth-child(2)::after{display:none}
   .cbk-fork{grid-template-columns:1fr}.cbn.hot .cbn-v{font-size:1.8rem}.sh-t span{font-size:.6rem}.cbs li{grid-template-columns:28px minmax(0,1fr);row-gap:2px}.cbs em{grid-column:2}}
 @media (prefers-reduced-motion:reduce){.cbk-fill,.cbc svg,.ii,.cbm-out>*{animation:none}.cbm-b{transition:none}}
+/* Department memos (data18.js): the memo card and the team leader's shift chart */
+.figmemo{padding:12px 14px;box-shadow:inset 0 0 0 1px var(--line),inset 3px 0 0 var(--refer)}
+.mm-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.mm-chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:999px;background:var(--refer-soft);color:var(--refer);font:800 .7rem/1.4 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.mm-chip .i{width:14px;height:14px}
+.mm-ref{font:600 .78rem/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.mm-t{margin:8px 0 10px;font:700 .92rem/1.35 var(--body);color:var(--ink)}
+.mm-p{display:flex;flex-wrap:wrap;gap:6px}
+.figtl{padding:10px;display:grid;gap:8px}
+.tl-r{display:grid;grid-template-columns:5.6em auto minmax(20px,1fr) auto;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);animation:tlin .5s var(--ease) var(--d) both}
+.tl-r b{font:800 .84rem/1.2 var(--body);color:var(--ink)}
+.tl-a,.tl-b{display:grid;gap:1px;font:700 .95rem/1.15 var(--mono);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tl-a em,.tl-b em{font:800 .62rem/1.2 var(--body);font-style:normal;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.tl-b{text-align:right}
+.tl-bar{height:8px;border-radius:4px;background:var(--surface-3);overflow:hidden}
+.tl-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--b-discharge),var(--b-observe));transform-origin:left;animation:cbk 1.6s var(--ease) var(--d) both}
+@keyframes tlin{from{opacity:0;transform:translateY(6px)}}
+@media (max-width:380px){.tl-r{grid-template-columns:auto minmax(16px,1fr) auto}.tl-r b{grid-column:1/-1}}
+.figemt{padding:10px}
+.emt{list-style:none;margin:0;padding:0;display:grid;gap:6px;position:relative}
+.emt li{display:grid;grid-template-columns:4.2em minmax(0,1fr);gap:10px;align-items:baseline;padding:8px 10px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font-size:.84rem;line-height:1.35;color:var(--ink-2)}
+.emt b{font:800 .8rem/1.2 var(--mono);color:var(--muted);white-space:nowrap}
+.emt li.u{box-shadow:inset 0 0 0 1.5px var(--observe);background:var(--observe-soft)}
+.emt li.n{box-shadow:inset 0 0 0 1.5px var(--discharge);background:var(--discharge-soft)}
+.emt li.u b{color:var(--observe)}.emt li.n b{color:var(--discharge)}
+@media (prefers-reduced-motion:reduce){.tl-r,.tl-bar i{animation:none}}
 @media (max-width:420px){.figwc{grid-template-columns:1fr}.wc{grid-template-columns:72px minmax(0,1fr);column-gap:10px}.wc-sk{grid-row:1/4;margin:0}}
 .out .rxs{grid-column:1/-1;margin-top:10px}
 .rxs .sc-t{margin:0 12px}
@@ -1789,7 +1846,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -1823,6 +1880,21 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <div class="seg" id="lkf" role="group" aria-label="Show a group"></div></div>
         <div id="lnks"></div>
         <p class="lk-note">Left out on purpose: the link page's response registers (Google Sheets that may hold patients' details). Open them from the link page itself.</p>
+      </div></section>
+
+      <!-- ED pharmacy drug list (12 Nov 2026): data19.js, built by src/edrx.js -->
+      <section class="view" data-view="pharmacy" id="v-pharmacy" hidden aria-labelledby="h-pharmacy"><div class="vw">
+        <header class="vhead"><div><h1 id="h-pharmacy">ED pharmacy drug list</h1>
+          <p>What the Emergency Pharmacy supplies, as its own list prints it, with each drug's prescriber category in the MOH Medicines Formulary. Find a drug before you write it on a discharge prescription. Nothing here is stored.</p></div></header>
+        <div class="tile t-emerald phx-hero" id="rxhero"></div>
+        <div class="lk-top"><label class="find"><span data-icon="search"></span><span class="vh">Find a drug</span><input id="rxq" type="search" placeholder="Find a drug, for example amoxicillin" autocomplete="off" spellcheck="false"></label>
+          <div class="seg" id="rxf" role="group" aria-label="Show by prescriber category"></div></div>
+        <nav class="phx-az" id="rxaz" aria-label="Jump to a letter"></nav>
+        <p class="phx-count" id="rxn" aria-live="polite"></p>
+        <div id="rxl"></div>
+        <h2 class="phx-kh">What the categories mean</h2>
+        <div class="phx-cats" id="rxcats"></div>
+        <p class="lk-note" id="rxsrc"></p>
       </div></section>
 
       <!-- First-shift intro -->
@@ -2732,7 +2804,7 @@ P['referral-rules'] = {
 
 /* Existing rule entries: group them and link the answered EM Watch question */
 P['gz-rules'].sub = 'flow';
-P['gz-rules'].see = [['#em-watch','What EM Watch is'],['#mau-admission','Admission to MAU'],['#yellow-zone','Yellow Zone flow']];
+P['gz-rules'].see = [['#em-watch','What EM Watch is'],['#mau-admission','Admission to MAU'],['#yellow-zone--flow','Yellow Zone flow']];
 P['emacc'].sub = 'flow';
 P['emacc'].see = [['#em-watch','EM Watch: telemedicine follow-up'],['#outpatient-referral','MAU FAST and Physician\'s Clinic']];
 P['referral-rules'].sub = 'flow';
@@ -3229,7 +3301,7 @@ P['abdominal-pain'].dept = [
   {h:'Women of reproductive age', src:'KKM circular BPKK KKM.600-30/3/5 Jld.2 (9), 31 May 2018', items:['Record the LMP of every woman of reproductive age','Keep a high suspicion of ectopic pregnancy whatever her marital status, and confirm or exclude it by history, examination and tests']},
   {h:'Before you send the patient home', src:'Million Ringgit Habits, ETD HKL', items:['Examine all 4 quadrants and document the findings; in the right iliac fossa check Rovsing, obturator and psoas signs','Discharge only when the pain score is 0, with a clear diagnosis and safety-net advice','Men: examine the testes. Epigastric pain: ECG ± amylase']}
 ];
-P['abdominal-pain'].see = [['#safe-practice--abd','Abdominal pain habits'],['#emacc','EMACC review within 3 days']];
+P['abdominal-pain'].see = [['#safe-practice--abd','Abdominal pain habits'],['#emacc','EMACC follow-up']];
 
 P['paracetamol-overdose'].dept = [
   {h:'Drug level tubes', src:'TDM PCM, salicylate, BZD (MO Drive, Toxicology)', items:['Paracetamol and salicylate levels: together in 1 plain (red-top) tube','Benzodiazepine level: a separate plain tube']}
@@ -3249,10 +3321,10 @@ P['renal-colic'].see = [['#emacc','EMACC follow-up'],['#em-watch','EM Watch']];
 
 P['pneumonia'].see = [['#infection-alerts--tb','Suspected TB'],['#outpatient-referral','MAU FAST clinic for CURB-65 0–1']];
 P['mild-tbi'].see = [['#gz-rules--reas','CT brain and going home: EP review'],['#safe-practice--cd','Imaging CDs from outside']];
-P['behavioural-disturbance'].see = [['#referral-rules--psy','Psychiatry referral'],['#yellow-zone','Yellow Zone PSY corner']];
+P['behavioural-disturbance'].see = [['#referral-rules--psy','Psychiatry referral'],['#yellow-zone--flow','Yellow Zone PSY corner']];
 P['cellulitis'].see = [['#em-watch','EM Watch takes cellulitis'],['#mau-admission','MAU takes cellulitis']];
 P['asthma'].see = [['#asthma-zone','Asthma Zone flow (Nov 2025)'],['#children--asthma','Children\'s asthma doses']];
-P['hypertensive-urgency'].see = [['#emacc','EMACC within 1 week'],['#em-watch','EM Watch']];
+P['hypertensive-urgency'].see = [['#emacc','EMACC follow-up'],['#em-watch','EM Watch']];
 P['scrotal-pain'].see = [['#safe-practice--abd','Torsion window: 6 hours']];
 
 /* ================= Version 7 additions: the workflow-map documents not yet in the app =================
@@ -5405,7 +5477,7 @@ P['hip-fracture-cpg'] = {
     icu:{end:'refer', title:'Refer and treat accordingly at Intensive Care Unit/High Dependency Unit', items:[
       'Life-threatening medical conditions: refer and treat accordingly at Intensive Care Unit/High Dependency Unit (Algorithm, p x)',
       '*Stable cases i.e. without life-threatening medical conditions; unstable cases should be referred to emergency department (Algorithm, p x)'],
-      links:[['#trauma-walkins','Trauma walk-ins: T-RACS and HIT CT'],['#yellow-zone','Yellow Zone flow']],
+      links:[['#trauma-walkins','Trauma walk-ins: T-RACS and HIT CT'],['#yellow-zone--flow','Yellow Zone flow']],
       gap:'CPG Algorithm (p x). The CPG does not list the life-threatening medical conditions, and names units, not an MTS level or zone. The department\'s uptriage and trauma walk-in rules are linked.'},
 
     /* Chapter 3, Signs and symptoms (p4) */
@@ -6565,7 +6637,7 @@ P['cancer-pain-cpg'] = {
       'No adverse events: pain relief acceptable to patient OR reduction of pain score by 2 points? No: the arrow returns to the next dose. Yes: record total dose of morphine used from the start of titration, then convert to regular 4-hourly morphine',
       '*For patients already on opioids, the bolus dose of morphine should be 10% of the total 24-hour morphine requirement converted to intravenous/subcutaneous equivalent. For elderly, frail or renal impaired patients, use lower dose of the given range',
       '**For details on sedation score, see Appendix 3 in the CPG: the Sedation tab'],
-      links:[['#pain--mp','Ebook: morphine pain protocol (consult EP)'],['#yellow-zone','Yellow Zone flow']],
+      links:[['#pain--mp','Ebook: morphine pain protocol (consult EP)'],['#yellow-zone--flow','Yellow Zone flow']],
       gap:'CPG Algorithm 2 (p xi), adapted from the 2010 CPG. The CPG names no MTS level or zone for it; this guide places repeated IV or SC doses with checks every 5 to 30 minutes above the Green Zone (MTS levels 4 and 5): still to confirm. The algorithm gives no number of doses, no rule to convert the titration total to 4-hourly morphine, and does not define elderly or frail. A sedation score >2 is score 3 only, which Appendix 3 already describes as severe respiratory depression.'},
 
     /* 4.4.5, Opioid rotation (p24–26), Table 4 (p25), Recommendations 5, 8, 9 and 11 */
@@ -7878,7 +7950,7 @@ P['snakebite-moh'] = {
     'Summarised, not reproduced: the guideline states no reuse terms. Read the full guideline for the wording. Its photographs are copyright of their photographers.',
     'Ahmad Khaldun Ismail, Teo Eng Wah, Indraneil Das, Taksa Vasaruchapong and Scott A. Weinstein. Land Snakes of Medical Significance in Malaysia, 2nd edition, July 2017, with the support of the Malaysian Society on Toxinology. ISBN 978-967-0250-26-7. All rights reserved: used for facts only, in the guide\'s own words (the MST book).',
     'Remote Envenomation Consultation Services (RECS): 24-hour phone advice from emergency physicians, named in the guideline (p iii, p vi, p vii, p3, p67) without a contact.'],
-  see:[['#calc-snake20','20-minute whole blood clotting test'],['#calc-snakeav','Antivenom by snake'],['#anaphylaxis','Anaphylaxis (ebook pathway)'],['#animal-bites','Other animal bites and rabies'],['#mau-admission','Admission to MAU: it lists snake bite'],['#referral-rules--med','Admission to General Medicine'],['#yellow-zone','Yellow Zone patient flow'],['#gz-rules--wait','Patients who should not wait outside'],['#children--pat','Where to triage a child']]
+  see:[['#calc-snake20','20-minute whole blood clotting test'],['#calc-snakeav','Antivenom by snake'],['#anaphylaxis','Anaphylaxis (ebook pathway)'],['#animal-bites','Other animal bites and rabies'],['#mau-admission','Admission to MAU: it lists snake bite'],['#referral-rules--med','Admission to General Medicine'],['#yellow-zone--flow','Yellow Zone patient flow'],['#gz-rules--wait','Patients who should not wait outside'],['#children--pat','Where to triage a child']]
 };
 
 /* Links from related entries (links only: their content stays as written). Guarded, so the file also loads on its own. */
@@ -8010,7 +8082,7 @@ P['communication'] = {
       'Score the agitation with BARS (ebook)',
       'Known psychiatric history, a relapse and no other medical problem: refer directly to the Psychiatry MO on call, who should see the patient within 45 minutes',
       'An aggressive patient with a psychiatric history only: the Yellow Zone PSY corner first'],
-      links:[['#behavioural-disturbance', 'Behavioural disturbance pathway'], ['#calc-calm', 'BARS and RASS'], ['#referral-rules--psy', 'Psychiatry referral'], ['#yellow-zone', 'Yellow Zone flow']],
+      links:[['#behavioural-disturbance', 'Behavioural disturbance pathway'], ['#calc-calm', 'BARS and RASS'], ['#referral-rules--psy', 'Psychiatry referral'], ['#yellow-zone--flow', 'Yellow Zone flow']],
       gap:'Sources: the ebook, Acute behavioural disturbance, p5–9; minutes of the ED, Psychiatry and Radiology meeting, 7 Feb 2023; Aliran pesakit di Zon Kuning, 13 Jul 2026 (MO Drive).'},
 
     /* ---- A complaint about the wait: the card's L.E.A.P., then the department's rules on who should not wait ---- */
@@ -8358,7 +8430,7 @@ P['communication'].hero = 'comms';
   G.nodes.sepsis = {end:'admit', title:'Sepsis found in the Green Zone: uptriage to the Yellow or Red Zone', items:[
     '"Pesakit-pesakit yang diberi diagnosis Sepsis di Zon Hijau hendaklah di Uptriage ke Zon Kuning atau Zon Merah (mengikut keadaan pesakit) untuk rawatan dan pemeriksaan lanjut"',
     'In English: a patient diagnosed with sepsis in the Green Zone is uptriaged to the Yellow Zone or the Red Zone, by the patient\'s condition, for further treatment and examination'],
-    gap:'Source: memo HKL/JK/98/188/3(9)24, 30 May 2024, paragraph 2.3.1, issued after a patient death in the Green Zone; effective immediately. The memo does not define sepsis or give criteria for it.'};
+    gap:'Source: memo HKL/JK/98/188/3(9)24, 30 May 2024, paragraph 2.3.1; effective immediately. The memo does not define sepsis or give criteria for it.'};
 
   /* 3, with 5. Before you admit, discharge or transfer: the corrected date of memo (10)24, and the 48-hour EM Watch rule */
   G.nodes.reas.items.push('Neuromedical cases that need a CT brain review: give the EMWATCH appointment within 48 hours, to pick up a fracture or brain bleed missed at the first examination (memo HKL/JK/98/188/3(21)23, 10 Oct 2023)');
@@ -8479,7 +8551,7 @@ P['communication'].hero = 'comms';
   R.nodes.fbt = {end:'refer', title:'Foreign body in the throat: refer to the ORL MO on call', items:[
     '"semua kes benda asing di tekak (foreign body in throat) wajib dirujuk kepada Pegawai Perubatan Atas Panggilan Jabatan Otorinologi untuk pemeriksaan lanjut"',
     'In English: every foreign body in the throat must be referred to the on-call MO of the Otorhinolaryngology (ORL) Department for further examination'],
-    gap:'Source: memo HKL/JK/98/188/3(5)24, 12 Mar 2024, from the Deputy Head of Department II, after the department\'s Mortality and Morbidity meeting report no. 5/2024 (23 Feb 2024); effective immediately. The memo gives no examples, age limit or first examination.'};
+    gap:'Source: memo HKL/JK/98/188/3(5)24, 12 Mar 2024, from the Deputy Head of Department II; effective immediately. The memo gives no examples, age limit or first examination.'};
   R.nodes.orthoc.items.push(
     'LA OT, the decision: the orthopaedic MO on call decides the treatment within 2 hours of the referral. If not, call them again to speed it; the 2024 congestion plan has the EP make that call (memo (8)22, May 2022, 2.2; memo (17)24, 12 Nov 2024)',
     'LA OT, the theatre: the emergency OT takes orthopaedic cases from 8 am to 9 pm only. The patient is called through the Google Sheet within 6 hours of the orthopaedic MO\'s examination (department policy 2026, 22.3.3 to 22.3.5, p57 to 58; it names the medical officer, which the guide owner confirmed on 10 Nov 2026 is the orthopaedic MO)',
@@ -8593,7 +8665,7 @@ P['communication'].hero = 'comms';
     'You, the Green Zone MO, complete the initial clerking and document accordingly in your notes',
     'The slide\'s end point: "PT SAFELY UPTRIAGED"',
     'Involve the EP for prompt intervention if needed'],
-    links:[['#gz-rules--upex', 'The worked example'], ['#yellow-zone', 'Yellow Zone patient flow'], ['#gz-rules--sepsis', 'Sepsis found in the Green Zone'], ['#cbd-2--c1', 'A case: worse after 4 hours of waiting']],
+    links:[['#gz-rules--upex', 'The worked example'], ['#yellow-zone--flow', 'Yellow Zone patient flow'], ['#gz-rules--sepsis', 'Sepsis found in the Green Zone'], ['#cbd-2--c1', 'A case: worse after 4 hours of waiting']],
     gap:src(A, 'slides 23 and 24')};
   G.nodes.upex = {end:'refer', title:'Worked example: post-traumatic pneumothorax, Green Zone to R2', items:[
     'The case: a 21-year-old man, motorbike against car 2 hours ago. Left chest wall pain with mild shortness of breath, speaking in phrases, RR 28, reduced breath sounds on the left, the left chest hyperresonant on percussion. X-ray not done yet',
@@ -9187,7 +9259,7 @@ P['communication'].hero = 'comms';
         'In this case, uptriage is appropriate',
         'Your role as the MO: alert the PPP to repeat the vital signs; alert the PPK to get a trolley or bed; alert the TL of R2 or the Yellow Zone that the patient needs uptriage',
         '"MUTUAL PROMPT ACTION FROM ALL PIHAK": prompt action from everyone, together'],
-        links:[['#gz-rules--uptri', 'Uptriage: think it through, then who to tell'], ['#gz-rules--wait', 'Patients who should not wait outside'], ['#yellow-zone', 'Yellow Zone patient flow']],
+        links:[['#gz-rules--uptri', 'Uptriage: think it through, then who to tell'], ['#gz-rules--wait', 'Patients who should not wait outside'], ['#yellow-zone--flow', 'Yellow Zone patient flow']],
         gap:src(E, 'slides 2 to 4, headed "Scenario 1"')},
 
       /* ---- Case 2: dengue triaged to the Green Zone (slides 5 and 6). Where he goes, and who may be in the Green Zone, are left out. ---- */
@@ -10881,6 +10953,495 @@ if (P['abdominal-pain']) P['abdominal-pain'].see = (P['abdominal-pain'].see || [
    patient's right is on the screen's left. Each frame: [yaw, [region 1 outline, ..., region 9 outline]] in 720 x 900 image pixels. */
 const A3D = {"w":720,"h":900,"front":12,"frames":[[-36,["311,193 372,194 380,251 374,313 358,368 297,371 233,370 220,315 224,252 245,194","458,194 503,196 505,250 499,308 487,360 443,365 394,366 384,312 390,251 408,195","561,196 577,198 567,247 557,302 551,350 541,355 512,358 507,308 512,249 529,196","297,382 358,381 372,435 373,496 361,551 302,556 238,556 221,500 219,437 233,383","443,375 487,373 495,424 496,481 487,533 443,541 395,547 383,495 382,435 394,380","541,366 550,362 548,408 555,461 561,511 544,521 513,529 503,480 503,423 512,370","303,568 361,564 377,616 379,676 366,731 308,739 246,741 230,687 227,625 239,570","443,552 487,546 498,595 500,651 490,704 447,715 400,724 389,674 386,615 396,560","545,531 562,522 566,568 570,621 567,671 548,685 516,697 507,650 505,593 513,541"]],[-33,["300,193 362,194 370,251 366,313 349,368 287,371 224,370 210,314 214,251 233,194","451,194 498,196 502,250 496,308 483,361 437,365 386,367 376,313 381,251 399,195","561,196 580,197 571,247 561,302 555,351 542,356 510,359 504,308 509,249 526,196","287,382 349,381 363,435 365,496 352,551 292,556 228,555 212,498 210,436 223,382","437,376 483,374 492,425 493,482 483,535 437,542 387,547 375,495 374,435 386,380","542,366 554,363 553,409 559,462 564,513 545,523 511,530 500,481 500,423 510,371","293,567 352,564 368,616 370,676 356,731 298,738 235,739 220,685 217,623 229,568","438,553 484,547 495,597 497,653 486,706 441,717 391,725 380,674 378,615 388,560","545,533 565,524 570,570 573,624 570,674 548,688 513,699 504,652 503,595 511,542"]],[-30,["288,193 352,194 361,251 357,313 340,368 278,370 215,369 202,314 204,251 222,194","444,194 493,196 498,250 492,309 479,361 431,365 378,367 367,313 372,251 390,195","560,196 582,197 575,248 565,303 558,352 542,357 508,360 501,309 506,250 523,196","278,382 340,381 355,435 356,496 343,551 282,555 219,554 203,497 202,435 215,382","431,376 479,374 489,425 489,483 479,536 431,543 379,547 366,495 365,435 378,380","542,367 557,363 557,410 563,464 567,515 545,525 508,532 497,482 497,424 507,372","283,566 343,564 359,616 361,676 347,731 288,737 225,737 210,683 207,621 219,567","431,554 479,549 491,598 493,655 482,708 434,718 383,725 371,675 369,615 380,561","545,535 568,526 574,572 576,626 572,677 547,691 510,702 501,654 499,597 508,544"]],[-27,["278,193 341,194 352,251 348,313 332,368 269,370 207,368 193,313 195,251 212,194","436,194 488,196 493,250 488,309 475,362 424,366 370,367 359,313 363,251 380,195","559,195 584,197 578,248 568,303 561,353 542,358 505,360 497,309 502,250 519,196","268,381 331,381 346,435 347,496 334,551 273,554 210,552 195,496 195,434 207,381","424,377 475,375 485,426 485,484 475,537 425,544 371,547 358,495 357,435 370,380","542,368 560,364 560,411 566,466 569,517 545,527 505,533 494,483 494,425 505,373","273,565 334,563 350,616 352,676 338,730 278,736 215,735 200,681 198,619 210,565","425,554 475,550 487,600 488,657 477,710 428,719 375,726 362,675 361,615 372,561","545,537 570,528 577,575 579,629 574,680 547,694 507,704 497,656 496,598 505,545"]],[-24,["267,193 331,194 342,251 339,313 323,368 260,370 199,367 186,313 186,251 202,194","428,194 482,195 488,250 484,309 470,362 418,366 362,367 350,313 353,251 371,195","557,195 586,197 580,248 571,304 563,354 541,359 502,361 493,309 497,250 514,196","260,381 323,381 338,435 339,496 325,550 263,553 201,550 188,494 188,433 199,380","418,377 470,376 481,427 481,485 470,538 418,544 363,548 350,495 349,435 362,380","541,369 562,365 563,412 569,467 571,519 544,529 501,535 490,485 490,426 501,373","264,564 325,563 341,616 343,676 329,730 268,734 206,732 191,678 189,617 202,563","418,555 470,551 482,601 484,659 472,711 421,720 366,726 354,675 352,615 364,561","544,539 572,531 579,577 581,632 575,683 545,697 503,706 493,658 491,600 502,547"]],[-21,["257,193 321,194 333,251 330,313 314,368 251,369 192,367 179,312 179,251 193,194","420,194 476,195 483,250 479,310 465,363 411,366 354,367 342,313 344,251 362,195","555,195 586,197 582,248 573,304 565,355 540,359 498,362 488,310 492,250 509,195","251,380 314,381 329,435 330,495 316,550 254,552 193,549 181,493 181,432 192,379","411,377 465,376 476,428 476,486 465,539 411,545 355,548 341,495 340,435 354,380","540,370 564,366 565,413 571,469 572,521 542,530 498,536 486,486 485,427 497,374","255,563 317,563 333,616 334,676 320,729 259,733 198,730 183,676 182,615 194,562","411,556 465,552 478,603 479,660 466,713 414,721 358,726 345,675 343,615 355,561","542,541 573,533 581,580 583,635 576,686 543,699 499,708 488,659 487,601 498,548"]],[-18,["247,193 311,194 324,251 322,313 306,368 243,369 185,366 172,312 171,251 185,194","412,194 469,195 477,250 474,310 460,363 404,366 346,367 333,312 335,251 352,195","552,195 586,197 583,248 575,305 566,355 539,360 494,362 483,310 487,250 504,195","243,380 306,380 321,434 322,495 308,549 246,551 186,547 174,491 175,430 186,379","404,377 459,377 471,429 471,487 459,540 404,545 347,547 333,495 332,434 346,380","538,371 565,367 567,415 573,470 573,523 540,532 493,537 481,487 481,428 493,375","246,562 308,562 324,615 325,675 311,729 250,731 190,727 176,673 174,613 186,560","404,556 459,553 472,604 473,662 461,715 406,722 350,726 336,674 335,615 347,561","540,543 574,535 582,582 584,638 577,690 541,702 494,710 483,661 482,603 493,550"]],[-15,["237,193 302,194 315,251 313,313 298,367 235,368 179,365 167,311 165,251 177,195","404,194 462,195 471,250 468,310 454,364 397,367 338,367 325,312 326,251 343,195","549,195 586,196 584,249 576,305 567,356 536,361 489,363 478,310 481,250 498,195","235,379 297,380 313,434 314,495 300,549 238,550 179,545 168,489 170,429 180,378","397,378 454,377 466,429 466,488 453,541 397,546 339,547 325,494 324,434 338,380","536,371 566,368 569,416 574,472 573,525 537,534 488,539 476,488 476,428 489,375","238,561 300,561 316,615 317,675 302,728 241,729 182,724 169,670 168,610 180,558","397,557 453,554 466,606 467,664 454,716 399,723 341,726 328,674 327,615 339,561","537,544 574,537 582,585 584,641 576,693 538,705 489,713 477,663 476,604 489,551"]],[-12,["229,193 292,194 306,251 305,313 289,367 228,367 174,364 161,311 159,250 170,195","395,194 455,195 465,251 462,311 448,364 390,367 330,366 316,312 318,251 334,195","545,195 584,196 584,249 577,306 567,357 533,362 484,363 472,311 475,250 492,195","228,378 289,380 305,434 306,494 291,548 230,548 173,543 163,488 165,428 174,377","390,378 448,377 460,430 460,489 447,542 390,546 331,547 317,494 316,434 330,380","533,372 566,369 570,417 575,474 573,527 534,536 483,540 470,489 470,429 484,376","230,559 292,561 307,614 308,674 294,727 233,727 176,721 163,668 162,608 173,556","390,557 447,555 460,607 461,665 448,718 391,723 333,725 319,673 318,614 331,560","534,546 573,539 582,587 584,644 575,696 534,708 484,715 471,664 471,606 483,552"]],[-9,["220,194 283,194 298,251 297,312 282,367 221,367 169,363 157,310 154,250 163,195","386,194 447,195 458,251 456,311 441,365 382,367 322,366 308,312 309,251 324,195","540,194 583,196 584,249 577,307 566,358 530,363 479,364 466,311 469,250 485,195","221,378 282,379 297,433 298,494 283,547 223,547 168,541 159,486 161,427 170,376","382,378 441,378 454,431 454,490 441,543 383,546 323,547 309,494 308,434 322,380","530,373 565,370 570,419 575,476 572,529 530,537 478,541 464,490 464,430 478,377","223,558 284,560 299,613 300,673 285,726 225,725 170,718 157,665 156,605 168,554","383,557 441,556 454,608 454,666 441,719 383,724 325,725 311,673 310,613 323,560","530,548 572,541 581,590 583,647 574,699 530,710 478,716 465,666 464,607 478,554"]],[-6,["212,194 274,194 289,251 289,312 274,366 214,366 165,363 153,310 149,250 157,195","378,194 439,195 451,251 449,311 435,365 375,367 314,366 300,312 301,251 315,195","535,194 580,196 582,249 576,307 565,359 526,363 473,364 460,311 462,250 478,195","215,377 274,379 289,433 290,493 276,546 216,545 163,539 155,484 158,425 166,375","375,378 435,378 448,431 447,490 434,544 375,547 315,546 301,493 301,433 314,379","526,374 564,371 569,420 574,477 570,531 526,539 472,542 458,490 458,431 473,377","216,556 276,559 291,612 292,672 278,724 218,723 164,715 152,662 152,603 163,552","375,557 434,557 447,609 448,668 434,720 376,724 317,724 303,672 302,613 315,559","526,550 571,543 580,593 581,650 571,703 526,713 471,718 458,667 458,608 472,555"]],[-3,["205,194 266,195 281,251 281,312 267,366 209,365 162,362 150,309 145,250 152,195","369,194 431,195 443,251 442,311 428,365 367,367 307,366 293,312 292,251 306,195","529,194 577,196 580,249 575,308 563,360 522,364 467,365 453,312 454,251 471,195","209,376 267,379 282,432 283,493 268,546 210,544 159,537 152,483 155,424 162,374","367,378 428,379 441,432 441,491 427,545 368,547 308,546 294,492 293,433 307,379","522,375 563,372 569,421 573,479 568,533 521,541 465,544 451,491 452,431 466,378","210,555 269,558 283,612 284,671 270,723 211,720 159,712 148,659 148,600 159,550","368,557 427,558 440,610 440,669 427,721 368,724 309,723 295,671 294,612 308,559","521,551 568,546 578,595 579,653 568,706 520,716 465,720 451,669 451,610 465,556"]],[0,["198,194 257,195 273,251 274,312 260,365 203,365 159,361 147,308 142,250 147,195","360,194 422,195 436,251 435,312 421,366 360,367 299,366 285,312 284,251 298,195","522,194 573,195 578,250 573,308 561,361 517,365 460,365 446,312 447,251 463,195","203,375 260,378 275,432 275,492 261,545 204,542 155,535 149,481 153,423 159,373","360,378 421,379 434,432 434,492 420,545 360,547 300,545 286,492 286,432 299,379","517,375 561,373 567,423 571,481 565,535 516,542 459,545 445,492 445,432 460,378","204,553 261,557 276,611 276,670 262,722 205,718 155,709 144,656 144,598 155,548","360,558 420,558 433,611 433,670 419,723 360,724 301,723 287,670 287,611 300,558","516,553 565,548 575,598 576,656 565,709 515,718 458,722 444,670 444,611 459,557"]],[3,["191,194 249,195 266,251 267,312 253,365 198,364 157,360 145,308 140,249 143,196","351,194 414,195 428,251 427,312 413,366 352,367 292,365 278,311 277,251 289,195","515,194 568,195 575,250 570,309 558,362 511,365 453,366 439,312 439,251 454,195","198,375 254,378 268,431 269,491 255,544 199,541 152,533 147,479 151,421 157,372","353,378 413,379 427,433 426,492 412,546 352,547 293,545 279,491 279,432 292,379","511,376 558,374 565,424 568,483 561,537 510,544 452,546 437,493 438,432 453,379","199,551 255,556 269,610 269,669 255,720 200,716 152,706 141,653 142,595 152,546","352,557 412,559 426,612 425,671 411,723 352,724 293,721 280,669 280,610 293,558","510,555 561,550 572,600 572,659 561,712 509,720 450,723 436,671 437,612 451,558"]],[6,["185,194 242,195 258,250 260,311 247,364 194,363 155,359 144,307 138,249 140,196","342,194 405,195 419,251 420,312 406,366 345,367 285,365 271,311 269,251 281,195","508,194 563,195 571,250 567,310 555,363 506,366 446,366 431,312 431,251 446,194","194,374 247,377 262,431 262,490 248,542 194,539 150,531 146,477 151,420 156,371","345,378 406,379 419,433 419,493 405,546 345,547 286,544 273,490 272,431 285,378","505,377 554,375 562,425 565,484 557,539 504,545 444,546 430,493 431,433 446,379","194,550 248,555 262,608 262,667 249,718 194,713 149,703 139,650 140,593 149,543","345,557 405,559 418,613 417,672 403,724 344,724 286,720 272,668 273,609 286,557","504,556 557,552 568,603 568,662 556,715 502,723 442,724 428,672 429,612 444,559"]],[9,["180,194 235,195 251,250 254,311 241,364 190,363 154,358 143,307 136,249 137,196","334,194 396,195 411,251 412,312 398,366 338,367 279,365 264,311 262,251 273,195","500,194 557,195 566,250 563,310 551,363 499,367 438,367 423,312 422,251 437,194","190,373 242,377 256,430 256,490 242,541 190,537 148,529 145,476 150,419 155,370","338,378 398,380 412,434 411,494 397,547 337,546 279,543 266,490 266,431 279,378","499,378 550,376 559,427 561,486 552,541 497,547 437,547 422,494 423,433 438,379","190,548 242,554 256,607 255,666 242,716 190,710 146,699 137,647 138,590 148,541","337,557 397,560 410,613 409,673 395,725 337,724 279,719 266,666 266,608 279,556","497,558 552,554 564,605 563,665 550,718 495,725 434,726 420,673 421,613 436,560"]],[12,["175,195 228,195 245,250 248,311 236,363 187,362 153,357 143,306 136,249 136,196","325,194 386,195 402,251 404,312 390,366 330,367 272,364 258,311 255,251 265,195","491,193 550,195 561,250 559,311 546,364 492,367 431,367 415,313 414,251 428,194","187,372 236,376 250,429 250,489 237,540 186,536 147,527 145,474 150,417 154,369","330,378 390,380 404,434 403,494 389,547 330,546 273,542 260,489 260,430 272,377","492,378 546,377 555,428 557,488 547,543 490,548 429,548 414,494 415,434 431,380","186,546 237,552 249,606 249,664 236,714 186,708 145,696 136,644 138,587 147,539","330,557 389,560 402,614 401,673 387,725 329,723 272,718 259,665 260,607 273,555","490,559 547,556 558,608 557,668 544,721 487,727 426,727 412,674 413,614 428,561"]],[15,["171,195 222,195 239,250 242,310 231,363 184,361 153,356 144,305 136,249 134,196","316,194 377,195 394,251 395,312 382,367 323,367 266,364 252,310 249,250 258,195","483,193 543,195 555,251 553,311 541,365 485,368 422,367 407,313 405,251 418,194","184,371 231,375 244,428 244,488 232,539 183,534 147,525 146,472 151,416 154,368","323,378 382,380 396,434 395,494 381,547 323,546 267,541 254,488 254,429 266,377","485,379 540,378 550,429 552,489 541,545 482,550 420,549 406,495 407,434 423,380","183,544 231,551 244,604 243,663 231,713 182,705 144,693 136,641 138,585 146,537","323,557 381,561 393,615 392,674 379,726 321,723 266,716 253,664 254,606 267,554","482,561 540,558 552,610 551,670 538,724 479,729 418,728 403,675 404,615 420,561"]],[18,["168,195 216,195 233,250 237,310 226,362 181,360 154,355 145,305 137,248 134,197","308,194 368,195 385,251 387,312 374,367 316,366 260,363 246,310 243,250 251,195","473,193 535,194 549,251 548,312 535,366 477,369 414,368 398,313 396,251 409,194","182,371 227,375 239,428 239,487 227,537 180,532 147,523 147,470 153,415 155,367","316,377 374,380 388,434 387,495 373,547 316,545 261,540 249,487 249,429 261,377","477,380 534,379 545,430 546,491 534,547 474,551 412,549 398,495 399,434 414,380","180,543 227,550 238,603 237,661 226,710 179,702 143,690 136,638 138,582 146,535","316,556 373,561 385,615 384,674 370,726 314,722 259,715 247,662 248,604 261,553","474,562 534,560 546,613 544,673 530,727 470,731 409,729 395,675 396,615 412,562"]],[21,["165,195 211,195 228,250 232,310 222,362 180,359 155,355 147,304 138,248 134,197","300,194 358,195 376,251 378,313 366,367 309,366 255,363 241,310 237,250 244,195","463,193 527,194 541,251 541,312 528,367 469,369 406,368 390,313 387,251 399,194","180,370 223,374 235,427 234,486 222,536 178,530 148,521 149,469 155,413 156,366","309,377 366,380 380,435 379,495 365,548 309,545 255,539 244,486 244,428 255,376","469,380 528,379 539,432 539,493 527,549 466,552 404,550 390,495 391,435 406,381","178,541 222,548 233,601 232,659 221,708 177,699 144,686 137,635 139,580 147,533","309,556 365,561 377,615 375,675 362,726 306,721 254,713 241,660 242,603 255,552","465,563 526,562 538,615 537,676 522,730 461,733 400,729 386,676 387,616 403,563"]],[24,["163,195 206,196 223,250 227,309 218,361 179,359 157,354 149,304 140,248 134,197","292,194 349,195 367,251 370,313 358,367 302,366 250,362 236,309 232,250 238,195","453,193 518,194 534,251 534,313 521,367 460,370 397,368 381,313 378,251 389,194","179,369 219,373 230,426 230,485 219,535 176,529 149,519 151,467 157,412 158,365","302,377 358,380 371,435 370,495 357,548 302,544 250,538 239,485 239,427 250,376","460,381 521,380 532,433 532,494 519,550 457,553 395,550 381,496 382,435 397,381","176,539 218,547 229,600 227,658 217,706 175,697 145,683 139,632 141,577 148,531","302,555 356,561 368,615 366,675 354,726 299,720 248,711 236,659 238,601 250,551","456,564 518,563 531,617 529,678 514,732 452,734 391,730 377,676 379,616 395,563"]],[27,["161,195 201,196 218,250 223,309 215,360 178,358 159,353 152,303 142,248 136,197","284,194 340,195 357,251 361,313 350,367 296,366 245,362 232,309 227,250 232,196","442,193 508,194 525,251 527,313 513,368 451,370 388,368 372,313 368,251 379,194","178,368 215,373 226,425 226,483 215,533 175,527 151,517 154,466 160,411 160,364","296,377 350,380 363,435 362,495 349,547 295,544 245,537 235,484 235,426 245,375","452,381 513,381 525,434 525,496 510,552 447,554 386,551 373,496 374,435 389,381","175,537 215,545 224,598 223,656 213,704 173,694 146,680 141,629 143,575 150,528","295,554 348,561 359,615 358,675 345,726 292,719 243,710 232,657 233,600 245,550","447,565 510,565 522,619 520,681 505,735 442,736 382,730 368,676 370,616 386,563"]],[30,["160,196 197,196 214,250 219,309 212,360 178,357 162,352 155,303 145,248 138,197","276,194 330,195 348,251 353,313 342,367 289,365 241,361 228,309 222,250 227,196","432,193 498,194 516,251 518,314 505,369 442,370 380,368 363,313 359,251 368,194","178,367 213,372 223,424 223,482 212,532 175,525 153,515 157,464 163,410 163,363","289,376 342,380 355,435 354,495 341,547 289,543 241,536 231,483 231,425 241,374","442,382 505,382 518,435 517,497 501,554 438,555 377,551 364,496 365,435 380,381","175,535 212,544 221,597 219,654 210,702 173,691 148,677 144,626 146,572 152,526","289,554 340,561 351,615 349,675 337,725 286,718 238,708 227,655 229,598 241,549","437,566 501,567 513,621 510,683 495,737 432,737 373,731 359,676 361,616 377,564"]],[33,["159,196 194,196 211,249 216,308 210,359 178,356 165,351 159,302 149,247 140,197","269,194 321,195 339,251 344,313 334,367 283,365 237,361 224,308 218,250 222,196","420,193 487,194 506,251 510,314 496,370 433,371 371,368 354,313 350,251 358,194","178,366 210,371 220,423 220,481 209,530 175,523 156,513 161,462 167,409 166,363","283,376 334,380 346,435 345,495 333,547 283,542 237,535 227,482 228,425 237,374","433,382 497,382 510,436 508,498 492,555 428,556 368,551 355,496 357,435 371,381","175,533 209,542 217,595 216,652 207,699 172,688 150,674 147,624 150,570 155,524","282,553 332,560 342,615 340,674 329,725 279,717 234,706 223,653 225,597 236,547","427,567 491,568 503,623 500,685 485,739 422,738 364,731 350,676 352,616 368,564"]],[36,["159,196 191,196 208,249 213,308 208,358 179,355 169,350 163,302 153,247 143,198","262,194 312,195 330,251 336,312 326,366 277,365 233,360 221,308 215,250 217,196","409,193 475,194 496,252 500,315 487,370 423,371 362,368 346,313 340,251 348,194","179,366 208,370 217,423 217,480 207,529 176,521 159,511 165,461 172,407 170,362","277,375 326,380 338,435 337,495 325,547 277,541 233,533 224,481 225,424 233,373","423,382 487,383 501,437 499,500 482,556 418,556 359,551 347,496 348,435 362,381","175,531 207,541 215,593 213,650 204,697 172,685 153,671 150,621 154,568 158,522","277,552 324,560 334,615 331,674 320,724 273,715 230,704 220,651 222,595 233,546","417,568 481,570 493,625 490,687 474,741 412,739 354,731 341,676 343,616 359,564"]]]};
 
+/* ================= 12 Nov 2026: the department's internal memos for the Green and Yellow Zones =================
+   Source: the department's memo index ("MEMO DALAMAN JABATAN", 99 memos, 2021 to 2026), which Krishna gave on 12 Nov 2026.
+   The memos the Green and Yellow Zones act on were read from their page images (the scans have no text layer; the OCR
+   was used only to find the text) and are added here as department notes (standing rule 6), each with its number and
+   date. The review of every row, with what went in, what was already in the guide and what was left out and why, is
+   MEMO-RUN-THROUGH.md. The memos are quoted in Malay where the wording matters, with the guide's English.
+   Each memo's own pages show as snapshots (app/memo/<key>-p<N>.webp, built by src/memos.js): at Krishna's choice of
+   12 Nov 2026 (standing rule 3) the signature, the name block and the registration numbers under it are covered, and so
+   are staff names and phone numbers. Not copied: names, signatures, registration numbers, phone numbers of staff. */
+
+/* The department's own memo list ("Memo Jabatan", on the ED link page): each memo card links to it (Krishna, 12 Nov 2026) */
+const MEMO_LIST = 'https://docs.google.com/spreadsheets/d/1ZCxDjxd5fgTGWx6fFNzJBDYvlIgTbdIyB-hIJUxCkA4/edit?usp=drive_link';
+const MEMOS = {
+  '2023-01': {ref:'HKL/JK/98/188/3(1)23', date:'10 Jan 2023', t:'Pelaksanaan tugas dan tanggungjawab Ketua Pasukan (Team Leader) di Zon Hijau', pages:[[1, 'Memo'], [2, 'Lampiran 1']]},
+  '2024-09': {ref:'HKL/JK/98/188/3(9)24', date:'30 May 2024', t:'Penambahbaikan pengurusan kes di Zon Hijau', pages:[[1, 'Page 1'], [2, 'Page 2']]},
+  '2021-14': {ref:'HKL/JK/98/188/3(14)2021', date:'12 May 2021', t:'Peringatan dalam pengurusan pesakit warga emas di zon klinikal Jabatan Kecemasan dan Trauma', pages:[[1, 'Memo']]},
+  '2022-14': {ref:'HKL/JK/98/188/3(17)22', date:'4 Aug 2022', t:'Peringatan ke atas penyediaan laporan dan dokumentasi fail perawatan pesakit di zon-zon perawatan', pages:[[1, 'Memo']]},
+  '2023-20': {ref:'HKL/JK/98/188/3(19)23', date:'27 Sep 2023', t:'Larangan penggunaan sarung tangan getah sebagai torniquet', pages:[[1, 'Memo']]},
+  '2022-23': {ref:'HKL/JK/98/188/3(25)', date:'15 Nov 2022', t:'Carta aliran pemakluman keputusan kritikal (critical value notification) Makmal Patologi kepada Jabatan Kecemasan dan Trauma', pages:[[1, 'Memo'], [2, 'Flow chart']]},
+  '2023-04': {ref:'HKL/JK/98/188/3/(4) 23', date:'3 Mar 2023', t:'Penambahbaikan ke atas proses kerja notifikasi penyakit berjangkit 1988', pages:[[1, 'Memo'], [2, 'Flow chart']]},
+  '2023-05': {ref:'HKL/JK/98/188/3(5)23', date:'21 Mar 2023', t:'Pengaktifan ambulan EMS/interfacility transfer untuk kes STEMI dari Jabatan Kecemasan dan Trauma HKL ke IJN', pages:[[1, 'Memo'], [2, 'Flow chart']]},
+  '2023-24': {ref:'HKL/JK/98/188/1(24)2023', date:'8 Nov 2023', t:'Peraturan penggunaan mesin POCT untuk ujian ABG dan FBC stat', pages:[[1, 'Memo']]},
+  '2022-04': {ref:'HKL/JK/98/188/3(5)22', date:'16 Mar 2022', t:'Tatacara terkini pengambilan spesimen bagi orang dalam tahanan polis', pages:[[1, 'Memo'], [2, 'Flow chart']]},
+  '2022-12': {ref:'HKL/JK/98/188/3(13)22', date:'9 Jun 2022', t:'Carta aliran kerja pengurusan kes \'missed fracture\'', pages:[[1, 'Memo'], [2, 'Lampiran 1'], [3, 'Lampiran 2']]},
+  '2022-19': {ref:'HKL/JK/98/188/3(14)22', date:'10 Jun 2022', t:'Verifikasi pengurusan transfusi darah', pages:[[1, 'Memo']]},
+  '2022-22': {ref:'HKL/JK/98/188/3(24)22', date:'11 Oct 2022', t:'Peringatan kepada prosedur penerimaan pesakit rujukan dari hospital/klinik luar', pages:[[1, 'Page 1'], [2, 'Page 2']]},
+  '2024-13': {ref:'HKL/JK/98/188/3(12)24', date:'14 Aug 2024', t:'Pemakluman tatacara preskripsi Human Albumin di Jabatan Kecemasan dan Trauma', pages:[[1, 'Memo']]},
+  '2024-04': {ref:'HKL/JK/98/188/3(3)24', date:'7 Mar 2024', t:'Pemakluman penambahbaikan pengendalian pesakit yang tidak mempunyai dokumen pengenalan diri \'unknown\'', pages:[[1, 'Memo']]},
+  '2021-12': {ref:'HKL/JK/98/188/3(13)2021', date:'10 May 2021', t:'Penambahbaikan pengurusan pesakit yang memerlukan \'sedation\' semasa prosidur CT scan/X-ray', pages:[[1, 'Memo'], [3, 'PSA form, side 1'], [4, 'PSA form, side 2']]},
+  '2022-08': {ref:'HKL/JK/98/188/3(9)22', date:'13 May 2022', t:'Arahan berkaitan prosedur CVC insertion di Jabatan Kecemasan dan Trauma', pages:[[1, 'Memo']]},
+  '2022-09': {ref:'HKL/JK/98/188/3(10)22', date:'17 May 2022', t:'Penggunaan borang baru "Central Venous Catheter Care Bundle"', pages:[[1, 'Memo'], [2, 'The care bundle form']]},
+  '2023-14': {ref:'HKL/JK/98/188/3(14)23', date:'5 Jul 2023', t:'Penyelarasan borang Inter-Departmental Transfer of Adult Patients Risk Assessment, borang senarai semak penghantaran pesakit dan senarai semak peralatan', pages:[[1, 'Memo'], [3, 'Risk form and flow chart']]},
+  '2024-11': {ref:'HKL/JK/98/188/3(11)24', date:'16 Jul 2024', t:'Carta alir pengurusan Dangerous Drugs Act (DDA) Jabatan Kecemasan dan Trauma HKL', pages:[[1, 'Memo'], [2, 'The DD in-charge duties'], [3, 'Flow chart']]},
+  '2022-21': {ref:'HKL/JK/98/188/3(23)22', date:'11 Oct 2022', t:'Pelaksanaan penggunaan Google Form sebagai format untuk tempahan kes ke LA OT', pages:[[1, 'Memo']]},
+  '2024-02': {ref:'HKL/JK/98/188/3(01)24', date:'11 Jan 2024', t:'Penyelarasan semula proses kerja pengurusan pesakit Klinik Ulangan (EMACC) Jabatan Kecemasan dan Trauma', pages:[[1, 'Memo'], [2, 'Lampiran A, 1 to 8'], [3, 'Lampiran A, 9 to 12'], [4, 'Lampiran A, 13 to 16'], [6, 'Lampiran B1: the TCA']]}
+};
+
+(function(){
+  const M = k => `memo ${MEMOS[k].ref}, ${MEMOS[k].date}`;
+  const SRC = (k, more) => `Source: ${M(k)}${more ? ', ' + more : ''}. A department note (standing rule 6).`;
+
+  /* The same POCT rule shows in both zones */
+  const POCT = [
+    'FBC Stat: "Hanya boleh dihantar untuk kes-kes dari Resus 1, Resus 2 dan Zon Kuning sahaja. Zon-zon lain perlu mendapat kelulusan Pakar yang bertugas." Only for Resus 1, Resus 2 and the Yellow Zone; any other zone needs the approval of the specialist on duty (2.1a)',
+    'One FBC Stat per patient; a repeat needs the specialist on duty\'s approval (2.1b)',
+    'A patient referred from outside with blood results from the same day: the blood tests are not repeated (2.1c)',
+    'ABG Stat: only for Resus 1, Resus 2 and the Yellow Zone, after resuscitation has started; any other zone needs the specialist on duty\'s approval (2.2a)',
+    'One ABG per patient; a repeat needs the specialist on duty\'s approval (2.2b)',
+    '"Hanya ujian ABG yang dibenarkan. VBG hanya boleh dilakukan untuk kes denggi yang kritikal (severe dengue). Kes-kes denggi adalah terkecuali." Only ABG is allowed; a VBG only for critical (severe) dengue, the exception (2.2c)'];
+  const POCTGAP = SRC('2023-24', 'paragraph 2, issued to save POCT machine reagent during a shortage, effective immediately; it gives no end date') + ' Whether it is still in force is under Still to confirm.';
+
+  /* ---------------- Green Zone rules ---------------- */
+  const G = P['gz-rules'];
+  const at = G.nodes.menu.opts.findIndex(o => o[1] === 'sepsis');
+  G.nodes.menu.opts.splice(at + 1, 0, ['Team leader of the shift', 'tl'], ['More department memos', 'gzm']);
+
+  G.nodes.tl = {check:'all', q:'Team leader: at the start of the shift, is each of these done?', fig:'memo-2023-01',
+    hint:'The MO who leads the Green Zone team on the shift (Ketua Pasukan). Tick what is done.',
+    items:[
+      'Roll call (taklimat ringkas) before the shift starts: every member of the team is present and knows the others (item 1)',
+      'Pending cases from the previous shift, including those waiting for a ward, are not missed and each has a proper plan, for example the Chair Centric Area',
+      'One MO attends the CME/GWR from 8.00 am to 9.00 am; cases go to that MO\'s room only after 9.00 am (item 6)'],
+    opts:[['All done: run the shift', 'tlrun'], ['Not yet', 'tlfix']]};
+  G.nodes.tlfix = {end:'neutral', title:'Finish the start-of-shift checks first', items:[
+    'Hold the roll call, so the team knows who is on and who is where',
+    'Go through every pending case from the previous shift, including those waiting for a ward, and make sure each has a plan',
+    'Send one MO to the CME/GWR from 8.00 am to 9.00 am; that room takes cases only after 9.00 am'],
+    links:[['#gz-rules--tlrun', 'During the shift']], gap:SRC('2023-01', 'Lampiran 1')};
+  G.nodes.tlrun = {end:'neutral', title:'Team leader: during the shift', fig:'tlclock', items:[
+    'Advise and consult on cases when the team on the shift needs it (item 2)',
+    'Redistribute cases when unseen cases pile up (item 3)',
+    'A sudden surge of patients: discuss with the Emergency Physician on duty and ask for help (item 4)',
+    'An incident: make sure the staff involved report it to the Penyelia (item 5)',
+    'Your own room: registration to it starts at 8.00 am (morning shift), 3.00 pm (afternoon) and 10.00 pm (night), and its number of cases need not match the other rooms',
+    'The last case goes to your room at 2.00 pm (morning), 9.00 pm (afternoon) and 7.00 am (night). Then share out the unseen cases, so the whole Green Zone starts examining them and gives each a plan',
+    '"Ketua Pasukan memastikan ahli pasukan tidak meninggalkan zon/syif sekiranya terdapat bilik yang masih ada lambakan kes yang belum diselesaikan": no one in the team leaves the zone or the shift while a room still has a backlog'],
+    links:[['#gz-rules--delay', 'Disposition is delayed'], ['#gz-rules--uptri', 'Uptriage']],
+    gap:SRC('2023-01', 'Lampiran 1, decided at the morning meeting and the Green Zone Warrior course')};
+
+  G.nodes.gzm = {q:'Which department memo?', hint:'Memos of the Emergency & Trauma Department, HKL, 2021 to 2024, as department notes. Each step shows its memo, with its pages.', opts:[
+    ['Admitting from the Green Zone; repeat BP and ECG', 'adm24'],
+    ['Elderly patients', 'old'],
+    ['Records to finish before the patient leaves', 'rec'],
+    ['The lab calls a critical result', 'cv'],
+    ['Notifiable disease: the form', 'notif'],
+    ['STEMI: the ambulance to IJN', 'stemi'],
+    ['Police detainee brought for samples only', 'pol'],
+    ['Stat FBC and ABG on the POCT machine', 'poct'],
+    ['Booking a case to LA OT', 'laot'],
+    ['Tourniquets', 'tq'],
+    ['A reported X-ray shows a missed fracture', 'mfl']]};
+
+  G.nodes.adm24 = {end:'neutral', title:'Admitting from the Green Zone; repeat BP and ECG', fig:'memo-2024-09', items:[
+    'Once the PPK has booked the ward by Google Form, the RPP of a patient to be admitted comes back to you, the treating MO, so you know where the patient is before the transfer to the ward (2.1.1)',
+    'A patient still waiting for a ward when the shift changes: hand over, examine again and document (2.1.2)',
+    'Repeat vital signs and ECG ("Repeat Bp/ECG/DXT") are done in Bilik 9, not at secondary triage (2.2.1)',
+    'Every Green Zone consultation room has a BP machine for the MO to repeat the BP (2.2.2)',
+    'A patient diagnosed with sepsis is uptriaged to the Yellow or Red Zone, by the patient\'s condition (2.3.1)',
+    'The waiting area is watched: continuously by the PPK on wheelchair duty, and every 2 hours by the Penyelia on duty and the triage staff (2.4.1)'],
+    links:[['#gz-rules--sepsis', 'Sepsis found in the Green Zone'], ['#gz-rules--oneway', 'One-way flow: no repeats after secondary triage'], ['#gz-rules--reas', 'Before you admit, discharge or transfer']],
+    gap:SRC('2024-09', 'effective immediately') +' The one-way flow step says an ECG asked for in the Green Zone is done in the Procedure Room; the memo names Bilik 9.'};
+
+  G.nodes.old = {end:'neutral', title:'Elderly patients: three reminders', fig:'memo-2021-14', items:[
+    '"Pesakit yang berumur > 65 tahun adalah tidak digalakkan untuk menerima ubat suntikan IV Tramal kerana boleh mendapat komplikasi dan kesan sampingan yang tidak diingini": patients over 65 are discouraged from IV tramadol (Tramal), for its complications and side effects (2 i)',
+    'An elderly patient treated in the Green Zone who needs review by a primary team (for example Urology, Surgery or Neurology) is placed in the Yellow Zone while waiting (2 ii)',
+    'Place elderly patients near the nurses\' counter, to watch them more closely and prevent incidents such as falls (2 iii)',
+    'The ebook\'s analgesia table, for comparison: tramadol in the elderly, "start low 50 mg, max 300 mg/day (to avoid if possible)"'],
+    links:[['#pain', 'Ebook: pain management'], ['#gz-rules--wait', 'Patients who should not wait outside']],
+    gap:SRC('2021-14') + ' A 2021 memo: whether it still stands is under Still to confirm.'};
+
+  G.nodes.rec = {check:'all', q:'Before the patient goes home or to a ward: is each record done and up to date?', fig:'memo-2022-14',
+    hint:'"...memastikan semua dokumen tersebut disediakan dan dikemaskini, sebelum pesakit discaj balik atau masuk ke wad." The department found many of these missing, which makes medical reports hard to write, especially in medicolegal cases.',
+    items:['The patient clerking note, by the MO', 'The nursing or patient report', 'The observation chart', 'The Early Warning Sign form'],
+    opts:[['All four are done', 'recok'], ['Not yet', 'recno']]};
+  G.nodes.recok = {end:'discharge', title:'The records are complete', items:['The patient can go home or to the ward once the rest of the disposition is settled'],
+    links:[['#gz-rules--reas', 'Before you admit, discharge or transfer'], ['#safe-practice--dcchk', 'The discharge check']], gap:SRC('2022-14')};
+  G.nodes.recno = {end:'observe', title:'Finish the records before the patient leaves', items:['Write or update what is missing: the clerking note is yours; the nursing report, the observation chart and the Early Warning Sign form are the nurses\' and PPPs\'', 'Then complete the disposition'],
+    gap:SRC('2022-14')};
+
+  G.nodes.cv = {end:'neutral', title:'The lab calls a critical result', fig:'memo-2022-23', items:[
+    'The pathology lab calls: 1. the zone\'s extension; if that fails, 2. the mobile of the PPP U32 or KJ U32 in charge of the zone; or 3. any PPP U32 or KJ U32 on that shift. The lab records the name and post of the person who took the call',
+    '"Petugas Jabatan Kecemasan yang menerima maklumat \'Critical Value Notification\' daripada Makmal Patologi hendaklah memaklumkan Pegawai Perubatan incharge zon dengan kadar segera": whoever takes the call tells the MO in charge of the zone at once (2.2)',
+    'You, the MO in charge of the zone: act on the result (further care)',
+    'Each shift, the KJ U32 or Penyelia U32 posts the in-charge\'s mobile or zone extension in the lab\'s WhatsApp group (2.1)',
+    'Shifts as the memo prints them: AM 8.00 am to 3.00 pm; PM 3.00 pm to 10.00 pm; ON 10.00 pm to 8.00 am, when only the PPP U32 is in charge of the zone'],
+    gap:SRC('2022-23', 'paragraph 2 and the flow chart')};
+
+  G.nodes.notif = {end:'neutral', title:'Notifiable disease: the form reaches UKA within 24 hours', fig:'memo-2023-04', items:[
+    'Complete the Borang Notifikasi Penyakit Berjangkit 1988. "Wajib menulis nomborkad pengenalan, tandatangan serta cop nama pegawai perubatan yang bertugas": the identity card number, signature and name stamp of the MO on duty must be written',
+    'Take the completed form to the Shift Supervisor\'s room (Bilik Penyelia Syif) yourself, and record the hand-over in the Notification Record Book there, as proof of hand-over',
+    'The PPP U32 in charge of the shift checks every form is complete; the PPK takes them to the Unit Kesihatan Awam HKL (UKA) twice a day, at 8.00 am and 4.00 pm',
+    'Why: forms were still failing to reach UKA within 24 hours'],
+    links:[['#infection-alerts', 'Infection alerts']],
+    gap:SRC('2023-04', 'from the Head of the PPP supervisors, with its flow chart')};
+
+  G.nodes.stemi = {q:'STEMI going to IJN: is the KVAS 10 team available?', fig:'memo-2023-05', hint:'You tell MECC; MECC activates KVAS 10 and tells you whether it is free.',
+    opts:[['Yes: KVAS 10 is available', 'stk'], ['No: KVAS 10 is away on another case', 'ste']]};
+  G.nodes.stk = {end:'refer', title:'KVAS 10 takes the patient to IJN', items:['MO informs MECC, and MECC activates KVAS 10', 'KVAS 10 transports the patient to IJN; the team hands over to the IJN team and returns to base'],
+    links:[['#acs--ijn', 'Ebook: IJN referral']], gap:SRC('2023-05', 'flow chart')};
+  G.nodes.ste = {end:'refer', title:'An EMS ambulance, with an escort from your zone', items:[
+    'MECC informs the PHC supervisor (SV PHC) and your clinical zone; the SV PHC activates the EMS/interfacility ambulance with its driver (2.2)',
+    '"Staf pengiring dari zon yang memohon": the escort comes from the zone that asked (2.3)',
+    'The EMS team and the accompanying staff take the patient to IJN, hand over to the IJN team and return to base'],
+    links:[['#acs--ijn', 'Ebook: IJN referral']], gap:SRC('2023-05', 'paragraph 2 and the flow chart')};
+
+  G.nodes.pol = {q:'A police detainee brought only for samples: stable?', fig:'memo-2022-04', hint:'Since the meeting with the Forensic Department of 11 Mar 2022, Forensic takes these samples. "Diminta untuk para petugas tidak menolak kes daripada pihak polis": do not turn away a police case.',
+    opts:[['Stable', 'pol2'], ['Not stable', 'polx']]};
+  G.nodes.polx = {end:'admit', title:'Not stable: treat accordingly', items:['Manage the patient\'s condition first, in the right zone'], gap:SRC('2022-04', 'flow chart')};
+  G.nodes.pol2 = {q:'Arrived between 8 am and 5 pm?', opts:[['Yes', 'polf'], ['No', 'pol3']]};
+  G.nodes.pol3 = {q:'Call the forensic specialist. Is it urgent?', opts:[['Not urgent', 'polf'], ['Urgent', 'pol4']]};
+  G.nodes.pol4 = {q:'Are forensic staff available?', opts:[['Yes', 'polf'], ['No', 'poly']]};
+  G.nodes.polf = {end:'refer', title:'To the Forensic Department, with the police', items:[
+    'Call the Forensic counter (ext 6695) or the person in charge there first, before you send the detainee with the police ("memaklumkan dulu kepada pihak kaunter Jabatan Forensik")',
+    'Forensic takes the sample, or gives an appointment to take it'],
+    gap:SRC('2022-04', 'paragraphs 2 to 3 and the flow chart') + ' The flow chart\'s footnote also names staff with their mobile numbers; they are not copied, and are covered on its page.'};
+  G.nodes.poly = {end:'discharge', title:'Urgent, and no forensic staff: the Yellow Zone takes the sample', items:['"Sekiranya Jabatan Forensik mengalami kekangan petugas ... Jabatan Kecemasan akan membantu": the ED helps when Forensic is short of staff', 'The flow chart then ends in discharge'],
+    gap:SRC('2022-04', 'paragraph 3 and the flow chart')};
+
+  G.nodes.poct = {end:'neutral', title:'Stat FBC and ABG on the POCT machine', fig:'memo-2023-24', items:POCT.concat(['From the Green Zone, a stat FBC or ABG on the POCT machine needs the approval of the specialist on duty']), gap:POCTGAP};
+
+  G.nodes.laot = {end:'neutral', title:'Booking a case to LA OT', fig:'memo-2022-21', items:[
+    '"...semua kes untuk tempahan (booking) ke LA OT dari Jabatan Kecemasan hendaklah melalui Google Form yang disediakan di dalam komputer di zon-zon kecemasan": book every LA OT case through the Google Form on the zone computers (2)',
+    'The patient moves: change the location in the Google Sheet, also linked on the zone computers (2)',
+    'In force from 10 Oct 2022. After the changeover, no phone call is needed: the LA OT staff check the Google Sheet (3)'],
+    gap:SRC('2022-21') + ' The form and the sheet are on the zone computers; the guide does not link them, since the sheet holds patients\' details.'};
+
+  G.nodes.tq = {end:'neutral', title:'Tourniquets: never a rubber glove', fig:'memo-2023-20', items:[
+    '"...melarang penggunaan sarung tangan getah sebagai torniquet semasa prosedur pemasangan intravenous cannula dan pengambilan darah pesakit": no rubber glove as a tourniquet for IV cannulation or blood taking (3)',
+    'Use the tourniquets the department provides (3)',
+    'Effective immediately, with firm action against anyone who does not comply (4)'],
+    gap:SRC('2023-20')};
+
+  G.nodes.mfl = {end:'neutral', title:'A reported X-ray shows a missed fracture', items:['The memo\'s flow, step by step, is on the missed fractures page'], links:[['#missed-fractures--mf1', 'The missed fracture flow']], gap:'Source: ' + M('2022-12') + '. A department note (standing rule 6); the memo card on the flow opens its pages.'};
+
+  /* ---------------- Yellow Zone ---------------- */
+  const Y = P['yellow-zone'];
+  Y.title = 'Yellow Zone: flow and memos';
+  Y.lead = 'Where patients go in the Yellow Zone, and the department memos for the procedures, drugs and transfers there.';
+  Y.start = 'menu';
+  Y.upd = true;
+  Y.nodes.menu = {q:'What do you need?', opts:[
+    ['Patient flow in the Yellow Zone', 'flow'],
+    ['Blood transfusion: the second verifier', 'bt'],
+    ['Sedation for a procedure, CT or X-ray', 'psa'],
+    ['Central line (CVC)', 'cvc'],
+    ['Receiving a patient referred from another hospital', 'refin'],
+    ['Transfer to a ward or another department', 'tr'],
+    ['Human albumin', 'alb'],
+    ['Dangerous drugs (DDA): your part', 'dda'],
+    ['Stat FBC and ABG on the POCT machine', 'poct'],
+    ['An "unknown" patient now identified', 'unk']]};
+
+  Y.nodes.bt = {end:'neutral', title:'Blood transfusion: the second verifier signs before it starts', fig:'memo-2022-19', items:[
+    'Agreed with the National Blood Centre (Pusat Darah Negara): the Ketua Jururawat, the Penyelia or the MO looking after the zone on that shift is the second verifier on the blood transfusion checklist (2)',
+    '"Semua senarai semak hendaklah ditandatangani dan dicop ... sebelum transfusi darah dilakukan": every checklist is signed and stamped by one of them before the transfusion starts (3)'],
+    gap:SRC('2022-19')};
+
+  Y.nodes.psa = {q:'Sedation for a procedure, CT or X-ray: is the patient high risk?', fig:'memo-2021-12', hint:'"Borang PSA wajib diisi" for every patient given sedation for any procedure, CT and X-ray included. The memo does not define high risk; the form asks about past history, allergy, previous complications and difficult airway features.',
+    opts:[['High risk', 'psah'], ['Not high risk', 'psaf']]};
+  Y.nodes.psah = {end:'refer', title:'High risk: consult the Emergency Physician first', items:['"Kes \'high risk\' yang memerlukan \'sedation\' hendaklah mendapat konsultasi dari Pakar Perubatan Kecemasan" (3 ii)', 'Then fill in the PSA form as for every sedation'], links:[['#yellow-zone--psaf', 'The PSA form']], gap:SRC('2021-12')};
+  Y.nodes.psaf = {end:'neutral', title:'Fill in the Procedural Sedation Analgesia (PSA) form', items:[
+    'Every patient given sedation for any procedure, CT and X-ray included: the PSA form (PSA/JKT/HKL/2013) in duplicate, one copy with the patient\'s record and one in the PSA file (3 i)',
+    'The form covers the indication (CMR, T&S, acute wound management, others), the place (Red zone, Yellow zone, IC ward), the pre-procedure assessment and preparation, monitoring and the medications given',
+    '"To take vital signs every 5 minutes during procedure, and every 15 minutes during observation until fully conscious" (form, side 2)',
+    'After the procedure it records any adverse event: "hypoxia (SPO2 <91%), hypotension, cardiac arrest, vomiting, apnoea etc", reversal agents, and the discharge criteria'],
+    gap:SRC('2021-12', 'and its PSA form') + ' The form refers to Lampiran 2 (medication) and Lampiran 3 (airway, last meal, trolley, discharge criteria), which are not in the memo\'s file: no drug or dose is given here.'};
+
+  const CVCB = ['Operator and assistant practised correct hand hygiene technique', 'Operator and assistant wore sterile gloves and gown, cap and mask', 'Equipment assembled and verified', 'Skin site scrubbed back and forth with friction using 2% chlorhexidine for 30 seconds (2 min for femoral)', 'Skin site allowed to dry completely before puncture (2 min for femoral). Do not wipe, fan or blot.', 'Patient\'s body covered by sterile drape from head to toe', 'Ultrasound probe cover applied', 'Local anaesthesia administered', 'CVC connected to 3-way stop cock, flushed and all lumen clamped except for distal lumen', 'Vein punctured and blood aspirated, guided by real-time ultrasound', 'Guidewire inserted followed by needle and syringe removal', 'Small incision (3mm) in the skin made using scapel', 'Dilator slided over the guidewire in twisting motion to create track and then removed', 'CVC threaded over the guidewire via unclamped distal lumen and the end of guidewire is grasped with forcep', 'CVC is ONLY then advanced and guidewire removed', 'CVC placement confirmed with ultrasound', 'Blood aspirated and flushed from each lumen', 'All lumen clamped, 3-way stop cock locked and caps applied', 'CVC secured with suture and sterile transparent dressing applied', 'Insertion date documented on dressing', 'CVC tip position confirmed with CXR'];
+  Y.nodes.cvc = {q:'Central line: is the specialist on duty supervising you directly?', fig:'memo-2022-08', hint:'"Pegawai Perubatan tidak dibenarkan melakukan CVC insertion TANPA \'direct supervision\' dari Pakar yang bertugas" (2.1).',
+    opts:[['Yes, the specialist is with me', 'cvcb'], ['No', 'cvcno']]};
+  Y.nodes.cvcno = {end:'refer', title:'Stop: no CVC without the specialist\'s direct supervision', items:['Ask the specialist on duty to supervise you directly before you start', 'The CVC insertion checklist is in use since 9 May 2022 (2.3)'], gap:SRC('2022-08', 'from the Deputy Head for the Head of Department, effective immediately')};
+  Y.nodes.cvcb = {check:'all', q:'The CVC care bundle: the critical steps', fig:'memo-2022-09', hint:'As printed on the form HKL/JK/PK 01-17 (in force 2 Mar 2022): "If there is any deviation of steps, supervisor must immediately correct the operator." Tick each step as it is done.',
+    items:CVCB, opts:[['Every step done', 'cvcok'], ['A step was missed', 'cvcfix']]};
+  Y.nodes.cvcok = {end:'neutral', title:'Inserted: the daily care, days 1 to 3', items:[
+    'Hub is wiped with 2% chlorhexidine for 30s and allowed to dry prior to access',
+    'Exit site is inspected for any signs of infection',
+    'Transparent dressing is dry and intact',
+    'CVC is still required',
+    'Attach the form to the observation chart; the memo files it with the temperature chart and the drug chart too'],
+    gap:SRC('2022-09', 'and the form HKL/JK/PK 01-17, Daily CVC Monitoring') + ' The equipment list is on the form\'s back page, which is not in the memo\'s file.'};
+  Y.nodes.cvcfix = {end:'refer', title:'A step was missed: the supervisor corrects it now', items:['"If there is any deviation of steps, supervisor must immediately correct the operator"', 'Record any complication on the form'], gap:SRC('2022-09', 'the form HKL/JK/PK 01-17')};
+
+  Y.nodes.refin = {check:'all', q:'A patient referred from another hospital or clinic: is each of these done?', fig:'memo-2022-22', hint:'The staff who receive the case are responsible for each point (3).',
+    items:[
+      'Examined again carefully on arrival, above all critical cases that need intubation and infusions (3 i)',
+      'All the documents received are complete, with the results, X-ray and others (3 ii)',
+      'Intubated: the ETT is confirmed in the right position, with no complication of intubation such as a pneumothorax or a blocked ETT, before any paralytic agent or a higher sedation dose (3 iii)'],
+    opts:[['All done', 'refok'], ['Not yet', 'refno']]};
+  Y.nodes.refok = {end:'neutral', title:'Received safely: carry on with the plan', items:['Re-examined, documents and results complete, the tube checked'], gap:SRC('2022-22')};
+  Y.nodes.refno = {end:'observe', title:'Finish the checks before you go on', items:['"Tidak dibenarkan memberi ubat \'paralytic agent\' atau meningkatkan dos ubat sedation sebelum memastikan ETT pada kedudukan yang betul": no paralytic and no higher sedation dose until the ETT is confirmed in place (3 iii)', 'Re-examine, and chase any missing document or result'], gap:SRC('2022-22')};
+
+  Y.nodes.tr = {q:'Transfer: is this a high-risk patient, on inotropes or ventilated (invasive or non-invasive)?', fig:'memo-2023-14', hint:'Every inter-departmental transfer uses three forms: the Inter-Departmental Transfer of Adult Patients risk assessment (HKL/PKT-14-01), the patient sending checklist and the equipment checklist.',
+    opts:[['Yes, high risk', 'trhi'], ['No', 'trews']]};
+  Y.nodes.trews = {q:'The Early Warning Score, recorded half an hour before the transfer?', hint:'"For EWS ≥ 1, to inform Doctor" (the risk form).',
+    opts:[['EWS 0', 'trlo'], ['EWS 1 to 5', 'trmed'], ['Over 5', 'trhi']]};
+  Y.nodes.trlo = {end:'discharge', title:'Low-risk transfer', items:['"Accompanied by PPK/JM/JT/ Pen.Peg.Perubatan"', 'The memo asks for its three forms on every transfer: the risk assessment, the patient sending checklist and the equipment checklist'], gap:SRC('2023-14', 'the risk assessment flow chart (HKL/PKT-14, issue 02, amendment 01, in force January 2016)')};
+  Y.nodes.trmed = {q:'Medium-risk transfer. Consult the PP: is the transfer essential now?', opts:[['Yes', 'trmy'], ['No', 'trwait']]};
+  Y.nodes.trmy = {end:'observe', title:'Medium risk: transfer with trained staff', items:['"Transfer with PP/PPS and JT/Pen. Peg. Perubatan with appropriate training as judged by managing PP"', 'Fill in the transfer checklist, with monitoring'], gap:SRC('2023-14', 'the risk assessment flow chart')};
+  Y.nodes.trhi = {q:'High risk. Consult the specialist in charge: is the transfer essential now?', opts:[['Yes', 'trhy'], ['No', 'trwait']]};
+  Y.nodes.trhy = {end:'admit', title:'High risk: transfer with an ALS-trained doctor', items:['"Transfer with: PP with ALS training and PPS/ JT/ Pen.Peg.Perubatan"', 'Fill in the transfer checklist, with monitoring'], gap:SRC('2023-14', 'the risk assessment flow chart: "EWS =0" low, "EWS =1 - 5" medium, "EWS > 5" high (a faint scan, read against the 5 beside it)')};
+  Y.nodes.trwait = {end:'observe', title:'Not essential now: resuscitate and delay the transfer', items:['"Resuscitate & delay transfer"'], gap:SRC('2023-14', 'the risk assessment flow chart')};
+
+  Y.nodes.alb = {end:'neutral', title:'Human albumin needs the Emergency Physician', fig:'memo-2024-13', items:['"...prekripsi Human Albumin perlu mendapat persetujuan dan tandatangan timbal dari Pakar Kecemasan": a human albumin prescription needs the Emergency Physician\'s agreement and countersignature (2)', 'Effective immediately (3)'], gap:SRC('2024-13', 'from morning meeting 25/2024')};
+
+  Y.nodes.dda = {end:'neutral', title:'Dangerous drugs (DDA): your part as the MO', fig:'memo-2024-11', items:[
+    '"Pegawai Perubatan BERTANGGUNGJAWAB memastikan preskripsi ubat pesakit (in patient) DITULIS LENGKAP": write the in-patient prescription in full (duty 8)',
+    '"Pegawai Perubatan TIDAK DIBENARKAN mengambil / mengeluarkan DD dari Almari DD": you may not take a dangerous drug out of the DD cupboard yourself (duty 14)',
+    'The flow: you write the prescription and ask the PPP or JT to give it; the PPP or JT in charge of the patient checks it and asks the DD in-charge, who issues it; the syringing out is done together',
+    'A zone\'s dangerous drugs are for that zone only: "DD Yellow Zone terhad kepada pesakit Yellow Zone/ Yellow Zone Extension/ Psy Cubical sahaja" (duty 13)',
+    'Every DD given is recorded under the patient\'s real name, and two patient identifiers are used each time'],
+    gap:SRC('2024-11', 'its 15 duties of the DD in-charge and its flow chart; it cancels memo HKL/JK/98/188/3(49)20 of 1 Oct 2020')};
+
+  Y.nodes.poct = {end:'neutral', title:'Stat FBC and ABG on the POCT machine', fig:'memo-2023-24', items:POCT, gap:POCTGAP};
+
+  Y.nodes.unk = {end:'neutral', title:'An "unknown" patient now identified: keep both wristbands', fig:'memo-2024-04', items:[
+    'A patient registered as "unknown" and later re-registered under the real identity may wear the new wristband together with the original "unknown" one (2)',
+    'Why: blood samples and tests already sent under the unknown identity stay usable for that patient (2)'],
+    gap:SRC('2024-04', 'after the Department Retreat of 26 Feb 2024 and the Transfusion Committee')};
+
+  Y.see = (Y.see || []).concat([['#gz-rules--gzm', 'Green Zone: department memos']]);
+  Y.kw = ((Y.kw || '') + ' memo blood transfusion verifier sedation PSA CVC central line care bundle referral transfer EWS albumin dangerous drugs DDA morphine POCT FBC ABG unknown wristband').trim();
+  Y.refs = (Y.refs || []).concat(['Department memos: ' + ['2022-19', '2021-12', '2022-08', '2022-09', '2022-22', '2023-14', '2024-13', '2024-11', '2023-24', '2024-04'].map(M).join('; ')]);
+
+  G.kw = ((G.kw || '') + ' team leader ketua pasukan roll call surge memo elderly tramadol tramal records clerking note critical value lab notification UKA STEMI KVAS police detainee forensic POCT LA OT tourniquet glove').trim();
+  G.refs = (G.refs || []).concat(['Department memos: ' + ['2023-01', '2024-09', '2021-14', '2022-14', '2022-23', '2023-04', '2023-05', '2022-04', '2023-24', '2022-21', '2023-20'].map(M).join('; ')]);
+
+  /* ---------------- Missed fractures: the department's work flow ---------------- */
+  const F = P['missed-fractures'];
+  const ri = F.nodes.menu.opts.findIndex(o => o[1] === 'recall');
+  F.nodes.menu.opts.splice(ri + 1, 0, ['The memo: a reported film shows a fracture', 'mf1']);
+  F.nodes.recall.links = (F.nodes.recall.links || []).concat([['#missed-fractures--mf1', 'The department memo\'s flow']]);
+  F.nodes.mf1 = {q:'The radiology report has come back to you, the MO on duty. Does it show a fracture?', fig:'memo-2022-12', hint:'The report is entered in the "X-Ray reporting" data and handed to the MO on duty, who assesses it (Lampiran 1).',
+    opts:[['Ada kepatahan: a fracture', 'mf2'], ['Tiada kepatahan: no fracture', 'mfn']]};
+  F.nodes.mfn = {end:'neutral', title:'No fracture: return the RPP to the Records Unit', items:['Serah RPP kembali kepada Unit Rekod Jabatan'], gap:SRC('2022-12', 'Lampiran 1')};
+  F.nodes.mf2 = {q:'Can the patient be reached?', opts:[['Yes', 'mfy'], ['No', 'mfno']]};
+  F.nodes.mfy = {end:'refer', title:'Call the patient back', items:['Ask the patient to come back to the department at a time and place that suit the patient', 'Inform the MO involved', 'Document the plan and further action in the RPP', 'Return the RPP to the Records Unit'], gap:SRC('2022-12', 'Lampiran 1')};
+  F.nodes.mfno = {end:'refer', title:'Cannot be reached: a recall letter or the nearest police station', items:[
+    'Send a recall letter, or contact the police station nearest the patient\'s address to reach the patient',
+    'A critical missed fracture that cannot be reached by phone: fill in the form "Pemakluman pesakit Missed Fracture yang tidak dapat dihubungi melalui telefon" (Lampiran 2) in 2 copies and give both to MECC, who call the nearest police station (2)',
+    'One copy goes to the Records Unit; MECC keeps the other in case the police call back (Lampiran 2)',
+    'Then inform the MO involved, document the plan in the RPP and return the RPP to the Records Unit'],
+    gap:SRC('2022-12', 'paragraph 2 and Lampiran 1 and 2')};
+
+  /* ---------------- EMACC follows memo (01)24 of 11 Jan 2024 (Krishna, 12 Nov 2026) ----------------
+     The memo cancels the Klinik Ulangan memo (27)22 and sets the work process: booking at Counter 10 with the slip hijau,
+     the first visit on day 4 (urgent) or day 5 at the earliest, blood results to EM WATCH, at most 2 visits in a month.
+     It does not restate who EMACC is for, so the 2018 SOP's eligibility and case list stay, labelled with their date. */
+  const E = P['emacc'], E24 = s => SRC('2024-02', s);
+  E.title = 'EMACC follow-up (Klinik Ulangan)';
+  E.src = 'Memo (01)24, Jan 2024';
+  E.upd = true;
+  E.lead = 'Emergency Medicine After Care Clinic: a short follow-up for patients discharged from the ED. The work process follows memo HKL/JK/98/188/3(01)24 of 11 Jan 2024, which cancels the Klinik Ulangan memo of 5 Dec 2022.';
+  E.nodes.elig.hint = 'Who EMACC is for comes from the SOP of 1 Feb 2018: the 2024 memo does not restate it.';
+  E.nodes.first.opts = [['Yes', 'usual'], ['No', 'need']];
+  E.nodes.need = {q:'What does the follow-up need to review?', fig:'memo-2024-02',
+    info:['Trauma within 3 months is a new trauma case: seen in the ED or at EMACC (within its first month). After 3 months it is an old case, assessed for the ED or redirected to another facility by its severity (9)',
+      'EMACC sees a patient at most twice within 1 month of discharge; after 1 month it is a new case, registered and triaged again (8)'],
+    opts:[['A blood result', 'bres'], ['The patient, or an X-ray report', 'urg'], ['Only the clinic\'s hours and slots', 'clinic']]};
+  E.nodes.bres = {end:'refer', title:'A blood result to review: EM WATCH, not EMACC', items:['"Bagi kes-kes yang memerlukan review blood result perlu dirujuk ke EMWATCH": cases that need a blood result reviewed are referred to EM WATCH (12)'],
+    links:[['#em-watch', 'EM Watch: telemedicine follow-up']], gap:E24('Lampiran A, 12')};
+  E.nodes.urg = {q:'Is it an urgent review?', hint:'The first visit is no earlier than day 4 (urgent) or day 5, so the X-ray report is back by then (12).',
+    opts:[['Urgent review', 'bku'], ['Not urgent', 'bkn']]};
+  const HOW = [
+    'Write the TCA date on the slip hijau, and send the patient with it to Counter 10, the ED Registration Counter, for the EMACC card and the appointment date; the Pembantu Tadbir records every TCA (7, 11; Lampiran B1)',
+    'The patient brings the slip hijau back to you: record the appointment date in the RPP, clip the slip hijau outside the RPP or the X-ray envelope, and hand over the discharge package (the medication slip, an MC if any, a referral letter if any) before the patient goes home (11; Lampiran B1)',
+    'Tell the patient: at most 2 EMACC visits within 1 month of discharge; refer to a specialist clinic if needed (8)',
+    'Late or missed: seen if a walk-in slot is free while the clinic is open; otherwise a new date on the next clinic day. No appointment card: to the Registration Counter first (13 to 15)',
+    'EMACC runs Monday to Friday, 8 am to 3 pm (Krishna, 12 Nov 2026)'];
+  E.nodes.bku = {end:'refer', title:'Urgent: EMACC on day 4 at the earliest, 12 pm to 3 pm', fig:'emtl', items:HOW, links:[['#emacc--clinic', 'The clinic: hours and slots']], gap:E24('Lampiran A, 7 to 15, and Lampiran B1')};
+  E.nodes.bkn = {end:'refer', title:'Not urgent: EMACC on day 5 at the earliest, 8 am to 3 pm', fig:'emtl', items:HOW, links:[['#emacc--clinic', 'The clinic: hours and slots']], gap:E24('Lampiran A, 7 to 15, and Lampiran B1')};
+  E.nodes.clinic = {end:'neutral', title:'The EMACC clinic: 8 am to 3 pm, Monday to Friday', fig:'memo-2024-02', items:[
+    'EMACC runs 8 am to 3 pm, Monday to Friday (Krishna, 12 Nov 2026). The memo prints the MOs\' hours as 7.30 am to 3.30 pm and consultations from 8.00 am to 3.30 pm, and the triage counter takes the last EMACC patient at 3.00 pm (1, 3, 4)',
+    'Appointments: 8 an hour across 2 consultation rooms, 8.00 am to 3.00 pm, 56 a day not counting walk-ins; about 56 to 60 patients a day in all (10)',
+    'A walk-in with no appointment who is still unwell or still unfit for work and needs a doctor: registered as an EMACC patient, or as a copy card after EMACC hours (16)',
+    'The second visit follows up the first, or bridges to a specialist clinic appointment; the patient is discharged after it (8.2)'],
+    gap:E24('Lampiran A') + ' The hours, 8 am to 3 pm on Monday to Friday, are Krishna\'s instruction of 12 Nov 2026; their written source is under Still to confirm.'};
+  delete E.nodes.book;
+  E.tables[0].title = 'Cases the 2018 SOP sends to EMACC. Its review times are replaced: the first visit is day 4 (urgent) or day 5 at the earliest, and blood results go to EM WATCH (memo (01)24, Jan 2024)';
+  E.refs = ['Memo HKL/JK/98/188/3(01)24: Penyelarasan semula proses kerja pengurusan pesakit Klinik Ulangan (EMACC), 11 Jan 2024, with Lampiran A, A1, B1, B2 and B3', 'Emergency Medicine After Care Clinic (EMACC) Standard Operating Procedure, ETD HKL, 1 Feb 2018 (MO Drive, Clinical / EMACC): who EMACC is for, and its case list'];
+  E.kw = ((E.kw || '') + ' klinik ulangan TCA slip hijau counter 10 kaunter 10 day 4 day 5 urgent review walk-in copy card').trim();
+})();
+
+/* ================= GENERATED by src/edrx.js from sources/pharmacy/: do not edit by hand =================
+   The ED pharmacy drug list: "Senarai Ubat Farmasi Kecemasan HKL", Jabatan Farmasi, HKL, updated ("Tarikh kemaskini")
+   14 Apr 2025, which Krishna gave on 12 Nov 2026: 155 drugs as printed, in its order. A department document (standing
+   rule 6), labelled with its source and date; the names of the pharmacists who prepared and verified it are not copied.
+   Each drug's prescriber category is from the MOH Medicines Formulary (FUKKM), matched by generic name and strength in
+   MyFormulary's public data (version 261014.0003, 5 Nov 2026); the link is the formulary's own e-service search. No
+   indication or dose is copied from the formulary (its portal reserves all rights). [no, name, category, link, note] */
+const EDRX = {
+  src:'Senarai Ubat Farmasi Kecemasan HKL, Jabatan Farmasi HKL, updated 14 Apr 2025',
+  fx:'MOH Medicines Formulary (FUKKM), MyFormulary data of 5 Nov 2026',
+  items:[[1,"Acetylsalicylic Acid 100mg, Glycine 45mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Acetylsalicylic",""],
+    [2,"Acetylsalicylic Acid 150mg Soluble Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Acetylsalicylic","Form printed differently: the list says Soluble Tablet; the formulary lists 150mg only as Dispersible Tablet."],
+    [3,"Acriflavine 0.1% Lotion","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Acriflavine",""],
+    [4,"Acyclovir 200mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Acyclovir",""],
+    [5,"Acyclovir 800mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Acyclovir",""],
+    [6,"Allopurinol 300mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Allopurinol",""],
+    [7,"Alprazolam 0.5mg Tablet","A","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Alprazolam",""],
+    [8,"Amitriptyline HCl 25mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Amitriptyline",""],
+    [9,"Amlodipine 10mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Amlodipine",""],
+    [10,"Amlodipine 5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Amlodipine",""],
+    [11,"Amoxicillin 500mg & Clavulanate 125mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Clavulanate",""],
+    [12,"Amoxicillin 500mg Capsule","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Amoxicillin",""],
+    [13,"Ampicillin & Sulbactam (Sultamicillin) 375mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Sulbact",""],
+    [14,"Antirabies Immunoglobulin Injection","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Antirabies",""],
+    [15,"Antivenene Cobra Injection","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Antivenene",""],
+    [16,"Antivenene King Cobra Injection","","","No King Cobra antivenene in the formulary's public list (only Cobra, Pit Viper, Sea snake, Haemato and Neuro Polyvalent)."],
+    [17,"Antivenene Serum Haematopolyvalent Injection","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Antivenom","Formulary name differs (Haemato Polyvalent Snake Antivenom)."],
+    [18,"Antivenene Serum Neuropolyvalent Injection","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Antivenom","Formulary name differs (Neuro Polyvalent Snake Antivenom)."],
+    [19,"Aqueous Cream","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Aqueous%20Cream",""],
+    [20,"Ascorbic Acid 100mg Tablet","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Ascorbic",""],
+    [21,"Atorvastatin 20mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Atorvastatin",""],
+    [22,"Azithromycin 250mg Tablet","A*, A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Azithromycin","Category depends on the indication: the e-service shows A*, A/KK; MyFormulary shows the badge A/KK and names the category for each indication in its Indications text."],
+    [23,"Baclofen 10mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Baclofen",""],
+    [24,"Benzyl Benzoate 25% Emulsion (Adult) (EBB)","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Benzyl%20Benzoate",""],
+    [25,"Betamethasone 17-Valerate 0.0125% Cream (1:8)","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Betamethasone%2017-Valerate","Formulary gives a range (0.01-0.05%); the list's 0.0125% (1:8 dilution) falls in it."],
+    [26,"Bisacodyl 5mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Bisacodyl",""],
+    [27,"Bisoprolol Fumarate 2.5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Bisoprolol",""],
+    [28,"Bromhexine HCl 8mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Bromhexine",""],
+    [29,"Calamine Cream","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Calamine",""],
+    [30,"Calamine Lotion","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Calamine",""],
+    [31,"Calcitriol 0.25mcg Capsule","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Calcitriol",""],
+    [32,"Calcium Carbonate 500mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Calcium%20Carbonate",""],
+    [33,"Calcium Lactate 300mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Calcium%20Lactate",""],
+    [34,"Calcium Polystyrene Sulphonate 5g Powder","A*, A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Polystyrene","Formulary entry gives no strength (list: 5g). Category depends on the indication: the e-service shows A*, A/KK; MyFormulary shows the badge A/KK and names the category for each indication in its Indications text."],
+    [35,"Carbimazole 5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Carbimazole",""],
+    [36,"Cefuroxime Axetil 250mg tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Cefuroxime",""],
+    [37,"Celecoxib 200mg Capsule","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Celecoxib",""],
+    [38,"Cephalexin Monohydrate 250mg Capsule","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Cephalexin",""],
+    [39,"Cetrimide 2% Lotion","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Cetrimide","Formulary gives a range (1-2%)."],
+    [40,"Charcoal, Activated 250mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Charcoal",""],
+    [41,"Charcoal, Activated 50g Granules","A","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Charcoal",""],
+    [42,"Chloramphenicol 0.5% Eye Drops","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Chloramphenicol",""],
+    [43,"Chloramphenicol 1% Eye Ointment","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Chloramphenicol",""],
+    [44,"Chloramphenicol 5% Ear Drops","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Chloramphenicol",""],
+    [45,"Chlorpheniramine Maleate 4mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Chlorpheniramine",""],
+    [46,"Ciprofloxacin 250mg Tablet","A","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Ciprofloxacin",""],
+    [47,"Clopidogrel 75mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Clopidogrel",""],
+    [48,"Clotrimazole 500mg Vaginal Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Clotrimazole",""],
+    [49,"Cloxacillin Sodium 250mg Capsule","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Cloxacillin",""],
+    [50,"Colchicine 0.5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Colchicine",""],
+    [51,"Cyproheptadine 4mg Tablet","","","Cyproheptadine is not in the formulary's public list."],
+    [52,"Diazepam 5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diazepam",""],
+    [53,"Diclofenac 50mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diclofenac",""],
+    [54,"Digoxin 0.25mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Digoxin",""],
+    [55,"Diltiazem HCl 30mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diltiazem",""],
+    [56,"Diosmin 450mg & Hesperidin 50mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diosmin",""],
+    [57,"Diphenhydramine HCl Expectorant (Adult) 14mg/5ml Syrup","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diphenhydramine",""],
+    [58,"Diphenhydramine HCl Expectorant (Paediatric) 7mg/5ml Syrup","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diphenhydramine",""],
+    [59,"Diphenoxylate 2.5mg & Atropine Sulphate 0.025mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diphenoxylate",""],
+    [60,"Diphtheria Antitoxin Injection","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Diphtheria%20Antitoxin",""],
+    [61,"Dolutegravir 50mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Dolutegravir",""],
+    [62,"Doxycycline 100mg Capsule","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Doxycycline",""],
+    [63,"Erythromycin Ethylsuccinate 400mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Erythromycin",""],
+    [64,"Etoricoxib 120mg Tablet","A*","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Etoricoxib",""],
+    [65,"Famotidine 20mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Famotidine",""],
+    [66,"Felodipine 10mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Felodipine","The formulary lists felodipine only as Extended Release Tablet; the list says Tablet."],
+    [67,"Felodipine 5mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Felodipine","The formulary lists felodipine only as Extended Release Tablet; the list says Tablet."],
+    [68,"Ferrous Fumarate 200mg Tablet","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Ferrous%20Fumarate",""],
+    [69,"Folic Acid 5 mg Tablet","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Folic%20Acid",""],
+    [70,"Frusemide 40mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Frusemide",""],
+    [71,"Gabapentin 300mg Capsule","A*, A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Gabapentin","Category depends on the indication: the e-service shows A*, A/KK; MyFormulary shows the badge A/KK and names the category for each indication in its Indications text."],
+    [72,"Gamma Benzene Hexachloride 0.1% Lotion","","","The scan's decimal mark is unclear (0.1% or 0,1%). Not matched: MyFormulary lists only Gamma Benzene Hexachloride 1% Cream/Lotion (A/KK); the list prints 0,1% (possibly 0.1%; either way not 1%)."],
+    [73,"Gliclazide 80mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Gliclazide",""],
+    [74,"Gliclazide MR 30mg","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Gliclazide","The list prints no form; the formulary's 30 mg MR is a tablet."],
+    [75,"Glycerin 10ML","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Glycerin","The formulary entry is plain Glycerin with no strength or form; the list says 10ML."],
+    [76,"Glycerin 25% & Sodium Chloride 15% Enema","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Glycerin",""],
+    [77,"Glyceryl Trinitrate 0.5mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Glyceryl%20Trinitrate",""],
+    [78,"Hepatitis B 20mcg HbsAg Vaccine Injection","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Hepatitis%20B","Formulary entry gives no strength (list: 20mcg HbsAg)."],
+    [79,"Hepatitis B Immunoglobulin (Human) Injection","A","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Hepatitis%20B",""],
+    [80,"Hydrochlorothiazide 25mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Hydrochlorothiazide",""],
+    [81,"Hydrocortisone 1% Cream","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Hydrocortisone",""],
+    [82,"Hydroxocobalamine 5gm/200ml Injection","","","Hydroxocobalamin is not in the formulary's public list (only cyanocobalamin and mecobalamin)."],
+    [83,"Hyoscine N-Butylbromide 10mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Hyoscine",""],
+    [84,"Idarucizumab 2.5g/50ml Injection","A*","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Idarucizumab","Formulary gives 50 mg/ml, the same concentration as the list's 2.5g/50ml."],
+    [85,"Iodine and Potassium Iodide Solution (LUGOL'S SOLUTION)","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Potassium%20Iodide",""],
+    [86,"Isosorbide Dinitrate 10mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Isosorbide",""],
+    [87,"isosorbide Mononitrate SR 60mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Isosorbide",""],
+    [88,"L-Methionine 500mg Capsule","","","L-Methionine is not in the formulary's public list."],
+    [89,"Lactulose 3.35g/5ml Liquid","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Lactulose",""],
+    [90,"Levonorgestrel 1.5mg Tablet","A*","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Levonorgestrel",""],
+    [91,"Lignocaine 2% Jelly","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Jelly",""],
+    [92,"Liquid paraffin","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Liquid%20Paraffin",""],
+    [93,"Loratadine 10mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Loratadine",""],
+    [94,"Lorazepam 1mg Tablet","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Lorazepam",""],
+    [95,"Magnesium Trisilicate Mixture","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Trisilic",""],
+    [96,"Magnesium Trisilicate Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Trisilic",""],
+    [97,"Mefenamic Acid 250mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Mefenamic",""],
+    [98,"Menthol in Spirit 1.6 % Inhalation","","","Menthol in spirit inhalation is not in the formulary's public list."],
+    [99,"Metformin HCl 500mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Metformin",""],
+    [100,"Methyl Salicylate 25% Ointment","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Methyl%20Salicylate",""],
+    [101,"Metoclopramide HCl 10mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Metoclopramide",""],
+    [102,"Metoprolol Tartrate 100mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Metoprolol",""],
+    [103,"Metronidazole 200mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Metronidazole",""],
+    [104,"Miconazole 2% Cream","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Miconazole",""],
+    [105,"Neomycin 0.5% Cream","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Neomycin",""],
+    [106,"Nystatin 100,000units/ml Suspension","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Nystatin",""],
+    [107,"Olanzapine 10mg Orodispersible Tablet","A*","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Olanzapine","Formulary says Disintegrating Tablet (list: Orodispersible Tablet)."],
+    [108,"Olanzapine 10mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Olanzapine",""],
+    [109,"Olanzapine 5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Olanzapine",""],
+    [110,"Omeprazole 20mg Capsule","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Omeprazole",""],
+    [111,"Oral Rehydration Salt","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Oral%20Rehydration",""],
+    [112,"Oseltamivir 75mg Capsule","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Oseltamivir",""],
+    [113,"Pantoprazole 40mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Pantoprazole",""],
+    [114,"Paracetamol 250mg Suppository","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Paracetamol",""],
+    [115,"Paracetamol 250mg/5ml Syrup","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Paracetamol",""],
+    [116,"Paracetamol 500mg Tablet","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Paracetamol",""],
+    [117,"Perindopril 4mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Perindopril",""],
+    [118,"Phenoxymethyl Penicillin 125mg Tablet","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Phenoxymethyl",""],
+    [119,"Phenytoin Sodium 100mg Capsule","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Phenytoin",""],
+    [120,"Physostigmine 2mg/5ml Injection","","","Physostigmine is not in the formulary's public list."],
+    [121,"Potassium Chloride 600mg SR Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Potassium%20Chloride",""],
+    [122,"Potassium Chloride Powder 1g","","","Not matched: no potassium chloride powder in the formulary's public list (it lists 1 g/10 ml Mixture, C, and 1 g/10 ml Injection, B)."],
+    [123,"Potassium Citrate 1.5g/5ml & Citric Acid Mixt.","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Potassium%20Citrate","Formulary gives 3 g/10 ml, the same concentration as the list's 1.5g/5ml."],
+    [124,"Potassium iodide powder","","","Potassium iodide powder is not in the formulary's public list (only Iodine and Potassium Iodide Solution)."],
+    [125,"Potassium Permanganate 1.5% Solution","","","Potassium permanganate is not in the formulary's public list."],
+    [126,"Prazosin HCl 1mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Prazosin",""],
+    [127,"Prednisolone 5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Prednisolone",""],
+    [128,"Pregabalin 75mg Tablet","","","Not matched: the formulary lists pregabalin 75mg only as Capsule (badge A/KK; A* for some indications); the list says Tablet."],
+    [129,"Prochlorperazine Maleate 5mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Prochlorperazine",""],
+    [130,"Prolase Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Prolase",""],
+    [131,"Propranolol HCl 40mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Propranolol",""],
+    [132,"Propylthiouracil 50mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Propylthiouracil",""],
+    [133,"Rabies Vaccine Injection","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Rabies%20Vaccine",""],
+    [134,"Risperidone 1mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Risperidone",""],
+    [135,"Sertraline HCl 50mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Sertraline",""],
+    [136,"Silver Sulfadiazine 1% Cream","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Sulfadiazine",""],
+    [137,"Sodium Bicarbonate 5% Ear Drops","","","Sodium bicarbonate ear drops are not in the formulary's public list."],
+    [138,"Sodium bicarbonate powder","","","Not matched: no sodium bicarbonate powder in the formulary's public list (it lists 1 g/15 ml Mixture and 8.4% Injection, both B)."],
+    [139,"Sodium Bicarbonate, Citric Acid, Sodium Citrate, Tartaric Acid 4g/sachet (URAL)","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Tartaric",""],
+    [140,"Sodium Chloride 0.9% Eye Drops","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Eye%20Drops",""],
+    [141,"Sodium Dihydrogen Orthophosphate 6gm Sachet","","","Sodium dihydrogen orthophosphate sachet is not in the formulary's public list."],
+    [142,"Sodium Valproate 200mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Valproate",""],
+    [143,"Spironolactone 25mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Spirono",""],
+    [144,"Sulphamethoxazole 400mg + Trimethoprim 80mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Trimethop",""],
+    [145,"Tenofovir DF 300mg / Emtricitabine 200 mg","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Emtricitabine","The list prints no form; the formulary entry is a tablet."],
+    [146,"Theophylline SR 250mg Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Theophylline","Formulary says Long Acting Tablet (list: SR Tablet)."],
+    [147,"Thymol Gargle","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Thymol","Formulary says Thymol Compound Gargle (list: Thymol Gargle)."],
+    [148,"Tramadol HCl 50mg Capsule","A/KK","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Tramadol",""],
+    [149,"Tranexamic Acid 250mg Capsule","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Tranexamic",""],
+    [150,"Trimetazidine 35mg MR Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Trimet",""],
+    [151,"Vitamin B Complex Tablet","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Vitamin%20B",""],
+    [152,"Vitamin B1 B6 B12 Tablet","B","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Vitamin%20B",""],
+    [153,"White Soft Paraffin 30g","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Mole%20Alba","Formulary gives no pack size (list: 30g)."],
+    [154,"Zinc Oxide Cream","C+","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Zinc",""],
+    [155,"Zinc Oxide, Benzyl Benzoate & Balsam Peru Suppository","C","https://pharmacy.moh.gov.my/en/apps/fukkm?generic=Zinc",""]]
+};
+
 
 /* ================= Green Zone MO Guide, version 8: the engine =================
    One page, one view at a time, routed on the hash:
@@ -10920,7 +11481,7 @@ const JOURNEY = [
    alt:'Illustration: patients seated in rows of chairs in the Chair Centric Area while a nurse checks a monitor',
    who:'Only if results are pending, or for observation or referral', title:'CCA, the Chair Centric Area',
    items:['PPP escorts the patient to the CCA and hands over to Yellow Zone Extension staff','Staff seat the patient, write the details on the whiteboard, record vital signs on the slip and monitor','When observation ends they send the patient back to the doctor\'s room, and the slip returns to the Green Zone MO','You stay responsible for the patient you sent, and the BHT goes with them'],
-   links:[['#gz-rules--wait','Where to seat patients who cannot wait outside'],['#gz-rules--ivab','IV antibiotics on a CCA chair'],['#yellow-zone','Uptriage: the Yellow Zone flow']]},
+   links:[['#gz-rules--wait','Where to seat patients who cannot wait outside'],['#gz-rules--ivab','IV antibiotics on a CCA chair'],['#yellow-zone--flow','Uptriage: the Yellow Zone flow']]},
   {short:'Review and finish', ic:'review', sub:'Back to you', img:'img/gz-06-review.webp', clip:'clips/stop5-review.mp4', audio:'audio/stop5.mp3', mo:true,
    say:'Before discharge, reassess and review every result. After a CT brain, ask the EP to review, and book EMACC or EMWATCH follow-up. Unsure, or the disposition is stuck? Call the EP in charge.',
    alt:'Illustration: two doctors review a CT brain image on a screen while a patient waits nearby',
@@ -10941,10 +11502,12 @@ const RULES = [
    items:['Several disciplines and no disposition after a long wait: inform the EP','External referral: discuss with the EP before accepting','Pending at the end of your shift: hand over to the next MO and document who'],
    links:[['#gz-rules--delay','Open the rule'],['#gz-rules--ext','External referrals']]}
 ];
-const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage'],['#gz-rules--ivab','IV antibiotics, no bed free'],['#gz-rules--ep4','Primary team delayed'],['#gz-rules--kk','Redirect to a KK or GP'],['#asthma-zone','Asthma Zone flow'],['#mau-admission','Admission to MAU'],['#referral-rules--ortho','Orthopaedic referral'],['#referral-rules--ipr','Transfer to IPR'],['#emacc','EMACC follow-up'],['#em-watch','EM Watch'],['#outpatient-referral','Clinic referrals'],['#gz-rules--dengue','Dengue from a KK to OW'],['#yellow-zone','Yellow Zone flow'],['#safe-practice','Million Ringgit Habits']];
+const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage'],['#gz-rules--ivab','IV antibiotics, no bed free'],['#gz-rules--ep4','Primary team delayed'],['#gz-rules--kk','Redirect to a KK or GP'],['#asthma-zone','Asthma Zone flow'],['#mau-admission','Admission to MAU'],['#referral-rules--ortho','Orthopaedic referral'],['#referral-rules--ipr','Transfer to IPR'],['#emacc','EMACC follow-up'],['#em-watch','EM Watch'],['#outpatient-referral','Clinic referrals'],['#gz-rules--dengue','Dengue from a KK to OW'],['#yellow-zone--flow','Yellow Zone flow'],['#safe-practice','Million Ringgit Habits']];
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['The ED pharmacy drug list','The Emergency Pharmacy\'s own list of 14 Apr 2025, 155 drugs, found as you type: is it on the list, and who may start it? Each drug shows its prescriber category in the MOH Medicines Formulary (B and C: a medical officer may start it; A/KK, A and A*: a specialist), with a link to the formulary\'s own entry. Search finds a drug by name and opens the list on it.',[['#pharmacy','Open the list'],['#tools','Shift tools']]],
+  ['Department memos for the Green and Yellow Zones','Twenty-two of the department\'s own memos, 2021 to 2024, as steps you can work through: EMACC booking now follows the memo of 11 Jan 2024 (Counter 10, day 4 or day 5); the team leader\'s shift, admitting from the Green Zone, elderly patients, the records to finish, critical lab results, notification, STEMI to IJN, police detainees, stat FBC and ABG, LA OT and tourniquets; in the Yellow Zone, transfusion, sedation, central lines with the care bundle, referred patients, transfers by EWS, albumin, dangerous drugs and unknown patients; and a missed fracture on a reported film. Each shows its memo\'s own pages, with the signature, registration numbers and any incident background covered, and links to the department\'s own memo list.',[['#gz-rules--tl','Team leader of the shift'],['#gz-rules--gzm','Green Zone memos'],['#yellow-zone','Yellow Zone memos']]],
   ['Abdominal pain: the visual handbook','A teaching handbook on adult abdominal pain in the ED, with its quick reference: the bedside pathway, the checks that prevent a miss, red flags, tests and imaging, pain relief and antibiotics, eight presentations, six cases, and a 3D map of the nine regions to tap and turn. Every number was checked against the source the handbook cites; the HKL ebook\'s Abdominal pain pathway stays the department\'s. The Malay discharge script can be read aloud.',[['#abdo-handbook','Open the handbook'],['#abdo-handbook--loc','The 3D map'],['#abdo-handbook--trig','The checks that prevent a miss']]],
   ['Real X-ray films, with the normal anatomy outlined','Reading X-rays now shows a normal film on each step: chest, pelvis, shoulder, elbow, wrist, hand, knee, ankle and foot, eighteen films in all. Each bone is outlined on the film: tap a name to light it, or switch the outlines off to read the film bare. The outlines are this guide\'s own tracing by eye, a teaching aid; some are marked approximate where bones lie over each other. A film loads only when you open its step.',[['#xray-guide--wrj','Wrist'],['#xray-guide--hd','Hand'],['#xray-guide--ankv','Ankle']]],
   ['Dengue follows the 2026 CPG','The Dengue route opens the CPG entry (4th edition), which has a Quick Reference tab. Pregnancy, age 65 and over, and obesity are triaged to Group B1 (MTS level 4, Green), as the Quick Reference prints them. The ebook\'s dengue pathway is kept as printed, with a notice.',[['#dengue-cpg','Dengue CPG']]],
@@ -11008,7 +11571,7 @@ const NUMS = [
   {g:'Emergencies', hot:true, lbl:'Code Stroke', val:'ext 5999', copy:'ext 5999', note:'Onset under 9 hours. Say CODE STROKE, then the patient\'s name, your location and extension, COVID status and the ETD MO\'s name.', href:'#stroke-tia', link:'CVA and TIA', src:'Code Stroke pathway'},
   {g:'Emergencies', lbl:'ED Resus', val:'ext 5339 / 5326', copy:'ext 5339 / 5326', note:'Amber Zone: ext 5324 / 5360.', src:'MAU critical patient flow'},
   {g:'Admission and follow-up', lbl:'MAU mobile team', val:'ext 6682 / 6684', copy:'ext 6682 / 6684', note:'Office hours. After hours, the same extensions reach the MAU 1 (male), MAU 2 (female) and MAU 3 wards. Phone before you register the admission.', href:'#mau-admission', link:'Admission to MAU', src:'MAU flow chart, 18 Oct 2022'},
-  {g:'Admission and follow-up', lbl:'EMACC follow-up', val:'ext 7040', copy:'03-2615 5555 ext 7040', note:'Call 03-2615 5555 ext 7040 and speak to the EMACC MO in charge.', href:'#emacc', link:'EMACC follow-up', src:'EMACC SOP, 1 Feb 2018'},
+  {g:'Admission and follow-up', lbl:'EMACC follow-up', val:'Counter 10', copy:'Counter 10, the ED Registration Counter', note:'Write the TCA date on the slip hijau and send the patient to Counter 10, the ED Registration Counter (memo (01)24, Jan 2024). EMACC runs 8 am to 3 pm, Monday to Friday. The 2018 SOP\'s line to the EMACC MO, ext 7040, is in no 2026 document.', href:'#emacc', link:'EMACC follow-up', src:'Memo (01)24, Jan 2024'},
   {g:'Admission and follow-up', lbl:'IPR specialist on call', val:'03-4023 2966', copy:'03-4023 2966', note:'For a respiratory patient who meets the IPR transfer criteria: stable, no inotropes, Venturi 40% or less, and none of the exclusions.', href:'#referral-rules--ipr', link:'IPR criteria', src:'IPR admission criteria (triage course folder)'},
   {g:'Admission and follow-up', lbl:'IJN hotline', val:'03-2617 8996', copy:'03-2617 8996', note:'ACS that meets the IJN referral criteria, with the patient\'s consent. Do not promise free treatment.', href:'#acs', link:'ACS pathway', src:'Ebook p12–14; IJN update'},
   {g:'Admission and follow-up', lbl:'MAU FAST clinic', val:'MHKL level 2', note:'8 am to 4:30 pm. For example low-risk chest pain with an ECG copy, or CAP with CURB-65 0–1 with a CXR copy.', href:'#outpatient-referral', link:'Clinic referrals', src:'FAST clinic criteria (draft)'},
@@ -11085,7 +11648,7 @@ const DRIVE = [
   ['EMWATCH','added','What EM Watch is, who can use it and which conditions it takes. This answers the open EMWATCH question.',[['#em-watch','EM Watch']]],
   ['MAU','added','The 11 admission criteria, the exclusions, the diagnoses MAU considers and how to phone it; the draft MAU FAST and Physician\'s Clinic criteria.',[['#mau-admission','Admission to MAU'],['#outpatient-referral','Clinic referrals']]],
   ['ARDS / ASTHMA','updated','The Asthma Zone flow follows the 13 Nov 2025 memo: you do the final assessment and discharge. Adult and children\'s MDI doses and the patient action plan are added.',[['#asthma-zone','Asthma Zone flow']]],
-  ['YELLOW ZONE','added','The July 2026 patient flow, and where patients go when the zone is full.',[['#yellow-zone','Yellow Zone flow']]],
+  ['YELLOW ZONE','added','The July 2026 patient flow, and where patients go when the zone is full.',[['#yellow-zone--flow','Yellow Zone flow']]],
   ['OSCC','added','Sexual assault, domestic violence, suspected child abuse, and the June 2026 reminders on forms and police reports.',[['#oscc','OSCC']]],
   ['ABG','added','When to run a blood gas, and when not to.',[['#blood-tests--gas','Blood gas']]],
   ['PDN / BLOOD TRANSFUSION','added','The mandatory pre-transfusion checklist (Mar 2026), bedside labelling and why requests are rejected.',[['#blood-tests--gxm','GXM sample'],['#blood-tests--reject','Rejections']]],
@@ -11103,7 +11666,7 @@ const DRIVE = [
   ['UROLOGY','updated','More reasons for urgent referral, and the discharge bundle for ureteric colic. The acute scrotum flow matches the ebook.',[['#renal-colic','Renal colic']]],
   ['Root files','added','How to import an imaging CD from another hospital. The resus round template is not Green Zone work.',[['#safe-practice--cd','Imaging CDs']]],
   ['GREEN ZONE','checked','The Green Zone Warrior note is already in the guide; nothing new.',[['#gz-rules','Green Zone rules']]],
-  ['EMACC','checked','The 2018 SOP is still the only version. The EMACC video (104 MB) was not opened.',[['#emacc','EMACC']]],
+  ['EMACC','checked','The SOP of 2018. Since 12 Nov 2026 the guide follows the department memo of 11 Jan 2024 for the work process. The EMACC video (104 MB) was not opened.',[['#emacc','EMACC']]],
   ['CLINICAL PATHWAY EDHKL','checked','Version 8.5 is the same file as the ebook this guide is built from.',[]],
   ['SNAKES BITE','unreadable','The Malaysian snakebite guideline is a scanned PDF with no readable text. The snake atlas was not opened.',[]],
   ['PDN: transfusion reaction guide','unreadable','The blood taking and transfusion reaction guide is a picture only.',[]],
@@ -11125,9 +11688,11 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'Department memos added on 12 Nov 2026 (Green Zone memos and the Yellow Zone menu). Still to confirm: (1) the elderly memo HKL/JK/98/188/3(14)2021 of 12 May 2021 (no IV tramadol over 65; elderly waiting for a primary team in the Yellow Zone): still in force? (2) the POCT memo HKL/JK/98/188/1(24)2023 of 8 Nov 2023 was issued for a reagent shortage: are its limits on stat FBC and ABG still in force? (3) repeat BP, ECG and DXT: memo HKL/JK/98/188/3(9)24 says Bilik 9, the one-way flow note says the Procedure Room: the same room? (4) is the LA OT Google Form (memo HKL/JK/98/188/3(23)22) still the way to book?',
+  'The ED pharmacy drug list (added 12 Nov 2026) is the Emergency Pharmacy\'s list of 14 Apr 2025, with each drug\'s MOH formulary category. Still to confirm: (1) is a later list out? (2) how the ED applies the categories A/KK, A and A* when an MO writes the prescription (the formulary says who may start one; does the EP countersign?); (3) row 72, Gamma Benzene Hexachloride: the scan\'s decimal mark is unclear (read as 0.1%), and the formulary lists only 1%.',
   'EM Watch booking is now in the app from work instruction AK-15 (in force 16 Mar 2026, p12). Still to confirm: its two forms, the Pink Form (Lampiran 1) and the EM WATCH Appointment form (Lampiran 2), which are not attached to the copy seen; and the timing: AK-15 aims to reassess within 48 to 72 hours and to review CT brain reports within 48 hours of discharge, where the department policy (2026, 9.2.1) and the 2023 deck give 1 week; and the deck\'s online prescription against AK-15\'s documents collected at the Record Unit.',
   'Redirection is in the app in part: a primary triage decision by the PPP for Level 5 (9XXX), with a Redirection Slip and the Redirection Book (AK-01, 2026; memo HKL/JK/98/188/3(2)24, 11 Jan 2024; the 2021 policy). Still to confirm: how a Green Zone MO redirects a patient already seen in the consultation room; whether private GPs are included; whether the 2021 hours (0730 to 1930, Monday to Friday), slip and list of Klinik Kesihatan are current; and the redirection procedure AK-01 cites (HKL/JK/PK 0x), which is not in the department\'s folder.',
-  'EMACC booking: the app follows the SOP of 1 Feb 2018 (ext 7040, the EMACC box, 40 a day, first review within 1 week). Memo HKL/JK/98/188/3(01)24 of 11 Jan 2024, which cancels memo (27)22, writes the TCA on the slip hijau and sends the patient to Counter 10: 7.30 am to 3.30 pm, 56 appointments a day, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EMWATCH. Work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge. The department policy (2026, 8.3.3) gives 9 am to 4 pm on working days. No 2026 document prints ext 7040.',
+  'EMACC follows memo HKL/JK/98/188/3(01)24 of 11 Jan 2024 since 12 Nov 2026 (Krishna\'s decision), in place of the SOP of 1 Feb 2018: the TCA on the slip hijau and Counter 10, 7.30 am to 3.30 pm, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EM WATCH; and EMACC runs 8 am to 3 pm, Monday to Friday (Krishna, 12 Nov 2026). Still to confirm: a written source for those hours (the memo prints 7.30 am to 3.30 pm for the MOs, and the department policy, 2026, 8.3.3, 9 am to 4 pm on working days); work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge; no 2026 document prints ext 7040; who EMACC is for still comes from the 2018 SOP; and the ebook\'s "EMACC or EMWATCH in 24 to 48 hours" (for example abdominal pain) against the memo\'s first EMACC visit on day 4 or day 5.',
   'Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents; a 2020 department table gives ext 5137 and 6838), the SCAN team line and the IPR on-call line.',
   'The MERS-CoV case definition, which is not in the PUI file.',
   'The MOH snakebite guideline (2017): Tables 15 and 16 leave four pit vipers and a krait\'s second choice blank, and give no dose for an unidentified bite and no maximum; and in HKL, where an observation-only or post-antivenom patient goes, who arranges the bloods at 5-7 days, the antivenom stock, and the RECS contact. CPG-REVIEW-SNAKEBITE.md.',
@@ -11246,6 +11811,7 @@ const ICONS = {
   triage:'<path d="M4 9.5 10.5 3H19a1 1 0 0 1 1 1v8.5L13.5 19a1.8 1.8 0 0 1-2.5 0L4 12a1.8 1.8 0 0 1 0-2.5z"/><circle cx="15.5" cy="7.5" r="1.5"/>',
   stetho:'<path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="10.5" r="2"/>',
   syringe:'<path d="m14 4 6 6M17 7l-8.5 8.5L5 16l.5-3.5L14 4"/><path d="m4 20 2.4-2.4M10 10.5l3.5 3.5"/>',
+  pill:'<path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7z"/><path d="m8.5 8.5 7 7"/>',
   chair:'<path d="M7 4v8.5h10V20M7 12.5V20M17 12.5V8"/><path d="M5 12.5h14"/>',
   review:'<path d="M14 3.5H7A2 2 0 0 0 5 5.5v13a2 2 0 0 0 2 2h4"/><path d="M8.5 8h6M8.5 11.5h3"/><circle cx="16" cy="15.5" r="3.3"/><path d="m18.5 18 2 2"/>',
   map:'<path d="M4 6.5 9 4l6 2.5L20 4v13.5L15 20l-6-2.5L4 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
@@ -11547,6 +12113,26 @@ function filmHTML(k){
     `<figcaption>Tap a name to light that part on the film${f.groups ? '; a group opens to its bones' : ''}. The outlines are this guide's own tracing by eye, a teaching aid and not a measurement; where one part runs on into the next, the line between them is a guide, not an edge on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
 }
 if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); });
+/* ================= Department memos (12 Nov 2026, data18.js) =================
+   A memo card on the step that quotes it: its number, date and title as printed, and its own scanned pages
+   (app/memo/<key>-p<N>.webp, with the signature and registration numbers covered), each opened with a tap in the
+   page viewer. Nothing loads before the tap. */
+const memoHTML = k => { const m = MEMOS[k];
+  return `<div class="fig figmemo"><div class="mm-h"><span class="mm-chip">${svg('rule')}Department memo</span><span class="mm-ref">${esc(m.ref)} · ${esc(m.date)}</span></div>
+    <p class="mm-t" lang="ms">${esc(m.t)}</p>
+    <div class="mm-p">${m.pages.map(([n, l]) => `<button type="button" class="pill" data-ppage="memo/${k}-p${n}" data-pname="${esc('Memo ' + m.ref + ' · ' + l)}">${svg('poster')}${esc(l)}</button>`).join('')}<a class="pill" href="${MEMO_LIST}" target="_blank" rel="noopener noreferrer">The department's memo list${svg('ext')}</a></div>
+    <p class="fig-cap">The memo as scanned, a page at a tap: signatures, registration numbers and any incident background are covered. The department's own list holds every memo.</p></div>`; };
+if (typeof MEMOS !== 'undefined') Object.keys(MEMOS).forEach(k => { FIGS['memo-' + k] = () => memoHTML(k); });
+/* On a question or a step the memo card goes below the options, so the question stays at the top of a phone screen */
+const memoFig = n => !!(n.fig && /^memo-/.test(n.fig));
+/* EMACC's first visit (memo HKL/JK/98/188/3(01)24, Lampiran A, 12): why it is day 4 or day 5, as the memo's own timeline draws it */
+FIGS.emtl = () => { const D = [['1', 'The patient is discharged', ''], ['2', '9 am: PPK Rekod sends the X-ray for reporting', ''], ['3', 'X-ray reporting', ''], ['4', '9 am: PPK Rekod collects the reported X-ray. 10 am: missed fracture review by an ED MO. 12 pm to 3 pm: EMACC, urgent cases', 'u'], ['5', 'EMACC, cases that are not urgent (the first appointment)', 'n']];
+  return `<div class="fig figemt"><ol class="emt">${D.map(([d, t, k]) => `<li class="${k}"><b>Day ${d}</b><span>${esc(t)}</span></li>`).join('')}</ol><p class="fig-cap">The first EMACC visit waits for the X-ray report (memo (01)24, Lampiran A, 12).</p></div>`; };
+/* The team leader's room through the day (memo HKL/JK/98/188/3(1)23, Lampiran 1): first and last case of each shift */
+FIGS.tlclock = () => { const R = [['Morning', '8.00 am', '2.00 pm'], ['Afternoon', '3.00 pm', '9.00 pm'], ['Night', '10.00 pm', '7.00 am']];
+  return `<div class="fig figtl" role="img" aria-label="Your room as team leader: cases start at ${R.map(r => r[1]).join(', ')} and the last case comes at ${R.map(r => r[2]).join(', ')}">
+    ${R.map(([s, a, b], i) => `<div class="tl-r" style="--d:${(i * .12).toFixed(2)}s"><b>${s}</b><span class="tl-a"><em>First case</em>${a}</span><span class="tl-bar" aria-hidden="true"><i></i></span><span class="tl-b"><em>Last case</em>${b}</span></div>`).join('')}
+    <p class="fig-cap">Your room as team leader: when its cases start and when the last one comes. After the last case, share out the unseen cases.</p></div>`; };
 /* ================= The 3D abdomen map (12 Nov 2026) =================
    The handbook's nine regions (p. 7) on a glass torso rendered with Blender for this guide (sources/abdo/abdo3d.blend): the front
    view first (abdo3d/poster.webp), the patient's right on the screen's left, labelled. Tap a region to light it and see what to
@@ -11752,6 +12338,8 @@ function search(q, loose){
       if (inB) s += 1;
     }
     if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
+    /* An ED pharmacy drug comes after the pathways, rules and guidelines that mention it (the list keeps its own order) */
+    if (e.kind === 'Drug') s = Math.min(s, 1);
     return {e, s};
   }).filter(Boolean).sort((a, b) => b.s - a.s).slice(0, 14).map(r => r.e);
 }
@@ -11815,7 +12403,7 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose){
-  return `<li><a href="${e.href}" role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -11852,7 +12440,7 @@ function closePal(restore){
 }
 
 /* ================= Views ================= */
-const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide'};
+const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
 /* A topic or group tile filters the list under it. On a phone the tiles fill the screen, so the list comes up to meet the
@@ -11962,7 +12550,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -12204,7 +12792,7 @@ function card(n, p){
   }
   if (n.step){
     const obs = n.kind === 'observe';
-    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig ? figHTML(n.fig) : ''}${list(n.items)}
+    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) ? figHTML(n.fig) : ''}
       <div class="opts"><button type="button" class="opt sugg" data-next><kbd>1</kbd><span>Done, continue</span>${svg('chev', 'gt')}</button></div></div></div>`;
   }
   const sc = n.check === 'score';
@@ -12213,8 +12801,8 @@ function card(n, p){
     n.items.map((i, k) => `<li><label><input type="checkbox" id="c${k}"><span>${sc ? esc(i[0]) + ` <b class="pts">(${pts(i[1])})</b>` : esc(i)}</span></label></li>`).join('') + '</ul>' + (sc ? '<p class="score">Score <b id="scv">0</b></p>' : '') : '';
   const info = n.info ? '<ul class="info">' + n.info.map(i => `<li>${esc(i)}</li>`).join('') + '</ul>' : '';
   return `<div class="stack"><div class="qc"><h2>${esc(n.q)}</h2>
-    ${n.hint ? `<p class="hint">${esc(n.hint)}</p>` : ''}${n.fig ? figHTML(n.fig) : ''}${info}${checks}
-    <div class="opts">${n.opts.map(([l], k) => `<button type="button" class="opt" data-go="${k}">${k < 9 ? `<kbd>${k + 1}</kbd>` : ''}<span>${esc(l)}</span>${svg('chev', 'gt')}</button>`).join('')}</div></div></div>`;
+    ${n.hint ? `<p class="hint">${esc(n.hint)}</p>` : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${info}${checks}
+    <div class="opts">${n.opts.map(([l], k) => `<button type="button" class="opt" data-go="${k}">${k < 9 ? `<kbd>${k + 1}</kbd>` : ''}<span>${esc(l)}</span>${svg('chev', 'gt')}</button>`).join('')}</div>${memoFig(n) ? figHTML(n.fig) : ''}</div></div>`;
 }
 function wireChecks(n){
   const boxes = $$('#cur .checks input'), btns = $$('#cur button.opt');
@@ -13596,6 +14184,44 @@ function renderLinks(){
     <ul class="lk-l">${g.items.map(it => `<li><a class="lk" href="${esc(it.u)}" target="_blank" rel="noopener noreferrer"><span class="lk-i">${svg(LK_IC[it.k] || 'link')}</span><span class="lk-t"><b>${esc(it.t)}</b>${it.d ? `<small>${esc(it.d)}</small>` : ''}${g.k === 'net' ? `<code class="lk-u">${esc(lkHost(it.u))}</code>` : ''}</span><span class="lk-k">${esc(it.k)}</span>${svg('ext')}</a>${g.k === 'net' ? `<button type="button" class="cpy" data-lcopy="${esc(it.u)}" aria-label="Copy the address of ${esc(it.t)}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</li>`).join('')}</ul></section>`).join('')
     : '<p class="empty">No link matches. Try a form, a system or a folder.</p>';
 }
+/* ================= The ED pharmacy drug list (12 Nov 2026, data19.js) =================
+   The Emergency Pharmacy's own list as printed, found as you type, with each drug's prescriber category in the MOH
+   Medicines Formulary and a link to the formulary's own entry. A category says who may start the prescription
+   (MOH Pharmaceutical Services Programme): B and C include medical officers; A/KK, A and A* are for specialists. */
+const RX_TIER = c => !c ? 'no' : /^(B|C\+?)$/.test(c) ? 'mo' : 'sp';
+const RX_TILE = () => TILE_KEYS.has('pharm') ? 'pharm' : 'doses';
+/* Who may start (initiate) the prescription, as the MOH Pharmaceutical Services Programme's MOHMF page defines each category */
+const RX_DEF = {'A*':'consultants and specialists, for specific indications only', 'A':'consultants and specialists', 'A/KK':'consultants, specialists and family medicine specialists', 'B':'medical officers, as well as specialists', 'C':'paramedics and medical officers, as well as specialists', 'C+':'paramedics doing midwifery too'};
+const rxGeneric = t => t.split(/\s(?=\d)|,\s|\s&\s|\s\(/)[0].trim();
+let rxF = 'all';
+function renderRx(){
+  if (typeof EDRX === 'undefined') return;
+  const q = ($('#rxq').value || '').trim().toLowerCase(), all = EDRX.items, cnt = t => all.filter(i => RX_TIER(i[2]) === t).length;
+  $('#rxf').innerHTML = [['all', 'All'], ['mo', 'MO may start'], ['sp', 'Specialist categories'], ['no', 'Not in the formulary']].map(([k, t]) => `<button type="button" data-rf="${k}" aria-pressed="${rxF === k}">${t} <span class="n">${k === 'all' ? all.length : cnt(k)}</span></button>`).join('');
+  const hits = all.filter(i => (rxF === 'all' || RX_TIER(i[2]) === rxF) && (!q || i[1].toLowerCase().includes(q)));
+  const L0 = i => i[1][0].toUpperCase(), letters = [...new Set(hits.map(L0))];
+  $('#rxaz').innerHTML = hits.length > 12 ? letters.map(L => `<button type="button" data-rl="${L}" aria-label="Drugs starting with ${L}">${L}</button>`).join('') : '';
+  $('#rxn').textContent = q || rxF !== 'all' ? `${hits.length} of ${all.length} drugs` : `${all.length} drugs, in the list's own order`;
+  const re = q ? new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
+  const hl = s => re ? s.split(re).map((x, k) => k % 2 ? `<mark>${esc(x)}</mark>` : esc(x)).join('') : esc(s);
+  const tip = c => !c ? 'Not found in the formulary\'s public list at this strength or form' : `MOH formulary category ${c}${RX_DEF[c] ? ': ' + RX_DEF[c] : ', by indication'}`;
+  $('#rxl').innerHTML = hits.length ? letters.map(L => `<section class="phx-g" id="rx-${L}"><h2>${L}</h2><ul class="phx-l">${hits.filter(i => L0(i) === L).map(([n, t, c, u, note]) => `<li class="phx" data-rxn="${n}"><span class="phx-t"><b>${hl(t)}</b>${note ? `<small>${esc(note)}</small>` : ''}</span><span class="phx-b ${RX_TIER(c)}" title="${esc(tip(c))}"><span class="vh">${esc(tip(c))}. </span><span aria-hidden="true">${c ? esc(c) : '·'}</span></span>${u ? `<a class="phx-go" href="${esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(t)} in the MOH formulary">${svg('ext')}</a>` : '<span aria-hidden="true"></span>'}</li>`).join('')}</ul></section>`).join('')
+    : '<p class="empty">No drug on the ED pharmacy\'s list of 14 Apr 2025 matches. Ask the pharmacy, or check the MOH formulary.</p>';
+}
+function renderRxStatic(){
+  if (typeof EDRX === 'undefined') return;
+  const all = EDRX.items, n = all.filter(i => i[2]).length;
+  withTiles($('#rxhero'), `${tileMedia(RX_TILE())}<span class="lbl">Jabatan Farmasi HKL · 14 Apr 2025</span><h2>${all.length} drugs on the ED list</h2><p>${n} with their MOH formulary category. Tap ${svg('ext')} for the formulary's own entry.</p>`);
+  $('#rxcats').innerHTML = `<div class="phx-c"><b><span class="phx-b mo">B · C</span>MO may start</b>B: medical officers and specialists. C and C+: paramedics too.</div>
+    <div class="phx-c"><b><span class="phx-b sp">A/KK · A</span>Specialist</b>A/KK: consultants, specialists and family medicine specialists. A: consultants and specialists. A*: specialists, for specific indications only.</div>
+    <div class="phx-c"><b><span class="phx-b no">·</span>Not found</b>Not in the formulary's public list at the strength or form printed here.</div>`;
+  $('#rxsrc').innerHTML = `Source: ${esc(EDRX.src)}, a department document: ${all.length} drugs, names and strengths as printed. Categories: the <a href="https://pharmacy.moh.gov.my/en/documents/ministry-health-medicines-formulary-mohmf.html" target="_blank" rel="noopener noreferrer">MOH Medicines Formulary</a> (who may start a prescription), matched by name and strength in its MyFormulary data of 5 Nov 2026; where the formulary prints a different form or strength, the drug says so. The formulary is the authority: open its entry before you prescribe. Indications and doses are not copied here.`;
+}
+function renderToolsRx(){
+  if (typeof EDRX === 'undefined' || !$('#trx')) return;
+  const all = EDRX.items, c = t => all.filter(i => RX_TIER(i[2]) === t).length;
+  withTiles($('#trx'), `${tileMedia(RX_TILE())}<div class="row"><span class="ic">${svg('pill')}</span><h2>ED pharmacy drug list</h2><span class="tag">${all.length}</span></div><p>Is it on the Emergency Pharmacy's list, and who may start it? The list of 14 Apr 2025, with the MOH formulary categories.</p><ul class="gl"><li><span>MO may start</span><b>${c('mo')}</b></li><li><span>Specialist</span><b>${c('sp')}</b></li><li><span>Not found</span><b>${c('no')}</b></li></ul><span class="go-l">Open the list${svg('chev')}</span>`);
+}
 function renderToolsLinks(){
   withTiles($('#tlk'), `${tileMedia('links')}<div class="row"><span class="ic">${svg('link')}</span><h2>ED links</h2><span class="tag">${LINKS.reduce((a, g) => a + g.items.length, 0)}</span></div><p>The department's forms, hospital systems and folders, from the ETD HKL link page.</p><ul class="gl">${LINKS.map(g => `<li><span>${esc(g.h)}</span><b>${g.items.length}</b></li>`).join('')}</ul>`);
   /* Reading X-rays (11 Nov 2026): the tile lists the films from the guide's own start menu, so it never drifts from the entry */
@@ -14176,7 +14802,7 @@ function route(){
   if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'links', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
+  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
   else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
     if (id && id !== calcTab){ calcTab = id; renderCalc(); }
@@ -14203,12 +14829,18 @@ $('#cnt-path').textContent = Object.keys(P).length;
 $('#cnt-rule').textContent = FLOW_IDS.length + PROT_IDS.length;
 $('#cnt-calc').textContent = Object.keys(CALCS).length;
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
-renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks();
+renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks(); renderRxStatic(); renderRx(); renderToolsRx();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
 $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
 IDX.push({href:'#links', title:'ED links', kind:'Tool', meta:'Forms, hospital systems and folders', body:'linktree ETD HKL link page forms hospital systems intranet folders ' + LINKS.flatMap(g => g.items.map(it => it.t + ' ' + it.d)).join(' · '), ic:'link', c:'c-flow'});
 LINKS.forEach(g => g.items.forEach(it => IDX.push({href:'#links', title:it.t, kind:'Link', meta:'ED links · ' + g.h, body:[it.d, it.k, g.h].join(' · '), ic:'link', c:'c-flow'})));
+/* the ED pharmacy list: the page, and each drug by its generic name (all strengths together), opening the list on it */
+if (typeof EDRX !== 'undefined'){
+  IDX.push({href:'#pharmacy', title:'ED pharmacy drug list', kind:'Tool', meta:'What the Emergency Pharmacy supplies, with the MOH formulary categories', body:'pharmacy farmasi ubat drug list stock available discharge prescription formulary FUKKM category ' + EDRX.items.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta'});
+  const G = {}; EDRX.items.forEach(i => { const g = rxGeneric(i[1]); (G[g] = G[g] || []).push(i); });
+  Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
+}
 renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderInstall();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
@@ -14287,6 +14919,13 @@ $('#run').addEventListener('keydown', e => {
 /* Tools and numbers */
 $('#nums').addEventListener('click', e => { const b = e.target.closest('button[data-copy]'); if (b){ const i = +b.dataset.copy; copyText(NUMS[i].copy, {btn:b, el:$('#nv' + i)}); } });
 $('#lkq').addEventListener('input', renderLinks);
+/* The ED pharmacy list: find as you type, filter by category, jump to a letter; a drug found by search opens the list on it */
+$('#rxq').addEventListener('input', renderRx);
+$('#rxf').addEventListener('click', e => { const b = e.target.closest('[data-rf]'); if (b){ rxF = b.dataset.rf; renderRx(); const nb = $(`#rxf [data-rf="${rxF}"]`); if (nb) nb.focus(); } });
+$('#rxaz').addEventListener('click', e => { const b = e.target.closest('[data-rl]'); if (b){ const s = document.getElementById('rx-' + b.dataset.rl); if (s) s.scrollIntoView({block:'start'}); } });
+const rxFrom = a => { if (a && a.dataset.rx){ rxF = 'all'; $('#rxq').value = a.dataset.rx; renderRx(); } };
+$('#palbody').addEventListener('click', e => rxFrom(e.target.closest('a[data-rx]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) rxFrom(palLinks()[palSel]); }, true);
 $('#lkf').addEventListener('click', e => { const b = e.target.closest('[data-lf]'); if (b){ lkF = b.dataset.lf; renderLinks(); const nb = $(`#lkf [data-lf="${lkF}"]`); if (nb) nb.focus(); } });
 $('#lnks').addEventListener('click', e => { const b = e.target.closest('[data-lcopy]'); if (b) copyText(b.dataset.lcopy, {btn:b, el:b.closest('li').querySelector('.lk-u'), ok:'Copied'}); });
 

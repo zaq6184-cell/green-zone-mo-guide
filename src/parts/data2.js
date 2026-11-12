@@ -5,7 +5,7 @@
 
 /* Existing rule entries: group them and link the answered EM Watch question */
 P['gz-rules'].sub = 'flow';
-P['gz-rules'].see = [['#em-watch','What EM Watch is'],['#mau-admission','Admission to MAU'],['#yellow-zone','Yellow Zone flow']];
+P['gz-rules'].see = [['#em-watch','What EM Watch is'],['#mau-admission','Admission to MAU'],['#yellow-zone--flow','Yellow Zone flow']];
 P['emacc'].sub = 'flow';
 P['emacc'].see = [['#em-watch','EM Watch: telemedicine follow-up'],['#outpatient-referral','MAU FAST and Physician\'s Clinic']];
 P['referral-rules'].sub = 'flow';
@@ -502,7 +502,7 @@ P['abdominal-pain'].dept = [
   {h:'Women of reproductive age', src:'KKM circular BPKK KKM.600-30/3/5 Jld.2 (9), 31 May 2018', items:['Record the LMP of every woman of reproductive age','Keep a high suspicion of ectopic pregnancy whatever her marital status, and confirm or exclude it by history, examination and tests']},
   {h:'Before you send the patient home', src:'Million Ringgit Habits, ETD HKL', items:['Examine all 4 quadrants and document the findings; in the right iliac fossa check Rovsing, obturator and psoas signs','Discharge only when the pain score is 0, with a clear diagnosis and safety-net advice','Men: examine the testes. Epigastric pain: ECG ± amylase']}
 ];
-P['abdominal-pain'].see = [['#safe-practice--abd','Abdominal pain habits'],['#emacc','EMACC review within 3 days']];
+P['abdominal-pain'].see = [['#safe-practice--abd','Abdominal pain habits'],['#emacc','EMACC follow-up']];
 
 P['paracetamol-overdose'].dept = [
   {h:'Drug level tubes', src:'TDM PCM, salicylate, BZD (MO Drive, Toxicology)', items:['Paracetamol and salicylate levels: together in 1 plain (red-top) tube','Benzodiazepine level: a separate plain tube']}
@@ -522,8 +522,8 @@ P['renal-colic'].see = [['#emacc','EMACC follow-up'],['#em-watch','EM Watch']];
 
 P['pneumonia'].see = [['#infection-alerts--tb','Suspected TB'],['#outpatient-referral','MAU FAST clinic for CURB-65 0–1']];
 P['mild-tbi'].see = [['#gz-rules--reas','CT brain and going home: EP review'],['#safe-practice--cd','Imaging CDs from outside']];
-P['behavioural-disturbance'].see = [['#referral-rules--psy','Psychiatry referral'],['#yellow-zone','Yellow Zone PSY corner']];
+P['behavioural-disturbance'].see = [['#referral-rules--psy','Psychiatry referral'],['#yellow-zone--flow','Yellow Zone PSY corner']];
 P['cellulitis'].see = [['#em-watch','EM Watch takes cellulitis'],['#mau-admission','MAU takes cellulitis']];
 P['asthma'].see = [['#asthma-zone','Asthma Zone flow (Nov 2025)'],['#children--asthma','Children\'s asthma doses']];
-P['hypertensive-urgency'].see = [['#emacc','EMACC within 1 week'],['#em-watch','EM Watch']];
+P['hypertensive-urgency'].see = [['#emacc','EMACC follow-up'],['#em-watch','EM Watch']];
 P['scrotal-pain'].see = [['#safe-practice--abd','Torsion window: 6 hours']];
