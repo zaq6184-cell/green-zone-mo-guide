@@ -1140,6 +1140,81 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await ac2.close();
   }
 
+  /* ---------- The cosmetic round of 13 Nov 2026, and the comment box for flagged steps ---------- */
+  {
+    /* The suggested answer in thumb reach */
+    await go(p, '#renal-colic', 500);
+    ok(!(await p.$('#ansbar')), 'answer bar: a question without a checklist has none');
+    await go(p, '#renal-colic--urgent', 600);
+    await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(250);
+    await p.evaluate(() => document.querySelector('#cur .checks input').click()); await p.waitForTimeout(400);
+    const ab = await p.evaluate(() => { const b = document.querySelector('#ansbar'), s = document.querySelector('#cur button.opt.sugg'), r = s.getBoundingClientRect(), br = b.getBoundingClientRect(), tb = document.querySelector('#tabbar').getBoundingClientRect();
+      return {shown:!b.hidden, label:b.querySelector('b') && b.querySelector('b').textContent, sugg:s.querySelector('span').textContent, below:r.top > innerHeight - 112, aboveTab:br.bottom <= tb.top, h:br.height}; });
+    ok(ab.below && ab.shown && ab.label === ab.sugg && ab.aboveTab && ab.h >= 44, 'answer bar: with the keys under the tab bar, a tick brings up the suggested answer in a bar just above it');
+    await p.screenshot({path:out + '/p-ansbar.png'});
+    await p.evaluate(() => document.querySelector('#cur button.opt.sugg').scrollIntoView({block:'center'})); await p.waitForTimeout(400);
+    ok(await p.evaluate(() => document.querySelector('#ansbar').hidden), 'answer bar: it hides while the suggested key itself is on screen');
+    await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(400);
+    const to = await p.evaluate(() => P['renal-colic'].nodes.urgent.opts[0][1]);
+    await p.click('#ansbar'); await p.waitForTimeout(400);
+    ok(await p.evaluate(to => state.cur === to && state.trail[state.trail.length - 1].label === P['renal-colic'].nodes.urgent.opts[0][0], to), 'answer bar: a tap answers with the suggested key');
+    ok(await p.evaluate(() => { const t = document.querySelector('.trailx'); return !!t && t.scrollLeft >= t.scrollWidth - t.clientWidth - 2 && !!document.querySelector('.trailw .tlbl') && /: you answered /.test(t.querySelector('button .vh').textContent); }), 'route trail: it opens on the newest answer, its label stays put, and each answer names its question for a screen reader');
+    ok(await p.evaluate(() => [...document.querySelectorAll('.strip .end')].every(e => getComputedStyle(e).backgroundColor === 'rgba(0, 0, 0, 0)')), 'route: on a phone the endings are plain dots and words');
+
+    /* The outcome card */
+    const end = await p.evaluate(() => Object.keys(P['renal-colic'].nodes).find(k => P['renal-colic'].nodes[k].end === 'discharge'));
+    await go(p, '#renal-colic--' + end, 600);
+    const ls0 = await p.evaluate(() => JSON.stringify(Object.entries(localStorage).filter(([k]) => k !== 'gz-recent')));
+    await p.evaluate(() => document.querySelector('#cur .ticks input').click()); await p.waitForTimeout(150);
+    const oc = await p.evaluate(() => { const f = document.querySelector('#cur .res-f'), pr = f.querySelector('.primary'), cs = getComputedStyle(f);
+      return {boxes:document.querySelectorAll('#cur .ticks input[type="checkbox"]').length, items:P['renal-colic'].nodes[state.cur].items.length, ticked:document.querySelector('#cur .ticks input').checked,
+        src:document.querySelector('#cur .res-s').textContent, last:f.lastElementChild === pr, full:Math.abs(pr.getBoundingClientRect().width - (f.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight))) < 2, again:!!f.querySelector('.res-again'), grid:cs.display}; });
+    ok(oc.boxes === oc.items && oc.ticked && oc.src === 'Ebook p53–54' && oc.last && oc.full && oc.again && oc.grid === 'grid', 'outcome: the items are boxes to tick, the ebook pages are on the card, and the main action is full width at the foot');
+    ok(await p.evaluate(ls0 => JSON.stringify(Object.entries(localStorage).filter(([k]) => k !== 'gz-recent')) === ls0, ls0), 'outcome: ticking an item stores nothing');
+    await p.screenshot({path:out + '/p-outcome.png', fullPage:false});
+
+    /* Badges, chips, search, the library, the view openings, the focus ring */
+    ok(await p.evaluate(() => !!document.querySelector('.run-hero .badge.b-dept') && document.querySelector('.run-hero .chip.mono').textContent === 'Ebook p53–54' && getComputedStyle(document.querySelector('.run-hero .chip.mono')).fontFamily.includes('Mono')), 'banner: Dept notes has its own badge, and the ebook page chip is in the figure face');
+    ok(await p.evaluate(() => { const b = 'The urgent indication for a urology referral is fever with urosepsis or pyelonephritis, frank haematuria or anuria, pregnancy, or a single kidney, transplanted kidney or another comorbidity that needs the urology team the same day.';
+      const t = snippet(b, ['haematuria'], false).replace(/<[^>]+>/g, ''); const w = t.replace(/^…/, '').split(' ')[0], z = t.replace(/…$/, '').split(' ').pop();
+      return t.startsWith('…') && b.includes(' ' + w + ' ') && b.includes(' ' + z) && (t.endsWith('…') ? b.includes(z + ' ') : true); }), 'search: a snippet starts and ends on whole words');
+    await p.evaluate(() => openPal()); await p.fill('#gq', 'dengue'); await p.waitForTimeout(300);
+    ok(await p.evaluate(() => { const R = document.querySelector('#palbody').getBoundingClientRect().right; const rs = [...document.querySelectorAll('#palbody .pal-res .rx')]; return rs.length > 5 && rs.every(x => x.getBoundingClientRect().right <= R + 1) && [...document.querySelectorAll('#palbody .pal-res .rs')].every(s => s.getBoundingClientRect().height <= parseFloat(getComputedStyle(s).lineHeight) * 2 + 2); }), 'search: each result stays inside the palette, its snippet at most two lines');
+    await p.screenshot({path:out + '/p-search-rows.png'});
+    await p.keyboard.press('Escape');
+    await go(p, '#pathways', 500);
+    ok(await p.evaluate(() => { const d = [...document.querySelectorAll('#libgrid .outs-dots')]; return d.every(e => e.scrollWidth <= e.clientWidth + 1 && getComputedStyle(e.querySelector('.od')).backgroundColor === 'rgba(0, 0, 0, 0)'); }) && await hscroll(p) <= 0, 'library: each row\'s endings are plain swatches and words, none hidden, with no sideways scroll');
+    await go(p, '#numbers', 500);
+    const vm = await p.evaluate(() => { const h = document.querySelector('#v-numbers .vhead'); return {more:getComputedStyle(h.querySelector('.vmore')).display, key:/current department directory/.test(h.querySelector('.vkey').textContent)}; });
+    await p.click('#v-numbers [data-vmore]'); await p.waitForTimeout(100);
+    ok(vm.more === 'none' && vm.key && await p.evaluate(() => getComputedStyle(document.querySelector('#v-numbers .vmore')).display !== 'none' && document.querySelector('#v-numbers [data-vmore]').getAttribute('aria-expanded') === 'true'), 'numbers: on a phone it opens on the sentence that carries its rule, and More shows the rest');
+    await p.screenshot({path:out + '/p-numbers-open.png'});
+    await go(p, '#renal-colic', 500);
+    ok(await p.evaluate(() => { const f = e => getComputedStyle(document.querySelector(e)).getPropertyValue('--focus').trim(); return f('#run .back') !== f('.run-hero .chip') && f('.run-hero .chip').toLowerCase() === getComputedStyle(document.documentElement).getPropertyValue('--mint').trim().toLowerCase(); }), 'focus: the ring is dark green on pearl by day and mint on a jewel');
+    await p.click('#run [data-flag]'); await p.waitForTimeout(200);
+    ok(!(await p.$('#flagbody [data-flagcmt]')), 'comment box: outside claude.ai the flag has no comment button');
+    await p.keyboard.press('Escape');
+
+    /* The comment box, with a stand-in for the claude.ai host (composer only: the page opens claude.ai's own box and posts nothing) */
+    const cc = await b.newContext({...phone, reducedMotion:'reduce'});
+    await cc.addInitScript(() => {
+      const fake = {openComposer: async t => { const el = t.range ? t.range.commonAncestorContainer : t.element; window.__cmt = {kind:t.range ? 'range' : 'element', text:(t.range ? t.range.toString() : t.element.textContent).trim(), id:el.id}; return {opened:true}; }};
+      window.claude = {use: async n => n === 'comments' ? fake : null};
+      try { Object.defineProperty(navigator, 'clipboard', {value:{writeText: t => { window.__clip = t; return Promise.resolve(); }}, configurable:true}); } catch(e){}
+    });
+    const cq = await cc.newPage(); cq.on('pageerror', e => errs.push('comment PAGEERROR: ' + e.message));
+    await cq.goto(U + '#renal-colic--urgent', {waitUntil:'load'}); await cq.waitForTimeout(700);
+    await cq.click('#run [data-flag]'); await cq.waitForTimeout(250);
+    ok(await cq.isVisible('#flagbody [data-flagcmt]') && /Never write a patient's name, IC or anything that identifies them/.test(await cq.textContent('#flagbody .flag-c')), 'comment box: in claude.ai the flag offers Comment on this step, and says never to write a patient\'s details');
+    await cq.screenshot({path:out + '/p-flag-comment.png'});
+    await cq.click('#flagbody [data-flagcmt]'); await cq.waitForTimeout(300);
+    const cm = await cq.evaluate(() => ({c:window.__cmt, closed:document.querySelector('#flagdlg').hidden, q:P['renal-colic'].nodes.urgent.q}));
+    ok(cm.closed && cm.c && cm.c.kind === 'range' && cm.c.text === cm.q && cm.c.id === 'sq-renal-colic--urgent', 'comment box: it opens claude.ai\'s own comment box on this step\'s heading (its own id per step), and the flag dialog steps aside');
+    const clip = await cq.evaluate(() => window.__clip || '');
+    ok(/Where: Renal colic: /.test(clip) && /#renal-colic--urgent\n/.test(clip), 'comment box: the report, with the step\'s link, is copied to paste into the comment');
+    await cc.close();
+  }
+
   /* ---------- Phone, dark ---------- */
   p = await mk({...phone, colorScheme:'dark'}, 'phone-dark');
   await p.goto(U, {waitUntil:'networkidle'}); await p.waitForTimeout(800);

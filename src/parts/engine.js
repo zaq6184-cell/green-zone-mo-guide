@@ -62,8 +62,9 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 12 Nov 2026';
+const APP_VER = 'Version 8, updated 13 Nov 2026';
 const V8 = [
+  ['The answer in thumb reach, and a tidier outcome card','On a checklist question, the answer your ticks point to now waits just above the tab bar: one tap answers. The route opens on your newest answer. The outcome card shows its ebook pages, its items are boxes to tick as you do them (on screen only, nothing is kept), and its main action sits at the foot, in reach of your thumb. Search results are shorter, Numbers, Pathways, Tools and Calculators open on the line that matters, and pictures sit back a little at night. In the claude.ai copy, Something wrong on this step? can also open claude.ai\'s comment box on the step: never write a patient\'s details there.',[['#renal-colic','Try it on renal colic'],['#numbers','Numbers']]],
   ['Search that forgives, and search by voice','Search now finds a misspelt word (paracetmol, renal collic), American spellings (hypoglycemia, diarrhea), Malay and everyday words (sakit dada, kencing batu, stomach ache) and abbreviations (AGE, PCM, HTN), and says which words it used. A microphone in the search box listens in English or Bahasa Melayu: say a topic, never a patient\'s details.',[['#search','Search the guide']]],
   ['Home care advice on the patient\'s own phone','On a discharge outcome and on the advice tabs, Show to patient brings up a QR code. The patient scans it and the advice opens on their phone, with Listen, in English or Bahasa Melayu where the leaflet has both. Nothing about them is sent or kept: the code holds only the address.',[['#renal-colic','Renal colic'],['#dengue-cpg','Dengue CPG']]],
   ['Copy the route, and flag a step','At the end of a pathway, Copy route copies each question with the answer you chose, then the outcome and its pages, for your notes. Under every step, Something wrong on this step? writes a short report for the guide owner: pick a reason, then send it on WhatsApp or copy it.',[['#renal-colic','Try it on renal colic']]],
@@ -386,6 +387,7 @@ const ICONS = {
   map:'<path d="M4 6.5 9 4l6 2.5L20 4v13.5L15 20l-6-2.5L4 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
   stop:'<path d="M8.3 3.5h7.4l4.8 4.8v7.4l-4.8 4.8H8.3l-4.8-4.8V8.3z"/><path d="M12 8v5M12 16.2h.01"/>',
   flag:'<path d="M5 21V4"/><path d="M5 4h11l-2 3.5 2 3.5H5"/>',
+  comment:'<path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4.5 19.5l1.3-4.2A7.5 7.5 0 1 1 20 11.5z"/><path d="M9 10.5h6M9 13.5h4"/>',
   mic:'<rect x="9" y="3" width="6" height="11.5" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v3"/>',
   qr:'<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14zM17.5 17.5H20V20h-2.5zM14 19.5h1.5M19.5 14H20"/>',
   grid:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
@@ -794,7 +796,7 @@ const kindLabel = (p, k) => (p.kinds && p.kinds[k]) || (p.grp === 'rules' ? KIND
 const outLbl = (p, k) => p.grp === 'cpg' && k === 'neutral' ? 'Guidance' : OUT_LBL[k];
 const fmt = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 const outsOf = p => OUT_ORDER.filter(k => Object.values(p.nodes).some(n => n.end === k));
-const badgeOf = p => p.isnew ? '<span class="badge b-new">New</span>' : p.upd ? '<span class="badge b-upd">Updated</span>' : p.dept ? '<span class="badge b-upd">Dept notes</span>' : '';
+const badgeOf = p => p.isnew ? '<span class="badge b-new">New</span>' : p.upd ? '<span class="badge b-upd">Updated</span>' : p.dept ? '<span class="badge b-dept">Dept notes</span>' : '';
 const sentence = s => s.charAt(0) + s.slice(1).toLowerCase();
 /* The outcome kinds that can still be reached from a node of an entry, in the ebook's order */
 function endsFrom(p, from){
@@ -1018,8 +1020,12 @@ function findMore(q){
 function snippet(body, ts, loose){
   let at = -1;
   for (const w of ts){ const m = termRe(w, loose).exec(body); if (m){ const k = m.index + m[1].length; if (at < 0 || k < at) at = k; } }
-  if (at < 0) return esc(body.slice(0, 120)) + (body.length > 120 ? '…' : '');
-  const a = Math.max(0, at - 50), z = Math.min(body.length, at + 110);
+  /* A snippet starts and ends on whole words */
+  const cut = z => { if (z >= body.length) return body.length; const s = body.lastIndexOf(' ', z); return s > z - 30 ? s : z; };
+  if (at < 0){ const z = cut(120); return esc(body.slice(0, z)) + (z < body.length ? '…' : ''); }
+  let a = Math.max(0, at - 50);
+  if (a > 0){ const s = body.indexOf(' ', a); if (s > -1 && s < at) a = s + 1; }
+  const z = Math.max(cut(at + 110), at + 1);
   return highlight((a ? '…' : '') + body.slice(a, z) + (z < body.length ? '…' : ''), ts, loose);
 }
 function highlight(text, ts, loose){
@@ -1491,7 +1497,7 @@ function draw(focus){
   const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.doc ? `<div class="see"><span>Source</span><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
   /* Every entry opens on a jewel banner: a guideline's own picture (hero), or its topic group's glass loop (a topic banner) */
   const hk = p.hero || (c && c.k && TILE_KEYS.has(c.k) ? c.k : '');
-  const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
+  const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip${p.page ? ' mono' : ''}">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
       <h1 id="run-title" tabindex="-1"${p.title.length > 26 ? ' class="long"' : ''}>${esc(p.title)}</h1>`;
   withTiles($('#run'), `<div class="run-h">
       <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg('back')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
@@ -1513,15 +1519,19 @@ function draw(focus){
         <p class="calc-note">Tap an earlier answer to change it. Keyboard: 1 to 9 to answer, Backspace to step back.</p>
       </aside>
       <div>
-        <div class="strip">${steps ? `<div class="trailx" role="group" aria-label="Your answers so far"><span class="tlbl">Route</span>${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"><span><span class="vh">Change: </span>${esc(t.label)}</span></button>`).join('')}</div>` : ''}${endsHTML(p, n)}</div>
+        <div class="strip">${steps ? `<div class="trailw"><span class="tlbl" aria-hidden="true">Route</span><div class="trailx" role="group" aria-label="Your answers so far">${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"><span><span class="vh">${esc(nodeText(p.nodes[t.node]))}: you answered </span>${esc(t.label)}<span class="vh">. Tap to change it.</span></span></button>`).join('')}</div></div>` : ''}${endsHTML(p, n)}</div>
         <div class="progress" aria-hidden="true"${n.end ? ` style="--oc:var(--b-${n.end})"` : ''}><span>${n.end ? `Outcome after ${steps} step${steps === 1 ? '' : 's'}` : 'Step ' + (steps + 1)}</span>${bar}</div>
         <div id="cur" tabindex="-1" class="cur-in">${card(n, p)}</div>
         <div class="flagrow"><button type="button" class="flagb" data-flag>${svg('flag')}<span>Something wrong on this step?</span></button></div>
+        ${n.check && !n.end ? '<button type="button" class="ansbar" id="ansbar" hidden></button>' : ''}
         ${about ? `<details class="about about-m"><summary>About this pathway</summary><div>${about}</div></details>` : ''}
         ${refTabs(p)}
       </div>
     </div>`);
+  if (ansIO){ ansIO.disconnect(); ansIO = null; }
   if (n.check) wireChecks(n);
+  /* The route trail opens on its newest answer, with soft edges where it runs on */
+  const tx = $('#run .trailx'); if (tx){ tx.scrollLeft = tx.scrollWidth; edgeFade(tx); }
   if (focus){
     const cur = $('#cur'); cur.focus({preventScroll:true});
     const strip = $('#run .strip'), target = strip && strip.offsetParent !== null ? strip : cur;
@@ -1533,17 +1543,21 @@ function draw(focus){
 
 function card(n, p){
   const list = (items, cls) => items && items.length ? `<ul${cls ? ` class="${cls}"` : ''}>` + items.map(i => `<li>${esc(i)}</li>`).join('') + '</ul>' : '';
+  /* The outcome's items are boxes for the MO to tick as each is done: on screen only, nothing is kept */
+  /* each step's heading has its own id: a comment placed on it stays with that step */
+  const sq = 'sq-' + state.id + '--' + state.cur;
+  const tickList = items => items && items.length ? '<ul class="ticks">' + items.map(i => `<li><label><input type="checkbox"><span>${esc(i)}</span></label></li>`).join('') + '</ul>' : '';
   if (n.end){
-    const ic = n.end === 'neutral' && p.grp === 'rules' ? 'rule' : OUT_IC[n.end];
-    return `<article class="res ${n.end}${land ? ' land' : ''}"><div class="res-h"><span class="ic">${svg(ic)}</span><div><h2>${esc(n.title)}</h2><div class="res-k">${kindLabel(p, n.end)}</div></div></div>
-      ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${n.figOnly ? '' : list(n.items, 'ticks')}
+    const ic = n.end === 'neutral' && p.grp === 'rules' ? 'rule' : OUT_IC[n.end], adv = (p.advice || p.leaflet) && n.end === 'discharge';
+    return `<article class="res ${n.end}${land ? ' land' : ''}"><div class="res-h"><span class="ic">${svg(ic)}</span><div><h2 id="${sq}">${esc(n.title)}</h2><div class="res-k">${kindLabel(p, n.end)}</div>${metaOf(p) ? `<div class="res-s">${esc(metaOf(p))}</div>` : ''}</div></div>
+      ${(n.items && n.items.length) || n.links || n.gap ? `<div class="res-b">${n.figOnly ? '' : tickList(n.items)}
         ${n.fig ? figHTML(n.fig) : ''}${n.links ? `<div class="links">${n.links.map(([href, t]) => /^https:/.test(href) ? `<a class="pill ext" href="${href}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>` : `<a class="pill" href="${href}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : ''}
         ${n.gap ? `<div class="gap">${svg('info')}<span>${esc(n.gap)}</span></div>` : ''}</div>` : ''}
-      <div class="res-f"><button type="button" data-restart>${svg('restart')}Start again</button><span class="grow"></span>${state.trail.some(t => !t.auto) ? `<button type="button" data-copyroute>${svg('route')}<span class="bl">Copy route</span></button>` : ''}<button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${(p.advice || p.leaflet) && n.end === 'discharge' ? ptqBtn(state.id, '') + `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
+      <div class="res-f">${state.trail.some(t => !t.auto) ? `<button type="button" data-copyroute>${svg('route')}<span class="bl">Copy route</span></button>` : ''}<button type="button" data-copyout>${svg('copy')}<span class="bl">Copy outcome</span></button>${adv ? ptqBtn(state.id, '') : ''}<button type="button" class="res-again" data-restart>${svg('restart')}Start again</button>${adv ? `<button type="button" class="primary" data-showadvice>${p.leaflet ? 'Home care advice' : 'Discharge advice'}</button>` : ''}</div></article>`;
   }
   if (n.step){
     const obs = n.kind === 'observe';
-    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) ? figHTML(n.fig) : ''}
+    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2 id="${sq}"><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) ? figHTML(n.fig) : ''}
       <div class="opts"><button type="button" class="opt sugg" data-next><kbd>1</kbd><span>Done, continue</span>${svg('chev', 'gt')}</button></div></div></div>`;
   }
   const sc = n.check === 'score';
@@ -1551,22 +1565,54 @@ function card(n, p){
   const checks = n.check ? `<p class="hint">${sc ? 'Tick each item that applies. The score adds up as you go.' : n.check === 'all' ? 'Tick each criterion that is met. All must be met.' : 'Tick any that are present.'}</p><ul class="checks">` +
     n.items.map((i, k) => `<li><label><input type="checkbox" id="c${k}"><span>${sc ? esc(i[0]) + ` <b class="pts">(${pts(i[1])})</b>` : esc(i)}</span></label></li>`).join('') + '</ul>' + (sc ? '<p class="score">Score <b id="scv">0</b></p>' : '') : '';
   const info = n.info ? '<ul class="info">' + n.info.map(i => `<li>${esc(i)}</li>`).join('') + '</ul>' : '';
-  return `<div class="stack"><div class="qc"><h2>${esc(n.q)}</h2>
+  return `<div class="stack"><div class="qc"><h2 id="${sq}">${esc(n.q)}</h2>
     ${n.hint ? `<p class="hint">${esc(n.hint)}</p>` : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${info}${checks}
     <div class="opts">${n.opts.map(([l], k) => `<button type="button" class="opt" data-go="${k}">${k < 9 ? `<kbd>${k + 1}</kbd>` : ''}<span>${esc(l)}</span>${svg('chev', 'gt')}</button>`).join('')}</div>${memoFig(n) ? figHTML(n.fig) : ''}</div></div>`;
 }
+/* The suggested answer in thumb reach (13 Nov 2026): when the answer keys sit under the tab bar, a bar just above it carries the
+   key your ticks point to, and a tap answers with it. It hides whenever that key is itself on screen. */
+let ansIO = null;
 function wireChecks(n){
-  const boxes = $$('#cur .checks input'), btns = $$('#cur button.opt');
+  const boxes = $$('#cur .checks input'), btns = $$('#cur button.opt'), bar = $('#ansbar'), seen = new Set();
+  let k = null;
+  const showBar = () => {
+    if (!bar) return;
+    const on = k !== null && !!btns[k] && !seen.has(btns[k]);
+    if (on && bar.dataset.go !== String(k)){
+      const l = n.opts[k][0];
+      bar.dataset.go = k;
+      bar.innerHTML = `${k < 9 ? `<kbd>${k + 1}</kbd>` : ''}<span class="ab-t"><small>From what you ticked</small><b>${esc(l)}</b></span>${svg('chev', 'gt')}`;
+      bar.setAttribute('aria-label', 'Answer: ' + l + ', suggested from what you ticked');
+    }
+    bar.hidden = !on;
+  };
   const upd = () => {
     const c = boxes.filter(b => b.checked).length;
-    let k = null;
+    k = null;
     if (n.check === 'score'){ const sum = boxes.reduce((a, b, i) => a + (b.checked ? n.items[i][1] : 0), 0); $('#scv').textContent = sum; k = n.suggest(sum); }
     else if (n.check === 'all') k = c === boxes.length ? 0 : (c > 0 ? 1 : null);
     else k = c > 0 ? 0 : null;
     btns.forEach((b, i) => b.classList.toggle('sugg', i === k));
+    showBar();
   };
   boxes.forEach(b => b.addEventListener('change', upd));
+  if (bar && 'IntersectionObserver' in window){
+    ansIO = new IntersectionObserver(es => { es.forEach(en => en.intersectionRatio >= .6 ? seen.add(en.target) : seen.delete(en.target)); showBar(); },
+      {rootMargin:`-76px 0px -${innerWidth <= 760 ? 112 : 24}px 0px`, threshold:[0, .6, 1]});
+    btns.forEach(b => ansIO.observe(b));
+  }
 }
+/* Rows that scroll sideways (the route trail, the list filters) show a soft edge where they run on */
+function edgeFade(el){
+  if (!el) return;
+  const max = el.scrollWidth - el.clientWidth;
+  el.classList.toggle('ef-l', max > 4 && el.scrollLeft > 4);
+  el.classList.toggle('ef-r', max > 4 && el.scrollLeft < max - 4);
+}
+const FADE_ROWS = '.trailx, #libf, #rxf, #lkf, #dgf, #extf';
+const fadeRows = () => $$(FADE_ROWS).forEach(el => { if (el.offsetParent !== null) edgeFade(el); });
+document.addEventListener('scroll', e => { const t = e.target; if (t && t.matches && t.matches(FADE_ROWS)) edgeFade(t); }, {capture:true, passive:true});
+addEventListener('resize', () => requestAnimationFrame(fadeRows));
 
 /* The whole pathway on one sheet: every step in order, your route lit, outcomes you can no longer reach dimmed */
 let mapFrom = null;
@@ -3745,6 +3791,22 @@ if (window.claude && typeof window.claude.use === 'function') window.claude.use(
    nothing is sent unless the MO sends it (standing rule 4). */
 const FLAG_WHY = ['A number or dose looks wrong', 'It looks out of date', 'It is unclear', 'A link or picture does not work', 'Something else (I will explain)'];
 let flagWhy = 0, flagFrom = null;
+/* Comment on this step (13 Nov 2026, Krishna: "add claude.ai's comment box for flagged steps"): in the claude.ai copy only, the
+   flag dialog can open claude.ai's own comment box on the step's heading (the composer-only grant: the page posts nothing and
+   never reads a comment; claude.ai does the typing, the name and the display). The heading carries an id per step, so each
+   step's comments sit on their own step. Rule 4: the dialog says never to write a patient's name or details. */
+let cmts = null;
+if (window.claude && typeof window.claude.use === 'function') window.claude.use('comments').then(c => { if (c && typeof c.openComposer === 'function') cmts = c; }).catch(() => {});
+function commentStep(){
+  const el = $('#cur h2'); if (!cmts || !el) return;
+  /* the report (with the step's link) goes on the clipboard, so the comment names its step even where the box's place on the page does not */
+  copyText(flagText(), {ok:'Report copied: paste it into the comment box'});
+  closeFlag(false);
+  let target = {element:el};
+  try { const r = document.createRange(); r.selectNodeContents(el); target = {range:r}; } catch(e){}
+  cmts.openComposer(target).then(r => { if (!r || !r.opened) toast('The comment box did not open. Tap Comment again, or send the report by WhatsApp.'); })
+    .catch(e => { if (e && /unavailable|not_granted|capability_/.test(e.code || '')) cmts = null; toast('Comments are not open to you here. Send the report by WhatsApp or Copy.'); });
+}
 function flagText(){
   const p = P[state.id], n = p.nodes[state.cur];
   return `Green Zone MO Guide: please check this step.\nWhere: ${p.title}: ${nodeText(n)}\n${APP_URL}#${state.id}${state.cur === p.start ? '' : '--' + state.cur}\nWhat: ${FLAG_WHY[flagWhy]}\n(${APP_VER})`;
@@ -3754,7 +3816,8 @@ function drawFlag(){
   $('#flagbody').innerHTML = `<div class="flag-w" role="group" aria-label="What is wrong">${FLAG_WHY.map((w, i) => `<button type="button" data-fw="${i}" aria-pressed="${i === flagWhy}">${esc(w)}</button>`).join('')}</div>
     <pre class="flag-t" id="flagt">${esc(flagText())}</pre>
     <p class="ptq-how">Send it to the guide owner. Don't add a patient's name or details.</p>
-    <div class="ptq-a"><a class="btn sm" id="flagwa" href="https://wa.me/?text=${encodeURIComponent(flagText())}" target="_blank" rel="noopener noreferrer">${svg('send')}<span>WhatsApp</span></a>${share ? `<button type="button" class="sm" data-flagshare>${svg('share')}<span>Share</span></button>` : ''}<button type="button" class="sm" data-flagcopy>${svg('copy')}<span class="bl">Copy</span></button></div>`;
+    <div class="ptq-a"><a class="btn sm" id="flagwa" href="https://wa.me/?text=${encodeURIComponent(flagText())}" target="_blank" rel="noopener noreferrer">${svg('send')}<span>WhatsApp</span></a>${share ? `<button type="button" class="sm" data-flagshare>${svg('share')}<span>Share</span></button>` : ''}<button type="button" class="sm" data-flagcopy>${svg('copy')}<span class="bl">Copy</span></button></div>
+    ${cmts ? `<div class="flag-c"><button type="button" class="sm" data-flagcmt>${svg('comment')}<span>Comment on this step in claude.ai</span></button><p class="ptq-how">The comment box opens on this step, and the report above is copied: paste it in, then add a line if you need to. It is posted with your claude.ai name, and everyone who can comment on the guide sees it. Never write a patient's name, IC or anything that identifies them.</p></div>` : ''}`;
 }
 function openFlag(){
   if (!state.id) return;
@@ -3770,8 +3833,9 @@ function closeFlag(restore){
 $('#flagclose').addEventListener('click', () => closeFlag(true));
 $('#flagdlg').addEventListener('click', e => {
   if (e.target === $('#flagdlg')) return closeFlag(true);
-  const b = e.target.closest('[data-fw], [data-flagcopy], [data-flagshare]'); if (!b) return;
-  if (b.dataset.fw){ flagWhy = +b.dataset.fw; drawFlag(); const nb = $(`#flagbody [data-fw="${flagWhy}"]`); if (nb) nb.focus(); }
+  const b = e.target.closest('[data-fw], [data-flagcopy], [data-flagshare], [data-flagcmt]'); if (!b) return;
+  if (b.hasAttribute('data-flagcmt')) commentStep();
+  else if (b.dataset.fw){ flagWhy = +b.dataset.fw; drawFlag(); const nb = $(`#flagbody [data-fw="${flagWhy}"]`); if (nb) nb.focus(); }
   else if (b.hasAttribute('data-flagcopy')) copyText(flagText(), {btn:b, el:$('#flagt'), ok:'Report copied'});
   else if (b.hasAttribute('data-flagshare')) navigator.share({text:flagText()}).catch(() => {});
 });
@@ -3884,7 +3948,14 @@ function route(){
   else changed = showView('home');
   if (routed && changed) $('#viewport').focus({preventScroll:true});
   routed = true;
+  requestAnimationFrame(fadeRows);
 }
+/* On a phone the on-shift views open on the sentence that carries their rule; More shows the rest */
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('[data-vmore]'); if (!b) return;
+  const h = b.closest('.vhead'), open = !h.classList.contains('open');
+  h.classList.toggle('open', open); b.setAttribute('aria-expanded', open); b.textContent = open ? 'Less' : 'More';
+});
 
 /* ================= Wiring ================= */
 fillIcons(document);
