@@ -2807,6 +2807,10 @@ function renderToolsRx(){
    the pages, never retyped. "High alert" marks a drug on the hospital's 2026 list. */
 let dgF = 'all';
 const DG_TILE = () => TILE_KEYS.has('prescr') ? 'prescr' : 'doses';
+/* The claude.ai artifact holds at most 511 files, so the guide's 227 pages are not among them (Krishna, 12 Nov 2026: "Yes,
+   publish", with its pages opening the web app's copies). There each page opens from the web app in a new tab; the artifact
+   cannot show another site's picture in its own viewer. A let, so the test can try it. */
+let DG_REMOTE = /(^|\.)claude\.ai$|claudeusercontent\.com$/.test(location.hostname);
 function renderDg(){
   if (typeof EDDG === 'undefined') return;
   const q = ($('#dgq').value || '').trim().toLowerCase(), all = EDDG.items;
@@ -2817,7 +2821,9 @@ function renderDg(){
   $('#dgn').textContent = q || dgF !== 'all' ? `${hits.length} of ${all.length} drugs` : `${all.length} drugs, in the guide's own order`;
   const re = q ? new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
   const hl = s => re ? s.split(re).map((x, k) => k % 2 ? `<mark>${esc(x)}</mark>` : esc(x)).join('') : esc(s);
-  const pills = ([n, t, a, b, pa, pb]) => Array.from({length:b - a + 1}, (_, k) => a + k).map((pg, k) => `<button type="button" class="pill" data-ppage="sp/c17-p${pg}" data-pname="${esc(t + ' · page ' + (pg - 8))}">${svg('poster')}p ${pg - 8}</button>`).join('');
+  const pills = ([n, t, a, b, pa, pb]) => Array.from({length:b - a + 1}, (_, k) => a + k).map((pg, k) => DG_REMOTE
+    ? `<a class="pill" href="${APP_URL}sp/c17-p${pg}.webp" target="_blank" rel="noopener noreferrer" aria-label="${esc(t + ', page ' + (pg - 8) + ', opens from the web app')}">${svg('poster')}p ${pg - 8}${svg('ext')}</a>`
+    : `<button type="button" class="pill" data-ppage="sp/c17-p${pg}" data-pname="${esc(t + ' · page ' + (pg - 8))}">${svg('poster')}p ${pg - 8}</button>`).join('');
   $('#dgl').innerHTML = hits.length ? letters.map(L => `<section class="phx-g" id="dg-${L}"><h2>${L}</h2><ul class="phx-l">${hits.filter(i => L0(i) === L).map(i => `<li class="phx dg" data-dgn="${i[0]}"><span class="phx-t"><b>${hl(i[1])}</b>${i[6] ? `<small class="phx-lasa">${svg('flag')}On the hospital's high alert list (2026)</small>` : ''}${EDDG.notes && EDDG.notes[i[0]] ? `<small class="phx-lasa dg-note">${svg('info')}${esc(EDDG.notes[i[0]])}</small>` : ''}<span class="dg-p">${pills(i)}</span></span></li>`).join('')}</ul></section>`).join('')
     : '<p class="empty">No drug in the guide matches. Try its generic name.</p>';
 }
@@ -2830,7 +2836,7 @@ function renderDgStatic(){
     <li>Its entries marked † are departures agreed with the intensivist in charge, so they apply only in that ICU.</li>
     <li>It draws on the manufacturers' product information and other references, among them the MOH Dilution Guide for Fluid-Restricted Critically Ill Adults (2024).</li>
     <li>The guide above is the department's own, for the ED. The GICU guide opens only with an MOH sign-in, from the Farmasi HKL page.</li></ul>${memoHTML('c16')}`;
-  $('#dgsrc').innerHTML = `Source: ${esc(EDDG.src)}, Pharmacy Department HKL, reviewed by the department's emergency physicians; shared on the Farmasi HKL page. In the guide with the department's authorisation (12 Nov 2026). Its pages are shown as printed, with the names and contact numbers of two pharmacists (pages 69, 123, 211 and 223) and the names on the NAC forms (pages 133 and 134) covered. "High alert" marks a drug on the hospital's List of High Alert Medications (2026); the guide's own red badge on its pages differs in places (it marks dextrose 20%, diazepam and phenobarbital, which the list does not name, and not potassium dihydrogen phosphate or sodium bicarbonate 8.4%, which the list does). The guide's own disclaimer: it is for trained staff of the department; check the dose before you give it.`;
+  $('#dgsrc').innerHTML = `Source: ${esc(EDDG.src)}, Pharmacy Department HKL, reviewed by the department's emergency physicians; shared on the Farmasi HKL page. In the guide with the department's authorisation (12 Nov 2026). Its pages are shown as printed, with the names and contact numbers of two pharmacists (pages 69, 123, 211 and 223) and the names on the NAC forms (pages 133 and 134) covered. "High alert" marks a drug on the hospital's List of High Alert Medications (2026); the guide's own red badge on its pages differs in places (it marks dextrose 20%, diazepam and phenobarbital, which the list does not name, and not potassium dihydrogen phosphate or sodium bicarbonate 8.4%, which the list does). The guide's own disclaimer: it is for trained staff of the department; check the dose before you give it.${DG_REMOTE ? ' In this copy each page opens from the web app, in a new tab.' : ''}`;
 }
 function renderToolsDg(){
   if (typeof EDDG === 'undefined' || !$('#tdg')) return;
