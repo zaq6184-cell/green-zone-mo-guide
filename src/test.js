@@ -22,7 +22,7 @@ const root = path.resolve(process.argv[2] || path.join(__dirname, '..', 'app'));
 const out = path.resolve(process.argv[3] || path.join(__dirname, 'shots'));
 const PORT = Number(process.env.PORT) || 8765;
 fs.mkdirSync(out, {recursive:true});
-const types = {'.html':'text/html','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg','.png':'image/png','.js':'text/javascript','.webmanifest':'application/manifest+json'};
+const types = {'.html':'text/html','.webp':'image/webp','.mp4':'video/mp4','.mp3':'audio/mpeg','.png':'image/png','.jpg':'image/jpeg','.js':'text/javascript','.webmanifest':'application/manifest+json'};
 /* For the web app's update check below: when set, sw.js is served as a newer build (its version and page id changed) */
 let swNewer = null;
 /* The site server. log, if given, collects every path asked for, with its byte range and Sec-Fetch-Dest. A film or sound
@@ -148,7 +148,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const st = await q.evaluate(() => ({open:!document.querySelector('#lb').hidden, src:document.querySelector('#lbimg').getAttribute('src'), ok:document.querySelector('#lbimg').naturalWidth > 0}));
     ok(st.open && st.src === 'memo/2022-09-p2.webp' && st.ok && seen.length === 1, 'a memo page opens full size on a tap, and only then loads' + (st.ok && seen.length === 1 ? '' : ' ' + JSON.stringify({st, seen})));
     await q.keyboard.press('Escape'); await q.waitForTimeout(150);
-    const mf = await q.evaluate(() => Object.entries(MEMOS).flatMap(([k, m]) => m.pages.map(([n]) => `memo/${k}-p${n}.webp`)));
+    const mf = await q.evaluate(() => Object.entries(MEMOS).filter(([, m]) => !m.dir).flatMap(([k, m]) => m.pages.map(([n]) => `memo/${k}-p${n}.webp`)));
     const onDisk = fs.readdirSync(path.join(__dirname, '..', 'app', 'memo')).map(f => 'memo/' + f).sort();
     ok(mf.length === 41 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos, and nothing else (' + onDisk.length + ' on disk)');
     ok(await q.evaluate(() => { const d = document.createElement('div'); d.innerHTML = FIGS['memo-2022-19'](); const a = d.querySelector('a.pill'); return !!a && a.href === MEMO_LIST && a.target === '_blank'; }), 'each memo card links to the department\'s own memo list');
@@ -185,6 +185,68 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await q.locator('#palbody a[data-rx="Celecoxib"]').click(); await q.waitForTimeout(700);
     ok(await q.evaluate(() => location.hash === '#pharmacy' && document.querySelector('#rxq').value === 'Celecoxib' && document.querySelectorAll('#rxl .phx').length === 1), 'opening it shows the list filtered to that drug');
     await q.close(); }
+  // The HKL doctors starter pack (12 Nov 2026): New to HKL, Prescribing at HKL, the NAC regimen, the look-alike marks
+  { const q = await p.context().newPage(); const base = p.url().split('#')[0], seen = []; q.on('request', r => { const u = r.url(); if (/\/sp\//.test(u)) seen.push(u.replace(/^.*?\/sp\//, 'sp/')); });
+    await q.goto(base + '#new-hkl'); await q.waitForTimeout(700);
+    ok(await q.locator('#run button[data-go]').count() === 11, 'New to HKL opens on its eleven topics');
+    await q.goto(base + '#new-hkl--map'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => document.querySelectorAll('#cur .figmemo').length === 2 && !!document.querySelector('#cur .figmemo a[href="https://linktr.ee/hkldoctors_starterpack"]')) && seen.length === 0, 'the map step shows its two sources, links the starter pack page, and loads no picture before a tap');
+    await q.locator('#cur [data-ppage="sp/a09-p1"]').click(); await q.waitForTimeout(800);
+    ok(await q.evaluate(() => !document.querySelector('#lb').hidden && document.querySelector('#lbimg').naturalWidth > 0) && seen.length === 1, 'the site plan opens on a tap');
+    await q.keyboard.press('Escape'); await q.waitForTimeout(150);
+    await q.goto(base + '#prescribing'); await q.waitForTimeout(700);
+    ok(await q.locator('#run button[data-go]').count() === 17, 'Prescribing at HKL opens on its seventeen topics');
+    // Two documents that open only with an MOH sign-in (12 Nov 2026): the facts in the guide's own words, the picture their link-page tile
+    await q.goto(base + '#prescribing--ams'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => { const c = document.querySelector('#cur'); return /Antimicrobial Request Form/.test(c.innerText) && /72 hours/.test(c.innerText) && /OPAT/.test(c.innerText) && !!c.querySelector('.figmemo [data-ppage="sp/tile-c01"]') && /MOH sign-in/.test(c.querySelector('.figmemo').innerText) && /7 Apr 2026/.test(c.innerText); }) && !seen.some(f => /tile-c01/.test(f)), 'the stewardship topic gives the policy\'s rules (request form, 72-hour review, OPAT readmission through the ED), with its tile card and date, and loads no picture before a tap');
+    await q.goto(base + '#prescribing--animal'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => { const c = document.querySelector('#cur'); return /darurat/.test(c.innerText) && /halal/.test(c.innerText) && /consent/.test(c.innerText) && !!c.querySelector('.figmemo [data-ppage="sp/tile-b01"]') && /HKL\/FAR\/GP-19/.test(c.innerText); }), 'the animal source topic gives the good practice, the emergency case and the religions\' needs, with its tile card');
+    await q.goto(base + '#prescribing--check'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => document.querySelectorAll('#cur .checks input').length === 8 && !!document.querySelector('#cur .opts + .figmemo [data-ppage="sp/tile-b04"]')), 'the prescription check has eight items, with its source card (a link-page tile) below the options');
+    const spf = await q.evaluate(() => Object.entries(MEMOS).filter(([, m]) => m.dir === 'sp').flatMap(([k, m]) => m.pages.map(([n]) => (typeof n === 'number' ? `sp/${k}-p${n}` : n === 'tile' ? `sp/tile-${k}` : `sp/${n}`) + '.webp')));
+    ok(spf.length > 30 && spf.every(f => fs.existsSync(path.join(__dirname, '..', 'app', f))), 'every starter pack source card points to a picture in app/sp (' + spf.length + ')');
+    ok(await q.evaluate(() => Object.values(SPFIGS).flat().every(k => !!MEMOS[k])), 'every multi-source figure names known sources');
+    await q.goto(base + '#calc-nac'); await q.waitForTimeout(700);
+    await q.locator('#v-calc input').first().fill('60'); await q.waitForTimeout(400);
+    ok(await q.evaluate(() => /12000 mg/.test(document.querySelector('#v-calc').innerText) && /60 ml of IV NAC/.test(document.querySelector('#v-calc').innerText) && /300 mg\/kg over 20 hours/.test(document.querySelector('#v-calc').innerText)), 'the NAC calculator gives the circular\'s 60 kg example: 12000 mg in 60 ml, three bags over 20 hours');
+    ok(await q.evaluate(() => P['paracetamol-overdose'].dept.some(d => /Lampiran 1a/.test(d.src) && d.items.some(i => /31\.25 ml\/hr/.test(i)))), 'the paracetamol overdose entry carries the hospital\'s regimen as a dated note');
+    await q.goto(base + '#pharmacy'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => /Look-alike sound-alike with Antirabies Immunoglobulin/.test(document.querySelector('#rxl [data-rxn="133"]').textContent) && document.querySelectorAll('#rxl .phx-lasa').length === 18), 'the ED pharmacy list marks its nine look-alike pairs (rabies vaccine with rabies immunoglobulin)');
+    await q.close(); }
+  // The ED dosing and dilution guide (12 Nov 2026): 116 drugs, each opening its own printed pages on a tap, 31 on the high alert list
+  { const q = await p.context().newPage(); const base = p.url().split('#')[0], seen = []; q.on('request', r => { const u = r.url(); if (/\/sp\/c17-/.test(u)) seen.push(u.replace(/^.*?\/sp\//, 'sp/')); });
+    await q.goto(base + '#dilution'); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => EDDG.items.length === 116 && EDDG.items.every((i, k) => i[0] === k + 1 && i[2] - i[4] === 8 && i[3] - i[5] === 8 && i[3] >= i[2]) && document.querySelectorAll('#dgl .phx').length === 116), 'the dilution guide lists its 116 drugs, each with its pages (printed page = PDF page - 8)');
+    const dgf = await q.evaluate(() => EDDG.items.flatMap(i => Array.from({length:i[3] - i[2] + 1}, (_, k) => 'sp/c17-p' + (i[2] + k) + '.webp')));
+    ok(dgf.every(f => fs.existsSync(path.join(__dirname, '..', 'app', f))), 'every page a drug opens is in app/sp (' + dgf.length + ' pills)');
+    const dgOn = fs.readdirSync(path.join(__dirname, '..', 'app', 'sp')).filter(f => /^c17-p/.test(f));
+    ok(dgOn.length === 227 && dgOn.every(f => dgf.includes('sp/' + f)), 'app/sp holds exactly the 227 pages the drugs open, and no other page of the guide');
+    const dchips = await q.locator('#dgf button').allInnerTexts();
+    ok(dchips.join('|').replace(/\s+/g, ' ') === 'All 116|High alert 31', 'the filters count 116 and 31 on the high alert list (' + dchips.join(', ') + ')');
+    ok(seen.length === 0, 'no page of the guide loads before a tap');
+    await q.locator('#dgq').fill('noradr'); await q.waitForTimeout(150);
+    ok(await q.evaluate(() => { const r = [...document.querySelectorAll('#dgl .phx')]; return r.length === 1 && !!r[0].querySelector('mark') && /high alert/.test(r[0].textContent) && r[0].querySelectorAll('[data-ppage]').length === 5 && r[0].querySelector('[data-ppage]').dataset.ppage === 'sp/c17-p148'; }), 'finding "noradr" leaves noradrenaline, marked high alert, with its five pages from printed page 140');
+    await q.locator('#dgl [data-ppage="sp/c17-p148"]').click(); await q.waitForTimeout(900);
+    ok(await q.evaluate(() => !document.querySelector('#lb').hidden && document.querySelector('#lbimg').naturalWidth > 0 && /page 140/.test(document.querySelector('#lb').textContent)) && seen.length === 1 && seen[0] === 'sp/c17-p148.webp', 'its first page opens on a tap, and only that page loads');
+    await q.keyboard.press('Escape'); await q.waitForTimeout(150);
+    await q.locator('#dgq').fill(''); await q.locator('#dgf [data-df="ham"]').click(); await q.waitForTimeout(150);
+    ok(await q.evaluate(() => document.querySelectorAll('#dgl .phx').length === 31 && [...document.querySelectorAll('#dgl .phx')].every(r => r.querySelector('.phx-lasa'))), 'High alert shows the 31, each marked');
+    ok(await q.evaluate(() => { const r = document.querySelector('#dgl [data-dgn="64"] .dg-note'); return !!r && /600 mg fentanyl/.test(r.textContent) && /10 mcg\/ml/.test(r.textContent) && /Still to confirm/.test(r.textContent) && document.querySelectorAll('#dgl .dg-note').length === 1 && CONFIRM.some(c => /page 126/.test(c)); }), 'midazolam carries the note on page 126\'s fentanyl figure, before its pages are opened, and it is under Still to confirm');
+    await q.locator('#dgf [data-df="all"]').click(); await q.waitForTimeout(150);
+    await q.locator('#dgaz [data-dl="S"]').click(); await q.waitForTimeout(600);
+    ok(await q.evaluate(() => { const s = document.getElementById('dg-S').getBoundingClientRect(); return s.top < innerHeight / 2 && s.top > -10; }), 'the letter S jumps to the drugs starting with S');
+    ok(await q.evaluate(() => /3rd edition, January 2026/.test(document.querySelector('#dgsrc').textContent) && /covered/.test(document.querySelector('#dgsrc').textContent)), 'the source line gives the edition and says what is covered on the pages');
+    ok(await q.evaluate(() => { const g = document.querySelector('#dgicu'); return !!g && /Special case/i.test(g.innerText) && /5th edition, April 2026/.test(g.innerText) && /only in that ICU/.test(g.innerText) && !!g.querySelector('.figmemo [data-ppage="sp/tile-c16"]') && CONFIRM.some(c => /general ICU's own dilution guide/.test(c)); }), 'the general ICU guide is a special case below the list, described in the guide\'s own words with its tile card, and backs the page 126 query');
+    ok(await hscroll(q) <= 0, 'the dilution guide has no sideways scroll');
+    await q.goto(base + '#tools'); await q.waitForTimeout(600);
+    ok(await q.evaluate(() => { const t = document.querySelector('#tdg'); return !!t && t.getAttribute('href') === '#dilution' && /116/.test(t.textContent); }), 'Shift tools has the dilution guide tile');
+    await q.goto(base + '#search'); await q.waitForTimeout(500);
+    await q.keyboard.type('vasopressin'); await q.waitForTimeout(400);
+    ok(await q.evaluate(() => { const a = document.querySelector('#palbody a[data-dg="VASOpressin"]'); return !!a && a.getAttribute('href') === '#dilution'; }), 'searching a drug offers it in the dilution guide');
+    await q.locator('#palbody a[data-dg="VASOpressin"]').click(); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => location.hash === '#dilution' && document.querySelector('#dgq').value === 'VASOpressin' && document.querySelectorAll('#dgl .phx').length === 1), 'opening it shows the guide filtered to that drug');
+    await q.close(); }
+  if (guardRe('starterpack')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('starterpack')), 'no signer, staff name or registration number from the starter pack documents is copied');
   if (guardRe('pharmacy')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(EDRX) + document.body.textContent), guardRe('pharmacy')), 'no name or registration number of the pharmacists who signed the list is copied');
   ok(await p.evaluate(() => { const on = ['#t-paths', '#t-rules', '#t-dc', '#t-calc', '#t-intro', '#tl-tip'].map(s => document.querySelector(s + ' .tm')).filter(el => { const r = el.getBoundingClientRect(); return (Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height >= .5; }); return on.length > 0 && on.every(el => el.querySelector('video')); }), 'the home tiles on screen start their loops');
   await p.screenshot({path:out + '/d-home.png'});
@@ -215,7 +277,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // Library filter and stars
   await go(p, '#pathways');
   ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length === Object.keys(P).length && Object.keys(P).length >= 44), `library shows a card for each of the ${await p.evaluate(() => Object.keys(P).length)} entries`);
-  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '21' && document.querySelector('#libf [data-f="cpg"] small').textContent === String(Object.keys(P).filter(id => P[id].grp === 'cpg').length)), 'the Ebook filter still counts the 23 ebook pathways (the CPGs are not), rules 21, and Guidelines every CPG entry');
+  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '23' && document.querySelector('#libf [data-f="cpg"] small').textContent === String(Object.keys(P).filter(id => P[id].grp === 'cpg').length)), 'the Ebook filter still counts the 23 ebook pathways (the CPGs are not), rules 23, and Guidelines every CPG entry');
   await p.fill('#libq', 'colic'); await p.waitForTimeout(150);
   console.log('     filter colic ->', await p.evaluate(() => [...document.querySelectorAll('#libgrid .pc h3')].map(h => h.textContent).join(' | ')));
   await p.fill('#libq', ''); await p.waitForTimeout(100);
@@ -335,7 +397,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 32 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 32 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 33 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 33 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
@@ -1166,6 +1228,32 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await p.keyboard.press('Escape');
     await go(p, '#install', 300);
     await p.screenshot({path:out + '/p-install-web.png', fullPage:true});
+
+    /* Share the guide and the link preview (12 Nov 2026) */
+    const htm = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8'), headPart = htm.split('</head>')[0];
+    const tagOf = pr => (headPart.match(new RegExp('<meta (?:property|name)="' + pr + '" content="([^"]*)"')) || [])[1];
+    ok(tagOf('og:title') === 'Green Zone MO Guide' && tagOf('og:url') === LIVE && tagOf('og:image') === LIVE + 'og/preview.jpg' && tagOf('og:image:width') === '1200' && tagOf('og:image:height') === '630' && tagOf('twitter:card') === 'summary_large_image' && /Green Zone/.test(tagOf('og:description') || '') && headPart.indexOf('og:image') > 0 && headPart.indexOf('og:image') < 4000 && /<title>Green Zone MO Guide<\/title>/.test(headPart), 'link preview: the web app\'s head carries its Open Graph and Twitter tags on the live address, in its first 4 KB');
+    ok(!/property="og:|name="twitter:/.test(fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8')), 'link preview: the artifact page carries none (claude.ai makes its own card)');
+    const jpg = fs.readFileSync(path.join(__dirname, '..', 'app', 'og', 'preview.jpg'));
+    const jdim = (() => { for (let i = 2; i < jpg.length - 9;){ if (jpg[i] !== 0xFF){ i++; continue; } const mk = jpg[i + 1]; if (mk >= 0xC0 && mk <= 0xC2) return [jpg.readUInt16BE(i + 7), jpg.readUInt16BE(i + 5)]; i += 2 + jpg.readUInt16BE(i + 2); } return []; })();
+    ok(jpg[0] === 0xFF && jpg[1] === 0xD8 && jdim[0] === 1200 && jdim[1] === 630 && jpg.length < 300 * 1024 && !!KEEP['og/preview.jpg'] && !PRE['og/preview.jpg'], 'link preview: og/preview.jpg is a JPEG of 1200 x 630 under 300 KB, kept by the worker once used and not saved at install (' + Math.round(jpg.length / 1024) + ' KB)');
+    ok(!log.some(l => l.startsWith('/og/')), 'share: nothing of the link preview loads before the share page opens');
+    await go(p, '#share', 800);
+    ok(await p.evaluate(() => { const v = document.querySelector('#v-share'); return !v.hidden && /Send the guide to a colleague/.test(v.innerText) && !!document.querySelector('#shbox .sh3.big .sh3-card') && !!document.querySelector('#shbox .sh-prev .shc-img img') && !document.getElementById('share'); }) && await hscroll(p) === 0, 'share: the page opens on its 3D card and the link preview, with no element named after its route and no sideways scroll');
+    ok(await until(p, () => !!document.querySelector('#shbox .sh-prev .shc-img img.on'), null, 5000) && log.some(l => l.startsWith('/og/preview.jpg')), 'share: the preview picture loads on the share page, and shows');
+    ok(await p.evaluate(() => getComputedStyle(document.querySelector('#shbox .sh3-card')).animationName === 'none'), 'share: with reduced motion the card stands still');
+    const sq = qrm.encode(LIVE, 'M'), sback = qrm.decode(sq.modules);
+    ok(await p.evaluate(() => SHARE_QR) === qrm.path(sq) && sback.text === LIVE && sback.eccOk, 'share: its QR code is the one qr.js makes for the web app, and reads back as it');
+    ok(await p.evaluate(L => { const a = document.querySelector('#shbox a[href^="https://wa.me/"]'), t = document.querySelector('#shbox a[href^="https://t.me/share/url"]'); return !!a && decodeURIComponent(a.href).includes(L) && a.target === '_blank' && !!t && decodeURIComponent(t.href).includes(L); }, LIVE), 'share: WhatsApp and Telegram open with the web app\'s address, in a new tab');
+    await p.tap('#shbox [data-shcopy]'); await p.waitForTimeout(250);
+    ok(await p.evaluate(() => navigator.clipboard.readText()) === LIVE, 'share: Copy link copies the web app\'s address');
+    ok(await p.evaluate(async () => { const calls = []; Object.defineProperty(navigator, 'share', {value:d => { calls.push(d); return Promise.reject(Object.assign(new Error('cancelled'), {name:'AbortError'})); }, configurable:true}); shareGuide(null); await new Promise(r => setTimeout(r, 80)); return calls.length === 1 && calls[0].url === APP_URL && /Green Zone/.test(calls[0].title); }), 'share: the share sheet is given the web app\'s address, and a cancel is not an error');
+    await p.screenshot({path:out + '/p-share-web.png', fullPage:true});
+    await go(p, '#home', 500);
+    ok(await p.evaluate(() => { const t = document.querySelector('#t-share'); return !!t && !t.hidden && /Share the guide/.test(t.textContent) && !!t.querySelector('a[href="#share"]') && !!t.querySelector('.sh3 .sh3-card') && !t.querySelector('img') && !!document.querySelector('#snav a[href="#share"]'); }), 'share: the home tile has its 3D card (drawn, so no picture loads), a way to the share page, and the menu links it');
+    await p.tap('#tabbar .fab'); await p.fill('#gq', 'share whatsapp'); await p.waitForTimeout(250);
+    ok(await p.evaluate(() => !!document.querySelector('#palbody a[href="#share"]')), 'search: "share whatsapp" finds Share the guide');
+    await p.keyboard.press('Escape');
 
     /* A sound is kept once played, from the same download, and a part of one or an unplayed film is not */
     ok(await playIt(p, 'audio/stop2.mp3'), 'web app: a sound plays through the worker');

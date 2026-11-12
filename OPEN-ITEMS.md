@@ -23,6 +23,25 @@ Still to confirm with the department (the app lists them under Still to confirm 
 - Is the LA OT Google Form (memo HKL/JK/98/188/3(23)22) still the way to book?
 - EMACC (decided: the guide follows memo (01)24 of 2024; and EMACC runs 8 am to 3 pm, Monday to Friday, Krishna's instruction of 12 Nov 2026). Still open: a written source for those hours (the memo prints 7.30 am to 3.30 pm for the MOs, the 2026 policy, 8.3.3, 9 am to 4 pm); work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge; no 2026 document prints ext 7040; who EMACC is for still comes from the 2018 SOP; and the ebook's "EMACC or EMWATCH in 24 to 48 hours" against the memo's first visit on day 4 or day 5.
 
+**The HKL doctors starter pack (`new-hkl`, `prescribing`, `data20.js`, added 12 Nov 2026).** Where its sources differ (also in the app):
+- Medicines on one outpatient prescription: eight (Director's memo, 27 May 2019) or five (MOH quick guide 2020, p21; the hospital's Good Prescribing Practice slides)?
+- The death certificate duplicate: within 72 hours of discharge (the Medical Records video, Oct 2022) or within 24 hours (the form's own header)?
+- Abbreviations: the pharmacy's accepted list and the MOH guide accept PCM and EES; the 2025 rules say paracetamol, not PCM.
+- GXM: the 2023 video asks for at least 5 ml in an adult and a printed label on the back of the form; the March 2026 transfusion memo says EDTA 3 to 4 ml and handwritten labels only.
+- For Krishna to pass on: several public files on these pages show patients' names and IC numbers (the Good Prescribing Practice slides 54 to 66, with a password on slide 71; the PhIS quick guide p02; the Good Dispensing Practice slides; the inpatient screening guide p25; the dispensing-error posters). Their owners may want to remove or redact them.
+
+**The ED dosing and dilution guide (`#dilution`, `data21.js`, added 12 Nov 2026).** The department's guide to injectable drugs (3rd edition, January 2026, Pharmacy Department HKL), shown page by page as printed; the department authorises it (Krishna, 12 Nov 2026). Still to confirm with its authors (also in the app):
+- Midazolam, page 126 (also noted on the drug's row): the high-dose Midafentanyl syringe prints "60 mg midazolam + 600 mg fentanyl to 60 ml"; the same page prints 30 mg midazolam + 300 mcg fentanyl to 30 ml, and a final concentration of 10 mcg/ml of fentanyl. Read on the page image. The general ICU's own Adult GICU Dilution Guide (5th edition, April 2026, p12; opens only with an MOH sign-in) also dilutes fentanyl "to a final concentration of 10 mcg/ml", which supports 600 mcg.
+- The guide's own high alert badge and the hospital's List of High Alert Medications (2026) differ: dextrose 20%, diazepam and phenobarbital carry the badge but are not on the list; potassium dihydrogen phosphate and sodium bicarbonate 8.4% are on the list without the badge. The app marks the list's 31.
+
+Points for its authors, read in the guide (not in the app):
+- Dobutamine, page 45: the double-strength chart heading prints "(10 mcg/ml)" for 500 mg in 50 ml; the single-strength heading prints "(5 mg/ml)". Read on the page image.
+- Lignocaine, page 115: the rate table's headers print "Dose (1 mg/min)" and "Dose (1 mg/hour)". Read on the page image.
+- Nicardipine, page 138: "increments of 0.5 – 1 mg every 15 minutes", without "/hour".
+- Cross-references to the wrong page: dopamine (p46 to 48) and noradrenaline (p140 to 144) send terbutaline to "page 211", which is terlipressin (terbutaline is p209 to 210); terlipressin (p211 to 212) sends it to "page 223", and vasopressin (p222 to 223) to "page 223", its own page; dimercaprol (p34 to 35) sends Calcium EDTA to "page 23" (it is p19 to 20).
+- Four pages name two ED pharmacists as the contacts for GTN ointment and the 4F-PCC form, one with their mobile numbers, where other entries name the role ("Clinical Pharmacist ED"). The app covers the names and numbers.
+- The extraction's own arithmetic found 72 more possible slips (infusion grids printed 0.1 ml/hour high, rounded concentrations, dose bands that leave a value unassigned): `sources/starterpack/c/txt/c17-digest.md`, Cross-cutting flags, on this PC only. Check each on its page before it goes to the authors.
+
 **The ED pharmacy drug list (`#pharmacy`, `data19.js`, added 12 Nov 2026).** The Emergency Pharmacy's list of 14 Apr 2025 (155 drugs), with each drug's prescriber category in the MOH Medicines Formulary (all 141 matches checked against the formulary's own data). Still to confirm (also in the app):
 - Is a later list out?
 - How does the ED apply the categories A/KK, A and A* when an MO writes the prescription? The formulary says who may start one; does the EP countersign?

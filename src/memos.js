@@ -2,16 +2,19 @@
 // (git-ignored) and the bands listed in sources/memos/covers.json. Each band covers what the public app must not show:
 // the signature, the name block and registration numbers under it (Krishna's choice, 12 Nov 2026, under standing rule 3),
 // and any phone number or patient detail. Run: node memos.js   (needs Playwright, already set up for the test)
+// node memos.js starterpack: the same for the HKL doctors starter pack (sources/starterpack/covers.json, each key with its
+// own src pattern) into app/sp/, leaving the link-page tile crops (tile-*.webp, from sptiles.js) in place.
 const fs = require('fs'), path = require('path');
 const { chromium } = require('playwright');
 const ROOT = path.join(__dirname, '..');
-const SRC = path.join(ROOT, 'sources', 'memos');
-const OUT = path.join(ROOT, 'app', 'memo');
+const SP = process.argv[2] === 'starterpack';
+const SRC = path.join(ROOT, 'sources', SP ? 'starterpack' : 'memos');
+const OUT = path.join(ROOT, 'app', SP ? 'sp' : 'memo');
 const W = 1240;
 const spec = JSON.parse(fs.readFileSync(path.join(SRC, 'covers.json'), 'utf8'));
 fs.mkdirSync(OUT, { recursive: true });
 /* Start from an empty folder, so no page from an earlier run (or without its bands) can be published */
-for (const f of fs.readdirSync(OUT)) fs.unlinkSync(path.join(OUT, f));
+for (const f of fs.readdirSync(OUT)) if (!/^tile-/.test(f)) fs.unlinkSync(path.join(OUT, f));
 (async () => {
   const b = await chromium.launch(); const p = await b.newPage();
   await p.setContent('<canvas id=c></canvas>');
@@ -19,8 +22,9 @@ for (const f of fs.readdirSync(OUT)) fs.unlinkSync(path.join(OUT, f));
   for (const [key, pages] of Object.entries(spec)) {
     if (key.startsWith('_')) continue;
     for (const [pg, spec] of Object.entries(pages)) {
+      if (pg === 'src') continue;
       const bands = Array.isArray(spec) ? spec : spec.bands, rot = Array.isArray(spec) ? 0 : spec.rot || 0;
-      const png = path.join(SRC, 'pages', key, 'p' + String(pg).padStart(2, '0') + '.png');
+      const png = pages.src ? path.join(SRC, pages.src.replace('{n}', String(pg).padStart(2, '0'))) : path.join(SRC, 'pages', key, 'p' + String(pg).padStart(2, '0') + '.png');
       const data = 'data:image/png;base64,' + fs.readFileSync(png).toString('base64');
       const url = await p.evaluate(async ([data, bands, W, rot]) => {
         let im = new Image(); im.src = data; await im.decode();

@@ -314,12 +314,12 @@ main{flex:1;outline:none}
 .bento .st{min-height:150px}
 #tl-quick,#tl-mine{order:1}
 #t-paths,#t-rules,#t-dc,#t-calc{order:2}
-#t-intro,#t-inst,#tl-tip,#tl-keyn{order:3}
+#t-intro,#t-inst,#t-share,#tl-tip,#tl-keyn{order:3}
 #tl-rules,#tl-new{order:4}
 @media (max-width:760px){#t-dc,#t-calc{grid-column:span 2}}
 @media (min-width:761px){.bento{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.bento .zt{grid-row:span 2}
-  #t-paths,#t-rules{order:1} #tl-quick,#tl-mine{order:2} #t-dc,#t-calc,#tl-keyn{order:3} #t-intro,#t-inst,#tl-tip{order:4}
-  .bento:has(#t-inst:not([hidden])) #tl-new{grid-column:span 4}}
+  #t-paths,#t-rules{order:1} #tl-quick,#tl-mine{order:2} #t-dc,#t-calc,#tl-keyn{order:3} #t-intro,#t-inst,#t-share,#tl-tip{order:4}
+  .bento:has(#t-inst[hidden]) #tl-new{grid-column:span 4}}
 /* Zone tile */
 .zm{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));list-style:none;margin:6px 0 0;padding:0}
 .zm::before{content:"";position:absolute;left:10%;right:10%;top:23px;height:5px;border-radius:3px;background:rgba(255,255,255,.22)}
@@ -371,6 +371,65 @@ main{flex:1;outline:none}
   @keyframes ph3turn{from{transform:rotateY(-40deg) rotateX(16deg)}to{transform:rotateY(28deg) rotateX(-2deg)}}
 }}
 @media (max-width:374px){.ph3{width:84px}.hin{gap:10px}}
+/* Share the guide (12 Nov 2026): the link's card rising out of a phone toward you, with its QR code behind, in 3D */
+.sh3{flex:none;display:grid;place-items:center;width:132px;height:156px;perspective:720px}
+.sh3-b{position:relative;display:block;width:78px;height:140px;transform-style:preserve-3d;transform:rotateY(calc(-24deg + var(--tx,0)*22deg)) rotateX(calc(8deg + var(--ty,0)*-14deg))}
+.sh3-b>*{position:absolute;display:block}
+.sh3-ph{inset:0;border-radius:18px;background:linear-gradient(160deg,var(--obsidian-1),var(--obsidian-3));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28),16px 22px 26px -14px rgba(0,0,0,.55)}
+.sh3-sc{inset:4px;border-radius:14px;background:linear-gradient(165deg,var(--teal-1),var(--teal-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);transform:translateZ(1px)}
+.sh3-l{left:12px;height:9px;border-radius:5px;background:rgba(255,255,255,.22);transform:translateZ(3px)}
+.sh3-l.l1{top:20px;width:38px}.sh3-l.l2{top:34px;left:auto;right:12px;width:30px;background:rgba(255,255,255,.34)}
+.sh3-card{left:-22px;top:52px;width:110px;border-radius:12px;transform:translateZ(40px);filter:drop-shadow(0 14px 14px rgba(0,0,0,.35))}
+.sh3-qr{right:-30px;top:-10px;width:44px;height:44px;padding:3px;border-radius:10px;background:#fff;box-shadow:0 10px 16px -8px rgba(0,0,0,.5);transform:translateZ(18px) rotateZ(7deg)}
+.sh3-qr svg{display:block;width:100%;height:100%}
+.sh3-go{left:74px;top:40px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--mint);color:var(--emerald-3);box-shadow:0 8px 14px -6px rgba(0,0,0,.5);transform:translateZ(54px)}
+.sh3-go svg{width:16px;height:16px}
+.sh3.big{width:260px;height:300px;perspective:1000px}
+.sh3.big .sh3-b{width:118px;height:214px}
+.sh3.big .sh3-ph{border-radius:28px}.sh3.big .sh3-sc{inset:6px;border-radius:22px}
+.sh3.big .sh3-l{height:14px;border-radius:7px;left:18px}.sh3.big .sh3-l.l1{top:34px;width:62px}.sh3.big .sh3-l.l2{top:56px;left:auto;right:18px;width:48px}
+.sh3.big .sh3-card{left:-48px;top:62px;width:196px;border-radius:16px;transform:translateZ(46px)}
+.sh3.big .sh3-qr{right:-50px;top:-16px;width:68px;height:68px;padding:5px;border-radius:14px;transform:translateZ(24px) rotateZ(7deg)}
+.sh3.big .sh3-go{left:124px;top:46px;width:42px;height:42px;transform:translateZ(66px)}.sh3.big .sh3-go svg{width:21px;height:21px}
+/* The card a messaging app shows under the link */
+.shc{display:block;overflow:hidden;border-radius:inherit;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);text-align:left}
+.shc-img{position:relative;display:block;aspect-ratio:1200/630;background:radial-gradient(120% 90% at 20% 10%,var(--emerald-1),var(--emerald-3) 70%)}
+.shc-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
+.shc-img img.on{opacity:1}
+.shc-mk{position:absolute;left:8%;top:22%;width:22%;aspect-ratio:1;display:grid;place-items:center;border-radius:24%;background:linear-gradient(150deg,var(--emerald-1),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.shc-mk svg{width:62%;height:62%}
+.shc-img img.on + .shc-mk{display:none}
+.shc-t{display:grid;gap:2px;padding:6px 8px 7px;font:700 .5rem/1.3 var(--body)}
+.shc-t b{font:800 .58rem/1.2 var(--body)}
+.shc-t span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:600;color:var(--muted)}
+.shc-t small{font:600 .46rem/1.2 var(--mono);color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sh3.big .shc-t{gap:3px;padding:9px 11px 10px;font-size:.66rem}.sh3.big .shc-t b{font-size:.76rem}.sh3.big .shc-t small{font-size:.6rem}
+.sh-prev .shc{max-width:440px;border-radius:16px;margin:10px 0}
+.sh-prev .shc-t{gap:4px;padding:12px 14px 13px;font-size:.86rem}.sh-prev .shc-t b{font-size:1rem}.sh-prev .shc-t small{font-size:.76rem}
+.sh-prev h3,.sh-qr h3{margin:0;font:800 1.05rem/1.2 var(--display)}
+.sh-prev .sub{margin:6px 0 0}
+.sh-prev .sub .i,.sh-prev .sub svg{width:15px;height:15px;vertical-align:-3px}
+.sh-hero{flex-direction:row;align-items:center;gap:10px}
+.sh-hero .lbl{opacity:.86}
+.sh-hero h2{margin:0;font:800 1.45rem/1.15 var(--display)}
+.sh-hero .links .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.24);color:#fff;min-height:42px}
+.sh-hero .links .pill:hover{border-color:var(--mint);color:#fff}
+.sh-hero .in-go.sh-alt{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.sh-url{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:600 .8rem/1.3 var(--mono);opacity:.85}
+.sh-more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+@media (max-width:760px){.sh-more{grid-template-columns:1fr}}
+@media (max-width:560px){.sh-hero{flex-direction:column-reverse;align-items:stretch}.sh-hero .sh3{align-self:center;margin:8px 0 6px}}
+@media (max-width:374px){.sh3{width:110px}.sh3.big{width:220px}}
+@media (prefers-reduced-motion:no-preference){
+  .sh3-b{transition:transform .5s var(--ease)}
+  .sh3-card{animation:shrise 1s var(--spring) .2s backwards}@keyframes shrise{from{opacity:0;transform:translateZ(0) translateY(30px) scale(.55)}}
+  .sh3-qr{animation:shqr .7s var(--spring) .7s backwards}@keyframes shqr{from{opacity:0;transform:translateZ(-30px) rotateZ(-20deg) scale(.4)}}
+  .sh3-go{animation:shgo .5s var(--spring) 1.05s backwards}@keyframes shgo{from{opacity:0;transform:translateZ(40px) scale(.3)}}
+}
+@supports (animation-timeline:view()){@media (hover:none) and (prefers-reduced-motion:no-preference){
+  .sh3-b{animation:sh3turn linear both;animation-timeline:view();animation-range:cover 8% cover 92%}
+  @keyframes sh3turn{from{transform:rotateY(-38deg) rotateX(14deg)}to{transform:rotateY(22deg) rotateX(-2deg)}}
+}}
 @media (min-width:1100px){.zt:has(.zx[hidden]) .zm{margin-block:auto}.zt:has(.zx[hidden]) .zm .zd{width:min(76px,calc(100% - 10px));height:auto;aspect-ratio:1}.zt:has(.zx[hidden]) .zm .zd svg{width:32px;height:32px}.zt:has(.zx[hidden]) .zm::before,.zt:has(.zx[hidden]) .zm .zf{top:34px}.zt:has(.zx[hidden]) .zm button{gap:10px}.zt:has(.zx[hidden]) .zm b{font-size:.95rem}.zt:has(.zx[hidden]) .zm small{font-size:.8rem}}
 /* Number tiles */
 .nt{justify-content:space-between}
@@ -929,6 +988,14 @@ button.opt.sugg .gt{color:var(--mint)}
 .phx-hero .tm img,.phx-hero .tm video{left:auto;width:64%}
 .phx-hero .tm::after{background:linear-gradient(90deg,var(--t2) 36%,transparent 92%);background:linear-gradient(90deg,var(--t2) 36%,color-mix(in srgb,var(--t2) 70%,transparent) 58%,transparent 92%)}
 .phx-kh{margin:18px 2px 8px;font:800 1rem/1.2 var(--display)}
+.dg-p{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.dg-icu{margin:18px 0 10px;padding:14px 14px 12px;border-radius:18px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.dg-icu:empty{display:none}
+.dg-icu h2{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 8px;font:800 1rem/1.25 var(--body);color:var(--ink)}
+.dg-icu-k{padding:3px 9px;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font:800 .7rem/1.2 var(--body);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.dg-icu-l{margin:0 0 10px;padding-left:18px;display:grid;gap:5px;font-size:.86rem;line-height:1.45;color:var(--ink)}
+.dg-p .pill{min-height:34px;padding:5px 11px;font-size:.8rem}
+.phx.dg{grid-template-columns:minmax(0,1fr) auto}
 .phx-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 12px}
 .phx-c{display:grid;gap:3px;align-content:start;padding:9px 10px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);font-size:.74rem;line-height:1.3;color:var(--muted)}
 .phx-c b{display:flex;align-items:center;gap:6px;font:800 .78rem/1.2 var(--body);color:var(--ink)}
@@ -1089,6 +1156,13 @@ button.opt.sugg .gt{color:var(--mint)}
 .mm-ref{font:600 .78rem/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
 .mm-t{margin:8px 0 10px;font:700 .92rem/1.35 var(--body);color:var(--ink)}
 .mm-p{display:flex;flex-wrap:wrap;gap:6px}
+.figmemo + .figmemo{margin-top:8px}
+.mm-sp{box-shadow:inset 0 0 0 1px var(--line),inset 3px 0 0 var(--accent)}
+.mm-sp .mm-chip{background:var(--accent-soft);color:var(--accent)}
+.phx-lasa{display:flex;align-items:center;gap:5px;color:var(--observe)!important;font-weight:700}
+.phx-lasa .i{width:13px;height:13px;flex:none}
+.phx-lasa.dg-note{align-items:flex-start;font-weight:600;line-height:1.45}
+.phx-lasa.dg-note .i{margin-top:3px}
 .figtl{padding:10px;display:grid;gap:8px}
 .tl-r{display:grid;grid-template-columns:5.6em auto minmax(20px,1fr) auto;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);animation:tlin .5s var(--ease) var(--d) both}
 .tl-r b{font:800 .84rem/1.2 var(--body);color:var(--ink)}
@@ -1773,6 +1847,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <a href="#poster" data-v="poster"><span data-icon="poster"></span>Wall poster</a>
       <a href="#about" data-v="about"><span data-icon="info"></span>Sources and about</a>
       <a href="#install" data-v="install"><span data-icon="install"></span>Install the guide</a>
+      <a href="#share" data-v="share"><span data-icon="share"></span>Share the guide</a>
     </nav>
     <div class="side-saved" id="sidesaved"></div>
     <div class="side-foot"><button type="button" class="ghost" data-settings><span data-icon="sliders"></span>Settings</button><span>Version 8</span></div>
@@ -1812,6 +1887,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <section class="tile t-bronze st" id="t-calc" aria-label="Calculators"></section>
           <a class="tile t-obsidian wide first" href="#intro" id="t-intro"></a>
           <section class="tile t-teal wide hin" id="t-inst" aria-labelledby="h-inst" hidden></section>
+          <section class="tile t-emerald wide hin shl" id="t-share" aria-labelledby="h-share-t"></section>
           <section class="tile t-champagne wide tip" id="tl-tip" aria-labelledby="h-tip"><span class="tm" aria-hidden="true" data-tm="tip"><img src="tiles/tip.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span><div class="tile-h"><h2 id="h-tip">Pearl for this shift</h2></div><div id="tip" aria-live="polite"></div></section>
           <section class="tile t-pearl wide" id="tl-keyn" aria-labelledby="h-keyn"><div class="tile-h"><h2 id="h-keyn">More numbers</h2><a class="tl" href="#numbers">All 14</a></div><div id="keynums"></div></section>
           <section class="tile t-pearl wide" id="tl-rules" aria-labelledby="h-rules3"><div class="tile-h"><h2 id="h-rules3">Three rules to keep</h2><a class="tl" href="#rules">All rules</a></div><div class="r3" id="rulecards"></div></section>
@@ -1846,7 +1922,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p>A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs. Nothing you tick or type is saved.</p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-indigo tool-go" id="tdg" href="#dilution"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -1880,6 +1956,20 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
           <div class="seg" id="lkf" role="group" aria-label="Show a group"></div></div>
         <div id="lnks"></div>
         <p class="lk-note">Left out on purpose: the link page's response registers (Google Sheets that may hold patients' details). Open them from the link page itself.</p>
+      </div></section>
+
+      <!-- ED dosing and dilution guide (12 Nov 2026): data21.js, built by src/edd.js; its pages in app/sp/c17-p<N>.webp -->
+      <section class="view" data-view="dilution" id="v-dilution" hidden aria-labelledby="h-dilution"><div class="vw">
+        <header class="vhead"><div><h1 id="h-dilution">ED dosing and dilution guide</h1>
+          <p>The department's own guide to the injectable drugs used in the ED: find a drug, then open its pages as printed, with the dose, dilution, rate and nursing notes. Nothing here is stored.</p></div></header>
+        <div class="tile t-indigo phx-hero" id="dghero"></div>
+        <div class="lk-top"><label class="find"><span data-icon="search"></span><span class="vh">Find a drug</span><input id="dgq" type="search" placeholder="Find a drug, for example noradrenaline" autocomplete="off" spellcheck="false"></label>
+          <div class="seg" id="dgf" role="group" aria-label="Show"></div></div>
+        <nav class="phx-az" id="dgaz" aria-label="Jump to a letter"></nav>
+        <p class="phx-count" id="dgn" aria-live="polite"></p>
+        <div id="dgl"></div>
+        <section class="dg-icu" id="dgicu" aria-labelledby="h-dgicu"></section>
+        <p class="lk-note" id="dgsrc"></p>
       </div></section>
 
       <!-- ED pharmacy drug list (12 Nov 2026): data19.js, built by src/edrx.js -->
@@ -1959,6 +2049,13 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
       </div></section>
 
       <!-- Install the guide: on a phone, tablet or computer, and without a signal (engine.js draws it; in the web app, pwa.js feeds its live state) -->
+      <!-- Share the guide (12 Nov 2026): rendered by renderShare in engine.js the first time it opens, so its picture loads only then -->
+      <section class="view" data-view="share" id="v-share" hidden aria-labelledby="h-share"><div class="vw">
+        <header class="vhead"><div><h1 id="h-share">Share the guide</h1>
+          <p>Send the guide to a colleague: one link opens it on any phone. Nothing here is stored, and nothing is sent unless you send it.</p></div></header>
+        <div id="shbox"></div>
+      </div></section>
+
       <section class="view" data-view="install" id="v-install" hidden aria-labelledby="h-install"><div class="vw">
         <header class="vhead"><div><h1 id="h-install">Install the guide</h1>
           <p>Put the guide on your home screen or desktop. It opens like an app, full screen, and works without a signal: on ward Wi-Fi, on mobile data or with none at all.</p></div></header>

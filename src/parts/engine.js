@@ -62,6 +62,8 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 const V8 = [
+  ['The ED dosing and dilution guide','The department\'s own guide to the injectable drugs used in the ED (3rd edition, January 2026), 116 drugs: find a drug as you type, filter the 31 on the hospital\'s high alert list, and open its pages as printed, with the dose, dilution, rate and nursing notes. Search finds each drug by name.',[['#dilution','Open the guide'],['#tools','Shift tools']]],
+  ['New to HKL, and Prescribing at HKL','From the HKL doctors starter pack and its pharmacy pages, every link reviewed: New to HKL (the site plan, reporting for duty, scrubs, incident and medication error reports, the PD301 and the death certificate, sharps, de-escalation, public statements, locum, PhIS) and Prescribing at HKL (a check before you sign, allergy status, STAT doses, countersigning, the eight-medicine limit, verbal orders, imprest stock, high alert and look-alike medicines, administration times, what the pharmacy sends back, private pharmacy memos). The paracetamol overdose entry adds the hospital\'s NAC regimen with a calculator, and the ED pharmacy list marks its look-alike pairs. Each step shows its source.',[['#new-hkl','New to HKL'],['#prescribing','Prescribing at HKL'],['#calc-nac','NAC by weight']]],
   ['The ED pharmacy drug list','The Emergency Pharmacy\'s own list of 14 Apr 2025, 155 drugs, found as you type: is it on the list, and who may start it? Each drug shows its prescriber category in the MOH Medicines Formulary (B and C: a medical officer may start it; A/KK, A and A*: a specialist), with a link to the formulary\'s own entry. Search finds a drug by name and opens the list on it.',[['#pharmacy','Open the list'],['#tools','Shift tools']]],
   ['Department memos for the Green and Yellow Zones','Twenty-two of the department\'s own memos, 2021 to 2024, as steps you can work through: EMACC booking now follows the memo of 11 Jan 2024 (Counter 10, day 4 or day 5); the team leader\'s shift, admitting from the Green Zone, elderly patients, the records to finish, critical lab results, notification, STEMI to IJN, police detainees, stat FBC and ABG, LA OT and tourniquets; in the Yellow Zone, transfusion, sedation, central lines with the care bundle, referred patients, transfers by EWS, albumin, dangerous drugs and unknown patients; and a missed fracture on a reported film. Each shows its memo\'s own pages, with the signature, registration numbers and any incident background covered, and links to the department\'s own memo list.',[['#gz-rules--tl','Team leader of the shift'],['#gz-rules--gzm','Green Zone memos'],['#yellow-zone','Yellow Zone memos']]],
   ['Abdominal pain: the visual handbook','A teaching handbook on adult abdominal pain in the ED, with its quick reference: the bedside pathway, the checks that prevent a miss, red flags, tests and imaging, pain relief and antibiotics, eight presentations, six cases, and a 3D map of the nine regions to tap and turn. Every number was checked against the source the handbook cites; the HKL ebook\'s Abdominal pain pathway stays the department\'s. The Malay discharge script can be read aloud.',[['#abdo-handbook','Open the handbook'],['#abdo-handbook--loc','The 3D map'],['#abdo-handbook--trig','The checks that prevent a miss']]],
@@ -244,6 +246,8 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'The ED dosing and dilution guide (3rd edition, January 2026; added 12 Nov 2026) is shown as printed. Still to confirm with its authors: (1) midazolam, page 126: the high-dose Midafentanyl syringe prints "60 mg midazolam + 600 mg fentanyl to 60 ml", while the same page prints 300 mcg fentanyl in 30 ml and a final 10 mcg/ml of fentanyl (the general ICU\'s own dilution guide, 5th edition, April 2026, p12, also dilutes fentanyl to a final 10 mcg/ml); (2) the guide\'s own high alert badge and the hospital\'s 2026 list differ (dextrose 20%, diazepam and phenobarbital carry the badge but are not on the list; potassium dihydrogen phosphate and sodium bicarbonate 8.4% are on the list without the badge).',
+  'From the HKL doctors starter pack (added 12 Nov 2026). Still to confirm: (1) medicines on one outpatient prescription: eight (Director\'s memo, 27 May 2019) or five (MOH quick guide 2020, p21; the hospital\'s Good Prescribing Practice slides)? (2) the death certificate duplicate: within 72 hours of discharge (the Medical Records video, Oct 2022) or within 24 hours (the form\'s own header)? (3) abbreviations: the pharmacy\'s accepted list and the MOH guide accept PCM and EES; the 2025 Good Prescribing Practice rules say write paracetamol, not PCM; (4) the GXM video (2023) asks for at least 5 ml in an adult and a printed label on the back of the form; the March 2026 transfusion memo in the guide says EDTA 3 to 4 ml and handwritten labels only.',
   'Department memos added on 12 Nov 2026 (Green Zone memos and the Yellow Zone menu). Still to confirm: (1) the elderly memo HKL/JK/98/188/3(14)2021 of 12 May 2021 (no IV tramadol over 65; elderly waiting for a primary team in the Yellow Zone): still in force? (2) the POCT memo HKL/JK/98/188/1(24)2023 of 8 Nov 2023 was issued for a reagent shortage: are its limits on stat FBC and ABG still in force? (3) repeat BP, ECG and DXT: memo HKL/JK/98/188/3(9)24 says Bilik 9, the one-way flow note says the Procedure Room: the same room? (4) is the LA OT Google Form (memo HKL/JK/98/188/3(23)22) still the way to book?',
   'The ED pharmacy drug list (added 12 Nov 2026) is the Emergency Pharmacy\'s list of 14 Apr 2025, with each drug\'s MOH formulary category. Still to confirm: (1) is a later list out? (2) how the ED applies the categories A/KK, A and A* when an MO writes the prescription (the formulary says who may start one; does the EP countersign?); (3) row 72, Gamma Benzene Hexachloride: the scan\'s decimal mark is unclear (read as 0.1%), and the formulary lists only 1%.',
   'EM Watch booking is now in the app from work instruction AK-15 (in force 16 Mar 2026, p12). Still to confirm: its two forms, the Pink Form (Lampiran 1) and the EM WATCH Appointment form (Lampiran 2), which are not attached to the copy seen; and the timing: AK-15 aims to reassess within 48 to 72 hours and to review CT brain reports within 48 hours of discharge, where the department policy (2026, 9.2.1) and the 2023 deck give 1 week; and the deck\'s online prescription against AK-15\'s documents collected at the Record Unit.',
@@ -673,14 +677,18 @@ if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-'
    A memo card on the step that quotes it: its number, date and title as printed, and its own scanned pages
    (app/memo/<key>-p<N>.webp, with the signature and registration numbers covered), each opened with a tap in the
    page viewer. Nothing loads before the tap. */
-const memoHTML = k => { const m = MEMOS[k];
-  return `<div class="fig figmemo"><div class="mm-h"><span class="mm-chip">${svg('rule')}Department memo</span><span class="mm-ref">${esc(m.ref)} · ${esc(m.date)}</span></div>
+/* A page is a number (<dir>/<key>-p<N>), 'tile' (its tile on the link page, <dir>/tile-<key>) or a file name in <dir> */
+const memoSrc = (k, n, dir) => typeof n === 'number' ? `${dir}/${k}-p${n}` : n === 'tile' ? `${dir}/tile-${k}` : `${dir}/${n}`;
+const memoHTML = k => { const m = MEMOS[k], dir = m.dir || 'memo', sp = dir !== 'memo';
+  return `<div class="fig figmemo${sp ? ' mm-sp' : ''}"><div class="mm-h"><span class="mm-chip">${svg(sp ? 'link' : 'rule')}${esc(m.kind || 'Department memo')}</span><span class="mm-ref">${esc(m.ref)} · ${esc(m.date)}</span></div>
     <p class="mm-t" lang="ms">${esc(m.t)}</p>
-    <div class="mm-p">${m.pages.map(([n, l]) => `<button type="button" class="pill" data-ppage="memo/${k}-p${n}" data-pname="${esc('Memo ' + m.ref + ' · ' + l)}">${svg('poster')}${esc(l)}</button>`).join('')}<a class="pill" href="${MEMO_LIST}" target="_blank" rel="noopener noreferrer">The department's memo list${svg('ext')}</a></div>
-    <p class="fig-cap">The memo as scanned, a page at a tap: signatures, registration numbers and any incident background are covered. The department's own list holds every memo.</p></div>`; };
+    <div class="mm-p">${m.pages.map(([n, l]) => `<button type="button" class="pill" data-ppage="${memoSrc(k, n, dir)}" data-pname="${esc((sp ? m.t : 'Memo ' + m.ref) + ' · ' + l)}">${svg('poster')}${esc(l)}</button>`).join('')}<a class="pill" href="${m.list || MEMO_LIST}" target="_blank" rel="noopener noreferrer">${esc(m.lname || 'The department\'s memo list')}${svg('ext')}</a></div>
+    <p class="fig-cap">${esc(m.cap || 'The memo as scanned, a page at a tap: signatures, registration numbers and any incident background are covered. The department\'s own list holds every memo.')}</p></div>`; };
 if (typeof MEMOS !== 'undefined') Object.keys(MEMOS).forEach(k => { FIGS['memo-' + k] = () => memoHTML(k); });
+/* Several sources on one step (the starter pack, data20.js): their cards one after another */
+if (typeof SPFIGS !== 'undefined') Object.keys(SPFIGS).forEach(k => { FIGS['sp-' + k] = () => SPFIGS[k].map(memoHTML).join(''); });
 /* On a question or a step the memo card goes below the options, so the question stays at the top of a phone screen */
-const memoFig = n => !!(n.fig && /^memo-/.test(n.fig));
+const memoFig = n => !!(n.fig && /^(memo|sp)-/.test(n.fig));
 /* EMACC's first visit (memo HKL/JK/98/188/3(01)24, Lampiran A, 12): why it is day 4 or day 5, as the memo's own timeline draws it */
 FIGS.emtl = () => { const D = [['1', 'The patient is discharged', ''], ['2', '9 am: PPK Rekod sends the X-ray for reporting', ''], ['3', 'X-ray reporting', ''], ['4', '9 am: PPK Rekod collects the reported X-ray. 10 am: missed fracture review by an ED MO. 12 pm to 3 pm: EMACC, urgent cases', 'u'], ['5', 'EMACC, cases that are not urgent (the first appointment)', 'n']];
   return `<div class="fig figemt"><ol class="emt">${D.map(([d, t, k]) => `<li class="${k}"><b>Day ${d}</b><span>${esc(t)}</span></li>`).join('')}</ol><p class="fig-cap">The first EMACC visit waits for the X-ray report (memo (01)24, Lampiran A, 12).</p></div>`; };
@@ -895,7 +903,7 @@ function search(q, loose){
     }
     if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
     /* An ED pharmacy drug comes after the pathways, rules and guidelines that mention it (the list keeps its own order) */
-    if (e.kind === 'Drug') s = Math.min(s, 1);
+    if (e.kind === 'Drug' || e.kind === 'Dilution') s = Math.min(s, 1);
     return {e, s};
   }).filter(Boolean).sort((a, b) => b.s - a.s).slice(0, 14).map(r => r.e);
 }
@@ -959,7 +967,7 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose){
-  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -996,7 +1004,7 @@ function closePal(restore){
 }
 
 /* ================= Views ================= */
-const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy'};
+const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy', dilution:'Dilution guide'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
 /* A topic or group tile filters the list under it. On a phone the tiles fill the screen, so the list comes up to meet the
@@ -1042,7 +1050,7 @@ function markNav(){
     const on = a.dataset.v === v && (!a.dataset.sub || a.dataset.sub === curSub);
     if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
-  const tab = curView === 'run' ? 'pathways' : v === 'calc' || v === 'install' ? 'tools' : v;
+  const tab = curView === 'run' ? 'pathways' : v === 'calc' || v === 'install' || v === 'share' ? 'tools' : v;
   $$('#tabbar [data-tab]').forEach(t => { if (t.dataset.tab === tab) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
 }
 function showLearn(sub){
@@ -1106,7 +1114,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr']);
 const tileMedia = k => TILE_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
@@ -2298,6 +2306,21 @@ const CALCS = {
         verdict:{cls:'next', link:'Open the pathway step', ...V[band]},
         gap:'The ebook does not give the activated charcoal dose, the N-acetylcysteine regimen or which nomogram treatment line to use.' + (band === 'e8' ? ' It does not say which band exactly 8 hours belongs to.' : '')};
     }},
+  nac:{t:'IV N-acetylcysteine: the hospital\'s regimen', g:'tox', src:'HKL NAC circular, Jan 2022', path:'#paracetamol-overdose', kw:'nac n-acetylcysteine acetylcysteine hidonac paracetamol overdose regimen regime infusion dose bag rate',
+    sub:'The hospital\'s paracetamol overdose regime (Lampiran 1a), worked out by weight: mg, ml of the 5000mg/25ml vial, the bag and the rate.',
+    fields:[['wt','Actual body weight','kg'], {k:'fr', type:'seg', label:'Fluid restriction?', opts:[['n','No'], ['y','Yes']]}],
+    note:'From the Director\'s circular of 10 Jan 2022 and its Lampiran 1a (Pharmacy Department HKL, forms updated 12.12.2021), on the paracetamol overdose entry: the dose on the actual body weight to a ceiling of 110kg; fluid restriction OR a weight under 40kg takes the two-bag regime; every bag in D5% (sodium chloride 0.9% if dextrose 5% is not suitable). When to start and stop follows the ebook\'s pathway, which gives no doses.',
+    run(v){
+      if (!v.wt) return null;
+      const bad = badWt(v.wt); if (bad) return bad;
+      const w = Math.min(v.wt, 110), two = v.fr === 'y' || v.wt < 40;
+      const S = two ? [[200, 250, 4, '62.5'], [100, 500, 16, '31.25']] : [[200, 500, 4, '125'], [50, 500, 8, '62.5'], [50, 500, 8, '62.5']];
+      const outs = S.map(([d, bag, h, rate], i) => { const mg = d * w; return ['Step ' + (i + 1) + ': ' + d + ' mg/kg', fx(mg) + ' mg', '', `${fx(mg / 200)} ml of IV NAC (5000mg/25ml) in ${bag}ml D5% over ${h} hours: ${rate} ml/hr`]; });
+      const total = S.reduce((a, s) => a + s[0], 0);
+      outs.unshift(['Dosing weight', fx(w) + ' kg', v.wt > 110 ? 'warn' : '', v.wt > 110 ? 'The circular caps the weight at 110kg' : 'Actual body weight']);
+      return {outs, verdict:{cls:'next', h:(two ? 'Fluid restriction or under 40kg: two bags' : 'Three bags') + `, ${total} mg/kg over ${S.reduce((a, s) => a + s[2], 0)} hours`, p:'Check the volume against the vials: 5000mg in 25ml is 200mg per ml.', href:'#paracetamol-overdose', link:'The pathway and the circular'},
+        gap:'The circular gives no treatment line, timing or stopping rule: the ebook\'s pathway decides when to start. The non-paracetamol acute liver failure regime (Lampiran 1b) is not worked out here.'};
+    }},
   anaph:{t:'Anaphylaxis: drugs and fluids', g:'tox', src:'Ebook p15–16', path:'#anaphylaxis--first', kw:'anaphylaxis allergy adrenaline epinephrine glucagon hydrocortisone chlorpheniramine salbutamol fluids',
     sub:'The ebook\'s drugs in anaphylaxis at a glance, with the fluid bolus worked out by weight.',
     fields:[['wt','Weight','kg']],
@@ -2458,6 +2481,7 @@ const CALCS = {
 };
 /* Every number above must still be in the source text: the test checks each of these phrases against the pathway data */
 const CALC_FACTS = [
+  ['paracetamol-overdose', 'Step 1: 200 mg/kg in 500ml D5% over 4 hours, 125 ml/hr'], ['paracetamol-overdose', 'Step 2: 50 mg/kg in 500ml D5% over 8 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 1: 200 mg/kg in 250ml D5% over 4 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 2: 100 mg/kg in 500ml D5% over 16 hours, 31.25 ml/hr'], ['paracetamol-overdose', 'IV NAC 5000mg/25ml per vial'], ['paracetamol-overdose', 'to a ceiling of 110kg'], ['paracetamol-overdose', 'Fluid restriction OR BW < 40kg'],
   ['snakebite-moh', 'Put 2 ml of freshly drawn venous blood into a small, dry glass tube, new or heat-cleaned'], ['snakebite-moh', 'Leave it undisturbed at room temperature for 20 minutes, then tip it once'], ['snakebite-moh', 'Still liquid: a coagulopathy is possible. Repeat as needed'], ['snakebite-moh', 'a quick bedside test when the bite is unidentified or a pit viper is suspected'], ['snakebite-moh', 'Do not decide antivenom on the 20WBCT alone'], ['snakebite-moh', 'Yet a coagulopathy on the 20WBCT is also listed as an antivenom indication (p66)'], ['snakebite-moh', 'After an adequate dose, clotting usually returns in 3-9 hours (p75)'], ['snakebite-moh', 'Still not clotting, or not clotting again, 6 hours after the infusion ended: repeat the starting dose (p75)'], ['snakebite-moh', 'Not in the guideline: whether a partial clot counts, a schedule for repeat tests, or what to use without a glass tube'], ['snakebite-moh', 'Local envenoming 5-10 vials, systemic 10 vials; next after 1-2 hours'], ['snakebite-moh', '10 vials; next after 1-2 hours'], ['snakebite-moh', '5 vials; next after 1-2 hours'], ['snakebite-moh', 'Red-headed krait 5 vials; next after 1-2 hours. No dose as a second choice'], ['snakebite-moh', '1-3 vials; next after 1-2 hours'], ['snakebite-moh', '4 vials; next at 6 hours'], ['snakebite-moh', '3 vials; next at 6 hours'], ['snakebite-moh', 'Second choice for the pit vipers'], ['snakebite-moh', 'Coral: consider neostigmine with atropine. Those pit vipers: usually not indicated'], ['snakebite-moh', 'Starting dose for an unidentified bite: not in the guideline'], ['snakebite-moh', 'Not in Borneo: the Malayan pit viper, monocled cobra and Malayan krait (p74)'], ['snakebite-moh', 'Printed blank, so ask the EP or an expert: the leaf-nose palm, Sumatran and mountain pit vipers in Table 15 (p71), the Sabah green pit viper in Table 16 (p73)'], ['snakebite-moh', 'Its antivenom is the anti-yamakagashi antivenom, sourced from Japan; no second choice and no dose in the guideline'], ['snakebite-moh', 'Never the Indian polyvalent antivenom'], ['snakebite-moh', 'Elapid antivenoms neutralise less per vial: up to 10 vials to start in confirmed envenoming (p65)'], ['snakebite-moh', 'Adrenaline drawn up before starting: adult 0.5 mg, child 0.01 mg/kg, of 1 mg/ml (1 in 1,000) (p69)'], ['snakebite-moh', 'Reconstitute each vial with the solution supplied or 10 ml water for injection; swirl gently, never shake (p69)'], ['snakebite-moh', 'Dilute: adult 250-500 ml normal saline or D5%; child 5-10 ml/kg'], ['snakebite-moh', 'or give it undiluted'], ['snakebite-moh', 'Run at 1-2 ml/min for 10-15 minutes; with no reaction, faster, to finish within an hour (p69)'], ['snakebite-moh', 'Monitor during the infusion and for at least an hour after'], ['snakebite-moh', 'The same dose at every age, in pregnancy and with comorbidities; no contraindication'], ['snakebite-moh', 'Some severely envenomed children may need a larger volume of antivenom, given their lower volume of distribution'], ['snakebite-moh', 'Repeat the starting dose: still unclotted, or unclotted again, 6 hours after the infusion ended; within 1-2 hours if bleeding stays brisk; after 1-2 hours if paralysis or the circulation worsens, with full support'], ['snakebite-moh', 'No maximum dose or number of repeats is given'], ['anaphylaxis', 'Infusion 1 mcg/min: 1 mg (1 ml of 1:1000) in 500 ml NS at 0.5 ml/min'], ['snakebite-moh', 'Krait and sea snake paralysis does not respond like this'], ['snakebite-moh', 'Table 17 prints 1 microgm/kg/min'],
   ['animal-bites', 'IM: 1 site; D0,3,7,14-28'], ['animal-bites', 'ID: 2 sites; D0,3,7'], ['animal-bites', 'IM/ID: 1 site; D0,3'], ['animal-bites', 'ID: 4 sites; D0'],
   ['animal-bites', 'Intramuscular (IM): 0.5 ml'], ['animal-bites', 'Intradermal (ID): 0.1 ml'], ['animal-bites', 'Deltoid (IM/ID)'], ['animal-bites', 'Suprascapular (ID)'], ['animal-bites', 'Anterolateral thigh (ID)'],
@@ -2761,7 +2785,7 @@ function renderRx(){
   const re = q ? new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
   const hl = s => re ? s.split(re).map((x, k) => k % 2 ? `<mark>${esc(x)}</mark>` : esc(x)).join('') : esc(s);
   const tip = c => !c ? 'Not found in the formulary\'s public list at this strength or form' : `MOH formulary category ${c}${RX_DEF[c] ? ': ' + RX_DEF[c] : ', by indication'}`;
-  $('#rxl').innerHTML = hits.length ? letters.map(L => `<section class="phx-g" id="rx-${L}"><h2>${L}</h2><ul class="phx-l">${hits.filter(i => L0(i) === L).map(([n, t, c, u, note]) => `<li class="phx" data-rxn="${n}"><span class="phx-t"><b>${hl(t)}</b>${note ? `<small>${esc(note)}</small>` : ''}</span><span class="phx-b ${RX_TIER(c)}" title="${esc(tip(c))}"><span class="vh">${esc(tip(c))}. </span><span aria-hidden="true">${c ? esc(c) : '·'}</span></span>${u ? `<a class="phx-go" href="${esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(t)} in the MOH formulary">${svg('ext')}</a>` : '<span aria-hidden="true"></span>'}</li>`).join('')}</ul></section>`).join('')
+  $('#rxl').innerHTML = hits.length ? letters.map(L => `<section class="phx-g" id="rx-${L}"><h2>${L}</h2><ul class="phx-l">${hits.filter(i => L0(i) === L).map(([n, t, c, u, note]) => `<li class="phx" data-rxn="${n}"><span class="phx-t"><b>${hl(t)}</b>${note ? `<small>${esc(note)}</small>` : ''}${typeof EDRX_LASA !== 'undefined' && EDRX_LASA[n] ? `<small class="phx-lasa">${svg('flag')}Look-alike sound-alike with ${esc(all.find(i => i[0] === EDRX_LASA[n])[1])} (the Emergency Pharmacy's top 10, 20 Aug 2026)</small>` : ''}</span><span class="phx-b ${RX_TIER(c)}" title="${esc(tip(c))}"><span class="vh">${esc(tip(c))}. </span><span aria-hidden="true">${c ? esc(c) : '·'}</span></span>${u ? `<a class="phx-go" href="${esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(t)} in the MOH formulary">${svg('ext')}</a>` : '<span aria-hidden="true"></span>'}</li>`).join('')}</ul></section>`).join('')
     : '<p class="empty">No drug on the ED pharmacy\'s list of 14 Apr 2025 matches. Ask the pharmacy, or check the MOH formulary.</p>';
 }
 function renderRxStatic(){
@@ -2777,6 +2801,40 @@ function renderToolsRx(){
   if (typeof EDRX === 'undefined' || !$('#trx')) return;
   const all = EDRX.items, c = t => all.filter(i => RX_TIER(i[2]) === t).length;
   withTiles($('#trx'), `${tileMedia(RX_TILE())}<div class="row"><span class="ic">${svg('pill')}</span><h2>ED pharmacy drug list</h2><span class="tag">${all.length}</span></div><p>Is it on the Emergency Pharmacy's list, and who may start it? The list of 14 Apr 2025, with the MOH formulary categories.</p><ul class="gl"><li><span>MO may start</span><b>${c('mo')}</b></li><li><span>Specialist</span><b>${c('sp')}</b></li><li><span>Not found</span><b>${c('no')}</b></li></ul><span class="go-l">Open the list${svg('chev')}</span>`);
+}
+/* ================= The ED dosing and dilution guide (12 Nov 2026, data21.js) =================
+   An index of the department's guide (3rd ed., Jan 2026): find a drug, open its own pages as printed. The doses are read from
+   the pages, never retyped. "High alert" marks a drug on the hospital's 2026 list. */
+let dgF = 'all';
+const DG_TILE = () => TILE_KEYS.has('prescr') ? 'prescr' : 'doses';
+function renderDg(){
+  if (typeof EDDG === 'undefined') return;
+  const q = ($('#dgq').value || '').trim().toLowerCase(), all = EDDG.items;
+  $('#dgf').innerHTML = [['all', 'All', all.length], ['ham', 'High alert', all.filter(i => i[6]).length]].map(([k, t, n]) => `<button type="button" data-df="${k}" aria-pressed="${dgF === k}">${t} <span class="n">${n}</span></button>`).join('');
+  const hits = all.filter(i => (dgF === 'all' || i[6]) && (!q || i[1].toLowerCase().includes(q)));
+  const L0 = i => i[1].replace(/^[^A-Za-z]+/, '')[0].toUpperCase(), letters = [...new Set(hits.map(L0))];
+  $('#dgaz').innerHTML = hits.length > 12 ? letters.map(L => `<button type="button" data-dl="${L}" aria-label="Drugs starting with ${L}">${L}</button>`).join('') : '';
+  $('#dgn').textContent = q || dgF !== 'all' ? `${hits.length} of ${all.length} drugs` : `${all.length} drugs, in the guide's own order`;
+  const re = q ? new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
+  const hl = s => re ? s.split(re).map((x, k) => k % 2 ? `<mark>${esc(x)}</mark>` : esc(x)).join('') : esc(s);
+  const pills = ([n, t, a, b, pa, pb]) => Array.from({length:b - a + 1}, (_, k) => a + k).map((pg, k) => `<button type="button" class="pill" data-ppage="sp/c17-p${pg}" data-pname="${esc(t + ' · page ' + (pg - 8))}">${svg('poster')}p ${pg - 8}</button>`).join('');
+  $('#dgl').innerHTML = hits.length ? letters.map(L => `<section class="phx-g" id="dg-${L}"><h2>${L}</h2><ul class="phx-l">${hits.filter(i => L0(i) === L).map(i => `<li class="phx dg" data-dgn="${i[0]}"><span class="phx-t"><b>${hl(i[1])}</b>${i[6] ? `<small class="phx-lasa">${svg('flag')}On the hospital's high alert list (2026)</small>` : ''}${EDDG.notes && EDDG.notes[i[0]] ? `<small class="phx-lasa dg-note">${svg('info')}${esc(EDDG.notes[i[0]])}</small>` : ''}<span class="dg-p">${pills(i)}</span></span></li>`).join('')}</ul></section>`).join('')
+    : '<p class="empty">No drug in the guide matches. Try its generic name.</p>';
+}
+function renderDgStatic(){
+  if (typeof EDDG === 'undefined') return;
+  withTiles($('#dghero'), `${tileMedia(DG_TILE())}<span class="lbl">ETD HKL · 3rd edition · Jan 2026</span><h2>${EDDG.items.length} injectable drugs</h2><p>Each opens the guide's own pages: dose, dilution, rate, nursing notes and Y-site compatibility.</p>`);
+  /* Special case (Krishna, 12 Nov 2026): the general ICU's own guide, described in the guide's own words; none of its entries copied */
+  if ($('#dgicu') && typeof MEMOS !== 'undefined' && MEMOS.c16) $('#dgicu').innerHTML = `<h2 id="h-dgicu"><span class="dg-icu-k">Special case</span>A patient in the general ICU</h2>
+    <ul class="dg-icu-l"><li>The general ICU has its own dilution guide: the Adult GICU Dilution Guide (HKL), 5th edition, April 2026, next review April 2031, prepared by pharmacists with the agreement of the ICU's consultant intensivists.</li>
+    <li>Its entries marked † are departures agreed with the intensivist in charge, so they apply only in that ICU.</li>
+    <li>It draws on the manufacturers' product information and other references, among them the MOH Dilution Guide for Fluid-Restricted Critically Ill Adults (2024).</li>
+    <li>The guide above is the department's own, for the ED. The GICU guide opens only with an MOH sign-in, from the Farmasi HKL page.</li></ul>${memoHTML('c16')}`;
+  $('#dgsrc').innerHTML = `Source: ${esc(EDDG.src)}, Pharmacy Department HKL, reviewed by the department's emergency physicians; shared on the Farmasi HKL page. In the guide with the department's authorisation (12 Nov 2026). Its pages are shown as printed, with the names and contact numbers of two pharmacists (pages 69, 123, 211 and 223) and the names on the NAC forms (pages 133 and 134) covered. "High alert" marks a drug on the hospital's List of High Alert Medications (2026); the guide's own red badge on its pages differs in places (it marks dextrose 20%, diazepam and phenobarbital, which the list does not name, and not potassium dihydrogen phosphate or sodium bicarbonate 8.4%, which the list does). The guide's own disclaimer: it is for trained staff of the department; check the dose before you give it.`;
+}
+function renderToolsDg(){
+  if (typeof EDDG === 'undefined' || !$('#tdg')) return;
+  withTiles($('#tdg'), `${tileMedia(DG_TILE())}<div class="row"><span class="ic">${svg('syringe')}</span><h2>ED dosing and dilution guide</h2><span class="tag">${EDDG.items.length}</span></div><p>The department's guide to injectable drugs, 3rd edition, January 2026: find a drug, open its pages.</p><ul class="gl"><li><span>Drugs</span><b>${EDDG.items.length}</b></li><li><span>High alert</span><b>${EDDG.items.filter(i => i[6]).length}</b></li></ul><span class="go-l">Open the guide${svg('chev')}</span>`);
 }
 function renderToolsLinks(){
   withTiles($('#tlk'), `${tileMedia('links')}<div class="row"><span class="ic">${svg('link')}</span><h2>ED links</h2><span class="tag">${LINKS.reduce((a, g) => a + g.items.length, 0)}</span></div><p>The department's forms, hospital systems and folders, from the ETD HKL link page.</p><ul class="gl">${LINKS.map(g => `<li><span>${esc(g.h)}</span><b>${g.items.length}</b></li>`).join('')}</ul>`);
@@ -3349,6 +3407,69 @@ $('#t-inst').addEventListener('click', e => { if (e.target.closest('[data-hin-go
 addEventListener('gz-pwa', renderHomeInstall);
 renderHomeInstall();
 
+/* ================= Share the guide (12 Nov 2026, at Krishna's request) =================
+   One link for a colleague: the web app's address (APP_URL), which opens on any phone and installs from there. A share
+   sheet where the browser has one (navigator.share, from a tap only; a cancel is not an error), Copy link everywhere, and
+   WhatsApp and Telegram links that open the reader's own app, where they choose who it goes to. The card drawn in 3D is the
+   one a messaging app shows under the link: the web app's Open Graph tags (build.js) and og/preview.jpg (og.js). It is one
+   card for every link, since a link preview runs no script and drops what follows the #. Nothing is stored or sent. */
+const SHARE_QR = 'M0 0h7v1h-7zM12 0h1v1h-1zM14 0h2v1h-2zM18 0h2v1h-2zM21 0h1v1h-1zM23 0h2v1h-2zM26 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM10 1h1v1h-1zM12 1h1v1h-1zM15 1h1v1h-1zM17 1h1v1h-1zM21 1h1v1h-1zM23 1h2v1h-2zM26 1h1v1h-1zM32 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM11 2h1v1h-1zM14 2h1v1h-1zM16 2h2v1h-2zM19 2h2v1h-2zM23 2h2v1h-2zM26 2h1v1h-1zM28 2h3v1h-3zM32 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h3v1h-3zM13 3h1v1h-1zM17 3h1v1h-1zM22 3h2v1h-2zM26 3h1v1h-1zM28 3h3v1h-3zM32 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM9 4h4v1h-4zM16 4h1v1h-1zM19 4h1v1h-1zM21 4h1v1h-1zM23 4h2v1h-2zM26 4h1v1h-1zM28 4h3v1h-3zM32 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM17 5h2v1h-2zM20 5h2v1h-2zM24 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h7v1h-7zM10 7h1v1h-1zM12 7h1v1h-1zM14 7h1v1h-1zM17 7h6v1h-6zM24 7h1v1h-1zM0 8h1v1h-1zM3 8h1v1h-1zM5 8h2v1h-2zM8 8h1v1h-1zM12 8h2v1h-2zM15 8h2v1h-2zM19 8h1v1h-1zM21 8h2v1h-2zM25 8h1v1h-1zM27 8h1v1h-1zM0 9h1v1h-1zM2 9h2v1h-2zM5 9h1v1h-1zM8 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM16 9h1v1h-1zM21 9h2v1h-2zM25 9h3v1h-3zM31 9h2v1h-2zM2 10h5v1h-5zM8 10h3v1h-3zM17 10h1v1h-1zM19 10h4v1h-4zM24 10h1v1h-1zM27 10h2v1h-2zM30 10h1v1h-1zM32 10h1v1h-1zM3 11h2v1h-2zM8 11h1v1h-1zM10 11h3v1h-3zM14 11h1v1h-1zM16 11h2v1h-2zM19 11h1v1h-1zM21 11h4v1h-4zM28 11h2v1h-2zM31 11h1v1h-1zM3 12h4v1h-4zM8 12h1v1h-1zM10 12h3v1h-3zM15 12h1v1h-1zM19 12h3v1h-3zM24 12h3v1h-3zM29 12h1v1h-1zM32 12h1v1h-1zM0 13h6v1h-6zM8 13h6v1h-6zM15 13h2v1h-2zM21 13h1v1h-1zM24 13h1v1h-1zM26 13h1v1h-1zM28 13h1v1h-1zM31 13h2v1h-2zM0 14h1v1h-1zM6 14h4v1h-4zM11 14h4v1h-4zM17 14h2v1h-2zM20 14h1v1h-1zM23 14h1v1h-1zM25 14h2v1h-2zM30 14h2v1h-2zM3 15h3v1h-3zM10 15h1v1h-1zM15 15h1v1h-1zM17 15h2v1h-2zM20 15h2v1h-2zM23 15h2v1h-2zM26 15h3v1h-3zM31 15h1v1h-1zM0 16h7v1h-7zM10 16h2v1h-2zM13 16h1v1h-1zM17 16h1v1h-1zM20 16h2v1h-2zM23 16h1v1h-1zM26 16h1v1h-1zM28 16h1v1h-1zM31 16h1v1h-1zM2 17h3v1h-3zM7 17h1v1h-1zM9 17h6v1h-6zM18 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM27 17h1v1h-1zM29 17h1v1h-1zM0 18h3v1h-3zM4 18h3v1h-3zM9 18h2v1h-2zM12 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM25 18h1v1h-1zM30 18h3v1h-3zM1 19h1v1h-1zM7 19h2v1h-2zM11 19h1v1h-1zM14 19h1v1h-1zM16 19h3v1h-3zM20 19h2v1h-2zM23 19h1v1h-1zM26 19h2v1h-2zM31 19h2v1h-2zM4 20h3v1h-3zM11 20h2v1h-2zM14 20h1v1h-1zM16 20h4v1h-4zM21 20h1v1h-1zM23 20h3v1h-3zM27 20h1v1h-1zM31 20h1v1h-1zM1 21h2v1h-2zM7 21h1v1h-1zM9 21h2v1h-2zM13 21h6v1h-6zM24 21h3v1h-3zM31 21h2v1h-2zM0 22h2v1h-2zM3 22h5v1h-5zM9 22h2v1h-2zM13 22h1v1h-1zM15 22h1v1h-1zM19 22h1v1h-1zM22 22h1v1h-1zM25 22h1v1h-1zM27 22h1v1h-1zM29 22h2v1h-2zM32 22h1v1h-1zM1 23h2v1h-2zM7 23h8v1h-8zM16 23h1v1h-1zM19 23h1v1h-1zM21 23h2v1h-2zM24 23h2v1h-2zM28 23h2v1h-2zM0 24h1v1h-1zM2 24h1v1h-1zM5 24h3v1h-3zM9 24h2v1h-2zM12 24h6v1h-6zM20 24h2v1h-2zM23 24h6v1h-6zM32 24h1v1h-1zM8 25h4v1h-4zM13 25h1v1h-1zM19 25h2v1h-2zM22 25h1v1h-1zM24 25h1v1h-1zM28 25h2v1h-2zM32 25h1v1h-1zM0 26h7v1h-7zM10 26h3v1h-3zM20 26h1v1h-1zM22 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h4v1h-4zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM12 27h5v1h-5zM19 27h4v1h-4zM24 27h1v1h-1zM28 27h1v1h-1zM32 27h1v1h-1zM0 28h1v1h-1zM2 28h3v1h-3zM6 28h1v1h-1zM9 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM16 28h1v1h-1zM19 28h4v1h-4zM24 28h6v1h-6zM0 29h1v1h-1zM2 29h3v1h-3zM6 29h1v1h-1zM8 29h2v1h-2zM12 29h4v1h-4zM17 29h1v1h-1zM21 29h1v1h-1zM23 29h1v1h-1zM26 29h1v1h-1zM28 29h3v1h-3zM0 30h1v1h-1zM2 30h3v1h-3zM6 30h1v1h-1zM10 30h2v1h-2zM14 30h1v1h-1zM18 30h1v1h-1zM20 30h3v1h-3zM24 30h1v1h-1zM28 30h1v1h-1zM32 30h1v1h-1zM0 31h1v1h-1zM6 31h1v1h-1zM9 31h1v1h-1zM12 31h1v1h-1zM14 31h4v1h-4zM20 31h2v1h-2zM23 31h3v1h-3zM29 31h1v1h-1zM0 32h7v1h-7zM8 32h1v1h-1zM11 32h1v1h-1zM21 32h1v1h-1zM23 32h3v1h-3zM28 32h2v1h-2zM31 32h1v1h-1z';
+const SHARE_TITLE = 'Green Zone MO Guide';
+const SHARE_DESC = 'Pathways, rules, calculators and numbers for the Green Zone, Emergency & Trauma Department, HKL. A reference tool only.';
+const SHARE_HOST = APP_URL.replace(/^https:\/\//, '').replace(/\/$/, '');
+/* Not inside a frame (the claude.ai artifact): there the share sheet is blocked, so Copy link stands in */
+const canShare = () => { try { return typeof navigator.share === 'function' && window.top === window.self; } catch(e){ return false; } };
+function shareGuide(btn, url = APP_URL){
+  if (!canShare()) return copyText(url, {btn, ok:'Link copied'});
+  try { navigator.share({title:SHARE_TITLE, text:SHARE_DESC, url}).catch(e => { if (!e || e.name !== 'AbortError') copyText(url, {btn, ok:'Link copied'}); }); }
+  catch(e){ copyText(url, {btn, ok:'Link copied'}); }
+}
+/* The card a messaging app shows. On the share page it carries the real picture (og/preview.jpg, fetched only there);
+   on the home tile it is drawn, so the front page loads nothing more. */
+const shCard = img => `<span class="shc"><span class="shc-img">${img ? '<img src="og/preview.jpg" alt="" width="1200" height="630" decoding="async">' : ''}<span class="shc-mk">${LOGO}</span></span>` +
+  `<span class="shc-t"><b>${SHARE_TITLE}</b><span>${esc(SHARE_DESC)}</span><small>${SHARE_HOST}</small></span></span>`;
+/* The phone, its chat, the card that rises out of it toward you, and the code behind: all in 3D. It leans toward a mouse
+   or pen (the tile's --tx and --ty, as for Install), turns as it crosses a touch screen, and stands still with reduced motion. */
+const sh3Art = big => `<span class="sh3${big ? ' big' : ''}" aria-hidden="true"><span class="sh3-b"><i class="sh3-ph"></i><i class="sh3-sc"></i>` +
+  `<i class="sh3-l l1"></i><i class="sh3-l l2"></i><span class="sh3-card">${shCard(big)}</span>` +
+  `<span class="sh3-qr"><svg viewBox="-2 -2 37 37"><rect x="-2" y="-2" width="37" height="37" rx="3" fill="#fff"/><path d="${SHARE_QR}" fill="#0b110e" shape-rendering="crispEdges"/></svg></span>` +
+  `<span class="sh3-go">${svg('share')}</span></span></span>`;
+function renderHomeShare(){
+  const el = $('#t-share'); if (!el) return;
+  el.innerHTML = `<div class="hin-t"><div class="tile-h"><h2 id="h-share-t">Share the guide</h2><span class="tag">One link</span></div>` +
+    `<p class="sub">Send it to a colleague: the link opens on any phone, and installs from there.</p><div class="links">` +
+    (canShare() ? `<button type="button" class="in-go sm" data-hsh-go>${svg('share')}<span class="bl">Share</span></button>` : `<button type="button" class="in-go sm" data-hsh-copy>${svg('copy')}<span class="bl">Copy link</span></button>`) +
+    `<a class="pill" href="#share">Card and QR code${svg('chev')}</a></div></div>${sh3Art(false)}`;
+}
+let shDone = false;
+function renderShare(){
+  const box = $('#shbox'); if (!box || shDone) return;
+  shDone = true;
+  const wa = 'https://wa.me/?text=' + encodeURIComponent(SHARE_TITLE + ': ' + APP_URL);
+  const tg = 'https://t.me/share/url?url=' + encodeURIComponent(APP_URL) + '&text=' + encodeURIComponent(SHARE_TITLE);
+  box.innerHTML = `<section class="tile t-emerald hin shl sh-hero" id="shhero" aria-labelledby="h-shhero"><div class="hin-t"><span class="lbl">One link, any phone</span>` +
+    `<h2 id="h-shhero">Send the guide to a colleague</h2><p class="sub">They tap the link, the guide opens, and it installs from there. Nothing about you or your patients goes with it.</p>` +
+    `<div class="links">${canShare() ? `<button type="button" class="in-go" data-shgo>${svg('share')}<span class="bl">Share</span></button>` : ''}` +
+    `<button type="button" class="in-go${canShare() ? ' sh-alt' : ''}" data-shcopy>${svg('copy')}<span class="bl">Copy link</span></button>` +
+    `<a class="pill" href="${wa}" target="_blank" rel="noopener noreferrer">WhatsApp${svg('ext')}</a><a class="pill" href="${tg}" target="_blank" rel="noopener noreferrer">Telegram${svg('ext')}</a></div>` +
+    `<code class="sh-url" id="sh-url">${esc(SHARE_HOST)}/</code></div>${sh3Art(true)}</section>` +
+    `<div class="sh-more"><section class="tile t-pearl sh-prev" aria-labelledby="h-shprev"><h3 id="h-shprev">What they will see</h3>` +
+    `<p class="sub">Messaging apps such as WhatsApp and Telegram show this card under the link.</p>${shCard(true)}` +
+    `<p class="sub">A link to one pathway or step shows the same card, then opens that step: copy it with ${svg('link')} on any step.</p></section>` +
+    `<section class="tile t-pearl in-qr sh-qr" aria-labelledby="h-shqr"><div class="in-qr-w"><svg class="in-qr-c" viewBox="-3 -3 39 39" role="img" aria-label="QR code that opens the guide's web app">` +
+    `<rect x="-3" y="-3" width="39" height="39" rx="3" fill="#fff"/><path d="${SHARE_QR}" fill="#0b110e" shape-rendering="crispEdges"/></svg></div>` +
+    `<div><h3 id="h-shqr">Face to face</h3><p>Their phone's camera opens the guide from this code. On a computer, it opens on your phone the same way.</p></div></section></div>`;
+  /* The picture shows once it has loaded; until then, or where it is not published, the card keeps its drawn mark */
+  $$('#shbox .shc-img img').forEach(im => { const on = () => im.classList.add('on'); if (im.complete && im.naturalWidth) on(); else { im.addEventListener('load', on); im.addEventListener('error', () => im.remove()); } });
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-shgo],[data-shcopy],[data-hsh-go],[data-hsh-copy]'); if (!b) return;
+  if (b.hasAttribute('data-shgo') || b.hasAttribute('data-hsh-go')) shareGuide(b);
+  else copyText(APP_URL, {btn:b, el:b.hasAttribute('data-shcopy') ? $('#sh-url') : null, ok:'Link copied'});
+});
+IDX.push({href:'#share', title:'Share the guide', kind:'Setting', meta:'One link, a QR code, and the card messaging apps show', body:'share send colleague friend recommend whatsapp telegram link copy link qr code new staff house officer', ic:'share', c:'c-meta'});
+renderHomeShare();
+
 /* ================= Routing ================= */
 function route(){
   stopReader(); pauseFilms();
@@ -3358,7 +3479,8 @@ function route(){
   if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
+  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
+  else if (h === 'share'){ renderShare(); changed = showView('share'); }
   else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
     if (id && id !== calcTab){ calcTab = id; renderCalc(); }
@@ -3385,7 +3507,7 @@ $('#cnt-path').textContent = Object.keys(P).length;
 $('#cnt-rule').textContent = FLOW_IDS.length + PROT_IDS.length;
 $('#cnt-calc').textContent = Object.keys(CALCS).length;
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
-renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks(); renderRxStatic(); renderRx(); renderToolsRx();
+renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks(); renderRxStatic(); renderRx(); renderToolsRx(); renderDgStatic(); renderDg(); renderToolsDg();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
 $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
@@ -3395,6 +3517,10 @@ LINKS.forEach(g => g.items.forEach(it => IDX.push({href:'#links', title:it.t, ki
 if (typeof EDRX !== 'undefined'){
   IDX.push({href:'#pharmacy', title:'ED pharmacy drug list', kind:'Tool', meta:'What the Emergency Pharmacy supplies, with the MOH formulary categories', body:'pharmacy farmasi ubat drug list stock available discharge prescription formulary FUKKM category ' + EDRX.items.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta'});
   const G = {}; EDRX.items.forEach(i => { const g = rxGeneric(i[1]); (G[g] = G[g] || []).push(i); });
+  if (typeof EDDG !== 'undefined'){
+    IDX.push({href:'#dilution', title:'ED dosing and dilution guide', kind:'Tool', meta:'Injectable drugs, 3rd edition, January 2026', body:'dilution dilute infusion injectable iv drug dose rate syringe pump icu gicu intensive care ' + EDDG.items.map(i => i[1]).join(' · '), ic:'syringe', c:'c-meta'});
+    EDDG.items.forEach(i => { const g = i[1].split(/\s(?=\d)|\s\(|;|,/)[0].trim(); IDX.push({href:'#dilution', title:g + ' (ED dilution guide)', kind:'Dilution', meta:'Dosing and dilution guide, p' + i[4] + (i[5] !== i[4] ? '–' + i[5] : ''), body:i[1], ic:'syringe', c:'c-meta', dg:g}); });
+  }
   Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
 }
 renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderInstall();
@@ -3477,6 +3603,12 @@ $('#nums').addEventListener('click', e => { const b = e.target.closest('button[d
 $('#lkq').addEventListener('input', renderLinks);
 /* The ED pharmacy list: find as you type, filter by category, jump to a letter; a drug found by search opens the list on it */
 $('#rxq').addEventListener('input', renderRx);
+$('#dgq').addEventListener('input', renderDg);
+$('#dgf').addEventListener('click', e => { const b = e.target.closest('[data-df]'); if (b){ dgF = b.dataset.df; renderDg(); const nb = $(`#dgf [data-df="${dgF}"]`); if (nb) nb.focus(); } });
+$('#dgaz').addEventListener('click', e => { const b = e.target.closest('[data-dl]'); if (b){ const s = document.getElementById('dg-' + b.dataset.dl); if (s) s.scrollIntoView({block:'start'}); } });
+const dgFrom = a => { if (a && a.dataset.dg){ dgF = 'all'; $('#dgq').value = a.dataset.dg; renderDg(); } };
+$('#palbody').addEventListener('click', e => dgFrom(e.target.closest('a[data-dg]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) dgFrom(palLinks()[palSel]); }, true);
 $('#rxf').addEventListener('click', e => { const b = e.target.closest('[data-rf]'); if (b){ rxF = b.dataset.rf; renderRx(); const nb = $(`#rxf [data-rf="${rxF}"]`); if (nb) nb.focus(); } });
 $('#rxaz').addEventListener('click', e => { const b = e.target.closest('[data-rl]'); if (b){ const s = document.getElementById('rx-' + b.dataset.rl); if (s) s.scrollIntoView({block:'start'}); } });
 const rxFrom = a => { if (a && a.dataset.rx){ rxF = 'all'; $('#rxq').value = a.dataset.rx; renderRx(); } };
@@ -3589,7 +3721,7 @@ const glowAt = e => {
   /* 3D: a tile with a picture leans toward a mouse or pen, and its picture shifts the other way for depth. --tx and --ty run
      from -1 to 1 across the tile; the angle is smaller on a larger tile, so an edge never travels more than about 6 px.
      Not for touch: a finger that lands on a tile to scroll the page would make it wobble. */
-  if (e.pointerType !== 'touch' && !REDUCED && r.width && t.classList.contains('tile') && (t.classList.contains('hin') || t.querySelector(':scope > .tm'))){
+  if (e.pointerType !== 'touch' && !REDUCED && r.width && t.classList.contains('tile') && (t.classList.contains('hin') || t.querySelector(':scope > .tm'))){ /* .hin: Install and Share */
     const nx = Math.max(-1, Math.min(1, x / r.width * 2 - 1)), ny = Math.max(-1, Math.min(1, y / r.height * 2 - 1));
     t.style.setProperty('--tx', nx.toFixed(3)); t.style.setProperty('--ty', ny.toFixed(3));
     t.style.setProperty('--ry', (nx * Math.min(4, 700 / r.width)).toFixed(2) + 'deg');

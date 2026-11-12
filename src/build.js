@@ -27,7 +27,7 @@ const crypto = require('crypto');
 const PARTS = path.join(__dirname, 'parts');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const APP = path.join(OUT, 'app');
-const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'engine.js'];
+const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'data20.js', 'data21.js', 'engine.js'];
 const stop = msg => { console.error(msg); process.exit(1); };
 
 /* LF line endings throughout, as git keeps the files (.gitattributes), so the hashes in sw.js match what GitHub Pages serves */
@@ -56,9 +56,27 @@ const BG = (head.match(/:root\{[^}]*?--bg:\s*(#[0-9a-fA-F]{6})/) || [])[1];
 const BG_DARK = (head.match(/prefers-color-scheme: dark\)\{:root:not\(\[data-theme="light"\]\)\{[^}]*?--bg:\s*(#[0-9a-fA-F]{6})/) || [])[1];
 if (!BG || !BG_DARK) stop('Could not read --bg (light and dark) from parts/head.html.');
 
-/* The same skeleton the artifact host wraps around the page, plus the tab icon and, for the web app, its manifest,
-   touch icon, home screen name (iOS) and the browser bar's colour (pwa.js keeps it with the Day and Night switch) */
-const SHELL = '<!doctype html><html><head><meta charset="utf-8">' +
+/* The link preview (12 Nov 2026): the card WhatsApp, Telegram and other apps show under a link to the web app. Open Graph
+   and Twitter tags in the head, with absolute addresses on APP_URL, and the picture og/preview.jpg (1200 x 630, made by
+   og.js). A crawler reads only the head of the page and drops what follows the #, so every link shows this one card.
+   For the web app only: the artifact's link preview belongs to claude.ai. */
+const APP_URL = (read('engine.js').match(/const APP_URL = '(https:[^']+\/)'/) || [])[1];
+if (!APP_URL) stop('Could not read APP_URL from parts/engine.js.');
+const DESC = 'Pathways, rules, calculators and numbers for medical officers and house officers in the Green Zone (MTS 4 and 5), Emergency & Trauma Department, Hospital Kuala Lumpur. A reference tool only.';
+const OG_IMG = 'og/preview.jpg';
+if (!fs.existsSync(path.join(APP, OG_IMG))) console.warn('Note: app/' + OG_IMG + ' is missing: run node og.js for the link preview picture.');
+const attr = t => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+const OG = '<title>Green Zone MO Guide</title>' +
+  `<meta name="description" content="${attr(DESC)}"><link rel="canonical" href="${APP_URL}">` +
+  `<meta property="og:type" content="website"><meta property="og:site_name" content="Green Zone MO Guide"><meta property="og:locale" content="en_GB">` +
+  `<meta property="og:title" content="Green Zone MO Guide"><meta property="og:description" content="${attr(DESC)}"><meta property="og:url" content="${APP_URL}">` +
+  `<meta property="og:image" content="${APP_URL + OG_IMG}"><meta property="og:image:secure_url" content="${APP_URL + OG_IMG}"><meta property="og:image:type" content="image/jpeg">` +
+  `<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The Green Zone MO Guide on three phones: the pathway library, a pathway step and the calculators">` +
+  `<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Green Zone MO Guide"><meta name="twitter:description" content="${attr(DESC)}"><meta name="twitter:image" content="${APP_URL + OG_IMG}">`;
+
+/* The same skeleton the artifact host wraps around the page, plus the tab icon and, for the web app, its link preview,
+   manifest, touch icon, home screen name (iOS) and the browser bar's colour (pwa.js keeps it with the Day and Night switch) */
+const SHELL = '<!doctype html><html><head><meta charset="utf-8">' + OG +
   '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' + encodeURIComponent(ICON) + '">' +
   '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">' +
   '<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">' +
@@ -73,7 +91,7 @@ const MANIFEST = {
   id: '/green-zone-mo-guide/',
   name: 'Green Zone MO Guide',
   short_name: 'Green Zone',
-  description: 'Pathways, rules, calculators and numbers for medical officers and house officers in the Green Zone (MTS 4 and 5), Emergency & Trauma Department, Hospital Kuala Lumpur. A reference tool only.',
+  description: DESC,
   lang: 'en-GB',
   dir: 'ltr',
   start_url: './',
@@ -106,9 +124,9 @@ app = app.replace("'__PAGE__'", () => `'${PAGE_ID}'`);
 
 /* What the service worker handles, from the files in app/ */
 const walk = dir => fs.existsSync(dir) ? fs.readdirSync(dir, {withFileTypes: true}).flatMap(d => d.isDirectory() ? walk(path.join(dir, d.name)) : [path.join(dir, d.name)]) : [];
-const files = ['img', 'tiles', 'media', 'poster', 'ebook', 'xray', 'abdo', 'abdo3d', 'memo', 'clips', 'audio'].flatMap(d => walk(path.join(APP, d))).map(f => path.relative(APP, f).split(path.sep).join('/')).sort();
+const files = ['img', 'tiles', 'media', 'poster', 'ebook', 'xray', 'abdo', 'abdo3d', 'memo', 'sp', 'og', 'clips', 'audio'].flatMap(d => walk(path.join(APP, d))).map(f => path.relative(APP, f).split(path.sep).join('/')).sort();
 const SMALL = /^(img\/[^/]+|tiles\/[^/]+|media\/[^/]+|poster\/[^/]+-thumb)\.webp$/; /* the small stills: saved at install */
-const LATER = /^(poster\/[^/]+\.webp|ebook\/[^/]+\.webp|xray\/[^/]+\.webp|abdo\/[^/]+\.webp|abdo3d\/.+\.webp|memo\/[^/]+\.webp|(media|clips|audio|tiles)\/[^/]+\.(mp4|mp3))$/; /* poster sheets, films and sounds: kept once used */
+const LATER = /^(og\/[^/]+\.jpg|poster\/[^/]+\.webp|ebook\/[^/]+\.webp|xray\/[^/]+\.webp|abdo\/[^/]+\.webp|abdo3d\/.+\.webp|memo\/[^/]+\.webp|sp\/[^/]+\.webp|(media|clips|audio|tiles)\/[^/]+\.(mp4|mp3))$/; /* poster sheets, films and sounds: kept once used */
 const PRE = {'': hash16(app), 'manifest.webmanifest': hash16(manifest)}, KEEP = {};
 let preBytes = Buffer.byteLength(app) + Buffer.byteLength(manifest), keepBytes = 0;
 for (const f of files){
