@@ -1985,6 +1985,10 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .pal-ai span{flex:1;min-width:0}
 .pal-ai .sm{min-height:36px}
 .pal-weak a{font-weight:800}
+/* Read aloud with the phone's own voices (13 Nov 2026): under the step, beside the flag, and above the open reference tab */
+.flagrow .sayb{margin-right:auto}
+.sayb[aria-pressed="true"]{color:var(--accent);background:var(--accent-soft)}
+.ptab-say{display:flex;justify-content:flex-end;padding:4px 10px 0}
 /* In the claude.ai copy, a comment on the step through claude.ai's own comment box */
 .flag-c{display:grid;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
 .flag-c .sm{justify-content:flex-start;width:100%}
@@ -2327,7 +2331,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <div class="shead"><h2>Privacy</h2></div>
         <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
           <p>Voice search uses your browser's own speech service, and Ask in your own words (in the claude.ai copy) sends your question to Claude under your own account: say or type a topic, never a patient's name or details. A patient's QR code holds only the address of the advice, and the patient's page keeps nothing about them. A report from Something wrong on this step? goes only where you send it.</p>
-          <p>Smart search runs on your own phone: what you type is never sent anywhere. It uses Model2Vec potion-retrieval-32M by Minish Lab (Stephan Tulkens and Thomas van Dongen), cut to its first 128 dimensions, under the MIT licence (<a href="ai/LICENSE.txt" target="_blank" rel="noopener noreferrer">licence</a>). It only finds and orders the guide's own pages; it writes nothing.</p>
+          <p>Smart search runs on your own phone: what you type is never sent anywhere. It uses Model2Vec potion-retrieval-32M by Minish Lab (Stephan Tulkens and Thomas van Dongen), cut to its first 128 dimensions, under the MIT licence (<a href="ai/LICENSE.txt" target="_blank" rel="noopener noreferrer">licence</a>), and, for searches in Malay, Model2Vec potion-multilingual-128M by the same authors (distilled from BAAI bge-m3), cut to 65,989 word pieces and 128 dimensions, also MIT (<a href="ai/LICENSE-ms.txt" target="_blank" rel="noopener noreferrer">licence</a>). It only finds and orders the guide's own pages; it writes nothing.</p>
           <p>Illustrations and clips are generated artwork and show no real staff or patients. Department documents are cited by title and date; personal phone numbers, registration numbers and patient details in them are left out.</p></div>
       </div></section>
 
@@ -2411,6 +2415,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
     <div class="set"><div><b>Moving tiles</b><small>The tiles, section bars and tool headers move silently. Off keeps still pictures and saves mobile data.</small></div><div class="seg" id="st-tiles" role="group" aria-label="Moving tiles"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Moving clips</b><small>The patient journey clips loop silently. Off saves mobile data.</small></div><div class="seg" id="st-clips" role="group" aria-label="Moving clips"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Smart search</b><small>Finds the guide's pages by meaning, not only by your words, on this phone: nothing is sent. <span id="st-aistate">It downloads (about 8 MB, once) the first time you search.</span></small></div><div class="seg" id="st-ai" role="group" aria-label="Smart search"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
+    <div class="set" id="st-asrrow"><div><b>Voice on this phone</b><small>English voice search runs on this phone, so the sound never leaves it. It downloads about 35 MB the first time you use it. Malay (BM) still uses the browser's speech service.</small></div><div class="seg" id="st-asr" role="group" aria-label="Voice on this phone"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set" id="st-buzzrow"><div><b>Vibration</b><small>A short buzz when you copy, answer, reach an outcome or tick a stop sign, and a long one when the 20WBCT timer runs out. Android phones.</small></div><div class="seg" id="st-buzz" role="group" aria-label="Vibration"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Saved, recent and quiz score</b><small id="st-count">Kept in this browser only.</small></div><button type="button" id="st-clear" class="sm">Clear</button></div>
     <p class="dlg-f">Settings are kept in this browser only. <span data-ver>Version 8</span>.</p>

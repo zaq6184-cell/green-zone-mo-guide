@@ -1272,6 +1272,15 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(moved.length === 0, 'smart search: searches that already worked keep their first result' + (moved.length ? ': ' + moved.join(', ') : ''));
     await aq.fill('#gq', 'ankle sprain'); await aq.waitForTimeout(250);
     ok(!/ankle strain/.test(await aq.textContent('#palbody')), 'smart search: "ankle sprain" is not "corrected" to ankle strain');
+    /* Malay-aware smart search: a Malay search downloads the Malay model, once; English searches never do */
+    ok(!aiReq.some(u => /ms-model/.test(u)) && await aq.evaluate(() => msQuery('sakit dada') && !msQuery('chest pain') && AIMS.state === 'idle'), 'smart search: English searches never download the Malay model');
+    await aq.fill('#gq', 'buku lali terseliuh');
+    await aq.waitForFunction(() => AIMS.state === 'ready' || AIMS.state === 'failed', null, {timeout:20000}).catch(() => {});
+    ok(await aq.evaluate(() => AIMS.state === 'ready') && aiReq.some(u => /ai\/ms-model\.bin$/.test(u)) && aiReq.some(u => /ai\/ms-vocab\.txt$/.test(u)), 'smart search: the first Malay search downloads the Malay model');
+    const msWant = {'buku lali terseliuh':/ankle/i, 'alahan teruk':/anaphylaxis|allerg/i, 'luka terbakar':/burn/i, 'lemah sebelah badan':/stroke|cva/i, 'kaki bengkak merah':/dvt|leg|cellulitis/i, 'sakit belakang':/pain|back/i, 'digigit kucing':/bite|rabies/i};
+    const msMiss = [];
+    for (const [q, re] of Object.entries(msWant)) if (!(await top3(q)).some(t => re.test(t))) msMiss.push(q);
+    ok(msMiss.length === 0 && await aq.evaluate(() => smartFind('alahan teruk', findMore('alahan teruk')).ms === true), 'smart search: Malay searches go to the Malay model and find their pages' + (msMiss.length ? ': missed ' + msMiss.join(', ') : ''));
     await aq.evaluate(() => { closePal(false); openSettings(); }); await aq.waitForTimeout(150);
     ok(/Ready on this device/.test(await aq.textContent('#st-aistate')), 'smart search: Settings says it is ready on this device');
     await aq.click('#st-ai [data-val="off"]'); await aq.evaluate(() => closeSettings(false));
@@ -1283,12 +1292,88 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
       const bc = await b.newContext({...phone, reducedMotion:'reduce'});
       await bc.route('**/ai/model.bin', r => r.fulfill({status:404, body:'not here'}));
       await bc.route('**/ai/model.b64.txt', r => r.fulfill({status:200, contentType:'text/plain', body:fs.readFileSync(b64, 'utf8')}));
+      const msb64 = path.join(__dirname, '..', 'sources', 'ai', 'ms', 'model.b64.txt');
+      await bc.route('**/ai/ms-model.bin', r => r.fulfill({status:404, body:'not here'}));
+      await bc.route('**/ai/ms-model.b64.txt', r => fs.existsSync(msb64) ? r.fulfill({status:200, contentType:'text/plain', body:fs.readFileSync(msb64, 'utf8')}) : r.fulfill({status:404, body:''}));
       const bq = await bc.newPage(); bq.on('pageerror', e => errs.push('smart search b64 PAGEERROR: ' + e.message));
       await bq.goto(U + '#home', {waitUntil:'load'}); await bq.waitForTimeout(500);
       await bq.evaluate(() => aiLoad());
       ok(await bq.evaluate(() => AI.state === 'ready' && smartFind('fainted', findMore('fainted')).r[0].href === '#syncope'), 'smart search: the base64 copy the claude.ai artifact serves loads the same model');
+      await bq.evaluate(() => aiLoadMs());
+      ok(await bq.evaluate(() => AIMS.state === 'ready' && smartFind('alahan teruk', findMore('alahan teruk')).ms === true), 'smart search: the base64 copy of the Malay model loads too');
       await bc.close();
     }
+
+    /* Read aloud with the phone's own voices (13 Nov 2026), with a stand-in for the phone's speech */
+    const tc = await b.newContext({...phone, reducedMotion:'reduce'});
+    await tc.addInitScript(() => {
+      window.__said = []; window.__cancel = 0;
+      const voices = [{lang:'en-US', name:'English US', localService:true}, {lang:'en-GB', name:'English UK', localService:true}, {lang:'ms-MY', name:'Malay', localService:true}];
+      window.SpeechSynthesisUtterance = class { constructor(t){ this.text = t; } };
+      Object.defineProperty(window, 'speechSynthesis', {configurable:true, value:{speaking:false,
+        getVoices: () => window.__noms ? voices.filter(v => !/^ms/.test(v.lang)) : voices,
+        speak(u){ window.__said.push({t:u.text, lang:u.lang, v:u.voice && u.voice.name}); if (!window.__hold) setTimeout(() => { if (u.onend) u.onend(); }, 30); },
+        cancel(){ window.__cancel++; }}});
+    });
+    const tq = await tc.newPage(); tq.on('pageerror', e => errs.push('read aloud PAGEERROR: ' + e.message));
+    await tq.goto(U + '#renal-colic--urgent', {waitUntil:'load'}); await tq.waitForTimeout(600);
+    await tq.click('#run [data-say="cur"]'); await tq.waitForTimeout(250);
+    const said1 = await tq.evaluate(() => ({all:window.__said.map(s => s.t).join(' '), s:window.__said[0], q:P['renal-colic'].nodes.urgent.q}));
+    ok(said1.s && said1.s.lang === 'en-GB' && said1.s.v === 'English UK' && said1.all.includes(said1.q) && /Answers: /.test(said1.all) && !/Read aloud|Something wrong|Copy/.test(said1.all), 'read aloud: the step is read by the phone\'s own British English voice, its question and its answers, and none of the buttons');
+    await tq.goto(U + '#dengue-cpg', {waitUntil:'load'}); await tq.waitForTimeout(500);
+    await tq.evaluate(() => { window.__said = []; selectTab('leaflet'); }); await tq.click('#run [data-leaf="ms"]'); await tq.waitForTimeout(150);
+    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    const said2 = await tq.evaluate(() => ({all:window.__said.map(s => s.t).join(' '), s:window.__said[0], title:P['dengue-cpg'].leaflet.ms.title}));
+    ok(said2.s && said2.s.lang === 'ms-MY' && said2.s.v === 'Malay' && said2.all.includes(said2.title), 'read aloud: the Malay side of a leaflet is read by a Malay voice');
+    await tq.evaluate(() => { window.__said = []; window.__noms = true; });
+    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    ok(await tq.evaluate(() => window.__said.length === 0), 'read aloud: with no Malay voice on the phone it says so, rather than reading Malay in an English voice');
+    await tq.evaluate(() => { window.__noms = false; window.__hold = true; }); await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(100);
+    const reading = await tq.evaluate(() => ({on:!!sayOn, c:window.__cancel, label:document.querySelector('#run [data-say="tab"] span').textContent}));
+    await tq.evaluate(() => { location.hash = '#renal-colic'; }); await tq.waitForTimeout(300);
+    ok(reading.on && reading.label === 'Stop reading' && await tq.evaluate(c => !sayOn && window.__cancel > c, reading.c), 'read aloud: while it reads, the button says Stop reading, and leaving the page stops it');
+    await tc.close();
+
+    /* Ask with exact quotes (13 Nov 2026): a quote shows only if it is the guide's own text, letter for letter */
+    const qc = await b.newContext({...phone, reducedMotion:'reduce'});
+    await qc.addInitScript(() => {
+      const fake = Object.assign(async () => ({text:''}), {json: async input => {
+        const line = input.split('\n').find(l => l.startsWith('c1 |')), text = line.split(' | ').slice(4).join(' | ');
+        window.__quote = text.split(' ').slice(0, 12).join(' ');
+        return {picks:[{id:'c1', quote:window.__quote}, {id:'c2', quote:'Give 50 mg of a drug the guide never names'}]};
+      }});
+      window.claude = {use: async n => n === 'sample' ? fake : null};
+    });
+    const qq = await qc.newPage(); qq.on('pageerror', e => errs.push('ask quotes PAGEERROR: ' + e.message));
+    await qq.goto(U + '#home', {waitUntil:'load'}); await qq.waitForTimeout(600);
+    await qq.evaluate(() => openPal()); await qq.fill('#gq', 'pregnant dengue patient which zone'); await qq.waitForTimeout(300);
+    await qq.click('#gask'); await qq.waitForTimeout(500);
+    const aqr = await qq.evaluate(() => ({q:window.__quote, li:[...document.querySelectorAll('#gaskres .rs')].map(s => s.textContent), note:(document.querySelector('#gaskn') || {}).textContent || ''}));
+    ok(aqr.li.length >= 2 && aqr.li[0].includes('“' + aqr.q + '”') && !aqr.li.some(t => /never names/.test(t)) && /checked letter for letter/.test(aqr.note), 'ask: a quote Claude copied from the guide shows in quotation marks; a quote that is not the guide\'s own text is dropped');
+    await qc.close();
+
+    /* Voice search on this phone (13 Nov 2026), with stand-ins for the microphone and the speech model (no network) */
+    const mc = await b.newContext({...phone, reducedMotion:'reduce'}), asrReq = [];
+    await mc.route('**/@huggingface/transformers@4.3.2/dist/transformers.min.js', r => { asrReq.push(r.request().url()); r.fulfill({status:200, contentType:'application/javascript', body:'export const env = {}; export async function pipeline(task, model){ window.__asrModel = task + " " + model; return async pcm => ({text: pcm && pcm.length ? "Chest pain." : ""}); }'}); });
+    await mc.addInitScript(() => {
+      Object.defineProperty(navigator, 'mediaDevices', {configurable:true, value:{getUserMedia: async () => { window.__mic = (window.__mic || 0) + 1; return {getTracks: () => [{stop(){ window.__micStop = true; }}]}; }}});
+      window.MediaRecorder = class { constructor(){ this.state = 'inactive'; this.mimeType = 'audio/webm'; } start(){ this.state = 'recording'; setTimeout(() => this.stop(), 150); } stop(){ if (this.state === 'inactive') return; this.state = 'inactive'; if (this.ondataavailable) this.ondataavailable({data:new Blob([new Uint8Array(10)])}); if (this.onstop) this.onstop(); } };
+      window.AudioContext = class { constructor(o){ window.__rate = o && o.sampleRate; } async decodeAudioData(){ return {numberOfChannels:1, getChannelData: () => new Float32Array(16000)}; } close(){} };
+    });
+    const mq = await mc.newPage(); mq.on('pageerror', e => errs.push('voice on phone PAGEERROR: ' + e.message));
+    await mq.goto(U + '#home', {waitUntil:'load'}); await mq.waitForTimeout(500);
+    ok(await mq.evaluate(() => ASR_OK && prefs.asr === 'off' && !asrLocal()) && asrReq.length === 0, 'voice on this phone: off until switched on, and nothing of it loads');
+    await mq.evaluate(() => openSettings()); await mq.waitForTimeout(150);
+    ok(await mq.isVisible('#st-asrrow') && /about 35 MB/.test(await mq.textContent('#st-asrrow')), 'voice on this phone: Settings offers it, with its download size');
+    await mq.click('#st-asr [data-val="on"]'); await mq.evaluate(() => { closeSettings(false); openPal(); }); await mq.waitForTimeout(150);
+    await mq.click('#gmic'); await mq.waitForTimeout(150);
+    ok(/on this phone/.test(await mq.textContent('#gmhint').catch(() => '')), 'voice on this phone: while it listens, it says it is listening on this phone');
+    await mq.waitForFunction(() => document.querySelector('#gq').value === 'Chest pain', null, {timeout:5000}).catch(() => {});
+    const asr1 = await mq.evaluate(() => ({q:document.querySelector('#gq').value, model:window.__asrModel, rate:window.__rate, stopped:!!window.__micStop, mic:window.__mic, res:document.querySelectorAll('#gres a').length}));
+    ok(asr1.q === 'Chest pain' && asr1.model === 'automatic-speech-recognition onnx-community/moonshine-tiny-ONNX' && asr1.rate === 16000 && asr1.stopped && asr1.res > 0 && asrReq.length === 1, 'voice on this phone: a tap records, Moonshine hears it on the phone, the words fill the search and the microphone is let go');
+    await mq.click('#gmlang'); await mq.waitForTimeout(100);
+    ok(await mq.evaluate(() => !asrLocal() && micLang === 'ms'), 'voice on this phone: Bahasa Melayu keeps the browser\'s speech service');
+    await mc.close();
   }
 
   /* ---------- Phone, dark ---------- */

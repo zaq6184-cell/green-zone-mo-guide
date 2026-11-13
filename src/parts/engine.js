@@ -64,6 +64,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 13 Nov 2026';
 const V8 = [
+  ['Read aloud, Malay smart search, and voice on your phone','Read aloud under any step, or above a reference tab, reads it in your phone\'s own voice, in English, or in Malay where the text is Malay. Smart search now understands Malay ("alahan teruk", "luka terbakar", "buku lali terseliuh"), with a second model that downloads only the first time you search in Malay. In the claude.ai copy, Ask shows the guide\'s own line that answers, checked word for word. In the web app, Settings, Voice on this phone makes English voice search run on the phone itself, so the sound never leaves it.',[['#renal-colic','Try Read aloud'],['#search','Search in Malay']]],
   ['Smart search: by meaning, on your phone','Search now understands everyday words: "fainted" finds syncope, "fell and hit head" finds head injury, "platelet low" finds the dengue CPG, "ankle sprain" finds the ankle. A small AI model downloads once (about 8 MB) the first time you search, then works without a signal. It runs on your phone, so nothing you type is sent anywhere, and it only finds the guide\'s own pages. Settings, Smart search turns it off.',[['#search','Try a search']]],
   ['Your phone buzzes where it helps','On an Android phone the guide now gives a light tick when you answer, a pulse when you reach the outcome, a buzz when a number or outcome is copied, two buzzes for a stop sign, and a long buzz when the 20-minute WBCT timer runs out (if you had switched to another app, it buzzes when you come back to the guide). Settings, Vibration turns it off. iPhones do not let a web page vibrate.',[['#tools','Shift tools']]],
   ['The answer in thumb reach, and a tidier outcome card','On a checklist question, the answer your ticks point to now waits just above the tab bar: one tap answers. The route opens on your newest answer. The outcome card shows its ebook pages, its items are boxes to tick as you do them (on screen only, nothing is kept), and its main action sits at the foot, in reach of your thumb. Search results are shorter, Numbers, Pathways, Tools and Calculators open on the line that matters, and pictures sit back a little at night. In the claude.ai copy, Something wrong on this step? can also open claude.ai\'s comment box on the step: never write a patient\'s details there.',[['#renal-colic','Try it on renal colic'],['#numbers','Numbers']]],
@@ -962,6 +963,9 @@ const ALIASES = [
   ['darah tinggi', 'hypertensive'], ['sakit tekak', 'sore throat'], ['resdung', 'rhinosinusitis'], ['gigi tercabut', 'avulsed tooth'], ['tertelan', 'ingestion'],
   ['alahan', 'anaphylaxis'], ['buah zakar', 'scrotal'], ['angin ahmar', 'stroke'], ['strok', 'stroke'], ['serangan jantung', 'acute coronary syndrome'], ['sakit sendi', 'gout'],
   ['jangkitan kulit', 'cellulitis'], ['keracunan', 'poisoning'], ['terlebih dos', 'overdose'],
+  /* 13 Nov 2026, from 30 Malay searches: each points at the guide's own words */
+  ['muntah darah', 'gi bleed'], ['berak hitam', 'gi bleed'], ['lemah sebelah badan', 'stroke'], ['lemah sebelah', 'stroke'], ['buah pinggang', 'kidney'], ['kaki bengkak', 'swollen leg'],
+  ['luka terbakar', 'burn'], ['melecur', 'burn'], ['terlebih makan ubat', 'overdose'], ['makan ubat berlebihan', 'overdose'], ['buku lali', 'ankle'], ['tertelan syiling', 'coin'], ['tertelan', 'swallowed'],
   /* everyday words and brands */
   ['stomach ache', 'abdominal pain'], ['tummy ache', 'abdominal pain'], ['heart attack', 'acute coronary syndrome'], ['kidney stone', 'renal colic'],
   ['panadol', 'paracetamol'], ['fainting', 'syncope'], ['faint', 'syncope'], ['wheeze', 'asthma'],
@@ -1025,7 +1029,8 @@ function findMore(q){
   const al = aliasesOf(q);
   if (al.length){
     const seen = new Set(), r = [];
-    for (const a of al) for (const e of find(a.q).r) if (!seen.has(e.href)){ seen.add(e.href); r.push(e); }
+    /* the alias in place of its words; if that finds nothing, the guide's own words alone ("alahan teruk" is anaphylaxis) */
+    for (const a of al){ const f0 = find(a.q), fr = f0.loose ? [] : f0.r; for (const e of (fr.length ? fr : find(a.to).r)) if (!seen.has(e.href)){ seen.add(e.href); r.push(e); } }
     if (r.some(e => !base.r.includes(e))){ out.r = [...r, ...base.r.filter(e => !seen.has(e.href))].slice(0, 14); out.also = al.map(a => a.to); out.loose = false; out.al = seen; }
   }
   if (out.r.length) return out;
@@ -1054,81 +1059,196 @@ const AI_SKIP = new Set(['Setting', 'Quiz', 'Update', 'Poster', 'About', 'Video'
 /* A passage this close joins the results. Below the second the matches are only the nearest, and the palette says so: on
    110 searches the model's scores did not tell a topic the guide covers from one it does not, so it never claims "not covered". */
 const AI_MIN = .38, AI_WEAK = .46;
+const AIMS_MIN = .38, AIMS_WEAK = .46; /* the Malay model's, set on the 30 Malay searches of 13 Nov 2026 */
 const SAVE_DATA = !!(navigator.connection && navigator.connection.saveData);
 function aiTok(vocab){
   const pre = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').match(/[a-z0-9]+|[^\sa-z0-9]/g) || [];
   const wp = w => { if (w.length > 100) return []; const out = []; let i = 0; while (i < w.length){ let j = w.length, f = -1; while (j > i){ const id = vocab.get((i ? '##' : '') + w.slice(i, j)); if (id !== undefined){ f = id; break; } j--; } if (f < 0) return []; out.push(f); i = j; } return out; };
   return s => pre(s).flatMap(wp);
 }
+/* The Malay model's tokenizer (from src/ai-ms.js's companion src/ai-ms-tok.js): potion-multilingual-128M's SentencePiece
+   Unigram vocabulary, with Viterbi over the piece scores; the guide's text and what is typed are lower-cased the same way */
+const MS = (() => {
+  const META = '\u2581';
+  /* SentencePiece nmt_nfkc removes ASCII control characters and maps these to a space before NFKC */
+  const CTRL = /[\u0000-\u0008\u000B\u000E-\u001F\u007F\u008F\u009F]/g;
+  const SPACEISH = /[\t\n\f\r\u0085\u1680\u200B-\u200F\u2028\u2029\u2581\uFEFF\uFFFD]/g;
+  const PUNCT = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/g;
+
+  function msNorm(s, lower){
+    s = String(s).replace(CTRL, '').replace(SPACEISH, ' ').normalize('NFKC');
+    s = s.replace(/ {2,}/g, ' ').replace(PUNCT, ' $& ').replace(/\s+/g, ' ').trim();
+    return lower ? s.toLowerCase() : s;
+  }
+
+  function msVocab(text){
+    const lines = text.split('\n');
+    const head = lines[0].split('\t');
+    if (head[0] !== '#GZMS') throw new Error('vocab format');
+    const def = Number(head[1]), min = Number(head[2]), n = lines.length - 1;
+    const pieces = new Array(n), score = new Float64Array(n), ids = new Map();
+    for (let i = 0; i < n; i++){
+      const l = lines[i + 1], t = l.indexOf('\t');
+      const p = t < 0 ? l : l.slice(0, t);
+      pieces[i] = p; score[i] = t < 0 ? def : Number(l.slice(t + 1));
+      if (!ids.has(p)) ids.set(p, i);
+    }
+    return {pieces, ids, score, def, min};
+  }
+
+  /* V: {ids: Map piece -> id, score, min}. Returns s => ids; opts.unk: true keeps [UNK] as -1 (for checking only).
+     opts.offset: true carries the running score from word to word, exactly as one Viterbi over the whole string (slower, no cache). */
+  function msTok(V, opts){
+    opts = opts || {};
+    const unkScore = V.min - 10, ids = V.ids, score = V.score;
+    let maxLen = 1; for (const p of ids.keys()){ const n = Array.from(p).length; if (n > maxLen) maxLen = n; }
+    const cache = new Map();
+    function word(w, base){
+      const cp = Array.from(w), n = cp.length;
+      const best = new Float64Array(n + 1), from = new Int32Array(n + 1).fill(-1), tid = new Int32Array(n + 1);
+      best[0] = base; from[0] = 0;
+      for (let i = 0; i < n; i++){
+        if (from[i] < 0) continue;
+        const b = best[i]; let sub = '', single = false;
+        for (let j = i; j < n && j - i < maxLen; j++){
+          sub += cp[j];
+          const t = ids.get(sub);
+          if (t === undefined) continue;
+          const c = b + score[t];
+          if (j === i) single = true;
+          if (from[j + 1] < 0 || c > best[j + 1]){ best[j + 1] = c; from[j + 1] = i; tid[j + 1] = t; }
+        }
+        if (!single){ const c = b + unkScore; if (from[i + 1] < 0 || c > best[i + 1]){ best[i + 1] = c; from[i + 1] = i; tid[i + 1] = -1; } }
+      }
+      const out = []; let e = n;
+      while (e > 0){ const t = tid[e]; if (!(t === -1 && out.length && out[out.length - 1] === -1)) out.push(t); e = from[e]; }
+      out.reverse();
+      return {out, end: best[n]};
+    }
+    return function(s){
+      const t = msNorm(s, opts.lower);
+      if (!t) return [];
+      const words = (META + t.replace(/ /g, META)).split(/(?=\u2581)/);
+      const res = []; let acc = 0, prevUnk = false;
+      for (const w of words){
+        let r;
+        if (opts.offset){ const x = word(w, acc); acc = x.end; r = x.out; }
+        else { r = cache.get(w); if (!r){ r = word(w, 0).out; if (cache.size > 50000) cache.clear(); cache.set(w, r); } }
+        for (const id of r){
+          if (id === -1){ if (!prevUnk && opts.unk) res.push(-1); prevUnk = true; }
+          else { res.push(id); prevUnk = false; }
+        }
+      }
+      return res;
+    };
+  }
+
+  return {msNorm, msVocab, msTok};
+})();
+/* A model file: model.bin on the web app; the claude.ai copy serves only web file types, so it has the same bytes as base64 text */
+const aiGet = async f => { const r = await fetch('ai/' + f); if (!r.ok) throw new Error(f + ' ' + r.status); return r; };
+async function aiBin(name){
+  for (const f of FRAMED ? [name + '.b64.txt', name + '.bin'] : [name + '.bin', name + '.b64.txt']){
+    let r; try { r = await aiGet(f); } catch(e){ continue; }
+    if (!f.endsWith('.txt')) return r.arrayBuffer();
+    const s = atob((await r.text()).trim()), u = new Uint8Array(s.length);
+    for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+    return u.buffer;
+  }
+  throw new Error(name + ' missing');
+}
+/* From a model's 8-bit rows and its tokenizer: a vector of meaning for any text, and the guide's passages read with it
+   (each entry's title, then its text in pieces of about 40 words) */
+async function aiIndex(buf, tokOf){
+  const dv = new DataView(buf);
+  if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== 'GZAI') throw new Error('model format');
+  const V = dv.getUint32(4, true), D = dv.getUint32(8, true), tok = tokOf(V);
+  const scale = new Float32Array(buf, 12, D), Q = new Int8Array(buf, 12 + D * 4, V * D);
+  const enc = s => {
+    const v = new Float32Array(D); let n = 0;
+    for (const id of tok(s)){ const o = id * D; for (let k = 0; k < D; k++) v[k] += Q[o + k]; }
+    for (let k = 0; k < D; k++){ v[k] *= scale[k]; n += v[k] * v[k]; }
+    if (!n) return null; n = Math.sqrt(n); for (let k = 0; k < D; k++) v[k] /= n; return v;
+  };
+  const own = [], vecs = [], txt = [];
+  const add = (i, s, t) => { const v = enc(s); if (v){ own.push(i); vecs.push(v); txt.push(t); } };
+  for (let i = 0; i < IDX.length; i++){
+    const e = IDX[i]; if (AI_SKIP.has(e.kind)) continue;
+    add(i, e.title, '');
+    let cur = [], words = 0;
+    const flush = () => { if (cur.length){ const t = cur.join(' · '); add(i, e.title + ': ' + t, t); cur = []; words = 0; } };
+    for (const p of (e.body || '').split(' · ')){ cur.push(p); words += p.split(' ').length; if (words > 40) flush(); }
+    flush();
+    if (i % 40 === 39) await new Promise(r => setTimeout(r, 0)); /* let a slow phone breathe */
+  }
+  const M = new Float32Array(vecs.length * D); vecs.forEach((v, j) => M.set(v, j * D));
+  return {state:'ready', enc, vec:M, own:Int32Array.from(own), txt, n:vecs.length, D};
+}
 async function aiLoad(){
   if (AI.state === 'loading' || AI.state === 'ready') return;
   AI.state = 'loading'; aiNote();
   try {
-    const get = async f => { const r = await fetch('ai/' + f); if (!r.ok) throw new Error(f + ' ' + r.status); return r; };
-    /* The web app serves model.bin; the claude.ai copy can serve only web file types, so it has the same bytes as base64 text */
-    const model = async () => {
-      for (const f of FRAMED ? ['model.b64.txt', 'model.bin'] : ['model.bin', 'model.b64.txt']){
-        let r; try { r = await get(f); } catch(e){ continue; }
-        if (!f.endsWith('.txt')) return r.arrayBuffer();
-        const s = atob((await r.text()).trim()), u = new Uint8Array(s.length);
-        for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
-        return u.buffer;
-      }
-      throw new Error('model missing');
-    };
-    const [vr, buf] = await Promise.all([get('vocab.txt'), model()]);
-    const pieces = (await vr.text()).split('\n'), dv = new DataView(buf);
-    if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== 'GZAI') throw new Error('model format');
-    const V = dv.getUint32(4, true), D = dv.getUint32(8, true);
-    if (pieces.length !== V) throw new Error('word pieces');
-    const scale = new Float32Array(buf, 12, D), Q = new Int8Array(buf, 12 + D * 4, V * D), tok = aiTok(new Map(pieces.map((t, i) => [t, i])));
-    const enc = s => {
-      const v = new Float32Array(D); let n = 0;
-      for (const id of tok(s)){ const o = id * D; for (let k = 0; k < D; k++) v[k] += Q[o + k]; }
-      for (let k = 0; k < D; k++){ v[k] *= scale[k]; n += v[k] * v[k]; }
-      if (!n) return null; n = Math.sqrt(n); for (let k = 0; k < D; k++) v[k] /= n; return v;
-    };
-    /* The guide's passages: each entry's title, then its text in pieces of about 40 words */
-    const own = [], vecs = [], txt = [];
-    const add = (i, s, t) => { const v = enc(s); if (v){ own.push(i); vecs.push(v); txt.push(t); } };
-    for (let i = 0; i < IDX.length; i++){
-      const e = IDX[i]; if (AI_SKIP.has(e.kind)) continue;
-      add(i, e.title, '');
-      let cur = [], words = 0;
-      const flush = () => { if (cur.length){ const t = cur.join(' · '); add(i, e.title + ': ' + t, t); cur = []; words = 0; } };
-      for (const p of (e.body || '').split(' · ')){ cur.push(p); words += p.split(' ').length; if (words > 40) flush(); }
-      flush();
-      if (i % 40 === 39) await new Promise(r => setTimeout(r, 0)); /* let a slow phone breathe */
-    }
-    const M = new Float32Array(vecs.length * D); vecs.forEach((v, j) => M.set(v, j * D));
-    Object.assign(AI, {state:'ready', enc, vec:M, own:Int32Array.from(own), txt, n:vecs.length, D});
+    const [vr, buf] = await Promise.all([aiGet('vocab.txt'), aiBin('model')]);
+    const pieces = (await vr.text()).split('\n');
+    Object.assign(AI, await aiIndex(buf, V => { if (pieces.length !== V) throw new Error('word pieces'); return aiTok(new Map(pieces.map((t, i) => [t, i]))); }));
   } catch(e){ AI.state = 'failed'; AI.err = String(e && e.message || e); }
   aiNote();
   if (!$('#pal').hidden && $('#gq').value.trim()) renderPal();
 }
-/* Each entry's closest passage to the search, and which passage it was */
-function aiScores(q){
-  const v = AI.enc(q); if (!v) return null;
-  const best = new Float32Array(IDX.length).fill(-1), at = new Int32Array(IDX.length).fill(-1), D = AI.D, M = AI.vec;
-  for (let j = 0; j < AI.n; j++){
-    let s = 0; const o = j * D; for (let k = 0; k < D; k++) s += v[k] * M[o + k];
-    const i = AI.own[j]; if (s > best[i]){ best[i] = s; at[i] = j; }
+/* Malay-aware smart search (13 Nov 2026, the third of the five AI upgrades Krishna asked for). Measured on 63 searches: the
+   multilingual model alone lifted Malay (4 to 13 of 30) but cost English (31 to 26 of 33), so the guide routes: a search with
+   a common Malay word goes to Model2Vec potion-multilingual-128M (MIT, Minish Lab, distilled from bge-m3; cut by src/ai-ms.js
+   to 65,989 pieces and 128 dimensions, about 8 MB: app/ai/ms-model.bin and ms-vocab.txt), and every other search stays on the
+   English model. The Malay model downloads only the first time a Malay search is typed. MS_WORDS are everyday Malay words,
+   search words only (rule 8). */
+const AIMS = {state:'idle', enc:null, vec:null, own:null, txt:null, n:0, D:0};
+let aiMsTried = false;
+const MS_WORDS = new Set(('sakit demam kencing batu sesak nafas semput lelah perut dada kepala tangan kaki patah tulang darah gula tinggi rendah manis ' +
+  'muntah cirit birit berak sembelit loya pening pitam pengsan gigitan gigit digigit anjing kucing ular patukan dipatuk luka terbakar melecur ubat ' +
+  'terlebih makan minum budak kanak bayi mengandung hamil berdarah tekak batuk selsema hidung telinga mulut gigi tercabut tertelan syiling leher ' +
+  'belakang pinggang zakar lutut siku bahu jari kulit gatal ruam bengkak merah nanah lemah sebelah badan lumpuh kebas kejang sawan ahmar strok ' +
+  'jantung serangan berdebar alahan teruk rosak terhantuk kecederaan jatuh terjatuh terseliuh lali pergelangan keracunan jangkitan kuman denggi ' +
+  'pesakit rawatan bagaimana berapa perlu boleh tidak dengan untuk yang dari selepas sebelum minggu sejak masih sangat sikit banyak orang tua ' +
+  'lelaki perempuan wanita kerana sebab rujuk rujukan bila apa mana buah buku sakitnya bengkok kesakitan pendarahan cedera terkena kemalangan ' +
+  'kencing manis darah tinggi susah bernafas sejuk panas menggigil lesu letih penat sesak dadanya kepalanya perutnya').split(' '));
+const msQuery = q => q.toLowerCase().replace(/-/g, ' ').split(/[^a-z]+/).some(w => MS_WORDS.has(w));
+async function aiLoadMs(){
+  if (AIMS.state === 'loading' || AIMS.state === 'ready') return;
+  AIMS.state = 'loading'; aiNote();
+  try {
+    const [vr, buf] = await Promise.all([aiGet('ms-vocab.txt'), aiBin('ms-model')]);
+    const MV = MS.msVocab(await vr.text());
+    Object.assign(AIMS, await aiIndex(buf, V => { if (MV.pieces.length !== V) throw new Error('word pieces'); return MS.msTok(MV, {lower:true}); }));
+  } catch(e){ AIMS.state = 'failed'; AIMS.err = String(e && e.message || e); }
+  aiNote();
+  if (!$('#pal').hidden && $('#gq').value.trim()) renderPal();
+}
+/* Each entry's closest passage to the search under model M, and which passage it was */
+function aiScores(M, q){
+  const v = M.enc(q); if (!v) return null;
+  const best = new Float32Array(IDX.length).fill(-1), at = new Int32Array(IDX.length).fill(-1), D = M.D, X = M.vec;
+  for (let j = 0; j < M.n; j++){
+    let s = 0; const o = j * D; for (let k = 0; k < D; k++) s += v[k] * X[o + k];
+    const i = M.own[j]; if (s > best[i]){ best[i] = s; at[i] = j; }
   }
   return {best, at};
 }
 /* Words and meaning together. Returns null when smart search has nothing to add (not ready, digits, too short). */
 function smartFind(q, kw){
-  if (AI.state !== 'ready' || prefs.ai === 'off' || /\d/.test(q) || q.replace(/[^a-z]/gi, '').length < 3) return null;
+  if (prefs.ai === 'off' || /\d/.test(q) || q.replace(/[^a-z]/gi, '').length < 3) return null;
+  /* a Malay search goes to the Malay model once it is ready; until then, and for everything else, the English one */
+  const M = msQuery(q) && AIMS.state === 'ready' ? AIMS : AI, MIN = M === AIMS ? AIMS_MIN : AI_MIN, WEAK = M === AIMS ? AIMS_WEAK : AI_WEAK;
+  if (M.state !== 'ready') return null;
   /* drug lists, the CPG shelf's links and outside links stay after the guide's own pages, as in keyword search */
   const side = i => /^(Drug|Dilution|National CPG|Link)$/.test(IDX[i].kind);
-  const pick = s => { const sc = aiScores(s); if (!sc) return null; let m = 0; for (let i = 0; i < IDX.length; i++) if (sc.best[i] > m && !side(i)) m = sc.best[i]; return {sc, m}; };
+  const pick = s => { const sc = aiScores(M, s); if (!sc) return null; let m = 0; for (let i = 0; i < IDX.length; i++) if (sc.best[i] > m && !side(i)) m = sc.best[i]; return {sc, m}; };
   /* A word the guide does not know was corrected by spelling: meaning decides whether the correction or the word as typed
      is closer ("asthama" is asthma; "sprain" is not "strain") */
   let A = pick(q), fixUsed = false;
   if (kw.fixed){ const B = pick(kw.fixed); if (B && (!A || B.m > A.m + .02)){ A = B; fixUsed = true; } }
   if (!A) return null;
   const {best, at} = A.sc, ts = terms(fixUsed ? kw.fixed : q), pos = new Map(IDX.map((e, i) => [e, i]));
-  const near = [...best.keys()].filter(i => best[i] >= AI_MIN).sort((a, b) => (best[b] - (side(b) ? .3 : 0)) - (best[a] - (side(a) ? .3 : 0))).slice(0, 14);
+  const near = [...best.keys()].filter(i => best[i] >= MIN).sort((a, b) => (best[b] - (side(b) ? .3 : 0)) - (best[a] - (side(a) ? .3 : 0))).slice(0, 14);
   const own = near.filter(i => !side(i)), closest = own.length ? best[own[0]] : 0;
   /* Words that are sure keep their order (every typed word in the top result's title, or a Malay or everyday word the
      guide knows); meaning then only adds what they missed, after them */
@@ -1143,15 +1263,15 @@ function smartFind(q, kw){
     /* the guide's own pages first, then the drug lists, shelf and links, each by score */
     order = [...pts.entries()].sort((a, b) => (side(a[0]) - side(b[0])) || (b[1] - a[1])).slice(0, 14).map(([i]) => i);
   }
-  const snip = new Map(order.filter(i => at[i] >= 0 && AI.txt[at[i]] && !kw.r.includes(IDX[i])).map(i => [IDX[i], AI.txt[at[i]]]));
-  return {r:order.map(i => IDX[i]), snip, weak:!sure && closest < AI_WEAK, moved:!sure && order[0] !== pos.get(kw.r[0]), sure:!!sure, closest, fixUsed};
+  const snip = new Map(order.filter(i => at[i] >= 0 && M.txt[at[i]] && !kw.r.includes(IDX[i])).map(i => [IDX[i], M.txt[at[i]]]));
+  return {r:order.map(i => IDX[i]), snip, ms:M === AIMS, weak:!sure && closest < WEAK, moved:!sure && order[0] !== pos.get(kw.r[0]), sure:!!sure, closest, fixUsed};
 }
 /* The smart search line in the palette, and its state in Settings */
 function aiNote(){
   const st = $('#st-aistate');
-  if (st) st.textContent = AI.state === 'ready' ? 'Ready on this device.' : AI.state === 'loading' ? 'Downloading now (about 8 MB, once).' : AI.state === 'failed' ? 'It could not download; it will try again on your next search.' : prefs.ai === 'off' ? 'Off: search uses the words you type.' : SAVE_DATA ? 'Waiting while Data Saver is on: tap Download in search.' : 'It downloads (about 8 MB, once) the first time you search.';
+  if (st) st.textContent = (AI.state === 'ready' ? 'Ready on this device.' : AI.state === 'loading' ? 'Downloading now (about 8 MB, once).' : AI.state === 'failed' ? 'It could not download; it will try again on your next search.' : prefs.ai === 'off' ? 'Off: search uses the words you type.' : SAVE_DATA ? 'Waiting while Data Saver is on: tap Download in search.' : 'It downloads (about 8 MB, once) the first time you search.') + (prefs.ai === 'off' ? '' : AIMS.state === 'ready' ? ' Malay search is ready too.' : ' A search in Malay downloads a second model (about 8 MB, once) the first time.');
 }
-function snippetOf(e, ts, loose, snip){ const t = snip && snip.get(e); return t ? highlight(t.length > 170 ? t.slice(0, t.lastIndexOf(' ', 160)) + '…' : t, ts, loose) : snippet(e.body, ts, loose); }
+function snippetOf(e, ts, loose, snip){ const t = snip && snip.get(e); return t ? highlight(t.length > 240 ? t.slice(0, t.lastIndexOf(' ', 230)) + '…' : t, ts, loose) : snippet(e.body, ts, loose); }
 function snippet(body, ts, loose){
   let at = -1;
   for (const w of ts){ const m = termRe(w, loose).exec(body); if (m){ const k = m.index + m[1].length; if (at < 0 || k < at) at = k; } }
@@ -1231,12 +1351,14 @@ function renderPal(){
     const kw = findMore(q);
     /* Smart search downloads the first time it is needed: the first search of three letters or more */
     if ((AI.state === 'idle' || AI.state === 'failed') && !aiTried && prefs.ai !== 'off' && !SAVE_DATA && q.replace(/[^a-z]/gi, '').length >= 3){ aiTried = true; aiLoad(); }
+    if (msQuery(q) && (AIMS.state === 'idle' || AIMS.state === 'failed') && !aiMsTried && prefs.ai !== 'off' && !SAVE_DATA){ aiMsTried = true; aiLoadMs(); }
     const sm = smartFind(q, kw), r = sm ? sm.r : kw.r, {loose, also} = kw, fixed = kw.fixed && (!sm || sm.fixUsed || kw.r.includes(sm.r[0])) ? kw.fixed : null; /* a corrected word is never silent */
     const ts = terms(fixed || q).concat(also.flatMap(terms));
     const note = sm && sm.weak ? `<div class="pal-fix pal-weak" id="gfix">These are the nearest by meaning. If none fits, the guide may not cover “${esc(q)}”: see the <a href="#guidelines">national CPGs</a>.</div>`
       : fixed ? `<div class="pal-fix" id="gfix">Nothing for “${esc(q)}”. Showing results for <b>${esc(fixed)}</b>.</div>`
       : also.length ? `<div class="pal-fix" id="gfix">Including results for <b>${also.map(esc).join('</b>, <b>')}</b>.</div>` : '';
-    const ai = AI.state === 'loading' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Getting smart search ready: about 8 MB, once. Searching by words meanwhile.</span></div>`
+    const ai = AIMS.state === 'loading' && msQuery(q) ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Getting Malay smart search ready: about 8 MB, once. Searching meanwhile.</span></div>`
+      : AI.state === 'loading' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Getting smart search ready: about 8 MB, once. Searching by words meanwhile.</span></div>`
       : sm && sm.moved && !sm.weak ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search: closest in meaning first, all from the guide's own pages.</span></div>`
       : AI.state === 'idle' && SAVE_DATA && prefs.ai !== 'off' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search waits while Data Saver is on.</span><button type="button" class="sm" id="gaidl">Download, 8 MB</button></div>` : '';
     h = askBtn(q) + ai + (r.length ? note + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>'
@@ -1253,6 +1375,7 @@ function openPal(){
   palFrom = document.activeElement;
   closeDrawer(false);
   if (AI.state === 'failed') aiTried = false; /* a download that failed is tried again on the next search */
+  if (AIMS.state === 'failed') aiMsTried = false;
   $('#pal').hidden = false; document.documentElement.style.overflow = 'hidden';
   $('#gq').value = ''; renderPal(); $('#gq').focus();
 }
@@ -1272,8 +1395,70 @@ const SPEECH = window.SpeechRecognition || window.webkitSpeechRecognition;
 const FRAMED = (() => { try { return window.top !== window; } catch(e){ return true; } })();
 let micLang = 'en', micRec = null, micDict = null, micOn = false, micBase = '', micDead = false;
 const MIC_HINT = {en:'Listening in English. Say a topic, not a patient\'s name or details.', ms:'Mendengar dalam Bahasa Melayu. Sebut topik sahaja, bukan nama atau butiran pesakit.'};
+/* ================= Voice search on this phone (13 Nov 2026) =================
+   The fifth AI upgrade: English voice search can run on the phone itself, so the sound never leaves it (rule 4), instead of
+   the browser's speech service. Moonshine tiny (onnx-community/moonshine-tiny-ONNX, MIT), run by transformers.js 4.3.2
+   (Apache 2.0) from jsDelivr, pinned; its files come from Hugging Face (about 35 MB once, the browser keeps them). Measured
+   on 13 Nov 2026: 90 to 92% of words right on test speech, about a tenth of a second per clip, and nothing for silence;
+   Whisper tiny was less accurate and ten times slower. English only: free on-phone models are too inaccurate in Malay, so the
+   BM button keeps the browser's service. Web app only (Settings, Voice on this phone, off until switched on): the claude.ai
+   copy cannot serve the 27 MB runtime. It hears a topic; it never stores what was said. */
+const ASR_TF = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.2/dist/transformers.min.js';
+const ASR_OK = !FRAMED && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder && (window.AudioContext || window.webkitAudioContext));
+let asrPipe = null, asrLoading = null, asrRec = null, asrState = 'idle', asrWork = false;
+const asrLocal = () => ASR_OK && prefs.asr === 'on' && micLang === 'en';
+function asrLoad(){
+  if (asrPipe) return Promise.resolve(asrPipe);
+  if (!asrLoading) asrLoading = (async () => {
+    asrState = 'loading'; micHint();
+    const tf = await import(ASR_TF);
+    tf.env.allowLocalModels = false;
+    const p = await tf.pipeline('automatic-speech-recognition', 'onnx-community/moonshine-tiny-ONNX');
+    asrPipe = p; asrState = 'ready'; micHint(); return p;
+  })().catch(e => { asrLoading = null; asrState = 'failed'; throw e; });
+  return asrLoading;
+}
+async function asrDecode(buf){
+  const AC = window.AudioContext || window.webkitAudioContext, c = new AC({sampleRate:16000});
+  try {
+    const a = await c.decodeAudioData(buf);
+    if (a.numberOfChannels < 2) return a.getChannelData(0);
+    const l = a.getChannelData(0), r = a.getChannelData(1), m = new Float32Array(l.length);
+    for (let i = 0; i < l.length; i++) m[i] = (l[i] + r[i]) / 2;
+    return m;
+  } finally { c.close(); }
+}
+async function asrStart(){
+  if (asrWork) return;
+  asrWork = true;
+  let stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({audio:{channelCount:1}}); }
+  catch(e){ asrWork = false; toast('The microphone is blocked for the guide here'); micUI(false); return; }
+  const loading = asrLoad().catch(() => null), parts = [];
+  let rec;
+  try { rec = asrRec = new MediaRecorder(stream); }
+  catch(e){ stream.getTracks().forEach(t => t.stop()); asrWork = false; toast('Voice on this phone does not work in this browser'); return; }
+  const done = new Promise(f => { rec.onstop = f; });
+  rec.ondataavailable = e => { if (e.data && e.data.size) parts.push(e.data); };
+  micUI(true); rec.start();
+  setTimeout(() => { if (rec.state !== 'inactive') rec.stop(); }, 6000);
+  await done;
+  stream.getTracks().forEach(t => t.stop());
+  if (asrRec === rec) asrRec = null;
+  micUI(false); asrBusy(true);
+  try {
+    const pcm = await asrDecode(await new Blob(parts, {type:rec.mimeType}).arrayBuffer()), asr = await loading;
+    if (!asr) throw new Error('model');
+    const out = await asr(pcm, {max_new_tokens:Math.max(16, Math.ceil(pcm.length / 16000 * 8))});
+    const t = String(out && out.text || '').trim().replace(/[.,!?]+$/, '');
+    if (t) micType(t); else toast('Nothing heard. Try again, closer to the phone.');
+  } catch(e){ toast(asrState === 'failed' ? 'Voice on this phone could not download. Try again with a signal.' : 'That could not be heard. Try again.'); }
+  asrBusy(false); asrWork = false;
+}
+function asrBusy(on){ const h = $('#gmhint'); if (!h) return; h.hidden = !on; h.textContent = on ? (asrState === 'ready' ? 'Working it out on this phone…' : 'Getting voice on this phone ready: about 35 MB, once…') : ''; }
+function micHint(){ const h = $('#gmhint'); if (h && micOn && asrLocal()) h.textContent = 'Listening on this phone (English), up to 6 seconds: tap again to stop. ' + MIC_HINT.en.replace(/^Listening in English\. /, ''); }
 function micShow(){
-  const can = !micDead && (!!micDict || (!!SPEECH && !FRAMED));
+  const can = !micDead && (!!micDict || (!!SPEECH && !FRAMED) || (ASR_OK && prefs.asr === 'on'));
   $('#gmic').hidden = !can; $('#gmlang').hidden = !can;
 }
 function micUI(on){
@@ -1282,18 +1467,20 @@ function micUI(on){
   const b = $('#gmic'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
   b.setAttribute('aria-label', on ? 'Stop listening' : 'Search by voice');
   const h = $('#gmhint'); h.hidden = !on; h.textContent = on ? MIC_HINT[micLang] : '';
+  if (on) micHint();
 }
 function micType(text){ $('#gq').value = (micBase + ' ' + text).replace(/\s+/g, ' ').trim(); renderPal(); }
 function micFail(hard){ micUI(false); if (hard){ micDead = true; micShow(); toast('Voice search is not available here'); } }
 function micStart(){
   if (micOn) return micStop();
   micBase = $('#gq').value.trim();
+  if (asrLocal()){ asrStart(); return; }
   if (micDict){
     micUI(true);
     micDict.start({language: micLang === 'ms' ? 'ms' : 'en'}).catch(e => micFail(e && (e.code === 'not_granted' || e.code === 'unavailable')));
     return;
   }
-  if (!SPEECH) return;
+  if (!SPEECH){ toast('Voice search in BM needs Chrome or Edge here'); return; }
   try {
     const r = micRec = new SPEECH();
     r.lang = micLang === 'ms' ? 'ms-MY' : 'en-GB'; r.interimResults = true; r.maxAlternatives = 1; r.continuous = false;
@@ -1304,6 +1491,7 @@ function micStart(){
   } catch(e){ micFail(true); }
 }
 function micStop(){
+  if (asrRec && asrRec.state !== 'inactive'){ try { asrRec.stop(); } catch(e){} return; }
   if (micRec){ try { micRec.stop(); } catch(e){} }
   if (micDict && micOn) micDict.stop().catch(() => {});
   micUI(false);
@@ -1633,6 +1821,7 @@ function endsHTML(p, n){
   return `<div class="ends"><span>${n.end ? 'Ended in' : 'Can still end in'}</span>${kinds.map(k => `<span class="end" style="--oc:var(--b-${k})">${outLbl(p, k)}</span>`).join('')}</div>`;
 }
 function draw(focus){
+  sayStop(); /* a new step stops the reading of the last */
   const p = P[state.id], n = p.nodes[state.cur], c = catOf(state.id), saved = isSaved(state.id), steps = state.trail.length;
   const isRule = p.grp === 'rules';
   const nowText = n.end ? kindLabel(p, n.end) + ': ' + n.title : nodeText(n);
@@ -1667,7 +1856,7 @@ function draw(focus){
         <div class="strip">${steps ? `<div class="trailw"><span class="tlbl" aria-hidden="true">Route</span><div class="trailx" role="group" aria-label="Your answers so far">${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"><span><span class="vh">${esc(nodeText(p.nodes[t.node]))}: you answered </span>${esc(t.label)}<span class="vh">. Tap to change it.</span></span></button>`).join('')}</div></div>` : ''}${endsHTML(p, n)}</div>
         <div class="progress" aria-hidden="true"${n.end ? ` style="--oc:var(--b-${n.end})"` : ''}><span>${n.end ? `Outcome after ${steps} step${steps === 1 ? '' : 's'}` : 'Step ' + (steps + 1)}</span>${bar}</div>
         <div id="cur" tabindex="-1" class="cur-in">${card(n, p)}</div>
-        <div class="flagrow"><button type="button" class="flagb" data-flag>${svg('flag')}<span>Something wrong on this step?</span></button></div>
+        <div class="flagrow">${sayBtn('cur', 'Read aloud')}<button type="button" class="flagb" data-flag>${svg('flag')}<span>Something wrong on this step?</span></button></div>
         ${n.check && !n.end ? '<button type="button" class="ansbar" id="ansbar" hidden></button>' : ''}
         ${about ? `<details class="about about-m"><summary>About this pathway</summary><div>${about}</div></details>` : ''}
         ${refTabs(p)}
@@ -1817,9 +2006,10 @@ function refTabs(p){
   const T = tabsOf(p); if (!T.length) return '';
   if (!T.some(t => t.k === ptabSel)) ptabSel = T[0].k;
   return `<section class="ptab" id="ptab" aria-label="Reference for this pathway"><div class="ptab-bar" role="tablist" aria-label="Reference">${T.map(t => `<button type="button" role="tab" id="tb-${t.k}" aria-controls="tp-${t.k}" aria-selected="${t.k === ptabSel}" tabindex="${t.k === ptabSel ? 0 : -1}" class="${t.cls || ''}" data-pt="${t.k}"><span>${esc(t.l)}</span></button>`).join('')}</div>` +
-    T.map(t => `<div class="ptab-p" role="tabpanel" id="tp-${t.k}" aria-labelledby="tb-${t.k}" tabindex="0"${t.k === ptabSel ? '' : ' hidden'}>${t.html}</div>`).join('') + '</section>';
+    (TTS ? `<div class="ptab-say">${sayBtn('tab', 'Read this tab aloud')}</div>` : '') + T.map(t => `<div class="ptab-p" role="tabpanel" id="tp-${t.k}" aria-labelledby="tb-${t.k}" tabindex="0"${t.k === ptabSel ? '' : ' hidden'}>${t.html}</div>`).join('') + '</section>';
 }
 function selectTab(k, focus){
+  if (sayOn && sayOn.dataset.say === 'tab') sayStop();
   ptabSel = k;
   $$('#ptab [role="tab"]').forEach(b => { const on = b.dataset.pt === k; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
   $$('#ptab [role="tabpanel"]').forEach(x => { x.hidden = x.id !== 'tp-' + k; });
@@ -1907,6 +2097,55 @@ function readLine(box, s, e){
 }
 let readScrolled = 0;
 ['wheel', 'touchmove', 'keydown'].forEach(ev => addEventListener(ev, e => { if (ev !== 'keydown' || /^(Page|Arrow(Up|Down)|Home|End)/.test(e.key)) readScrolled = Date.now(); }, {passive:true}));
+/* ================= Read aloud with the phone's own voices (13 Nov 2026) =================
+   Krishna: "perform all these upgrades", the first being to read any page aloud. The step or outcome on screen, or the open
+   reference tab, is read by the phone's own text-to-speech voice (speechSynthesis), in English, or in Malay where the text is
+   Malay (a leaflet's Bahasa Melayu side): nothing downloads. It reads the guide's own words as they stand, never anything
+   else (rule 8), and nothing typed is involved (rule 4). Only on a tap; navigating away, answering or playing a recording
+   stops it. A phone with no Malay voice says so rather than reading Malay in an English voice. The recorded narrations (READ)
+   stay where they exist. */
+const TTS = window.speechSynthesis && window.SpeechSynthesisUtterance ? window.speechSynthesis : null;
+const SAY_BLOCK = 'h1,h2,h3,h4,h5,p,li,dt,dd,th,td,figcaption,blockquote,.res-k,.res-s,label > span';
+const SAY_SKIP = 'button,kbd,svg,.vh,.flagrow,.res-f,.pbar,.lsn,.lfilm,.ptab-bar,.ptab-say,.leaf-lang,[aria-hidden="true"]';
+let sayOn = null;
+function sayLines(el){
+  const all = [...el.querySelectorAll(SAY_BLOCK)].filter(x => !x.closest(SAY_SKIP) && x.offsetParent !== null), set = new Set(all);
+  const lines = all.filter(x => ![...x.querySelectorAll(SAY_BLOCK)].some(y => set.has(y))).map(x => x.textContent.replace(/\s+/g, ' ').trim()).filter(Boolean);
+  const opts = [...el.querySelectorAll('button.opt > span')].map(s => s.textContent.trim()).filter(Boolean);
+  if (opts.length > 1) lines.push('Answers: ' + opts.join('; '));
+  return lines;
+}
+/* Chrome on Android cuts off a long utterance, so the text goes in pieces of about 200 characters, sentence by sentence */
+function sayChunks(lines){
+  const out = []; let cur = '';
+  for (const l of lines){ const s = /[.!?:;]$/.test(l) ? l : l + '.'; if (cur && (cur + ' ' + s).length > 200){ out.push(cur); cur = s; } else cur = cur ? cur + ' ' + s : s; }
+  if (cur) out.push(cur);
+  return out;
+}
+function sayVoice(lg){
+  const vs = TTS.getVoices() || [], ok = v => new RegExp('^' + lg + '([-_]|$)', 'i').test(v.lang), pool = vs.filter(ok);
+  const gb = v => lg !== 'en' || /^en[-_]GB/i.test(v.lang);
+  return pool.find(v => v.localService && gb(v)) || pool.find(gb) || pool.find(v => v.localService) || pool[0] || null;
+}
+function sayUI(b, on){ if (!b) return; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); const l = b.querySelector('span'); if (l) l.textContent = on ? 'Stop reading' : b.dataset.label; }
+function sayStop(){ if (TTS && (sayOn || TTS.speaking)) TTS.cancel(); const b = sayOn; sayOn = null; sayUI(b, false); }
+function sayEl(el, b){
+  if (!TTS || !el) return;
+  if (sayOn === b){ sayStop(); return; }
+  sayStop(); stopReader(); pauseFilms();
+  const lg = /^ms/i.test((el.querySelector('[lang]') || el.closest('[lang]') || {getAttribute:() => 'en'}).getAttribute('lang') || '') ? 'ms' : 'en';
+  const voices = TTS.getVoices() || [], v = sayVoice(lg);
+  if (lg === 'ms' && voices.length && !v){ toast('This phone has no Malay voice. Add one in its text-to-speech settings.'); return; }
+  const parts = sayChunks(sayLines(el)); if (!parts.length) return;
+  sayOn = b; sayUI(b, true);
+  parts.forEach((t, i) => {
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = lg === 'ms' ? 'ms-MY' : 'en-GB'; if (v) u.voice = v; u.rate = .95;
+    if (i === parts.length - 1) u.onend = u.onerror = () => { if (sayOn === b){ sayOn = null; sayUI(b, false); } };
+    TTS.speak(u);
+  });
+}
+const sayBtn = (k, label) => TTS ? `<button type="button" class="flagb sayb" data-say="${k}" data-label="${label}" aria-pressed="false">${svg('volume')}<span>${label}</span></button>` : '';
 function stopReader(){
   if (!readKey) return;
   reader.pause();
@@ -1915,6 +2154,7 @@ function stopReader(){
   document.querySelectorAll('.reading, .lsn-ch button.on, .rl-on').forEach(el => el.classList.remove('reading', 'on', 'rl-on'));
 }
 function playReader(key, at){
+  sayStop();
   if (readKey !== key){ stopReader(); readKey = key; reader.src = READ[key].src; }
   stopJourney(); pauseTour(); pauseFilms();
   if (at != null){ try { reader.currentTime = at; } catch(e){} }
@@ -3532,7 +3772,9 @@ const prefs = {
   /* Vibration on a phone that has it: on unless switched off */
   buzz: store.get('gz-buzz', 'on'),
   /* Smart search: downloads the first time it is needed, unless switched off */
-  ai: store.get('gz-ai', 'on')
+  ai: store.get('gz-ai', 'on'),
+  /* Voice search on this phone (English, web app): off until switched on, since it downloads about 35 MB */
+  asr: store.get('gz-asr', 'off')
 };
 let setFrom = null;
 function applyPrefs(){
@@ -3544,8 +3786,9 @@ function applyPrefs(){
 }
 function syncSettings(){
   $('#st-buzzrow').hidden = !CAN_BUZZ;
+  $('#st-asrrow').hidden = !ASR_OK;
   aiNote();
-  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips], ['#st-tiles', prefs.tiles], ['#st-buzz', prefs.buzz], ['#st-ai', prefs.ai]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
+  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips], ['#st-tiles', prefs.tiles], ['#st-buzz', prefs.buzz], ['#st-ai', prefs.ai], ['#st-asr', prefs.asr]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
   const s = savedIds().length, r = recentIds().length, best = store.get(QKEY, null);
   $('#st-count').textContent = s || r || best !== null ? `${s} saved, ${r} recent${best !== null ? ', quiz best ' + best + ' of ' + QUIZ.length : ''}. Kept in this browser only.` : 'Nothing kept yet. Saved and recent pathways stay in this browser only.';
 }
@@ -3910,6 +4153,12 @@ function askCands(q){
   return out.sort((a, b) => b.s - a.s).filter(x => !seen.has(x.e.href) && seen.add(x.e.href)).slice(0, 40).map(x => x.e);
 }
 const askBtn = q => askFn && !askDead && q.trim().split(/\s+/).length >= 2 ? `<button type="button" class="pal-ask" id="gask">${svg('spark')}<span><b>Ask in your own words</b><small>Claude picks the steps in the guide that fit your question; what you see is the guide's own text. Don't type a patient's name or details.</small></span></button>` : '';
+/* Exact quotes (13 Nov 2026): Claude may also name the line that answers; the page shows it only if it is the guide's own text */
+const askText = e => ((e.title || '') + ' · ' + (e.body || '')).replace(/\s+/g, ' ');
+function askQuote(e, quote){
+  const qt = String(quote).replace(/\s+/g, ' ').trim().replace(/^["“‘']+|["”’']+$/g, '').trim();
+  return qt.length >= 12 && qt.split(' ').length <= 40 && askText(e).includes(qt) ? qt : null;
+}
 async function askGuide(){
   const q = $('#gq').value.trim(), body = $('#palbody');
   const cands = askCands(q);
@@ -3918,7 +4167,7 @@ async function askGuide(){
   const ctl = askCtl = new AbortController();
   body.innerHTML = `<div class="pal-asking" role="status">${svg('spark')}<span>Finding the steps in the guide for “${esc(q)}”…</span><button type="button" class="sm" id="gaskstop">Stop</button></div>`;
   $('#gaskstop').addEventListener('click', () => { ctl.abort(); renderPal(); });
-  const list = cands.map((e, i) => `c${i + 1} | ${e.title} | ${e.kind} | ${e.meta || ''} | ${(e.body || '').slice(0, 220).replace(/\s+/g, ' ')}`).join('\n');
+  const list = cands.map((e, i) => `c${i + 1} | ${e.title} | ${e.kind} | ${e.meta || ''} | ${askText(e).slice(0, 600)}`).join('\n');
   const input = `You help a doctor in a Malaysian emergency department find the right place in a clinical reference guide. Do not give clinical advice.
 
 The doctor's question: "${q.replace(/"/g, "'")}"
@@ -3926,13 +4175,19 @@ The doctor's question: "${q.replace(/"/g, "'")}"
 Candidate places in the guide, one per line (id | title | kind | where | the guide's own text, cut short):
 ${list}
 
-Reply with JSON only, in this form: {"picks": ["c3", "c1"]}. List up to 3 candidate ids, best first, that would best answer the question. Use an empty list if none fits. Pick only ids from the list above.`;
+Reply with JSON only, in this form: {"picks": [{"id": "c3", "quote": "..."}, {"id": "c1", "quote": ""}]}. List up to 3 candidate ids, best first, that would best answer the question. Use an empty list if none fits. Pick only ids from the list above. For each pick, "quote" is the one sentence or line from that candidate's own text that best answers the question, copied exactly, character for character, at most 30 words; use "" if no single line answers it. Never write words of your own in a quote.`;
   try {
     const r = await askFn.json(input, {modelTier:'default', signal:ctl.signal});
     if (ctl !== askCtl || $('#pal').hidden) return;
-    const picks = (r && Array.isArray(r.picks) ? r.picks : []).map(id => /^c(\d+)$/.exec(String(id))).filter(Boolean).map(m => cands[+m[1] - 1]).filter(Boolean).filter((e, i, a) => a.indexOf(e) === i).slice(0, 3);
+    /* A pick is "c3" or {id:"c3", quote:"..."}. A quote is kept only if the guide's own text holds it letter for letter */
+    const quotes = new Map();
+    const picks = (r && Array.isArray(r.picks) ? r.picks : []).map(x => {
+      const m = /^c(\d+)$/.exec(String(x && typeof x === 'object' ? x.id : x)), e = m && cands[+m[1] - 1];
+      if (e && x && typeof x === 'object' && typeof x.quote === 'string'){ const qt = askQuote(e, x.quote); if (qt && !quotes.has(e)) quotes.set(e, qt); }
+      return e;
+    }).filter(Boolean).filter((e, i, a) => a.indexOf(e) === i).slice(0, 3);
     const ts = terms(q);
-    body.innerHTML = picks.length ? `<div class="pal-fix" id="gaskn">Picked by Claude from the guide for “${esc(q)}”. The words below are the guide's own: open the step and check it before you act.</div><ul class="pal-res" id="gaskres" role="listbox">${picks.map(e => palEntry(e, ts, true)).join('')}</ul>`
+    body.innerHTML = picks.length ? `<div class="pal-fix" id="gaskn">Picked by Claude from the guide for “${esc(q)}”. The words below are the guide's own: open the step and check it before you act.${quotes.size ? ' A line in quotation marks is the guide\'s own, checked letter for letter.' : ''}</div><ul class="pal-res" id="gaskres" role="listbox">${picks.map(e => palEntry(e, ts, true, quotes.has(e) ? new Map([[e, '“' + quotes.get(e) + '”']]) : null)).join('')}</ul>`
       : `<div class="pal-none" id="gaskn">Claude found nothing in the guide that answers “${esc(q)}”. Try search with other words.</div>`;
     palSel = 0; markSel();
   } catch(e){
@@ -4078,7 +4333,7 @@ const ptqBtn = (id, cls) => ptKey(id) ? `<button type="button" class="${cls || '
 
 /* ================= Routing ================= */
 function route(){
-  stopReader(); pauseFilms();
+  stopReader(); pauseFilms(); sayStop();
   const h = decodeURIComponent(location.hash.slice(1));
   let m, changed = false;
   closePal(false); closeSettings(false); closeSheet(); closeMap(false); closePtq(false); closeFlag(false);
@@ -4187,6 +4442,7 @@ $('#libgrid').addEventListener('click', e => { const b = e.target.closest('[data
 $('#run').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b || !state.id) return;
   const p = P[state.id], n = p.nodes[state.cur];
+  if (b.dataset.say){ sayEl(b.dataset.say === 'cur' ? $('#cur') : $('#ptab [role="tabpanel"]:not([hidden])'), b); return; }
   if (b.dataset.go !== undefined){ const [l, to] = n.opts[+b.dataset.go]; go(l, to); }
   else if (b.hasAttribute('data-next')) go('Done', n.next);
   else if (b.dataset.back !== undefined) backTo(+b.dataset.back);
@@ -4338,9 +4594,10 @@ $('#settings').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   const grp = b.closest('.seg');
   if (grp && b.dataset.val){
-    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips', 'st-tiles':'tiles', 'st-buzz':'buzz', 'st-ai':'ai'}[grp.id];
+    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips', 'st-tiles':'tiles', 'st-buzz':'buzz', 'st-ai':'ai', 'st-asr':'asr'}[grp.id];
     prefs[key] = b.dataset.val; store.set('gz-' + key, b.dataset.val); applyPrefs(); syncSettings();
     if (key === 'buzz') buzz('ok');
+    if (key === 'asr') micShow();
     if (key === 'clips') setJourneyClip(prefs.clips === 'on');
     if (key === 'tiles') tileClips();
   } else if (b.id === 'st-clear'){

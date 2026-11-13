@@ -84,6 +84,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **AI upgrades (13 Nov 2026):** read any step or tab aloud with the phone's own voice, in English or Malay; Ask quotes the guide's own line that answers; smart search understands Malay; English voice search can run on the phone itself (web app, switch on in Settings).
 - **Smart search (13 Nov 2026):** an AI model on the phone finds the guide's pages by meaning ("fainted" finds syncope, "fell and hit head" head injury), downloaded once (about 8 MB) at the first search; nothing is sent anywhere; off in Settings.
 - **Vibration (13 Nov 2026):** on Android phones, a short buzz on an answer, an outcome, a copy and a stop sign, and a long one when the 20WBCT timer runs out; off in Settings.
 - **Cosmetic round (13 Nov 2026):** the suggested answer in thumb reach on checklist questions, the route opening on its newest answer, an outcome card with boxes to tick and its source, shorter search results and library rows, quieter view openings on phones, header pictures dimmed at night, a focus ring that shows on every surface; and, in the claude.ai copy, Comment on this step from the flag.
