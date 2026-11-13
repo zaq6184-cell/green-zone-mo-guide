@@ -1979,6 +1979,12 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .b-dept{background:var(--dept-soft);color:var(--dept)}
 /* The flag report reads as words */
 .flag-t{font:600 .86rem/1.5 var(--body)}
+/* Smart search (13 Nov 2026): its line in the palette, and the line that says nothing in the guide is close */
+.pal-ai{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;margin:4px 4px 8px;padding:8px 12px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font:700 .84rem/1.35 var(--body)}
+.pal-ai svg{width:16px;height:16px;flex:none}
+.pal-ai span{flex:1;min-width:0}
+.pal-ai .sm{min-height:36px}
+.pal-weak a{font-weight:800}
 /* In the claude.ai copy, a comment on the step through claude.ai's own comment box */
 .flag-c{display:grid;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
 .flag-c .sm{justify-content:flex-start;width:100%}
@@ -2321,6 +2327,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <div class="shead"><h2>Privacy</h2></div>
         <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
           <p>Voice search uses your browser's own speech service, and Ask in your own words (in the claude.ai copy) sends your question to Claude under your own account: say or type a topic, never a patient's name or details. A patient's QR code holds only the address of the advice, and the patient's page keeps nothing about them. A report from Something wrong on this step? goes only where you send it.</p>
+          <p>Smart search runs on your own phone: what you type is never sent anywhere. It uses Model2Vec potion-retrieval-32M by Minish Lab (Stephan Tulkens and Thomas van Dongen), cut to its first 128 dimensions, under the MIT licence (<a href="ai/LICENSE.txt" target="_blank" rel="noopener noreferrer">licence</a>). It only finds and orders the guide's own pages; it writes nothing.</p>
           <p>Illustrations and clips are generated artwork and show no real staff or patients. Department documents are cited by title and date; personal phone numbers, registration numbers and patient details in them are left out.</p></div>
       </div></section>
 
@@ -2403,6 +2410,8 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
     <div class="set"><div><b>Text size</b><small>Larger text for reading at arm's length.</small></div><div class="seg" id="st-size" role="group" aria-label="Text size"><button type="button" data-val="std">Standard</button><button type="button" data-val="large">Large</button></div></div>
     <div class="set"><div><b>Moving tiles</b><small>The tiles, section bars and tool headers move silently. Off keeps still pictures and saves mobile data.</small></div><div class="seg" id="st-tiles" role="group" aria-label="Moving tiles"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Moving clips</b><small>The patient journey clips loop silently. Off saves mobile data.</small></div><div class="seg" id="st-clips" role="group" aria-label="Moving clips"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
+    <div class="set"><div><b>Smart search</b><small>Finds the guide's pages by meaning, not only by your words, on this phone: nothing is sent. <span id="st-aistate">It downloads (about 8 MB, once) the first time you search.</span></small></div><div class="seg" id="st-ai" role="group" aria-label="Smart search"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
+    <div class="set" id="st-buzzrow"><div><b>Vibration</b><small>A short buzz when you copy, answer, reach an outcome or tick a stop sign, and a long one when the 20WBCT timer runs out. Android phones.</small></div><div class="seg" id="st-buzz" role="group" aria-label="Vibration"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Saved, recent and quiz score</b><small id="st-count">Kept in this browser only.</small></div><button type="button" id="st-clear" class="sm">Clear</button></div>
     <p class="dlg-f">Settings are kept in this browser only. <span data-ver>Version 8</span>.</p>
   </div>

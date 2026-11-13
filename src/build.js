@@ -124,9 +124,9 @@ app = app.replace("'__PAGE__'", () => `'${PAGE_ID}'`);
 
 /* What the service worker handles, from the files in app/ */
 const walk = dir => fs.existsSync(dir) ? fs.readdirSync(dir, {withFileTypes: true}).flatMap(d => d.isDirectory() ? walk(path.join(dir, d.name)) : [path.join(dir, d.name)]) : [];
-const files = ['img', 'tiles', 'media', 'poster', 'ebook', 'xray', 'abdo', 'abdo3d', 'memo', 'sp', 'og', 'clips', 'audio'].flatMap(d => walk(path.join(APP, d))).map(f => path.relative(APP, f).split(path.sep).join('/')).sort();
+const files = ['img', 'tiles', 'media', 'poster', 'ebook', 'xray', 'abdo', 'abdo3d', 'memo', 'sp', 'og', 'clips', 'audio', 'ai'].flatMap(d => walk(path.join(APP, d))).map(f => path.relative(APP, f).split(path.sep).join('/')).sort();
 const SMALL = /^(img\/[^/]+|tiles\/[^/]+|media\/[^/]+|poster\/[^/]+-thumb)\.webp$/; /* the small stills: saved at install */
-const LATER = /^(og\/[^/]+\.jpg|poster\/[^/]+\.webp|ebook\/[^/]+\.webp|xray\/[^/]+\.webp|abdo\/[^/]+\.webp|abdo3d\/.+\.webp|memo\/[^/]+\.webp|sp\/[^/]+\.webp|(media|clips|audio|tiles)\/[^/]+\.(mp4|mp3))$/; /* poster sheets, films and sounds: kept once used */
+const LATER = /^(og\/[^/]+\.jpg|poster\/[^/]+\.webp|ebook\/[^/]+\.webp|xray\/[^/]+\.webp|abdo\/[^/]+\.webp|abdo3d\/.+\.webp|memo\/[^/]+\.webp|sp\/[^/]+\.webp|ai\/[^/]+\.(bin|txt)|(media|clips|audio|tiles)\/[^/]+\.(mp4|mp3))$/; /* poster sheets, films, sounds and the smart search model: kept once used */
 const PRE = {'': hash16(app), 'manifest.webmanifest': hash16(manifest)}, KEEP = {}, SIZE = {};
 let preBytes = Buffer.byteLength(app) + Buffer.byteLength(manifest), keepBytes = 0;
 for (const f of files){

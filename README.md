@@ -84,6 +84,8 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **Smart search (13 Nov 2026):** an AI model on the phone finds the guide's pages by meaning ("fainted" finds syncope, "fell and hit head" head injury), downloaded once (about 8 MB) at the first search; nothing is sent anywhere; off in Settings.
+- **Vibration (13 Nov 2026):** on Android phones, a short buzz on an answer, an outcome, a copy and a stop sign, and a long one when the 20WBCT timer runs out; off in Settings.
 - **Cosmetic round (13 Nov 2026):** the suggested answer in thumb reach on checklist questions, the route opening on its newest answer, an outcome card with boxes to tick and its source, shorter search results and library rows, quieter view openings on phones, header pictures dimmed at night, a focus ring that shows on every surface; and, in the claude.ai copy, Comment on this step from the flag.
 - **Seven features (12 Nov 2026):** search that forgives misspellings, American spellings, Malay and everyday words and abbreviations, and says what it used; voice search in English or Bahasa Melayu; home care advice on the patient's own phone by QR code, with Listen; Copy route for the notes; Save everything for no signal (web app); Ask in your own words (claude.ai copy); and Something wrong on this step?, a report for the guide owner.
 - **ED extensions (12 Nov 2026):** the department's extension list on the Numbers page: 34 rooms in five areas, found by room name or by the first digits of a number, filtered by area, each extension copied with a tap; the guide's search finds every room.

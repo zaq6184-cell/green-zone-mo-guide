@@ -1979,6 +1979,12 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .b-dept{background:var(--dept-soft);color:var(--dept)}
 /* The flag report reads as words */
 .flag-t{font:600 .86rem/1.5 var(--body)}
+/* Smart search (13 Nov 2026): its line in the palette, and the line that says nothing in the guide is close */
+.pal-ai{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;margin:4px 4px 8px;padding:8px 12px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font:700 .84rem/1.35 var(--body)}
+.pal-ai svg{width:16px;height:16px;flex:none}
+.pal-ai span{flex:1;min-width:0}
+.pal-ai .sm{min-height:36px}
+.pal-weak a{font-weight:800}
 /* In the claude.ai copy, a comment on the step through claude.ai's own comment box */
 .flag-c{display:grid;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
 .flag-c .sm{justify-content:flex-start;width:100%}
@@ -2321,6 +2327,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <div class="shead"><h2>Privacy</h2></div>
         <div class="prose"><p>No patient data is entered or stored. Saved and recent pathways, the quiz score, your settings, the intro and where you stopped the tour stay in this browser only, and you can clear them in Settings. Nothing you tick in the safety check or type in the calculators is kept.</p>
           <p>Voice search uses your browser's own speech service, and Ask in your own words (in the claude.ai copy) sends your question to Claude under your own account: say or type a topic, never a patient's name or details. A patient's QR code holds only the address of the advice, and the patient's page keeps nothing about them. A report from Something wrong on this step? goes only where you send it.</p>
+          <p>Smart search runs on your own phone: what you type is never sent anywhere. It uses Model2Vec potion-retrieval-32M by Minish Lab (Stephan Tulkens and Thomas van Dongen), cut to its first 128 dimensions, under the MIT licence (<a href="ai/LICENSE.txt" target="_blank" rel="noopener noreferrer">licence</a>). It only finds and orders the guide's own pages; it writes nothing.</p>
           <p>Illustrations and clips are generated artwork and show no real staff or patients. Department documents are cited by title and date; personal phone numbers, registration numbers and patient details in them are left out.</p></div>
       </div></section>
 
@@ -2403,6 +2410,8 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
     <div class="set"><div><b>Text size</b><small>Larger text for reading at arm's length.</small></div><div class="seg" id="st-size" role="group" aria-label="Text size"><button type="button" data-val="std">Standard</button><button type="button" data-val="large">Large</button></div></div>
     <div class="set"><div><b>Moving tiles</b><small>The tiles, section bars and tool headers move silently. Off keeps still pictures and saves mobile data.</small></div><div class="seg" id="st-tiles" role="group" aria-label="Moving tiles"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Moving clips</b><small>The patient journey clips loop silently. Off saves mobile data.</small></div><div class="seg" id="st-clips" role="group" aria-label="Moving clips"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
+    <div class="set"><div><b>Smart search</b><small>Finds the guide's pages by meaning, not only by your words, on this phone: nothing is sent. <span id="st-aistate">It downloads (about 8 MB, once) the first time you search.</span></small></div><div class="seg" id="st-ai" role="group" aria-label="Smart search"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
+    <div class="set" id="st-buzzrow"><div><b>Vibration</b><small>A short buzz when you copy, answer, reach an outcome or tick a stop sign, and a long one when the 20WBCT timer runs out. Android phones.</small></div><div class="seg" id="st-buzz" role="group" aria-label="Vibration"><button type="button" data-val="on">On</button><button type="button" data-val="off">Off</button></div></div>
     <div class="set"><div><b>Saved, recent and quiz score</b><small id="st-count">Kept in this browser only.</small></div><button type="button" id="st-clear" class="sm">Clear</button></div>
     <p class="dlg-f">Settings are kept in this browser only. <span data-ver>Version 8</span>.</p>
   </div>
@@ -12403,6 +12412,8 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 13 Nov 2026';
 const V8 = [
+  ['Smart search: by meaning, on your phone','Search now understands everyday words: "fainted" finds syncope, "fell and hit head" finds head injury, "platelet low" finds the dengue CPG, "ankle sprain" finds the ankle. A small AI model downloads once (about 8 MB) the first time you search, then works without a signal. It runs on your phone, so nothing you type is sent anywhere, and it only finds the guide\'s own pages. Settings, Smart search turns it off.',[['#search','Try a search']]],
+  ['Your phone buzzes where it helps','On an Android phone the guide now gives a light tick when you answer, a pulse when you reach the outcome, a buzz when a number or outcome is copied, two buzzes for a stop sign, and a long buzz when the 20-minute WBCT timer runs out (if you had switched to another app, it buzzes when you come back to the guide). Settings, Vibration turns it off. iPhones do not let a web page vibrate.',[['#tools','Shift tools']]],
   ['The answer in thumb reach, and a tidier outcome card','On a checklist question, the answer your ticks point to now waits just above the tab bar: one tap answers. The route opens on your newest answer. The outcome card shows its ebook pages, its items are boxes to tick as you do them (on screen only, nothing is kept), and its main action sits at the foot, in reach of your thumb. Search results are shorter, Numbers, Pathways, Tools and Calculators open on the line that matters, and pictures sit back a little at night. In the claude.ai copy, Something wrong on this step? can also open claude.ai\'s comment box on the step: never write a patient\'s details there.',[['#renal-colic','Try it on renal colic'],['#numbers','Numbers']]],
   ['Search that forgives, and search by voice','Search now finds a misspelt word (paracetmol, renal collic), American spellings (hypoglycemia, diarrhea), Malay and everyday words (sakit dada, kencing batu, stomach ache) and abbreviations (AGE, PCM, HTN), and says which words it used. A microphone in the search box listens in English or Bahasa Melayu: say a topic, never a patient\'s details.',[['#search','Search the guide']]],
   ['Home care advice on the patient\'s own phone','On a discharge outcome and on the advice tabs, Show to patient brings up a QR code. The patient scans it and the advice opens on their phone, with Listen, in English or Bahasa Melayu where the leaflet has both. Nothing about them is sent or kept: the code holds only the address.',[['#renal-colic','Renal colic'],['#dengue-cpg','Dengue CPG']]],
@@ -12797,8 +12808,12 @@ function wbTimer(){
 function wbTick(){
   const s = wbLeft();
   $$('.wb-tm').forEach(t => { t.querySelector('.wb-cd').textContent = wbFmt(s); t.querySelector('.wb-at').textContent = wbAt(s); t.classList.toggle('due', !s); t.querySelector('[data-wbct]').textContent = 'Restart the 20 minutes'; });
-  if (!s){ clearInterval(wbT); wbT = null; }
+  if (!s){ if (wbT) wbDue(); clearInterval(wbT); wbT = null; }
 }
+/* Time to tip the tube: a long buzz, held until the guide is back on screen if the phone had moved to another app */
+let wbLate = false;
+function wbDue(){ if (document.visibilityState === 'visible') buzz('alarm'); else wbLate = true; }
+document.addEventListener('visibilitychange', () => { if (wbLate && document.visibilityState === 'visible'){ wbLate = false; buzz('alarm'); } });
 function wbctStart(){ wbEnd = Date.now() + 1200000; clearInterval(wbT); wbT = null; wbTick(); wbT = setInterval(wbTick, 1000); }
 /* Infographics for the rabies protocol (10 Nov 2026), drawn from its flow charts and appendices; a node or note names one in fig */
 const FIGS = {
@@ -13163,15 +13178,23 @@ const dotsOf = kinds => `<span class="dots" role="img" aria-label="Can end in: $
 let toastT;
 function toast(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2400); }
 /* Copy with a fallback: if the clipboard is refused, select the text on the page so it can be copied by hand */
+/* Vibration (13 Nov 2026, Krishna: "Provide vibration of phone where it is needed"): a short buzz where the screen gives no other
+   sign or the MO may be looking away: a copy (and a different buzz when copying is blocked), an answer, an outcome, a stop sign
+   ticked, a calculator turning to stop, voice search starting and stopping, and a long one when the 20WBCT timer runs out.
+   Phones with Android only (iPhone browsers have no vibration); Settings, Vibration turns it off. Only the switch is kept. */
+const CAN_BUZZ = typeof navigator.vibrate === 'function';
+const BUZZ = {tick:8, ok:14, land:[22], stop:[30, 70, 30], fail:[40, 60, 40], alarm:[400, 150, 400, 150, 600]};
+function buzz(k){ if (!CAN_BUZZ || prefs.buzz === 'off') return; try { navigator.vibrate(BUZZ[k]); } catch(e){} }
 function copyText(text, o = {}){
   const lab = o.btn ? (o.btn.querySelector('.bl') || o.btn) : null;
   const orig = lab ? (lab.dataset.orig || (lab.dataset.orig = lab.textContent)) : '';
   const flash = msg => { if (lab){ lab.textContent = msg; clearTimeout(lab._t); lab._t = setTimeout(() => { lab.textContent = orig; }, 1800); } else toast(msg); };
   const select = () => {
+    buzz('fail');
     if (o.el){ const r = document.createRange(); r.selectNodeContents(o.el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); flash('Selected: copy it'); }
     else toast(o.fail || 'Copying is blocked here');
   };
-  try { navigator.clipboard.writeText(text).then(() => flash(o.ok || 'Copied'), select); } catch(e){ select(); }
+  try { navigator.clipboard.writeText(text).then(() => { buzz('ok'); flash(o.ok || 'Copied'); }, select); } catch(e){ select(); }
 }
 
 /* ================= Groups: body systems for the ebook, then flow and protocols ================= */
@@ -13291,6 +13314,11 @@ const ALIASES = [
   ['stomach ache', 'abdominal pain'], ['tummy ache', 'abdominal pain'], ['heart attack', 'acute coronary syndrome'], ['kidney stone', 'renal colic'],
   ['panadol', 'paracetamol'], ['fainting', 'syncope'], ['faint', 'syncope'], ['wheeze', 'asthma'],
   ['blood sugar', 'glucose'], ['low sugar', 'hypoglycaemia'], ['high sugar', 'hyperglycaemia'], ['broken bone', 'fracture'], ['allergy', 'anaphylaxis'],
+  /* 13 Nov 2026, from 110 on-shift searches: each points at the guide's own words */
+  ['vomiting blood', 'gi bleed'], ['black stool', 'gi bleed'], ['weak one side', 'stroke'], ['one sided weakness', 'stroke'], ['facial droop', 'stroke'], ['slurred speech', 'stroke'],
+  ['head knock', 'head injury'], ['hit head', 'head injury'], ['hit his head', 'head injury'], ['hit her head', 'head injury'], ['bumped head', 'head injury'],
+  ['took too many pills', 'overdose'], ['took too many tablets', 'overdose'], ['too many pills', 'overdose'], ['too many tablets', 'overdose'], ['overdosed', 'overdose'], ['fits', 'seizure'], ['fitting', 'seizure'], ['convulsion', 'seizure'],
+  ['passed out', 'syncope'], ['blacked out', 'syncope'], ['drunk', 'alcohol'], ['urine infection', 'uti'],
   /* abbreviations */
   ['sob', 'breathless'], ['pcm', 'paracetamol'], ['htn', 'hypertensive'], ['loc', 'loss of consciousness'], ['cva', 'stroke'], ['dm', 'diabetes'],
   ['fb', 'foreign body'], ['hpt', 'hypertensive'], ['ugib', 'bleeding'], ['age', 'gastroenteritis', 1], ['pe', 'pulmonary embolism', 1], ['od', 'overdose', 1], ['mi', 'myocardial infarction', 1]
@@ -13346,7 +13374,7 @@ function findMore(q){
   if (al.length){
     const seen = new Set(), r = [];
     for (const a of al) for (const e of find(a.q).r) if (!seen.has(e.href)){ seen.add(e.href); r.push(e); }
-    if (r.some(e => !base.r.includes(e))){ out.r = [...r, ...base.r.filter(e => !seen.has(e.href))].slice(0, 14); out.also = al.map(a => a.to); out.loose = false; }
+    if (r.some(e => !base.r.includes(e))){ out.r = [...r, ...base.r.filter(e => !seen.has(e.href))].slice(0, 14); out.also = al.map(a => a.to); out.loose = false; out.al = seen; }
   }
   if (out.r.length) return out;
   /* American spellings, then misspellings: only when nothing matched */
@@ -13356,6 +13384,122 @@ function findMore(q){
   if (fx.some((w, i) => w !== uk[i])){ const r = find(fx.join(' ')); if (r.r.length) return {...out, r:r.r, loose:r.loose, fixed:fx.join(' ')}; }
   return out;
 }
+/* ================= Smart search (13 Nov 2026) =================
+   Krishna: "Improve the search capabilities, if possible AI", and for its download, "First time it's needed".
+   A small open model (Model2Vec potion-retrieval-32M, MIT licence, cut to 128 dimensions: app/ai/, made by src/ai.js) turns a
+   search and every passage of the guide into vectors of meaning on the phone itself: no AI engine, only a look-up and a sum,
+   and nothing is sent anywhere. It downloads once (about 8 MB) the first time a search is typed, unless Settings, Smart search
+   is off or the browser's Data Saver is on (then it waits for a tap), and the web app keeps it for use without a signal.
+   It only reorders and adds the guide's own pages; it writes nothing (rule 8). Words still decide when they are sure: every
+   typed word in a title, or a Malay or everyday word the guide already knows (ALIASES). Otherwise the closest in meaning come
+   first, and when even the closest are not close the palette says they are only the nearest and points to the national CPGs.
+   Digits (extensions) stay with words. Measured on 13 Nov 2026: 55 of 55 hard on-shift searches found a right page in the top
+   three (words alone: 46; for UTI, tetanus and drunk, which have no page of their own, a page that mentions them), and the
+   searches that already worked kept their first result. */
+const AI = {state:'idle', enc:null, vec:null, own:null, txt:null, n:0, D:0};
+let aiTried = false;
+const AI_SKIP = new Set(['Setting', 'Quiz', 'Update', 'Poster', 'About', 'Video']);
+/* A passage this close joins the results. Below the second the matches are only the nearest, and the palette says so: on
+   110 searches the model's scores did not tell a topic the guide covers from one it does not, so it never claims "not covered". */
+const AI_MIN = .38, AI_WEAK = .46;
+const SAVE_DATA = !!(navigator.connection && navigator.connection.saveData);
+function aiTok(vocab){
+  const pre = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').match(/[a-z0-9]+|[^\sa-z0-9]/g) || [];
+  const wp = w => { if (w.length > 100) return []; const out = []; let i = 0; while (i < w.length){ let j = w.length, f = -1; while (j > i){ const id = vocab.get((i ? '##' : '') + w.slice(i, j)); if (id !== undefined){ f = id; break; } j--; } if (f < 0) return []; out.push(f); i = j; } return out; };
+  return s => pre(s).flatMap(wp);
+}
+async function aiLoad(){
+  if (AI.state === 'loading' || AI.state === 'ready') return;
+  AI.state = 'loading'; aiNote();
+  try {
+    const get = async f => { const r = await fetch('ai/' + f); if (!r.ok) throw new Error(f + ' ' + r.status); return r; };
+    /* The web app serves model.bin; the claude.ai copy can serve only web file types, so it has the same bytes as base64 text */
+    const model = async () => {
+      for (const f of FRAMED ? ['model.b64.txt', 'model.bin'] : ['model.bin', 'model.b64.txt']){
+        let r; try { r = await get(f); } catch(e){ continue; }
+        if (!f.endsWith('.txt')) return r.arrayBuffer();
+        const s = atob((await r.text()).trim()), u = new Uint8Array(s.length);
+        for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i);
+        return u.buffer;
+      }
+      throw new Error('model missing');
+    };
+    const [vr, buf] = await Promise.all([get('vocab.txt'), model()]);
+    const pieces = (await vr.text()).split('\n'), dv = new DataView(buf);
+    if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== 'GZAI') throw new Error('model format');
+    const V = dv.getUint32(4, true), D = dv.getUint32(8, true);
+    if (pieces.length !== V) throw new Error('word pieces');
+    const scale = new Float32Array(buf, 12, D), Q = new Int8Array(buf, 12 + D * 4, V * D), tok = aiTok(new Map(pieces.map((t, i) => [t, i])));
+    const enc = s => {
+      const v = new Float32Array(D); let n = 0;
+      for (const id of tok(s)){ const o = id * D; for (let k = 0; k < D; k++) v[k] += Q[o + k]; }
+      for (let k = 0; k < D; k++){ v[k] *= scale[k]; n += v[k] * v[k]; }
+      if (!n) return null; n = Math.sqrt(n); for (let k = 0; k < D; k++) v[k] /= n; return v;
+    };
+    /* The guide's passages: each entry's title, then its text in pieces of about 40 words */
+    const own = [], vecs = [], txt = [];
+    const add = (i, s, t) => { const v = enc(s); if (v){ own.push(i); vecs.push(v); txt.push(t); } };
+    for (let i = 0; i < IDX.length; i++){
+      const e = IDX[i]; if (AI_SKIP.has(e.kind)) continue;
+      add(i, e.title, '');
+      let cur = [], words = 0;
+      const flush = () => { if (cur.length){ const t = cur.join(' · '); add(i, e.title + ': ' + t, t); cur = []; words = 0; } };
+      for (const p of (e.body || '').split(' · ')){ cur.push(p); words += p.split(' ').length; if (words > 40) flush(); }
+      flush();
+      if (i % 40 === 39) await new Promise(r => setTimeout(r, 0)); /* let a slow phone breathe */
+    }
+    const M = new Float32Array(vecs.length * D); vecs.forEach((v, j) => M.set(v, j * D));
+    Object.assign(AI, {state:'ready', enc, vec:M, own:Int32Array.from(own), txt, n:vecs.length, D});
+  } catch(e){ AI.state = 'failed'; AI.err = String(e && e.message || e); }
+  aiNote();
+  if (!$('#pal').hidden && $('#gq').value.trim()) renderPal();
+}
+/* Each entry's closest passage to the search, and which passage it was */
+function aiScores(q){
+  const v = AI.enc(q); if (!v) return null;
+  const best = new Float32Array(IDX.length).fill(-1), at = new Int32Array(IDX.length).fill(-1), D = AI.D, M = AI.vec;
+  for (let j = 0; j < AI.n; j++){
+    let s = 0; const o = j * D; for (let k = 0; k < D; k++) s += v[k] * M[o + k];
+    const i = AI.own[j]; if (s > best[i]){ best[i] = s; at[i] = j; }
+  }
+  return {best, at};
+}
+/* Words and meaning together. Returns null when smart search has nothing to add (not ready, digits, too short). */
+function smartFind(q, kw){
+  if (AI.state !== 'ready' || prefs.ai === 'off' || /\d/.test(q) || q.replace(/[^a-z]/gi, '').length < 3) return null;
+  /* drug lists, the CPG shelf's links and outside links stay after the guide's own pages, as in keyword search */
+  const side = i => /^(Drug|Dilution|National CPG|Link)$/.test(IDX[i].kind);
+  const pick = s => { const sc = aiScores(s); if (!sc) return null; let m = 0; for (let i = 0; i < IDX.length; i++) if (sc.best[i] > m && !side(i)) m = sc.best[i]; return {sc, m}; };
+  /* A word the guide does not know was corrected by spelling: meaning decides whether the correction or the word as typed
+     is closer ("asthama" is asthma; "sprain" is not "strain") */
+  let A = pick(q), fixUsed = false;
+  if (kw.fixed){ const B = pick(kw.fixed); if (B && (!A || B.m > A.m + .02)){ A = B; fixUsed = true; } }
+  if (!A) return null;
+  const {best, at} = A.sc, ts = terms(fixUsed ? kw.fixed : q), pos = new Map(IDX.map((e, i) => [e, i]));
+  const near = [...best.keys()].filter(i => best[i] >= AI_MIN).sort((a, b) => (best[b] - (side(b) ? .3 : 0)) - (best[a] - (side(a) ? .3 : 0))).slice(0, 14);
+  const own = near.filter(i => !side(i)), closest = own.length ? best[own[0]] : 0;
+  /* Words that are sure keep their order (every typed word in the top result's title, or a Malay or everyday word the
+     guide knows); meaning then only adds what they missed, after them */
+  const sure = kw.r.length && (!kw.fixed || fixUsed) && ((kw.al && kw.al.has(kw.r[0].href)) || (!kw.loose && ts.every(w => termRe(w).test(kw.r[0].title))));
+  let order;
+  if (sure) order = [...kw.r.map(e => pos.get(e)).filter(i => i !== undefined), ...near.filter(i => !kw.r.includes(IDX[i]))].slice(0, 14);
+  else {
+    const pts = new Map();
+    /* a word found in a title counts for more than one found only in the text ("fainted" is in Code Blue's text; Syncope is what is meant) */
+    kw.r.forEach((e, k) => { const i = pos.get(e); if (i !== undefined) pts.set(i, Math.max(0, best[i]) + (kw.fixed && !fixUsed ? .06 : ts.some(w => termRe(w).test(e.title)) ? .18 : .06) / (1 + k * .5)); });
+    near.forEach(i => { if (!pts.has(i)) pts.set(i, best[i]); });
+    /* the guide's own pages first, then the drug lists, shelf and links, each by score */
+    order = [...pts.entries()].sort((a, b) => (side(a[0]) - side(b[0])) || (b[1] - a[1])).slice(0, 14).map(([i]) => i);
+  }
+  const snip = new Map(order.filter(i => at[i] >= 0 && AI.txt[at[i]] && !kw.r.includes(IDX[i])).map(i => [IDX[i], AI.txt[at[i]]]));
+  return {r:order.map(i => IDX[i]), snip, weak:!sure && closest < AI_WEAK, moved:!sure && order[0] !== pos.get(kw.r[0]), sure:!!sure, closest, fixUsed};
+}
+/* The smart search line in the palette, and its state in Settings */
+function aiNote(){
+  const st = $('#st-aistate');
+  if (st) st.textContent = AI.state === 'ready' ? 'Ready on this device.' : AI.state === 'loading' ? 'Downloading now (about 8 MB, once).' : AI.state === 'failed' ? 'It could not download; it will try again on your next search.' : prefs.ai === 'off' ? 'Off: search uses the words you type.' : SAVE_DATA ? 'Waiting while Data Saver is on: tap Download in search.' : 'It downloads (about 8 MB, once) the first time you search.';
+}
+function snippetOf(e, ts, loose, snip){ const t = snip && snip.get(e); return t ? highlight(t.length > 170 ? t.slice(0, t.lastIndexOf(' ', 160)) + '…' : t, ts, loose) : snippet(e.body, ts, loose); }
 function snippet(body, ts, loose){
   let at = -1;
   for (const w of ts){ const m = termRe(w, loose).exec(body); if (m){ const k = m.index + m[1].length; if (at < 0 || k < at) at = k; } }
@@ -13417,8 +13561,8 @@ let palSel = 0, palFrom = null;
 const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].title, kind:kindOf(P[id]), meta:metaOf(P[id]), ic:c.ic, c:c.c, j:c.j}; };
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
-function palEntry(e, ts, loose){
-  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippet(e.body, ts, loose)}</span>` : ''}</span></a></li>`;
+function palEntry(e, ts, loose, snip){
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -13432,10 +13576,18 @@ function renderPal(){
       palEntry({href:'#tools', title:'Discharge safety check', kind:'Tool', meta:'Shift tools', ic:'check', c:'c-meta'}) +
       palEntry({href:'#numbers', title:'Numbers to know', kind:'Number', meta:'Code Blue, Code Stroke, MAU, EMACC, IPR', ic:'phone', c:'c-abdo'}) + '</ul>';
   } else {
-    const {r, loose, also, fixed} = findMore(q), ts = terms(fixed || q).concat(also.flatMap(terms));
-    const note = fixed ? `<div class="pal-fix" id="gfix">Nothing for “${esc(q)}”. Showing results for <b>${esc(fixed)}</b>.</div>`
+    const kw = findMore(q);
+    /* Smart search downloads the first time it is needed: the first search of three letters or more */
+    if ((AI.state === 'idle' || AI.state === 'failed') && !aiTried && prefs.ai !== 'off' && !SAVE_DATA && q.replace(/[^a-z]/gi, '').length >= 3){ aiTried = true; aiLoad(); }
+    const sm = smartFind(q, kw), r = sm ? sm.r : kw.r, {loose, also} = kw, fixed = kw.fixed && (!sm || sm.fixUsed || kw.r.includes(sm.r[0])) ? kw.fixed : null; /* a corrected word is never silent */
+    const ts = terms(fixed || q).concat(also.flatMap(terms));
+    const note = sm && sm.weak ? `<div class="pal-fix pal-weak" id="gfix">These are the nearest by meaning. If none fits, the guide may not cover “${esc(q)}”: see the <a href="#guidelines">national CPGs</a>.</div>`
+      : fixed ? `<div class="pal-fix" id="gfix">Nothing for “${esc(q)}”. Showing results for <b>${esc(fixed)}</b>.</div>`
       : also.length ? `<div class="pal-fix" id="gfix">Including results for <b>${also.map(esc).join('</b>, <b>')}</b>.</div>` : '';
-    h = askBtn(q) + (r.length ? note + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose)).join('') + '</ul>'
+    const ai = AI.state === 'loading' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Getting smart search ready: about 8 MB, once. Searching by words meanwhile.</span></div>`
+      : sm && sm.moved && !sm.weak ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search: closest in meaning first, all from the guide's own pages.</span></div>`
+      : AI.state === 'idle' && SAVE_DATA && prefs.ai !== 'off' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search waits while Data Saver is on.</span><button type="button" class="sm" id="gaidl">Download, 8 MB</button></div>` : '';
+    h = askBtn(q) + ai + (r.length ? note + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>'
       : `<div class="pal-none">Nothing found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`);
   }
   if (askCtl && q){ askCtl.abort(); askCtl = null; }
@@ -13448,6 +13600,7 @@ function openPal(){
   if (!$('#pal').hidden) return;
   palFrom = document.activeElement;
   closeDrawer(false);
+  if (AI.state === 'failed') aiTried = false; /* a download that failed is tried again on the next search */
   $('#pal').hidden = false; document.documentElement.style.overflow = 'hidden';
   $('#gq').value = ''; renderPal(); $('#gq').focus();
 }
@@ -13472,6 +13625,7 @@ function micShow(){
   $('#gmic').hidden = !can; $('#gmlang').hidden = !can;
 }
 function micUI(on){
+  if (micOn !== on) buzz('tick');
   micOn = on;
   const b = $('#gmic'); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
   b.setAttribute('aria-label', on ? 'Stop listening' : 'Search by voice');
@@ -13817,7 +13971,7 @@ function showPath(id, node){
   markNav();
   if (routed) $('#run-title').focus({preventScroll:true});
 }
-function go(label, to){ state.trail.push({node:state.cur, label}); state.cur = to; land = true; draw(true); }
+function go(label, to){ state.trail.push({node:state.cur, label}); state.cur = to; land = true; buzz(P[state.id].nodes[to] && P[state.id].nodes[to].end ? 'land' : 'tick'); draw(true); }
 function backTo(i){ state.cur = state.trail[i].node; state.trail = state.trail.slice(0, i); land = false; draw(true); }
 function restart(){ state.trail = []; state.cur = P[state.id].start; land = false; draw(true); }
 
@@ -14175,7 +14329,11 @@ function renderDcheck(){
     else if (a === DC_ALL.length){ v.className = 'verdict ok'; v.innerHTML = 'All checks done: ready to discharge<p>Document the safety-net advice and the follow-up you arranged.</p>'; }
     else { v.className = 'verdict'; v.textContent = `${a} of ${DC_ALL.length} checks done`; }
   };
-  $('#dcheck').addEventListener('change', upd);
+  $('#dcheck').addEventListener('change', e => {
+    const was = $('#verdict').className; upd();
+    if (e.target.dataset.dc && e.target.dataset.dc[0] === 's' && e.target.checked) buzz('stop');
+    else if ($('#verdict').className !== was && $('#verdict').classList.contains('ok')) buzz('land');
+  });
   $('#dcclear').addEventListener('click', () => { $$('#dcheck input').forEach(i => { i.checked = false; }); upd(); });
   upd();
 }
@@ -15184,11 +15342,16 @@ function renderCalc(){
   markCxCurrent();
 }
 let calcLast = null;
+let cxVd = '';
 function calcOut(){
   const c = CALCS[calcTab], {v, list} = calcVals(calcTab);
   let r = c.run(v);
   if (Array.isArray(r)) r = {outs:r};
   calcLast = r;
+  /* a buzz when this calculator's verdict turns to stop (not when a calculator first opens) */
+  const vk = calcTab + ':' + (r && r.verdict ? r.verdict.cls + ':' + r.verdict.h : '');
+  if (vk !== cxVd && cxVd.startsWith(calcTab + ':') && r && r.verdict && r.verdict.cls === 'stop') buzz('stop');
+  cxVd = vk;
   const sk = $('#cxsticky');
   if (sk){ const vd = r && r.verdict; sk.hidden = !vd; if (vd){ sk.className = 'cx-sticky ' + vd.cls; sk.innerHTML = `<span>${esc(vd.h)}</span><small>See the result${svg('chev')}</small>`; } }
   const box = $('#couts');
@@ -15713,7 +15876,11 @@ const prefs = {
   size: store.get('gz-size', 'std'),
   clips: store.get('gz-clips', !REDUCED && matchMedia('(min-width: 761px)').matches ? 'on' : 'off'),
   /* The tile loops move on every device unless motion is reduced or the browser's data saver is on */
-  tiles: store.get('gz-tiles', REDUCED || (navigator.connection && navigator.connection.saveData) ? 'off' : 'on')
+  tiles: store.get('gz-tiles', REDUCED || (navigator.connection && navigator.connection.saveData) ? 'off' : 'on'),
+  /* Vibration on a phone that has it: on unless switched off */
+  buzz: store.get('gz-buzz', 'on'),
+  /* Smart search: downloads the first time it is needed, unless switched off */
+  ai: store.get('gz-ai', 'on')
 };
 let setFrom = null;
 function applyPrefs(){
@@ -15724,7 +15891,9 @@ function applyPrefs(){
   themeChanged();
 }
 function syncSettings(){
-  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips], ['#st-tiles', prefs.tiles]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
+  $('#st-buzzrow').hidden = !CAN_BUZZ;
+  aiNote();
+  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips], ['#st-tiles', prefs.tiles], ['#st-buzz', prefs.buzz], ['#st-ai', prefs.ai]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
   const s = savedIds().length, r = recentIds().length, best = store.get(QKEY, null);
   $('#st-count').textContent = s || r || best !== null ? `${s} saved, ${r} recent${best !== null ? ', quiz best ' + best + ' of ' + QUIZ.length : ''}. Kept in this browser only.` : 'Nothing kept yet. Saved and recent pathways stay in this browser only.';
 }
@@ -16120,7 +16289,7 @@ Reply with JSON only, in this form: {"picks": ["c3", "c1"]}. List up to 3 candid
     body.innerHTML = `<div class="pal-none">${e && e.code === 'rate_limited' ? 'Too many questions just now. Try again in a minute.' : 'Claude could not be asked just now. Search still works.'}</div>`;
   }
 }
-$('#palbody').addEventListener('click', e => { if (e.target.closest('#gask')) askGuide(); });
+$('#palbody').addEventListener('click', e => { if (e.target.closest('#gask')) askGuide(); else if (e.target.closest('#gaidl')){ aiTried = true; aiLoad(); renderPal(); } });
 if (window.claude && typeof window.claude.use === 'function') window.claude.use('sample').then(s => { if (s && typeof s.json === 'function'){ askFn = s; if (!$('#pal').hidden) renderPal(); } }).catch(() => {});
 
 /* ================= Flag this step (12 Nov 2026) =================
@@ -16517,8 +16686,9 @@ $('#settings').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   const grp = b.closest('.seg');
   if (grp && b.dataset.val){
-    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips', 'st-tiles':'tiles'}[grp.id];
+    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips', 'st-tiles':'tiles', 'st-buzz':'buzz', 'st-ai':'ai'}[grp.id];
     prefs[key] = b.dataset.val; store.set('gz-' + key, b.dataset.val); applyPrefs(); syncSettings();
+    if (key === 'buzz') buzz('ok');
     if (key === 'clips') setJourneyClip(prefs.clips === 'on');
     if (key === 'tiles') tileClips();
   } else if (b.id === 'st-clear'){

@@ -1213,6 +1213,82 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const clip = await cq.evaluate(() => window.__clip || '');
     ok(/Where: Renal colic: /.test(clip) && /#renal-colic--urgent\n/.test(clip), 'comment box: the report, with the step\'s link, is copied to paste into the comment');
     await cc.close();
+
+    /* Vibration (13 Nov 2026), with a stand-in for the phone's vibration */
+    const vc = await b.newContext({...phone, reducedMotion:'reduce'});
+    await vc.addInitScript(() => {
+      window.__buzz = [];
+      Object.defineProperty(navigator, 'vibrate', {value: p => { window.__buzz.push(JSON.stringify(p)); return true; }, configurable:true});
+      try { Object.defineProperty(navigator, 'clipboard', {value:{writeText: () => Promise.resolve()}, configurable:true}); } catch(e){}
+    });
+    const vq = await vc.newPage(); vq.on('pageerror', e => errs.push('vibration PAGEERROR: ' + e.message));
+    const lastBuzz = () => vq.evaluate(() => window.__buzz[window.__buzz.length - 1] || null);
+    await vq.goto(U + '#renal-colic', {waitUntil:'load'}); await vq.waitForTimeout(600);
+    ok(await vq.evaluate(() => window.__buzz.length === 0), 'vibration: opening a pathway does not buzz');
+    await vq.click('#run [data-go="0"]'); await vq.waitForTimeout(250);
+    const tick = await lastBuzz();
+    const vend = await vq.evaluate(() => Object.keys(P['renal-colic'].nodes).find(k => P['renal-colic'].nodes[k].end === 'discharge'));
+    const vplan = await vq.evaluate(e => pathTo('renal-colic', e).map(t => t.label), vend);
+    await vq.evaluate(() => restart()); await vq.waitForTimeout(200);
+    for (const l of vplan){ const sel = await vq.evaluate(l => { const n = P[state.id].nodes[state.cur]; return l === 'Done' ? '#run [data-next]' : `#run [data-go="${n.opts.findIndex(o => o[0] === l)}"]`; }, l); await vq.click(sel); await vq.waitForTimeout(120); }
+    const landed = await lastBuzz();
+    await vq.click('#run [data-copyout]'); await vq.waitForTimeout(250);
+    ok(tick === '8' && landed === '[22]' && await lastBuzz() === '14', 'vibration: a light tick on each answer, a pulse on reaching the outcome, and a buzz when a copy is made');
+    await vq.goto(U + '#tools', {waitUntil:'load'}); await vq.waitForTimeout(500);
+    await vq.click('[data-dc="s0"]'); await vq.waitForTimeout(150);
+    ok(await lastBuzz() === '[30,70,30]', 'vibration: ticking a stop sign on the discharge check buzzes twice');
+    await vq.evaluate(() => { wbEnd = Date.now() - 1; clearInterval(wbT); wbT = setInterval(wbTick, 1000); wbTick(); }); await vq.waitForTimeout(150);
+    ok(await lastBuzz() === '[400,150,400,150,600]', 'vibration: the 20WBCT timer running out gives a long buzz');
+    await vq.evaluate(() => openSettings()); await vq.waitForTimeout(200);
+    ok(await vq.isVisible('#st-buzzrow'), 'vibration: Settings offers it on a phone that can vibrate');
+    await vq.click('#st-buzz [data-val="off"]'); await vq.waitForTimeout(150);
+    const n0 = await vq.evaluate(() => window.__buzz.length);
+    await vq.evaluate(() => closeSettings(false));
+    await vq.click('[data-dc="s1"]'); await vq.waitForTimeout(150);
+    ok(await vq.evaluate(n0 => window.__buzz.length === n0 && localStorage.getItem('gz-buzz') !== null, n0), 'vibration: switched off in Settings, nothing buzzes, and only the switch is kept');
+    await vc.close();
+
+    /* Smart search (13 Nov 2026): the model downloads the first time a search is typed, then meaning sorts what words miss */
+    const ac = await b.newContext({...phone, reducedMotion:'reduce'});
+    const aq = await ac.newPage(), aiReq = []; aq.on('pageerror', e => errs.push('smart search PAGEERROR: ' + e.message));
+    aq.on('request', r => { if (/\/ai\//.test(r.url())) aiReq.push(r.url()); });
+    await aq.goto(U + '#home', {waitUntil:'load'}); await aq.waitForTimeout(800);
+    ok(aiReq.length === 0 && fs.existsSync(path.join(__dirname, '..', 'app', 'ai', 'model.bin')) && fs.existsSync(path.join(__dirname, '..', 'app', 'ai', 'LICENSE.txt')), 'smart search: nothing of the model downloads before a search');
+    await aq.evaluate(() => openPal()); await aq.fill('#gq', 'fainted');
+    await aq.waitForFunction(() => AI.state === 'ready' || AI.state === 'failed', null, {timeout:20000}).catch(() => {});
+    await aq.waitForTimeout(300);
+    const top3 = q => aq.evaluate(q => { const kw = findMore(q), sm = smartFind(q, kw); return (sm ? sm.r : kw.r).slice(0, 3).map(e => e.href + ' ' + e.title); }, q);
+    const first = q => aq.evaluate(q => { const kw = findMore(q), sm = smartFind(q, kw); return ((sm ? sm.r : kw.r)[0] || {}).href; }, q);
+    ok(await aq.evaluate(() => AI.state === 'ready' && AI.n > 3000) && aiReq.some(u => /ai\/model\.bin$/.test(u)) && aiReq.some(u => /ai\/vocab\.txt$/.test(u)), 'smart search: the first search downloads the model, and the guide\'s passages are read on the phone');
+    ok(/Smart search: closest in meaning first/.test(await aq.textContent('#gai').catch(() => '')) && (await top3('fainted')).some(t => /syncope/i.test(t)), 'smart search: "fainted" finds syncope, and the palette says meaning sorted it');
+    await aq.screenshot({path:out + '/p-smart.png'});
+    const want = {'fell and hit head':/head/i, 'ankle sprain':/ankle/i, 'red swollen leg':/dvt|leg/i, 'platelet low':/dengue/i, 'renal failure':/ckd|kidney|nephro|dialysis/i, 'allergic reaction':/anaphylaxis/i, 'old lady fall':/hip|fall/i, 'short of breath':/asthma|breathless|copd/i};
+    const misses = [];
+    for (const [q, re] of Object.entries(want)) if (!(await top3(q)).some(t => re.test(t))) misses.push(q);
+    ok(misses.length === 0, 'smart search: everyday words find their pages (head injury, ankle, DVT, dengue, CKD, anaphylaxis, hip fracture, asthma)' + (misses.length ? ': missed ' + misses.join(', ') : ''));
+    const keepFirst = {'renal colic':'#renal-colic', 'dengue':'#dengue-cpg', 'AGE':'#gastroenteritis', '5359':'#numbers', 'kencing batu':'#renal-colic', 'paracetmol':'#paracetamol-overdose', 'asthama':'#asthma', 'code blue':'#code-blue', 'emacc':'#emacc', 'rabies':'#calc-rabies'};
+    const moved = [];
+    for (const [q, h] of Object.entries(keepFirst)) if (await first(q) !== h) moved.push(q + ' -> ' + await first(q));
+    ok(moved.length === 0, 'smart search: searches that already worked keep their first result' + (moved.length ? ': ' + moved.join(', ') : ''));
+    await aq.fill('#gq', 'ankle sprain'); await aq.waitForTimeout(250);
+    ok(!/ankle strain/.test(await aq.textContent('#palbody')), 'smart search: "ankle sprain" is not "corrected" to ankle strain');
+    await aq.evaluate(() => { closePal(false); openSettings(); }); await aq.waitForTimeout(150);
+    ok(/Ready on this device/.test(await aq.textContent('#st-aistate')), 'smart search: Settings says it is ready on this device');
+    await aq.click('#st-ai [data-val="off"]'); await aq.evaluate(() => closeSettings(false));
+    ok(await aq.evaluate(() => smartFind('fainted', findMore('fainted')) === null && prefs.ai === 'off' && /off/.test(localStorage.getItem('gz-ai'))), 'smart search: switched off in Settings, search goes by words alone');
+    await ac.close();
+    /* The claude.ai copy serves the model as base64 text (it serves no .bin): with only that file, smart search still loads */
+    const b64 = path.join(__dirname, '..', 'sources', 'ai', 'model.b64.txt');
+    if (fs.existsSync(b64)){
+      const bc = await b.newContext({...phone, reducedMotion:'reduce'});
+      await bc.route('**/ai/model.bin', r => r.fulfill({status:404, body:'not here'}));
+      await bc.route('**/ai/model.b64.txt', r => r.fulfill({status:200, contentType:'text/plain', body:fs.readFileSync(b64, 'utf8')}));
+      const bq = await bc.newPage(); bq.on('pageerror', e => errs.push('smart search b64 PAGEERROR: ' + e.message));
+      await bq.goto(U + '#home', {waitUntil:'load'}); await bq.waitForTimeout(500);
+      await bq.evaluate(() => aiLoad());
+      ok(await bq.evaluate(() => AI.state === 'ready' && smartFind('fainted', findMore('fainted')).r[0].href === '#syncope'), 'smart search: the base64 copy the claude.ai artifact serves loads the same model');
+      await bc.close();
+    }
   }
 
   /* ---------- Phone, dark ---------- */
