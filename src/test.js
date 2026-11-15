@@ -268,7 +268,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   noFilm(p, 'every view, the tour included, loads no film from media/ before a tap');
   // Topic tiles: pictures, and loops while Moving tiles is on (on by default)
   await go(p, '#pathways', 900);
-  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length) === 10, 'the ten topic tiles have their pictures');
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length) === 11, 'the eleven topic tiles have their pictures (Scores and rules since 16 Nov 2026)');
   ok(await p.waitForFunction(() => [...document.querySelectorAll('#libcats .tm img')].every(i => i.complete && i.naturalWidth === 640), null, {timeout:5000}).then(() => true, () => false), 'every topic picture loads');
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm video').length) > 0, 'the topic tiles start their loops (Moving tiles is on by default)');
   ok(await p.evaluate(() => document.querySelectorAll('.libsec .lh .tm img').length) >= 8, 'the Pathways section bars carry their topic pictures');
@@ -398,13 +398,13 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 33 && document.querySelectorAll('#cxlist .cxl').length === 18), 'the hub lists 33 calculators and 18 outside links (5 PEMCalc, 13 MDCalc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 55 && document.querySelectorAll('#cxlist .cxl').length === 6), 'the hub lists 55 calculators and 6 outside links (5 PEMCalc, 1 MDCalc: the QTc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
   await p.screenshot({path:out + '/d-calc-hub.png', fullPage:true});
   await p.click('#cxcats [data-cg="scores"]'); await p.waitForTimeout(150);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).sort().join() === 'apef,curb,mcisaac,wells' && [...document.querySelectorAll('#cxlist .cxl')].filter(r => !r.hidden).length === 3), 'the Scores tile shows the asthma action plan zones, CURB-65, Wells and McIsaac, with ABCD2, Alvarado and Centor on MDCalc');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).sort().join() === 'abcd2,alvarado,apef,ciwa,curb,mcisaac,mews,news2,qsofa,sah,wells' && [...document.querySelectorAll('#cxlist .cxl')].filter(r => !r.hidden).length === 0), 'the Scores tile shows its eleven, with ABCD2 and Alvarado now built in and no outside link; was: the Scores tile shows the asthma action plan zones, CURB-65, Wells and McIsaac, with ABCD2, Alvarado and Centor on MDCalc');
   await p.click('#cxcats [data-cg="all"]'); await p.fill('#cxq', 'clexane'); await p.waitForTimeout(150);
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxc')].filter(r => !r.hidden).map(r => r.dataset.id).join() === 'anticoag'), 'finding "clexane" shows the anticoagulant calculator');
   await p.fill('#cxq', 'zzzz'); await p.waitForTimeout(100);
@@ -451,7 +451,66 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => /5–10% dehydrated/.test(document.querySelector('#couts').textContent) && /moderate/.test(document.querySelector('#couts .cx-gap').textContent)), 'two SOAP signs read 5–10%, and the moderate gap is named');
   await go(p, '#calc-obsess', 400);
   for (let i = 0; i < 7; i++) await p.check('#calcbox input[data-k="o"][data-i="' + i + '"]');
-  ok(await p.evaluate(() => document.querySelector('#couts .verdict a').getAttribute('href') === '#acs--obs' && [...document.querySelectorAll('#couts .cx-links a')].some(a => /mdcalc\.com\/calc\/111\//.test(a.href) && a.target === '_blank')), 'all seven Obsess criteria start the protocol, with the TIMI score on MDCalc beside it');
+  ok(await p.evaluate(() => document.querySelector('#couts .verdict a').getAttribute('href') === '#acs--obs' && [...document.querySelectorAll('#couts .cx-links a')].some(a => a.getAttribute('href') === '#calc-timi')), 'all seven Obsess criteria start the protocol, with the guide\'s own TIMI calculator beside it; was: the TIMI score on MDCalc beside it');
+
+  // 16 Nov 2026: the calculators built from their own sources (data24.js), in place of MDCalc links
+  {
+    const r = await p.evaluate(() => {
+      const T = (id, set) => { cState[id] = {}; for (const [k, v] of Object.entries(set)) cPut(id, k, v); const r = CALCS[id].run(calcVals(id).v); const o = Array.isArray(r) ? {outs:r} : (r || {}); return {outs:(o.outs || []).map(x => x[0] + '=' + x[1]).join(' | '), href:o.verdict ? o.verdict.href : ''}; };
+      const ck = (n, t) => Array.from({length:n}, (_, i) => t.includes(i)), w0 = calcMem.wt;
+      const out = {
+        timi: T('timi', {t:ck(7, [0, 1])}), heart: T('heart', {hr0:'1', hr1:'1', hr2:'1', hr3:'1', hr4:'1'}), cthr: T('cthr', {h:ck(5, []), h_none:true, m:ck(2, [0])}),
+        cspine: T('cspine', {h:ck(3, []), h_none:true, l:ck(5, [1]), rot:'able'}), cspx: T('cspine', {h:ck(3, [0])}), nexus: T('nexus', {n:ck(5, [0, 1, 2, 3])}),
+        wellspe: T('wellspe', {w:ck(7, [0, 2])}), ottawa: T('ottawa', {j:'kn', r_kn:ck(P['xray-guide'].nodes.kn.items.length, [0])}),
+        chads: T('chads', {ag:'75', c:ck(6, [1])}), hasbled: T('hasbled', {b:ck(9, [0, 3, 6])}), mews: T('mews', {mw0:'3', mw1:'4', mw2:'3', mw3:'1', mw4:'0'}),
+        abcd2: T('abcd2', {a:ck(3, [0, 1, 2]), cf:'weak', du:'60'}), abcdlo: T('abcd2', {a:ck(3, [0]), cf:'speech', du:'10'}), sah: T('sah', {s:ck(6, []), s_none:true}),
+        perc: T('perc', {g:'low', p:ck(8, [0, 1, 2, 3, 4, 5, 6, 7])}), percnot: T('perc', {g:'not'}), ddimer: T('ddimer', {pr:'low', yrs:'72', dd:'650'}), ddhigh: T('ddimer', {pr:'high', yrs:'72'}),
+        sfsr: T('sfsr', {f:ck(5, [1])}), csrs: T('csrs', {c:ck(7, [1, 3]), dx:'card'}), csvv: T('csrs', {c:ck(7, [0]), dx:'vv'}), alvarado: T('alvarado', {a:ck(8, [2, 3, 6])}),
+        qsofa: T('qsofa', {q:ck(3, [0, 2])}), news2: T('news2', {sc:'1', rr:'22', sp:'95', o2:'Air', sbp:'105', pr:'95', cn:'Alert', tp:'38.5'}),
+        news2s2: T('news2', {sc:'2', rr:'16', sp:'95', o2:'Oxygen', sbp:'120', pr:'80', cn:'Alert', tp:'37'}), news2red: T('news2', {sc:'1', rr:'16', sp:'97', o2:'Air', sbp:'120', pr:'80', cn:'CVPU', tp:'37'}),
+        ciwa: T('ciwa', {cw0:'1', cw1:'1', cw2:'1', cw3:'1', cw4:'1', cw5:'1', cw6:'1', cw7:'1', cw8:'1', cw9:'0'}),
+        burns: T('burns', {who:'adult', rg:ck(8, [1, 3]), wt:'70', hrs:'2', given:'1000', co:'3'}), burnsch: T('burns', {who:'child', tbsa:'8', wt:'20'}), wtage: T('wtage', {yrs:'5'})};
+      calcMem.wt = w0; for (const id of Object.keys(out)) delete cState[id]; delete cState.cspine; delete cState.abcd2; delete cState.perc; delete cState.ddimer; delete cState.csrs; delete cState.news2; delete cState.burns; return out;
+    });
+    const eq = (k, outs, href) => ok(r[k].outs === outs && (href == null || r[k].href === href), k + ': ' + outs + (href ? ' >> ' + href : '') + (r[k].outs === outs && (href == null || r[k].href === href) ? '' : ' (got ' + r[k].outs + ' >> ' + r[k].href + ')'));
+    eq('timi', 'TIMI for UA/NSTEMI=2 of 7', '#acs-cpg--ind');
+    eq('heart', 'HEART score=5 of 10', '#acs-cpg--ind');
+    eq('cthr', 'Canadian CT Head Rule=Medium risk', '#head-injury-cpg--imm');
+    eq('cspine', 'Canadian C-spine Rule=No radiography', '#head-injury-cpg--ccrok');
+    eq('cspx', 'Canadian C-spine Rule=Radiography', '#head-injury-cpg--ccrx');
+    eq('nexus', 'Criteria met=4 of 5', '#head-injury-cpg--nexx');
+    eq('wellspe', 'PE Wells score=4.5', '#vte-cpg--pelik');
+    eq('ottawa', 'Ottawa knee rule=Film needed');
+    eq('chads', 'CHA2DS2-VASc=3 of 9 | Adjusted stroke rate=3.20% a year', '#ed-scores--chad2');
+    eq('hasbled', 'HAS-BLED=3 of 9', '#ed-scores--hbhi');
+    eq('mews', 'MEWS=4 of 14', '#ed-scores--mew3');
+    eq('abcd2', 'ABCD2=7 of 7 | Johnston et al.=High risk', '#ed-scores--abcdhi');
+    eq('abcdlo', 'ABCD2=3 of 7 | Johnston et al.=Low risk', '#ed-scores--abcdlo');
+    eq('sah', 'Ottawa SAH rule=Not required by the rule', '#ed-scores--sahno');
+    eq('perc', 'Criteria met=8 of 8', '#ed-scores--percneg');
+    eq('percnot', 'PERC=Does not apply', '#vte-cpg--pewells');
+    eq('ddimer', 'Cut-off=720 \u00b5g/L | D-dimer 650 \u00b5g/L=Below the cut-off');
+    eq('ddhigh', 'Age-adjusted cut-off=Does not apply', '#vte-cpg--pelik');
+    eq('sfsr', 'San Francisco Syncope Rule=Not low risk', '#ed-scores--sfhi');
+    eq('csrs', 'Canadian Syncope Risk Score=5 | 30-day risk=19.7%', '#ed-scores--csh');
+    eq('csvv', 'Canadian Syncope Risk Score=-3 | 30-day risk=0.4%', '#ed-scores--csvl');
+    eq('alvarado', 'Alvarado score=5 of 10', '#ed-scores--alv5');
+    eq('qsofa', 'qSOFA=2 of 3', '#ed-scores--qs2');
+    eq('news2', 'NEWS2=6 | Parameters that score=5 of 7', '#ed-scores--nw5');
+    eq('news2s2', 'NEWS2=4 | Parameters that score=2 of 7', '#ed-scores--nw0');
+    eq('news2red', 'NEWS2=3 | Parameters that score=1 of 7', '#ed-scores--nw3');
+    eq('ciwa', 'CIWA-Ar=9 of 67', '#ed-scores--cw0');
+    eq('burns', 'TBSA=27% | First 24 hours=5670 ml | Starting rate=306 ml/hr | Next 16 hours=177 ml/hr | Urine output target=35\u201370 ml/hr', '#ed-scores--bfx');
+    eq('burnsch', 'TBSA=8%', '#ed-scores--bmin');
+    eq('wtage', 'Formula then in use=18 kg | Luscombe and Owens=22 kg');
+    ok(await p.evaluate(() => CALC_LINKS.length === 6 && CALC_LINKS.filter(l => l.site === 'MDCalc').map(l => l.t).join() === 'Corrected QT interval (QTc)'), 'MDCalc is linked for the QTc only; the other scores are built in');
+    ok(await p.evaluate(() => P['ed-scores'].refs.length === 16 && CATS.some(c => c.k === 'scores' && c.ids.includes('ed-scores')) && Object.keys(P['ed-scores'].nodes).length > 40), 'the scores entry lists its sixteen sources and has its own topic group');
+    ok(await p.evaluate(() => CONFIRM.some(c => /D-dimer assay the HKL laboratory runs/.test(c) && /\.160|before 160/.test(c) && /CIWA-Ar of 10/.test(c))), 'the D-dimer assay, the AF CPG footnote, the SAH age, burns and alcohol withdrawal are under Still to confirm');
+    await go(p, '#calc-news2', 400);
+    await p.fill('#cf-rr', '26'); await p.fill('#cf-sp', '91'); await p.fill('#cf-sbp', '88'); await p.fill('#cf-pr', '135'); await p.fill('#cf-tp', '39.5'); await p.waitForTimeout(200);
+    ok(await p.evaluate(() => /NEWS2\s*14/.test(document.querySelector('#couts').textContent.replace(/\s+/g, ' ')) && document.querySelector('#couts .verdict a').getAttribute('href') === '#ed-scores--nw7'), 'NEWS2 typed in the page: respiration 26, SpO2 91, systolic 88 and pulse 135 score 3 each and 39.5 °C scores 2: 14, the emergency response step');
+    // (the scores entry itself is not opened here: opening an entry adds it to Recent, and this part of the test checks that the calculators store nothing)
+  }
   await go(p, '#calc-syncope', 400);
   await p.check('#calcbox input[data-k="r"][data-i="1"]');
   ok(await p.evaluate(() => document.querySelector('#couts .verdict').classList.contains('stop') && document.querySelector('#couts .verdict a').getAttribute('href') === '#syncope--adm'), 'one syncope high-risk factor means admission');
@@ -958,7 +1017,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   noFilm(p, 'phone: Day and Night and every view, the tour included, load no film from media/ before a tap');
   await go(p, '#pathways', 600);
-  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 10 && document.querySelectorAll('#libcats .tm video').length > 0), 'on a phone the topic tiles move by default too');
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 11 && document.querySelectorAll('#libcats .tm video').length > 0), 'on a phone the topic tiles move by default too');
   ok(await p.evaluate(() => { const n = document.querySelectorAll('.tm[data-play]').length; return n > 0 && n <= 6; }), 'a phone plays at most six loops at once');
   await p.screenshot({path:out + '/p-pathways-tiles.png'});
   await go(p, '#guidelines', 500);
@@ -1366,8 +1425,10 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await mq.evaluate(() => openSettings()); await mq.waitForTimeout(150);
     ok(await mq.isVisible('#st-asrrow') && /about 35 MB/.test(await mq.textContent('#st-asrrow')), 'voice on this phone: Settings offers it, with its download size');
     await mq.click('#st-asr [data-val="on"]'); await mq.evaluate(() => { closeSettings(false); openPal(); }); await mq.waitForTimeout(150);
+    /* the stand-in recorder stops itself after 150 ms and the stand-in model answers at once, so record every hint shown from the tap on */
+    await mq.evaluate(() => { const h = document.querySelector('#gmhint'); window.__hints = []; new MutationObserver(() => window.__hints.push(h.textContent)).observe(h, {childList:true, characterData:true, subtree:true}); });
     await mq.click('#gmic'); await mq.waitForTimeout(150);
-    ok(/on this phone/.test(await mq.textContent('#gmhint').catch(() => '')), 'voice on this phone: while it listens, it says it is listening on this phone');
+    ok(await mq.evaluate(() => window.__hints.some(t => /^Listening on this phone/.test(t))), 'voice on this phone: while it listens, it says it is listening on this phone');
     await mq.waitForFunction(() => document.querySelector('#gq').value === 'Chest pain', null, {timeout:5000}).catch(() => {});
     const asr1 = await mq.evaluate(() => ({q:document.querySelector('#gq').value, model:window.__asrModel, rate:window.__rate, stopped:!!window.__micStop, mic:window.__mic, res:document.querySelectorAll('#gres a').length}));
     ok(asr1.q === 'Chest pain' && asr1.model === 'automatic-speech-recognition onnx-community/moonshine-tiny-ONNX' && asr1.rate === 16000 && asr1.stopped && asr1.res > 0 && asrReq.length === 1, 'voice on this phone: a tap records, Moonshine hears it on the phone, the words fill the search and the microphone is let go');
@@ -1419,7 +1480,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#home', 400);
   await p.screenshot({path:out + '/t-home.png'});
   await go(p, '#pathways', 500);
-  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 10 && !document.querySelector('.tm video')), 'with reduced motion the tiles stay as still pictures');
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 11 && !document.querySelector('.tm video')), 'with reduced motion the tiles stay as still pictures');
 
   /* ---------- The tour film: it downloads only on a tap, and chapters, the transcript, Resume, the language and
      Day/Night still work. Chrome treats a call to load() as overriding preload="none", so the film goes in only when the
@@ -1650,7 +1711,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#calc-dengue', 500);
     ok(await visible(p) === 'calc', 'offline: a calculator opens');
     await go(p, '#pathways', 700);
-    ok(await until(p, () => { const im = [...document.querySelectorAll('#libcats .tm img')]; return im.length === 10 && im.every(i => i.complete && i.naturalWidth === 640); }, null, 8000), 'offline: the topic tiles show their saved pictures');
+    ok(await until(p, () => { const im = [...document.querySelectorAll('#libcats .tm img')]; return im.length === 11 && im.every(i => i.complete && i.naturalWidth === 640); }, null, 8000), 'offline: the topic tiles show their saved pictures');
     await p.screenshot({path:out + '/p-offline-pathways.png'});
     ok(await playIt(p, 'audio/stop2.mp3'), 'offline: the kept sound plays');
     const rng = await p.evaluate(async () => { const r = await fetch('audio/stop2.mp3', {headers:{Range:'bytes=100-199'}}); return [r.status, r.headers.get('content-range'), (await r.arrayBuffer()).byteLength]; });

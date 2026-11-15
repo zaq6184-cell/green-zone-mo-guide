@@ -64,6 +64,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 13 Nov 2026';
 const V8 = [
+  ['Calculators built in, from their own sources','The calculators that sent you to MDCalc now work inside the guide, and 22 are new: TIMI and HEART (ACS CPG 2026); the Canadian CT Head Rule, the Canadian C-spine Rule and NEXUS (head injury CPG 2015); Wells for PE (VTE CPG 2013); the Ottawa ankle, foot and knee rules; CHA2DS2-VASc and HAS-BLED (AF CPG 2012); MEWS (abdominal trauma CPG 2025); and, each from its own paper or owner and credited to its authors, ABCD2, the Ottawa SAH rule, PERC, the age-adjusted D-dimer, the San Francisco Syncope Rule, the Canadian Syncope Risk Score, Alvarado, qSOFA, NEWS2, CIWA-Ar, burns size and fluids, and a child\'s weight from age. Nothing is copied from MDCalc: its terms forbid it, even with credit. Only six outside links are left: five PEMCalc children\'s tools and the QTc.',[['#calc','Open the calculators'],['#ed-scores','Scores and rules']]],
   ['Read aloud, Malay smart search, and voice on your phone','Read aloud under any step, or above a reference tab, reads it in your phone\'s own voice, in English, or in Malay where the text is Malay. Smart search now understands Malay ("alahan teruk", "luka terbakar", "buku lali terseliuh"), with a second model that downloads only the first time you search in Malay. In the claude.ai copy, Ask shows the guide\'s own line that answers, checked word for word. In the web app, Settings, Voice on this phone makes English voice search run on the phone itself, so the sound never leaves it.',[['#renal-colic','Try Read aloud'],['#search','Search in Malay']]],
   ['Smart search: by meaning, on your phone','Search now understands everyday words: "fainted" finds syncope, "fell and hit head" finds head injury, "platelet low" finds the dengue CPG, "ankle sprain" finds the ankle. A small AI model downloads once (about 8 MB) the first time you search, then works without a signal. It runs on your phone, so nothing you type is sent anywhere, and it only finds the guide\'s own pages. Settings, Smart search turns it off.',[['#search','Try a search']]],
   ['Your phone buzzes where it helps','On an Android phone the guide now gives a light tick when you answer, a pulse when you reach the outcome, a buzz when a number or outcome is copied, two buzzes for a stop sign, and a long buzz when the 20-minute WBCT timer runs out (if you had switched to another app, it buzzes when you come back to the guide). Settings, Vibration turns it off. iPhones do not let a web page vibrate.',[['#tools','Shift tools']]],
@@ -260,6 +261,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'From the calculators built into the guide on 16 Nov 2026 (CALC-RESEARCH.md). Still to confirm: (1) which D-dimer assay the HKL laboratory runs: the age-adjusted cut-off (ADJUST-PE) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE; (2) the AF CPG (2012), Table 14 footnote: a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed \u2265200 mmol/L; (3) the Ottawa SAH rule\'s age: 40 or older (JAMA 2013) or over 40 (CMAJ 2017, Figure 1): the guide uses 40 or older; (4) burns: the department\'s own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA, VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses; (5) alcohol withdrawal: the department\'s regimen for a CIWA-Ar of 10 or more, which the guide\'s sources do not give.',
   'The ED extension directory (Nombor Sambungan Jabatan – ED, added 12 Nov 2026) prints no issuer or date. Still to confirm: (1) three numbers are printed for two rooms each: 6699 for Bilik Porter PPK and Pejabat Rekod Kecemasan, 6590 for the MOIC (Bilik Pegawai Perubatan (YM)) and Bilik PPK (YM), and 5346 for Bilik Ketua Jururawat and Pejabat Pengurusan (Penyelia/Matron): shared lines, or slips? (2) Who keeps the list, and its date.',
   'The ED dosing and dilution guide (3rd edition, January 2026; added 12 Nov 2026) is shown as printed. Still to confirm with its authors: (1) midazolam, page 126: the high-dose Midafentanyl syringe prints "60 mg midazolam + 600 mg fentanyl to 60 ml", while the same page prints 300 mcg fentanyl in 30 ml and a final 10 mcg/ml of fentanyl (the general ICU\'s own dilution guide, 5th edition, April 2026, p12, also dilutes fentanyl to a final 10 mcg/ml); (2) the guide\'s own high alert badge and the hospital\'s 2026 list differ (dextrose 20%, diazepam and phenobarbital carry the badge but are not on the list; potassium dihydrogen phosphate and sodium bicarbonate 8.4% are on the list without the badge).',
   'From the HKL doctors starter pack (added 12 Nov 2026). Still to confirm: (1) medicines on one outpatient prescription: eight (Director\'s memo, 27 May 2019) or five (MOH quick guide 2020, p21; the hospital\'s Good Prescribing Practice slides)? (2) the death certificate duplicate: within 72 hours of discharge (the Medical Records video, Oct 2022) or within 24 hours (the form\'s own header)? (3) abbreviations: the pharmacy\'s accepted list and the MOH guide accept PCM and EES; the 2025 Good Prescribing Practice rules say write paracetamol, not PCM; (4) the GXM video (2023) asks for at least 5 ml in an adult and a printed label on the back of the form; the March 2026 transfusion memo in the guide says EDTA 3 to 4 ml and handwritten labels only.',
@@ -861,6 +863,7 @@ const CATS = [
   {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis','sore-throat-cpg']},
   {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','t2dm-cpg','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','snakebite-moh','pain','cancer-pain-cpg']},
   {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['xray-guide','hip-fracture-cpg','avulsed-tooth-cpg']},
+  {k:'scores', t:'Scores and rules', s:'Scores', ic:'scale', c:'c-flow', j:'t-sapphire', ids:['ed-scores']},
   {k:'flow', t:'Green Zone flow and referrals', s:'Flow and referrals', ic:'route', c:'c-flow', j:'t-emerald', ids:FLOW_IDS},
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
 ];
@@ -2240,19 +2243,21 @@ function renderDcheck(){
 const CALC_GROUPS = [
   {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'The one-screen assessment, triage vital signs, fluids, the test result, urine output, the shock index and adjusted weight'},
   {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin, asthma prednisolone, kidney function with drug doses, and the rabies vaccine and RIG'},
-  {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65, Wells, the asthma action plan zones and the McIsaac score'},
-  {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain, syncope, SVT and blood pressure'},
+  {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65, Wells, McIsaac and the asthma action plan zones; ABCD2, the Ottawa SAH rule, Alvarado, qSOFA, NEWS2, MEWS and CIWA-Ar'},
+  {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain (Obsess, TIMI, HEART), PE (Wells, PERC, age-adjusted D-dimer), syncope, SVT, blood pressure and AF (CHA2DS2-VASc, HAS-BLED)'},
   {k:'calm', t:'Pain and calm', j:'t-plum', ic:'feather', d:'Pain scales, BARS and RASS, and the cancer pain rescue dose'},
-  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria and the GCS, with the neck and limb rules'},
+  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria, the GCS and the Canadian CT Head Rule; the neck (Canadian C-spine, NEXUS); the Ottawa ankle, foot and knee rules; burns'},
   {k:'tox', t:'Poisoning and allergy', j:'t-obsidian', ic:'flask', d:'Paracetamol overdose and anaphylaxis'},
-  {k:'kids', t:'Kids', j:'t-champagne', ic:'kid', d:'Child doses and the dehydration check'}
+  {k:'kids', t:'Kids', j:'t-champagne', ic:'kid', d:'Child doses, the dehydration check and weight from age'}
 ];
 const CALC_G = Object.fromEntries(CALC_GROUPS.map(g => [g.k, g]));
 /* Appendix 3 rows kept in the CKD CPG entry's Doses tab: name, usual dose, the three GFR columns and the note */
 const ckdRows = () => P['ckd-cpg'].notes.find(t => t.l === 'Doses').notes.filter(n => n.table).flatMap(n => n.table.rows.map(r => ({grp:n.h, name:r[0] + (r[0] === 'Acyclovir' ? ' (' + (/zoster/.test(r[1]) ? 'herpes zoster' : 'herpes simplex') + ')' : ''), dose:r[1], mild:r[2], mod:r[3], sev:r[4], note:r[5] || ''})));
 /* Outside tools, as links only: nothing from either site is copied into the guide.
-   PEMCalc (pemcalc.com, Dr Kiran Nesarajah): children's tools our sources do not cover.
-   MDCalc (mdcalc.com): emergency scores the ebook names but does not define (TIMI, ABCD2), or does not cover.
+   PEMCalc (pemcalc.com, Dr Kiran Nesarajah): children's tools our sources do not cover (PRAM needs its author's permission;
+   PECARN waits for its paper; the vital signs table for Fleming's web appendix).
+   MDCalc (mdcalc.com): the QTc only. Since 16 Nov 2026 the other scores are built in from their own sources (data24.js,
+   CALC-RESEARCH.md): MDCalc's terms forbid copying its tools or text, even with credit.
    The MDCalc links come from its own sitemap and were checked to open, 9 Nov 2026. */
 const PEM = 'https://pemcalc.com/', MDC = 'https://www.mdcalc.com/calc/';
 const CALC_LINKS = [
@@ -2261,19 +2266,7 @@ const CALC_LINKS = [
   {g:'kids', site:'PEMCalc', href:PEM + 'vitalsigns.html', t:'Normal vital signs by age', d:'Heart rate, breathing rate, blood pressure and SpO2 ranges for each age group.'},
   {g:'head', site:'PEMCalc', href:PEM + 'pecarn.html', t:'PECARN head injury rules', d:'Which children with a head injury can safely go without a CT.'},
   {g:'head', site:'PEMCalc', href:PEM + 'pgcs.html', t:'Paediatric GCS', d:'The GCS with descriptors for infants and young children.'},
-  {g:'cardio', site:'MDCalc', href:MDC + '111/timi-risk-score-ua-nstemi', t:'TIMI risk score (UA/NSTEMI)', d:'Risk score for unstable angina or NSTEMI. The Obsess protocol needs TIMI under 1, and the ebook does not list its items.'},
-  {g:'cardio', site:'MDCalc', href:MDC + '115/wells-criteria-pulmonary-embolism', t:'Wells criteria for pulmonary embolism', d:'Pre-test probability of a pulmonary embolism.'},
-  {g:'cardio', site:'MDCalc', href:MDC + '347/perc-rule-pulmonary-embolism', t:'PERC rule for pulmonary embolism', d:'When a low-risk patient needs no further testing for a pulmonary embolism.'},
-  {g:'cardio', site:'MDCalc', href:MDC + '48/corrected-qt-interval-qtc', t:'Corrected QT interval (QTc)', d:'The QT interval corrected for the heart rate.'},
-  {g:'scores', site:'MDCalc', href:MDC + '357/abcd2-score-tia', t:'ABCD2 score (TIA)', d:'Stroke risk after a TIA. The ebook\'s TIA route turns on ABCD2 over 3, and it does not list the items.'},
-  {g:'scores', site:'MDCalc', href:MDC + '617/alvarado-score-acute-appendicitis', t:'Alvarado score', d:'Likelihood of appendicitis in a patient with abdominal pain.'},
-  {g:'scores', site:'MDCalc', href:MDC + '104/centor-score-modified-mcisaac-strep-pharyngitis', t:'Centor score (McIsaac)', d:'Likelihood of a streptococcal sore throat.'},
-  {g:'head', site:'MDCalc', href:MDC + '64/glasgow-coma-scale-score-gcs', t:'Glasgow Coma Scale', d:'The GCS that the head injury criteria use.'},
-  {g:'head', site:'MDCalc', href:MDC + '696/canadian-c-spine-rule', t:'Canadian C-spine rule', d:'Which alert, stable trauma patients need imaging of the neck.'},
-  {g:'head', site:'MDCalc', href:MDC + '703/nexus-criteria-c-spine-imaging', t:'NEXUS criteria for C-spine imaging', d:'When the cervical spine can be cleared without imaging.'},
-  {g:'head', site:'MDCalc', href:MDC + '1670/ottawa-ankle-rule', t:'Ottawa ankle rule', d:'Which ankle and midfoot injuries need an X-ray.'},
-  {g:'head', site:'MDCalc', href:MDC + '368/ottawa-knee-rule', t:'Ottawa knee rule', d:'Which knee injuries need an X-ray.'},
-  {g:'doses', site:'MDCalc', href:MDC + '43/creatinine-clearance-cockcroft-gault-equation', t:'Creatinine clearance (Cockcroft-Gault)', d:'The creatinine clearance that the anticoagulant doses here depend on.'}
+  {g:'cardio', site:'MDCalc', href:MDC + '48/corrected-qt-interval-qtc', t:'Corrected QT interval (QTc)', d:'The QT interval corrected for the heart rate.'}
 ];
 /* National CPGs on the Academy of Medicine of Malaysia's list (https://www.acadmed.org.my/index.cfm?&menuid=67), read 9 Nov 2026:
    the 46 that bear on the Green Zone (CPG-RUN-THROUGH.md, tiers A, B and C, and the dengue CPG). Links only. Each opens its PDF
@@ -2850,7 +2843,7 @@ const CALCS = {
       return {outs:[['Obsess criteria met', `${n} of ${all}`, n === all ? 'good' : 'warn', n === all ? 'All met' : 'If they cannot all be met: not suitable for the Obsess protocol']],
         verdict:n === all ? {cls:'next', h:'All met: start the Obsess protocol', p:P.acs.nodes.obs.items.join('; ') + '.', href:'#acs--obs', link:'Open the protocol step'}
           : {cls:'next', h:'Not suitable for the Obsess protocol yet', p:P.acs.nodes.noobs.items.join(' '), href:'#acs--noobs', link:'Open the pathway step'},
-        links:[['#acs-cpg--timi', 'TIMI score (ACS CPG 2026, Appendix IV)'], [MDC + '111/timi-risk-score-ua-nstemi', 'TIMI score on MDCalc (outside site)', true]]};
+        links:[['#calc-timi', 'TIMI risk score calculator (ACS CPG 2026, Appendix IV)'], ['#acs-cpg--timi', 'TIMI score in the ACS CPG']]};
     }},
   syncope:{t:'Syncope: dangerous causes and high-risk factors', g:'cardio', src:'Ebook p57–58', path:'#syncope--risk', kw:'syncope collapse faint blackout high risk admit ecg troponin',
     sub:'Any dangerous cause or high-risk factor means admission; none means observation and discharge.',
@@ -3101,8 +3094,303 @@ const CALCS = {
       const gaps = ['The notes do not say which SOAP band counts as moderate dehydration.'];
       if (v.s_set && v.s_n === 4) gaps.push('They do not cover treatment for a child over 10% dehydrated.');
       return {outs:out, gap:gaps.join(' ')};
+    }},
+  /* ================= 16 Nov 2026: in place of MDCalc links, each read from its own source in the guide's data =================
+     Group A: the ACS CPG 2026 (TIMI, HEART), the head injury CPG 2015 (Canadian CT Head Rule, Canadian C-spine Rule, NEXUS),
+     the VTE CPG 2013 (PE Wells) and Reading X-rays (the Ottawa rules). Group B: the AF CPG 2012 and the abdominal trauma CPG
+     2025. Group C: each score's own paper or owner (P['ed-scores']). Nothing is copied from MDCalc. Nothing is saved. */
+  timi:{t:'TIMI risk score (UA/NSTEMI)', g:'cardio', src:'ACS CPG 2026, Appendix IV', path:'#acs-cpg--timi', kw:'timi unstable angina nstemi chest pain risk acs troponin obsess',
+    sub:'The seven variables of Appendix IV, and where the CPG\'s rule-out takes the total.',
+    fields:[{k:'t', type:'check', label:'Tick each one present at admission', pts:true, items:() => P['acs-cpg'].nodes.timi.items}],
+    note:'ACS CPG (1st edition, 2026), Appendix IV (p164): the sum of 7 variables at admission. Flowchart 6, only after the serial troponins and with the patient pain free: a TIMI for UA/NSTEMI score of 0 or 1 is discharged and 2 or more is the indeterminate group; Appendix IV and Table 7 call 2 or less low risk. The ebook\'s Obsess protocol asks for TIMI under 1.',
+    run(v){
+      if (!v.t_set) return null;
+      const s = v.t_sum, r = bandOut('acs-cpg', 'timi', s, ['good', 'warn'], 'TIMI for UA/NSTEMI', s + ' of 7', {min:-0.5, max:7.5, v:s, bands:[[-0.5, 1.5, 'good'], [1.5, 7.5, 'warn']]});
+      r.verdict.cls = 'next'; r.verdict.p = 'Flowchart 6 scores this only after the serial troponins come back below the 99th percentile with under 50% change in 3 hours, in a patient who is pain free; a raised troponin, a 50% change or ongoing pain takes the patient to admission or the indeterminate group instead.';
+      if (s === 2) r.gap = 'A score of 2 is low risk in Appendix IV and Table 7, but goes to the indeterminate group in Flowchart 6.';
+      r.links = [['#calc-obsess', 'Obsess protocol check (the ebook: TIMI under 1)'], ['#calc-heart', 'HEART score']];
+      return r;
+    }},
+  heart:{t:'HEART score', g:'cardio', src:'ACS CPG 2026, Appendix III', path:'#acs-cpg--heart', kw:'heart score chest pain history ecg age risk factors troponin acs',
+    sub:'Add the five rows of Appendix III, and see where the CPG\'s rule-out takes the total.',
+    fields:() => heartRows().map(([h, bands], i) => ({k:'hr' + i, type:'pick', label:h, opts:bands})),
+    note:'ACS CPG (1st edition, 2026), Appendix III (p163): add the five rows, 0 to 10. Flowchart 6 (with cTn), only after the serial troponins and with the patient pain free: HEART score 3 or less is discharged, over 3 is the indeterminate group. In the Modified Heart Score, hs-cTn is used instead of cardiac troponins.',
+    run(v){
+      const rows = heartRows(), got = rows.map((r, i) => v['hr' + i]);
+      if (got.every(x => !x)) return null;
+      if (got.some(x => !x)) return [['Still to pick', rows.filter((r, i) => !got[i]).map(r => r[0]).join(', '), 'warn', 'The score adds all five rows']];
+      const s = got.reduce((a, x) => a + +x, 0), i = s <= 3 ? 0 : 1, n = P['acs-cpg'].nodes.heart, o = n.opts[i];
+      return {outs:[['HEART score', s + ' of 10', i ? 'warn' : 'good', o[0], {min:-0.5, max:10.5, v:s, bands:[[-0.5, 3.5, 'good'], [3.5, 10.5, 'warn']]}]],
+        verdict:{cls:'next', h:nodeHead(P['acs-cpg'].nodes[o[1]]), p:'Flowchart 6 scores this only after the serial troponins come back below the 99th percentile with under 50% change in 3 hours, in a patient who is pain free; a raised troponin, a 50% change or ongoing pain takes the patient to admission or the indeterminate group instead.', href:'#acs-cpg--' + o[1], link:'Open the step'},
+        gap:'The CPG does not define the History or ECG grades, and exactly 3 risk factors is in no row of Appendix III.', links:[['#calc-timi', 'TIMI risk score']]};
+    }},
+  cthr:{t:'Canadian CT Head Rule', g:'head', src:'Head injury CPG 2015, p26', path:'#head-injury-cpg--cthr', kw:'canadian ct head rule cchr minor head injury ct brain skull fracture vomiting amnesia dangerous mechanism',
+    sub:'The rule\'s high- and medium-risk factors for a minor head injury, as the CPG prints them.',
+    fields:[{k:'h', type:'check', label:'A. High risk (for neurological intervention)', stop:true, none:true, items:() => P['head-injury-cpg'].nodes.cthr.items},
+      {k:'m', type:'check', label:'B. Medium risk (for brain injury on CT)', none:true, items:() => P['head-injury-cpg'].nodes.cthrm.items}],
+    note:'Head injury CPG 2015, p26: CT Head Rule is only applicable for patients with minor head injuries: witnessed loss of consciousness, definite amnesia or witnessed disorientation in a patient with a GCS score of 13 - 15. The CPG\'s own decision on a head CT, and how soon, is Algorithm 3.',
+    run(v){
+      if (!v.h_n && !v.h_none) return null;
+      const key = v.h_n ? 'cthrhi' : (!v.m_n && !v.m_none) ? '' : v.m_n ? 'cthrmid' : 'cthrlo';
+      if (!key) return [['High risk', 'None', 'good', 'Now the medium-risk factors']];
+      const e = P['head-injury-cpg'].nodes[key];
+      return {outs:[['Canadian CT Head Rule', key === 'cthrhi' ? 'High risk' : key === 'cthrmid' ? 'Medium risk' : 'Neither', key === 'cthrhi' ? 'bad' : key === 'cthrmid' ? 'warn' : 'good', e.title]],
+        verdict:{cls:key === 'cthrlo' ? 'ok' : key === 'cthrhi' ? 'stop' : 'next', h:e.title, p:e.items[1], href:'#head-injury-cpg--imm', link:'Head CT: Algorithm 3'}, gap:e.gap, links:[['#calc-gcs', 'Glasgow Coma Scale'], ['#calc-head', 'The ebook\'s mild head injury check']]};
+    }},
+  cspine:{t:'Canadian C-spine Rule', g:'head', src:'Head injury CPG 2015, Appendix 6', path:'#head-injury-cpg--ccr1', kw:'canadian c-spine rule ccr cervical spine neck injury x-ray radiography trauma',
+    sub:'Whether an alert, stable trauma patient needs a neck film, step by step as Appendix 6 prints it.',
+    fields:[{k:'h', type:'check', label:'Any high risk factor which mandates radiography?', stop:true, none:true, items:() => P['head-injury-cpg'].nodes.ccr1.items},
+      {k:'l', type:'check', label:'Any low risk factor which allows safe assessment of range of motion?', none:true, items:() => P['head-injury-cpg'].nodes.ccr2.items},
+      {k:'rot', type:'seg', label:'Able to actively rotate neck? 45° left and right', nodef:true, opts:[['able', 'Able'], ['unable', 'Unable']]}],
+    note:'Head injury CPG 2015, Appendix 6 (p55): for alert (GCS=15) and stable trauma patients where cervical spine injury is concern. Any high risk factor: radiography. No low risk factor: radiography. A low risk factor: assess the range of motion; unable to rotate 45° left and right: radiography.',
+    run(v){
+      const N = P['head-injury-cpg'].nodes, end = (k, why) => ({outs:[['Canadian C-spine Rule', k === 'ccrok' ? 'No radiography' : 'Radiography', k === 'ccrok' ? 'good' : 'bad', why]], verdict:{cls:k === 'ccrok' ? 'ok' : 'stop', h:N[k].title, href:'#head-injury-cpg--' + k, link:'Open the step'}, gap:N[k].gap, links:[['#calc-nexus', 'NEXUS low-risk criteria']]});
+      if (!v.h_n && !v.h_none) return null;
+      if (v.h_n) return end('ccrx', 'A high risk factor mandates radiography');
+      if (!v.l_n && !v.l_none) return [['High risk factors', 'None', 'good', 'Now the low risk factors']];
+      if (!v.l_n) return end('ccrx', 'No low risk factor allows a safe range of motion assessment');
+      if (!v.rot) return [['Range of motion', 'Safe to assess', 'good', 'Ask the patient to rotate the neck 45° left and right']];
+      return v.rot === 'able' ? end('ccrok', 'Able to rotate 45° left and right') : end('ccrx', 'Unable to rotate 45° left and right');
+    }},
+  nexus:{t:'NEXUS low-risk criteria', g:'head', src:'Head injury CPG 2015, Appendix 7', path:'#head-injury-cpg--nexus', kw:'nexus cervical spine neck x-ray radiography low risk criteria trauma intoxication',
+    sub:'Cervical-spine radiography is indicated unless the patient meets all five.',
+    fields:[{k:'n', type:'check', label:'Tick each criterion the patient meets', items:() => P['head-injury-cpg'].nodes.nexus.items}],
+    note:'Head injury CPG 2015, Appendix 7 (p56), from Hoffman and colleagues: cervical-spine radiography is indicated for patients with trauma unless they meet all five criteria. The step gives each definition as printed.',
+    run(v){
+      if (!v.n_set) return null;
+      const all = v.n_n === 5, k = all ? 'nexok' : 'nexx', e = P['head-injury-cpg'].nodes[k];
+      return {outs:[['Criteria met', v.n_n + ' of 5', all ? 'good' : 'bad', all ? 'All five: low probability of cervical injury' : 'Not all five: radiography is indicated']],
+        verdict:{cls:all ? 'ok' : 'stop', h:e.title, href:'#head-injury-cpg--' + k, link:'Open the step'}, gap:e.gap, links:[['#calc-cspine', 'Canadian C-spine Rule']]};
+    }},
+  wellspe:{t:'Wells score (PE)', g:'cardio', src:'VTE CPG 2013, Table 3.1.2', path:'#vte-cpg--pewells', kw:'wells pe pulmonary embolism ctpa lmwh vte',
+    sub:'PE likely or unlikely, and the CPG\'s next step.',
+    fields:[{k:'w', type:'check', label:'Tick each one present', pts:true, items:() => P['vte-cpg'].nodes.pewells.items}],
+    note:'VTE CPG (2013), Table 3.1.2 (p45), in the guide\'s own words: PE likely above 4 points, PE unlikely at 4 points or fewer. Its algorithm (p47): PE likely, cover with LMWH and a CTPA the same day or within 24 hours, then a bilateral CUS if the CTPA is negative; PE unlikely, exclude PE. Tested in non-pregnant patients.',
+    run(v){
+      if (!v.w_set) return null;
+      const s = v.w_sum;
+      return bandOut('vte-cpg', 'pewells', s, ['bad', 'good'], 'PE Wells score', String(s), {min:-0.5, max:12.5, v:s, bands:[[-0.5, 4.25, 'good'], [4.25, 12.5, 'bad']]}, [['#calc-perc', 'PERC rule'], ['#calc-ddimer', 'Age-adjusted D-dimer'], ['#calc-anticoag', 'Anticoagulant doses']]);
+    }},
+  ottawa:{t:'Ottawa ankle, foot and knee rules', g:'head', src:'Reading X-rays (named sources)', path:'#xray-guide--ank', kw:'ottawa ankle rule foot rule knee rule x-ray film sprain fracture malleolus navicular fifth metatarsal patella fibula weight bearing',
+    sub:'Whether the injury needs a film, from the checklists in Reading X-rays.',
+    fields:v => [{k:'j', type:'seg', label:'Which rule?', re:true, opts:[['ank', 'Ankle'], ['ft', 'Midfoot'], ['kn', 'Knee']]},
+      {k:'r_' + (v.j || 'ank'), type:'check', label:'Tick each one present', none:true, items:() => P['xray-guide'].nodes[v.j || 'ank'].items}],
+    note:'From Reading X-rays (11 Nov 2026), in the guide\'s own words from named sources: the NHS Scotland Ottawa Ankle Rules sheet, Wikipedia and WikEM for the ankle and foot; the ACR narrative (2019), Wikipedia, WikEM and NICE NG38 for the knee. The step lists when not to use the knee rule.',
+    run(v){
+      const j = v.j || 'ank', k = 'r_' + j;
+      if (!v[k + '_n'] && !v[k + '_none']) return null;
+      const n = P['xray-guide'].nodes[j], any = v[k + '_n'] > 0, o = n.opts[any ? 0 : 1];
+      return {outs:[[{ank:'Ottawa ankle rule', ft:'Ottawa foot rule', kn:'Ottawa knee rule'}[j], any ? 'Film needed' : 'No film by the rule', any ? 'warn' : 'good', o[0]]],
+        verdict:{cls:any ? 'next' : 'ok', h:any ? 'A film is needed by the rule' : 'No film needed by the rule', href:'#xray-guide--' + o[1], link:'Open the step'}};
+    }},
+  chads:{t:'CHA2DS2-VASc (AF)', g:'cardio', src:'AF CPG 2012, Table 12', path:'#ed-scores--chads', kw:'cha2ds2-vasc chads2 af atrial fibrillation stroke risk anticoagulation oac aspirin',
+    sub:'Stroke risk in non-valvular AF, its yearly stroke rate, and the antithrombotic approach the CPG sets for it.',
+    fields:[{k:'ag', type:'seg', label:'Age', opts:[['0', 'Under 65'], ['65', '65 to 74'], ['75', '75 or over']]},
+      {k:'c', type:'check', label:'Tick each one present', pts:true, items:() => P['ed-scores'].nodes.chads.items.filter(r => !/^Age /.test(r[0]))}],
+    note:'Management of Atrial Fibrillation CPG (2012), Table 12 (p29), in the guide\'s own words: the risk factors with their points (maximum 9), the adjusted stroke rate by score, and the approach to thromboprophylaxis.',
+    run(v){
+      if (!v.c_set && v.ag === '0') return null;
+      const it = P['ed-scores'].nodes.chads.items, ap = v.ag === '75' ? it.find(r => /75 or over/.test(r[0]))[1] : v.ag === '65' ? it.find(r => /65 to 74/.test(r[0]))[1] : 0, s = v.c_sum + ap;
+      const r = bandOut('ed-scores', 'chads', s, ['good', 'warn', 'bad'], 'CHA2DS2-VASc', s + ' of 9', {min:-0.5, max:9.5, v:s, bands:[[-0.5, 0.5, 'good'], [0.5, 1.5, 'warn'], [1.5, 9.5, 'bad']]}, [['#calc-hasbled', 'HAS-BLED']]);
+      r.outs.push(['Adjusted stroke rate', CHADS_RATE[s] + ' a year', 'good', 'Table 12c, by score']);
+      return r;
+    }},
+  hasbled:{t:'HAS-BLED (AF)', g:'cardio', src:'AF CPG 2012, Table 14', path:'#ed-scores--hasbled', kw:'has-bled hasbled bleeding risk anticoagulation af warfarin',
+    sub:'Bleeding risk on antithrombotic therapy in AF.',
+    fields:[{k:'b', type:'check', label:'Tick each one present', pts:true, items:() => P['ed-scores'].nodes.hasbled.items}],
+    note:'AF CPG (2012), Table 14 and its keypoint (p42), in the guide\'s own words: a score of 3 or more indicates high risk, needing some caution and regular review once antithrombotic therapy starts. The step gives the footnote\'s definitions; a symbol is lost in its print (Still to confirm).',
+    run(v){
+      if (!v.b_set) return null;
+      const s = v.b_sum;
+      return bandOut('ed-scores', 'hasbled', s, ['bad', 'good'], 'HAS-BLED', s + ' of 9', {min:-0.5, max:9.5, v:s, bands:[[-0.5, 2.5, 'good'], [2.5, 9.5, 'bad']]}, [['#calc-chads', 'CHA2DS2-VASc']]);
+    }},
+  mews:{t:'MEWS (abdominal trauma)', g:'scores', src:'Abdominal trauma CPG 2025, Table 6', path:'#ed-scores--mews', kw:'mews modified early warning score hdu icu abdominal trauma deterioration',
+    sub:'Pick the band for each sign, as Table 6 prints them.',
+    fields:() => MEWS_ROWS.map(([h, bands], i) => ({k:'mw' + i, type:'pick', label:h, opts:bands.map(([b, sc], j) => [String(j), b, '', sc])})),
+    note:'Management of Abdominal Trauma in Adults CPG (2025), Table 6 (p57): patients with a MEWS of 3 or 4 were transferred to the HDU, and a MEWS of 5 or more was considered criteria for ICU admission. The CPG uses it, with the CRASH score, to pick out severely injured abdominal trauma patients for early ICU/HDW referral.',
+    run(v){ return bandsRun(v, 'mw', MEWS_ROWS, s => s >= 5 ? 2 : s >= 3 ? 1 : 0, 'MEWS', ['good', 'warn', 'bad'], 'ed-scores', 'mews', 14); }},
+  abcd2:{t:'ABCD2 score (TIA)', g:'scores', src:'Johnston et al., Lancet 2007', path:'#ed-scores--abcd2', kw:'abcd2 abcd tia transient ischaemic attack stroke risk',
+    sub:'Early stroke risk after a TIA, and where the ebook\'s TIA route takes it.',
+    fields:[{k:'a', type:'check', label:'Tick each one present', pts:true, items:() => P['ed-scores'].nodes.abcd2.items.filter(r => !/^(Clinical feature|Duration)/.test(r[0]))},
+      {k:'cf', type:'seg', label:'Clinical features', opts:[['none', 'Neither'], ['speech', 'Speech impairment without weakness'], ['weak', 'Unilateral weakness']]},
+      {k:'du', type:'seg', label:'Duration', opts:[['0', 'Under 10 min'], ['10', '10 to 59 min'], ['60', '60 min or longer']]}],
+    note:'Johnston SC et al. Lancet 2007;369:283-92 (abstract), in the guide\'s own words: score 0 to 3 low risk (2-day stroke risk 1.0%), 4 to 5 moderate (4.1%), 6 to 7 high (8.1%). The ebook\'s TIA route calls over 3 high.',
+    run(v){
+      if (!v.a_set && v.cf === 'none' && v.du === '0') return null;
+      const it = P['ed-scores'].nodes.abcd2.items, pt = re => it.find(r => re.test(r[0]))[1];
+      const s = v.a_sum + (v.cf === 'weak' ? pt(/unilateral weakness/) : v.cf === 'speech' ? pt(/speech impairment/) : 0) + (v.du === '60' ? pt(/60 min or longer/) : v.du === '10' ? pt(/10 to 59 min/) : 0);
+      const r = bandOut('ed-scores', 'abcd2', s, ['good', 'bad'], 'ABCD2', s + ' of 7', {min:-0.5, max:7.5, v:s, bands:[[-0.5, 3.5, 'good'], [3.5, 5.5, 'warn'], [5.5, 7.5, 'bad']]}, [['#stroke-tia', 'Ebook: stroke and TIA']]);
+      r.outs.push(['Johnston et al.', s <= 3 ? 'Low risk' : s <= 5 ? 'Moderate risk' : 'High risk', s <= 3 ? 'good' : s <= 5 ? 'warn' : 'bad', '2-day stroke risk ' + (s <= 3 ? '1.0%' : s <= 5 ? '4.1%' : '8.1%')]);
+      return r;
+    }},
+  sah:{t:'Ottawa SAH rule', g:'scores', src:'Perry et al., JAMA 2013; CMAJ 2017', path:'#ed-scores--sah', kw:'ottawa sah subarachnoid haemorrhage hemorrhage headache thunderclap neck stiffness',
+    sub:'Whether an alert adult with a sudden headache needs investigation for subarachnoid haemorrhage.',
+    fields:[{k:'s', type:'check', label:'Tick each one present', stop:true, none:true, items:() => P['ed-scores'].nodes.sah.items}],
+    note:'Perry JJ et al., JAMA 2013 and CMAJ 2017, in the guide\'s own words: for alert patients over 15 with a new acute severe nontraumatic headache peaking within 1 hour; not with new neurological deficits, previous aneurysm, SAH or brain tumour, or 3 or more similar headaches over 6 months or more. Any one item: investigate.',
+    run(v){ return anyRun(v, 's', 'ed-scores', 'sah', 'Ottawa SAH rule', ['Investigate for SAH', 'Not required by the rule']); }},
+  perc:{t:'PERC rule (PE)', g:'cardio', src:'Kline et al., J Thromb Haemost 2008', path:'#ed-scores--perc', kw:'perc pulmonary embolism rule out criteria pe d-dimer low risk',
+    sub:'For a patient you already think is low risk for PE: all eight criteria, or not.',
+    fields:[{k:'g', type:'seg', label:'Your gestalt: pretest probability of PE', nodef:true, opts:[['low', 'Low, under 15%'], ['not', 'Not low']]},
+      {k:'p', type:'check', label:'Tick each criterion the patient meets', items:() => P['ed-scores'].nodes.perc.items}],
+    note:'Kline JA et al. J Thromb Haemost 2008 (abstract), in the guide\'s own words: with a low suspicion (gestalt under 15%) and all eight criteria, 1.0% had VTE or died within 45 days in a study in 13 emergency departments. PERC is not in the VTE CPG, whose route is the PE Wells score.',
+    run(v){
+      if (!v.g) return v.p_set ? [['Gestalt', 'Still to choose', 'warn', 'PERC applies only with a low suspicion']] : null;
+      if (v.g === 'not') return {outs:[['PERC', 'Does not apply', 'warn', 'Only for a low suspicion, under 15%']], verdict:{cls:'next', h:'Suspicion not low: use the VTE CPG\'s PE Wells score', href:'#vte-cpg--pewells', link:'PE Wells score'}, links:[['#calc-wellspe', 'Wells score (PE)']]};
+      if (!v.p_set) return null;
+      const neg = v.p_n === 8, k = neg ? 'percneg' : 'percpos', e = P['ed-scores'].nodes[k];
+      return {outs:[['Criteria met', v.p_n + ' of 8', neg ? 'good' : 'warn', neg ? 'PERC negative' : 'PERC positive']], verdict:{cls:neg ? 'ok' : 'next', h:e.title, p:e.items[0], href:'#ed-scores--' + k, link:'Open the step'}, gap:e.gap, links:[['#calc-wellspe', 'Wells score (PE)']]};
+    }},
+  ddimer:{t:'Age-adjusted D-dimer', g:'cardio', src:'Righini et al., JAMA 2014', path:'#ed-scores--ddimer', kw:'d-dimer ddimer age adjusted cut-off cutoff pe pulmonary embolism adjust-pe elderly',
+    sub:'The D-dimer cut-off for age, for a non-high clinical probability only.',
+    fields:[{k:'pr', type:'seg', label:'Clinical probability', nodef:true, opts:[['low', 'Non-high or unlikely'], ['high', 'High or likely']]}, ['yrs', 'Age', 'years'], ['dd', 'D-dimer result, if you have it', '\u00b5g/L']],
+    note:'Righini M et al. JAMA 2014 (ADJUST-PE, abstract), in the guide\'s own words: from age 50 the cut-off is age \u00d7 10 \u00b5g/L, in place of 500 \u00b5g/L, for a non-high or unlikely clinical probability, with a highly sensitive D-dimer assay. The VTE CPG warns that the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE (p46).',
+    run(v){
+      if (!v.pr) return v.yrs ? [['Clinical probability', 'Still to choose', 'warn', 'The age-adjusted cut-off is for a non-high or unlikely probability only']] : null;
+      if (v.pr === 'high') return {outs:[['Age-adjusted cut-off', 'Does not apply', 'bad', 'ADJUST-PE: non-high or unlikely probability only']], verdict:{cls:'stop', h:'High or likely probability: no D-dimer rule-out', p:'The VTE CPG: PE likely, cover with LMWH and a CTPA the same day (p47).', href:'#vte-cpg--pelik', link:'VTE CPG: PE likely'}};
+      if (!v.yrs) return null;
+      if (v.yrs < 18 || v.yrs > 120) return [['Age', 'Enter 18 to 120 years', 'warn', '']];
+      const cut = v.yrs >= 50 ? v.yrs * 10 : 500, out = [['Cut-off', cut + ' \u00b5g/L', 'good', v.yrs >= 50 ? 'Age \u00d7 10, from age 50' : 'Under 50: the conventional 500 \u00b5g/L']];
+      if (v.dd && v.dd < 50) return {outs:out.concat([['D-dimer ' + v.dd, 'Check the unit', 'warn', 'Enter \u00b5g/L: 500 \u00b5g/L is 0.5 mg/L']])};
+      if (v.dd) out.push(['D-dimer ' + v.dd + ' \u00b5g/L', v.dd < cut ? 'Below the cut-off' : 'At or above the cut-off', v.dd < cut ? 'good' : 'bad', v.dd < cut ? 'ADJUST-PE: 1 of 331 untreated between 500 and the cut-off had an event in 3 months' : 'Not ruled out by D-dimer']);
+      return {outs:out, gap:'Only with a highly sensitive assay: check which D-dimer your laboratory runs (VTE CPG, p46; Still to confirm).', links:[['#calc-wellspe', 'Wells score (PE)'], ['#ed-scores--ddimer', 'The step and its source']]};
+    }},
+  sfsr:{t:'San Francisco Syncope Rule', g:'cardio', src:'Quinn et al., Ann Emerg Med 2004, 2006', path:'#ed-scores--sfsr', kw:'san francisco syncope rule chess faint collapse syncope serious outcome',
+    sub:'Five findings: any one, and the patient is not low risk by the rule.',
+    fields:[{k:'f', type:'check', label:'Tick each one present', stop:true, none:true, items:() => P['ed-scores'].nodes.sfsr.items}],
+    note:'Quinn JV et al., Ann Emerg Med 2004 and 2006 (abstracts), in the guide\'s own words: 98% sensitive and 56% specific for serious outcomes within 30 days in its validation. The ebook\'s syncope pathway is the department\'s route.',
+    run(v){ return anyRun(v, 'f', 'ed-scores', 'sfsr', 'San Francisco Syncope Rule', ['Not low risk', 'Low risk by the rule'], [['#calc-syncope', 'The ebook\'s syncope risk check'], ['#calc-csrs', 'Canadian Syncope Risk Score']]); }},
+  csrs:{t:'Canadian Syncope Risk Score', g:'cardio', src:'Thiruganasambandamoorthy et al., CMAJ 2016', path:'#ed-scores--csrs', kw:'canadian syncope risk score csrs faint collapse syncope troponin qtc vasovagal',
+    sub:'The 30-day risk of a serious adverse event after syncope, from Figure 2.',
+    fields:[{k:'c', type:'check', label:'Tick each one present', pts:true, items:() => P['ed-scores'].nodes.csrs.items.filter(r => !/^Diagnosis in emergency/.test(r[0]))},
+      {k:'dx', type:'seg', label:'Diagnosis in the emergency department', opts:[['none', 'Neither'], ['vv', 'Vasovagal syncope'], ['card', 'Cardiac syncope']]}],
+    note:'Thiruganasambandamoorthy V et al. CMAJ 2016;188:E289-98, Figure 2, in the guide\'s own words: adults with syncope within 24 hours, score \u22123 to 11. The paper derived the score; its later validation was not read here.',
+    run(v){
+      if (!v.c_set && v.dx === 'none') return null;
+      const it = P['ed-scores'].nodes.csrs.items, dp = re => it.find(r => re.test(r[0]))[1];
+      const s = v.c_sum + (v.dx === 'vv' ? dp(/vasovagal syncope$/) : v.dx === 'card' ? dp(/cardiac syncope$/) : 0), risk = CSRS_RISK.find(r => r[0] === s);
+      const r = bandOut('ed-scores', 'csrs', s, ['good', 'good', 'warn', 'bad', 'bad'], 'Canadian Syncope Risk Score', String(s), {min:-3.5, max:11.5, v:s, bands:[[-3.5, 0.5, 'good'], [0.5, 3.5, 'warn'], [3.5, 11.5, 'bad']]}, [['#syncope', 'Ebook: syncope'], ['#calc-sfsr', 'San Francisco Syncope Rule']]);
+      if (risk) r.outs.push(['30-day risk', risk[1] + '%', 'good', risk[2] + ' (Figure 2)']);
+      return r;
+    }},
+  alvarado:{t:'Alvarado score', g:'scores', src:'Alvarado 1986; Ohle et al., BMC Med 2011', path:'#ed-scores--alvarado', kw:'alvarado mantrels appendicitis right iliac fossa rif abdominal pain score',
+    sub:'The 10-point appendicitis score, with the strata of a systematic review.',
+    fields:[{k:'a', type:'check', label:'Tick each one present', pts:true, items:() => P['ed-scores'].nodes.alvarado.items}],
+    note:'Ohle R et al. BMC Med 2011;9:139 (Figure 1, CC BY): Alvarado\'s score (1986), strata 1 to 4 (predicted appendicitis 30%), 5 to 6 (66%) and 7 to 10 (93%). A cut point of 5 rules out well in all groups; the score over-predicts appendicitis in women at every level. The ebook\'s abdominal pain pathway stays the department\'s route.',
+    run(v){
+      if (!v.a_set) return null;
+      return bandOut('ed-scores', 'alvarado', v.a_sum, ['good', 'warn', 'bad'], 'Alvarado score', v.a_sum + ' of 10', {min:-0.5, max:10.5, v:v.a_sum, bands:[[-0.5, 4.5, 'good'], [4.5, 6.5, 'warn'], [6.5, 10.5, 'bad']]}, [['#abdominal-pain', 'Ebook: abdominal pain']]);
+    }},
+  qsofa:{t:'qSOFA (suspected infection)', g:'scores', src:'Sepsis-3, JAMA 2016', path:'#ed-scores--qsofa', kw:'qsofa quick sofa sepsis infection septic poor outcome',
+    sub:'Three bedside criteria for an adult with suspected infection.',
+    fields:[{k:'q', type:'check', label:'Tick each one present', pts:true, items:() => P['ed-scores'].nodes.qsofa.items}],
+    note:'Singer M et al. and Seymour CW et al., JAMA 2016 (abstracts), in the guide\'s own words: at least 2 of the 3 marks an adult with suspected infection as more likely to have poor outcomes typical of sepsis. The abstracts describe a score of 2 or more only.',
+    run(v){
+      if (!v.q_set) return null;
+      return bandOut('ed-scores', 'qsofa', v.q_sum, ['bad', 'warn'], 'qSOFA', v.q_sum + ' of 3', {min:-0.5, max:3.5, v:v.q_sum, bands:[[-0.5, 1.5, 'good'], [1.5, 3.5, 'bad']]});
+    }},
+  news2:{t:'NEWS2 (adults)', g:'scores', src:'Royal College of Physicians, 2017', path:'#ed-scores--news2', kw:'news2 news national early warning score deterioration escalation observations vital signs',
+    sub:'Type the observations: each scores by the RCP\'s Chart 1, and the total sets the response.',
+    fields:[{k:'sc', type:'seg', label:'SpO2 scale', opts:[['1', 'Scale 1'], ['2', 'Scale 2 (hypercapnic, target 88\u201392%)']]},
+      ['rr', 'Respiration rate', 'per minute'], ['sp', 'SpO2', '%'], {k:'o2', type:'seg', label:'Air or oxygen?', opts:[['Air', 'Air'], ['Oxygen', 'Oxygen']]},
+      ['sbp', 'Systolic blood pressure', 'mmHg'], ['pr', 'Pulse', 'per minute'], {k:'cn', type:'seg', label:'Consciousness (ACVPU)', opts:[['Alert', 'Alert'], ['CVPU', 'New confusion, voice, pain or unresponsive']]}, ['tp', 'Temperature', '\u00b0C']],
+    note:'Royal College of Physicians, National Early Warning Score (NEWS) 2, 2017 (Charts 1, 2 and 4), in the guide\'s own layout and words: not the RCP\'s chart. Not for children (under 16) or women who are pregnant. Scale 2 only for confirmed hypercapnic respiratory failure with a prescribed target of 88 to 92%.',
+    run(v){
+      const need = [['rr', 'respiration rate'], ['sp', 'SpO2'], ['sbp', 'systolic pressure'], ['pr', 'pulse'], ['tp', 'temperature']].filter(([k]) => !v[k]);
+      if (need.length === 5) return null;
+      if (need.length) return [['Still to enter', need.map(n => n[1]).join(', '), 'warn', 'NEWS2 adds all seven parameters']];
+      const R = name => NEWS2_ROWS.find(r => r[0].startsWith(name))[1];
+      const parts = [['Respiration', bandScore(R('Respiration'), v.rr)], ['SpO2', bandScore(R(v.sc === '2' ? 'SpO2 Scale 2' : 'SpO2 Scale 1'), v.sp, v.o2)], ['Air or oxygen', bandScore(R('Air or oxygen'), v.o2)],
+        ['Systolic', bandScore(R('Systolic'), v.sbp)], ['Pulse', bandScore(R('Pulse'), v.pr)], ['Consciousness', bandScore(R('Consciousness'), v.cn)], ['Temperature', bandScore(R('Temperature'), v.tp)]];
+      const miss = parts.filter(p => p[1] == null);
+      if (miss.length) return [['Between the printed bands', miss.map(p => p[0]).join(', '), 'warn', 'Chart 1 prints whole numbers (temperature to one decimal)']];
+      const s = parts.reduce((a, p) => a + p[1], 0), three = parts.some(p => p[1] === 3), i = s >= 7 ? 3 : s >= 5 ? 2 : three ? 1 : 0, n = P['ed-scores'].nodes.news2, o = n.opts[i], e = P['ed-scores'].nodes[o[1]];
+      return {outs:[['NEWS2', String(s), ['good', 'warn', 'bad', 'bad'][i], o[0], {min:-0.5, max:20.5, v:s, bands:[[-0.5, 4.5, 'good'], [4.5, 6.5, 'warn'], [6.5, 20.5, 'bad']]}], ['Parameters that score', parts.filter(p => p[1]).length + ' of 7', 'good', parts.filter(p => p[1]).map(p => p[0] + ' ' + p[1]).join(', ') || 'None']],
+        verdict:{cls:['ok', 'next', 'stop', 'stop'][i], h:e.title, p:e.items.join(' '), href:'#ed-scores--' + o[1], link:'Open the step'}, gap:e.gap};
+    }},
+  ciwa:{t:'CIWA-Ar (alcohol withdrawal)', g:'scores', src:'Sullivan et al., Br J Addict 1989', path:'#ed-scores--ciwa', kw:'ciwa ciwa-ar alcohol withdrawal tremor sweats agitation hallucinations delirium',
+    sub:'Rate each of the ten items as the scale prints them; maximum 67.',
+    fields:() => CIWA_ROWS.map(([h, how, d], i) => ({k:'cw' + i, type:'pick', label:h + ': ' + how, opts:d.map((t, j) => [String(j), t || 'Between the levels either side', ''])})),
+    note:'The CIWA-Ar (Sullivan et al., 1989), as the scale is printed: it is not copyrighted and may be reproduced freely. Its one cut-off: patients scoring less than 10 do not usually need additional medication for withdrawal. Record the pulse, taken for one minute, and the blood pressure with it.',
+    run(v){
+      const got = CIWA_ROWS.map((r, i) => v['cw' + i]);
+      if (got.every(x => !x)) return null;
+      const s = got.reduce((a, x) => a + (x ? +x : 0), 0), left = got.filter(x => !x).length, i = s < 10 ? 0 : 1, o = P['ed-scores'].nodes.ciwa.opts[i], e = P['ed-scores'].nodes[o[1]];
+      const out = [['CIWA-Ar', s + ' of 67', i ? 'warn' : 'good', o[0], {min:-0.5, max:67.5, v:s, bands:[[-0.5, 9.5, 'good'], [9.5, 67.5, 'warn']]}]];
+      if (left) out.push(['Still to rate', left + ' of 10 items', 'warn', 'The total so far counts only the items rated']);
+      return {outs:out, verdict:left ? null : {cls:i ? 'next' : 'ok', h:e.title, p:e.items[0], href:'#ed-scores--' + o[1], link:'Open the step'}, gap:e.gap};
+    }},
+  burns:{t:'Burns: size and fluids', g:'head', src:'VicBurns; RCH Melbourne', path:'#ed-scores--bsz', kw:'burn burns tbsa rule of nines palm parkland fluid resuscitation hartmann urine output scald luka terbakar melecur',
+    sub:'TBSA by the rule of nines (adults) or your paediatric chart, then the Parkland volume and starting rate.',
+    fields:v => [{k:'who', type:'seg', label:'Patient', re:true, opts:[['adult', 'Adult'], ['child', 'Child under 16']]},
+      ...((v.who || 'adult') === 'adult' ? [{k:'rg', type:'check', label:'Whole regions burnt (rule of nines; not erythema)', pts:true, items:() => RULE_OF_NINES}, ['palms', 'Scattered patches: number of the patient\'s palms', 'palms']]
+        : [['tbsa', 'TBSA from a paediatric chart (Lund and Browder)', '%']]),
+      ['wt', 'Weight', 'kg'], ['hrs', 'Hours since the burn', 'hours'], ['given', 'IV fluid already given', 'ml'],
+      {k:'co', type:'seg', label:'Formula', opts:[['3', '3 ml/kg/%TBSA (RCH)'], ['4', '4 ml/kg/%TBSA (VicBurns: inhalation, electrical or other trauma)']]}],
+    note:'From the Victorian Adult Burns Service (VicBurns: rule of nines, the palm, the fluid thresholds, 3 to 4 ml/kg/%TBSA) and the Royal Children\'s Hospital Melbourne (the modified Parkland steps and the urine output targets), in the guide\'s own words. Count from the time of the burn. Not in the ebook: the department\'s own burns route is under Still to confirm.',
+    run(v){
+      const adult = (v.who || 'adult') === 'adult', tb = adult ? Math.min(100, (v.rg_sum || 0) + (v.palms || 0)) : v.tbsa;
+      if (!tb) return null;
+      if (tb > 100) return [['TBSA', 'Enter up to 100%', 'warn', '']];
+      const lim = adult ? 20 : 10, over = tb > lim, out = [['TBSA', fx(tb) + '%', over ? 'bad' : 'warn', (adult ? 'Adult: fluids over 20%' : 'Child under 16: fluids over 10%') + ' (VicBurns)']];
+      if (!over) return {outs:out, verdict:{cls:'next', h:'Below the fluid threshold: check when to call the burns team', href:'#ed-scores--bmin', link:'Open the step'}};
+      if (!v.wt) return {outs:out.concat([['Weight', 'Enter the weight', 'warn', 'for the Parkland volume']])};
+      const bad = badWt(v.wt, 2, 300); if (bad) return bad;
+      const vol = +v.co * tb * v.wt, half = vol / 2, h = Math.min(v.hrs || 0, 7), first = half - (v.given || 0);
+      out.push(['First 24 hours', Math.round(vol) + ' ml', 'bad', v.co + ' \u00d7 ' + fx(tb) + '% \u00d7 ' + fx(v.wt) + ' kg, from the time of the burn']);
+      out.push(['Starting rate', first > 0 ? Math.round(first / (8 - h)) + ' ml/hr' : 'Already given', first > 0 ? 'bad' : 'warn', first > 0 ? `(${Math.round(half)} \u2212 ${Math.round(v.given || 0)} ml) over the ${8 - h} hours left of the first 8` : 'More than the first-8-hour half is in: titrate by urine output']);
+      out.push(['Next 16 hours', Math.round(half / 16) + ' ml/hr', 'warn', Math.round(half) + ' ml']);
+      out.push(['Urine output target', adult ? fx(0.5 * v.wt) + '\u2013' + fx(v.wt) + ' ml/hr' : fx(v.wt) + ' ml/hr', 'good', adult ? '0.5 to 1 ml/kg/hr (or 30 to 50 ml/hr)' : '1 ml/kg/hr']);
+      return {outs:out, verdict:{cls:'stop', h:'Above the threshold: IV fluids and the burns team', p:'Hartmann\'s solution; titrate the rate by urine output, by 10 to 20% at a time (RCH).', href:'#ed-scores--bfx', link:'Open the step'}, gap:'The formulas set the starting rate; the urine output and fluid status set the rest (RCH).'};
+    }},
+  wtage:{t:'Child: weight from age', g:'kids', src:'Luscombe and Owens, Arch Dis Child 2007', path:'#ed-scores--wtage', kw:'weight estimate estimation age child apls formula resuscitation broselow',
+    sub:'Two formulas for ages 1 to 10, when the child cannot be weighed.',
+    fields:[['yrs', 'Age', 'years']],
+    note:'Luscombe M, Owens B. Arch Dis Child 2007;92:412-5 (abstract): in 17,244 children aged 1 to 10 in a UK emergency department, the formula then in use, 2 \u00d7 (age + 4), underestimated weight by a mean of 18.8%; 3 \u00d7 age + 7 was the most accurate. Weigh the child whenever you can.',
+    run(v){
+      if (!v.yrs) return null;
+      if (v.yrs < 1 || v.yrs > 10) return [['Age', 'Ages 1 to 10 only', 'warn', 'The paper covers 1 to 10 years']];
+      return {outs:[['Formula then in use', fx(2 * (v.yrs + 4)) + ' kg', 'warn', '2 \u00d7 (age + 4): underestimated by a mean of 18.8%'], ['Luscombe and Owens', fx(3 * v.yrs + 7) + ' kg', 'good', '3 \u00d7 age + 7: mean underestimate 2.48%']],
+        gap:'Both formulas come from British children; weigh the child whenever you can.', links:[['#calc-kids', 'Child doses by weight']]};
     }}
 };
+/* ---- 16 Nov 2026: helpers for the scores built from their own sources ---- */
+const nodeHead = n => n ? (n.title || n.q || n.step || '') : '';
+/* A score node's band by its own suggest(), the step it leads to, and the verdict that opens it */
+function bandOut(id, key, s, cls, label, val, sc, links){
+  const n = P[id].nodes[key], i = n.suggest ? n.suggest(s) : 0, o = n.opts[i], e = P[id].nodes[o[1]], c = cls[i];
+  return {outs:[[label, val, c, o[0], sc]], verdict:{cls:{good:'ok', warn:'next', bad:'stop'}[c], h:nodeHead(e), p:e && e.end ? (e.items || [])[0] : '', href:`#${id}--${o[1]}`, link:'Open the step'}, gap:e && e.gap, links};
+}
+/* A rule that fires on any one item: the node's first option when any is ticked, its second for none */
+function anyRun(v, k, id, key, label, words, links){
+  if (!v[k + '_n'] && !v[k + '_none']) return null;
+  const any = v[k + '_n'] > 0, o = P[id].nodes[key].opts[any ? 0 : 1], e = P[id].nodes[o[1]];
+  return {outs:[[label, any ? words[0] : words[1], any ? 'bad' : 'good', o[0]]], verdict:{cls:any ? 'stop' : 'ok', h:e.title, p:(e.items || [])[0], href:`#${id}--${o[1]}`, link:'Open the step'}, gap:e.gap, links};
+}
+/* A table of printed bands (MEWS): one pick per row, the score from the band picked */
+function bandsRun(v, k, rows, band, label, cls, id, key, max){
+  const got = rows.map((r, i) => v[k + i]);
+  if (got.every(x => !x)) return null;
+  if (got.some(x => !x)) return [['Still to pick', rows.filter((r, i) => !got[i]).map(r => r[0]).join(', '), 'warn', 'The score adds every row']];
+  const s = got.reduce((a, x, i) => a + rows[i][1][+x][1], 0), i = band(s), o = P[id].nodes[key].opts[i], e = P[id].nodes[o[1]];
+  return {outs:[[label, s + ' of ' + max, cls[i], o[0]]], verdict:{cls:{good:'ok', warn:'next', bad:'stop'}[cls[i]], h:e.title, p:(e.items || [])[0], href:`#${id}--${o[1]}`, link:'Open the step'}, gap:e.gap};
+}
+/* The HEART rows of the ACS CPG's Appendix III, read from the entry's own lines: [row, [[points, grade], ...]] */
+const heartRows = () => P['acs-cpg'].nodes.heart.info.slice(0, 5).map(l => { const m = l.match(/^([^:(]+)[^:]*: (.*)$/); return [m[1].trim(), m[2].split('; ').map(b => { const x = b.match(/^(.*) (\d)$/); return [x[2], x[1]]; })]; });
+/* The score of a value against printed bands such as '\u22648', '9\u201311', '\u226525', '88\u201392, or \u226593 on air' (NEWS2) */
+function bandScore(bands, x, o2){
+  if (typeof x === 'string' && !/^[\d.]+$/.test(x)){ const b = bands.find(([l]) => l === x); return b ? b[1] : null; }
+  const n = +x, hit = part => {
+    const m = part.match(/^(.*?)(?: on (air|oxygen))?$/), cond = m[1].trim(), on = m[2];
+    if (on && (o2 || 'Air').toLowerCase() !== on) return false;
+    let r;
+    if ((r = cond.match(/^\u2264([\d.]+)$/))) return n <= +r[1];
+    if ((r = cond.match(/^\u2265([\d.]+)$/))) return n >= +r[1];
+    if ((r = cond.match(/^([\d.]+)\u2013([\d.]+)$/))) return n >= +r[1] && n <= +r[2];
+    return false;
+  };
+  const b = bands.find(([l]) => l.split(', or ').some(hit));
+  return b ? b[1] : null;
+}
 /* Every number above must still be in the source text: the test checks each of these phrases against the pathway data */
 const CALC_FACTS = [
   ['paracetamol-overdose', 'Step 1: 200 mg/kg in 500ml D5% over 4 hours, 125 ml/hr'], ['paracetamol-overdose', 'Step 2: 50 mg/kg in 500ml D5% over 8 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 1: 200 mg/kg in 250ml D5% over 4 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 2: 100 mg/kg in 500ml D5% over 16 hours, 31.25 ml/hr'], ['paracetamol-overdose', 'IV NAC 5000mg/25ml per vial'], ['paracetamol-overdose', 'to a ceiling of 110kg'], ['paracetamol-overdose', 'Fluid restriction OR BW < 40kg'],
@@ -3160,7 +3448,50 @@ const CALC_FACTS = [
   ['head-injury-cpg', 'Obeys commands 6; Localising 5; Flexion withdrawal 4; Abnormal flexion 3; Extension 2; None 1'],
   ['head-injury-cpg', 'Mild head injury (MHI): GCS 13 - 15'], ['head-injury-cpg', 'Moderate head injury: GCS 9 - 12'], ['head-injury-cpg', 'Severe head injury: GCS 3 - 8'],
   ['head-injury-cpg', 'GCS <13 on initial management'], ['head-injury-cpg', 'GCS <15 at 2 hours after injury'],
-  ['head-injury-cpg', 'In patients with head injury with GCS of ≤8, intubation is recommended for airway protection']
+  ['head-injury-cpg', 'In patients with head injury with GCS of ≤8, intubation is recommended for airway protection'],
+  /* 16 Nov 2026: the scores built from their own sources (data24.js) */
+  ['acs-cpg', 'Appendix IV (p164): the sum of the presence of 7 variables at admission'],
+  ['acs-cpg', 'HEART score ≤ 3'],
+  ['acs-cpg', 'HEART score > 3'],
+  ['head-injury-cpg', 'GCS score <15 at two hours after injury'],
+  ['head-injury-cpg', 'Amnesia before impact >30 minutes'],
+  ['head-injury-cpg', 'Age >65 years old'],
+  ['head-injury-cpg', 'Able to actively rotate neck? 45° left and right'],
+  ['head-injury-cpg', 'No posterior midline cervical-spine tenderness'],
+  ['vte-cpg', 'PE likely above 4 points; PE unlikely at 4 points or fewer'],
+  ['vte-cpg', '["Heart rate over 100 beats/min",1.5]'],
+  ['vte-cpg', '["Haemoptysis",1]'],
+  ['ed-scores', '["Clinical feature: unilateral weakness",2]'],
+  ['ed-scores', '["Duration 10 to 59 min",1]'],
+  ['ed-scores', 'score 0 to 3 low risk (2-day stroke risk 1.0%), 4 to 5 moderate (4.1%), 6 to 7 high (8.1%)'],
+  ['ed-scores', 'Age 40 years or older'],
+  ['ed-scores', 'a gestalt pretest probability under 15%'],
+  ['ed-scores', 'SaO2 95% or higher'],
+  ['ed-scores', 'cut-off = age × 10 µg/L'],
+  ['ed-scores', 'the conventional cut-off of 500 µg/L'],
+  ['ed-scores', 'Haematocrit under 30%'],
+  ['ed-scores', 'Systolic blood pressure under 90 mm Hg at triage'],
+  ['ed-scores', '["Corrected QT interval > 480 ms",2]'],
+  ['ed-scores', '["Diagnosis in emergency department: vasovagal syncope",-2]'],
+  ['ed-scores', '["Tenderness in right lower quadrant",2]'],
+  ['ed-scores', '["Leucocytosis",2]'],
+  ['ed-scores', '["Respiratory rate 22/min or greater",1]'],
+  ['ed-scores', '["Systolic blood pressure 100 mm Hg or less",1]'],
+  ['ed-scores', 'Respiration rate (per minute): ≤8 scores 3; 9–11 scores 1; 12–20 scores 0; 21–24 scores 2; ≥25 scores 3'],
+  ['ed-scores', 'Temperature (°C): ≤35.0 scores 3; 35.1–36.0 scores 1; 36.1–38.0 scores 0; 38.1–39.0 scores 1; ≥39.1 scores 2'],
+  ['ed-scores', 'Patients with a MEWS of 3 or 4 were transferred to the HDU'],
+  ['ed-scores', 'A MEWS score of ≥5 was considered criteria for ICU admission'],
+  ['ed-scores', '["Age 75 or over",2]'],
+  ['ed-scores', '["Age 65 to 74",1]'],
+  ['ed-scores', 'A score of 3 or more indicates high risk'],
+  ['ed-scores', 'Patients scoring less than 10 do not usually need additional medication for withdrawal'],
+  ['ed-scores', 'maximum possible score 67'],
+  ['ed-scores', 'Right arm 9%'],
+  ['ed-scores', 'begin fluid resuscitation for burns over 20% TBSA in adults, and over 10% TBSA in children under 16'],
+  ['ed-scores', 'RCH modified Parkland: 3 × TBSA% × weight (kg) = ml for the first 24 hours'],
+  ['ed-scores', 'children 1 ml/kg/hr; adults 0.5 to 1 ml/kg/hr'],
+  ['ed-scores', 'weight (kg) = 2 × (age + 4)'],
+  ['ed-scores', 'weight (kg) = 3 × age + 7']
 ];
 const calcFactsMissing = () => CALC_FACTS.filter(([id, s]) => !JSON.stringify(P[id]).includes(s));
 const CALC_SEE = {'ckd-cpg':[['#calc-crcl', 'Kidney function and drug doses']], 'cancer-pain-cpg':[['#calc-copioid', 'Rescue dose and titration'], ['#calc-pain', 'Pain scales'], ['#calc-analgesia', 'Analgesia by weight']], 'sore-throat-cpg':[['#calc-mcisaac', 'McIsaac score'], ['#calc-kids', 'Child doses'], ['#calc-analgesia', 'Analgesia by weight']],
@@ -3173,6 +3504,11 @@ const CALC_SEE = {'ckd-cpg':[['#calc-crcl', 'Kidney function and drug doses']], 
   acs:[['#calc-obsess', 'Obsess protocol check']], syncope:[['#calc-syncope', 'Syncope risk check']], svt:[['#calc-svt', 'SVT drugs by weight']], 'hypertensive-urgency':[['#calc-htn', 'Hypertensive urgency calculator']],
   'paracetamol-overdose':[['#calc-paraod', 'Time since ingestion']], anaphylaxis:[['#calc-anaph', 'Anaphylaxis drugs and fluids']],
   'dengue-cpg':[['#calc-dassess', 'One-screen assessment'], ['#calc-dvitals', 'Triage vital signs'], ['#calc-dfluid', 'Fluids by weight'], ['#calc-drdt', 'Test result'], ['#calc-duo', 'Urine output'], ['#calc-weight', 'Adjusted weight']]};
+/* 16 Nov 2026: links to the calculators built from their own sources */
+Object.entries({'acs-cpg':[['#calc-timi', 'TIMI risk score'], ['#calc-heart', 'HEART score']], 'head-injury-cpg':[['#calc-cthr', 'Canadian CT Head Rule'], ['#calc-cspine', 'Canadian C-spine Rule'], ['#calc-nexus', 'NEXUS criteria']],
+  'vte-cpg':[['#calc-wellspe', 'Wells score (PE)'], ['#calc-perc', 'PERC rule'], ['#calc-ddimer', 'Age-adjusted D-dimer']], 'xray-guide':[['#calc-ottawa', 'Ottawa rules calculator']], 'stroke-tia':[['#calc-abcd2', 'ABCD2 calculator']],
+  syncope:[['#calc-sfsr', 'San Francisco Syncope Rule'], ['#calc-csrs', 'Canadian Syncope Risk Score']], 'abdominal-pain':[['#calc-alvarado', 'Alvarado calculator']], 'abdo-handbook':[['#calc-alvarado', 'Alvarado calculator']],
+  'ed-scores':['abcd2', 'sah', 'perc', 'ddimer', 'sfsr', 'csrs', 'alvarado', 'qsofa', 'news2', 'mews', 'chads', 'hasbled', 'ciwa', 'burns', 'wtage'].map(k => ['#calc-' + k, CALCS[k].t])}).forEach(([id, l]) => { CALC_SEE[id] = [...(CALC_SEE[id] || []), ...l]; });
 /* Add each calculator link once: an entry may already link to it (dengue already links to the shock index) */
 for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; }
 for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
@@ -3221,7 +3557,7 @@ function fieldHTML(id, f){
   if (f.type === 'rate'){ const a = x || [];
     return `<fieldset class="cf-full"><legend>${esc(f.label)}</legend>${f.rows.map((row, r) => `<div class="rate"><span class="rn" id="rn-${r}">${esc(row[0])}</span><div class="ro" role="radiogroup" aria-labelledby="rn-${r}">${[1, 2, 3].map(s => `<button type="button" role="radio" data-k="${f.k}" data-r="${r}" data-s="${s - 1}" aria-checked="${a[r] === s - 1}"><b>${s - 1}</b><span>${esc(row[s] || '')}</span></button>`).join('')}</div></div>`).join('')}</fieldset>`; }
   if (f.type === 'pick'){
-    return `<fieldset class="cf-full"><legend>${esc(f.label)}</legend><div class="pick" role="radiogroup">${optsOf(f).map(([val, t, d]) => `<button type="button" role="radio" data-k="${f.k}" data-pv="${esc(val)}" aria-checked="${x === val}"><b>${esc(val)}</b><span>${esc(t)}${d ? `<small>${esc(d)}</small>` : ''}</span></button>`).join('')}</div></fieldset>`; }
+    return `<fieldset class="cf-full"><legend>${esc(f.label)}</legend><div class="pick" role="radiogroup">${optsOf(f).map(([val, t, d, badge]) => `<button type="button" role="radio" data-k="${f.k}" data-pv="${esc(val)}" aria-checked="${x === val}"><b>${esc(badge != null ? badge : val)}</b><span>${esc(t)}${d ? `<small>${esc(d)}</small>` : ''}</span></button>`).join('')}</div></fieldset>`; }
   return '';
 }
 function renderCalc(){

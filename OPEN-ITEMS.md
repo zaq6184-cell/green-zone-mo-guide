@@ -6,6 +6,13 @@ Still to confirm with the department (the app lists them under Still to confirm 
 
 **The ED extension directory (12 Nov 2026)** (also in the app): the list ("Nombor Sambungan Jabatan – ED") prints no issuer or date. Three numbers are printed for two rooms each: 6699 (Bilik Porter PPK; Pejabat Rekod Kecemasan), 6590 (the MOIC, Bilik Pegawai Perubatan (YM); Bilik PPK (YM)) and 5346 (Bilik Ketua Jururawat; Pejabat Pengurusan (Penyelia/Matron)): shared lines, or slips? Who keeps the list, and its date?
 
+**Calculators built from their own sources (`data24.js`, `CALC-RESEARCH.md`, added 16 Nov 2026)** (also in the app):
+- Which D-dimer assay does the HKL laboratory run? The age-adjusted cut-off (ADJUST-PE, JAMA 2014) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE.
+- The AF CPG (2012), Table 14 footnote (HAS-BLED): a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed "≥200 mmol/L". The guide shows the footnote as printed and says so.
+- The Ottawa SAH rule's age: "40 years or older" (JAMA 2013, abstract) or "> 40 yr" (CMAJ 2017, Figure 1). The guide uses 40 or older.
+- Burns: the department's own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA; VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses. The Lund and Browder chart found (RCH) was too coarse to read every value, so the guide leaves it out.
+- Alcohol withdrawal: the department's regimen for a CIWA-Ar of 10 or more, which the guide's sources do not give.
+
 **From the review of 12 Nov 2026** (also in the app):
 - Obesity in dengue sits in three zones across the sources: morbid obesity to Red (the department's Dengue SOP 2.0 note, `data2.js`), the high-risk line of Appendix 7 to Yellow, and Group B1, Green, in the Quick Reference (p5) and Tables 6 and 8, which the guide follows since 12 Nov 2026. Which does the department use for morbid obesity?
 - A CT brain review: the guide's rules, discharge check, journey and quiz say "an EM Watch or EMACC appointment", while the memo of 10 Oct 2023 asks for EM Watch within 48 hours and EMACC now sees patients from day 4 (memo (01)24). Should EMACC stay in that line?
