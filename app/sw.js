@@ -26,9 +26,9 @@
               (with their sizes) and fetches each one in full; the fetch passes through this worker, which keeps it as above.
               Nothing is fetched ahead without that tap. */
 'use strict';
-const VERSION = 'c02a9e86aa23', PAGE = '75df8f4693ae';
+const VERSION = '54e99d6e37da', PAGE = 'd02c0fb5155a';
 const PRE = {
-  "": "d213ce89ef505b35",
+  "": "4fe9f12e71298316",
   "manifest.webmanifest": "3f4620e73fac5885",
   "img/gz-01-hero.webp": "e0db0e365820090d",
   "img/gz-02-triage.webp": "60e7adac5fc1ea89",

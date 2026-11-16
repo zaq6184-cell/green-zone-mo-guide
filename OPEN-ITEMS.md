@@ -12,6 +12,7 @@ Still to confirm with the department (the app lists them under Still to confirm 
 - The Ottawa SAH rule's age: "40 years or older" (JAMA 2013, abstract) or "> 40 yr" (CMAJ 2017, Figure 1). The guide uses 40 or older.
 - Burns: the department's own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA; VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses. The Lund and Browder chart found (RCH) was too coarse to read every value, so the guide leaves it out.
 - Alcohol withdrawal: the department's regimen for a CIWA-Ar of 10 or more, which the guide's sources do not give.
+- Children's heart and breathing rates (Fleming et al., Lancet 2011, Web Tables 4 and 5, added 16 Nov 2026): the paper gives centiles of healthy children and does not say which centile makes a rate abnormal. Which ranges or centile do the department and its paediatric triage use for a child's heart rate and breathing rate, and should the guide mark one?
 
 **From the review of 12 Nov 2026** (also in the app):
 - Obesity in dengue sits in three zones across the sources: morbid obesity to Red (the department's Dengue SOP 2.0 note, `data2.js`), the high-risk line of Appendix 7 to Yellow, and Group B1, Green, in the Quick Reference (p5) and Tables 6 and 8, which the guide follows since 12 Nov 2026. Which does the department use for morbid obesity?

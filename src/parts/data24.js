@@ -96,11 +96,44 @@ const CSRS_RISK = [[-3, '0.4', 'Very Low'], [-2, '0.7', 'Very Low'], [-1, '1.2',
 const CHADS_RATE = ['0%', '1.30%', '2.20%', '3.20%', '4.00%', '6.70%', '9.80%', '9.60%', '6.70%', '15.20%'];
 const RULE_OF_NINES = [['Head (front 4.5%, back 4.5%)', 9], ['Right arm', 9], ['Left arm', 9], ['Anterior torso', 18], ['Back', 18], ['Right leg', 18], ['Left leg', 18], ['Genitalia', 1]];
 
+/* Children's heart and breathing rates: Fleming S, Thompson M, Stevens R, et al. Lancet 2011;377:1011-8 (PMC3789232),
+   web appendix p12, Web Tables 4 (breathing rate) and 5 (heart rate), read 16 Nov 2026. Written by a script from the appendix's
+   text layer and checked against its page image; not retyped. Each row: [age band, 1st, 10th, 25th centile, median, 75th, 90th,
+   99th centile]. 'Birth' (heart rate only) is the immediate neonatal period. The calculator shows only the band picked. */
+const FLEMING_RR = [['0–3 m', 25, 34, 40, 43, 52, 57, 66],
+  ['3–6 m', 24, 33, 38, 41, 49, 55, 64],
+  ['6–9 m', 23, 31, 36, 39, 47, 52, 61],
+  ['9–12 m', 22, 30, 35, 37, 45, 50, 58],
+  ['12–18 m', 21, 28, 32, 35, 42, 46, 53],
+  ['18–24 m', 19, 25, 29, 31, 36, 40, 46],
+  ['2–3 y', 18, 22, 25, 28, 31, 34, 38],
+  ['3–4 y', 17, 21, 23, 25, 27, 29, 33],
+  ['4–6 y', 17, 20, 21, 23, 25, 27, 29],
+  ['6–8 y', 16, 18, 20, 21, 23, 24, 27],
+  ['8–12 y', 14, 16, 18, 19, 21, 22, 25],
+  ['12–15 y', 12, 15, 16, 18, 19, 21, 23],
+  ['15–18 y', 11, 13, 15, 16, 18, 19, 22]];
+const FLEMING_HR = [['Birth', 90, 107, 116, 127, 138, 148, 164],
+  ['0–3 m', 107, 123, 133, 143, 154, 164, 181],
+  ['3–6 m', 104, 120, 129, 140, 150, 159, 175],
+  ['6–9 m', 98, 114, 123, 134, 143, 152, 168],
+  ['9–12 m', 93, 109, 118, 128, 137, 145, 161],
+  ['12–18 m', 88, 103, 112, 123, 132, 140, 156],
+  ['18–24 m', 82, 98, 106, 116, 126, 135, 149],
+  ['2–3 y', 76, 92, 100, 110, 119, 128, 142],
+  ['3–4 y', 70, 86, 94, 104, 113, 123, 136],
+  ['4–6 y', 65, 81, 89, 98, 108, 117, 131],
+  ['6–8 y', 59, 74, 82, 91, 101, 111, 123],
+  ['8–12 y', 52, 67, 75, 84, 93, 103, 115],
+  ['12–15 y', 47, 62, 69, 78, 87, 96, 108],
+  ['15–18 y', 43, 58, 65, 73, 83, 92, 104]];
+const FLEMING_C = ['1st centile', '10th centile', '25th centile', 'median', '75th centile', '90th centile', '99th centile'];
+
 P['ed-scores'] = {
   title:'Scores and rules from their own sources', grp:'cpg', own:true, isnew:true,
   src:'Named sources, one on each step',
   lead:'The emergency scores the Green Zone uses that its ebook and department documents do not define, each rebuilt from its own source in the guide\'s own words and credited to its authors: the CPGs that print them (atrial fibrillation 2012, abdominal trauma 2025), or the score\'s own paper or owner. Every number was read on the page named on its step (16 Nov 2026). Each has its calculator.',
-  kw:'score scores rule rules calculator mdcalc abcd2 ottawa sah subarachnoid thunderclap perc d-dimer ddimer adjust-pe alvarado mantrels san francisco canadian syncope risk score csrs qsofa news2 mews cha2ds2-vasc chads has-bled hasbled ciwa ciwa-ar rule of nines parkland tbsa apls',
+  kw:'score scores rule rules calculator mdcalc abcd2 ottawa sah subarachnoid thunderclap perc d-dimer ddimer adjust-pe alvarado mantrels san francisco canadian syncope risk score csrs qsofa news2 mews cha2ds2-vasc chads has-bled hasbled ciwa ciwa-ar rule of nines parkland tbsa apls fleming centiles',
   start:'menu',
   nodes:{
     menu:{q:'Which score or rule?', hint:'Each step names its source and page, and gives the score\'s limits. A score supports the doctor\'s judgement; it does not replace the ebook\'s pathway or a department protocol, and where the two differ the step says so.', opts:[
@@ -118,7 +151,8 @@ P['ed-scores'] = {
       ['HAS-BLED (AF CPG 2012)','hasbled'],
       ['CIWA-Ar (alcohol withdrawal)','ciwa'],
       ['Burns: size and fluids (TBSA, Parkland)','bsz'],
-      ['Weight from age, 1 to 10 years','wtage']]},
+      ['Weight from age, 1 to 10 years','wtage'],
+      ['Fleming centiles: heart and breathing rates by age (children)','vitals']]},
 
     /* ABCD2: Johnston SC et al. Lancet 2007;369:283-92 (abstract, PMID 17258668) */
     abcd2:{check:'score', q:'ABCD2 score: tick what applies', hint:'Johnston et al., Lancet 2007 (abstract): a unified score for the early risk of stroke after a TIA, validated in four groups of patients seen in emergency departments and clinics in the USA and UK. Take one clinical feature (unilateral weakness 2, or speech impairment without weakness 1) and one duration (60 min or longer 2, or 10 to 59 min 1). In the abstract: score 0 to 3 low risk (2-day stroke risk 1.0%), 4 to 5 moderate (4.1%), 6 to 7 high (8.1%). The ebook\'s TIA route calls over 3 high.',
@@ -237,7 +271,19 @@ P['ed-scores'] = {
 
     /* Weight from age: Luscombe M, Owens B. Arch Dis Child 2007;92:412-5 (abstract, PMID 17213259) */
     wtage:{end:'neutral', title:'A child\'s weight from age (1 to 10 years)', items:['The formula then in use: weight (kg) = 2 × (age + 4)', 'Luscombe and Owens (one UK emergency department, 2005, 17,244 children aged 1 to 10): that formula underestimated measured weight by a mean of 18.8%; weight (kg) = 3 × age + 7 was the most accurate (mean underestimate 2.48%)', 'Weigh the child whenever you can: both formulas come from British children, and the paper covers ages 1 to 10 only'],
-      links:[['#calc-kids','Child doses by weight']], gap:'Luscombe M, Owens B. Arch Dis Child 2007;92:412-5 (abstract).'}
+      links:[['#calc-kids','Child doses by weight']], gap:'Luscombe M, Owens B. Arch Dis Child 2007;92:412-5 (abstract).'},
+
+    /* Fleming S, et al. Lancet 2011;377:1011-8 (PMC3789232) and its web appendix, Web Tables 4 and 5 (p12) */
+    vitals:{end:'neutral', title:'Fleming centiles: a child\'s heart and breathing rates by age', items:[
+      'Centiles of heart rate and breathing rate in healthy children from birth to 18 years, from a systematic review of 69 studies: heart rate from 59 studies (143,346 children) and breathing rate from 20 (3,881 children)',
+      'The web appendix gives the 1st, 10th, 25th, 50th, 75th, 90th and 99th centiles for 13 age bands from birth to 18 years; heart rate also has a row for birth, the immediate neonatal period. The calculator shows the band you pick and where a rate sits in it',
+      'The paper does not say which centile makes a rate abnormal. It gives several centiles so that guidelines and early warning scores can choose cut-offs for their setting, weighing how far the illness to be detected moves the vital signs against the cost of misclassifying healthy and unwell children',
+      'Use a rate as part of the whole assessment of the child. Heart rate may be higher with fever or anxiety, and a manual count may underestimate it',
+      'Most measurements were in awake children. Heart rates in asleep children tended to be lower, but not significantly (P = 0.06)',
+      'The age bands share their ends (0 to 3 months, 3 to 6 months): the paper does not say which band a child exactly on a boundary falls in',
+      'The paper gives no blood pressure or SpO2'],
+      links:[['#calc-vitals','Check a child\'s heart and breathing rates'], ['#children','Children in the ED']],
+      gap:'Fleming S, Thompson M, Stevens R, et al. Lancet 2011;377:1011-8, and its web appendix (Web Tables 4 and 5, p12). The department\'s own paediatric ranges are not in the guide: see Still to confirm.'}
   },
   refs:['Johnston SC, Rothwell PM, Nguyen-Huynh MN, et al. Validation and refinement of scores to predict very early stroke risk after transient ischaemic attack. Lancet 2007;369:283-92. https://pubmed.ncbi.nlm.nih.gov/17258668/',
     'Perry JJ, Stiell IG, Sivilotti ML, et al. Clinical decision rules to rule out subarachnoid hemorrhage for acute headache. JAMA 2013;310:1248-55. https://pubmed.ncbi.nlm.nih.gov/24065011/',
@@ -254,9 +300,12 @@ P['ed-scores'] = {
     'Sullivan JT, Sykora K, Schneiderman J, Naranjo CA, Sellers EM. Assessment of alcohol withdrawal: the revised Clinical Institute Withdrawal Assessment for Alcohol scale (CIWA-Ar). Br J Addict 1989;84:1353-7. The scale as reproduced at https://web.stanford.edu/~ashford/CIWA2.htm',
     'Victorian Adult Burns Service (Alfred Health), VicBurns: https://www.vicburns.org.au/ (burn assessment, fluid resuscitation, urine output, referrals) and its Rule of Nine poster for adults (last updated 8 May 2012).',
     'The Royal Children\'s Hospital Melbourne. Clinical Practice Guideline: Burns, acute management (last updated April 2026), https://www.rch.org.au/clinicalguide/guideline_index/Burns/, and A Guide to Prescribing Resuscitation Fluids in Major Burns.',
-    'Luscombe M, Owens B. Weight estimation in resuscitation: is the current formula still valid? Arch Dis Child 2007;92:412-5. https://pubmed.ncbi.nlm.nih.gov/17213259/']
+    'Luscombe M, Owens B. Weight estimation in resuscitation: is the current formula still valid? Arch Dis Child 2007;92:412-5. https://pubmed.ncbi.nlm.nih.gov/17213259/',
+    'Fleming S, Thompson M, Stevens R, Heneghan C, Plüddemann A, Maconochie I, Tarassenko L, Mant D. Normal ranges of heart rate and respiratory rate in children from birth to 18 years: a systematic review of observational studies (author manuscript, Europe PMC). Lancet 2011;377:1011-8, and its web appendix (Web Tables 4 and 5). https://pmc.ncbi.nlm.nih.gov/articles/PMC3789232/']
 };
+P['ed-scores'].kinds = {neutral:'What the source says'};
 P['ed-scores'].notesFoot = 'Each score is in the guide\'s own words from the source named on its step, read on 16 Nov 2026, and credited to its authors. Two are quoted because their owners allow it: MEWS (abdominal trauma CPG 2025, MaHTAS) and the CIWA-Ar items (the scale states it is not copyrighted). Nothing is copied from MDCalc or any other calculator site. A score supports judgement; it does not replace the ebook\'s pathway or a department protocol.';
 P['stroke-tia'].see = [...(P['stroke-tia'].see || []), ['#ed-scores--abcd2', 'ABCD2 score (Johnston 2007)']];
 P['syncope'].see = [...(P['syncope'].see || []), ['#ed-scores--sfsr', 'San Francisco Syncope Rule'], ['#ed-scores--csrs', 'Canadian Syncope Risk Score']];
 P['abdominal-pain'].see = [...(P['abdominal-pain'].see || []), ['#ed-scores--alvarado', 'Alvarado score']];
+P['children'].see = [...(P['children'].see || []), ['#ed-scores--vitals', 'Heart and breathing rates by age (Fleming 2011)']];

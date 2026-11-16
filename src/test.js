@@ -398,7 +398,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 55 && document.querySelectorAll('#cxlist .cxl').length === 6), 'the hub lists 55 calculators and 6 outside links (5 PEMCalc, 1 MDCalc: the QTc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 56 && document.querySelectorAll('#cxlist .cxl').length === 6), 'the hub lists 56 calculators and 6 outside links (5 PEMCalc, 1 MDCalc: the QTc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
@@ -469,8 +469,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
         qsofa: T('qsofa', {q:ck(3, [0, 2])}), news2: T('news2', {sc:'1', rr:'22', sp:'95', o2:'Air', sbp:'105', pr:'95', cn:'Alert', tp:'38.5'}),
         news2s2: T('news2', {sc:'2', rr:'16', sp:'95', o2:'Oxygen', sbp:'120', pr:'80', cn:'Alert', tp:'37'}), news2red: T('news2', {sc:'1', rr:'16', sp:'97', o2:'Air', sbp:'120', pr:'80', cn:'CVPU', tp:'37'}),
         ciwa: T('ciwa', {cw0:'1', cw1:'1', cw2:'1', cw3:'1', cw4:'1', cw5:'1', cw6:'1', cw7:'1', cw8:'1', cw9:'0'}),
-        burns: T('burns', {who:'adult', rg:ck(8, [1, 3]), wt:'70', hrs:'2', given:'1000', co:'3'}), burnsch: T('burns', {who:'child', tbsa:'8', wt:'20'}), wtage: T('wtage', {yrs:'5'})};
-      calcMem.wt = w0; for (const id of Object.keys(out)) delete cState[id]; delete cState.cspine; delete cState.abcd2; delete cState.perc; delete cState.ddimer; delete cState.csrs; delete cState.news2; delete cState.burns; return out;
+        burns: T('burns', {who:'adult', rg:ck(8, [1, 3]), wt:'70', hrs:'2', given:'1000', co:'3'}), burnsch: T('burns', {who:'child', tbsa:'8', wt:'20'}), wtage: T('wtage', {yrs:'5'}),
+        vit23: T('vitals', {vband:'2–3 y', vhr:'150', vrr:'30'}), vitat: T('vitals', {vband:'0–3 m', vhr:'143', vrr:'24'}), vitbirth: T('vitals', {vband:'Birth', vhr:'120'}), vit812: T('vitals', {vband:'8–12 y', vhr:'100'})};
+      calcMem.wt = w0; for (const id of Object.keys(out)) delete cState[id]; delete cState.cspine; delete cState.abcd2; delete cState.perc; delete cState.ddimer; delete cState.csrs; delete cState.news2; delete cState.burns; delete cState.vitals; return out;
     });
     const eq = (k, outs, href) => ok(r[k].outs === outs && (href == null || r[k].href === href), k + ': ' + outs + (href ? ' >> ' + href : '') + (r[k].outs === outs && (href == null || r[k].href === href) ? '' : ' (got ' + r[k].outs + ' >> ' + r[k].href + ')'));
     eq('timi', 'TIMI for UA/NSTEMI=2 of 7', '#acs-cpg--ind');
@@ -503,8 +504,24 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     eq('burns', 'TBSA=27% | First 24 hours=5670 ml | Starting rate=306 ml/hr | Next 16 hours=177 ml/hr | Urine output target=35\u201370 ml/hr', '#ed-scores--bfx');
     eq('burnsch', 'TBSA=8%', '#ed-scores--bmin');
     eq('wtage', 'Formula then in use=18 kg | Luscombe and Owens=22 kg');
+    /* Fleming centiles (Web Tables 4 and 5), each case read off the table by hand */
+    eq('vit23', 'Heart rate, healthy children (2–3 y)=Median 110 | Heart rate 150=Above the 99th | Breathing rate, healthy children (2–3 y)=Median 28 | Breathing rate 30=Median to 75th', '#children');
+    eq('vitat', 'Heart rate, healthy children (0–3 m)=Median 143 | Heart rate 143=At the median | Breathing rate, healthy children (0–3 m)=Median 43 | Breathing rate 24=Below the 1st', '#children');
+    eq('vitbirth', 'Heart rate, healthy children (Birth)=Median 127 | Heart rate 120=25th to median | Breathing rate=No row for birth', '#children');
+    eq('vit812', 'Heart rate, healthy children (8–12 y)=Median 84 | Heart rate 100=75th to 90th | Breathing rate, healthy children (8–12 y)=Median 19', '#children');
+    ok(await p.evaluate(() => {
+      const asc = r => r.length === 8 && r.slice(1).every((x, i, a) => Number.isInteger(x) && (i === 0 || x > a[i - 1]));
+      return FLEMING_RR.length === 13 && FLEMING_HR.length === 14 && FLEMING_RR.every(asc) && FLEMING_HR.every(asc)
+        && FLEMING_HR.slice(1).map(r => r[0]).join() === FLEMING_RR.map(r => r[0]).join() && FLEMING_HR[0].join() === 'Birth,90,107,116,127,138,148,164'
+        && FLEMING_RR[12].join() === '15–18 y,11,13,15,16,18,19,22' && FLEMING_HR[13].join() === '15–18 y,43,58,65,73,83,92,104';
+    }), 'Fleming: 13 breathing-rate and 14 heart-rate bands, seven rising centiles in each, birth for heart rate only, the first and last rows as printed');
+    ok(await p.evaluate(() => FLEMING_HR.every(r => { cState.vitals = {}; cPut('vitals', 'vband', r[0]); cPut('vitals', 'vhr', String(r[7] + 1)); cPut('vitals', 'vrr', '30'); const o = CALCS.vitals.run(calcVals('vitals').v); delete cState.vitals;
+      return o.verdict.cls === 'next' && !/\bnormal\b/i.test(JSON.stringify(o.outs) + o.verdict.h + o.verdict.p) && o.outs[1][1] === 'Above the 99th'; })),
+      'Fleming: in every band the verdict is neutral, the word normal never appears, and a rate one above the 99th centile says so');
+    ok(await p.evaluate(() => { const l = CALC_LINKS.find(x => /vitalsigns/.test(x.href)); return l && l.t === 'Blood pressure and SpO2 by age' && P['ed-scores'].nodes.vitals && P['ed-scores'].nodes.menu.opts.some(o => o[1] === 'vitals') && (P.children.see || []).some(s => s[0] === '#ed-scores--vitals'); }),
+      'PEMCalc stays linked for blood pressure and SpO2 only; the scores entry has the Fleming step, and Children in the ED links to it');
     ok(await p.evaluate(() => CALC_LINKS.length === 6 && CALC_LINKS.filter(l => l.site === 'MDCalc').map(l => l.t).join() === 'Corrected QT interval (QTc)'), 'MDCalc is linked for the QTc only; the other scores are built in');
-    ok(await p.evaluate(() => P['ed-scores'].refs.length === 16 && CATS.some(c => c.k === 'scores' && c.ids.includes('ed-scores')) && Object.keys(P['ed-scores'].nodes).length > 40), 'the scores entry lists its sixteen sources and has its own topic group');
+    ok(await p.evaluate(() => P['ed-scores'].refs.length === 17 && CATS.some(c => c.k === 'scores' && c.ids.includes('ed-scores')) && Object.keys(P['ed-scores'].nodes).length > 40), 'the scores entry lists its seventeen sources and has its own topic group');
     ok(await p.evaluate(() => CONFIRM.some(c => /D-dimer assay the HKL laboratory runs/.test(c) && /\.160|before 160/.test(c) && /CIWA-Ar of 10/.test(c))), 'the D-dimer assay, the AF CPG footnote, the SAH age, burns and alcohol withdrawal are under Still to confirm');
     await go(p, '#calc-news2', 400);
     await p.fill('#cf-rr', '26'); await p.fill('#cf-sp', '91'); await p.fill('#cf-sbp', '88'); await p.fill('#cf-pr', '135'); await p.fill('#cf-tp', '39.5'); await p.waitForTimeout(200);
