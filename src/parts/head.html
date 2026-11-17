@@ -2089,6 +2089,116 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .dc-list .pts{align-self:center}
 .num-card .src{font-size:.8rem;opacity:1}
 
+/* ================= The 17 Nov 2026 round: the drug finder card, bedside reminders, pins, the thumb bar and the folded library ================= */
+/* The drug finder card, above the search results: it points to where the guide names a drug, and quotes no dose */
+.drugc{margin:4px 0 12px;padding:14px;border-radius:var(--r-md);background:var(--pearl);box-shadow:var(--pearl-sh)}
+.dc-h{display:flex;align-items:center;gap:12px}
+.dc-h .ic{width:40px;height:40px;border-radius:13px}
+.dc-ht{flex:1;min-width:0;display:grid;gap:2px}
+.dc-ht b{font:850 1.08rem/1.2 var(--display)}
+.dc-ht small{font:600 .8rem/1.35 var(--body);color:var(--muted)}
+.drugc .tag{background:var(--surface-3);color:var(--muted);letter-spacing:.06em;white-space:nowrap}
+.drugc .tag.hi{background:var(--admit-soft);color:var(--admit)}
+.dc-rows{display:grid;gap:6px;margin-top:12px}
+.dc-r{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:4px 10px;min-height:44px;padding:8px 12px;border-radius:12px;background:var(--surface-2);color:var(--ink);text-decoration:none;box-shadow:inset 0 0 0 1px var(--line)}
+.dc-r:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.dc-r .k{font:800 .68rem/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dc-r .v{font:700 .86rem/1.3 var(--body);min-width:0}
+.dc-r.more .v{grid-column:1/-1;color:var(--accent)}
+.dc-lasa{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;padding:8px 12px;border-radius:12px;background:var(--observe-soft);color:var(--ink);font:600 .82rem/1.4 var(--body)}
+.dc-lasa svg{flex:none;width:17px;height:17px;color:var(--observe);margin-top:1px}
+.dc-s{margin-top:12px}
+.dc-n{margin:0 0 6px;font:800 .74rem/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dc-s ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.dc-s li a{display:grid;gap:1px;padding:7px 10px;border-radius:10px;color:var(--ink);text-decoration:none}
+.dc-s li a:hover{background:var(--accent-soft)}
+.dc-s li b{font:800 .84rem/1.25 var(--body)}
+.dc-s li span{font:500 .82rem/1.35 var(--body);color:var(--muted)}
+.dc-s summary{display:flex;align-items:center;min-height:40px;padding:4px 10px;cursor:pointer;font:800 .84rem var(--body);color:var(--accent)}
+@media (max-width:560px){.dc-r{grid-template-columns:minmax(0,1fr) auto}.dc-r .k{grid-column:1/-1}}
+
+/* Bedside reminders: the button under a timed step, and the tray at the foot of the screen */
+.rmd-b{display:grid;gap:6px;margin:14px 0 4px}
+.rmd-b button{justify-self:start;gap:8px;min-height:48px;border-radius:16px}
+.rmd-b button svg{width:19px;height:19px}
+.rmd-b small{font:600 .8rem/1.4 var(--body);color:var(--muted)}
+.rmd{position:fixed;z-index:52;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100vw - 32px));display:flex;flex-direction:column-reverse;gap:8px}
+.rmd-p{width:100%;justify-content:flex-start;gap:10px;min-height:56px;padding:8px 14px;border:0;border-radius:20px;background:var(--obsidian-2);color:#fff;box-shadow:var(--jewel-rim),var(--sh-3);text-align:left}
+.rmd-p:hover{border:0;filter:brightness(1.1)}
+.rmd-p svg{width:20px;height:20px;color:var(--mint);flex:none}
+.rmd-pt{flex:1;min-width:0;display:grid;gap:1px}
+.rmd-pt b{font:800 .86rem/1.25 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rmd-pt small{font:600 .74rem/1.2 var(--body);opacity:.8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rmd output{font:700 1rem var(--mono);font-variant-numeric:tabular-nums}
+.rmd-n{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:12px;background:var(--mint);color:var(--emerald-3);font:800 .74rem var(--mono)}
+.rmd.is-due .rmd-p{background:var(--b-observe);color:var(--on-observe)}
+.rmd.is-due .rmd-p svg{color:var(--on-observe)}
+@media (prefers-reduced-motion:no-preference){.rmd.is-due .rmd-p{animation:rmdpulse 1.6s var(--ease) 3}@keyframes rmdpulse{50%{transform:scale(1.03)}}}
+.rmd-l{max-height:min(56vh,440px);overflow:auto;padding:10px;border-radius:20px;background:var(--pearl);box-shadow:var(--pearl-sh),var(--sh-3)}
+.rmd-l ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rmd-l li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 10px;padding:10px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.rmd-l li.due{background:var(--observe-soft);box-shadow:inset 0 0 0 1.5px var(--b-observe)}
+.rmd-t{display:grid;gap:1px;min-width:0}
+.rmd-t b{font:800 .86rem/1.3 var(--body)}
+.rmd-t small{font:600 .76rem/1.3 var(--body);color:var(--muted)}
+.rmd-a{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.rmd-a .ib{margin-left:auto;width:40px;height:40px;min-height:40px}
+.rmd-note{margin:8px 4px 2px;font:600 .74rem/1.4 var(--body);color:var(--muted)}
+.pt-mode .rmd{display:none!important}
+@media (max-width:760px){
+  .rmd{left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));width:auto;bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  html.rmd-on .main{padding-bottom:calc(166px + env(safe-area-inset-bottom,0px))}
+  html.rmd-on:has(#ansbar:not([hidden])) .rmd{bottom:calc(164px + env(safe-area-inset-bottom,0px))}
+}
+@media (min-width:761px){html.rmd-on .main{padding-bottom:96px}}
+
+/* Pinned calculators and steps: a row at the top of the home page */
+.pins{margin-top:12px}
+.pins-h{display:flex;align-items:baseline;gap:8px;margin:0 2px 8px}
+.pins-h h2{margin:0;font:850 1rem/1.2 var(--display)}
+.pins-h small{font:700 .74rem var(--mono);color:var(--muted)}
+.pins-x{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:16px;margin:0 -16px -8px;padding:4px 16px 18px;scrollbar-width:none;list-style:none} /* room for the cards' shadows, which a scrolling row clips */
+.pins-x li{flex:none;display:flex}
+.pins-x::-webkit-scrollbar{display:none}
+.pinc{flex:none;scroll-snap-align:start;display:flex;align-items:center;gap:10px;width:min(240px,72vw);min-height:62px;padding:9px 12px 9px 9px;border-radius:18px;background:var(--pearl);box-shadow:var(--pearl-sh);color:var(--ink);text-decoration:none}
+.pinc:hover{box-shadow:var(--sh-3),inset 0 0 0 1.5px var(--accent)}
+.pinc .ic{width:38px;height:38px;border-radius:12px}
+.pinc .ic svg{width:19px;height:19px}
+.pinc-t{display:grid;gap:1px;min-width:0}
+.pinc-t b{font:800 .86rem/1.25 var(--body);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pinc-t small{font:600 .74rem/1.2 var(--body);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-foot [data-pin][aria-pressed="true"],.run-acts [data-pin][aria-pressed="true"]{color:var(--accent)}
+
+/* The thumb bar: on a phone, Save, Pin, the whole map, Copy link and Start again sit under the step, within reach of the thumb */
+.thumbbar{display:none}
+@media (max-width:760px){
+  .run-acts{display:none}
+  .thumbbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:14px 0 6px;padding:6px;border-radius:22px;background:var(--pearl);box-shadow:var(--pearl-sh)}
+  .thumbbar button{flex-direction:column;gap:3px;min-height:56px;padding:6px 2px;border:0;border-radius:16px;background:transparent;color:var(--ink-2);font:800 .72rem/1.1 var(--body);box-shadow:none}
+  .thumbbar button:hover{background:var(--surface-3)}
+  .thumbbar button svg{width:21px;height:21px}
+  .thumbbar button[aria-pressed="true"]{color:var(--accent);background:var(--accent-soft)}
+  .thumbbar [data-save][aria-pressed="true"] svg{color:var(--gold)}
+}
+
+/* The folded library: on a phone, each group opens on a tap */
+.lib-fold{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 2px 10px;font:700 .84rem/1.35 var(--body);color:var(--muted)}
+.lib-fold button{flex:none}
+.libsec.fold{margin-top:10px}
+.libsec.fold .lh{padding:0}
+.lh-b{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:12px 16px 12px 18px;border:0;border-radius:0;background:none;color:inherit;font:inherit;letter-spacing:inherit;text-align:left;box-shadow:none}
+.lh-b:hover{border:0;background:rgba(255,255,255,.06)}
+.lh-b:active{transform:none}
+.libsec .lh .lh-b small{margin-left:auto}
+.libsec .lh .lh-c{width:18px;height:18px;margin-left:2px}
+.lh-b[aria-expanded="true"] .lh-c{transform:rotate(90deg)}
+@media (prefers-reduced-motion:no-preference){.libsec .lh .lh-c{transition:transform .2s var(--ease)}}
+.lh-b:focus-visible{outline:3px solid var(--mint);outline-offset:-4px;border-radius:var(--r-xl)}
+
+/* Safari's engine (checked 17 Nov 2026): the 3D rise of a very tall tile, the 18,000 px Still to confirm list, projects far past the screen
+   and the page scrolls sideways; that one tile enters flat */
+@supports (animation-timeline:view()){@media (hover:none){.tile.confirm,.tile.confirm::before{animation:none}}}
+
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -2140,6 +2250,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <header class="hello"><div><h1 id="h-home">Green Zone <span>MO Guide</span></h1><p class="hello-sub"><span id="greet">On shift</span><span class="hs-l"> · Emergency &amp; Trauma, Hospital Kuala Lumpur · MTS 4–5</span><span class="hs-s"> · ED HKL · MTS 4–5</span></p></div>
           <button type="button" class="dn" id="daynight" role="switch" aria-checked="false" aria-label="Night colours"><span class="dn-l">Night colours</span><span class="dn-t" aria-hidden="true"><span class="dn-k"></span><span class="dn-i dn-sun" data-icon-in="sun"></span><span class="dn-i dn-moon" data-icon-in="moon"></span></span></button></header>
         <button type="button" class="searchbox" data-find id="herosearch"><span data-icon="search"></span><span>Symptom, rule, dose or number</span><kbd>/</kbd></button>
+        <section class="pins" id="pins" aria-label="Pinned calculators and steps" hidden></section>
         <div class="bento" id="bento">
           <section class="tile t-emerald zt" aria-labelledby="h-zone">
             <span class="tm" aria-hidden="true" data-tm="flow"><img src="tiles/flow.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>
@@ -2427,3 +2538,5 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
   <div class="lb-scroll" id="lbs"><img id="lbimg" src="poster/sheet1.webp" loading="lazy" alt="Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know"></div>
 </div>
 <div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+<div class="rmd" id="rmd" hidden></div>
+<div class="vh" id="rmdlive" role="status" aria-live="assertive"></div>

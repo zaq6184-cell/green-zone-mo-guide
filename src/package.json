@@ -9,6 +9,7 @@
     "test": "node test.js",
     "serve": "node serve.js",
     "icons": "node icons.js",
+    "webkit": "node webkit.js",
     "all": "node check-data.js && node build.js && node test.js"
   },
   "devDependencies": {

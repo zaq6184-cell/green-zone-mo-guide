@@ -181,8 +181,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await q.evaluate(() => { const t = document.querySelector('#trx'); return !!t && t.getAttribute('href') === '#pharmacy' && /155/.test(t.textContent); }), 'Shift tools has the ED pharmacy tile');
     await q.goto(base + '#search'); await q.waitForTimeout(500);
     await q.keyboard.type('celecoxib'); await q.waitForTimeout(400);
-    ok(await q.evaluate(() => { const a = [...document.querySelectorAll('#palbody a')]; const k = a.findIndex(x => x.dataset.rx === 'Celecoxib'); return k > 0 && a[k].getAttribute('href') === '#pharmacy' && !a[0].dataset.rx; }), 'searching a drug offers it on the ED pharmacy list, after the pathways that mention it');
-    await q.locator('#palbody a[data-rx="Celecoxib"]').click(); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => { const a = [...document.querySelectorAll('#gres a')]; const k = a.findIndex(x => x.dataset.rx === 'Celecoxib'); return k > 0 && a[k].getAttribute('href') === '#pharmacy' && !a[0].dataset.rx; }), 'searching a drug offers it on the ED pharmacy list, after the pathways that mention it');
+    await q.locator('#gres a[data-rx="Celecoxib"]').click(); await q.waitForTimeout(700);
     ok(await q.evaluate(() => location.hash === '#pharmacy' && document.querySelector('#rxq').value === 'Celecoxib' && document.querySelectorAll('#rxl .phx').length === 1), 'opening it shows the list filtered to that drug');
     await q.close(); }
   // The HKL doctors starter pack (12 Nov 2026): New to HKL, Prescribing at HKL, the NAC regimen, the look-alike marks
@@ -243,8 +243,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await q.evaluate(() => { const t = document.querySelector('#tdg'); return !!t && t.getAttribute('href') === '#dilution' && /116/.test(t.textContent); }), 'Shift tools has the dilution guide tile');
     await q.goto(base + '#search'); await q.waitForTimeout(500);
     await q.keyboard.type('vasopressin'); await q.waitForTimeout(400);
-    ok(await q.evaluate(() => { const a = document.querySelector('#palbody a[data-dg="VASOpressin"]'); return !!a && a.getAttribute('href') === '#dilution'; }), 'searching a drug offers it in the dilution guide');
-    await q.locator('#palbody a[data-dg="VASOpressin"]').click(); await q.waitForTimeout(700);
+    ok(await q.evaluate(() => { const a = document.querySelector('#gres a[data-dg="VASOpressin"]'); return !!a && a.getAttribute('href') === '#dilution'; }), 'searching a drug offers it in the dilution guide');
+    await q.locator('#gres a[data-dg="VASOpressin"]').click(); await q.waitForTimeout(700);
     ok(await q.evaluate(() => location.hash === '#dilution' && document.querySelector('#dgq').value === 'VASOpressin' && document.querySelectorAll('#dgl .phx').length === 1), 'opening it shows the guide filtered to that drug');
     await q.close(); }
   if (guardRe('starterpack')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('starterpack')), 'no signer, staff name or registration number from the starter pack documents is copied');
@@ -315,7 +315,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.screenshot({path:out + '/d-pal-empty.png'});
   await p.keyboard.type('ivab antibiotics'); await p.waitForTimeout(200);
   await p.fill('#gq', 'antibiotics no bed'); await p.waitForTimeout(200);
-  console.log('     search ->', await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 5).map(a => a.getAttribute('href')).join(' ')));
+  console.log('     search ->', await p.evaluate(() => [...document.querySelectorAll('#gres a')].slice(0, 5).map(a => a.getAttribute('href')).join(' ')));
   await p.screenshot({path:out + '/d-pal-results.png'});
   await p.fill('#gq', 'renal colic'); await p.waitForTimeout(200);
   await p.keyboard.press('Enter'); await p.waitForTimeout(450);
@@ -369,6 +369,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => document.querySelector('#ptab [aria-selected="true"]').dataset.pt) === 'advice', 'advice tab selected');
   await p.screenshot({path:out + '/d-run-outcome.png', fullPage:true});
   await p.click('[data-save]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => getComputedStyle(document.querySelector('.thumbbar')).display === 'none' && getComputedStyle(document.querySelector('.run-acts')).display !== 'none' && !!document.querySelector('.run-acts [data-pin]') && [...document.querySelectorAll('#run [data-save]')].every(b => b.getAttribute('aria-pressed') === 'true')), 'desktop: the step actions stay at the top, with Pin, and both Save buttons show the save');
   // Tools
   await go(p, '#tools');
   ok(await p.evaluate(() => !!document.querySelector('#dcheck .tool-h .tm img') && !!document.querySelector('#tcx .tm img')), 'the discharge check header and the calculators card have their pictures');
@@ -698,9 +699,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await p.keyboard.press('/'); await p.waitForTimeout(250);
   await p.fill('#gq', 'fluid quota'); await p.waitForTimeout(250);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => ['#dengue-cpg', '#calc-dfluid'].includes(a.getAttribute('href')))), 'searching "fluid quota" finds the dengue CPG');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#gres a')].slice(0, 6).some(a => ['#dengue-cpg', '#calc-dfluid'].includes(a.getAttribute('href')))), 'searching "fluid quota" finds the dengue CPG');
   await p.fill('#gq', 'denggi'); await p.waitForTimeout(250);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => a.getAttribute('href') === '#dengue-cpg')), 'searching in Malay ("denggi") finds it through the leaflet');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#gres a')].slice(0, 6).some(a => a.getAttribute('href') === '#dengue-cpg')), 'searching in Malay ("denggi") finds it through the leaflet');
   await p.keyboard.press('Escape'); await p.waitForTimeout(200);
   // The asthma and gout CPG entries (Academy CPG round): tabs, banners, a walk to an outcome, deep links, links and search
   await go(p, '#asthma-cpg', 400);
@@ -784,9 +785,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // End of part 2 entries
   await p.keyboard.press('/'); await p.waitForTimeout(250);
   await p.fill('#gq', 'colchicine'); await p.waitForTimeout(250);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => a.getAttribute('href').startsWith('#gout-cpg'))), 'searching "colchicine" finds the gout CPG');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#gres a')].slice(0, 6).some(a => a.getAttribute('href').startsWith('#gout-cpg'))), 'searching "colchicine" finds the gout CPG');
   await p.fill('#gq', 'peak flow action plan'); await p.waitForTimeout(250);
-  ok(await p.evaluate(() => [...document.querySelectorAll('#palbody a')].slice(0, 6).some(a => ['#calc-apef', '#asthma-cpg'].includes(a.getAttribute('href')))), 'searching "peak flow action plan" finds the asthma CPG or its calculator');
+  ok(await p.evaluate(() => [...document.querySelectorAll('#gres a')].slice(0, 6).some(a => ['#calc-apef', '#asthma-cpg'].includes(a.getAttribute('href')))), 'searching "peak flow action plan" finds the asthma CPG or its calculator');
   await p.keyboard.press('Escape'); await p.waitForTimeout(200);
   // Quiz
   await go(p, '#quiz');
@@ -1066,11 +1067,78 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await hscroll(p) <= 0, 'phone runner no sideways scroll');
   await p.screenshot({path:out + '/p-run-steps.png'});
   await p.screenshot({path:out + '/p-run-full.png', fullPage:true});
-  await p.tap('#run .run-acts [data-map]'); await p.waitForTimeout(450);
+  await p.tap('#run .thumbbar [data-map]'); await p.waitForTimeout(450);
   ok(await p.evaluate(() => !document.querySelector('#pmap').hidden), 'phone opens the whole-pathway map');
   ok(await hscroll(p) <= 0, 'phone map no sideways scroll');
   await p.screenshot({path:out + '/p-map.png'});
   await p.tap('#pmclose'); await p.waitForTimeout(250);
+  /* 17 Nov 2026: the thumb bar, bedside reminders, pins, the drug finder card and the folded library */
+  ok(await p.evaluate(() => getComputedStyle(document.querySelector('.thumbbar')).display === 'grid' && getComputedStyle(document.querySelector('.run-acts')).display === 'none' && document.querySelectorAll('.thumbbar button').length === 5 && document.querySelector('.thumbbar').getBoundingClientRect().top > 844 * 0.3), 'phone: Save, Pin, Map, Link and Again sit in the thumb bar under the step, not at the top');
+  ok(await p.evaluate(() => Object.keys(REMIND).length === 13 && Object.entries(REMIND).every(([a, rs]) => { const [id, k] = a.split('--'), n = P[id] && P[id].nodes[k]; return !!n && rs.every(([m, ph]) => m > 0 && m <= 60 && JSON.stringify(n).includes(ph) && new RegExp('\\b' + m + ' minutes').test(ph)); })), 'every reminder is on its own step, its minutes printed in the step\'s own words (13 steps)');
+  await go(p, '#asthma--m1', 500);
+  await p.tap('[data-remind]'); await p.waitForTimeout(200);
+  ok(await p.evaluate(() => !document.querySelector('#rmd').hidden && rems.length === 1 && rems[0].m === 10 && /Reassess after 10 minutes/.test(document.querySelector('#rmd').innerText) && /^(10:00|9:5\d)$/.test(document.querySelector('#rmd output').textContent)), 'a reminder starts from the step, for the 10 minutes it prints');
+  ok(await p.evaluate(() => Object.keys(localStorage).every(k => !/rem/i.test(k) && !String(localStorage.getItem(k)).includes('asthma--m1'))), 'a reminder is not stored');
+  await p.evaluate(() => { navigator.vibrate = x => { (window.__vib = window.__vib || []).push(x); return true; }; rems[0].end = Date.now() - 1; remTick(); });
+  await p.waitForTimeout(250);
+  ok(await p.evaluate(() => document.querySelector('#rmd').classList.contains('is-due') && /Due now/.test(document.querySelector('#rmd').innerText) && JSON.stringify(window.__vib || []) === JSON.stringify([BUZZ.alarm]) && /Reminder due: Reassess after 10 minutes/.test(document.querySelector('#rmdlive').textContent)), 'when it is due it buzzes the alarm, opens the tray and says so');
+  await p.screenshot({path:out + '/p-reminder-due.png'});
+  ok(await hscroll(p) <= 0, 'phone reminder tray no sideways scroll');
+  await p.tap('#rmd [data-ragain]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => rems.length === 1 && !rems[0].due && !document.querySelector('#rmd').classList.contains('is-due')), 'Again restarts it');
+  await p.tap('#rmd [data-rdone]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => rems.length === 0 && document.querySelector('#rmd').hidden && !document.documentElement.classList.contains('rmd-on')), 'the cross clears it and the tray goes');
+  ok(await p.evaluate(() => /buzzes when it is due/.test(document.querySelector('.rmd-b small').textContent)), 'on a phone that can vibrate, the line under the button says it buzzes');
+  ok(await p.evaluate(() => { const was = prefs.buzz; prefs.buzz = 'off'; const t = remBtns('asthma', 'm1'); prefs.buzz = was; return /cannot vibrate for it, so watch for it on screen/.test(t); }), 'where it cannot buzz (an iPhone, or Vibration off), the line says to watch the screen');
+  await p.tap('[data-remind]'); await p.waitForTimeout(200);
+  await p.evaluate(() => document.querySelector('.thumbbar').scrollIntoView({block:'center'})); await p.waitForTimeout(200);
+  await p.tap('.thumbbar [data-map]'); await p.waitForTimeout(450);
+  ok(await p.evaluate(() => !document.querySelector('#pmap').hidden), 'with a reminder running, the thumb bar can still be reached above the tray');
+  await p.tap('#pmclose'); await p.waitForTimeout(250);
+  await p.evaluate(() => document.querySelector('#cur [data-next], #cur button.opt').scrollIntoView({block:'center'})); await p.waitForTimeout(150);
+  await p.tap('#cur [data-next], #cur button.opt'); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => state.cur !== 'm1' && rems.length === 1 && !document.querySelector('#rmd').hidden), 'and the step\'s own answer too, and the reminder keeps running as the steps change');
+  await p.evaluate(() => { rems = []; remDraw(); });
+  await go(p, '#home', 300); await go(p, '#asthma--m1', 500);
+  await p.tap('.thumbbar [data-pin]'); await p.waitForTimeout(150);
+  await go(p, '#calc-news2', 500);
+  await p.tap('#calcbox [data-pin]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => localStorage.getItem('gz-pins') === JSON.stringify(['#calc-news2', '#asthma--m1'])), 'a pin keeps only the address: a calculator and a step');
+  await go(p, '#home', 500);
+  ok(await p.evaluate(() => { const a = [...document.querySelectorAll('#pins .pinc')]; return !document.querySelector('#pins').hidden && a.map(x => x.getAttribute('href')).join() === '#calc-news2,#asthma--m1' && /NEWS2/.test(a[0].textContent) && /Bronchodilator/.test(a[1].textContent) && /Bronchial asthma/.test(a[1].textContent); }), 'home shows the pinned calculator and step at the top');
+  await p.screenshot({path:out + '/p-home-pins.png'});
+  ok(await hscroll(p) <= 0, 'phone home with pins no sideways scroll');
+  await p.tap('#pins .pinc[href="#asthma--m1"]'); await p.waitForTimeout(500);
+  ok(await p.evaluate(() => state.id === 'asthma' && state.cur === 'm1' && document.querySelector('.thumbbar [data-pin]').getAttribute('aria-pressed') === 'true'), 'a pinned step opens on that step, marked as pinned');
+  await p.tap('.thumbbar [data-pin]'); await p.waitForTimeout(150);
+  ok(await p.evaluate(() => localStorage.getItem('gz-pins') === JSON.stringify(['#calc-news2']) && document.querySelector('.thumbbar [data-pin]').getAttribute('aria-pressed') === 'false'), 'tapping the pin again unpins the step');
+  await p.evaluate(() => { document.getElementById('st-clear').click(); });
+  ok(await p.evaluate(() => !localStorage.getItem('gz-pins') && document.querySelector('#pins').hidden), 'Settings, Clear removes the pins too');
+  await p.evaluate(() => openPal()); await p.fill('#gq', 'tramadol'); await p.waitForTimeout(500);
+  ok(await p.evaluate(() => { const c = [...document.querySelectorAll('.drugc')]; return c.length === 1 && c[0].querySelector('.dc-ht b').textContent === 'Tramadol' && c[0].querySelectorAll('.dc-r[data-rx]').length === 1 && c[0].querySelectorAll('.dc-r[data-dg]').length === 1 && /^Named in \d+ steps? of \d+ entries/.test(c[0].querySelector('.dc-n').textContent); }), 'tramadol: one card with its pharmacy row and its dilution row (the HCl salt joined), and the steps that name it');
+  ok(await p.evaluate(() => [...document.querySelectorAll('.drugc .dc-s li a')].every(a => { const [id, k] = a.getAttribute('href').slice(1).split('--'), q = P[id]; if (!q) return false; const n = q.nodes[k || q.start], s = a.querySelector('span').textContent.replace(/…$/, ''); return s === 'Named in its reference tabs' || (n.end ? n.title : nodeText(n)).startsWith(s); })), 'each line on the card is a step\'s own heading, linking to that step: no dose is lifted out');
+  ok(await p.evaluate(() => !!palLinks()[0] && !palLinks()[0].closest('.drugc') && !!palLinks()[0].closest('#gres')), 'Enter still opens the first result: the card sits above without taking the selection');
+  await p.screenshot({path:out + '/p-drug-card.png'});
+  await p.fill('#gq', 'adrenaline'); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => { const c = document.querySelectorAll('.drugc'); return c.length === 1 && !!c[0].querySelector('.dc-h .tag.hi') && /ADrenaline/.test(c[0].querySelector('.dc-r[data-dg]').textContent) && !/NORADrenaline/.test(c[0].textContent); }), 'adrenaline: one card with the high-alert mark and its dilution guide row, not noradrenaline');
+  await p.fill('#gq', 'chest pain'); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => !document.querySelector('.drugc')), 'no card when no drug is named');
+  ok(await p.evaluate(() => drugsFor(['adrenal crisis']).length === 0 && drugsFor(['none of the four conditions']).length === 0 && drugsFor(['oral antibiotics']).length === 0 && drugsFor(['amox'])[0].g === 'Amoxicillin' && drugsFor(['dose of tramadol'])[0].g === 'Tramadol'), 'a longer search must hold a drug\'s whole name: "adrenal crisis" is not adrenaline, "four" and "oral" open no card');
+  ok(await p.evaluate(() => drugIndex().every(d => [...new DOMParser().parseFromString(drugCard(d), 'text/html').querySelectorAll('.dc-s li span')].every(s => !/\d+(\.\d+)?\s?(mg|mcg|µg|g|ml|mL|units?|IU|mmol|µmol|%|puffs?|L\/min)\b/i.test(s.textContent)))), 'on every drug\'s card (' + await p.evaluate(() => drugIndex().length) + ' drugs), no step row carries a dose or a threshold');
+  ok(await p.evaluate(() => { const i = EDRX.items.find(x => x[0] === +Object.keys(EDRX_LASA)[0]), d = drugsFor([drugName(rxGeneric(i[1]))]); return d.length >= 1 && d.length <= 2 && /Look-alike pair/.test(d.map(drugCard).join('')); }), 'a drug on the pharmacy\'s look-alike top 10 says so on its card');
+  await p.fill('#gq', 'tramadol'); await p.waitForTimeout(300);
+  await p.tap('.drugc a[data-rx]'); await p.waitForTimeout(500);
+  ok(await p.evaluate(() => location.hash === '#pharmacy' && /tramadol/i.test(document.querySelector('#rxq').value) && document.querySelector('#pal').hidden), 'the card\'s pharmacy row opens the list on that drug');
+  await go(p, '#pathways', 500);
+  const libH = await p.evaluate(() => document.documentElement.scrollHeight);
+  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length === 0 && document.querySelectorAll('#libgrid [data-lsec]:not([data-lsec="*"])').length === document.querySelectorAll('#libgrid .libsec').length) && libH < 4000, 'phone: the library opens folded by group (' + libH + ' px)');
+  await p.tap('#libgrid [data-lsec="heart"]'); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length === CATS.find(c => c.k === 'heart').ids.filter(id => P[id]).length && document.querySelector('#libgrid [data-lsec="heart"]').getAttribute('aria-expanded') === 'true'), 'a tap on a group opens it');
+  await p.screenshot({path:out + '/p-library-folded.png'});
+  await p.locator('#libq').fill('colic'); await p.waitForTimeout(300);
+  ok(await p.evaluate(() => !document.querySelector('#libgrid [data-lsec]') && document.querySelectorAll('#libgrid .pc').length >= 1), 'a library search shows every match, unfolded');
+  await p.locator('#libq').fill(''); await p.waitForTimeout(200);
+  ok(await hscroll(p) <= 0, 'phone folded library no sideways scroll');
   await go(p, '#gz-rules--ivab', 400);
   await p.screenshot({path:out + '/p-run-ivab.png', fullPage:true});
   ok(await p.evaluate(() => [...document.querySelectorAll('#run button, #run a')].filter(e => e.offsetParent !== null && !e.closest('.trailx, .ptab-bar')).every(e => { const r = e.getBoundingClientRect(); return r.left >= -1 && r.right <= innerWidth + 1; })), 'phone outcome: no control is clipped at the edges');

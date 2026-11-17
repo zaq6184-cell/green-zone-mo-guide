@@ -2090,6 +2090,116 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .dc-list .pts{align-self:center}
 .num-card .src{font-size:.8rem;opacity:1}
 
+/* ================= The 17 Nov 2026 round: the drug finder card, bedside reminders, pins, the thumb bar and the folded library ================= */
+/* The drug finder card, above the search results: it points to where the guide names a drug, and quotes no dose */
+.drugc{margin:4px 0 12px;padding:14px;border-radius:var(--r-md);background:var(--pearl);box-shadow:var(--pearl-sh)}
+.dc-h{display:flex;align-items:center;gap:12px}
+.dc-h .ic{width:40px;height:40px;border-radius:13px}
+.dc-ht{flex:1;min-width:0;display:grid;gap:2px}
+.dc-ht b{font:850 1.08rem/1.2 var(--display)}
+.dc-ht small{font:600 .8rem/1.35 var(--body);color:var(--muted)}
+.drugc .tag{background:var(--surface-3);color:var(--muted);letter-spacing:.06em;white-space:nowrap}
+.drugc .tag.hi{background:var(--admit-soft);color:var(--admit)}
+.dc-rows{display:grid;gap:6px;margin-top:12px}
+.dc-r{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:4px 10px;min-height:44px;padding:8px 12px;border-radius:12px;background:var(--surface-2);color:var(--ink);text-decoration:none;box-shadow:inset 0 0 0 1px var(--line)}
+.dc-r:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.dc-r .k{font:800 .68rem/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dc-r .v{font:700 .86rem/1.3 var(--body);min-width:0}
+.dc-r.more .v{grid-column:1/-1;color:var(--accent)}
+.dc-lasa{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;padding:8px 12px;border-radius:12px;background:var(--observe-soft);color:var(--ink);font:600 .82rem/1.4 var(--body)}
+.dc-lasa svg{flex:none;width:17px;height:17px;color:var(--observe);margin-top:1px}
+.dc-s{margin-top:12px}
+.dc-n{margin:0 0 6px;font:800 .74rem/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dc-s ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.dc-s li a{display:grid;gap:1px;padding:7px 10px;border-radius:10px;color:var(--ink);text-decoration:none}
+.dc-s li a:hover{background:var(--accent-soft)}
+.dc-s li b{font:800 .84rem/1.25 var(--body)}
+.dc-s li span{font:500 .82rem/1.35 var(--body);color:var(--muted)}
+.dc-s summary{display:flex;align-items:center;min-height:40px;padding:4px 10px;cursor:pointer;font:800 .84rem var(--body);color:var(--accent)}
+@media (max-width:560px){.dc-r{grid-template-columns:minmax(0,1fr) auto}.dc-r .k{grid-column:1/-1}}
+
+/* Bedside reminders: the button under a timed step, and the tray at the foot of the screen */
+.rmd-b{display:grid;gap:6px;margin:14px 0 4px}
+.rmd-b button{justify-self:start;gap:8px;min-height:48px;border-radius:16px}
+.rmd-b button svg{width:19px;height:19px}
+.rmd-b small{font:600 .8rem/1.4 var(--body);color:var(--muted)}
+.rmd{position:fixed;z-index:52;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100vw - 32px));display:flex;flex-direction:column-reverse;gap:8px}
+.rmd-p{width:100%;justify-content:flex-start;gap:10px;min-height:56px;padding:8px 14px;border:0;border-radius:20px;background:var(--obsidian-2);color:#fff;box-shadow:var(--jewel-rim),var(--sh-3);text-align:left}
+.rmd-p:hover{border:0;filter:brightness(1.1)}
+.rmd-p svg{width:20px;height:20px;color:var(--mint);flex:none}
+.rmd-pt{flex:1;min-width:0;display:grid;gap:1px}
+.rmd-pt b{font:800 .86rem/1.25 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rmd-pt small{font:600 .74rem/1.2 var(--body);opacity:.8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rmd output{font:700 1rem var(--mono);font-variant-numeric:tabular-nums}
+.rmd-n{display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:12px;background:var(--mint);color:var(--emerald-3);font:800 .74rem var(--mono)}
+.rmd.is-due .rmd-p{background:var(--b-observe);color:var(--on-observe)}
+.rmd.is-due .rmd-p svg{color:var(--on-observe)}
+@media (prefers-reduced-motion:no-preference){.rmd.is-due .rmd-p{animation:rmdpulse 1.6s var(--ease) 3}@keyframes rmdpulse{50%{transform:scale(1.03)}}}
+.rmd-l{max-height:min(56vh,440px);overflow:auto;padding:10px;border-radius:20px;background:var(--pearl);box-shadow:var(--pearl-sh),var(--sh-3)}
+.rmd-l ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rmd-l li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 10px;padding:10px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.rmd-l li.due{background:var(--observe-soft);box-shadow:inset 0 0 0 1.5px var(--b-observe)}
+.rmd-t{display:grid;gap:1px;min-width:0}
+.rmd-t b{font:800 .86rem/1.3 var(--body)}
+.rmd-t small{font:600 .76rem/1.3 var(--body);color:var(--muted)}
+.rmd-a{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.rmd-a .ib{margin-left:auto;width:40px;height:40px;min-height:40px}
+.rmd-note{margin:8px 4px 2px;font:600 .74rem/1.4 var(--body);color:var(--muted)}
+.pt-mode .rmd{display:none!important}
+@media (max-width:760px){
+  .rmd{left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));width:auto;bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  html.rmd-on .main{padding-bottom:calc(166px + env(safe-area-inset-bottom,0px))}
+  html.rmd-on:has(#ansbar:not([hidden])) .rmd{bottom:calc(164px + env(safe-area-inset-bottom,0px))}
+}
+@media (min-width:761px){html.rmd-on .main{padding-bottom:96px}}
+
+/* Pinned calculators and steps: a row at the top of the home page */
+.pins{margin-top:12px}
+.pins-h{display:flex;align-items:baseline;gap:8px;margin:0 2px 8px}
+.pins-h h2{margin:0;font:850 1rem/1.2 var(--display)}
+.pins-h small{font:700 .74rem var(--mono);color:var(--muted)}
+.pins-x{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:16px;margin:0 -16px -8px;padding:4px 16px 18px;scrollbar-width:none;list-style:none} /* room for the cards' shadows, which a scrolling row clips */
+.pins-x li{flex:none;display:flex}
+.pins-x::-webkit-scrollbar{display:none}
+.pinc{flex:none;scroll-snap-align:start;display:flex;align-items:center;gap:10px;width:min(240px,72vw);min-height:62px;padding:9px 12px 9px 9px;border-radius:18px;background:var(--pearl);box-shadow:var(--pearl-sh);color:var(--ink);text-decoration:none}
+.pinc:hover{box-shadow:var(--sh-3),inset 0 0 0 1.5px var(--accent)}
+.pinc .ic{width:38px;height:38px;border-radius:12px}
+.pinc .ic svg{width:19px;height:19px}
+.pinc-t{display:grid;gap:1px;min-width:0}
+.pinc-t b{font:800 .86rem/1.25 var(--body);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pinc-t small{font:600 .74rem/1.2 var(--body);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cx-foot [data-pin][aria-pressed="true"],.run-acts [data-pin][aria-pressed="true"]{color:var(--accent)}
+
+/* The thumb bar: on a phone, Save, Pin, the whole map, Copy link and Start again sit under the step, within reach of the thumb */
+.thumbbar{display:none}
+@media (max-width:760px){
+  .run-acts{display:none}
+  .thumbbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:14px 0 6px;padding:6px;border-radius:22px;background:var(--pearl);box-shadow:var(--pearl-sh)}
+  .thumbbar button{flex-direction:column;gap:3px;min-height:56px;padding:6px 2px;border:0;border-radius:16px;background:transparent;color:var(--ink-2);font:800 .72rem/1.1 var(--body);box-shadow:none}
+  .thumbbar button:hover{background:var(--surface-3)}
+  .thumbbar button svg{width:21px;height:21px}
+  .thumbbar button[aria-pressed="true"]{color:var(--accent);background:var(--accent-soft)}
+  .thumbbar [data-save][aria-pressed="true"] svg{color:var(--gold)}
+}
+
+/* The folded library: on a phone, each group opens on a tap */
+.lib-fold{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 2px 10px;font:700 .84rem/1.35 var(--body);color:var(--muted)}
+.lib-fold button{flex:none}
+.libsec.fold{margin-top:10px}
+.libsec.fold .lh{padding:0}
+.lh-b{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:12px 16px 12px 18px;border:0;border-radius:0;background:none;color:inherit;font:inherit;letter-spacing:inherit;text-align:left;box-shadow:none}
+.lh-b:hover{border:0;background:rgba(255,255,255,.06)}
+.lh-b:active{transform:none}
+.libsec .lh .lh-b small{margin-left:auto}
+.libsec .lh .lh-c{width:18px;height:18px;margin-left:2px}
+.lh-b[aria-expanded="true"] .lh-c{transform:rotate(90deg)}
+@media (prefers-reduced-motion:no-preference){.libsec .lh .lh-c{transition:transform .2s var(--ease)}}
+.lh-b:focus-visible{outline:3px solid var(--mint);outline-offset:-4px;border-radius:var(--r-xl)}
+
+/* Safari's engine (checked 17 Nov 2026): the 3D rise of a very tall tile, the 18,000 px Still to confirm list, projects far past the screen
+   and the page scrolls sideways; that one tile enters flat */
+@supports (animation-timeline:view()){@media (hover:none){.tile.confirm,.tile.confirm::before{animation:none}}}
+
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -2141,6 +2251,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <header class="hello"><div><h1 id="h-home">Green Zone <span>MO Guide</span></h1><p class="hello-sub"><span id="greet">On shift</span><span class="hs-l"> · Emergency &amp; Trauma, Hospital Kuala Lumpur · MTS 4–5</span><span class="hs-s"> · ED HKL · MTS 4–5</span></p></div>
           <button type="button" class="dn" id="daynight" role="switch" aria-checked="false" aria-label="Night colours"><span class="dn-l">Night colours</span><span class="dn-t" aria-hidden="true"><span class="dn-k"></span><span class="dn-i dn-sun" data-icon-in="sun"></span><span class="dn-i dn-moon" data-icon-in="moon"></span></span></button></header>
         <button type="button" class="searchbox" data-find id="herosearch"><span data-icon="search"></span><span>Symptom, rule, dose or number</span><kbd>/</kbd></button>
+        <section class="pins" id="pins" aria-label="Pinned calculators and steps" hidden></section>
         <div class="bento" id="bento">
           <section class="tile t-emerald zt" aria-labelledby="h-zone">
             <span class="tm" aria-hidden="true" data-tm="flow"><img src="tiles/flow.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>
@@ -2428,6 +2539,8 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
   <div class="lb-scroll" id="lbs"><img id="lbimg" src="poster/sheet1.webp" loading="lazy" alt="Poster sheet 1: patient flow, three rules to keep, four more rules and numbers to know"></div>
 </div>
 <div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+<div class="rmd" id="rmd" hidden></div>
+<div class="vh" id="rmdlive" role="status" aria-live="assertive"></div>
 
 <script>
 const P = {};
@@ -12728,8 +12841,9 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 16 Nov 2026';
+const APP_VER = 'Version 8, updated 17 Nov 2026';
 const V8 = [
+  ['Find a drug, set a reminder, pin what you use','Type a drug\'s name in search and a card above the results shows where the guide names it: its rows on the ED pharmacy list, its pages in the dilution guide with the high-alert mark, any look-alike pair, and each step that names it, a tap away; doses stay in their own steps. Steps that print a short bedside interval (reassess after 10 minutes, repeat every 20 minutes) offer a reminder that shows when it is due, and buzzes on a phone that can (Android); it holds only the step and the time. Pin a calculator or a single step to the top of the home page. On a phone, Save, Pin, the whole map, Copy link and Start again now sit under the step, within reach of your thumb, and the pathway library folds by group.',[['#asthma--m1','A step with a reminder'],['#calc','Pin a calculator']]],
   ['Children\'s heart and breathing rates by age','A new calculator shows where a child\'s heart rate and breathing rate sit among healthy children of the same age band: the 1st to 99th centiles from Fleming et al. (Lancet 2011), a systematic review of 69 studies from birth to 18 years. It names the centile and never calls a rate normal, since the paper does not say which centile makes a rate abnormal. PEMCalc stays linked for blood pressure and SpO2, which the paper does not give.',[['#calc-vitals','Open the calculator'],['#ed-scores--vitals','The source and its limits']]],
   ['Calculators built in, from their own sources','The calculators that sent you to MDCalc now work inside the guide, and 22 are new: TIMI and HEART (ACS CPG 2026); the Canadian CT Head Rule, the Canadian C-spine Rule and NEXUS (head injury CPG 2015); Wells for PE (VTE CPG 2013); the Ottawa ankle, foot and knee rules; CHA2DS2-VASc and HAS-BLED (AF CPG 2012); MEWS (abdominal trauma CPG 2025); and, each from its own paper or owner and credited to its authors, ABCD2, the Ottawa SAH rule, PERC, the age-adjusted D-dimer, the San Francisco Syncope Rule, the Canadian Syncope Risk Score, Alvarado, qSOFA, NEWS2, CIWA-Ar, burns size and fluids, and a child\'s weight from age. Nothing is copied from MDCalc: its terms forbid it, even with credit. Only six outside links are left: five PEMCalc children\'s tools and the QTc.',[['#calc','Open the calculators'],['#ed-scores','Scores and rules']]],
   ['Read aloud, Malay smart search, and voice on your phone','Read aloud under any step, or above a reference tab, reads it in your phone\'s own voice, in English, or in Malay where the text is Malay. Smart search now understands Malay ("alahan teruk", "luka terbakar", "buku lali terseliuh"), with a second model that downloads only the first time you search in Malay. In the claude.ai copy, Ask shows the guide\'s own line that answers, checked word for word. In the web app, Settings, Voice on this phone makes English voice search run on the phone itself, so the sound never leaves it.',[['#renal-colic','Try Read aloud'],['#search','Search in Malay']]],
@@ -13048,6 +13162,7 @@ const ICONS = {
   bed:'<path d="M3 18.5v-11M3 14.5h18v4M21 14.5V12a3 3 0 0 0-3-3h-7v5.5"/><circle cx="7" cy="11.5" r="1.8"/>',
   door:'<path d="M13.5 4H7A1.5 1.5 0 0 0 5.5 5.5v13A1.5 1.5 0 0 0 7 20h6.5"/><path d="M10.5 12H20M16.5 8.5 20 12l-3.5 3.5"/>',
   clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  pin:'<path d="M9.5 3.5h5l-.9 5.6 3.4 3.4H7l3.4-3.4zM12 12.5v8"/>',
   send:'<path d="M4 12h12.5"/><path d="m11.5 6.5 5.5 5.5-5.5 5.5"/><path d="M20 5v14"/>',
   step:'<circle cx="12" cy="12" r="9"/><path d="M10.5 8.5 14 12l-3.5 3.5"/>',
   todo:'<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M9 8h6M9 12h6M9 16h3"/>',
@@ -13138,6 +13253,76 @@ let wbLate = false;
 function wbDue(){ if (document.visibilityState === 'visible') buzz('alarm'); else wbLate = true; }
 document.addEventListener('visibilitychange', () => { if (wbLate && document.visibilityState === 'visible'){ wbLate = false; buzz('alarm'); } });
 function wbctStart(){ wbEnd = Date.now() + 1200000; clearInterval(wbT); wbT = null; wbTick(); wbT = setInterval(wbTick, 1000); }
+/* ================= Bedside reminders (17 Nov 2026) =================
+   Where a step prints a short bedside interval ("Reassess after 10 minutes", "repeat every 20 minutes"), a button starts a
+   reminder for that interval, as printed. REMIND lists each step, the minutes and the phrase that sets them, and the test checks
+   that every phrase is still in its step. Several can run at once, in a tray at the foot of the screen. Like the 20WBCT timer, a
+   reminder lives in memory only: it holds the step's address and the time, never anything about a patient, and nothing is typed
+   (standing rule 4); a reload clears it. When one is due it buzzes and opens the tray; if the phone had moved to another app, it
+   does so when the guide is back on screen. */
+const REMIND = {
+  'anaphylaxis--airp':[[10, 'Nebulised adrenaline, repeat every 10 minutes']],
+  'asthma--m1':[[10, 'Reassess after 10 minutes']],
+  'asthma--m2':[[10, 'reassess after 10 minutes; may repeat up to 3 times']],
+  'asthma--s1':[[20, 'may repeat every 20 minutes (up to 3 times)']],
+  'hypoglycaemia--r15':[[15, 'Reassess in 15 minutes']],
+  'pain--np':[[30, 'Reassess in 30 minutes to 1 hour']],
+  'pain--m1':[[5, 'Reassess in 5 minutes']],
+  'pain--m05':[[5, 'Reassess in 5 minutes']],
+  'children--asthma':[[20, 'repeat every 20 minutes (max 3 cycles in 1 hour)'], [60, 'observe 60 minutes']],
+  'asthma-cpg--mmt':[[20, 'repeat every 20 minutes for 1 hour']],
+  'asthma-cpg--svt':[[20, 'repeat every 20 minutes for 1 hour']],
+  'asthma-cpg--ltx':[[20, 'repeat every 20 minutes for 1 hour']],
+  't2dm-cpg--hchk':[[15, 'Glucose rechecked every 15 minutes']]
+};
+let rems = [], remT = null, remSeq = 0, remOpen = false;
+const remFmt = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const remHref = addr => { const [id, k] = addr.split('--'); return '#' + (P[id].start === k ? id : addr); };
+function remBtns(id, k){
+  const r = REMIND[id + '--' + k]; if (!r) return '';
+  return `<div class="rmd-b">${r.map(([m, ph], i) => `<button type="button" class="soft" data-remind="${id}--${k}" data-ri="${i}">${svg('clock')}<span>Remind me in ${m} min</span></button><small>The step says: “${esc(ph)}”. The reminder holds only this step and the time${CAN_BUZZ && prefs.buzz !== 'off' ? ', and buzzes when it is due' : ': this phone cannot vibrate for it, so watch for it on screen'}.</small>`).join('')}</div>`;
+}
+function remStart(addr, i){
+  const [m, ph] = REMIND[addr][i], [id] = addr.split('--'), old = rems.find(r => r.addr === addr && r.i === i);
+  if (old){ old.end = Date.now() + m * 60000; old.due = old.late = false; }
+  else rems.push({n:++remSeq, addr, i, m, ph, t:P[id].title, end:Date.now() + m * 60000, due:false, late:false});
+  buzz('ok'); toast(old ? `Reminder restarted: ${m} min` : `Reminder set: ${m} min`);
+  remDraw(); if (!remT) remT = setInterval(remTick, 1000);
+}
+function remTick(){
+  const now = Date.now(); let rang = false;
+  rems.forEach(r => { if (!r.due && r.end <= now){ r.due = true; rang = true; if (document.visibilityState === 'visible') remRing(r); else r.late = true; } });
+  if (rang) remDraw();
+  else $$('#rmd [data-rn]').forEach(o => { const r = rems.find(x => x.n === +o.dataset.rn); if (r && !r.due) o.textContent = remFmt(r.end - now); });
+  if (!rems.some(r => !r.due)){ clearInterval(remT); remT = null; }
+}
+function remRing(r){ buzz('alarm'); remOpen = true; const l = document.getElementById('rmdlive'); if (l) l.textContent = 'Reminder due: ' + r.ph + ', ' + r.t; }
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible') return;
+  const late = rems.filter(r => r.late); if (!late.length) return;
+  late.forEach(r => { r.late = false; }); remRing(late[0]); remDraw();
+});
+function remDraw(){
+  const el = $('#rmd'); if (!el) return;
+  document.documentElement.classList.toggle('rmd-on', rems.length > 0);
+  if (!rems.length){ el.hidden = true; el.innerHTML = ''; remOpen = false; return; }
+  const now = Date.now(), due = rems.filter(r => r.due), run = rems.filter(r => !r.due).sort((a, b) => a.end - b.end), top = due[0] || run[0];
+  const left = r => r.due ? 'Due now' : remFmt(r.end - now);
+  const row = r => `<li class="${r.due ? 'due' : ''}"><span class="rmd-t"><b>${esc(r.ph)}</b><small>${esc(r.t)}</small></span><output${r.due ? '' : ` data-rn="${r.n}"`}>${left(r)}</output><span class="rmd-a"><a class="btn sm" href="${remHref(r.addr)}" data-ropen>Open the step</a>${r.due ? `<button type="button" class="sm" data-ragain="${r.n}">Again, ${r.m} min</button>` : ''}<button type="button" class="ib" data-rdone="${r.n}" aria-label="${r.due ? 'Done: clear this reminder' : 'Cancel this reminder'}">${svg('x')}</button></span></li>`;
+  el.hidden = false;
+  el.className = 'rmd' + (due.length ? ' is-due' : '') + (remOpen ? ' open' : '');
+  el.innerHTML = `<button type="button" class="rmd-p" id="rmdp" aria-expanded="${remOpen}" aria-label="Reminders: ${rems.length}. ${due.length ? 'Due: ' : 'Next: '}${esc(top.ph)}">${svg('clock')}<span class="rmd-pt"><b>${due.length ? 'Due: ' : ''}${esc(top.ph)}</b><small>${esc(top.t)}</small></span><output${top.due ? '' : ` data-rn="${top.n}"`}>${top.due ? 'Now' : remFmt(top.end - now)}</output>${rems.length > 1 ? `<span class="rmd-n">${rems.length}</span>` : ''}</button>`
+    + (remOpen ? `<div class="rmd-l"><ul>${[...due, ...run].map(row).join('')}</ul><p class="rmd-note">Reminders live on this screen only. They hold the step and the time, nothing about the patient, and a reload clears them.</p></div>` : '');
+}
+/* wired from the start-up line, once the page's helpers exist */
+function remWire(){ const el = document.getElementById('rmd'); if (el) el.addEventListener('click', e => {
+  const t = e.target;
+  if (t.closest('#rmdp')){ remOpen = !remOpen; remDraw(); const p = $('#rmdp'); if (p) p.focus(); return; }
+  const a = t.closest('[data-ragain]'), d = t.closest('[data-rdone]');
+  if (a){ const r = rems.find(x => x.n === +a.dataset.ragain); if (r) remStart(r.addr, r.i); return; }
+  if (d){ rems = rems.filter(x => x.n !== +d.dataset.rdone); remDraw(); const p = $('#rmdp'); if (p) p.focus(); return; }
+  if (t.closest('[data-ropen]')){ remOpen = false; setTimeout(remDraw, 0); }
+}); }
 /* Infographics for the rabies protocol (10 Nov 2026), drawn from its flow charts and appendices; a node or note names one in fig */
 const FIGS = {
   /* The three wound categories of the flow charts (Appendices 2 and 3), with what each leads to */
@@ -13988,15 +14173,55 @@ function renderMine(){
   }
 }
 function renderSideSaved(){
-  const s = savedIds().slice(0, 6), el = $('#sidesaved');
-  el.innerHTML = s.length ? '<div class="sgrp">Saved</div>' + s.map(id => `<a href="#${id}">${svg('star', '', true)}<span>${esc(P[id].title)}</span></a>`).join('') : '';
-  el.hidden = !s.length;
+  const s = savedIds().slice(0, 6), pn = pinIds().slice(0, 6), el = $('#sidesaved');
+  el.innerHTML = (s.length ? '<div class="sgrp">Saved</div>' + s.map(id => `<a href="#${id}">${svg('star', '', true)}<span>${esc(P[id].title)}</span></a>`).join('') : '')
+    + (pn.length ? '<div class="sgrp">Pinned</div>' + pn.map(h => `<a href="${h}">${svg('pin', '', true)}<span>${esc(pinInfo(h).title)}</span></a>`).join('') : '');
+  el.hidden = !s.length && !pn.length;
 }
 function refreshSaved(){
-  renderMine(); renderSideSaved(); renderLibf();
+  renderMine(); renderSideSaved(); renderLibf(); renderPins();
   const s = savedIds();
   $$('#libgrid [data-star]').forEach(b => { const on = s.includes(b.dataset.star); b.setAttribute('aria-pressed', on); b.innerHTML = svg('star', '', on); b.setAttribute('aria-label', (on ? 'Remove from saved: ' : 'Save: ') + P[b.dataset.star].title); });
   if (libF === 'saved') renderLib();
+}
+
+/* ================= Pinned calculators and steps (17 Nov 2026) =================
+   The star keeps a whole entry (Saved); a pin keeps one calculator or one step, shown in a row at the top of the home page, in the
+   menu and in the search box. Only the addresses are kept, on this phone (gz-pins), as Saved does: nothing about a patient. */
+const PIN_MAX = 12;
+const pinOk = h => { const m = /^#calc-([a-z0-9]+)$/.exec(h); if (m) return !!CALCS[m[1]]; const [id, k] = String(h).slice(1).split('--'); return !!(P[id] && k && P[id].nodes[k]); };
+const pinIds = () => store.get('gz-pins', []).filter(pinOk);
+const isPinned = h => pinIds().includes(h);
+const clip = (s, n) => s.length <= n ? s : s.slice(0, n).replace(/\s+\S*$/, '') + '…';
+function pinInfo(h){
+  const m = /^#calc-([a-z0-9]+)$/.exec(h);
+  if (m){ const c = CALCS[m[1]], g = CALC_G[c.g]; return {href:h, title:c.t, sub:'Calculator', kind:'Calculator', meta:g.t, ic:g.ic, j:g.j}; }
+  const [id, k] = h.slice(1).split('--'), p = P[id], n = p.nodes[k], c = catOf(id);
+  return {href:h, title:clip(n.end ? n.title : nodeText(n), 64), sub:p.title, kind:'Step', meta:p.title, ic:c.ic, j:c.j};
+}
+function pinBtnHTML(h, cls, label){
+  const on = isPinned(h);
+  return `<button type="button"${cls ? ` class="${cls}"` : ''} data-pin="${h}" aria-pressed="${on}" aria-label="${on ? 'Pinned to the home page. Tap to unpin' : 'Pin to the home page'}" title="${on ? 'Pinned' : 'Pin'}">${svg('pin', '', on)}${label ? `<span class="bl">${on ? 'Pinned' : 'Pin'}</span>` : ''}</button>`;
+}
+function syncPins(h){
+  const on = isPinned(h);
+  $$('[data-pin]').filter(x => x.dataset.pin === h).forEach(x => { const lbl = !!x.querySelector('.bl'); x.setAttribute('aria-pressed', on); x.title = on ? 'Pinned' : 'Pin';
+    x.setAttribute('aria-label', on ? 'Pinned to the home page. Tap to unpin' : 'Pin to the home page'); x.innerHTML = svg('pin', '', on) + (lbl ? `<span class="bl">${on ? 'Pinned' : 'Pin'}</span>` : ''); });
+}
+function togglePin(h){
+  const s = pinIds(), on = !s.includes(h);
+  if (on && s.length >= PIN_MAX){ toast('Up to ' + PIN_MAX + ' pins: unpin one first'); return false; }
+  store.set('gz-pins', on ? [h, ...s] : s.filter(x => x !== h));
+  buzz('ok'); toast(on ? 'Pinned to the home page' : 'Unpinned');
+  renderPins(); renderSideSaved();
+  return on;
+}
+function renderPins(){
+  const el = $('#pins'); if (!el) return;
+  const s = pinIds();
+  el.hidden = !s.length;
+  el.innerHTML = s.length ? `<div class="pins-h"><h2>Pinned</h2><small>${s.length} of ${PIN_MAX}</small></div><ul class="pins-x">${s.map(h => { const i = pinInfo(h); return `<li><a class="pinc" href="${h}"><span class="ic j ${i.j}">${svg(i.ic)}</span><span class="pinc-t"><b>${esc(i.title)}</b><small>${esc(i.sub)}</small></span></a></li>`; }).join('')}</ul>` : '';
+  const x = el.querySelector('.pins-x'); if (x) requestAnimationFrame(() => edgeFade(x));
 }
 
 /* ================= Search palette ================= */
@@ -14013,6 +14238,7 @@ function renderPal(){
   if (!q){
     const s = savedIds(), r = recentIds().filter(id => !s.includes(id)).slice(0, 4);
     if (s.length) h += '<div class="grp">Saved</div><ul class="pal-res" role="listbox">' + s.map(id => palEntry(ent(id))).join('') + '</ul>';
+    const pn = pinIds(); if (pn.length) h += '<div class="grp">Pinned</div><ul class="pal-res" role="listbox">' + pn.map(x => palEntry(pinInfo(x))).join('') + '</ul>';
     if (r.length) h += '<div class="grp">Recent</div><ul class="pal-res" role="listbox">' + r.map(id => palEntry(ent(id))).join('') + '</ul>';
     const quick = POPULAR.map(([href]) => IDX.find(e => e.href === href)).filter(Boolean);
     h += '<div class="grp">Quick open</div><ul class="pal-res" role="listbox">' + quick.map(e => palEntry(e)).join('') +
@@ -14032,15 +14258,16 @@ function renderPal(){
       : AI.state === 'loading' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Getting smart search ready: about 8 MB, once. Searching by words meanwhile.</span></div>`
       : sm && sm.moved && !sm.weak ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search: closest in meaning first, all from the guide's own pages.</span></div>`
       : AI.state === 'idle' && SAVE_DATA && prefs.ai !== 'off' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search waits while Data Saver is on.</span><button type="button" class="sm" id="gaidl">Download, 8 MB</button></div>` : '';
-    h = askBtn(q) + ai + (r.length ? note + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>'
+    const dcs = drugsFor([fixed || q, ...also]), dcard = dcs.length && dcs.length <= 2 ? dcs.map(drugCard).join('') : '';
+    h = askBtn(q) + ai + (r.length ? note + dcard + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>'
       : `<div class="pal-none">Nothing found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`);
   }
   if (askCtl && q){ askCtl.abort(); askCtl = null; }
-  body.innerHTML = h;
-  palSel = 0; markSel();
+  body.innerHTML = h; body.scrollTop = 0;
+  palSel = 0; markSel(true);
 }
-function palLinks(){ return $$('#palbody a'); }
-function markSel(){ palLinks().forEach((a, i) => a.setAttribute('aria-selected', i === palSel ? 'true' : 'false')); const a = palLinks()[palSel]; if (a) a.scrollIntoView({block:'nearest'}); }
+function palLinks(){ return $$('#palbody a').filter(a => !a.closest('.drugc')); } /* the drug card is reached by Tab; arrows and Enter keep to the results */
+function markSel(still){ palLinks().forEach((a, i) => a.setAttribute('aria-selected', i === palSel ? 'true' : 'false')); const a = palLinks()[palSel]; if (a && !still) a.scrollIntoView({block:'nearest'}); } /* new results open at the top, the drug card in full; only the arrow keys scroll */
 function openPal(){
   if (!$('#pal').hidden) return;
   palFrom = document.activeElement;
@@ -14055,6 +14282,76 @@ function closePal(restore){
   if (typeof micStop === 'function' && micOn) micStop();
   $('#pal').hidden = true; document.documentElement.style.overflow = '';
   if (restore && palFrom && palFrom.focus) palFrom.focus();
+}
+
+/* ================= Drug finder card (17 Nov 2026) =================
+   Typing a drug's name puts one card above the search results: where the guide names that drug. Its rows on the ED pharmacy list
+   (with the formulary category), its pages in the ED dosing and dilution guide (with the hospital's high-alert mark), a look-alike
+   pair from the Emergency Pharmacy's top 10, and every step that names it, each a tap away. It points and never summarises: no
+   dose is lifted out of its step (rules 5 and 8), and the results below keep their own order. A drug is known by its name on the
+   two department lists; two or more drugs sharing a name (several insulins) show no card, and the results list them. */
+let DRUGS = null;
+const DSTEPS = new Map();
+const dgGeneric = t => t.split(/\s(?=\d)|\s\(|;|,/)[0].trim();
+const DRUG_TWO = /^(sodium|potassium|calcium|magnesium|vitamin|glucose|dextrose|human|water|ferrous|glyceryl|hydrogen|activated|tranexamic|valproic|fusidic|folic|isosorbide)$/;
+/* The two lists name one drug with and without its salt (Tramadol HCl, Tramadol): the salt is dropped, except after a word such as sodium or calcium */
+const DRUG_SALT = /^(hcl|hydrochloride|sulphate|sulfate|phosphate|citrate|maleate|bromide|tartrate|bitartrate|acetate|succinate|besylate|besilate|mesylate|mesilate|hyclate|sodium|potassium|dihydrate|monohydrate|trihydrate|hydrobromide|fumarate|butylbromide)$/i;
+const drugName = g => { const w = g.trim().split(/\s+/); if (!DRUG_TWO.test(w[0].toLowerCase())) while (w.length > 1 && DRUG_SALT.test(w[w.length - 1])) w.pop(); return w.join(' '); };
+function drugIndex(){
+  if (DRUGS) return DRUGS;
+  const M = new Map(), add = (g0, kind, i) => { const g = drugName(g0), k = g.toLowerCase(); if (!M.has(k)) M.set(k, {g, k, rx:[], dg:[]}); M.get(k)[kind].push(i); };
+  if (typeof EDRX !== 'undefined') EDRX.items.forEach(i => add(rxGeneric(i[1]), 'rx', i));
+  if (typeof EDDG !== 'undefined') EDDG.items.forEach(i => add(dgGeneric(i[1]), 'dg', i));
+  DRUGS = [...M.values()].map(d => {
+    const w = d.k.split(/[\s/]+/), f = w[0].length < 4 ? d.k : DRUG_TWO.test(w[0]) && w[1] ? w[0] + ' ' + w[1] : w[0];
+    return {...d, f, g:d.rx.length ? drugName(rxGeneric(d.rx[0][1])) : d.g.charAt(0).toUpperCase() + d.g.slice(1).toLowerCase()};
+  });
+  return DRUGS;
+}
+/* A single word being typed may be the start of a drug's name (amox); a longer search must hold the drug's name as whole words,
+   so "adrenal crisis" is not adrenaline and "none of the four" is not the four-factor concentrate */
+const DRUG_WORD = /^(oral|four|anti|topical|normal|sterile|snake|human)$/;
+const wordIn = (q, t) => new RegExp('(^|[^a-z])' + reEsc(t) + '(?![a-z])').test(q);
+function drugsFor(qs){
+  const out = [];
+  qs.forEach(q0 => {
+    const q = String(q0 || '').toLowerCase().trim(); if (q.replace(/[^a-z]/g, '').length < 4) return;
+    const words = q.split(/[^a-z0-9-]+/).filter(Boolean), one = words.length === 1 && words[0].length >= 4 ? words[0] : '';
+    drugIndex().forEach(d => { if (out.includes(d)) return;
+      if (wordIn(q, d.k) || (!DRUG_WORD.test(d.f) && wordIn(q, d.f)) || (one && !DRUG_WORD.test(one) && d.k.startsWith(one))) out.push(d); });
+  });
+  return out;
+}
+function drugSteps(d){
+  if (DSTEPS.has(d.k)) return DSTEPS.get(d.k);
+  const re = new RegExp('(^|[^a-z])' + reEsc(d.f) + '(?![a-z])', 'i'), hits = [];
+  Object.keys(P).forEach(id => {
+    const p = P[id], ns = Object.entries(p.nodes || {}).filter(([, n]) => re.test(JSON.stringify(n))).map(([k, n]) => ({href:'#' + (k === p.start ? id : id + '--' + k), t:stepLabel(n.end ? n.title : nodeText(n))}));
+    if (ns.length) hits.push({id, t:p.title, ns}); else if (re.test(JSON.stringify([p.notes, p.dept, p.tables, p.advice, p.concerns, p.leaflet, p.script]))) hits.push({id, t:p.title, ns:[]});
+  });
+  DSTEPS.set(d.k, hits); return hits;
+}
+/* A step's own heading, cut before the first dose or threshold it prints ("Administer IV morphine …"), so no number leaves its step */
+const DOSE_AT = /\d+(?:[.,]\d+)?(?:\s?(?:to|–|-)\s?\d+(?:[.,]\d+)?)?\s?(?:mg|mcg|µg|g|kg|ml|mL|L|units?|IU|mmol|µmol|%|puffs?|U)\b/i;
+function stepLabel(t){
+  const m = DOSE_AT.exec(t); if (!m) return clip(t, 72);
+  const s = t.slice(0, m.index).replace(/[\s,:;(–-]+$/, '');
+  return s.length >= 10 ? clip(s, 64) + ' …' : 'Open the step';
+}
+function drugCard(d){
+  const st = drugSteps(d), n = st.reduce((a, e) => a + e.ns.length, 0), withSteps = st.filter(e => e.ns.length).length, refOnly = st.length - withSteps, hi = d.dg.some(i => i[6]);
+  const pages = i => 'p' + i[4] + (i[5] !== i[4] ? '–' + i[5] : '');
+  const HI = '<span class="tag hi" title="On the hospital\'s 2026 high-alert list">High alert</span>';
+  const rows = d.rx.slice(0, 3).map(i => `<a class="dc-r" href="#pharmacy" data-rx="${esc(rxGeneric(i[1]))}"><span class="k">ED pharmacy</span><span class="v">${esc(i[1])}</span><span class="tag">${esc(i[2] || 'Not in the formulary')}</span></a>`).join('')
+    + (d.rx.length > 3 ? `<a class="dc-r more" href="#pharmacy" data-rx="${esc(rxGeneric(d.rx[0][1]))}"><span class="v">${d.rx.length - 3} more on the pharmacy list</span></a>` : '')
+    + d.dg.map(i => `<a class="dc-r" href="#dilution" data-dg="${esc(dgGeneric(i[1]))}"><span class="k">Dilution guide</span><span class="v">${esc(i[1])}, ${pages(i)}</span>${i[6] ? HI : ''}</a>`).join('');
+  const lasa = typeof EDRX_LASA === 'undefined' ? '' : d.rx.filter(i => EDRX_LASA[i[0]]).map(i => { const o = EDRX.items.find(x => x[0] === EDRX_LASA[i[0]]); return o ? `<p class="dc-lasa">${svg('info')}<span>Look-alike pair on the Emergency Pharmacy's top 10: <b>${esc(i[1])}</b> and <b>${esc(o[1])}</b>.</span></p>` : ''; }).join('');
+  const items = st.flatMap(e => e.ns.length ? e.ns.map(s => `<li><a href="${s.href}"><b>${esc(e.t)}</b><span>${esc(s.t)}</span></a></li>`) : [`<li><a href="#${e.id}"><b>${esc(e.t)}</b><span>Named in its reference tabs</span></a></li>`]);
+  const ent = x => `${x} entr${x === 1 ? 'y' : 'ies'}`;
+  const cnt = n ? `Named in ${n} step${n === 1 ? '' : 's'}${withSteps > 1 ? ` of ${ent(withSteps)}` : ''}` + (refOnly ? `, and in the reference tabs of ${refOnly} more` : '') : refOnly ? `Named in the reference tabs of ${ent(refOnly)}` : 'Not named in the guide\'s pathways';
+  return `<section class="drugc" aria-label="${esc(d.g)}: where the guide names it"><div class="dc-h"><span class="ic j t-teal">${svg('pill')}</span><span class="dc-ht"><b>${esc(d.g)}</b><small>Where the guide names it. Each dose stays in its own step.</small></span>${hi ? HI : ''}</div>`
+    + (rows ? `<div class="dc-rows">${rows}</div>` : '') + lasa
+    + `<div class="dc-s"><p class="dc-n">${cnt}</p>${items.length ? `<ul>${items.slice(0, 4).join('')}</ul>` + (items.length > 4 ? `<details><summary>All ${items.length}</summary><ul>${items.slice(4).join('')}</ul></details>` : '') : ''}</div></section>`;
 }
 
 /* ================= Voice search (12 Nov 2026) =================
@@ -14380,6 +14677,9 @@ function renderHome(){
 /* ================= Pathway library ================= */
 let libF = 'all', libCat = 'all';
 function libCounts(){ const all = Object.keys(P); return {all:all.length, ebook:all.filter(id => !P[id].grp).length, cpg:all.filter(id => P[id].grp === 'cpg').length, rules:all.filter(id => P[id].grp === 'rules').length, saved:savedIds().length}; }
+/* On a phone the whole library folds by group (17 Nov 2026): a tap on a group opens it; a search, a filter or a topic shows everything */
+let libOpen = new Set();
+const FOLD_MQ = matchMedia('(max-width:760px)');
 function renderLibf(){
   const n = libCounts();
   $('#libf').innerHTML = [['all', 'All'], ['ebook', 'Ebook'], ['cpg', 'Guidelines'], ['rules', 'Rules and protocols'], ['saved', 'Saved']].map(([k, t]) => `<button type="button" data-f="${k}" aria-pressed="${libF === k}">${t} <small>${n[k]}</small></button>`).join('');
@@ -14406,7 +14706,10 @@ function renderLib(){
   withTiles($('#libcats'), `<button type="button" data-cat="all" aria-pressed="${libCat === 'all'}">${tileMedia('all')}${svg('grid')}<span>All topics</span><small>${ids.length}</small></button>` + cats.map(c => `<button type="button" class="${c.j}" data-cat="${c.k}" aria-pressed="${libCat === c.k}">${tileMedia(c.k)}${svg(c.ic)}<span>${esc(c.s)}</span><small>${c.ids.filter(id => ids.includes(id)).length}</small></button>`).join(''));
   const shown = CATS.filter(c => libCat === 'all' || c.k === libCat).map(c => [c, c.ids.filter(id => ids.includes(id)).sort(byTitle)]).filter(([, l]) => l.length);
   let h;
-  if (shown.length) h = shown.map(([c, l]) => `<section class="libsec ${c.j}" aria-label="${esc(c.t)}"><h2 class="lh">${tileMedia(c.k)}${svg(c.ic)}<span>${esc(c.t)}</span><small>${l.length}</small></h2><div class="grid">${l.map(pcard).join('')}</div></section>`).join('');
+  const fold = FOLD_MQ.matches && libF === 'all' && libCat === 'all' && !q && shown.length > 1;
+  if (shown.length) h = (fold ? `<div class="lib-fold"><span>${ids.length} pathways in ${shown.length} groups. Tap a group to open it.</span><button type="button" class="sm" data-lsec="*">${shown.every(([c]) => libOpen.has(c.k)) ? 'Close all' : 'Open all'}</button></div>` : '')
+    + shown.map(([c, l]) => { const open = !fold || libOpen.has(c.k);
+      return `<section class="libsec ${c.j}${fold ? ' fold' : ''}" aria-label="${esc(c.t)}"><h2 class="lh">${tileMedia(c.k)}${fold ? `<button type="button" class="lh-b" data-lsec="${c.k}" aria-expanded="${open}">` : ''}${svg(c.ic)}<span>${esc(c.t)}</span><small>${l.length}</small>${fold ? svg('chev', 'lh-c') + '</button>' : ''}</h2>${open ? `<div class="grid">${l.map(pcard).join('')}</div>` : ''}</section>`; }).join('');
   else if (shelf.length) h = '';
   else if (libF === 'saved' && !s.length) h = '<div class="empty">Nothing saved yet. Tap the star on any pathway to keep it here, on the home page and in the menu.</div>';
   else h = `<div class="empty">No pathway matches “${esc(q)}”. The search also covers rules, numbers, doses and the tour. <button type="button" class="sm" data-find>Search everything</button></div>`;
@@ -14494,7 +14797,7 @@ function endsHTML(p, n){
 function draw(focus){
   sayStop(); /* a new step stops the reading of the last */
   const p = P[state.id], n = p.nodes[state.cur], c = catOf(state.id), saved = isSaved(state.id), steps = state.trail.length;
-  const isRule = p.grp === 'rules';
+  const isRule = p.grp === 'rules', sh = '#' + state.id + '--' + state.cur;
   const nowText = n.end ? kindLabel(p, n.end) + ': ' + n.title : nodeText(n);
   const total = n.end ? Math.max(steps, 1) : steps + Math.max(stepsLeft(p, state.cur), 1);
   const bar = Array.from({length:total}, (_, i) => `<i class="${n.end ? 'fin' : i <= steps ? 'on' : ''}"></i>`).join('');
@@ -14508,6 +14811,7 @@ function draw(focus){
       <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg('back')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
         <div class="run-acts">
           <button type="button" class="ib" data-save aria-pressed="${saved}" aria-label="${saved ? 'Saved. Tap to remove from your list' : 'Save to your list'}" title="${saved ? 'Saved' : 'Save'}">${svg('star', '', saved)}</button>
+          ${pinBtnHTML(sh, 'ib', false)}
           <button type="button" class="ib" data-map aria-label="See the whole pathway" title="Whole pathway">${svg('map')}</button>
           <button type="button" class="ib" data-link aria-label="Copy a link to this step" title="Copy link">${svg('link')}</button>
           <button type="button" class="ib" data-restart aria-label="Start again" title="Start again"${steps ? '' : ' disabled'}>${svg('restart')}</button>
@@ -14527,6 +14831,14 @@ function draw(focus){
         <div class="strip">${steps ? `<div class="trailw"><span class="tlbl" aria-hidden="true">Route</span><div class="trailx" role="group" aria-label="Your answers so far">${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"><span><span class="vh">${esc(nodeText(p.nodes[t.node]))}: you answered </span>${esc(t.label)}<span class="vh">. Tap to change it.</span></span></button>`).join('')}</div></div>` : ''}${endsHTML(p, n)}</div>
         <div class="progress" aria-hidden="true"${n.end ? ` style="--oc:var(--b-${n.end})"` : ''}><span>${n.end ? `Outcome after ${steps} step${steps === 1 ? '' : 's'}` : 'Step ' + (steps + 1)}</span>${bar}</div>
         <div id="cur" tabindex="-1" class="cur-in">${card(n, p)}</div>
+        ${remBtns(state.id, state.cur)}
+        <div class="thumbbar" role="group" aria-label="This step">
+          <button type="button" data-save aria-pressed="${saved}" aria-label="${saved ? 'Saved. Tap to remove from your list' : 'Save to your list'}">${svg('star', '', saved)}<span>${saved ? 'Saved' : 'Save'}</span></button>
+          ${pinBtnHTML(sh, '', true)}
+          <button type="button" data-map aria-label="See the whole pathway">${svg('map')}<span>Map</span></button>
+          <button type="button" data-link aria-label="Copy a link to this step">${svg('link')}<span>Link</span></button>
+          <button type="button" data-restart aria-label="Start again"${steps ? '' : ' disabled'}>${svg('restart')}<span>Again</span></button>
+        </div>
         <div class="flagrow">${sayBtn('cur', 'Read aloud')}<button type="button" class="flagb" data-flag>${svg('flag')}<span>Something wrong on this step?</span></button></div>
         ${n.check && !n.end ? '<button type="button" class="ansbar" id="ansbar" hidden></button>' : ''}
         ${about ? `<details class="about about-m"><summary>About this pathway</summary><div>${about}</div></details>` : ''}
@@ -14614,7 +14926,7 @@ function edgeFade(el){
   el.classList.toggle('ef-l', max > 4 && el.scrollLeft > 4);
   el.classList.toggle('ef-r', max > 4 && el.scrollLeft < max - 4);
 }
-const FADE_ROWS = '.trailx, #libf, #rxf, #lkf, #dgf, #extf';
+const FADE_ROWS = '.trailx, #libf, #rxf, #lkf, #dgf, #extf, .pins-x';
 const fadeRows = () => $$(FADE_ROWS).forEach(el => { if (el.offsetParent !== null) edgeFade(el); });
 document.addEventListener('scroll', e => { const t = e.target; if (t && t.matches && t.matches(FADE_ROWS)) edgeFade(t); }, {capture:true, passive:true});
 addEventListener('resize', () => requestAnimationFrame(fadeRows));
@@ -16261,7 +16573,7 @@ function renderCalc(){
   withTiles(box, `<div class="tile ${g.j} tool-h cx-h">${tileMedia(g.k)}<div class="row"><span class="ic">${svg(g.ic)}</span><h2>${esc(c.t)}</h2></div><p>${esc(c.sub)}</p><div class="tags"><span class="tag">${esc(c.src)}</span><span class="tag">${esc(g.t)}</span></div></div>
     <div class="tool-b"><div class="fields">${list.map(f => fieldHTML(calcTab, f)).join('')}</div>${c.sticky ? '<button type="button" class="cx-sticky" id="cxsticky" hidden></button>' : ''}<div class="outs" id="couts" aria-live="polite"></div>
     <p class="calc-note">${esc(c.note)}</p>
-    <div class="foot cx-foot">${c.path ? `<a class="pill" href="${c.path}">Open the pathway${svg('chev')}</a>` : ''}<span class="sp"></span><button type="button" class="sm" id="cxcopy">${svg('copy')}<span class="bl">Copy</span></button><button type="button" class="sm" id="cxclear">${svg('restart')}<span class="bl">Clear</span></button></div></div>`);
+    <div class="foot cx-foot">${c.path ? `<a class="pill" href="${c.path}">Open the pathway${svg('chev')}</a>` : ''}<span class="sp"></span>${pinBtnHTML('#calc-' + calcTab, 'sm', true)}<button type="button" class="sm" id="cxcopy">${svg('copy')}<span class="bl">Copy</span></button><button type="button" class="sm" id="cxclear">${svg('restart')}<span class="bl">Clear</span></button></div></div>`);
   calcOut();
   markCxCurrent();
 }
@@ -17431,7 +17743,7 @@ if (typeof EDRX !== 'undefined'){
   }
   Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
 }
-renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderViewHeroes(); renderInstall();
+renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderViewHeroes(); renderInstall(); renderPins(); remWire();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
 document.addEventListener('click', e => {
@@ -17469,12 +17781,23 @@ $('#libq').addEventListener('input', renderLib);
 $('#libf').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (b){ libF = b.dataset.f; renderLib(); } });
 $('#libcats').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b){ libCat = b.dataset.cat; renderLib(); revealList(firstShown('#libgrid .libsec') || $('#libgrid')); } });
 $('#libgrid').addEventListener('click', e => { const b = e.target.closest('[data-star]'); if (b){ e.preventDefault(); toggleSave(b.dataset.star); } });
+$('#libgrid').addEventListener('click', e => {
+  const b = e.target.closest('[data-lsec]'); if (!b) return;
+  const k = b.dataset.lsec;
+  if (k === '*'){ const ks = CATS.map(c => c.k), all = ks.every(x => libOpen.has(x)); libOpen = all ? new Set() : new Set(ks); }
+  else if (libOpen.has(k)) libOpen.delete(k); else libOpen.add(k);
+  renderLib(); const nb = $(`#libgrid [data-lsec="${k}"]`); if (nb) nb.focus();
+});
+FOLD_MQ.addEventListener('change', () => renderLib());
+/* Pins (17 Nov 2026): the pin on a step, in the thumb bar or on a calculator */
+document.addEventListener('click', e => { const b = e.target.closest('[data-pin]'); if (!b) return; const h = b.dataset.pin; togglePin(h); syncPins(h); });
 
 /* Runner */
 $('#run').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b || !state.id) return;
   const p = P[state.id], n = p.nodes[state.cur];
   if (b.dataset.say){ sayEl(b.dataset.say === 'cur' ? $('#cur') : $('#ptab [role="tabpanel"]:not([hidden])'), b); return; }
+  if (b.dataset.remind){ remStart(b.dataset.remind, +b.dataset.ri); return; }
   if (b.dataset.go !== undefined){ const [l, to] = n.opts[+b.dataset.go]; go(l, to); }
   else if (b.hasAttribute('data-next')) go('Done', n.next);
   else if (b.dataset.back !== undefined) backTo(+b.dataset.back);
@@ -17482,8 +17805,8 @@ $('#run').addEventListener('click', e => {
   else if (b.hasAttribute('data-map')) openMap();
   else if (b.hasAttribute('data-save')){
     const on = toggleSave(state.id);
-    b.setAttribute('aria-pressed', on); b.innerHTML = svg('star', '', on); b.title = on ? 'Saved' : 'Save';
-    b.setAttribute('aria-label', on ? 'Saved. Tap to remove from your list' : 'Save to your list');
+    $$('#run [data-save]').forEach(x => { const tb = !!x.closest('.thumbbar'); x.setAttribute('aria-pressed', on); x.innerHTML = svg('star', '', on) + (tb ? `<span>${on ? 'Saved' : 'Save'}</span>` : ''); if (!tb) x.title = on ? 'Saved' : 'Save';
+      x.setAttribute('aria-label', on ? 'Saved. Tap to remove from your list' : 'Save to your list'); });
   }
   else if (b.hasAttribute('data-link')) copyText(APP_URL + '#' + state.id + (state.cur === p.start ? '' : '--' + state.cur), {ok:'Link to this step copied', fail:'Copying is blocked here. Use Share to copy the link.'});
   else if (b.hasAttribute('data-flag')) openFlag();
@@ -17633,7 +17956,7 @@ $('#settings').addEventListener('click', e => {
     if (key === 'clips') setJourneyClip(prefs.clips === 'on');
     if (key === 'tiles') tileClips();
   } else if (b.id === 'st-clear'){
-    ['gz-saved', 'gz-recent', QKEY, 'gz-quiz-best', 'gz-tour-pos', 'gz-tour-pos-ms', 'gz-tour-lang', 'gz-intro'].forEach(k => store.del(k));
+    ['gz-saved', 'gz-pins', 'gz-recent', QKEY, 'gz-quiz-best', 'gz-tour-pos', 'gz-tour-pos-ms', 'gz-tour-lang', 'gz-intro'].forEach(k => store.del(k));
     refreshSaved(); syncSettings(); startQuiz(); introTile(); toast('Cleared from this browser');
   } else if (b.id === 'setclose') closeSettings(true);
 });
@@ -17710,7 +18033,7 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
    - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
-  const PAGE = 'd02c0fb5155a'; /* this page's id, which build.js also writes into sw.js */
+  const PAGE = '5f6fc135a120'; /* this page's id, which build.js also writes into sw.js */
 
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };
