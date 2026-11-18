@@ -6,6 +6,13 @@ Still to confirm with the department (the app lists them under Still to confirm 
 
 **The ED extension directory (12 Nov 2026)** (also in the app): the list ("Nombor Sambungan Jabatan – ED") prints no issuer or date. Three numbers are printed for two rooms each: 6699 (Bilik Porter PPK; Pejabat Rekod Kecemasan), 6590 (the MOIC, Bilik Pegawai Perubatan (YM); Bilik PPK (YM)) and 5346 (Bilik Ketua Jururawat; Pejabat Pengurusan (Penyelia/Matron)): shared lines, or slips? Who keeps the list, and its date?
 
+**The pink EM Watch form (`data25.js`, added 18 Nov 2026)** (also in the app): four pages given by Krishna as photos on 18 Nov 2026 (checklist with five mandatory conditions; consent in Malay and English; signatures and the patient's slip), with no form number, date or issuer beyond the department's name.
+- Is it work instruction AK-15's Pink Form (Borang Pink, Lampiran 1), and is the slip cut off on page 4 the EM WATCH Appointment form (Lampiran 2)?
+- Age: the form prints "Berumur lebih 18 tahun/penjaga" (over 18, or a guardian), and its consent is signed by "the patient or authorised guardian"; AK-15 (p5) and the 2026 policy (9.1, p28) say 18 and over. May a patient under 18 use EM Watch with a guardian?
+- Its other conditions: a smartphone with WhatsApp and the know-how to make a video call, where AK-15 gives a smartphone or tablet with stable internet, used alone or with the family's help; "not Huawei" (the 2023 deck) is not on it; and "Pesakit tidak memerlukan pemeriksaan secara fisikal" (no physical examination needed, as on the triage course's slide 27), which AK-15's criteria as the guide has them do not list. The guide's eligibility question keeps AK-15's list and points to the form's.
+- The clinic's hours on the slip, Monday to Saturday 8 am to 2 pm, closed on Sunday: no other source the guide has gives them.
+- The clinic's mobile number, printed on pages 2, 3 and 4 (the WhatsApp line and the number the patient is called from): decided by Krishna on 18 Nov 2026, "Keep it covered": covered on the pictures and left out of the text (it is in `guard-values.local.json`, so the test fails if it appears).
+
 **Calculators built from their own sources (`data24.js`, `CALC-RESEARCH.md`, added 16 Nov 2026)** (also in the app):
 - Which D-dimer assay does the HKL laboratory run? The age-adjusted cut-off (ADJUST-PE, JAMA 2014) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE.
 - The AF CPG (2012), Table 14 footnote (HAS-BLED): a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed "≥200 mmol/L". The guide shows the footnote as printed and says so.
@@ -139,7 +146,7 @@ For Krishna as the handbook's editor (not department questions; the app shows th
 - Kept as the slides print them, from outside sources the decks do not name: the bite slide's figures (5% and 80% infection risk, cat-scratch at 7 to 12 days, "Does not transmit leptospirosis", cloxacillin and Augmentin with no dose), "IM diclofenac" for the sudden headache with no dose, SNOOP4 and the low-risk headache criteria, the burn points and the six tibial plateau types. Confirm each, or name its source.
 - Does the "wrong triage QR" register in case 2 exist?
 
-1. How to book EM Watch: the training deck shows the recruitment step only as a picture.
+1. How to book EM Watch: the training deck shows the recruitment step only as a picture. (Answered by AK-15 on 10 Nov 2026; its Pink Form, or a form like it, given on 18 Nov 2026: see The pink EM Watch form above.)
 2. The procedure for patients redirected to a Klinik Kesihatan or private GP.
 3. Whether the EMACC SOP of 1 Feb 2018 (ext 7040, Monday to Friday 9 am to 4 pm) is still current.
 4. Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents), the SCAN team line and the IPR on-call line.

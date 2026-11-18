@@ -2199,16 +2199,66 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
    and the page scrolls sideways; that one tile enters flat */
 @supports (animation-timeline:view()){@media (hover:none){.tile.confirm,.tile.confirm::before{animation:none}}}
 
+
+/* ================= The 18 Nov 2026 round: back through this visit ================= */
+/* The top bar's back sits where the logo does, so the menu never moves; after a link inside content it opens to show where it leads */
+.gback{display:inline-flex;align-items:center;height:44px;min-height:44px;max-width:min(54vw,300px);padding:0 10px 0 9px;border:0;border-radius:14px;background:var(--key);box-shadow:var(--rim),var(--sh-1);color:var(--ink);font:800 .86rem/1 var(--body);flex:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.gback:hover{border:0;filter:brightness(1.04)}
+.gback svg{width:22px;height:22px;flex:none}
+.gback .gb-l{max-width:0;margin-left:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;opacity:0}
+.gback.peek .gb-l{max-width:calc(min(54vw,300px) - 45px);margin-left:5px;opacity:1}
+.gback[aria-expanded="true"]{background:var(--accent-soft);color:var(--accent)}
+@media (min-width:721px){.gback .gb-l{max-width:220px;margin-left:5px;opacity:1}} /* a tablet always says where it leads */
+@media (max-width:560px){.top.has-back .brand{display:none}}
+@media (prefers-reduced-motion:no-preference){
+  .gback:not([hidden]){animation:gbin .34s var(--ease)}
+  .gback .gb-l{transition:max-width .4s var(--ease),opacity .25s,margin .4s var(--ease)}
+  .gback svg{transition:transform .16s var(--ease)}
+  .gback:active svg{transform:translateX(-3px)}
+  @keyframes gbin{from{opacity:0;transform:translateX(-8px) scale(.9)}to{opacity:1;transform:none}}
+  .view.enter-back{animation:vback .34s var(--ease)}
+  @keyframes vback{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+}
+/* On a desktop, the menu carries it under Search */
+.side-back{display:none}
+@media (min-width:1100px){
+  .side-back:not([hidden]){display:flex;align-items:center;gap:10px;width:100%;min-height:54px;margin:8px 0 0;padding:8px 12px;border:0;border-radius:16px;background:rgba(255,255,255,.08);color:#eef6f1;text-align:left;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);-webkit-user-select:none;user-select:none}
+  .side-back:hover{background:rgba(255,255,255,.14)}
+  .side-back svg{width:20px;height:20px;flex:none;color:var(--mint)}
+  .side-back[aria-expanded="true"]{box-shadow:inset 0 0 0 1.5px var(--mint)}
+  .sb-t{display:grid;gap:1px;min-width:0}
+  .sb-t small{font:700 .64rem/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:#c9d8d0}
+  .sb-t b{font:800 .88rem/1.25 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sb-t span{font:600 .72rem/1.25 var(--body);color:#c9d8d0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+/* The hold list: the earlier pages of this visit, newest first */
+.gbm{position:fixed;z-index:62;width:min(380px,calc(100vw - 20px));max-height:min(70vh,540px);overflow:auto;overscroll-behavior:contain;padding:8px;border-radius:22px;background:var(--pearl);box-shadow:var(--pearl-sh),var(--sh-3)}
+.gbm-h{display:grid;gap:2px;padding:8px 10px 10px}
+.gbm-h b{font:850 1rem/1.2 var(--display);color:var(--ink)}
+.gbm-h small{font:600 .74rem/1.3 var(--body);color:var(--muted)}
+.gbm ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.gbm button{display:flex;align-items:center;gap:10px;width:100%;min-height:58px;padding:8px 10px;border:0;border-radius:16px;background:transparent;color:var(--ink);text-align:left;box-shadow:none;font:inherit}
+.gbm button:hover,.gbm button:focus-visible{border:0;background:var(--surface-3)}
+.gbm .ic{width:38px;height:38px;border-radius:12px;flex:none}
+.gbm .gbm-ic{display:grid;place-items:center;background:var(--surface-3);color:var(--accent)}
+.gbm .ic svg{width:19px;height:19px}
+.gbm-t{flex:1;display:grid;gap:1px;min-width:0}
+.gbm-t b{font:800 .86rem/1.25 var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gbm-t small{font:600 .74rem/1.25 var(--body);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gbm-n{flex:none;font:700 .7rem var(--mono);color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.gbm:not([hidden]){animation:gbm .22s var(--ease);transform-origin:top left}@keyframes gbm{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}}
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
 <div class="app">
+  <div class="gbm" id="gbm" hidden role="dialog" aria-label="Back through this visit"><div class="gbm-h"><b>Back through this visit</b><small>Newest first. Kept in memory only: a reload clears it.</small></div><ol id="gbml"></ol></div>
   <aside class="side" id="side" aria-label="Guide menu">
     <div class="side-top">
       <a class="brand" href="#home"><span class="mark" aria-hidden="true" data-mark></span><span class="bt"><b>Green Zone</b><small>MO Guide · ED HKL</small></span></a>
       <button type="button" class="ib ghost" id="sideclose" aria-label="Close menu" data-icon="x"></button>
     </div>
     <button type="button" class="side-search" data-find><span data-icon="search"></span><span>Search</span><kbd>/</kbd></button>
+    <button type="button" class="side-back" data-gback hidden aria-haspopup="true" aria-expanded="false" aria-label="Back"><span data-icon="back"></span><span class="sb-t" aria-hidden="true"><small>Back to</small><b id="sbt"></b><span id="sbs" hidden></span></span></button>
     <nav class="snav" id="snav" aria-label="Sections">
       <div class="sgrp">On shift</div>
       <a href="#home" data-v="home"><span data-icon="home"></span>Home</a>
@@ -2238,6 +2288,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
   <div class="main">
     <header class="top" id="topbar">
       <button type="button" class="ib" id="menubtn" aria-label="Open menu" aria-controls="side" aria-expanded="false" data-icon="menu"></button>
+      <button type="button" class="gback" id="gback" data-gback hidden aria-haspopup="true" aria-expanded="false" aria-label="Back"><span data-icon="back"></span><span class="gb-l" id="gbl" aria-hidden="true"></span></button>
       <a class="brand" href="#home"><span class="mark" aria-hidden="true" data-mark></span><span class="bt"><b>Green Zone</b></span></a>
       <span class="top-title" id="toptitle" aria-hidden="true"></span>
       <button type="button" class="ib" data-find aria-label="Search the guide" data-icon="search"></button>

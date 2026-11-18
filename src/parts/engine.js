@@ -62,8 +62,10 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 17 Nov 2026';
+const APP_VER = 'Version 8, updated 18 Nov 2026';
 const V8 = [
+  ['Back, to where you were','A back arrow now sits at the top left whenever there is somewhere to go back to: it returns to the page you came from as you left it, on the same step of a pathway with your answers, the same tab and the same place on the page, or to your search with its words. After a link inside a step it opens for a moment to show where it leads. Press and hold it (or right-click) for the earlier pages of this visit. On a desktop it is in the menu, under Search. Your phone\'s own back does the same. It lives in memory only: a reload clears it.',[['#home','Home']]],
+  ['The pink EM Watch form','EM Watch now walks you through the department\'s pink form, page by page: the checklist and its five mandatory conditions, the consent the patient signs, and the slip you cut off for them, with the clinic\'s hours (Monday to Saturday, 8 am to 2 pm). The consent is in two tabs, Malay and English, as printed, and Read aloud reads it in either language. Each page opens as printed with a tap. Nothing about the patient goes into the guide.',[['#em-watch--form','The pink form'],['#em-watch','EM Watch']]],
   ['Find a drug, set a reminder, pin what you use','Type a drug\'s name in search and a card above the results shows where the guide names it: its rows on the ED pharmacy list, its pages in the dilution guide with the high-alert mark, any look-alike pair, and each step that names it, a tap away; doses stay in their own steps. Steps that print a short bedside interval (reassess after 10 minutes, repeat every 20 minutes) offer a reminder that shows when it is due, and buzzes on a phone that can (Android); it holds only the step and the time. Pin a calculator or a single step to the top of the home page. On a phone, Save, Pin, the whole map, Copy link and Start again now sit under the step, within reach of your thumb, and the pathway library folds by group.',[['#asthma--m1','A step with a reminder'],['#calc','Pin a calculator']]],
   ['Children\'s heart and breathing rates by age','A new calculator shows where a child\'s heart rate and breathing rate sit among healthy children of the same age band: the 1st to 99th centiles from Fleming et al. (Lancet 2011), a systematic review of 69 studies from birth to 18 years. It names the centile and never calls a rate normal, since the paper does not say which centile makes a rate abnormal. PEMCalc stays linked for blood pressure and SpO2, which the paper does not give.',[['#calc-vitals','Open the calculator'],['#ed-scores--vitals','The source and its limits']]],
   ['Calculators built in, from their own sources','The calculators that sent you to MDCalc now work inside the guide, and 22 are new: TIMI and HEART (ACS CPG 2026); the Canadian CT Head Rule, the Canadian C-spine Rule and NEXUS (head injury CPG 2015); Wells for PE (VTE CPG 2013); the Ottawa ankle, foot and knee rules; CHA2DS2-VASc and HAS-BLED (AF CPG 2012); MEWS (abdominal trauma CPG 2025); and, each from its own paper or owner and credited to its authors, ABCD2, the Ottawa SAH rule, PERC, the age-adjusted D-dimer, the San Francisco Syncope Rule, the Canadian Syncope Risk Score, Alvarado, qSOFA, NEWS2, CIWA-Ar, burns size and fluids, and a child\'s weight from age. Nothing is copied from MDCalc: its terms forbid it, even with credit. Only six outside links are left: five PEMCalc children\'s tools and the QTc.',[['#calc','Open the calculators'],['#ed-scores','Scores and rules']]],
@@ -270,7 +272,7 @@ const CONFIRM = [
   'From the HKL doctors starter pack (added 12 Nov 2026). Still to confirm: (1) medicines on one outpatient prescription: eight (Director\'s memo, 27 May 2019) or five (MOH quick guide 2020, p21; the hospital\'s Good Prescribing Practice slides)? (2) the death certificate duplicate: within 72 hours of discharge (the Medical Records video, Oct 2022) or within 24 hours (the form\'s own header)? (3) abbreviations: the pharmacy\'s accepted list and the MOH guide accept PCM and EES; the 2025 Good Prescribing Practice rules say write paracetamol, not PCM; (4) the GXM video (2023) asks for at least 5 ml in an adult and a printed label on the back of the form; the March 2026 transfusion memo in the guide says EDTA 3 to 4 ml and handwritten labels only.',
   'Department memos added on 12 Nov 2026 (Green Zone memos and the Yellow Zone menu). Still to confirm: (1) the elderly memo HKL/JK/98/188/3(14)2021 of 12 May 2021 (no IV tramadol over 65; elderly waiting for a primary team in the Yellow Zone): still in force? (2) the POCT memo HKL/JK/98/188/1(24)2023 of 8 Nov 2023 was issued for a reagent shortage: are its limits on stat FBC and ABG still in force? (3) repeat BP, ECG and DXT: memo HKL/JK/98/188/3(9)24 says Bilik 9, the one-way flow note says the Procedure Room: the same room? (4) is the LA OT Google Form (memo HKL/JK/98/188/3(23)22) still the way to book?',
   'The ED pharmacy drug list (added 12 Nov 2026) is the Emergency Pharmacy\'s list of 14 Apr 2025, with each drug\'s MOH formulary category. Still to confirm: (1) is a later list out? (2) how the ED applies the categories A/KK, A and A* when an MO writes the prescription (the formulary says who may start one; does the EP countersign?); (3) row 72, Gamma Benzene Hexachloride: the scan\'s decimal mark is unclear (read as 0.1%), and the formulary lists only 1%.',
-  'EM Watch booking is now in the app from work instruction AK-15 (in force 16 Mar 2026, p12). Still to confirm: its two forms, the Pink Form (Lampiran 1) and the EM WATCH Appointment form (Lampiran 2), which are not attached to the copy seen; and the timing: AK-15 aims to reassess within 48 to 72 hours and to review CT brain reports within 48 hours of discharge, where the department policy (2026, 9.2.1) and the 2023 deck give 1 week; and the deck\'s online prescription against AK-15\'s documents collected at the Record Unit.',
+  'EM Watch booking is now in the app from work instruction AK-15 (in force 16 Mar 2026, p12). A pink EM Watch form (four pages, no form number or date printed) was given by the guide owner on 18 Nov 2026 and is in the app. Still to confirm: (1) whether it is AK-15\'s Pink Form (Lampiran 1), and whether the slip cut off on its page 4 is the EM WATCH Appointment form (Lampiran 2); (2) its age condition, "Berumur lebih 18 tahun/penjaga" (over 18, or a guardian; its consent is signed by "the patient or authorised guardian"), against 18 and over in AK-15 and the department policy: may a patient under 18 use EM Watch with a guardian?; (3) its other conditions: a smartphone with WhatsApp and the know-how to make a video call, where AK-15 gives a smartphone or tablet with stable internet, used alone or with the family\'s help; "not Huawei" (the 2023 deck) is not on it; and "Pesakit tidak memerlukan pemeriksaan secara fisikal" (no physical examination needed; also the triage course, slide 27), which AK-15\'s criteria as the guide has them do not list; (4) the clinic\'s hours on the slip, Monday to Saturday 8 am to 2 pm, closed on Sunday, which no other source gives. (The clinic\'s mobile number, printed on pages 2 to 4, stays covered in the guide, by the guide owner\'s decision of 18 Nov 2026.) Also still to confirm: the timing: AK-15 aims to reassess within 48 to 72 hours and to review CT brain reports within 48 hours of discharge, where the department policy (2026, 9.2.1) and the 2023 deck give 1 week; and the deck\'s online prescription against AK-15\'s documents collected at the Record Unit.',
   'Redirection is in the app in part: a primary triage decision by the PPP for Level 5 (9XXX), with a Redirection Slip and the Redirection Book (AK-01, 2026; memo HKL/JK/98/188/3(2)24, 11 Jan 2024; the 2021 policy). Still to confirm: how a Green Zone MO redirects a patient already seen in the consultation room; whether private GPs are included; whether the 2021 hours (0730 to 1930, Monday to Friday), slip and list of Klinik Kesihatan are current; and the redirection procedure AK-01 cites (HKL/JK/PK 0x), which is not in the department\'s folder.',
   'EMACC follows memo HKL/JK/98/188/3(01)24 of 11 Jan 2024 since 12 Nov 2026 (the guide owner\'s decision), in place of the SOP of 1 Feb 2018: the TCA on the slip hijau and Counter 10, 7.30 am to 3.30 pm, the first visit no earlier than day 4 (urgent) or day 5, at most 2 visits within a month, blood results to EM WATCH; and EMACC runs 8 am to 3 pm, Monday to Friday (the guide owner, 12 Nov 2026). Still to confirm: a written source for those hours (the memo prints 7.30 am to 3.30 pm for the MOs, and the department policy, 2026, 8.3.3, 9 am to 4 pm on working days); work instruction AK-13 (an unsigned 2026 copy) phones the registration counter for a Google Sheet slot from 4 days after discharge; no 2026 document prints ext 7040; who EMACC is for still comes from the 2018 SOP; and the ebook\'s "EMACC or EMWATCH in 24 to 48 hours" (for example abdominal pain) against the memo\'s first EMACC visit on day 4 or day 5.',
   'Numbers against the current directory: Neuro Rehab 7099, the MAU 6682 / 6684 (both 2022 documents; a 2020 department table gives ext 5137 and 6838), the SCAN team line and the IPR on-call line.',
@@ -778,7 +780,7 @@ const memoSrc = (k, n, dir) => typeof n === 'number' ? `${dir}/${k}-p${n}` : n =
 const memoHTML = k => { const m = MEMOS[k], dir = m.dir || 'memo', sp = dir !== 'memo';
   return `<div class="fig figmemo${sp ? ' mm-sp' : ''}"><div class="mm-h"><span class="mm-chip">${svg(sp ? 'link' : 'rule')}${esc(m.kind || 'Department memo')}</span><span class="mm-ref">${esc(m.ref)} · ${esc(m.date)}</span></div>
     <p class="mm-t" lang="ms">${esc(m.t)}</p>
-    <div class="mm-p">${m.pages.map(([n, l]) => `<button type="button" class="pill" data-ppage="${memoSrc(k, n, dir)}" data-pname="${esc((sp ? m.t : 'Memo ' + m.ref) + ' · ' + l)}">${svg('poster')}${esc(l)}</button>`).join('')}<a class="pill" href="${m.list || MEMO_LIST}" target="_blank" rel="noopener noreferrer">${esc(m.lname || 'The department\'s memo list')}${svg('ext')}</a></div>
+    <div class="mm-p">${m.pages.map(([n, l]) => `<button type="button" class="pill" data-ppage="${memoSrc(k, n, dir)}" data-pname="${esc((sp ? m.t : m.kind ? m.ref : 'Memo ' + m.ref) + ' · ' + l)}">${svg('poster')}${esc(l)}</button>`).join('')}${m.list === false ? '' : `<a class="pill" href="${m.list || MEMO_LIST}" target="_blank" rel="noopener noreferrer">${esc(m.lname || 'The department\'s memo list')}${svg('ext')}</a>`}</div>
     <p class="fig-cap">${esc(m.cap || 'The memo as scanned, a page at a tap: signatures, registration numbers and any incident background are covered. The department\'s own list holds every memo.')}</p></div>`; };
 if (typeof MEMOS !== 'undefined') Object.keys(MEMOS).forEach(k => { FIGS['memo-' + k] = () => memoHTML(k); });
 /* Several sources on one step (the starter pack, data20.js): their cards one after another */
@@ -1052,6 +1054,8 @@ const ALIASES = [
   ['head knock', 'head injury'], ['hit head', 'head injury'], ['hit his head', 'head injury'], ['hit her head', 'head injury'], ['bumped head', 'head injury'],
   ['took too many pills', 'overdose'], ['took too many tablets', 'overdose'], ['too many pills', 'overdose'], ['too many tablets', 'overdose'], ['overdosed', 'overdose'], ['fits', 'seizure'], ['fitting', 'seizure'], ['convulsion', 'seizure'],
   ['passed out', 'syncope'], ['blacked out', 'syncope'], ['drunk', 'alcohol'], ['urine infection', 'uti'],
+  /* 18 Nov 2026: the department's names for the EM Watch form and its video call */
+  ['pink form', 'em watch form'], ['borang pink', 'em watch form'], ['google meet', 'em watch'],
   /* abbreviations */
   ['sob', 'breathless'], ['pcm', 'paracetamol'], ['htn', 'hypertensive'], ['loc', 'loss of consciousness'], ['cva', 'stroke'], ['dm', 'diabetes'],
   ['fb', 'foreign body'], ['hpt', 'hypertensive'], ['ugib', 'bleeding'], ['age', 'gastroenteritis', 1], ['pe', 'pulmonary embolism', 1], ['od', 'overdose', 1], ['mi', 'myocardial infarction', 1]
@@ -1270,7 +1274,7 @@ async function aiLoad(){
     Object.assign(AI, await aiIndex(buf, V => { if (pieces.length !== V) throw new Error('word pieces'); return aiTok(new Map(pieces.map((t, i) => [t, i]))); }));
   } catch(e){ AI.state = 'failed'; AI.err = String(e && e.message || e); }
   aiNote();
-  if (!$('#pal').hidden && $('#gq').value.trim()) renderPal();
+  if (!$('#pal').hidden && $('#gq').value.trim() && !askCtl) renderPal(); /* never over a question being asked, or its answer */
 }
 /* Malay-aware smart search (13 Nov 2026, the third of the five AI upgrades Krishna asked for). Measured on 63 searches: the
    multilingual model alone lifted Malay (4 to 13 of 30) but cost English (31 to 26 of 33), so the guide routes: a search with
@@ -1298,7 +1302,7 @@ async function aiLoadMs(){
     Object.assign(AIMS, await aiIndex(buf, V => { if (MV.pieces.length !== V) throw new Error('word pieces'); return MS.msTok(MV, {lower:true}); }));
   } catch(e){ AIMS.state = 'failed'; AIMS.err = String(e && e.message || e); }
   aiNote();
-  if (!$('#pal').hidden && $('#gq').value.trim()) renderPal();
+  if (!$('#pal').hidden && $('#gq').value.trim() && !askCtl) renderPal(); /* never over a question being asked, or its answer */
 }
 /* Each entry's closest passage to the search under model M, and which passage it was */
 function aiScores(M, q){
@@ -1489,18 +1493,20 @@ function renderPal(){
 }
 function palLinks(){ return $$('#palbody a').filter(a => !a.closest('.drugc')); } /* the drug card is reached by Tab; arrows and Enter keep to the results */
 function markSel(still){ palLinks().forEach((a, i) => a.setAttribute('aria-selected', i === palSel ? 'true' : 'false')); const a = palLinks()[palSel]; if (a && !still) a.scrollIntoView({block:'nearest'}); } /* new results open at the top, the drug card in full; only the arrow keys scroll */
-function openPal(){
+function openPal(q){
   if (!$('#pal').hidden) return;
   palFrom = document.activeElement;
   closeDrawer(false);
   if (AI.state === 'failed') aiTried = false; /* a download that failed is tried again on the next search */
   if (AIMS.state === 'failed') aiMsTried = false;
   $('#pal').hidden = false; document.documentElement.style.overflow = 'hidden';
-  $('#gq').value = ''; renderPal(); $('#gq').focus();
+  $('#gq').value = typeof q === 'string' ? q : ''; renderPal();
+  if (typeof q !== 'string' || matchMedia('(hover:hover) and (pointer:fine)').matches) $('#gq').focus();
 }
 function closePal(restore){
   if ($('#pal').hidden) return;
   if (typeof micStop === 'function' && micOn) micStop();
+  if (!restore && $('#gq').value.trim()) navPal = {q:$('#gq').value.trim(), at:Date.now()};
   $('#pal').hidden = true; document.documentElement.style.overflow = '';
   if (restore && palFrom && palFrom.focus) palFrom.focus();
 }
@@ -1726,7 +1732,7 @@ function showView(name, sub){
     if (from === 'learn'){ pauseTour(); stopJourney(); }
     $$('#viewport > .view').forEach(v => { v.hidden = v.dataset.view !== name; });
     const el = $(`#viewport > .view[data-view="${name}"]`);
-    el.classList.remove('enter');
+    el.classList.remove('enter', 'enter-back');
     if (!REDUCED && routed){ void el.offsetWidth; el.classList.add('enter'); }
   }
   curView = name; curSub = sub || null;
@@ -1835,9 +1841,17 @@ function tileClips(){
   }, {threshold:[0, .35, .6, .85, 1]});
   $$('.tm').forEach(el => { if (TILE_KEYS.has(el.dataset.tm)) tileIO.observe(el); });
 }
+/* A loop on a page that is no longer shown stops downloading and goes, unless it has fully arrived (18 Nov 2026): Safari's
+   engine kept every paused loop loading, 23 at once on pages no longer shown, which held the connections an X-ray film and
+   smart search needed on the local test server. A loop that only scrolls out of view on the page you are on keeps its video,
+   as before. When the page is shown again its loops start over their stills. */
+const tileFull = v => v.duration > 0 && v.buffered.length > 0 && v.buffered.end(v.buffered.length - 1) >= v.duration - .25;
 function playTile(el, show){
   let v = el.querySelector('video');
-  if (!show || document.hidden){ if (v) v.pause(); return; }
+  if (!show || document.hidden){
+    if (v){ v.pause(); if (!show && !tileFull(v) && el.closest('[hidden]')){ v.removeAttribute('src'); v.load(); v.remove(); } }
+    return;
+  }
   if (!v){
     v = document.createElement('video');
     v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
@@ -2029,7 +2043,7 @@ function draw(focus){
   const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip${p.page ? ' mono' : ''}">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
       <h1 id="run-title" tabindex="-1"${p.title.length > 26 ? ' class="long"' : ''}>${esc(p.title)}</h1>`;
   withTiles($('#run'), `<div class="run-h">
-      <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg('back')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
+      <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg(isRule ? 'rule' : 'path')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
         <div class="run-acts">
           <button type="button" class="ib" data-save aria-pressed="${saved}" aria-label="${saved ? 'Saved. Tap to remove from your list' : 'Save to your list'}" title="${saved ? 'Saved' : 'Save'}">${svg('star', '', saved)}</button>
           ${pinBtnHTML(sh, 'ib', false)}
@@ -2191,7 +2205,7 @@ function tabsOf(p){
   const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(state.id)}</div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
-  const note = d => `<div class="deptnote"><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}${d.refs ? `<ol class="srcl">${d.refs.map(r => `<li>${esc(r[0])} ${r[1][0] === '#' ? `<a href="${r[1]}">Open in this guide</a>` : `<a href="${r[1]}" target="_blank" rel="noopener noreferrer">Open source${svg('ext')}</a>`}</li>`).join('')}</ol>` : ''}</div>`;
+  const note = d => `<div class="deptnote"${d.lang ? ` lang="${d.lang}"` : ''}><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}${d.refs ? `<ol class="srcl">${d.refs.map(r => `<li>${esc(r[0])} ${r[1][0] === '#' ? `<a href="${r[1]}">Open in this guide</a>` : `<a href="${r[1]}" target="_blank" rel="noopener noreferrer">Open source${svg('ext')}</a>`}</li>`).join('')}</ol>` : ''}</div>`;
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
   if (p.dept) T.push({k:'dept', l:'Department notes', cls:'t-dept', html:p.dept.map(note).join('') + '<p class="hint">Not in the ebook: supplementary notes from department documents, with their sources.</p>'});
   /* A national guideline's reference notes, several tabs of them, each note with its page */
@@ -2337,7 +2351,7 @@ function sayEl(el, b){
   if (!TTS || !el) return;
   if (sayOn === b){ sayStop(); return; }
   sayStop(); stopReader(); pauseFilms();
-  const lg = /^ms/i.test((el.querySelector('[lang]') || el.closest('[lang]') || {getAttribute:() => 'en'}).getAttribute('lang') || '') ? 'ms' : 'en';
+  const lg = /^ms/i.test(([...el.querySelectorAll('[lang]')].find(x => !x.closest('.fig')) || el.closest('[lang]') || {getAttribute:() => 'en'}).getAttribute('lang') || '') ? 'ms' : 'en';
   const voices = TTS.getVoices() || [], v = sayVoice(lg);
   if (lg === 'ms' && voices.length && !v){ toast('This phone has no Malay voice. Add one in its text-to-speech settings.'); return; }
   const parts = sayChunks(sayLines(el)); if (!parts.length) return;
@@ -4856,7 +4870,7 @@ function renderPt(id, lang, back){
   document.title = (lg === 'ms' ? 'Nasihat penjagaan di rumah' : 'Home care advice') + ' · HKL';
 }
 $('#ptbody').addEventListener('click', e => {
-  if (e.target.closest('[data-ptback]')){ history.length > 1 ? history.back() : (location.hash = '#home'); return; }
+  if (e.target.closest('[data-ptback]')){ NAV.length ? navBack(NAV.length - 1) : (location.hash = '#home'); return; }
   const l = e.target.closest('[data-ptlang]');
   if (l && ptCur){ location.hash = '#pt-' + ptCur + (l.dataset.ptlang === 'ms' ? '-ms' : ''); return; }
   const b = e.target.closest('[data-ptsize]'); if (!b) return;
@@ -4901,7 +4915,8 @@ function route(){
   stopReader(); pauseFilms(); sayStop();
   const h = decodeURIComponent(location.hash.slice(1));
   let m, changed = false;
-  closePal(false); closeSettings(false); closeSheet(); closeMap(false); closePtq(false); closeFlag(false);
+  closePal(false); closeSettings(false); closeSheet(); closeMap(false); closePtq(false); closeFlag(false); closeNavList(false);
+  const navT = h === 'search' ? null : navBefore('#' + (h || 'home'));
   const pt = h.match(/^pt-([\w-]+?)(-ms)?$/), ptId = pt && ptKey(pt[1]) === pt[1] ? pt[1] : null;
   document.documentElement.classList.toggle('pt-mode', !!ptId);
   if (!ptId && document.title !== DOC_TITLE) document.title = DOC_TITLE;
@@ -4928,8 +4943,152 @@ function route(){
   else changed = showView('home');
   if (routed && changed) $('#viewport').focus({preventScroll:true});
   routed = true;
+  navAfter('#' + (h || 'home'), navT);
   requestAnimationFrame(fadeRows);
 }
+/* ================= Back through this visit (18 Nov 2026) =================
+   Krishna: "If after opening new content, create back button so that can go back to the previous content or page. Make it
+   interactive and high quality." Answering a step does not change the address, so the browser's own back used to land on a
+   pathway's first question. Now each page left is kept as a snapshot: its address; on a pathway the step, the answers given
+   (with their auto marks) and the open tab; the scroll position; and a search it was opened from. Back restores it: the arrow
+   in the top bar (where the logo sits, so the menu never moves), the sidebar's button on a desktop, the hold list (press and
+   hold, right-click, or the down arrow key) for earlier pages, and the phone's own back where the browser returns to a page
+   the guide tagged (history.state). Every other change of address is a fresh visit, as before: a page opened again by its
+   address starts at its first question. The guide moves by setting the address, never history.back(), so in the claude.ai
+   frame it cannot step out of the guide. Memory only (rule 4): nothing is written to storage, and a reload clears it. */
+const NAV_LOAD = Math.random().toString(36).slice(2, 8), NAV_MAX = 30, NAV_LIST = 8;
+let NAV = [], navSeq = 0, navHere = null, navWant = null, navPopSt = null, navPal = null, navFrom = null, navFromAt = 0, navPeekT = 0;
+const NAV_SNAPS = new Map(); /* a tagged history entry's key -> the page as it was left, for the browser's own back and forward */
+const NAV_IC = {home:'home', rules:'rule', tools:'check', calc:'calc', numbers:'phone', links:'link', pharmacy:'pill', dilution:'syringe', new:'spark', poster:'poster', about:'info', intro:'spark', install:'install', share:'share', learn:'route', pt:'heart'};
+addEventListener('popstate', e => { navPopSt = e.state; });
+/* Where a tap came from: a link inside the content or the search opens the arrow to show where it leads; the tab bar and the menu do not */
+document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a[href^="#"], [data-gocat]');
+  if (a){ navFrom = a.closest('#viewport, #pal') ? 'content' : 'chrome'; navFromAt = Date.now(); }
+}, true);
+function navTag(){
+  try {
+    const s = history.state; if (s && s.gzl === NAV_LOAD && s.gz) return s.gz;
+    const k = ++navSeq; history.replaceState({gz:k, gzl:NAV_LOAD}, ''); return k;
+  } catch (e) { return ++navSeq; } /* a frame that refuses: the phone's own back behaves as before; the guide's own back still works */
+}
+/* The page on screen, as it stands */
+function navSnap(){
+  if (!navHere) return null;
+  const s = {h:navHere.h, k:navHere.k, y:window.scrollY, j:''};
+  if (curView === 'run' && state.id && P[state.id]){
+    const p = P[state.id], n = p.nodes[state.cur], c = catOf(state.id) || {};
+    s.st = {id:state.id, trail:state.trail.map(t => ({...t})), cur:state.cur, tab:ptabSel};
+    s.t = p.title; s.s = (state.trail.length ? 'Step ' + (state.trail.length + 1) + ' · ' : '') + clip(n.end ? n.title : nodeText(n), 70);
+    s.ic = c.ic || (p.grp === 'rules' ? 'rule' : 'path'); s.j = c.j || '';
+  } else {
+    const v = curView || 'home', calc = (navHere.h.match(/^#calc-([a-z0-9]+)$/) || [])[1];
+    s.t = v === 'pathways' ? ({saved:'Saved', cpg:'Guidelines'}[libF] || 'Pathways') : v === 'calc' && calc && CALCS[calc] ? CALCS[calc].t
+      : v === 'learn' ? ({journey:'The patient journey', tour:'The tour', quiz:'The quiz'}[curSub] || VIEW_TITLE.learn) : v === 'pt' ? 'Advice for the patient' : VIEW_TITLE[v] || 'Home';
+    s.s = v === 'calc' && calc ? 'Calculator' : (navHere.h.match(/^#journey-(\d)$/) || [])[1] ? 'Stop ' + navHere.h.slice(-1) : '';
+    s.ic = v === 'pathways' ? (libF === 'saved' ? 'star' : 'path') : NAV_IC[v] || 'home';
+  }
+  return s;
+}
+/* Before a page changes: keep the one being left, and say whether this is a way back */
+function navBefore(hh){
+  const pop = navPopSt; navPopSt = null;
+  const want = navWant && navWant.h === hh ? navWant : null; navWant = null;
+  const pal = navPal && Date.now() - navPal.at < 2500 ? navPal.q : null; navPal = null;
+  const leave = navSnap();
+  if (leave){
+    if (pal){ leave.pal = pal; leave.t = 'Search'; leave.s = '“' + pal + '”'; leave.ic = 'search'; leave.j = ''; }
+    NAV_SNAPS.set(leave.k, leave);
+  }
+  let target = want;
+  if (!target && pop && pop.gzl === NAV_LOAD && NAV_SNAPS.has(pop.gz) && !(leave && pop.gz === leave.k)) target = NAV_SNAPS.get(pop.gz);
+  const i = target ? NAV.lastIndexOf(target) : -1;
+  if (i >= 0){ NAV = NAV.slice(0, i); return target; }
+  /* A fresh visit (or the browser's forward): the page left goes on the stack, unless it is the same page, the intro,
+     or the patient's page in its other language; a pathway opened again by its own address, with answers given, is kept */
+  if (leave && !/^#intro$/.test(leave.h)){
+    const same = leave.h === hh && !leave.pal && !(leave.st && leave.st.trail.length);
+    const ptLang = /^#pt-/.test(leave.h) && leave.h.replace(/-ms$/, '') === hh.replace(/-ms$/, '');
+    if (!same && !ptLang){ NAV.push(leave); if (NAV.length > NAV_MAX) NAV.shift(); }
+  }
+  return target;
+}
+/* After it changes: tag the entry, restore what was kept, and draw the button */
+function navAfter(hh, target){
+  navHere = {h:hh, k:navTag()};
+  if (target){
+    if (target.st && curView === 'run' && P[target.st.id]){
+      const p = P[target.st.id];
+      state = {id:target.st.id, trail:target.st.trail.map(t => ({...t})), cur:p.nodes[target.st.cur] ? target.st.cur : p.start};
+      ptabSel = target.st.tab; land = false; draw(false); setTopTitle(p.title);
+    }
+    const y = target.y; requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)));
+    if (!REDUCED){ const v = $('#viewport > .view:not([hidden])'); if (v){ v.classList.remove('enter', 'enter-back'); void v.offsetWidth; v.classList.add('enter-back'); } }
+    if (target.pal) setTimeout(() => openPal(target.pal), 0);
+  }
+  navDraw(!target && navFrom === 'content' && Date.now() - navFromAt < 2000);
+  navFrom = null;
+}
+function navDraw(peek){
+  const s = NAV[NAV.length - 1], on = !!s && curView !== 'pt';
+  $('#topbar').classList.toggle('has-back', on);
+  $$('[data-gback]').forEach(b => {
+    b.hidden = !on; if (!on) return;
+    b.setAttribute('aria-label', 'Back to ' + s.t + (s.s ? ', ' + s.s : ''));
+    b.title = 'Back to ' + s.t + '. Press and hold for earlier pages.';
+  });
+  if (on){ $('#gbl').textContent = s.t; $('#sbt').textContent = s.t; $('#sbs').textContent = s.s || ''; $('#sbs').hidden = !s.s; }
+  const g = $('#gback'); clearTimeout(navPeekT); g.classList.remove('peek');
+  if (on && peek){ void g.offsetWidth; g.classList.add('peek'); navPeekT = setTimeout(() => g.classList.remove('peek'), 2600); }
+}
+/* Back: one page, or (from the hold list) several */
+function navBack(i){
+  const s = NAV[i]; if (!s) return;
+  closeNavList(false); navWant = s; buzz('tick');
+  if (location.hash === s.h) route(); else location.hash = s.h;
+}
+/* The hold list: the earlier pages of this visit, newest first */
+let navListFrom = null;
+function openNavList(btn, focus){
+  const m = $('#gbm'); if (!NAV.length) return;
+  const rows = []; for (let i = NAV.length - 1, n = 1; i >= 0 && n <= NAV_LIST; i--, n++){ const s = NAV[i];
+    rows.push(`<li><button type="button" data-gbto="${i}"><span class="ic ${s.j ? 'j ' + s.j : 'gbm-ic'}">${svg(s.ic || 'path')}</span><span class="gbm-t"><b>${esc(s.t)}</b>${s.s ? `<small>${esc(s.s)}</small>` : ''}</span><span class="gbm-n">${n === 1 ? 'Back' : n + ' back'}</span></button></li>`); }
+  $('#gbml').innerHTML = rows.join('');
+  const r = btn.getBoundingClientRect();
+  const wide = innerWidth >= 1100, mw = Math.min(380, innerWidth - 20); /* a desktop opens it beside the menu, a phone under the top bar */
+  m.style.top = Math.round(wide ? r.top : r.bottom + 8) + 'px'; m.style.left = Math.round(wide ? r.right + 12 : Math.max(10, Math.min(r.left, innerWidth - mw - 10))) + 'px';
+  if (m.hidden){ navListFrom = btn; m.hidden = false; buzz('tick'); }
+  btn.setAttribute('aria-expanded', 'true');
+  if (focus){ const f = m.querySelector('button'); if (f) f.focus(); }
+}
+function closeNavList(restore){
+  const m = $('#gbm'); if (!m || m.hidden) return;
+  m.hidden = true; $$('[data-gback]').forEach(b => b.setAttribute('aria-expanded', 'false'));
+  if (restore && navListFrom && navListFrom.focus) navListFrom.focus();
+}
+(function(){
+  let held = false, t = 0;
+  const stop = () => clearTimeout(t);
+  document.addEventListener('pointerdown', e => {
+    const b = e.target.closest && e.target.closest('[data-gback]');
+    if (!b){ if (!(e.target.closest && e.target.closest('#gbm'))) closeNavList(false); return; }
+    held = false; stop(); t = setTimeout(() => { held = true; openNavList(b, false); }, 450);
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev => document.addEventListener(ev, stop, true));
+  document.addEventListener('contextmenu', e => { const b = e.target.closest && e.target.closest('[data-gback]'); if (!b) return; e.preventDefault(); stop(); held = true; openNavList(b, false); });
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('[data-gback]');
+    if (b){ e.preventDefault(); const h = held; held = false; if (h && !$('#gbm').hidden) return; /* the release of a long press */ navBack(NAV.length - 1); return; }
+    const r = e.target.closest && e.target.closest('[data-gbto]'); if (r){ navBack(+r.dataset.gbto); }
+  });
+  document.addEventListener('keydown', e => {
+    const b = e.target.closest && e.target.closest('[data-gback]');
+    if (b && (e.key === 'ArrowDown' || e.key === 'ContextMenu' || (e.shiftKey && e.key === 'F10'))){ e.preventDefault(); openNavList(b, true); return; }
+    if ($('#gbm').hidden) return;
+    if (e.key === 'Escape'){ e.preventDefault(); e.stopPropagation(); closeNavList(true); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){ const l = [...$$('#gbml button')], i = l.indexOf(document.activeElement); if (i < 0) return; e.preventDefault(); l[(i + (e.key === 'ArrowDown' ? 1 : l.length - 1)) % l.length].focus(); }
+  }, true);
+})();
 /* On a phone the on-shift views open on the sentence that carries their rule; More shows the rest */
 document.addEventListener('click', e => {
   const b = e.target.closest && e.target.closest('[data-vmore]'); if (!b) return;

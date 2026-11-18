@@ -150,7 +150,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await q.keyboard.press('Escape'); await q.waitForTimeout(150);
     const mf = await q.evaluate(() => Object.entries(MEMOS).filter(([, m]) => !m.dir).flatMap(([k, m]) => m.pages.map(([n]) => `memo/${k}-p${n}.webp`)));
     const onDisk = fs.readdirSync(path.join(__dirname, '..', 'app', 'memo')).map(f => 'memo/' + f).sort();
-    ok(mf.length === 41 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos, and nothing else (' + onDisk.length + ' on disk)');
+    ok(mf.length === 45 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos and the 4 of the pink EM Watch form, and nothing else (' + onDisk.length + ' on disk)');
     ok(await q.evaluate(() => { const d = document.createElement('div'); d.innerHTML = FIGS['memo-2022-19'](); const a = d.querySelector('a.pill'); return !!a && a.href === MEMO_LIST && a.target === '_blank'; }), 'each memo card links to the department\'s own memo list');
     // EMACC follows memo (01)24 of 11 Jan 2024 (Krishna, 12 Nov 2026)
     await q.goto(base + '#emacc--need'); await q.waitForTimeout(700);
@@ -992,6 +992,26 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => /6000/.test(document.querySelector('#cur').textContent) && /Parking Terbuka Cawangan Sumber/.test(document.querySelector('#cur').textContent)), 'Fire in the department: dial 6000, and the assembly point');
   await go(p, '#em-watch--book', 300);
   ok(await p.evaluate(() => (P['em-watch'].nodes.book.items || []).length >= 7 && /AK-15/.test(JSON.stringify(P['em-watch'].nodes.book))), 'EM Watch booking: the seven steps of AK-15');
+  /* 18 Nov 2026: the pink EM Watch form (data25.js) */
+  { const seenE = [], onReq = r => { if (/\/memo\/emwatch/.test(r.url())) seenE.push(r.url()); }; p.on('request', onReq);
+    ok(await p.evaluate(() => { const E = P['em-watch']; return E.nodes.cond.opts[0][1] === 'form' && E.nodes.form.next === 'book' && E.nodes.book.links[0][0] === '#em-watch--form' && /given by the guide owner on 18 Nov 2026/.test(E.nodes.book.gap); }), 'EM Watch: once the condition fits, the pink form comes before the booking steps, which link back to it and name it in their source line');
+    await go(p, '#em-watch--form', 450);
+    const ef = await p.evaluate(() => { const c = document.querySelector('#cur .figmemo'), t = document.querySelector('#cur').textContent;
+      return {conds:['Warganegara Malaysia sahaja', 'Berumur lebih 18 tahun/penjaga', 'Mempunyai telefon pintar & WhatsApp', 'Berpengetahuan melakukan panggilan video', 'Pesakit tidak memerlukan pemeriksaan secara fisikal'].every(s => t.includes(s)),
+        hours:/Isnin hingga Sabtu, 8\.00 pagi hingga 2\.00 petang/.test(t) && /Monday to Saturday, 8 am to 2 pm, closed on Sunday/.test(t),
+        pages:c ? [...c.querySelectorAll('[data-ppage]')].map(b => b.dataset.ppage) : [], link:c ? !!c.querySelector('a.pill') : null, chip:c ? c.querySelector('.mm-chip').textContent : ''}; });
+    ok(ef.conds && ef.hours, 'the form step quotes its five mandatory conditions and the slip\'s hours as printed');
+    ok(JSON.stringify(ef.pages) === JSON.stringify(['memo/emwatch-p1', 'memo/emwatch-p2', 'memo/emwatch-p3', 'memo/emwatch-p4']) && ef.link === false && /Department form/.test(ef.chip) && seenE.length === 0, 'its card is a department form with the four pages, links to no memo list, and loads none before a tap' + (seenE.length ? ' ' + seenE.join(' ') : ''));
+    await p.locator('#cur [data-ppage="memo/emwatch-p3"]').click(); await p.waitForFunction(() => { const i = document.querySelector('#lbimg'); return i.complete && i.naturalWidth > 0; }, null, {timeout:6000}).catch(() => {}); await p.waitForTimeout(150);
+    const lb = await p.evaluate(() => ({open:!document.querySelector('#lb').hidden, src:document.querySelector('#lbimg').getAttribute('src'), w:document.querySelector('#lbimg').naturalWidth, name:document.querySelector('#lbt').textContent}));
+    ok(lb.open && lb.src === 'memo/emwatch-p3.webp' && lb.w === 1240 && lb.name === 'The pink EM Watch form · Page 3: consent, English' && seenE.length === 1, 'a page of the form opens full size on a tap, named by the form, not as a memo' + (lb.open && lb.w === 1240 && seenE.length === 1 ? '' : ' ' + JSON.stringify({lb, seenE})));
+    await p.keyboard.press('Escape'); await p.waitForTimeout(200);
+    const tabs = await p.evaluate(() => { const t = [...document.querySelectorAll('#run .ptab-bar [role="tab"], #run .ptab-bar button')].map(b => b.textContent.trim()); selectTab('n0'); const ms = [...document.querySelectorAll('#run .deptnote[lang="ms"]')].length, txt = document.querySelector('#run').textContent; selectTab('n1'); return {t, ms, bm:/Saya bersetuju untuk menerima rawatan melalui tele konsultasi/.test(txt), en:/I agree to receive teleconsultation treatment via online video consultation/.test(document.querySelector('#run').textContent)}; });
+    ok(tabs.t.some(x => /Consent, BM/.test(x)) && tabs.t.some(x => /Consent, English/.test(x)) && tabs.ms === 4 && tabs.bm && tabs.en, 'the consent is in two tabs, Malay (marked as Malay) and English, as printed');
+    if (guardRe('emwatch')) { const re = new RegExp(guardRe('emwatch')), art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
+      ok(!re.test(art) && !re.test(idx) && await p.evaluate(r => !new RegExp(r).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('emwatch')), 'the clinic\'s mobile number printed on the form is nowhere in the guide, page or data'); }
+    ok(await p.evaluate(() => ['pink form', 'borang pink', 'google meet', 'borang kebenaran', 'emwatch'].every(q => { const r = findMore(q); return (r.r || r)[0].href === '#em-watch'; }) && ['klinik kesihatan', 'clinic referral', 'referral form', 'borang', 'pink urine'].every(q => { const r = findMore(q); return !(r.r || r).slice(0, 2).some(x => x.href === '#em-watch'); })), 'search: the pink form, its Malay name and Google Meet open EM Watch first, while clinic, form and borang searches keep their own first results');
+    p.off('request', onReq); }
   ok(await p.evaluate(() => !/9 Jul 2024/.test(JSON.stringify(P))), 'memo (10)24 is no longer dated 9 Jul 2024');
   await go(p, '#home', 300);
   /* The medical interpreters (memo of 9 Jul 2026) */
@@ -1476,7 +1496,73 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const reading = await tq.evaluate(() => ({on:!!sayOn, c:window.__cancel, label:document.querySelector('#run [data-say="tab"] span').textContent}));
     await tq.evaluate(() => { location.hash = '#renal-colic'; }); await tq.waitForTimeout(300);
     ok(reading.on && reading.label === 'Stop reading' && await tq.evaluate(c => !sayOn && window.__cancel > c, reading.c), 'read aloud: while it reads, the button says Stop reading, and leaving the page stops it');
+    /* 18 Nov 2026: the pink EM Watch form: an English step with a Malay-titled card reads in English; each consent tab in its own voice */
+    await tq.evaluate(() => { window.__hold = false; window.__said = []; });
+    await tq.goto(U + '#em-watch--form', {waitUntil:'load'}); await tq.waitForTimeout(600);
+    await tq.click('#run [data-say="cur"]'); await tq.waitForTimeout(250);
+    const said3 = await tq.evaluate(() => ({s:window.__said[0], all:window.__said.map(s => s.t).join(' ')}));
+    ok(said3.s && said3.s.lang === 'en-GB' && /Fill in the pink EM Watch form/.test(said3.all), 'read aloud: the EM Watch form step reads in English, though its card\'s title is Malay');
+    await tq.evaluate(() => { sayStop(); window.__said = []; selectTab('n0'); }); await tq.waitForTimeout(150);
+    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    const said4 = await tq.evaluate(() => ({s:window.__said[0], all:window.__said.map(s => s.t).join(' ')}));
+    ok(said4.s && said4.s.lang === 'ms-MY' && said4.s.v === 'Malay' && /Kebenaran Rawatan/.test(said4.all) && /Saya adalah pesakit atau penjaga yang sah/.test(said4.all), 'read aloud: the EM Watch consent in Malay is read by a Malay voice, as printed');
+    await tq.evaluate(() => { sayStop(); window.__said = []; selectTab('n1'); }); await tq.waitForTimeout(150);
+    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    const said5 = await tq.evaluate(() => ({s:window.__said[0], all:window.__said.map(s => s.t).join(' ')}));
+    ok(said5.s && said5.s.lang === 'en-GB' && /Treatment consent/.test(said5.all) && /I am the patient or authorised guardian/.test(said5.all), 'read aloud: the English consent is read by an English voice');
     await tc.close();
+
+    /* Back through this visit (18 Nov 2026): the arrow restores the page left, as it was; a revisit by address starts fresh */
+    const nv = await b.newContext({...phone, reducedMotion:'reduce'}), nq = await nv.newPage(); nq.on('pageerror', e => errs.push('back PAGEERROR: ' + e.message));
+    const NW = ms => nq.waitForTimeout(ms), nhash = h => nq.evaluate(x => { location.hash = x; }, h);
+    await nq.goto(U + '#home', {waitUntil:'load'}); await NW(500);
+    ok(await nq.evaluate(() => document.querySelector('#gback').hidden), 'back: no arrow on the first page of a visit');
+    await nhash('#renal-colic'); await NW(450);
+    await nq.tap('#cur button.opt[data-go="0"]'); await NW(350);
+    await nq.tap('#cur button.opt[data-go="0"], #cur [data-next]'); await NW(350);
+    const nat = await nq.evaluate(() => ({cur:state.cur, n:state.trail.length}));
+    await nq.evaluate(() => scrollTo(0, 260)); await NW(150);
+    await nq.evaluate(() => { const a = document.createElement('a'); a.href = '#emacc'; a.textContent = 'EMACC'; document.querySelector('#cur').appendChild(a); a.click(); }); await NW(500);
+    const ng = await nq.evaluate(() => { const g = document.querySelector('#gback'); return {on:!g.hidden, label:g.getAttribute('aria-label'), peek:g.classList.contains('peek'), brand:getComputedStyle(document.querySelector('.top .brand')).display, menu:Math.round(document.querySelector('#menubtn').getBoundingClientRect().left), sw:document.documentElement.scrollWidth, iw:innerWidth}; });
+    ok(ng.on && /^Back to Renal colic, Step 3 · /.test(ng.label) && ng.peek && ng.brand === 'none' && ng.menu <= 16 && ng.sw <= ng.iw, 'back: after a link inside a step, the arrow opens to show where it leads, in the logo\'s place, the menu unmoved and nothing past the edge' + (ng.on && ng.peek ? '' : ' ' + JSON.stringify(ng)));
+    await nq.tap('#gback'); await NW(600);
+    const nr = await nq.evaluate(() => ({hash:location.hash, cur:state.cur, n:state.trail.length, y:Math.round(scrollY), next:document.querySelector('#gback').getAttribute('aria-label')}));
+    ok(nr.hash === '#renal-colic' && nr.cur === nat.cur && nr.n === nat.n && Math.abs(nr.y - 260) <= 4, 'back: returns to the same step, with its answers and its place on the page' + (nr.cur === nat.cur ? '' : ' ' + JSON.stringify({nr, nat})));
+    ok(nr.next === 'Back to Home', 'back: and then offers the page before it');
+    await nhash('#emacc'); await NW(450); await nq.goBack(); await NW(600);
+    ok(await nq.evaluate(x => location.hash === '#renal-colic' && state.cur === x.cur && state.trail.length === x.n, nat), 'back: the phone\'s own back restores the step too');
+    await nhash('#home'); await NW(350); await nhash('#renal-colic'); await NW(450);
+    ok(await nq.evaluate(() => state.cur === P['renal-colic'].start && !state.trail.length), 'back: a pathway opened again by its address starts at its first question, as before');
+    await nq.tap('#cur button.opt[data-go="0"]'); await NW(300);
+    await nhash('#numbers'); await NW(400); await nhash('#pharmacy'); await NW(400);
+    await nq.dispatchEvent('#gback', 'contextmenu'); await NW(250);
+    const nl = await nq.evaluate(() => ({open:!document.querySelector('#gbm').hidden, rows:[...document.querySelectorAll('#gbml button b')].map(x => x.textContent), n:[...document.querySelectorAll('#gbml .gbm-n')].map(x => x.textContent), exp:document.querySelector('#gback').getAttribute('aria-expanded')}));
+    ok(nl.open && nl.rows[0] === 'Numbers' && nl.rows[1] === 'Renal colic' && nl.n[0] === 'Back' && nl.n[1] === '2 back' && nl.exp === 'true', 'back: press and hold lists the earlier pages of the visit, newest first' + (nl.open ? '' : ' ' + JSON.stringify(nl)));
+    await nq.tap('#gbml button >> nth=1'); await NW(550);
+    ok(await nq.evaluate(() => location.hash === '#renal-colic' && state.trail.length === 1 && document.querySelector('#gbm').hidden), 'back: a row of the list goes back that far, as the page was');
+    await nq.evaluate(() => { openPal(); document.querySelector('#gq').value = 'tramadol'; renderPal(); }); await NW(400);
+    await nq.tap('#gres a >> nth=0'); await NW(550);
+    ok(await nq.evaluate(() => document.querySelector('#gback').getAttribute('aria-label') === 'Back to Search, “tramadol”'), 'back: from a search result, the arrow leads back to the search');
+    await nq.tap('#gback'); await NW(650);
+    const ns = await nq.evaluate(() => ({open:!document.querySelector('#pal').hidden, q:document.querySelector('#gq').value, rows:document.querySelectorAll('#gres a').length, under:location.hash, kb:document.activeElement === document.querySelector('#gq')}));
+    ok(ns.open && ns.q === 'tramadol' && ns.rows > 0 && ns.under === '#renal-colic' && !ns.kb, 'back: the search reopens with its words and results, over the page it came from, without the phone\'s keyboard' + (ns.open ? '' : ' ' + JSON.stringify(ns)));
+    await nq.evaluate(() => closePal(true)); await NW(150);
+    ok(await nq.evaluate(() => sessionStorage.length === 0 && Object.keys(localStorage).every(k => /^gz-/.test(k)) && !Object.values(localStorage).some(v => /"trail"|"gzl"/.test(v))), 'back: memory only: nothing is written to storage');
+    await nv.close();
+    /* On a desktop the menu carries it under Search */
+    const dv = await b.newContext({viewport:{width:1280, height:800}, reducedMotion:'reduce'}), dq = await dv.newPage(); dq.on('pageerror', e => errs.push('back desk PAGEERROR: ' + e.message));
+    await dq.goto(U + '#home', {waitUntil:'load'}); await dq.waitForTimeout(500);
+    await dq.evaluate(() => { location.hash = '#asthma'; }); await dq.waitForTimeout(450); await dq.click('#cur button.opt[data-go="0"]'); await dq.waitForTimeout(350);
+    await dq.evaluate(() => { location.hash = '#calc-curb'; }); await dq.waitForTimeout(500);
+    const dd = await dq.evaluate(() => ({side:getComputedStyle(document.querySelector('.side-back')).display, top:getComputedStyle(document.querySelector('#topbar')).display, t:document.querySelector('#sbt').textContent, s:document.querySelector('#sbs').textContent}));
+    ok(dd.side === 'flex' && dd.top === 'none' && dd.t === 'Bronchial asthma' && /^Step 2 · /.test(dd.s), 'back: on a desktop, the menu shows Back to, with the page and its step' + (dd.side === 'flex' ? '' : ' ' + JSON.stringify(dd)));
+    await dq.click('.side-back', {button:'right'}); await dq.waitForTimeout(250);
+    const dl = await dq.evaluate(() => { const m = document.querySelector('#gbm').getBoundingClientRect(), s = document.querySelector('.side-back').getBoundingClientRect(), top = document.elementFromPoint(m.left + 40, m.top + 40); return {open:!document.querySelector('#gbm').hidden, beside:m.left >= s.right, onTop:!!(top && top.closest('#gbm'))}; });
+    ok(dl.open && dl.beside && dl.onTop, 'back: a right-click opens the list beside the menu, drawn above the page' + (dl.onTop ? '' : ' ' + JSON.stringify(dl)));
+    await dq.keyboard.press('Escape'); await dq.waitForTimeout(150);
+    await dq.click('.side-back'); await dq.waitForTimeout(550);
+    ok(await dq.evaluate(() => location.hash === '#asthma' && state.trail.length === 1 && document.querySelector('#gbm').hidden), 'back: the menu\'s button goes back, as the page was');
+    await dv.close();
 
     /* Ask with exact quotes (13 Nov 2026): a quote shows only if it is the guide's own text, letter for letter */
     const qc = await b.newContext({...phone, reducedMotion:'reduce'});
@@ -1491,9 +1577,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const qq = await qc.newPage(); qq.on('pageerror', e => errs.push('ask quotes PAGEERROR: ' + e.message));
     await qq.goto(U + '#home', {waitUntil:'load'}); await qq.waitForTimeout(600);
     await qq.evaluate(() => openPal()); await qq.fill('#gq', 'pregnant dengue patient which zone'); await qq.waitForTimeout(300);
-    await qq.click('#gask'); await qq.waitForTimeout(500);
+    await qq.click('#gask'); await qq.waitForFunction(() => document.querySelectorAll('#gaskres .rs').length >= 2, null, {timeout:6000}).catch(() => {}); await qq.waitForTimeout(150);
     const aqr = await qq.evaluate(() => ({q:window.__quote, li:[...document.querySelectorAll('#gaskres .rs')].map(s => s.textContent), note:(document.querySelector('#gaskn') || {}).textContent || ''}));
-    ok(aqr.li.length >= 2 && aqr.li[0].includes('“' + aqr.q + '”') && !aqr.li.some(t => /never names/.test(t)) && /checked letter for letter/.test(aqr.note), 'ask: a quote Claude copied from the guide shows in quotation marks; a quote that is not the guide\'s own text is dropped');
+    ok(aqr.li.length >= 2 && aqr.li[0].includes('“' + aqr.q + '”') && !aqr.li.some(t => /never names/.test(t)) && /checked letter for letter/.test(aqr.note), 'ask: a quote Claude copied from the guide shows in quotation marks; a quote that is not the guide\'s own text is dropped' + (aqr.li.length >= 2 && aqr.li[0].includes('“' + aqr.q + '”') ? '' : ' ' + JSON.stringify(aqr).slice(0, 600)));
     await qc.close();
 
     /* Voice search on this phone (13 Nov 2026), with stand-ins for the microphone and the speech model (no network) */
@@ -1848,6 +1934,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await ap.goto(W + 'artifact.html#install', {waitUntil:'load'}); await ap.waitForTimeout(900);
     ok(await ap.evaluate(() => { const a = document.querySelector('#inhero a.in-go'); return document.querySelector('#in-state').textContent === 'Install it from the web app' && !document.querySelector('#in-steps') && !document.querySelector('#in-chips') && !window.GZ_PWA && !!a && a.href === APP_URL + '#install' && a.target === '_blank' && a.rel.includes('noopener') && !!document.querySelector('.in-qr-c'); }), 'artifact: Install the guide says it installs from the web app, links to its #install page and shows the code');
     ok(await ap.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).length === 0) && !aerr.length && await hscroll(ap) <= 0, 'artifact: no service worker, no errors, no sideways scroll' + (aerr.length ? ': ' + aerr.join('; ') : ''));
+    await ap.evaluate(() => { location.hash = '#asthma'; }); await ap.waitForTimeout(450); await ap.tap('#cur button.opt[data-go="0"]'); await ap.waitForTimeout(350);
+    await ap.evaluate(() => { location.hash = '#numbers'; }); await ap.waitForTimeout(450); await ap.tap('#gback'); await ap.waitForTimeout(550);
+    ok(await ap.evaluate(() => location.hash === '#asthma' && state.trail.length === 1) && !aerr.length, 'artifact: back returns to the step, as it was');
     await ap.screenshot({path:out + '/p-install-artifact.png', fullPage:true});
     await ac.close();
 

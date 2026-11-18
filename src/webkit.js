@@ -15,13 +15,17 @@ const VIEWS = ['#home', '#pathways', '#rules', '#tools', '#calc', '#calc-news2',
   const srv = spawn(process.execPath, [path.join(__dirname, 'serve.js')], {env: {...process.env, PORT: String(PORT)}, stdio: 'ignore'});
   await new Promise(r => setTimeout(r, 800));
   let problems = 0;
-  const b = await pw.webkit.launch();
+  let b = null;
   try {
     for (const [dev, scheme] of [['iPhone 13', 'light'], ['iPhone 13', 'dark'], ['iPhone SE', 'light']]) {
+      /* a fresh WebKit for each pass (18 Nov 2026): one pass's unfinished loads cannot hold the next pass's connections */
+      if (b) await b.close();
+      b = await pw.webkit.launch();
       const ctx = await b.newContext({...pw.devices[dev], colorScheme: scheme, serviceWorkers: 'block'});
       const p = await ctx.newPage(), errs = [], bad = [], shots = dev === 'iPhone 13';
+      const pend = new Map(); p.on('request', r => pend.set(r, Date.now())); p.on('requestfinished', r => pend.delete(r)); p.on('requestfailed', r => pend.delete(r));
       p.on('pageerror', e => errs.push('pageerror ' + e.message)); p.on('console', m => { if (m.type() === 'error') errs.push('console ' + m.text().slice(0, 160)); });
-      await p.goto(URL + '#home', {waitUntil: 'load'}); await p.waitForTimeout(900);
+      await p.goto(URL + '#home', {waitUntil: 'load', timeout: 90000}); await p.waitForTimeout(900);
       for (const v of VIEWS) {
         const before = errs.length;
         await p.evaluate(h => { location.hash = h; }, v); await p.waitForTimeout(v === '#tour' ? 900 : 550);
@@ -53,13 +57,21 @@ const VIEWS = ['#home', '#pathways', '#rules', '#tools', '#calc', '#calc-news2',
       await p.tap('#calcbox [data-pin]'); await p.waitForTimeout(200);
       await p.evaluate(() => { location.hash = '#home'; }); await p.waitForTimeout(500);
       if (!(await p.evaluate(() => !document.querySelector('#pins').hidden))) bad.push('the pin did not show on home');
-      await p.evaluate(() => { location.hash = '#xray-guide--wrj'; }); await p.waitForTimeout(900);
-      if (!(await p.evaluate(() => { const i = document.querySelector('.xf img'); return !!i && i.naturalWidth > 0; }))) bad.push('the wrist film did not load');
+      await p.evaluate(() => { location.hash = '#xray-guide--wrj'; }); await p.waitForTimeout(500);
+      /* the film is lazy: bring it near the screen, then give it time to arrive */
+      await p.evaluate(() => { const i = document.querySelector('.xf img'); if (i) i.scrollIntoView({block:'center'}); });
+      const film = await p.waitForFunction(() => { const i = document.querySelector('.xf img'); return !!i && i.naturalWidth > 0; }, null, {timeout:6000}).then(() => true).catch(() => false);
+      if (!film) bad.push('the wrist film did not load');
+      /* No tile loop stays attached on a page that is no longer shown (18 Nov 2026) */
+      const vids = await p.evaluate(() => [...document.querySelectorAll('video')].filter(v => v.currentSrc || v.getAttribute('src')).map(v => ({src:(v.currentSrc || v.getAttribute('src')).split('/').slice(-2).join('/'), ns:v.networkState, hidden:!!v.closest('[hidden]'), tile:!!v.closest('.tm')})));
+      if (vids.some(v => v.tile && v.hidden)) bad.push('a tile loop is still attached on a page no longer shown: ' + vids.filter(v => v.tile && v.hidden).map(v => v.src).join(', '));
+      /* When something failed, say what was still open and which videos were attached */
+      if (bad.length) console.log('  open requests: ' + ([...pend].map(([r, t]) => r.url().replace(URL, '') + ' ' + Math.round((Date.now() - t) / 1000) + 's').join(' | ').slice(0, 700) || 'none') + '\n  videos attached: ' + (vids.map(v => v.src + ' (networkState ' + v.ns + (v.hidden ? ', hidden page' : '') + ')').join(', ') || 'none'));
       console.log(`WebKit ${dev}, ${scheme}: ${bad.length ? bad.length + ' problem(s)' : 'no problems'}`); bad.forEach(x => console.log('  - ' + x));
       problems += bad.length;
       await ctx.close();
     }
-  } finally { await b.close(); srv.kill(); }
+  } finally { if (b) await b.close(); srv.kill(); }
   console.log(problems ? problems + ' problem(s)' : 'Safari\'s engine: no problems'); console.log('screenshots: ' + OUT);
   process.exitCode = problems ? 1 : 0;
 })();
