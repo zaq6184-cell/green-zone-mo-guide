@@ -1564,6 +1564,75 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await dq.evaluate(() => location.hash === '#asthma' && state.trail.length === 1 && document.querySelector('#gbm').hidden), 'back: the menu\'s button goes back, as the page was');
     await dv.close();
 
+    /* Open now (18 Nov 2026): the hours the sources print, read against Malaysia time, whatever the phone's own time zone */
+    const onc = await b.newContext({...phone, reducedMotion:'reduce', timezoneId:'Europe/London'}), onq = await onc.newPage(); onq.on('pageerror', e => errs.push('open now PAGEERROR: ' + e.message));
+    await onq.clock.setFixedTime(new Date('2026-11-17T06:40:00Z')); /* Tuesday 2.40 pm in Malaysia, 6.40 am in London */
+    await onq.goto(U + '#home', {waitUntil:'load'}); await onq.waitForFunction(() => document.querySelectorAll('#tl-now .nowl a').length >= 3, null, {timeout:6000}).catch(() => {});
+    const on1 = await onq.evaluate(() => ({t:document.querySelector('#tl-now [data-nowt]').textContent, sh:document.querySelector('#tl-now .nowsh').textContent, emacc:document.querySelector('#tl-now [data-nowk="emacc"]').innerText, cls:document.querySelector('#tl-now [data-nowk="emacc"]').className}));
+    ok(on1.t === 'Tue 2.40 pm' && on1.sh === 'AM shift' && /In session until 3 pm \(20 min left\)/.test(on1.emacc) && on1.cls === 'on', 'open now: the home tile reads Malaysia time on a phone set to London (Tuesday 2.40 pm, AM shift, EMACC in session for 20 more minutes)' + (on1.cls === 'on' ? '' : ' ' + JSON.stringify(on1)));
+    const ost = await onq.evaluate(() => { const H = k => HOURS.find(h => h.k === k), L = (k, dow, h, m) => hoursState(H(k), {dow, min:h * 60 + m}).line;
+      return {emOpen:L('emacc', 1, 8, 0), emClose:L('emacc', 2, 15, 0), emFri:L('emacc', 5, 15, 0), ewSat:L('emwatch', 6, 13, 0), ewSun:L('emwatch', 0, 10, 0),
+        abcFri:L('abc', 5, 15, 30), abcThu:L('abc', 4, 16, 0), abcFriLate:L('abc', 5, 16, 30), sh1:L('shift', 3, 21, 59), sh2:L('shift', 3, 22, 0), sh3:L('shift', 4, 7, 59), sh4:L('shift', 4, 8, 0),
+        cb1:L('cbs', 2, 16, 59), cb2:L('cbs', 2, 17, 0), mau:L('mau', 2, 4, 0), laot:L('laot', 2, 21, 0)}; });
+    ok(ost.emOpen === 'In session until 3 pm' && ost.emClose === 'Not in session now; next session tomorrow, 8 am' && ost.emFri === 'Not in session now; next session Monday, 8 am', 'open now: EMACC opens on the minute and closes on the minute, and after Friday its next session is Monday' + (ost.emFri.includes('Monday') ? '' : ' ' + JSON.stringify(ost)));
+    ok(ost.ewSat === 'In session until 2 pm' && ost.ewSun === 'Not in session now; next session tomorrow, 8 am', 'open now: EM Watch runs on Saturday and not on Sunday, as its slip prints');
+    ok(ost.abcFri === 'In session until 4.30 pm (unless today is a public holiday)' && ost.abcThu === 'Not in session now; next session tomorrow, 3 pm (unless it is a public holiday)' && ost.abcFriLate === 'Not in session now; next session Monday, 2 pm (unless it is a public holiday)', 'open now: the Animal Bite Clinic keeps its Friday hours and says the public holiday it cannot know');
+    ok(ost.sh1 === 'PM shift, 3 pm to 10 pm' && ost.sh2 === 'ON shift, 10 pm to 8 am' && ost.sh3 === 'ON shift, 10 pm to 8 am' && ost.sh4 === 'AM shift, 8 am to 3 pm', 'open now: the night shift runs across midnight');
+    ok(/^Before 1700 hr/.test(ost.cb1) && /^After 1700 hr: the manual sends a SCACC Code Blue to MECC, 5333$/.test(ost.cb2) && ost.mau === 'After hours now: MAU 1, 2 or 3, until 8 am' && ost.laot === 'No orthopaedic cases in the emergency OT now, until 8 am', 'open now: the hours that change a route say what holds now and until when');
+    ok(await onq.evaluate(() => HOURS.every(h => { const [id, k] = h.at.slice(1).split('--'); return P[id] && P[id].nodes[k] && JSON.stringify(P[id].nodes[k]).includes(h.phrase) && /days are not printed|Sessions|AM 8 am/.test(h.hrs); })), 'open now: every row\'s hours are still printed in the step it names, and the rows without days say so');
+    await onq.evaluate(() => { location.hash = '#emacc--clinic'; }); await onq.waitForFunction(() => !!document.querySelector('.nowc [data-nowk="emacc"]'), null, {timeout:5000}).catch(() => {});
+    const och = await onq.evaluate(() => { const c = document.querySelector('.nowc'); return c ? {t:c.innerText.replace(/\s+/g, ' '), before:!!(c.compareDocumentPosition(document.querySelector('#cur')) & Node.DOCUMENT_POSITION_FOLLOWING), kinds:/admit|discharge|observe|refer/.test(c.innerHTML)} : null; });
+    ok(och && /Tue 2\.40 pm EMACC: In session until 3 pm/.test(och.t) && och.before && !och.kinds, 'open now: the EMACC step shows its hours live, with the time read, above the step, in no outcome colour' + (och ? '' : ' (no chips)'));
+    await onq.clock.setFixedTime(new Date('2026-11-17T07:05:00Z')); await onq.evaluate(() => nowTick());
+    ok(await onq.evaluate(() => /Tue 3\.05 pm EMACC: Not in session now; next session tomorrow, 8 am/.test(document.querySelector('.nowc').innerText.replace(/\s+/g, ' '))), 'open now: the chips update as the clock passes 3 pm');
+    ok(await onq.evaluate(() => sessionStorage.length === 0 && !Object.keys(localStorage).some(k => /now|hour|open/i.test(k))), 'open now: nothing is stored');
+    await onc.close();
+
+    /* Changed since you last looked (18 Nov 2026): a count of rounds seen, and marks for what changed after it */
+    const ec = await b.newContext({...phone, reducedMotion:'reduce'}), eq = await ec.newPage(); eq.on('pageerror', e => errs.push('changed PAGEERROR: ' + e.message));
+    await eq.goto(U + '#em-watch', {waitUntil:'load'}); await eq.waitForTimeout(600);
+    const e1 = await eq.evaluate(() => ({stored:localStorage.getItem('gz-round'), n:V8.length, note:!!document.querySelector('.chg-n'), mark:CHG.size}));
+    ok(e1.stored === String(e1.n) && !e1.note && e1.mark === 0, 'changed: on a first open the phone stores the count of rounds and marks nothing');
+    await eq.evaluate(() => localStorage.setItem('gz-round', String(V8.length - 5))); await eq.reload({waitUntil:'load'}); await eq.waitForTimeout(700);
+    const e2 = await eq.evaluate(() => ({note:(document.querySelector('.chg-n') || {}).textContent || '', stored:localStorage.getItem('gz-round'), n:V8.length}));
+    ok(/Changed since you last opened the guide: The pink EM Watch form/.test(e2.note) && e2.stored === String(e2.n), 'changed: five rounds later, EM Watch opens with what changed in it, and the count moves on');
+    await eq.evaluate(() => { location.hash = '#rules'; }); await eq.waitForTimeout(500);
+    ok(await eq.evaluate(() => [...document.querySelectorAll('#v-rules .badge.b-chg')].length >= 1), 'changed: the rules list marks EM Watch Changed');
+    await eq.evaluate(() => { location.hash = '#home'; }); await eq.waitForTimeout(500);
+    ok(await eq.evaluate(() => document.querySelectorAll('#newcard .chg-d').length === 5), 'changed: What\'s new on the home page marks the five rounds that are new to this phone');
+    await ec.close();
+
+    /* The reference beside the step (18 Nov 2026), on a desktop */
+    const rc = await b.newContext({viewport:{width:1280, height:800}, reducedMotion:'reduce'}), rq = await rc.newPage(); rq.on('pageerror', e => errs.push('ref beside PAGEERROR: ' + e.message));
+    await rq.goto(U + '#renal-colic', {waitUntil:'load'}); await rq.waitForTimeout(600);
+    await rq.click('.rail-p .refsw'); await rq.waitForTimeout(400);
+    const rb = await rq.evaluate(() => { const c = document.querySelector('#cur').getBoundingClientRect(), r = document.querySelector('.refcol').getBoundingClientRect();
+      return {side:document.querySelector('.run-grid').classList.contains('ref-side'), apart:c.right <= r.left, top:Math.abs(c.top - r.top) < 400, rail:getComputedStyle(document.querySelector('.rail-p')).display, strip:getComputedStyle(document.querySelector('.strip')).display, sw:document.documentElement.scrollWidth <= innerWidth, pref:localStorage.getItem('gz-refside')}; });
+    ok(rb.side && rb.apart && rb.top && rb.rail === 'none' && rb.strip !== 'none' && rb.sw && /on/.test(rb.pref), 'reference beside: on a desktop the reference tabs sit beside the step, the route moves to the strip, nothing scrolls sideways' + (rb.apart ? '' : ' ' + JSON.stringify(rb)));
+    await rq.evaluate(() => { location.hash = '#asthma'; }); await rq.waitForTimeout(500);
+    ok(await rq.evaluate(() => document.querySelector('.run-grid').classList.contains('ref-side')), 'reference beside: it stays on for the next pathway');
+    await rq.click('.refcol .refsw'); await rq.waitForTimeout(400);
+    ok(await rq.evaluate(() => !document.querySelector('.run-grid').classList.contains('ref-side') && getComputedStyle(document.querySelector('.rail-p')).display !== 'none'), 'reference beside: Show your route brings the route panel back');
+    await rq.setViewportSize({width:820, height:1100}); await rq.waitForTimeout(300);
+    ok(await rq.evaluate(() => getComputedStyle(document.querySelector('.rail-p .refsw')).display === 'none' && document.documentElement.scrollWidth <= innerWidth), 'reference beside: a tablet held upright keeps one column, with no switch');
+    await rc.close();
+
+    /* Pages drawn when first needed (18 Nov 2026): with idle drawing switched off, a hand-off and a deep link still draw their page */
+    const lc = await b.newContext({...phone, reducedMotion:'reduce'}); await lc.addInitScript(() => { window.requestIdleCallback = () => 0; window.__noIdle = true; });
+    const lq = await lc.newPage(); lq.on('pageerror', e => errs.push('lazy PAGEERROR: ' + e.message));
+    await lq.goto(U + '#home', {waitUntil:'load'}); await lq.waitForTimeout(500);
+    ok(await lq.evaluate(() => lazyDone.size === 0 && !document.querySelector('#dgl .phx') && !document.querySelector('#nums *')), 'drawn when needed: at startup only the home page is drawn');
+    await lq.evaluate(() => { openPal(); document.querySelector('#gq').value = 'vasopressin'; renderPal(); }); await lq.waitForTimeout(400);
+    await lq.locator('#gres a[data-dg]').first().click(); await lq.waitForTimeout(600);
+    ok(await lq.evaluate(() => location.hash === '#dilution' && /vaso/i.test(document.querySelector('#dgq').value) && document.querySelectorAll('#dgl .phx').length >= 1), 'drawn when needed: a search handed to the dilution guide draws it and fills its find box');
+    await lq.evaluate(() => { location.hash = '#calc-curb'; }); await lq.waitForTimeout(500);
+    ok(await lq.evaluate(() => !!document.querySelector('#calcbox *') && document.querySelectorAll('#cxcats button').length > 0), 'drawn when needed: a link straight to a calculator draws the calculators');
+    await lc.close();
+    const ic = await b.newContext({...phone, reducedMotion:'reduce'}), iq = await ic.newPage(); iq.on('pageerror', e => errs.push('idle PAGEERROR: ' + e.message));
+    await iq.goto(U + '#home', {waitUntil:'load'});
+    ok(await iq.waitForFunction(() => lazyDone.size === Object.keys(LAZY).length, null, {timeout:15000}).then(() => true, () => false), 'drawn when idle: after the first screen, every page is drawn while the phone is idle');
+    await ic.close();
+
     /* Ask with exact quotes (13 Nov 2026): a quote shows only if it is the guide's own text, letter for letter */
     const qc = await b.newContext({...phone, reducedMotion:'reduce'});
     await qc.addInitScript(() => {

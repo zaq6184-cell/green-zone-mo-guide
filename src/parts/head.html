@@ -2247,6 +2247,60 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .gbm-t small{font:600 .74rem/1.25 var(--body);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gbm-n{flex:none;font:700 .7rem var(--mono);color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){.gbm:not([hidden]){animation:gbm .22s var(--ease);transform-origin:top left}@keyframes gbm{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}}
+/* ================= The 18 Nov 2026 round, part 2: open now, changed since you last looked, the reference beside the step ================= */
+/* Open now: a pearl tile on the home page, and live chips on the steps. Information only: a filled dot means the hours hold now */
+.nowt .tile-h{gap:8px}
+@media (min-width:761px){#tl-now{order:2}} /* on wider screens it sits with Quick routes, after the Pathways and Rules tiles */
+.nowt .tag.mono{font-family:var(--mono);letter-spacing:.02em;text-transform:none}
+.nowt .nowsh{text-decoration:none;background:var(--surface-3);color:var(--ink-2)}
+.nowl{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+.nowl a{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:11px;align-items:center;padding:8px 6px;border-radius:12px;color:var(--ink);text-decoration:none}
+.nowl a:hover{background:var(--surface-2)}
+.nowl .nd{grid-row:span 2;align-self:start;margin-top:5px;width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--faint)}
+.nowl a.on .nd{background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.nowl .nt-t{display:flex;flex-wrap:wrap;gap:1px 8px;align-items:baseline;min-width:0}
+.nowl .nt-t b{font:800 .92rem/1.3 var(--body)}
+.nowl .nt-t span{font:600 .86rem/1.3 var(--body);color:var(--ink-2)}
+.nowl small{grid-column:2;font:600 .74rem/1.35 var(--body);color:var(--muted)}
+.nowmore{margin:2px 0 0;border-top:1px solid var(--line);padding-top:4px}
+.nowmore summary{display:flex;align-items:center;gap:6px;min-height:40px;padding:4px 6px;cursor:pointer;list-style:none;font:800 .86rem/1.3 var(--body);color:var(--accent)}
+.nowmore summary::-webkit-details-marker{display:none}
+.nowmore summary svg{width:15px;height:15px}
+.nowmore[open] summary svg{transform:rotate(90deg)}
+@media (prefers-reduced-motion:no-preference){.nowmore summary svg{transition:transform .2s var(--ease)}}
+.nowt .sub{margin-top:4px}
+.nowc{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}
+.nowc-t{display:inline-flex;align-items:center;gap:5px;padding:4px 2px;font:700 .76rem/1 var(--mono);color:var(--muted)}
+.nowc-t svg{width:14px;height:14px}
+.nowc-c{display:inline-block;max-width:100%;padding:6px 11px;border-radius:14px;background:var(--surface-2);color:var(--ink-2);font:600 .8rem/1.35 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
+.nowc-c.on{box-shadow:inset 0 0 0 1.5px var(--accent);color:var(--ink)}
+.nowc-c b{font-weight:800}
+/* Changed since you last looked */
+.badge.b-chg{background:var(--surface-3);color:var(--ink-2);box-shadow:inset 0 0 0 1.5px var(--gold)}
+.chg-n{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:12px 0 0;padding:10px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1.5px var(--gold);font:600 .86rem/1.4 var(--body);color:var(--ink-2)}
+.chg-n svg{width:16px;height:16px;flex:none;color:var(--gold)}
+.chg-n span{flex:1;min-width:0}
+.chg-n a{font-weight:800;white-space:nowrap}
+.chg-d{display:inline-block;margin-left:8px;padding:2px 7px;border-radius:999px;font:800 .66rem/1.3 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);box-shadow:inset 0 0 0 1.5px var(--gold);vertical-align:2px}
+/* The reference beside the step: the reference tabs take the rail's column; the route moves to the strip above the step */
+.run-grid{grid-template-areas:"rail main" "rail ref"}
+.run-grid > .rail-p{grid-area:rail}
+.run-grid > .run-main{grid-area:main}
+.run-grid > .refcol{grid-area:ref;min-width:0}
+.refsw{display:none}
+@media (max-width:980px){.run-grid{grid-template-areas:"main" "ref"}}
+@media (min-width:981px){
+  .rail-p .refsw{display:flex;width:100%;justify-content:flex-start;gap:8px;min-height:44px;margin:0 0 12px;padding:8px 12px;border:0;border-radius:14px;background:var(--surface-2);color:var(--accent);font:800 .84rem/1.2 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
+  .rail-p .refsw:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+  .rail-p .refsw svg,.refcol .refsw svg{width:17px;height:17px}
+  .run-grid.ref-side{grid-template-columns:minmax(0,1fr) minmax(320px,42%);grid-template-areas:"main ref"}
+  .run-grid.ref-side > .rail-p{display:none}
+  .run-grid.ref-side .strip{display:grid;gap:8px;margin:0 0 10px}
+  .run-grid.ref-side > .refcol{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto;overscroll-behavior:contain;border-radius:var(--r-xl)}
+  .run-grid.ref-side > .refcol .ptab{margin-top:0}
+  .ref-side .refcol .refsw{display:inline-flex;gap:8px;min-height:40px;margin:0 0 10px;padding:6px 12px;border:0;border-radius:12px;background:var(--surface-2);color:var(--accent);font:800 .84rem/1.2 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
+}
+@media (min-width:981px) and (max-width:1099px){.run-grid.ref-side > .refcol{top:84px;max-height:calc(100vh - 108px)}}
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -2312,6 +2366,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
           </section>
           <div class="tile t-garnet nt" id="kn-a"></div>
           <div class="tile t-obsidian nt" id="kn-b"></div>
+          <section class="tile t-pearl wide nowt" id="tl-now" aria-labelledby="h-now"></section>
           <section class="tile t-pearl wide" id="tl-quick" aria-labelledby="h-quick"><div class="tile-h"><h2 id="h-quick">Quick routes</h2><span class="tag">How each can end</span></div><div class="qr" id="quick"></div></section>
           <section class="tile t-pearl wide" id="tl-mine" aria-labelledby="h-mine"><div class="tile-h"><h2 id="h-mine">Saved and recent</h2><a class="tl" href="#pathways">All pathways</a></div><div id="mine"></div></section>
           <section class="tile t-sapphire st" id="t-paths" aria-label="Pathways by body system"></section>

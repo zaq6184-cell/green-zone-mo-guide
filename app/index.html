@@ -2248,6 +2248,60 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .gbm-t small{font:600 .74rem/1.25 var(--body);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gbm-n{flex:none;font:700 .7rem var(--mono);color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){.gbm:not([hidden]){animation:gbm .22s var(--ease);transform-origin:top left}@keyframes gbm{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}}
+/* ================= The 18 Nov 2026 round, part 2: open now, changed since you last looked, the reference beside the step ================= */
+/* Open now: a pearl tile on the home page, and live chips on the steps. Information only: a filled dot means the hours hold now */
+.nowt .tile-h{gap:8px}
+@media (min-width:761px){#tl-now{order:2}} /* on wider screens it sits with Quick routes, after the Pathways and Rules tiles */
+.nowt .tag.mono{font-family:var(--mono);letter-spacing:.02em;text-transform:none}
+.nowt .nowsh{text-decoration:none;background:var(--surface-3);color:var(--ink-2)}
+.nowl{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+.nowl a{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:11px;align-items:center;padding:8px 6px;border-radius:12px;color:var(--ink);text-decoration:none}
+.nowl a:hover{background:var(--surface-2)}
+.nowl .nd{grid-row:span 2;align-self:start;margin-top:5px;width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--faint)}
+.nowl a.on .nd{background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.nowl .nt-t{display:flex;flex-wrap:wrap;gap:1px 8px;align-items:baseline;min-width:0}
+.nowl .nt-t b{font:800 .92rem/1.3 var(--body)}
+.nowl .nt-t span{font:600 .86rem/1.3 var(--body);color:var(--ink-2)}
+.nowl small{grid-column:2;font:600 .74rem/1.35 var(--body);color:var(--muted)}
+.nowmore{margin:2px 0 0;border-top:1px solid var(--line);padding-top:4px}
+.nowmore summary{display:flex;align-items:center;gap:6px;min-height:40px;padding:4px 6px;cursor:pointer;list-style:none;font:800 .86rem/1.3 var(--body);color:var(--accent)}
+.nowmore summary::-webkit-details-marker{display:none}
+.nowmore summary svg{width:15px;height:15px}
+.nowmore[open] summary svg{transform:rotate(90deg)}
+@media (prefers-reduced-motion:no-preference){.nowmore summary svg{transition:transform .2s var(--ease)}}
+.nowt .sub{margin-top:4px}
+.nowc{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}
+.nowc-t{display:inline-flex;align-items:center;gap:5px;padding:4px 2px;font:700 .76rem/1 var(--mono);color:var(--muted)}
+.nowc-t svg{width:14px;height:14px}
+.nowc-c{display:inline-block;max-width:100%;padding:6px 11px;border-radius:14px;background:var(--surface-2);color:var(--ink-2);font:600 .8rem/1.35 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
+.nowc-c.on{box-shadow:inset 0 0 0 1.5px var(--accent);color:var(--ink)}
+.nowc-c b{font-weight:800}
+/* Changed since you last looked */
+.badge.b-chg{background:var(--surface-3);color:var(--ink-2);box-shadow:inset 0 0 0 1.5px var(--gold)}
+.chg-n{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:12px 0 0;padding:10px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1.5px var(--gold);font:600 .86rem/1.4 var(--body);color:var(--ink-2)}
+.chg-n svg{width:16px;height:16px;flex:none;color:var(--gold)}
+.chg-n span{flex:1;min-width:0}
+.chg-n a{font-weight:800;white-space:nowrap}
+.chg-d{display:inline-block;margin-left:8px;padding:2px 7px;border-radius:999px;font:800 .66rem/1.3 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);box-shadow:inset 0 0 0 1.5px var(--gold);vertical-align:2px}
+/* The reference beside the step: the reference tabs take the rail's column; the route moves to the strip above the step */
+.run-grid{grid-template-areas:"rail main" "rail ref"}
+.run-grid > .rail-p{grid-area:rail}
+.run-grid > .run-main{grid-area:main}
+.run-grid > .refcol{grid-area:ref;min-width:0}
+.refsw{display:none}
+@media (max-width:980px){.run-grid{grid-template-areas:"main" "ref"}}
+@media (min-width:981px){
+  .rail-p .refsw{display:flex;width:100%;justify-content:flex-start;gap:8px;min-height:44px;margin:0 0 12px;padding:8px 12px;border:0;border-radius:14px;background:var(--surface-2);color:var(--accent);font:800 .84rem/1.2 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
+  .rail-p .refsw:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+  .rail-p .refsw svg,.refcol .refsw svg{width:17px;height:17px}
+  .run-grid.ref-side{grid-template-columns:minmax(0,1fr) minmax(320px,42%);grid-template-areas:"main ref"}
+  .run-grid.ref-side > .rail-p{display:none}
+  .run-grid.ref-side .strip{display:grid;gap:8px;margin:0 0 10px}
+  .run-grid.ref-side > .refcol{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto;overscroll-behavior:contain;border-radius:var(--r-xl)}
+  .run-grid.ref-side > .refcol .ptab{margin-top:0}
+  .ref-side .refcol .refsw{display:inline-flex;gap:8px;min-height:40px;margin:0 0 10px;padding:6px 12px;border:0;border-radius:12px;background:var(--surface-2);color:var(--accent);font:800 .84rem/1.2 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
+}
+@media (min-width:981px) and (max-width:1099px){.run-grid.ref-side > .refcol{top:84px;max-height:calc(100vh - 108px)}}
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -2313,6 +2367,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
           </section>
           <div class="tile t-garnet nt" id="kn-a"></div>
           <div class="tile t-obsidian nt" id="kn-b"></div>
+          <section class="tile t-pearl wide nowt" id="tl-now" aria-labelledby="h-now"></section>
           <section class="tile t-pearl wide" id="tl-quick" aria-labelledby="h-quick"><div class="tile-h"><h2 id="h-quick">Quick routes</h2><span class="tag">How each can end</span></div><div class="qr" id="quick"></div></section>
           <section class="tile t-pearl wide" id="tl-mine" aria-labelledby="h-mine"><div class="tile-h"><h2 id="h-mine">Saved and recent</h2><a class="tl" href="#pathways">All pathways</a></div><div id="mine"></div></section>
           <section class="tile t-sapphire st" id="t-paths" aria-label="Pathways by body system"></section>
@@ -12980,8 +13035,11 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 18 Nov 2026';
 const V8 = [
+  ['Open now','The home page shows what holds at this moment, in Malaysia time: whether EMACC, EM Watch and the Animal Bite Clinic are in session (until when, or the next session), the shift, and the hours that change a route (MAU office hours, the Observation Ward\'s medical officer, LA OT for orthopaedic cases, Code Blue at SCACC after 1700 hr). The steps that print those hours show the same, live. Only the hours the sources print; sessions only, nothing about booking.',[['#home','Home'],['#emacc--clinic','EMACC hours']]],
+  ['Changed since you last looked','From the next update on, an entry that changed since you last opened the guide carries a Changed mark in the library and a line at its top, and What\'s new on the home page marks what is new to you. Your phone keeps only a count of the updates it has seen.',[['#new','What\'s new']]],
+  ['The reference beside the step','On a computer, or a tablet held sideways, the route panel beside the step can show the pathway\'s reference tabs instead (Reference beside the step), so a table or the advice stays in view while you answer. Your route moves to the strip above the step.',[['#renal-colic','Renal colic']]],
   ['Back, to where you were','A back arrow now sits at the top left whenever there is somewhere to go back to: it returns to the page you came from as you left it, on the same step of a pathway with your answers, the same tab and the same place on the page, or to your search with its words. After a link inside a step it opens for a moment to show where it leads. Press and hold it (or right-click) for the earlier pages of this visit. On a desktop it is in the menu, under Search. Your phone\'s own back does the same. It lives in memory only: a reload clears it.',[['#home','Home']]],
-  ['The pink EM Watch form','EM Watch now walks you through the department\'s pink form, page by page: the checklist and its five mandatory conditions, the consent the patient signs, and the slip you cut off for them, with the clinic\'s hours (Monday to Saturday, 8 am to 2 pm). The consent is in two tabs, Malay and English, as printed, and Read aloud reads it in either language. Each page opens as printed with a tap. Nothing about the patient goes into the guide.',[['#em-watch--form','The pink form'],['#em-watch','EM Watch']]],
+  ['The pink EM Watch form','EM Watch now walks you through the department\'s pink form, page by page: the checklist and its five mandatory conditions, the consent the patient signs, and the slip you cut off for them, with the clinic\'s hours (Monday to Saturday, 8 am to 2 pm). The consent is in two tabs, Malay and English, as printed, and Read aloud reads it in either language. Each page opens as printed with a tap. Nothing about the patient goes into the guide.',[['#em-watch--form','The pink form'],['#em-watch','EM Watch']],['#em-watch']],
   ['Find a drug, set a reminder, pin what you use','Type a drug\'s name in search and a card above the results shows where the guide names it: its rows on the ED pharmacy list, its pages in the dilution guide with the high-alert mark, any look-alike pair, and each step that names it, a tap away; doses stay in their own steps. Steps that print a short bedside interval (reassess after 10 minutes, repeat every 20 minutes) offer a reminder that shows when it is due, and buzzes on a phone that can (Android); it holds only the step and the time. Pin a calculator or a single step to the top of the home page. On a phone, Save, Pin, the whole map, Copy link and Start again now sit under the step, within reach of your thumb, and the pathway library folds by group.',[['#asthma--m1','A step with a reminder'],['#calc','Pin a calculator']]],
   ['Children\'s heart and breathing rates by age','A new calculator shows where a child\'s heart rate and breathing rate sit among healthy children of the same age band: the 1st to 99th centiles from Fleming et al. (Lancet 2011), a systematic review of 69 studies from birth to 18 years. It names the centile and never calls a rate normal, since the paper does not say which centile makes a rate abnormal. PEMCalc stays linked for blood pressure and SpO2, which the paper does not give.',[['#calc-vitals','Open the calculator'],['#ed-scores--vitals','The source and its limits']]],
   ['Calculators built in, from their own sources','The calculators that sent you to MDCalc now work inside the guide, and 22 are new: TIMI and HEART (ACS CPG 2026); the Canadian CT Head Rule, the Canadian C-spine Rule and NEXUS (head injury CPG 2015); Wells for PE (VTE CPG 2013); the Ottawa ankle, foot and knee rules; CHA2DS2-VASc and HAS-BLED (AF CPG 2012); MEWS (abdominal trauma CPG 2025); and, each from its own paper or owner and credited to its authors, ABCD2, the Ottawa SAH rule, PERC, the age-adjusted D-dimer, the San Francisco Syncope Rule, the Canadian Syncope Risk Score, Alvarado, qSOFA, NEWS2, CIWA-Ar, burns size and fluids, and a child\'s weight from age. Nothing is copied from MDCalc: its terms forbid it, even with credit. Only six outside links are left: five PEMCalc children\'s tools and the QTc.',[['#calc','Open the calculators'],['#ed-scores','Scores and rules']]],
@@ -13034,6 +13092,16 @@ const V8 = [
   ['Moving tiles','The topic tiles, Code Blue and Code Stroke show a glass sculpture of their body system, made in Flow Studio, moving in a quiet 8-second loop: the heart beats, the lungs breathe. The other home tiles move too: a book, a shield, a doorway, a gauge, a compass and a pearl. So do the Pathways section bars and the Shift tools headers. A loop plays only while its tile is on screen, and a phone plays at most six at once. Settings, Moving tiles turns them off.',[['#home','Home'],['#pathways','Pathways'],['#tools','Shift tools']]],
   ['Day and night','A switch on the home screen turns the night colours on and off. In night colours the tour plays a night version of the film, in English and in Bahasa Melayu, and the poster page shows night versions of both sheets. The sheets on the wall keep the day colours.',[['#home','Home'],['#tour','Watch the tour']]]
 ];
+/* ================= Changed since you last looked (18 Nov 2026) =================
+   Krishna: "Build all five" (E). The phone keeps one number, gz-round: how many rounds of What's new (V8, newest first) it had
+   seen when the guide last opened. Rounds added since then mark the entries in their fourth field (addresses) as Changed: a
+   badge in the library and a line at the top of the entry; What's new on the home page marks what is new to this phone. On the
+   first open nothing is invented: the number is stored and nothing is marked. Nothing about a patient is kept (rule 4). */
+const CHG_N = V8.length; let chgPrev = null;
+try { const v = localStorage.getItem('gz-round'); chgPrev = v === null || isNaN(+v) ? null : +v; localStorage.setItem('gz-round', String(CHG_N)); } catch(e){}
+const CHG_NEW = chgPrev !== null && chgPrev < CHG_N ? CHG_N - chgPrev : 0;
+const CHG = new Map(); /* entry object -> the newest round's title that changed it */
+V8.slice(0, CHG_NEW).forEach(([t, , , at]) => (at || []).forEach(h => { const p = P[h.replace(/^#/, '').split('--')[0]]; if (p && !CHG.has(p)) CHG.set(p, t); }));
 
 /* The first-shift intro: four screens about using the guide, with a drawn picture each */
 const INTRO = [
@@ -13181,6 +13249,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'Open now (18 Nov 2026) reads the hours the sources print. Four print an hour but not the days: MAU office hours, 8 am to 5 pm (the MAU admission note); the Observation Ward\'s medical officer, 10 am to 10 pm (memo HKL/JK/98/188/3(6)23); LA OT taking orthopaedic cases, 8 am to 9 pm only (department policy 2026, 22.3.3); and office hours at SCACC ending at 1700 hr, with no start (Code Blue Manual, 4.2). Which days does each hold, and when do SCACC office hours start? EMACC follows the guide owner\'s 8 am to 3 pm, Monday to Friday, where the memo of 11 Jan 2024 prints 7.30 am to 3.30 pm. The guide cannot know public holidays.',
   'From the calculators built into the guide on 16 Nov 2026 (CALC-RESEARCH.md). Still to confirm: (1) which D-dimer assay the HKL laboratory runs: the age-adjusted cut-off (ADJUST-PE) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE; (2) the AF CPG (2012), Table 14 footnote: a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed \u2265200 mmol/L; (3) the Ottawa SAH rule\'s age: 40 or older (JAMA 2013) or over 40 (CMAJ 2017, Figure 1): the guide uses 40 or older; (4) burns: the department\'s own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA, VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses; (5) alcohol withdrawal: the department\'s regimen for a CIWA-Ar of 10 or more, which the guide\'s sources do not give.',
   'From the children\'s heart and breathing rates added on 16 Nov 2026 (Fleming et al., Lancet 2011, Web Tables 4 and 5): the paper gives centiles of healthy children and does not say which centile makes a rate abnormal. Still to confirm: which ranges or centile the department and its paediatric triage use for a child\'s heart rate and breathing rate, and whether the guide should mark one.',
   'The ED extension directory (Nombor Sambungan Jabatan – ED, added 12 Nov 2026) prints no issuer or date. Still to confirm: (1) three numbers are printed for two rooms each: 6699 for Bilik Porter PPK and Pejabat Rekod Kecemasan, 6590 for the MOIC (Bilik Pegawai Perubatan (YM)) and Bilik PPK (YM), and 5346 for Bilik Ketua Jururawat and Pejabat Pengurusan (Penyelia/Matron): shared lines, or slips? (2) Who keeps the list, and its date.',
@@ -13797,7 +13866,7 @@ const kindLabel = (p, k) => (p.kinds && p.kinds[k]) || (p.grp === 'rules' ? KIND
 const outLbl = (p, k) => p.grp === 'cpg' && k === 'neutral' ? 'Guidance' : OUT_LBL[k];
 const fmt = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 const outsOf = p => OUT_ORDER.filter(k => Object.values(p.nodes).some(n => n.end === k));
-const badgeOf = p => p.isnew ? '<span class="badge b-new">New</span>' : p.upd ? '<span class="badge b-upd">Updated</span>' : p.dept ? '<span class="badge b-dept">Dept notes</span>' : '';
+const badgeOf = p => (CHG.has(p) ? '<span class="badge b-chg">Changed</span>' : '') + (p.isnew ? '<span class="badge b-new">New</span>' : p.upd ? '<span class="badge b-upd">Updated</span>' : p.dept ? '<span class="badge b-dept">Dept notes</span>' : '');
 const sentence = s => s.charAt(0) + s.slice(1).toLowerCase();
 /* The outcome kinds that can still be reached from a node of an entry, in the ebook's order */
 function endsFrom(p, from){
@@ -13911,7 +13980,9 @@ IDX.push({href:'#new', title:'What\'s new from the drives', kind:'Update', meta:
 IDX.push({href:'#poster', title:'Wall poster, two A3 sheets', kind:'Poster', meta:'Print', body:'poster A3 sheet patient flow rules numbers pathways', ic:'poster', c:'c-prot'});
 IDX.push({href:'#install', title:'Install the guide, and use it without a signal', kind:'Setting', meta:'Phone, tablet or computer', body:'install app home screen add to home screen offline no signal no internet no wifi download save phone android iphone ipad samsung windows mac laptop computer desktop', ic:'install', c:'c-meta'});
 IDX.push({href:'#about', title:'Sources and about', kind:'About', meta:'Sources, privacy', body:'sources ebook memos SOP privacy no patient data version', ic:'info', c:'c-prot'});
-const HAY = new Map(Object.entries(P).map(([id, p]) => [id, (p.title + ' ' + pathWords(p).join(' ')).toLowerCase()]));
+/* The library's search words, built at the first search (18 Nov 2026: about 0.2 s of startup on a slow phone) */
+let HAY_ = null;
+const HAY = {get:id => (HAY_ || (HAY_ = new Map(Object.entries(P).map(([i, p]) => [i, (p.title + ' ' + pathWords(p).join(' ')).toLowerCase()])))).get(id)};
 
 /* Terms match at the start of a word, so "tent" finds the waiting tent but not "persistent" */
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -14326,6 +14397,78 @@ function refreshSaved(){
   if (libF === 'saved') renderLib();
 }
 
+/* ================= Open now (18 Nov 2026) =================
+   Krishna: "Build all five" (A). The hours the guide's own sources print, read against the time in Malaysia now (UTC+8 all
+   year, whatever the phone's own time zone), on the home page (#tl-now) and as live chips on the steps that print or use them.
+   Each row names the step and the phrase its hours come from, and the test fails if the phrase leaves its step (rule 8).
+   Clinic rows are sessions only: they say nothing about booking (EMACC and EM Watch are booked days ahead). Where a source
+   prints an hour but not the days, the row says so and the question is under Still to confirm. Public holidays cannot be known
+   here, so the clinic whose source closes on them says "unless today is a public holiday". Information only: no outcome
+   colours, nothing chosen for you, and nothing stored (rule 4). */
+const NOW_D = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const nowWeek = (days, spans) => Object.fromEntries(days.map(d => [d, spans]));
+const HOURS = [
+  {k:'emacc', t:'EMACC', kind:'session', at:'#emacc--clinic', phrase:'EMACC runs 8 am to 3 pm, Monday to Friday', week:nowWeek([1, 2, 3, 4, 5], [[480, 900]]),
+   hrs:'Sessions Monday to Friday, 8 am to 3 pm (the guide owner, 12 Nov 2026)', on:['#emacc', '#safe-practice--fuemacc']},
+  {k:'emwatch', t:'EM Watch', kind:'session', at:'#em-watch--form', phrase:'Isnin hingga Sabtu, 8.00 pagi hingga 2.00 petang', week:nowWeek([1, 2, 3, 4, 5, 6], [[480, 840]]),
+   hrs:'Sessions Monday to Saturday, 8 am to 2 pm; closed on Sunday (the pink form\'s slip)', on:['#em-watch', '#safe-practice--fuwatch']},
+  {k:'abc', t:'Animal Bite Clinic', kind:'session', at:'#animal-bites--abc', phrase:'Mondays to Thursdays 2.00pm – 4.00pm; Fridays 3.00pm – 4.30pm', ph:true,
+   week:Object.assign(nowWeek([1, 2, 3, 4], [[840, 960]]), nowWeek([5], [[900, 990]])),
+   hrs:'Sessions Monday to Thursday 2 pm to 4 pm, Friday 3 pm to 4.30 pm; closed on weekends and public holidays', on:['#animal-bites--abc']},
+  {k:'mau', t:'MAU', kind:'span', at:'#mau-admission--mau', phrase:'Office hours (8 am–5 pm): MAU mobile team', span:[480, 1020],
+   inT:'Office hours now: the MAU mobile team', outT:'After hours now: MAU 1, 2 or 3', hrs:'Office hours 8 am to 5 pm; the days are not printed', on:['#mau-admission--mau']},
+  {k:'ow', t:'Observation Ward', kind:'span', at:'#gz-rules--ow', phrase:'with a medical officer from 10 am to 10 pm', span:[600, 1320],
+   inT:'An OW medical officer now', outT:'No OW medical officer now', hrs:'A medical officer from 10 am to 10 pm; the days are not printed', on:['#gz-rules--ow', '#dengue--ow']},
+  {k:'laot', t:'LA OT, orthopaedic cases', kind:'span', at:'#referral-rules--orthoc', phrase:'takes orthopaedic cases from 8 am to 9 pm only', span:[480, 1260],
+   inT:'The emergency OT takes orthopaedic cases now', outT:'No orthopaedic cases in the emergency OT now', hrs:'8 am to 9 pm only; the days are not printed', on:['#referral-rules--orthoc']},
+  {k:'cbs', t:'Code Blue at SCACC', kind:'after', at:'#code-blue--z2ah', phrase:'After office hours (after 1700 hr)', from:1020,
+   inT:'After 1700 hr: the manual sends a SCACC Code Blue to MECC, 5333', outT:'Before 1700 hr: the manual prints when office hours end, not when they start', hrs:'Office hours end at 1700 hr; the start and the days are not printed', on:['#code-blue--where', '#code-blue--z2', '#code-blue--z2ah']},
+  {k:'shift', t:'Shift', kind:'shift', at:'#gz-rules--cv', phrase:'AM 8.00 am to 3.00 pm; PM 3.00 pm to 10.00 pm; ON 10.00 pm to 8.00 am', shifts:[['AM', 480, 900], ['PM', 900, 1320], ['ON', 1320, 480]],
+   hrs:'AM 8 am to 3 pm, PM 3 pm to 10 pm, ON 10 pm to 8 am (the critical result memo)', on:['#gz-rules--cv']}
+];
+const myNow = () => { const d = new Date(Date.now() + 8 * 3600e3); return {dow:d.getUTCDay(), min:d.getUTCHours() * 60 + d.getUTCMinutes()}; };
+const hm = m => { m = ((m % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mi = m % 60; return (h % 12 || 12) + (mi ? '.' + String(mi).padStart(2, '0') : '') + (h < 12 ? ' am' : ' pm'); };
+const nowLabel = now => NOW_D[now.dow].slice(0, 3) + ' ' + hm(now.min);
+function hoursState(h, now){
+  const {dow, min} = now || myNow(), ph = h.ph ? ' (unless today is a public holiday)' : '', phn = h.ph ? ' (unless it is a public holiday)' : '';
+  if (h.kind === 'session'){
+    const cur = (h.week[dow] || []).find(([a, b]) => min >= a && min < b);
+    if (cur){ const left = cur[1] - min; return {on:true, line:`In session until ${hm(cur[1])}${left < 60 ? ` (${left} min left)` : ''}${ph}`}; }
+    for (let i = 0; i < 8; i++){
+      const d = (dow + i) % 7, sp = (h.week[d] || []).find(([a]) => i > 0 || a > min);
+      if (sp) return {on:false, line:`Not in session now; next session ${i === 0 ? 'today' : i === 1 ? 'tomorrow' : NOW_D[d]}, ${hm(sp[0])}${phn}`};
+    }
+    return {on:false, line:'Not in session now'};
+  }
+  if (h.kind === 'span'){ const [a, b] = h.span, on = min >= a && min < b; return {on, line:`${on ? h.inT : h.outT}, until ${hm(on ? b : a)}`}; }
+  if (h.kind === 'after'){ const on = min >= h.from; return {on, line:on ? h.inT : h.outT}; }
+  const s = h.shifts.find(([, a, b]) => a < b ? min >= a && min < b : min >= a || min < b);
+  return {on:true, line:`${s[0]} shift, ${hm(s[1])} to ${hm(s[2])}`, shift:s[0]};
+}
+const nowRow = (h, now) => { const s = hoursState(h, now); return `<li><a href="${h.at}" class="${s.on ? 'on' : ''}" data-nowk="${h.k}"><i class="nd" aria-hidden="true"></i><span class="nt-t"><b>${esc(h.t)}</b><span>${esc(s.line)}</span></span><small>${esc(h.hrs)}</small></a></li>`; };
+function renderNow(){
+  const el = $('#tl-now'); if (!el) return;
+  const now = myNow(), open = !!(el.querySelector('details') || {}).open, sh = hoursState(HOURS.find(h => h.k === 'shift'), now);
+  el.innerHTML = `<div class="tile-h"><h2 id="h-now">Now</h2><span class="tag mono" data-nowt>${esc(nowLabel(now))}</span><a class="tag nowsh" href="#gz-rules--cv">${esc(sh.shift)} shift</a></div>
+    <ul class="nowl">${HOURS.filter(h => h.kind === 'session').map(h => nowRow(h, now)).join('')}</ul>
+    <details class="nowmore"${open ? ' open' : ''}><summary>Hours that change a route${svg('chev')}</summary><ul class="nowl">${HOURS.filter(h => h.kind === 'span' || h.kind === 'after').map(h => nowRow(h, now)).join('')}</ul></details>
+    <p class="sub">Malaysia time, from this phone's clock, against the hours the guide's sources print. Sessions only: it says nothing about booking.</p>`;
+}
+/* On a step: the hours it prints or uses, live, with the time they were read at */
+const nowChipsIn = (hs, now) => `<span class="nowc-t">${svg('clock')}${esc(nowLabel(now))}</span>` + hs.map(h => { const s = hoursState(h, now); return `<span class="nowc-c${s.on ? ' on' : ''}" data-nowk="${h.k}"><b>${esc(h.t)}:</b> ${esc(s.line)}</span>`; }).join('');
+function nowChips(id, node){
+  const a = '#' + id, b = a + '--' + node, hs = HOURS.filter(h => h.on.some(x => x === a || x === b));
+  return hs.length ? `<div class="nowc" data-nowc="${hs.map(h => h.k).join(' ')}" aria-label="Hours now">${nowChipsIn(hs, myNow())}</div>` : '';
+}
+function nowTick(){
+  if (document.hidden) return;
+  const now = myNow();
+  if (curView === 'home') renderNow();
+  $$('.nowc').forEach(el => { el.innerHTML = nowChipsIn(HOURS.filter(h => el.dataset.nowc.split(' ').includes(h.k)), now); });
+}
+setInterval(nowTick, 30000);
+document.addEventListener('visibilitychange', () => nowTick());
+
 /* ================= Pinned calculators and steps (17 Nov 2026) =================
    The star keeps a whole entry (Saved); a pin keeps one calculator or one step, shown in a row at the top of the home page, in the
    menu and in the search box. Only the addresses are kept, on this phone (gz-pins), as Saved does: nothing about a patient. */
@@ -14642,6 +14785,7 @@ function revealList(el){
   window.scrollTo({top:Math.max(0, window.scrollY + y - under - 12), behavior:REDUCED ? 'auto' : 'smooth'});
 }
 function showView(name, sub){
+  ensureView(name);
   const from = curView, changed = name !== from;
   if (from && from !== 'run') SCROLL[from] = window.scrollY;
   if (changed){
@@ -14811,6 +14955,7 @@ function renderHome(){
   $('#greet').textContent = g + (day ? ' · ' + day : '');
   if (zSel < 0 && matchMedia('(min-width: 761px)').matches) zSel = 1;
   zoneMap(true);
+  renderNow();
   withTiles($('#kn-a'), numTile(0)); withTiles($('#kn-b'), numTile(1));
   $('#quick').innerHTML = POPULAR.map(([h, t]) => {
     const m = h.slice(1).match(/^([\w-]+?)(?:--(\w+))?$/), id = m && P[m[1]] ? m[1] : null;
@@ -14822,7 +14967,7 @@ function renderHome(){
   $('#keynums').innerHTML = [3, 4, 5].map(i => { const n = NUMS[i]; return `<div class="qnum"><div class="rt"><span>${esc(n.lbl)}</span><b id="kn${i}">${esc(n.val)}</b></div>${n.copy ? `<button type="button" class="sm" data-kcopy="${i}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</div>`; }).join('');
   renderTip();
   $('#rulecards').innerHTML = ruleRows();
-  $('#newcard').innerHTML = `<ul>${V8.slice(0, 6).map(([t, , l]) => `<li><a href="${l[0][0]}">${esc(t)}</a></li>`).join('')}</ul><a class="pill" href="#new">Everything new, and what came from the drives${svg('chev')}</a>`;
+  $('#newcard').innerHTML = `<ul>${V8.slice(0, 6).map(([t, , l], i) => `<li><a href="${l[0][0]}">${esc(t)}</a>${i < CHG_NEW ? '<span class="chg-d">New to you</span>' : ''}</li>`).join('')}</ul><a class="pill" href="#new">Everything new, and what came from the drives${svg('chev')}</a>`;
 }
 
 /* ================= Pathway library ================= */
@@ -14897,6 +15042,7 @@ function renderRules(){
 
 /* ================= Pathway runner ================= */
 let state = {id:null, trail:[], cur:null}, ptabSel = null, land = false;
+let refSide = store.get('gz-refside', 'off') === 'on'; /* 18 Nov 2026: the reference tabs beside the step on wide screens */
 
 /* Find the answers that lead from the start of an entry to a node, for links such as #trauma-walkins--ct */
 function pathTo(id, target){
@@ -14954,6 +15100,7 @@ function draw(focus){
   const bar = Array.from({length:total}, (_, i) => `<i class="${n.end ? 'fin' : i <= steps ? 'on' : ''}"></i>`).join('');
   const count = Object.keys(p.nodes).length;
   const about = (p.lead ? `<p class="lead">${esc(p.lead)}</p>` : '') + (p.doc ? `<div class="see"><span>Source</span><a class="pill ext" href="${p.doc.href}" target="_blank" rel="noopener noreferrer">${esc(p.doc.t)}${svg('ext')}</a></div>` : '') + (p.see ? `<div class="see"><span>See also</span>${p.see.map(([href, t]) => `<a class="pill" href="${href}">${esc(t)}</a>`).join('')}</div>` : '');
+  const rtabs = refTabs(p); /* the reference tabs, below the step or beside it */
   /* Every entry opens on a jewel banner: a guideline's own picture (hero), or its topic group's glass loop (a topic banner) */
   const hk = p.hero || (c && c.k && TILE_KEYS.has(c.k) ? c.k : '');
   const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip${p.page ? ' mono' : ''}">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
@@ -14969,19 +15116,20 @@ function draw(focus){
         </div></div>
       ${hk ? `<div class="tile ${p.heroj || c.j} run-hero${p.hero ? '' : ' topic'}">${tileMedia(hk)}${head}</div>` : head}
       ${about ? `<div class="about-t">${about}</div>` : ''}
+      ${CHG.has(p) ? `<p class="chg-n">${svg('spark')}<span>Changed since you last opened the guide: <b>${esc(CHG.get(p))}</b></span><a href="#new">What's new</a></p>` : ''}
     </div>
-    <div class="run-grid">
+    <div class="run-grid${refSide && rtabs ? ' ref-side' : ''}">
       <aside class="rail-p" aria-label="Your route so far">
-        <div class="rail-h"><h2>Your route</h2><span>${n.end ? 'Outcome' : 'Step ' + (steps + 1)}</span></div>
+        <div class="rail-h"><h2>Your route</h2><span>${n.end ? 'Outcome' : 'Step ' + (steps + 1)}</span></div>${rtabs ? `<button type="button" class="refsw" data-refside="on">${svg('grid')}<span>Reference beside the step</span></button>` : ''}
         <ol class="rp">${state.trail.map((t, i) => `<li class="done${i === 0 ? ' start' : ''}"><button type="button" data-back="${i}"><span class="q">${esc(nodeText(p.nodes[t.node]))}</span><span class="a"><span class="vh">You answered: </span>${esc(t.label)}</span></button></li>`).join('')}<li class="now${steps ? '' : ' start'}${n.end ? ' end-k' : ''}" aria-current="step"${n.end ? ` style="--oc:var(--b-${n.end})"` : ''}><span class="q">${esc(nowText)}</span></li></ol>
         ${endsHTML(p, n)}
         <button type="button" class="mapbtn" data-map><span>${svg('map')}Whole pathway</span><small>${count} steps</small></button>
         <p class="calc-note">Tap an earlier answer to change it. Keyboard: 1 to 9 to answer, Backspace to step back.</p>
       </aside>
-      <div>
+      <div class="run-main">
         <div class="strip">${steps ? `<div class="trailw"><span class="tlbl" aria-hidden="true">Route</span><div class="trailx" role="group" aria-label="Your answers so far">${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"><span><span class="vh">${esc(nodeText(p.nodes[t.node]))}: you answered </span>${esc(t.label)}<span class="vh">. Tap to change it.</span></span></button>`).join('')}</div></div>` : ''}${endsHTML(p, n)}</div>
         <div class="progress" aria-hidden="true"${n.end ? ` style="--oc:var(--b-${n.end})"` : ''}><span>${n.end ? `Outcome after ${steps} step${steps === 1 ? '' : 's'}` : 'Step ' + (steps + 1)}</span>${bar}</div>
-        <div id="cur" tabindex="-1" class="cur-in">${card(n, p)}</div>
+        ${nowChips(state.id, state.cur)}<div id="cur" tabindex="-1" class="cur-in">${card(n, p)}</div>
         ${remBtns(state.id, state.cur)}
         <div class="thumbbar" role="group" aria-label="This step">
           <button type="button" data-save aria-pressed="${saved}" aria-label="${saved ? 'Saved. Tap to remove from your list' : 'Save to your list'}">${svg('star', '', saved)}<span>${saved ? 'Saved' : 'Save'}</span></button>
@@ -14993,8 +15141,8 @@ function draw(focus){
         <div class="flagrow">${sayBtn('cur', 'Read aloud')}<button type="button" class="flagb" data-flag>${svg('flag')}<span>Something wrong on this step?</span></button></div>
         ${n.check && !n.end ? '<button type="button" class="ansbar" id="ansbar" hidden></button>' : ''}
         ${about ? `<details class="about about-m"><summary>About this pathway</summary><div>${about}</div></details>` : ''}
-        ${refTabs(p)}
       </div>
+      ${rtabs ? `<div class="refcol"><button type="button" class="refsw" data-refside="off">${svg('route')}<span>Show your route</span></button>${rtabs}</div>` : ''}
     </div>`);
   if (ansIO){ ansIO.disconnect(); ansIO = null; }
   if (n.check) wireChecks(n);
@@ -17525,7 +17673,7 @@ function renderToolsInstall(){
   el.innerHTML = `<div class="row"><span class="ic">${svg('install')}</span><h2>Install the guide</h2><span class="tag">${tag}</span></div><p>On a phone, tablet or computer, opened like an app and used without a signal: the steps for every device and browser.</p>` +
     `<ul class="gl">${INSTALL_PLAT.map(p => `<li><span>${esc(p.t)}</span>${p.k === DEVICE.plat && DEVICE.known ? '<b class="me">This one</b>' : ''}</li>`).join('')}</ul><span class="go-l">How to install${svg('chev')}</span>`;
 }
-addEventListener('gz-pwa', () => { if (!instWeb && window.GZ_PWA) renderInstall(); else installLive(); });
+addEventListener('gz-pwa', () => { if (!lazyDone.has('install')) return; if (!instWeb && window.GZ_PWA) renderInstall(); else installLive(); });
 addEventListener('online', installLive); addEventListener('offline', installLive);
 $('#instbox').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
@@ -18023,7 +18171,21 @@ $$('[data-ver]').forEach(e => { e.textContent = APP_VER; });
 /* Counts written in the views' own text (12 Nov 2026: they had drifted from the data) */
 $$('[data-cnt]').forEach(e => { const n = {ebook:Object.values(P).filter(x => !x.grp).length, rules:FLOW_IDS.length + PROT_IDS.length}[e.dataset.cnt]; if (n) e.textContent = n; });
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
-renderHome(); renderSideSaved(); renderLib(); renderRules(); renderDcheck(); renderCalcHub(); renderCalc(); renderToolsCalc(); renderNums(); renderLinks(); renderToolsLinks(); renderRxStatic(); renderRx(); renderToolsRx(); renderDgStatic(); renderDg(); renderToolsDg();
+/* ================= Pages drawn when first needed (18 Nov 2026) =================
+   Krishna: "Build all five" (B). Measured with the CPU slowed four times (about a mid-range phone): the startup drew every page,
+   opened or not, and the pages nobody had opened yet cost about 2.5 s of it (the dilution guide, the pharmacy list, the
+   calculators, Install, the library, the extensions, the ED links). Each is now drawn the first time it is shown (showView), the
+   first time a search hands over to it, or when the phone is idle after the first screen, one page per idle moment. */
+const LAZY = {pathways:[renderLib], rules:[renderRules], calc:[renderCalcHub, renderCalc], numbers:[renderNums, () => { if (typeof EXTDIR !== 'undefined' && $('#extdir')){ renderExtStatic(); renderExt(); } }],
+  links:[renderLinks], pharmacy:[renderRxStatic, renderRx], dilution:[renderDgStatic, renderDg], new:[renderDrive], install:[renderInstall]};
+const lazyDone = new Set();
+function ensureView(v){ if (!LAZY[v] || lazyDone.has(v)) return; lazyDone.add(v); LAZY[v].forEach(f => f()); }
+function lazyIdle(){
+  const v = Object.keys(LAZY).find(k => !lazyDone.has(k)); if (!v) return;
+  const go = () => { ensureView(v); lazyIdle(); };
+  if (window.requestIdleCallback) requestIdleCallback(go, {timeout:2000}); else setTimeout(go, 150); /* Safari has no requestIdleCallback */
+}
+renderHome(); renderSideSaved(); renderDcheck(); renderToolsCalc(); renderToolsLinks(); renderToolsRx(); renderToolsDg();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
 $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
@@ -18039,10 +18201,12 @@ if (typeof EDRX !== 'undefined'){
   }
   Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
 }
-renderJourney(false); setupTour(); startQuiz(); renderDrive(); renderAbout(); renderViewHeroes(); renderInstall(); renderPins(); remWire();
+renderJourney(false); setupTour(); startQuiz(); renderAbout(); renderViewHeroes(); renderPins(); remWire();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
 document.addEventListener('click', e => {
+  const rs = e.target.closest && e.target.closest('[data-refside]');
+  if (rs){ refSide = rs.dataset.refside === 'on'; store.set('gz-refside', refSide ? 'on' : 'off'); const y = window.scrollY; draw(false); window.scrollTo(0, y); const f = $(refSide ? '.refcol .refsw' : '.rail-p .refsw'); if (f) f.focus({preventScroll:true}); return; }
   if (e.target.closest('[data-find]')){ e.preventDefault(); openPal(); return; }
   if (e.target.closest('[data-settings]')){ e.preventDefault(); openSettings(); return; }
   const a = e.target.closest('a[href^="#"]');
@@ -18136,7 +18300,7 @@ $('#rxq').addEventListener('input', renderRx);
 $('#dgq').addEventListener('input', renderDg);
 $('#dgf').addEventListener('click', e => { const b = e.target.closest('[data-df]'); if (b){ dgF = b.dataset.df; renderDg(); const nb = $(`#dgf [data-df="${dgF}"]`); if (nb) nb.focus(); } });
 $('#dgaz').addEventListener('click', e => { const b = e.target.closest('[data-dl]'); if (b){ const s = document.getElementById('dg-' + b.dataset.dl); if (s) s.scrollIntoView({block:'start'}); } });
-const dgFrom = a => { if (a && a.dataset.dg){ dgF = 'all'; $('#dgq').value = a.dataset.dg; renderDg(); } };
+const dgFrom = a => { if (a && a.dataset.dg){ ensureView('dilution'); dgF = 'all'; $('#dgq').value = a.dataset.dg; renderDg(); } };
 $('#palbody').addEventListener('click', e => dgFrom(e.target.closest('a[data-dg]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) dgFrom(palLinks()[palSel]); }, true);
 $('#rxf').addEventListener('click', e => { const b = e.target.closest('[data-rf]'); if (b){ rxF = b.dataset.rf; renderRx(); const nb = $(`#rxf [data-rf="${rxF}"]`); if (nb) nb.focus(); } });
@@ -18177,12 +18341,11 @@ if ($('#extdir')){
 if (typeof EXTDIR !== 'undefined'){
   IDX.push({href:'#numbers', title:'ED extension directory', kind:'Tool', meta:'The department\'s extensions, by room', body:'extension extensions sambungan telephone phone number directory ' + EXTDIR.groups.flatMap(g => g.rows.map(r => r[0] + ' ' + r[1].join(' '))).join(' · '), ic:'phone', c:'c-abdo'});
   EXTDIR.groups.forEach(g => g.rows.forEach(r => IDX.push({href:'#numbers', title:`${r[0]}: ext ${r[1].join(' / ')}`, kind:'Number', meta:'ED extensions · ' + g.h, body:[r[1].join(' '), r[2] || '', g.h, 'extension sambungan'].join(' · '), ic:'phone', c:'c-abdo', ext:r[0]})));
-  renderExtStatic(); renderExt();
 }
-const extFrom = a => { if (a && a.dataset.extq){ extF = 'all'; $('#extq').value = a.dataset.extq; renderExt(); } };
+const extFrom = a => { if (a && a.dataset.extq){ ensureView('numbers'); extF = 'all'; $('#extq').value = a.dataset.extq; renderExt(); } };
 $('#palbody').addEventListener('click', e => extFrom(e.target.closest('a[data-extq]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) extFrom(palLinks()[palSel]); }, true);
-const rxFrom = a => { if (a && a.dataset.rx){ rxF = 'all'; $('#rxq').value = a.dataset.rx; renderRx(); } };
+const rxFrom = a => { if (a && a.dataset.rx){ ensureView('pharmacy'); rxF = 'all'; $('#rxq').value = a.dataset.rx; renderRx(); } };
 $('#palbody').addEventListener('click', e => rxFrom(e.target.closest('a[data-rx]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) rxFrom(palLinks()[palSel]); }, true);
 $('#lkf').addEventListener('click', e => { const b = e.target.closest('[data-lf]'); if (b){ lkF = b.dataset.lf; renderLinks(); const nb = $(`#lkf [data-lf="${lkF}"]`); if (nb) nb.focus(); } });
@@ -18309,6 +18472,7 @@ document.addEventListener('pointerdown', glowAt, {passive:true});
 ['pointerup', 'pointercancel'].forEach(k => document.addEventListener(k, e => { if (e.pointerType !== 'mouse') glowOff(); }, {passive:true}));
 window.addEventListener('hashchange', route);
 route();
+requestAnimationFrame(() => setTimeout(lazyIdle, 50));
 window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Image(); im.src = s.img; }));
 
 </script>
@@ -18329,7 +18493,7 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
    - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
-  const PAGE = '5470eb7d69a9'; /* this page's id, which build.js also writes into sw.js */
+  const PAGE = '42156f9c73d6'; /* this page's id, which build.js also writes into sw.js */
 
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };
