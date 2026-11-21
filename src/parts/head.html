@@ -2326,6 +2326,72 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .ab-gap svg{flex:none;width:15px;height:15px;margin-top:2px}
 #absrc{margin-top:14px;display:grid;gap:10px}
 @media (max-width:480px){.ab-bands{grid-template-columns:1fr 1fr}.ab-b.usual{grid-column:1 / -1}}
+/* ================= The 21 Nov 2026 round: turnable 3D scenes (spinHTML in engine.js) =================
+   A Blender turntable shown one view at a time from one packed picture; the stage is the render's own dark slate, so it
+   is the same by day and by night. Labels are glass pins on the scene's own points. */
+.spin{padding:12px;overflow:hidden}
+.spin-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
+.spin-bar b{font:850 1rem/1.2 var(--display)}
+.spin-go{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border-radius:12px;background:var(--key);box-shadow:var(--rim);color:var(--accent);font:800 .84rem/1 var(--body);white-space:nowrap}
+.spin-go svg{width:16px;height:16px}
+.spin-go small{font:700 .72rem/1 var(--mono);color:var(--muted)}
+.spin-ready .spin-go small{display:none}
+.spin-stage{position:relative;width:100%;max-width:720px;margin:0 auto;border-radius:18px;overflow:hidden;background:var(--viewer);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 18px 40px -24px rgba(0,0,0,.55);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;contain:paint}
+.spin-stage:active{cursor:grabbing}
+.spin-img,.spin-sheet{position:absolute;inset:0;width:100%;height:100%;display:block}
+.spin-sheet{background-repeat:no-repeat}
+.spin-lbl{position:absolute;inset:0;pointer-events:none}
+.spin-pin{position:absolute;display:inline-flex;align-items:center;gap:6px;min-width:0;min-height:0;padding:3px;border:0;border-radius:999px;transform:translate(-50%,-100%);background:rgba(8,22,18,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 6px 16px -6px rgba(0,0,0,.6);color:#eaf7ef;font:800 .74rem/1 var(--body);pointer-events:auto;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.spin-pin i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:rgba(61,220,151,.24);box-shadow:inset 0 0 0 1.5px #3ddc97;font:850 .8rem/1 var(--display);font-style:normal;color:#fff}
+.spin-pin span{display:none;padding-right:8px;white-space:nowrap}
+.spin-pin.dim i{background:rgba(255,166,77,.24);box-shadow:inset 0 0 0 1.5px #ffa64d}
+.spin-pin.on{background:rgba(8,22,18,.9);box-shadow:inset 0 0 0 1.5px var(--gold),0 8px 20px -6px rgba(0,0,0,.7)}
+.spin-pin.on i{background:var(--gold);box-shadow:none;color:var(--gold-ink)}
+.spin-pin.on span,.spin-pin:focus-visible span,.spin-pin:hover span{display:inline}
+.spin-pin:focus-visible{outline:2px solid #fff;outline-offset:2px}
+/* a 44 px target around each 30 px pin */
+.spin-pin::after{content:"";position:absolute;inset:-7px}
+.spin-wait{position:absolute;right:12px;bottom:12px;width:22px;height:22px;border-radius:50%;border:2.5px solid rgba(255,255,255,.25);border-top-color:#3ddc97;opacity:0;pointer-events:none}
+.spin-loading .spin-wait{opacity:1;animation:spinw .8s linear infinite}
+@keyframes spinw{to{transform:rotate(360deg)}}
+.spin-turn{display:flex;align-items:center;gap:12px;max-width:720px;margin:12px auto 0;font:800 .86rem var(--body);color:var(--muted)}
+.spin-turn input{flex:1;min-height:44px;accent-color:var(--accent)}
+.spin-info{max-width:720px;margin:8px auto 0}
+.spin-info h4{margin:4px 0 4px;font:850 1rem/1.25 var(--display)}
+.spin-info ul{margin:0 0 10px;padding-left:20px}
+.spin figcaption{max-width:720px;margin:10px auto 0;font-size:.8rem;line-height:1.45;color:var(--muted)}
+.jspin{margin-top:18px}
+/* The 21 Nov 2026 round: the MOH abbreviation list (#abbreviations, and the card above search results) */
+.kb-r .phx-t{display:grid;grid-template-columns:minmax(4.5em,auto) 1fr;column-gap:12px;row-gap:2px;align-items:baseline}
+.kb-a{font:800 .95rem/1.3 var(--mono);color:var(--ink);overflow-wrap:anywhere}
+.kb-m{font:600 .9rem/1.4 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.kb-p{grid-column:2;font:700 .72rem/1.2 var(--mono);color:var(--muted)}
+.kb-r mark{background:var(--accent-soft);color:inherit;border-radius:3px;padding:0 1px}
+.kbc .dc-r .k{font-family:var(--mono)}
+/* The 21 Nov 2026 round: the MOH Antidotes Quick Guide (#antidotes): one card per antidote, its headings as printed */
+.ax-l{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ax{border-radius:var(--r-lg);background:var(--pearl);box-shadow:var(--pearl-sh);overflow:hidden}
+.ax summary{display:flex;align-items:center;gap:10px;min-height:56px;padding:10px 14px;cursor:pointer;list-style:none}
+.ax summary::-webkit-details-marker{display:none}
+.ax summary::after{content:"";flex:none;width:9px;height:9px;margin-left:2px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-2px);transition:transform .2s var(--ease)}
+.ax[open] summary::after{transform:rotate(225deg) translateY(-2px)}
+.ax-h{flex:1;min-width:0;display:grid;gap:2px}
+.ax-h b{font:800 .92rem/1.3 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.ax-h small{font:600 .8rem/1.35 var(--body);color:var(--muted);overflow-wrap:anywhere}
+.ax-pg{flex:none;font:700 .72rem/1 var(--mono);color:var(--muted)}
+.ax-qt{flex:none;background:var(--observe-soft,rgba(234,179,8,.16));color:var(--observe)}
+.ax-b{display:grid;gap:12px;padding:2px 14px 14px;border-top:1px solid var(--line)}
+.ax-f h4{margin:10px 0 4px;font:800 .72rem/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.ax-f p{margin:0 0 6px;font-size:.88rem;line-height:1.5;color:var(--ink);overflow-wrap:anywhere}
+.ax-f ul{margin:0 0 6px;padding-left:18px;font-size:.88rem;line-height:1.5}
+.ax-f sup{font-size:.62em;color:var(--muted)}
+.ax-tw{overflow-x:auto;margin:4px 0 8px;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line)}
+.ax-t{border-collapse:collapse;width:100%;min-width:0;font-size:.8rem;line-height:1.4}
+.ax-t th,.ax-t td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.ax-t th{background:var(--surface-2);font-weight:800;color:var(--ink)}
+.ax-t tr:last-child td{border-bottom:0}
+@media (min-width:761px){.spin-pin span{display:inline}}
+@media (prefers-reduced-motion:reduce){.spin-loading .spin-wait{animation:none;border-color:#3ddc97}}
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -2435,7 +2501,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p><span class="vkey">Nothing you tick or type is saved.</span> <span class="vmore">A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs.</span> <button type="button" class="vmore-b" data-vmore aria-expanded="false">More</button></p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-indigo tool-go" id="tdg" href="#dilution"></a><a class="tile t-plum tool-go" id="tabx" href="#antibiotics"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-indigo tool-go" id="tdg" href="#dilution"></a><a class="tile t-plum tool-go" id="tabx" href="#antibiotics"></a><a class="tile t-teal tool-go" id="tax" href="#antidotes"></a><a class="tile t-slate tool-go" id="tkb" href="#abbreviations"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -2510,6 +2576,28 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <div id="absrc"></div>
       </div></section>
 
+      <!-- The MOH Antidotes Quick Guide (21 Nov 2026): app/data/antidotes.json and data30.js, built by src/antidotes.js -->
+      <section class="view" data-view="antidotes" id="v-antidotes" hidden aria-labelledby="h-antidotes"><div class="vw">
+        <header class="vhead"><div><h1 id="h-antidotes">Antidotes</h1>
+          <p>The Ministry of Health's Antidotes Quick Guide (Adult Dose), First Edition, January 2022: each antidote's preparation, dose and storage, as printed. Nothing you type is stored.</p></div></header>
+        <div class="tile t-teal phx-hero" id="axhero"></div>
+        <div class="lk-top"><label class="find"><span data-icon="search"></span><span class="vh">Find an antidote or a poison</span><input id="axq" type="search" placeholder="Find an antidote or a poison, for example paracetamol" autocomplete="off" spellcheck="false"></label></div>
+        <p class="phx-count" id="axn" aria-live="polite"></p>
+        <div id="axl"></div>
+        <div id="axsrc"></div>
+      </div></section>
+
+      <!-- The MOH abbreviation list (21 Nov 2026): app/data/abbr.json, built by src/abbr.js, loaded the first time it is needed -->
+      <section class="view" data-view="abbreviations" id="v-abbreviations" hidden aria-labelledby="h-abbreviations"><div class="vw">
+        <header class="vhead"><div><h1 id="h-abbreviations">Abbreviations</h1>
+          <p>The Ministry of Health's list of abbreviations at its facilities, Bil.1/2024: each abbreviation with its meaning as printed. Find one by its letters or by a word in its meaning.</p></div></header>
+        <div class="tile t-slate phx-hero" id="kbhero"></div>
+        <div class="lk-top"><label class="find"><span data-icon="search"></span><span class="vh">Find an abbreviation</span><input id="kbq" type="search" placeholder="Find an abbreviation, for example TDS" autocomplete="off" spellcheck="false" autocapitalize="characters"></label></div>
+        <p class="phx-count" id="kbn" aria-live="polite"></p>
+        <div id="kbl"></div>
+        <div id="kbsrc"></div>
+      </div></section>
+
       <!-- ED pharmacy drug list (12 Nov 2026): data19.js, built by src/edrx.js -->
       <section class="view" data-view="pharmacy" id="v-pharmacy" hidden aria-labelledby="h-pharmacy"><div class="vw">
         <header class="vhead"><div><h1 id="h-pharmacy">ED pharmacy drug list</h1>
@@ -2539,6 +2627,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
           <div class="jtop"><p>Tap a stop, listen to each one, or play them all in order.</p><button type="button" id="playall" class="soft"><span data-icon="play"></span>Play all stops</button></div>
           <ol class="jrail tile t-emerald" id="rail"></ol>
           <div class="stage" id="stage"></div>
+          <div class="jspin" id="jspin"></div>
         </div>
         <div data-lp="tour" hidden>
           <div class="tourbox tile t-obsidian" id="tourbox"><div class="tour-in">

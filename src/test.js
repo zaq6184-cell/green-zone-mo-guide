@@ -150,7 +150,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await q.keyboard.press('Escape'); await q.waitForTimeout(150);
     const mf = await q.evaluate(() => Object.entries(MEMOS).filter(([, m]) => !m.dir).flatMap(([k, m]) => m.pages.map(([n]) => `memo/${k}-p${n}.webp`)));
     const onDisk = fs.readdirSync(path.join(__dirname, '..', 'app', 'memo')).map(f => 'memo/' + f).sort();
-    ok(mf.length === 77 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos, the 4 of the pink EM Watch form and the 32 of the memos, letters and antimicrobial guides of 21 Nov 2026, and nothing else (' + onDisk.length + ' on disk)');
+    ok(mf.length === 98 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos, the 4 of the pink EM Watch form, the 32 of the memos, letters and antimicrobial guides of 21 Nov 2026, and the 13 of the own-risk circular and 8 of the leptospirosis circular, and nothing else (' + onDisk.length + ' on disk)');
     ok(await q.evaluate(() => { const d = document.createElement('div'); d.innerHTML = FIGS['memo-2022-19'](); const a = d.querySelector('a.pill'); return !!a && a.href === MEMO_LIST && a.target === '_blank'; }), 'each memo card links to the department\'s own memo list');
     // EMACC follows memo (01)24 of 11 Jan 2024 (Krishna, 12 Nov 2026)
     await q.goto(base + '#emacc--need'); await q.waitForTimeout(700);
@@ -278,7 +278,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // Library filter and stars
   await go(p, '#pathways');
   ok(await p.evaluate(() => document.querySelectorAll('#libgrid .pc').length === Object.keys(P).length && Object.keys(P).length >= 44), `library shows a card for each of the ${await p.evaluate(() => Object.keys(P).length)} entries`);
-  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '23' && document.querySelector('#libf [data-f="cpg"] small').textContent === String(Object.keys(P).filter(id => P[id].grp === 'cpg').length)), 'the Ebook filter still counts the 23 ebook pathways (the CPGs are not), rules 23, and Guidelines every CPG entry');
+  ok(await p.evaluate(() => document.querySelector('#libf [data-f="ebook"] small').textContent === '23' && document.querySelector('#libf [data-f="rules"] small').textContent === '24' && document.querySelector('#libf [data-f="cpg"] small').textContent === String(Object.keys(P).filter(id => P[id].grp === 'cpg').length)), 'the Ebook filter still counts the 23 ebook pathways (the CPGs are not), rules 24, and Guidelines every CPG entry');
   await p.fill('#libq', 'colic'); await p.waitForTimeout(150);
   console.log('     filter colic ->', await p.evaluate(() => [...document.querySelectorAll('#libgrid .pc h3')].map(h => h.textContent).join(' | ')));
   await p.fill('#libq', ''); await p.waitForTimeout(100);
@@ -1030,7 +1030,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#mau-admission', 450);
     ok(await p.evaluate(() => [...document.querySelectorAll('#run [role="tab"], #run .ptab-bar button')].some(x => /2025 criteria/.test(x.textContent)) && /2025 criteria tab/.test(P['mau-admission'].nodes.crit.hint)), 'MAU: the 2025 criteria from General Medicine are a dated tab beside the 2022 checklist');
     ok(await p.evaluate(() => P['gz-rules'].nodes.gzm.opts.length === 13 && P['yellow-zone'].nodes.hd && P['abdominal-pain'].dept.some(d => /Bil\. 9\/2024/.test(d.src) && d.fig === 'memo-kpk-ectopic') && P['infection-alerts'].nodes.nipah.fig === 'memo-2026-nipah'
-      && CONFIRM[0].includes('21 Nov 2026') && V8[0][3].includes('#blood-tests') && APP_VER === 'Version 8, updated 21 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
+      && CONFIRM[0].includes('21 Nov 2026') && V8.find(v => /^Department memos and letters/.test(v[0]))[3].includes('#blood-tests') && APP_VER === 'Version 8, updated 21 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
     ok(await p.evaluate(() => Object.entries({'measles':'#infection-alerts', 'campak':'#infection-alerts', 'dispatch book':'#blood-tests', 'winspirin':'#prescribing', 'phq-9':'#referral-rules'}).every(([q, h]) => { const r = findMore(q), a = (r.r || r)[0]; return !!a && a.href.startsWith(h); })), 'search: measles, campak, dispatch book, winspirin and PHQ-9 open their new steps');
     if (guardRe('announcements')) { const re = new RegExp(guardRe('announcements')), art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
       ok(!re.test(art) && !re.test(idx) && await p.evaluate(r => !new RegExp(r).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('announcements')), 'no patient, password, link or registration number from these documents is anywhere in the guide, page or data'); }
@@ -1048,6 +1048,65 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await p.evaluate(() => { const r = (findMore('ceftriaxone').r || findMore('ceftriaxone')), k = r.findIndex(a => a.ab === 'Ceftriaxone'), d = drugsFor(['vancomycin']); return k > 0 && r[k].href === '#antibiotics' && !r[0].ab && d.length === 1 && /Antimicrobial guide/.test(drugCard(d[0])); }), 'antimicrobials: search offers the drug in the guides after the pages that mention it, and the drug finder card points to it');
     p.off('request', onReqN); }
   ok(await p.evaluate(() => !/9 Jul 2024/.test(JSON.stringify(P))), 'memo (10)24 is no longer dated 9 Jul 2024');
+  /* ---------- 21 Nov 2026: the documents left out, the antidotes and abbreviations, and the turnable 3D route ---------- */
+  {
+    /* By this point the page's resource timing buffer is full, so loading is read from the guide's own states */
+    await go(p, '#home', 400);
+    ok(await p.evaluate(() => AX.state === 'idle' && !spinReady.has('route')), 'the antidotes and the 3D route download nothing before they are needed, idle drawing included');
+    /* Antidotes: loaded on first open, every entry, headings in printed order, doubtful lines marked, in the drug card */
+    await go(p, '#antidotes', 1200);
+    const ax = await p.evaluate(() => { const q = document.querySelector('#axq'), out = {cards:document.querySelectorAll('#axl .ax').length};
+      q.value = 'naloxone'; q.dispatchEvent(new Event('input'));
+      const o = document.querySelector('#axl .ax[open]'); out.heads = o ? [...o.querySelectorAll('h4')].map(h => h.textContent) : [];
+      q.value = 'calcium gluconate'; q.dispatchEvent(new Event('input'));
+      out.cal = (document.querySelector('#axl .ax .ab-gap') || {}).textContent || '';
+      q.value = 'paracetamol'; q.dispatchEvent(new Event('input'));
+      out.para = [...document.querySelectorAll('#axl .ax-h b')].map(b => b.textContent);
+      out.src = /shall not modify the text/.test(document.querySelector('#axsrc').textContent);
+      out.card = drugsFor(['naloxone']).some(d => d.ax && d.ax.length);
+      out.store = Object.keys(localStorage).filter(k => /ax|antidote/i.test(k));
+      q.value = ''; q.dispatchEvent(new Event('input')); return out; });
+    ok(ax.cards === 38 && ax.heads.includes('Dosage and administration') && !ax.heads.some(h => /^references?$/i.test(h)) && /3000-6000mg\/kg\/dose/.test(ax.cal) && ax.para.some(n => /N-ACETYLCYSTEINE/.test(n)) && ax.src && ax.card && !ax.store.length && await p.evaluate(() => AX.state === 'ready'),
+      'antidotes: 38 entries load on first open, headings as printed, the calcium gluconate maximum marked, found by poison, in the drug card, nothing stored' + (ax.cards === 38 ? '' : ' ' + JSON.stringify(ax)));
+    /* Abbreviations: the list loads on first need; a search that is exactly an abbreviation shows it above the results */
+    await go(p, '#abbreviations', 1200);
+    const kb = await p.evaluate(() => { const q = document.querySelector('#kbq'); q.value = 'mso4'; q.dispatchEvent(new Event('input'));
+      const r = document.querySelector('#kbl .kb-r'), out = {row:r ? r.textContent : '', n:KB.rows.length};
+      q.value = 'tds'; q.dispatchEvent(new Event('input')); out.tds = [...document.querySelectorAll('#kbl .kb-r')].map(x => x.textContent)[0] || '';
+      q.value = ''; q.dispatchEvent(new Event('input')); return out; });
+    ok(kb.n === 2665 && /Do Not Use This Abbreviation/.test(kb.row) && /Row 1500 · p35/.test(kb.row) && /Toilet, Debridement And Suturing/.test(kb.tds) && await p.evaluate(() => KB.state === 'ready'),
+      'abbreviations: 2,665 rows load on first open, MSO4 shows its do-not-use line with its row and page, each meaning as printed');
+    await p.evaluate(() => { location.hash = '#search'; }); await p.waitForTimeout(400);
+    await p.fill('#gq', 'MSO4'); await p.waitForTimeout(400);
+    ok(await p.evaluate(() => { const c = document.querySelector('#palbody .kbc'); return !!c && /Morphine Sulfate/.test(c.textContent) && !palLinks().some(a => a.closest('.kbc')); }), 'search: an exact abbreviation with nothing else in the guide shows its card, outside the arrow-key results');
+    await p.fill('#gq', 'acs'); await p.waitForTimeout(500);
+    ok(await p.evaluate(() => { const a = palLinks(), c = document.querySelector('#palbody .kbc'), g = document.querySelector('#gres'); return a.length && /^#acs/.test(a[0].getAttribute('href')) && (!c || !!(g.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING)); }), 'search: "acs" still opens an ACS entry first, the abbreviation card (if any) below the results');
+    await p.keyboard.press('Escape'); await p.waitForTimeout(200);
+    /* The documents: the own-risk circular, leptospirosis, smoking products, the CME decks */
+    const docs = await p.evaluate(() => ({
+      aor:!!P['safe-practice'].nodes.aorkpk && P['safe-practice'].nodes.menu.opts.some(o => o[1] === 'aorkpk') && MEMOS['kpk-aor'].pages.length === 13,
+      lepto:/doxycycline 200 mg stat, then 100 mg BD for 5 to 7 days/.test(P['infection-alerts'].nodes.lepto.items.join()) && /608 hourly/.test(P['infection-alerts'].nodes.lepto.items.join()) && MEMOS['kpk-lepto'].pages.length === 8,
+      vape:/within 24 hours/.test(P['infection-alerts'].nodes.vape.items.join()) && !P['infection-alerts'].nodes.vape.fig && /Hak cipta terpelihara/.test(P['infection-alerts'].nodes.vape.gap),
+      ct:P['ct-brain'].nodes.menu.opts.length === 6 && /brain WW 80, WL 40/.test(P['ct-brain'].nodes.win.items.join()) && /ASPECTS ≤ 7/.test(P['ct-brain'].nodes.stroke.items.join()),
+      agg:(P['behavioural-disturbance'].dept || []).some(d => /CME deck/.test(d.src) && /not copied/.test(d.src)),
+      confirm:/608 hourly/.test(CONFIRM.join()) && /3000-6000mg\/kg\/dose/.test(CONFIRM.join()) }));
+    ok(Object.values(docs).every(Boolean), 'documents of 21 Nov 2026: the own-risk circular (13 pages), leptospirosis (8 pages, doses as printed), smoking products (own words, no pages), the CT brain CME, the aggressive patient deck without its dose table, and their open questions' + (Object.values(docs).every(Boolean) ? '' : ' ' + JSON.stringify(docs)));
+    await go(p, '#infection-alerts--lepto', 600);
+    ok(await p.evaluate(() => /leptospirosis/i.test(document.querySelector('#cur h2').textContent) && document.querySelectorAll('#cur .figmemo [data-ppage]').length === 8), 'leptospirosis opens as a step, with its eight pages on a tap');
+    await go(p, '#ct-brain', 600);
+    ok(await p.evaluate(() => document.querySelectorAll('#cur button.opt').length === 6), 'the CT brain notes open on their six topics');
+    /* The 3D route: the first view lazily, the rest on the first turn, labels on the scene's own points */
+    await go(p, '#journey', 800);
+    await p.evaluate(() => document.querySelector('#jspin [data-spin]').scrollIntoView({block:'center'})); await p.waitForTimeout(500);
+    ok(await p.evaluate(() => !spinReady.has('route') && document.querySelector('#jspin .spin-img').complete), 'the 3D route shows its first view and loads the turntable only when turned');
+    const sp = await p.evaluate(async () => { const f = document.querySelector('#jspin [data-spin]'), r = f.querySelector('[data-spin-yaw]');
+      r.value = 6; r.dispatchEvent(new Event('input', {bubbles:true})); await new Promise(z => setTimeout(z, 1200));
+      const at = SPIN.route.at[6][1][0], pin = f.querySelector('[data-spin-pin="0"]');
+      const out = {i:+f.dataset.i, ready:f.classList.contains('spin-ready'), left:pin.style.left, want:(at[0] / SPIN.route.w * 100).toFixed(2) + '%', pins:f.querySelectorAll('.spin-pin').length};
+      pin.click(); out.info = f.querySelector('.spin-info h4') ? f.querySelector('.spin-info h4').textContent : ''; return out; });
+    sp.sheet = await p.evaluate(() => spinReady.has('route') && /spin\/route\.webp/.test(document.querySelector('#jspin .spin-sheet').style.backgroundImage));
+    ok(sp.i === 6 && sp.ready && sp.left === sp.want && sp.pins === 5 && /^1\. Triage/.test(sp.info) && sp.sheet, 'the 3D route turns to the view asked for, its five labels follow it, and a label opens its stop' + (sp.i === 6 && sp.ready && sp.left === sp.want && sp.sheet ? '' : ' ' + JSON.stringify(sp)));
+  }
   await go(p, '#home', 300);
   /* The medical interpreters (memo of 9 Jul 2026) */
   await go(p, '#interpreter', 400);
@@ -1228,7 +1287,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(cp.includes('#acs') && tops.join(' ') === '#asthma #dengue-cpg #emacc #renal-colic', 'review: search finds the ACS pathway in the top three for "chest pain", and puts the ebook asthma pathway first for "asthma", the dengue CPG for "dengue", EMACC for "MC" and renal colic for "renal colic" (' + cp.join(' ') + '; ' + tops.join(' ') + ')');
     ok(await p.evaluate(() => TIPS.every(t => !!t.src) && /Dengue in Adults/.test(TIPS[0].src) && TIPS.find(t => /cannot walk/.test(t.t)).l === 'Limbs and fractures' && typeof TIP_SRC === 'undefined'), 'review: every pearl carries its own source (the dengue pearl names the CPG)');
     await go(p, '#pathways', 300);
-    ok(await p.evaluate(() => /the 23 rules and protocols/.test(document.querySelector('#v-pathways .vhead p').textContent) && [...document.querySelectorAll('[data-ver]')].every(e => /^Version 8, updated /.test(e.textContent)) && INTRO.every(i => !/\{(calcs|nums)\}/.test(i.p) || /calculators/.test(i.p))), 'review: the counts in the views\' own text follow the data, and the version line is current');
+    ok(await p.evaluate(() => /the 24 rules and protocols/.test(document.querySelector('#v-pathways .vhead p').textContent) && [...document.querySelectorAll('[data-ver]')].every(e => /^Version 8, updated /.test(e.textContent)) && INTRO.every(i => !/\{(calcs|nums)\}/.test(i.p) || /calculators/.test(i.p))), 'review: the counts in the views\' own text follow the data, and the version line is current');
     for (const v of ['#new', '#about', '#poster', '#dilution']) await go(p, v, 450);
     await p.waitForTimeout(600);
     ok(await p.evaluate(() => [['newhero', 'whatsnew'], ['abouthero', 'sources'], ['posterhero', 'poster'], ['dghero', 'dilute']].every(([id, k]) => { const t = document.querySelector('#' + id + ' .tm'); return !!t && t.dataset.tm === k && TILE_KEYS.has(k) && !!t.querySelector('img'); })) && ['dilute', 'whatsnew', 'sources', 'poster'].every(k => fs.existsSync(path.join(__dirname, '..', 'app', 'tiles', k + '.mp4')) && fs.existsSync(path.join(__dirname, '..', 'app', 'tiles', k + '.webp'))), 'review: What\'s new, Sources and about, the wall poster and the dilution guide open on their own Flow banners, each a still and its loop');
@@ -1634,7 +1693,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await eq.evaluate(() => { location.hash = '#rules'; }); await eq.waitForTimeout(500);
     ok(await eq.evaluate(() => [...document.querySelectorAll('#v-rules .badge.b-chg')].length >= 1), 'changed: the rules list marks EM Watch Changed');
     await eq.evaluate(() => { location.hash = '#home'; }); await eq.waitForTimeout(500);
-    ok(await eq.evaluate(() => document.querySelectorAll('#newcard .chg-d').length === 1 + V8.findIndex(v => /pink EM Watch form/.test(v[0]))), 'changed: What\'s new on the home page marks the rounds that are new to this phone');
+    ok(await eq.evaluate(() => document.querySelectorAll('#newcard .chg-d').length === Math.min(6, 1 + V8.findIndex(v => /pink EM Watch form/.test(v[0])))), 'changed: What\'s new on the home page marks the rounds that are new to this phone');
     await ec.close();
 
     /* The reference beside the step (18 Nov 2026), on a desktop */

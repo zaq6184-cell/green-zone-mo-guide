@@ -27,7 +27,7 @@ const crypto = require('crypto');
 const PARTS = path.join(__dirname, 'parts');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const APP = path.join(OUT, 'app');
-const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'data20.js', 'data21.js', 'data22.js', 'data23.js', 'data24.js', 'data25.js', 'data26.js', 'data27.js', 'engine.js'];
+const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'data20.js', 'data21.js', 'data22.js', 'data23.js', 'data24.js', 'data25.js', 'data26.js', 'data27.js', 'data28.js', 'data29.js', 'data30.js', 'engine.js'];
 const stop = msg => { console.error(msg); process.exit(1); };
 
 /* LF line endings throughout, as git keeps the files (.gitattributes), so the hashes in sw.js match what GitHub Pages serves */
@@ -124,9 +124,9 @@ app = app.replace("'__PAGE__'", () => `'${PAGE_ID}'`);
 
 /* What the service worker handles, from the files in app/ */
 const walk = dir => fs.existsSync(dir) ? fs.readdirSync(dir, {withFileTypes: true}).flatMap(d => d.isDirectory() ? walk(path.join(dir, d.name)) : [path.join(dir, d.name)]) : [];
-const files = ['img', 'tiles', 'media', 'poster', 'ebook', 'xray', 'abdo', 'abdo3d', 'memo', 'sp', 'og', 'clips', 'audio', 'ai'].flatMap(d => walk(path.join(APP, d))).map(f => path.relative(APP, f).split(path.sep).join('/')).sort();
+const files = ['img', 'tiles', 'media', 'poster', 'ebook', 'xray', 'abdo', 'abdo3d', 'spin', 'data', 'memo', 'sp', 'og', 'clips', 'audio', 'ai'].flatMap(d => walk(path.join(APP, d))).map(f => path.relative(APP, f).split(path.sep).join('/')).sort();
 const SMALL = /^(img\/[^/]+|tiles\/[^/]+|media\/[^/]+|poster\/[^/]+-thumb)\.webp$/; /* the small stills: saved at install */
-const LATER = /^(og\/[^/]+\.jpg|poster\/[^/]+\.webp|ebook\/[^/]+\.webp|xray\/[^/]+\.webp|abdo\/[^/]+\.webp|abdo3d\/.+\.webp|memo\/[^/]+\.webp|sp\/[^/]+\.webp|ai\/[^/]+\.(bin|txt)|(media|clips|audio|tiles)\/[^/]+\.(mp4|mp3))$/; /* poster sheets, films, sounds and the smart search model: kept once used */
+const LATER = /^(og\/[^/]+\.jpg|poster\/[^/]+\.webp|ebook\/[^/]+\.webp|xray\/[^/]+\.webp|abdo\/[^/]+\.webp|abdo3d\/.+\.webp|spin\/[^/]+\.webp|data\/[^/]+\.json|memo\/[^/]+\.webp|sp\/[^/]+\.webp|ai\/[^/]+\.(bin|txt)|(media|clips|audio|tiles)\/[^/]+\.(mp4|mp3))$/; /* poster sheets, films, sounds and the smart search model: kept once used */
 const PRE = {'': hash16(app), 'manifest.webmanifest': hash16(manifest)}, KEEP = {}, SIZE = {};
 let preBytes = Buffer.byteLength(app) + Buffer.byteLength(manifest), keepBytes = 0;
 for (const f of files){

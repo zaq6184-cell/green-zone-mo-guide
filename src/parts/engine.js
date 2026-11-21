@@ -64,6 +64,8 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 21 Nov 2026';
 const V8 = [
+  [`Antidotes, abbreviations and the documents left out`, `The Ministry of Health's Antidotes Quick Guide (First Edition, January 2022): all 38 antidotes with their preparation, dose and storage as printed, in Shift tools, in search and on the drug card, with the lines its reader found doubtful marked. The MOH abbreviation list (Bil.1/2024, 2,665 rows): type an abbreviation in search to see its meaning as the list prints it. Discharge at own risk, the MOH procedure (circular Bil. 24/2021), in Safe practice; fever after a flood, treated as suspected leptospirosis (Bil. 26/2021), and smoking products and vaping, notified within 24 hours (Bil. 25/2026), in Infection alerts; the department's CME on reading a CT brain; and the CME deck on the aggressive patient on the behavioural disturbance pathway. Each with its source and date; the questions they raise are under Still to confirm.`, [['#antidotes', 'Antidotes'], ['#abbreviations', 'Abbreviations'], ['#ct-brain', 'Reading a CT brain'], ['#safe-practice--aorkpk', 'Own risk: the MOH procedure']], ['#safe-practice', '#infection-alerts', '#behavioural-disturbance', '#ct-brain']],
+  [`The route, in 3D`, `The patient journey ends on a glass model of the five stops of a Green Zone visit, made in Blender for this guide: drag it, or use the slider, to turn it all the way round, and tap a number for what happens at that stop. Only its first view loads (7 KB) until you turn it; the rest is one 140 KB picture, kept once used. Four new banners move too: antidotes, abbreviations, CT brain and the aggressive patient.`, [['#journey', 'Patient journey']]],
   ['Department memos and letters, 2019 to 2026','Two dozen memos and letters the department circulated, read from their pages and placed where you look for them: suspected measles (memo of 19 Nov 2026) and the department\'s own Nipah memo in Infection alerts; seven memos of 2025 and 2026 on the Green Zone rules (primary team review within 2 hours, waiting for emergency surgery, IV paracetamol and IV albumin, Lampiran A, fever after chemotherapy, moving a patient within HKL, sick leave for staff), with two older ones; the dispatch book, POCT results and the laboratory\'s rules in Blood tests; medicines for a foreign patient and dispersible aspirin in Prescribing; psychology counselling in Referral rules; the 2025 MAU criteria as a dated tab; haemodialysis in the Yellow Zone; and the 2024 ectopic pregnancy circular on Abdominal pain. A new page in Shift tools, ED antimicrobial guides, holds the department\'s two quick guides of February 2024: the dose of each antimicrobial for each band of kidney function (type a CrCl and the printed band is marked), and how to reconstitute, dilute and give each injectable. Each step shows its source, with its pages at a tap where they can be shown.',[['#gz-rules--gzn','Green Zone: memos of 2025 and 2026'],['#infection-alerts--measles','Suspected measles'],['#blood-tests','Blood tests: the lab\'s rules'],['#prescribing--fgnrx','A foreign patient: 5 days'],['#antibiotics','ED antimicrobial guides']],['#gz-rules','#infection-alerts','#blood-tests','#prescribing','#referral-rules','#mau-admission','#yellow-zone','#abdominal-pain','#missed-fractures']],
   ['Open now','The home page shows what holds at this moment, in Malaysia time: whether EMACC, EM Watch and the Animal Bite Clinic are in session (until when, or the next session), the shift, and the hours that change a route (MAU office hours, the Observation Ward\'s medical officer, LA OT for orthopaedic cases, Code Blue at SCACC after 1700 hr). The steps that print those hours show the same, live. Only the hours the sources print; sessions only, nothing about booking.',[['#home','Home'],['#emacc--clinic','EMACC hours']]],
   ['Changed since you last looked','From the next update on, an entry that changed since you last opened the guide carries a Changed mark in the library and a line at its top, and What\'s new on the home page marks what is new to you. Your phone keeps only a count of the updates it has seen.',[['#new','What\'s new']]],
@@ -279,6 +281,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  `From the documents added on 21 Nov 2026 at the guide owner's "add the documents that was left out". Still to confirm: (1) the MOH procedure for discharge at own risk (KPK circular Bil. 24/2021) is written for ward inpatients and never mentions the emergency department: does the department apply it in the ED, and is its Borang A the AOR form the department policy 2026 (32.3) means; (2) the MOH abbreviation list Bil.1/2024 prints no issuer, date or rule for its use, and gives only the meanings it prints (TDS only as "Toilet, Debridement And Suturing", BD only as "Binswanger's Disease"): whether the department uses it, and where its do-not-use list (named in its row 1500) is; (3) the leptospirosis circular Bil. 26/2021 prints the child's amoxicillin as "50 mg/kg dose oral 608 hourly" (in both copies circulated), gives no regimen for children aged 8 and over, and is written for primary care: what the department uses; (4) the smoking products circular Bil. 25/2026 names no route for sending its notification form to the PKD: how the department sends it; (5) the CME deck on the aggressive patient (circulated 13 Oct 2026, undated) has its own dose table (slide 53, haloperidol, olanzapine, risperidone, lorazepam, diazepam and midazolam): how it compares with the ebook's table on the behavioural disturbance pathway, which stays the department's route; (6) the MOH Antidotes Quick Guide (2022) prints lines its reader found doubtful, shown as printed with a Check mark: calcium gluconate's maximum "3000-6000mg/kg/dose" after 60 mg/kg/dose; dantrolene's indication "Malignant hypothermia" and its 70 ml title against 60 ml of water for injection; atropine "0.5 to 2.4 mg/kg/hour"; bromocriptine's two maximums; D-penicillamine's two daily doses; methylene blue's two dose paragraphs; folinic acid's 50 mg/5 ml title against 50 mg/ml; and the storage tables of idarucizumab and the 3-factor PCC, which contradict the text under them; whether a later edition exists; and how its entries compare with the ebook\'s pathways and the hospital\'s regimens (N-acetylcysteine with the paracetamol overdose pathway and the HKL NAC regimen; naloxone and flumazenil), which has not been done; (7) the aggressive patient deck\'s HKL risk-of-violence form prints "> 2" factors for high risk and "≥ 2" for moderate (slide 22); (8) the CT brain CME prints the narrow window as "WW: 8 WL:32" (slide 4), shown as printed.`,
   'From the department memos and letters added on 21 Nov 2026. Still to confirm: (1) the department\'s Nipah memo HKL/JK/98/123/8 prints "28 Januari 2025" but was circulated in January 2026, and the POCT review memo prints "6 Mac 2025" but cites a meeting of 4 Dec 2025: which year is right; (2) whether the memo on a patient treated elsewhere within 24 hours (HKL/JK/98/188/3(5)19, 4 Feb 2019) and the memo on CT or MRI before discharge (HKL/JK/98/188/3(28)22, 14 Dec 2022) are still in force, and how the registration sticker marks a visit within 24 hours; (3) which criteria the review of IV paracetamol and IV albumin used (letter HKL/JK/98/188/1, May 2026); (4) Lampiran A for foreign patients (memo of 6 Jul 2026): its flow chart prints the forms as CIP/JKT-02 and CIP/JK-01 where the memo prints BPK/JKT-02 and CIP/JKT-01, and it does not say what happens when no specialist is present; (5) MAU: the 2022 criteria the entry follows, or the General Medicine letter of 7 Feb 2025 (oxygen up to a Venturi mask at 40%, 100 kg or less, pregnancy excluded); (6) whether the aspirin dispersible brands of the pharmacy letter of 9 Nov 2022 are still the ones supplied; (7) EMACC\'s days: an undated meeting minute circulated on 3 Jan 2025 says EMACC runs Monday to Saturday, Saturday until 1 pm, with at most 10 Monday appointments, where the guide (the guide owner, 12 Nov 2026) says Monday to Friday, 8 am to 3 pm; (8) whether the department\'s two antimicrobial quick guides (dilution, and adult dosing), 2nd edition, February 2024, are still the current editions.',
   'Open now (18 Nov 2026) reads the hours the sources print. Four print an hour but not the days: MAU office hours, 8 am to 5 pm (the MAU admission note); the Observation Ward\'s medical officer, 10 am to 10 pm (memo HKL/JK/98/188/3(6)23); LA OT taking orthopaedic cases, 8 am to 9 pm only (department policy 2026, 22.3.3); and office hours at SCACC ending at 1700 hr, with no start (Code Blue Manual, 4.2). Which days does each hold, and when do SCACC office hours start? EMACC follows the guide owner\'s 8 am to 3 pm, Monday to Friday, where the memo of 11 Jan 2024 prints 7.30 am to 3.30 pm. The guide cannot know public holidays.',
   'From the calculators built into the guide on 16 Nov 2026 (CALC-RESEARCH.md). Still to confirm: (1) which D-dimer assay the HKL laboratory runs: the age-adjusted cut-off (ADJUST-PE) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE; (2) the AF CPG (2012), Table 14 footnote: a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed \u2265200 mmol/L; (3) the Ottawa SAH rule\'s age: 40 or older (JAMA 2013) or over 40 (CMAJ 2017, Figure 1): the guide uses 40 or older; (4) burns: the department\'s own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA, VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses; (5) alcohol withdrawal: the department\'s regimen for a CIWA-Ar of 10 or more, which the guide\'s sources do not give.',
@@ -861,6 +864,92 @@ let a3drag = null;
 document.addEventListener('pointerdown', e => { const s = e.target.closest && e.target.closest('.a3-stage'); if (s && e.isPrimary) a3drag = {s, x:e.clientX, i:+s.closest('[data-a3]').dataset.i, moved:false}; });
 document.addEventListener('pointermove', e => { if (!a3drag) return; const d = Math.round((e.clientX - a3drag.x) / 14); if (d){ a3drag.moved = true; a3frame(a3drag.s.closest('[data-a3]'), a3drag.i - d); } });
 ['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, () => { a3drag = null; }));
+/* ================= Turnable 3D scenes (21 Nov 2026) =================
+   Scenes this guide modelled and rendered in Blender from its own code (src/spin3d.py; no downloaded model), each a turntable
+   of SPIN[key].n views packed into one picture (spin/<key>.webp, by src/spin-pack.py, data29.js). Before a tap only the first
+   view loads (spin/<key>-0.webp, a few KB, lazily). The first drag, slider move or Turn in 3D downloads the rest once, and Turn
+   in 3D turns the scene once around unless motion is reduced. A sideways drag turns it, gliding on a little after the finger
+   lifts; an upward or downward swipe still scrolls. Numbered labels sit on the scene's own points (SPIN[key].at), and a tap
+   on one opens what happens there (SPIN_INFO). Labels say only what the guide already says on the page they open. */
+const SPIN_PX = 16; /* pixels of drag per view */
+const SPIN_INFO = {
+  route: {t:'The route, in 3D', alt:'A glass model of the five stops of a Green Zone visit on a glowing one-way path: triage, the MO\'s room, the treatment room, the CCA in amber, and review',
+    hint:'Drag sideways to turn it, or tap a number.',
+    cap:'The order of the five stops, as the journey above sets them out: not a floor plan. The CCA (amber) is only if needed; the direct path skips it. This guide\'s own model, made in Blender.',
+    label:i => JOURNEY[i].short, dim:i => !!JOURNEY[i].optional,
+    info:i => { const s = JOURNEY[i]; return `<h4>${i + 1}. ${esc(s.title)}</h4><ul>${s.items.slice(0, 3).map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="links"><a class="pill" href="#journey-${i + 1}">Open stop ${i + 1}${svg('chev')}</a></div>`; }}
+};
+const spinOK = k => typeof SPIN !== 'undefined' && SPIN[k] && SPIN_INFO[k];
+function spinLabels(k, i, on){
+  const S = SPIN[k], I = SPIN_INFO[k];
+  return S.at[i][1].map(([x, y, z], j) => `<button type="button" class="spin-pin${on === j ? ' on' : ''}${I.dim && I.dim(j) ? ' dim' : ''}" data-spin-pin="${j}" style="left:${(x / S.w * 100).toFixed(2)}%;top:${(y / S.h * 100).toFixed(2)}%;z-index:${Math.max(1, Math.round(100 - z * 4))}" aria-pressed="${on === j}" aria-label="${esc((j + 1) + '. ' + I.label(j))}"><i>${j + 1}</i><span>${esc(I.label(j))}</span></button>`).join('');
+}
+function spinHTML(k){
+  if (!spinOK(k)) return '';
+  const S = SPIN[k], I = SPIN_INFO[k], kb = Math.round(S.bytes / 1024);
+  return `<figure class="fig spin" data-spin="${k}" data-i="0" data-on="-1"><div class="spin-bar"><b>${esc(I.t)}</b><button type="button" class="sm spin-go" data-spin-go>${svg('play')}<span>Turn in 3D</span><small>${kb} KB</small></button></div>` +
+    `<div class="spin-stage" style="aspect-ratio:${S.w}/${S.h}"><img class="spin-img" src="spin/${k}-0.webp" width="${S.w}" height="${S.h}" loading="lazy" decoding="async" alt="${esc(I.alt)}"><div class="spin-sheet" aria-hidden="true"></div><div class="spin-lbl">${spinLabels(k, 0, -1)}</div><span class="spin-wait" aria-hidden="true"></span></div>` +
+    `<label class="spin-turn"><span>Turn</span><input type="range" min="0" max="${S.n - 1}" step="1" value="0" data-spin-yaw aria-label="Turn the model" aria-valuetext="Front view"></label>` +
+    `<div class="spin-info" aria-live="polite"><p class="hint">${esc(I.hint)}</p></div><figcaption>${esc(I.cap)}</figcaption></figure>`;
+}
+const spinReady = new Set(), spinGet = {};
+function spinLoad(fig){
+  const k = fig.dataset.spin;
+  if (spinReady.has(k)) return Promise.resolve();
+  if (!spinGet[k]){ $$(`[data-spin="${k}"]`).forEach(f => f.classList.add('spin-loading'));
+    spinGet[k] = new Promise(res => { const im = new Image(); im.onload = im.onerror = () => { spinReady.add(k); $$(`[data-spin="${k}"]`).forEach(f => { f.classList.remove('spin-loading'); f.classList.add('spin-ready'); spinPaint(f, +f.dataset.i); }); res(); }; im.src = `spin/${k}.webp`; }); }
+  return spinGet[k];
+}
+function spinPaint(fig, i){
+  const k = fig.dataset.spin, S = SPIN[k], sh = fig.querySelector('.spin-sheet'), c = i % S.cols, r = Math.floor(i / S.cols);
+  if (spinReady.has(k)) sh.style.cssText = `background-image:url(spin/${k}.webp);background-size:${S.cols * 100}% ${S.rows * 100}%;background-position:${S.cols > 1 ? (c / (S.cols - 1) * 100).toFixed(3) : 0}% ${S.rows > 1 ? (r / (S.rows - 1) * 100).toFixed(3) : 0}%`;
+  fig.querySelector('.spin-lbl').innerHTML = spinLabels(k, i, +fig.dataset.on);
+  const rg = fig.querySelector('[data-spin-yaw]'); if (+rg.value !== i) rg.value = i;
+  rg.setAttribute('aria-valuetext', i === 0 ? 'Front view' : `Turned ${S.at[i][0]} degrees`);
+}
+function spinTo(fig, pos){
+  const S = SPIN[fig.dataset.spin], i = ((Math.round(pos) % S.n) + S.n) % S.n;
+  if (+fig.dataset.i === i) return;
+  fig.dataset.i = i; spinPaint(fig, i);
+}
+/* Turn in 3D: once around in about 2.6 s, easing in and out; never with reduced motion */
+function spinPlay(fig){
+  const S = SPIN[fig.dataset.spin], from = +fig.dataset.i, t0 = performance.now(), dur = 2600, id = (fig._run || 0) + 1;
+  fig._run = id;
+  const tick = now => { if (fig._run !== id || !fig.isConnected) return; const p = Math.min(1, (now - t0) / dur), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+    spinTo(fig, from + e * S.n); if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+let spinDrag = null;
+document.addEventListener('pointerdown', e => {
+  const st = e.target.closest && e.target.closest('.spin-stage'); if (!st || !e.isPrimary || e.target.closest('.spin-pin')) return;
+  const fig = st.closest('[data-spin]'); fig._run = (fig._run || 0) + 1; spinLoad(fig);
+  spinDrag = {fig, x:e.clientX, i:+fig.dataset.i, v:0, lx:e.clientX, lt:e.timeStamp};
+});
+document.addEventListener('pointermove', e => {
+  if (!spinDrag || !spinReady.has(spinDrag.fig.dataset.spin)) return;
+  const d = spinDrag, dt = Math.max(1, e.timeStamp - d.lt); d.v = (e.clientX - d.lx) / dt; d.lx = e.clientX; d.lt = e.timeStamp;
+  spinTo(d.fig, d.i - (e.clientX - d.x) / SPIN_PX);
+});
+['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, () => {
+  const d = spinDrag; spinDrag = null; if (!d || REDUCED || Math.abs(d.v) < .2 || !spinReady.has(d.fig.dataset.spin)) return;
+  /* Glide: the speed at release, in views a frame, fading out */
+  let v = d.v * 16 / SPIN_PX, pos = +d.fig.dataset.i; const id = (d.fig._run || 0) + 1; d.fig._run = id;
+  const glide = () => { if (d.fig._run !== id) return; v *= .9; pos -= v; spinTo(d.fig, pos); if (Math.abs(v) > .04) requestAnimationFrame(glide); };
+  requestAnimationFrame(glide);
+}));
+document.addEventListener('input', e => { const r = e.target.closest && e.target.closest('[data-spin-yaw]'); if (!r) return;
+  const fig = r.closest('[data-spin]'), v = +r.value; fig._run = (fig._run || 0) + 1; spinLoad(fig).then(() => spinTo(fig, v)); });
+document.addEventListener('click', e => {
+  const g = e.target.closest && e.target.closest('[data-spin-go]');
+  if (g){ const fig = g.closest('[data-spin]'); spinLoad(fig).then(() => { if (!REDUCED) spinPlay(fig); }); return; }
+  const p = e.target.closest && e.target.closest('[data-spin-pin]'); if (!p) return;
+  const fig = p.closest('[data-spin]'), k = fig.dataset.spin, j = +p.dataset.spinPin, on = +fig.dataset.on === j ? -1 : j, I = SPIN_INFO[k];
+  fig.dataset.on = on; fig.classList.toggle('spin-pick', on >= 0);
+  fig.querySelector('.spin-lbl').innerHTML = spinLabels(k, +fig.dataset.i, on);
+  fig.querySelector('.spin-info').innerHTML = on < 0 ? `<p class="hint">${esc(I.hint)}</p>` : I.info(on);
+  const nb = fig.querySelector(`[data-spin-pin="${j}"]`); if (nb) nb.focus();
+});
 /* A step that reads several films shows them one after another (XGROUPS, data15.js) */
 if (typeof XGROUPS !== 'undefined') Object.keys(XGROUPS).forEach(n => { FIGS['xg-' + n] = () => XGROUPS[n].map(filmHTML).join(''); });
 document.addEventListener('click', e => {
@@ -1037,7 +1126,7 @@ function search(q, loose){
     }
     if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
     /* An ED pharmacy drug comes after the pathways, rules and guidelines that mention it (the list keeps its own order) */
-    if (e.kind === 'Drug' || e.kind === 'Dilution' || e.kind === 'Antimicrobial') s = Math.min(s, 1);
+    if (e.kind === 'Drug' || e.kind === 'Dilution' || e.kind === 'Antimicrobial' || e.kind === 'Antidote') s = Math.min(s, 1);
     return {e, s};
   }).filter(Boolean).sort((a, b) => (b.s - a.s) || (a.e.href.includes('--') - b.e.href.includes('--'))).slice(0, 14).map(r => r.e);
 }
@@ -1339,7 +1428,7 @@ function smartFind(q, kw){
   const M = msQuery(q) && AIMS.state === 'ready' ? AIMS : AI, MIN = M === AIMS ? AIMS_MIN : AI_MIN, WEAK = M === AIMS ? AIMS_WEAK : AI_WEAK;
   if (M.state !== 'ready') return null;
   /* drug lists, the CPG shelf's links and outside links stay after the guide's own pages, as in keyword search */
-  const side = i => /^(Drug|Dilution|Antimicrobial|National CPG|Link)$/.test(IDX[i].kind);
+  const side = i => /^(Drug|Dilution|Antimicrobial|Antidote|National CPG|Link)$/.test(IDX[i].kind);
   const pick = s => { const sc = aiScores(M, s); if (!sc) return null; let m = 0; for (let i = 0; i < IDX.length; i++) if (sc.best[i] > m && !side(i)) m = sc.best[i]; return {sc, m}; };
   /* A word the guide does not know was corrected by spelling: meaning decides whether the correction or the word as typed
      is closer ("asthama" is asthma; "sprain" is not "strain") */
@@ -1545,7 +1634,114 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose, snip){
-  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ab ? ` data-ab="${esc(e.ab)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ab ? ` data-ab="${esc(e.ab)}"` : ''}${e.ax ? ` data-ax="${esc(e.ax)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
+}
+/* ================= Antidotes (21 Nov 2026) =================
+   The MOH Antidotes Quick Guide (Adult Dose), First Edition, January 2022 (Pharmaceutical Services Programme), 38 antidotes,
+   each with its own headings in their printed order and its text unmodified, as its page 2 permits with acknowledgement
+   (data/antidotes.json, from src/antidotes.js; AXIDX in data30.js names them for search and the drug finder card). The
+   entries load the first time the page opens (about 57 KB) and the web app keeps them once used. A line the reader found
+   doubtful (a maximum printed per kg, a storage table that contradicts its text) is shown as printed and marked. */
+const AX = {state:'idle', d:null, p:null};
+function axLoad(){
+  if (AX.state === 'loading' || AX.state === 'ready') return AX.p;
+  AX.state = 'loading';
+  return AX.p = fetch('data/antidotes.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => { AX.d = d; AX.state = 'ready'; if (lazyDone.has('antidotes')){ renderAxStatic(); renderAx(); } })
+    .catch(() => { AX.state = 'failed'; if (lazyDone.has('antidotes')) renderAx(); });
+}
+/* The guide's own marks: **bold**, ^n reference marks, bullet lines and pipe tables, drawn as printed */
+function axMd(t){
+  const inl = x => esc(x).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\^(\d+(?:[,\-–]\d+)*)/g, '<sup>$1</sup>');
+  const out = []; let tb = null, ul = null;
+  const flush = () => { if (tb){ const rows = tb.filter(r => !/^\|\s*-/.test(r)).map(r => r.replace(/^\||\|$/g, '').split('|').map(c => c.trim()));
+      out.push(`<div class="ax-tw"><table class="ax-t"><thead><tr>${rows[0].map(c => `<th>${inl(c)}</th>`).join('')}</tr></thead><tbody>${rows.slice(1).map(r => `<tr>${r.map(c => `<td>${inl(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`); tb = null; }
+    if (ul){ out.push(`<ul>${ul.map(x => `<li>${inl(x)}</li>`).join('')}</ul>`); ul = null; } };
+  String(t).split('\n').forEach(l => {
+    if (/^\s*\|/.test(l)){ if (ul) flush(); (tb = tb || []).push(l.trim()); return; }
+    if (/^\s*[•▪-]\s+/.test(l)){ if (tb) flush(); (ul = ul || []).push(l.replace(/^\s*[•▪-]\s+/, '')); return; }
+    flush(); if (l.trim()) out.push(`<p>${inl(l)}</p>`);
+  });
+  flush(); return out.join('');
+}
+function renderAx(){
+  const L = $('#axl'); if (!L) return;
+  if (AX.state !== 'ready'){ if (AX.state === 'idle' && !$('#v-antidotes').hidden) axLoad(); /* drawn early when the phone is idle: load only once the page is shown */
+    $('#axn').textContent = AX.state === 'failed' ? '' : 'Getting the guide ready: about 57 KB, once.';
+    L.innerHTML = AX.state === 'failed' ? '<p class="empty">The guide could not be loaded. Check the connection and open this page again.</p>' : ''; return; }
+  const q = ($('#axq').value || '').trim().toLowerCase(), R = AX.d.rows;
+  const hit = r => !q || r.n.toLowerCase().includes(q) || String(r.f).toLowerCase().includes(q) || (q.length >= 4 && r.h.some(([h, v]) => /^indication/i.test(h) && v.toLowerCase().includes(q)));
+  const hits = R.map((r, i) => [r, i]).filter(([r]) => hit(r));
+  $('#axn').textContent = q ? `${hits.length} of ${R.length} antidotes` : `${R.length} antidotes, in the guide's own order. Tap one to open it.`;
+  const one = hits.length === 1;
+  L.innerHTML = hits.length ? `<ul class="ax-l">${hits.map(([r, i]) => `<li><details class="ax" id="ax-${i}"${one ? ' open' : ''}><summary><span class="ax-h"><b>${esc(r.n)}</b><small>${esc(r.f)}</small></span>${r.q ? `<span class="tag ax-qt" title="A line under Still to confirm">Check</span>` : ''}<span class="ax-pg">p${esc(r.p)}</span></summary>`
+    + `<div class="ax-b">${r.q ? `<p class="ab-gap">${svg('info')}<span>As printed, and under Still to confirm: ${esc(r.q)}.</span></p>` : ''}${r.h.map(([h, v]) => `<section class="ax-f"><h4>${esc(h)}</h4>${axMd(v)}</section>`).join('')}</div></details></li>`).join('')}</ul>`
+    : '<p class="empty">No antidote in the guide matches. Try the poison, or the antidote\'s generic name.</p>';
+}
+const AX_TILE = () => TILE_KEYS.has('antidote') || STILL_KEYS.has('antidote') ? 'antidote' : 'tox';
+function renderAxStatic(){
+  if (!$('#axhero')) return;
+  withTiles($('#axhero'), `${tileMedia(AX_TILE())}<span class="lbl">MOH · First Edition · Jan 2022</span><h2>${typeof AXIDX !== 'undefined' ? AXIDX.length : 38} antidotes</h2><p>Preparation, dose and storage for each, as the Ministry of Health's quick guide prints them.</p>`);
+  const M = AX.d && AX.d.meta;
+  $('#axsrc').innerHTML = `<p class="lk-note">Source: Antidotes Quick Guide (Adult Dose), First Edition, January 2022, Pharmaceutical Services Programme, Ministry of Health Malaysia${M ? ` (${esc(M.code)}, ${esc(M.isbn)})` : ''}. Reproduced with acknowledgement and the text unmodified, as its page 2 permits: “Permission is hereby granted to reproduce information contained herein provided that such reproduction be given due acknowledgement and shall not modify the text.” Each entry's reference list, which its small raised numbers point to, is in the printed guide, and its tables are redrawn for a phone: where the guide merges a cell, its value is repeated in each row or column it covers, and two boxed notes (dantrolene, digoxin Fab) sit after their dose sections. A second reader checked every value against the page images. Its own disclaimer: “${esc(M ? M.disclaimer : 'This antidotes guide is intended to serve the user as a handy reference and not as a complete drug information resource.')}” A national guide (standing rule 8). It has not yet been compared line by line with the ebook's pathways or the hospital's own regimens (paracetamol overdose and its NAC regimen among them): those stay the department's route, and the comparison is under Still to confirm.</p>`;
+}
+function renderToolsAx(){
+  if (!$('#tax') || typeof AXIDX === 'undefined') return;
+  withTiles($('#tax'), `${tileMedia(AX_TILE())}<div class="row"><span class="ic">${svg('prot')}</span><h2>Antidotes</h2><span class="tag">${AXIDX.length}</span></div><p>The Ministry of Health's quick guide, January 2022: preparation, dose and storage for each antidote, as printed.</p>`);
+}
+/* ================= Abbreviations (21 Nov 2026) =================
+   The Ministry of Health's "Senarai Kata Singkatan (Abbreviation) di Fasiliti Kementerian Kesihatan Malaysia Bil.1/2024", all
+   2,665 rows as printed (data/abbr.json, from src/abbr.js). It prints no issuer, reference, date or rule for its use. It loads
+   the first time it is needed (the page #abbreviations, or a search of 2 to 10 characters with no space; about 48 KB with
+   gzip), and the web app keeps it once used. A search that is exactly an abbreviation on the list shows its meanings above
+   the results; an abbreviation with several rows shows them all, as printed, and the guide never chooses between them. */
+const KB = {state:'idle', rows:null, by:null, meta:null, p:null};
+const kbKey = s => String(s).toLowerCase().replace(/[\s.]/g, '');
+function kbLoad(){
+  if (KB.state === 'loading' || KB.state === 'ready') return KB.p;
+  KB.state = 'loading';
+  return KB.p = fetch('data/abbr.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
+    KB.meta = d.meta; KB.rows = d.rows; KB.by = new Map();
+    d.rows.forEach(r => { const k = kbKey(r[0]); if (!KB.by.has(k)) KB.by.set(k, []); KB.by.get(k).push(r); });
+    KB.state = 'ready';
+    if (!$('#pal').hidden && $('#gq').value.trim() && !askCtl) renderPal(); /* never over a question being asked, or its answer */
+    if (lazyDone.has('abbreviations')) renderKb();
+  }).catch(() => { KB.state = 'failed'; if (lazyDone.has('abbreviations')) renderKb(); });
+}
+function kbCard(q){
+  if (KB.state !== 'ready') return '';
+  const rows = KB.by.get(kbKey(q)); if (!rows) return '';
+  return `<section class="drugc kbc" aria-label="${esc(rows[0][0])}: on the abbreviation list"><div class="dc-h"><span class="ic j t-slate">${svg('rule')}</span><span class="dc-ht"><b>${esc(rows[0][0])}</b><small>MOH abbreviation list, Bil.1/2024, as printed${rows.length > 1 ? `: ${rows.length} rows` : ''}</small></span></div>`
+    + rows.slice(0, 4).map(r => `<a class="dc-r" href="#abbreviations" data-kb="${esc(r[0])}"><span class="k">Row ${r[3]} · p${r[2]}</span><span class="v">${esc(r[1])}</span></a>`).join('')
+    + (rows.length > 4 ? `<a class="dc-r more" href="#abbreviations" data-kb="${esc(rows[0][0])}"><span class="v">${rows.length - 4} more rows</span></a>` : '') + '</section>';
+}
+function renderKb(){
+  const L = $('#kbl'); if (!L) return;
+  if (KB.state !== 'ready'){ if (KB.state === 'idle' && !$('#v-abbreviations').hidden) kbLoad();
+    $('#kbn').textContent = KB.state === 'failed' ? '' : 'Getting the list ready: about 48 KB, once.';
+    L.innerHTML = KB.state === 'failed' ? '<p class="empty">The list could not be loaded. Check the connection and open this page again.</p>' : ''; return; }
+  const raw = ($('#kbq').value || '').trim(), q = raw.toLowerCase(), k = kbKey(raw);
+  let hits = [];
+  if (q){
+    const exact = KB.rows.filter(r => kbKey(r[0]) === k), starts = k ? KB.rows.filter(r => kbKey(r[0]) !== k && kbKey(r[0]).startsWith(k)) : [];
+    const inMeaning = q.length >= 3 ? KB.rows.filter(r => !(k && kbKey(r[0]).startsWith(k)) && r[1].toLowerCase().includes(q)) : [];
+    hits = [...exact, ...starts, ...inMeaning];
+  }
+  const re = q ? new RegExp('(' + raw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
+  const hl = s => re ? String(s).split(re).map((v, i) => i % 2 ? `<mark>${esc(v)}</mark>` : esc(v)).join('') : esc(s);
+  $('#kbn').textContent = !q ? `${KB.rows.length.toLocaleString('en-GB')} abbreviations. Type the letters, or a word in the meaning.` : hits.length ? `${hits.length} row${hits.length > 1 ? 's' : ''}${hits.length > 60 ? ': the first 60' : ''}` : '';
+  L.innerHTML = !q ? '' : hits.length ? `<ul class="phx-l kb-l">${hits.slice(0, 60).map(r => `<li class="phx kb-r"><span class="phx-t"><b class="kb-a">${hl(r[0])}</b><span class="kb-m">${hl(r[1])}</span><small class="kb-p">Row ${r[3]} · p${r[2]}</small></span></li>`).join('')}</ul>`
+    : `<p class="empty">“${esc(raw)}” is not on the list. The list says nothing about abbreviations it leaves out.</p>`;
+}
+const KB_TILE = () => TILE_KEYS.has('abbrev') || STILL_KEYS.has('abbrev') ? 'abbrev' : 'sources';
+function renderKbStatic(){
+  if (!$('#kbhero')) return;
+  withTiles($('#kbhero'), `${tileMedia(KB_TILE())}<span class="lbl">Ministry of Health · Bil.1/2024</span><h2>2,665 abbreviations</h2><p>Each with its meaning as the list prints it, on 61 pages.</p>`);
+  $('#kbsrc').innerHTML = `<p class="lk-note">Source: “Senarai Kata Singkatan (Abbreviation) di Fasiliti Kementerian Kesihatan Malaysia Bil.1/2024”, posted to the department's channel on 1 Aug 2024. The list prints no issuer, reference, date or signature, and no rule on how to use it. It prints one instruction, in its row 1500: “MSO4: Morphine Sulfate (Do Not Use This Abbreviation. Write Out The Name. Per The Do-Not-Use List.)”; that do-not-use list is not in the file. Where one abbreviation has several rows, or a row reads oddly, it is shown as printed. It gives only the meanings it prints: TDS, for example, appears only as “Toilet, Debridement And Suturing”, and BD only as “Binswanger's Disease”. Nothing you type is stored.</p>`;
+}
+function renderToolsKb(){
+  if (!$('#tkb')) return;
+  withTiles($('#tkb'), `${tileMedia(KB_TILE())}<div class="row"><span class="ic">${svg('rule')}</span><h2>Abbreviations</h2><span class="tag">2,665</span></div><p>The Ministry of Health's list, Bil.1/2024: what an abbreviation stands for, as printed.</p>`);
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -1573,9 +1769,10 @@ function renderPal(){
       : AI.state === 'loading' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Getting smart search ready: about 8 MB, once. Searching by words meanwhile.</span></div>`
       : sm && sm.moved && !sm.weak ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search: closest in meaning first, all from the guide's own pages.</span></div>`
       : AI.state === 'idle' && SAVE_DATA && prefs.ai !== 'off' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search waits while Data Saver is on.</span><button type="button" class="sm" id="gaidl">Download, 8 MB</button></div>` : '';
-    const dcs = drugsFor([fixed || q, ...also]), dcard = dcs.length && dcs.length <= 2 ? dcs.map(drugCard).join('') : '';
-    h = askBtn(q) + ai + (r.length ? note + dcard + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>'
-      : `<div class="pal-none">Nothing found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`);
+    const dcs = drugsFor([fixed || q, ...also]), dcard = dcs.length && dcs.length <= 2 ? dcs.map(drugCard).join('') : '', kbc = kbCard(q);
+    if (KB.state === 'idle' && !SAVE_DATA && /^\S{2,10}$/.test(q)) kbLoad();
+    h = askBtn(q) + ai + (r.length ? note + dcard + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>' + kbc
+      : kbc + `<div class="pal-none">Nothing ${kbc ? 'else ' : ''}found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`);
   }
   if (askCtl && q){ askCtl.abort(); askCtl = null; }
   body.innerHTML = h; body.scrollTop = 0;
@@ -1616,9 +1813,10 @@ const DRUG_SALT = /^(hcl|hydrochloride|sulphate|sulfate|phosphate|citrate|maleat
 const drugName = g => { const w = g.trim().split(/\s+/); if (!DRUG_TWO.test(w[0].toLowerCase())) while (w.length > 1 && DRUG_SALT.test(w[w.length - 1])) w.pop(); return w.join(' '); };
 function drugIndex(){
   if (DRUGS) return DRUGS;
-  const M = new Map(), add = (g0, kind, i) => { const g = drugName(g0), k = g.toLowerCase(); if (!M.has(k)) M.set(k, {g, k, rx:[], dg:[], ab:[]}); M.get(k)[kind].push(i); };
+  const M = new Map(), add = (g0, kind, i) => { const g = drugName(g0), k = g.toLowerCase(); if (!M.has(k)) M.set(k, {g, k, rx:[], dg:[], ab:[], ax:[]}); M.get(k)[kind].push(i); };
   if (typeof EDRX !== 'undefined') EDRX.items.forEach(i => add(rxGeneric(i[1]), 'rx', i));
   if (typeof EDDG !== 'undefined') EDDG.items.forEach(i => add(dgGeneric(i[1]), 'dg', i));
+  if (typeof AXIDX !== 'undefined') AXIDX.forEach(([i, n, f, g]) => add(g, 'ax', {n, f, g}));
   if (typeof ABX !== 'undefined'){ ABX.dose.renal.rows.forEach(r => add(r[6], 'ab', {n:r[0], g:r[6]})); ABX.dose.none.forEach(r => add(r[3], 'ab', {n:r[0], g:r[3]})); ABX.dil.rows.forEach(r => add(r[4], 'ab', {n:r[1], g:r[4]})); }
   DRUGS = [...M.values()].map(d => {
     const w = d.k.split(/[\s/]+/), f = w[0].length < 4 ? d.k : DRUG_TWO.test(w[0]) && w[1] ? w[0] + ' ' + w[1] : w[0];
@@ -1663,7 +1861,8 @@ function drugCard(d){
   const rows = d.rx.slice(0, 3).map(i => `<a class="dc-r" href="#pharmacy" data-rx="${esc(rxGeneric(i[1]))}"><span class="k">ED pharmacy</span><span class="v">${esc(i[1])}</span><span class="tag">${esc(i[2] || 'Not in the formulary')}</span></a>`).join('')
     + (d.rx.length > 3 ? `<a class="dc-r more" href="#pharmacy" data-rx="${esc(rxGeneric(d.rx[0][1]))}"><span class="v">${d.rx.length - 3} more on the pharmacy list</span></a>` : '')
     + d.dg.map(i => `<a class="dc-r" href="#dilution" data-dg="${esc(dgGeneric(i[1]))}"><span class="k">Dilution guide</span><span class="v">${esc(i[1])}, ${pages(i)}</span>${i[6] ? HI : ''}</a>`).join('')
-    + (d.ab || []).slice(0, 2).map(i => `<a class="dc-r" href="#antibiotics" data-ab="${esc(i.g)}"><span class="k">Antimicrobial guide</span><span class="v">${esc(i.n)}</span></a>`).join('');
+    + (d.ab || []).slice(0, 2).map(i => `<a class="dc-r" href="#antibiotics" data-ab="${esc(i.g)}"><span class="k">Antimicrobial guide</span><span class="v">${esc(i.n)}</span></a>`).join('')
+    + (d.ax || []).slice(0, 2).map(i => `<a class="dc-r" href="#antidotes" data-ax="${esc(i.g)}"><span class="k">Antidote guide</span><span class="v">${esc(i.n)}</span></a>`).join('');
   const lasa = typeof EDRX_LASA === 'undefined' ? '' : d.rx.filter(i => EDRX_LASA[i[0]]).map(i => { const o = EDRX.items.find(x => x[0] === EDRX_LASA[i[0]]); return o ? `<p class="dc-lasa">${svg('info')}<span>Look-alike pair on the Emergency Pharmacy's top 10: <b>${esc(i[1])}</b> and <b>${esc(o[1])}</b>.</span></p>` : ''; }).join('');
   const items = st.flatMap(e => e.ns.length ? e.ns.map(s => `<li><a href="${s.href}"><b>${esc(e.t)}</b><span>${esc(s.t)}</span></a></li>`) : [`<li><a href="#${e.id}"><b>${esc(e.t)}</b><span>Named in its reference tabs</span></a></li>`]);
   const ent = x => `${x} entr${x === 1 ? 'y' : 'ies'}`;
@@ -1913,7 +2112,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir', 'ctbrain', 'antidote', 'abbrev', 'aggress']);
 /* Stills without a loop yet (the 12 Nov 2026 review: Flow Studio stills for What's new, Sources and about, the wall poster
    and the dilution guide): shown like a tile's still, never asked for a video. Move a key to TILE_KEYS once its loop is in tiles/. */
 const STILL_KEYS = new Set([]); /* empty: the four review banners' loops and the ED extension directory's (extdir) went in on 12 Nov 2026 */
@@ -4231,6 +4430,7 @@ function renderToolsLinks(){
 let step = 0, playAll = false, stageVisible = false, clipsOn = false;
 const voice = new Audio(); voice.preload = 'none';
 function renderJourney(anim){
+  const js = $('#jspin'); if (js && !js.firstChild) js.innerHTML = spinHTML('route');
   $('#rail').innerHTML = JOURNEY.map((s, i) => `<li><button type="button" class="${s.optional ? 'maybe' : ''}" data-i="${i}" ${i === step ? 'aria-current="step"' : ''} aria-label="Stop ${i + 1}: ${esc(s.short)}${s.optional ? ', only if needed' : ''}"><span class="n">${svg(s.ic)}</span><b>${esc(s.short)}</b><small>${esc(s.sub)}</small></button></li>`).join('');
   const s = JOURNEY[step], stage = $('#stage');
   const nc = s.note && s.note.c ? ` style="--c:var(--${s.note.c});--cs:var(--${s.note.c}-soft)"` : '';
@@ -5091,7 +5291,7 @@ function route(){
   else if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'antibiotics', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
+  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'antibiotics', 'antidotes', 'abbreviations', 'new', 'poster', 'about', 'install'].includes(h)){ changed = showView(h); if (h === 'antidotes' && AX.state === 'idle') renderAx(); if (h === 'abbreviations' && KB.state === 'idle') renderKb(); }
   else if (h === 'share'){ renderShare(); changed = showView('share'); }
   else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
@@ -5279,7 +5479,7 @@ if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden =
    calculators, Install, the library, the extensions, the ED links). Each is now drawn the first time it is shown (showView), the
    first time a search hands over to it, or when the phone is idle after the first screen, one page per idle moment. */
 const LAZY = {pathways:[renderLib], rules:[renderRules], calc:[renderCalcHub, renderCalc], numbers:[renderNums, () => { if (typeof EXTDIR !== 'undefined' && $('#extdir')){ renderExtStatic(); renderExt(); } }],
-  links:[renderLinks], pharmacy:[renderRxStatic, renderRx], dilution:[renderDgStatic, renderDg], antibiotics:[renderAbStatic, renderAb], new:[renderDrive], install:[renderInstall]};
+  links:[renderLinks], pharmacy:[renderRxStatic, renderRx], dilution:[renderDgStatic, renderDg], antibiotics:[renderAbStatic, renderAb], antidotes:[renderAxStatic, renderAx], abbreviations:[renderKbStatic, renderKb], new:[renderDrive], install:[renderInstall]};
 const lazyDone = new Set();
 function ensureView(v){ if (!LAZY[v] || lazyDone.has(v)) return; lazyDone.add(v); LAZY[v].forEach(f => f()); }
 function lazyIdle(){
@@ -5287,7 +5487,7 @@ function lazyIdle(){
   const go = () => { ensureView(v); lazyIdle(); };
   if (window.requestIdleCallback) requestIdleCallback(go, {timeout:2000}); else setTimeout(go, 150); /* Safari has no requestIdleCallback */
 }
-renderHome(); renderSideSaved(); renderDcheck(); renderToolsCalc(); renderToolsLinks(); renderToolsRx(); renderToolsDg(); renderToolsAb();
+renderHome(); renderSideSaved(); renderDcheck(); renderToolsCalc(); renderToolsLinks(); renderToolsRx(); renderToolsDg(); renderToolsAb(); renderToolsAx(); renderToolsKb();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
 $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
@@ -5305,6 +5505,11 @@ if (typeof EDRX !== 'undefined'){
 }
 /* The ED antimicrobial guides (21 Nov 2026): the page, and each antimicrobial by its name */
 if (typeof ABX !== 'undefined'){
+  if (typeof AXIDX !== 'undefined'){
+    IDX.push({href:'#antidotes', title:'Antidotes (MOH quick guide, 2022)', kind:'Tool', meta:'Preparation, dose and storage for 38 antidotes, as printed', body:'antidote antidotes poisoning overdose toxicology', kw:'antidote antidotes', ic:'prot', c:'c-meta'});
+    AXIDX.forEach(([i, n, f, g]) => IDX.push({href:'#antidotes', title:g + ' (antidote)', kind:'Antidote', meta:'MOH Antidotes Quick Guide: ' + f, body:(n + ' ' + f).toLowerCase(), kw:g.toLowerCase(), ax:g, ic:'prot', c:'c-meta'}));
+  }
+  IDX.push({href:'#abbreviations', title:'Abbreviations (MOH list, Bil.1/2024)', kind:'Tool', meta:'2,665 abbreviations and their meanings, as printed', body:'abbreviation abbreviations singkatan kata singkatan acronym acronyms what does it stand for meaning', kw:'abbreviation abbreviations singkatan acronym', ic:'rule', c:'c-meta'});
   IDX.push({href:'#antibiotics', title:'ED antimicrobial guides', kind:'Tool', meta:'Doses by kidney function, and how to give injectable antimicrobials (Feb 2024)', body:'antibiotic antibiotics antimicrobial renal dose crcl creatinine clearance kidney dilution reconstitution reconstitute infusion rate', kw:'antibiotic antibiotics antimicrobial antimicrobials crcl', ic:'pill', c:'c-meta'});
   const seen = new Set(); [...ABX.dose.renal.rows.map(r => r[6]), ...ABX.dose.none.map(r => r[3]), ...ABX.dil.rows.map(r => r[4]), 'Gentamicin', 'Vancomycin'].forEach(g => { const k = g.toLowerCase(); if (seen.has(k)) return; seen.add(k); IDX.push({href:'#antibiotics', title:g + ' (ED antimicrobial guides)', kind:'Antimicrobial', meta:'ED antimicrobial guides: dose by kidney function, dilution and rate', body:g, ic:'pill', c:'c-meta', ab:g}); });
 }
@@ -5410,6 +5615,14 @@ $('#dgaz').addEventListener('click', e => { const b = e.target.closest('[data-dl
 if ($('#abq')){ $('#abq').addEventListener('input', renderAb); $('#abcr').addEventListener('input', renderAb);
   $('#abf').addEventListener('click', e => { const b = e.target.closest('[data-abf]'); if (b){ abF = b.dataset.abf; renderAb(); const nb = $(`#abf [data-abf="${abF}"]`); if (nb) nb.focus(); } }); }
 const abFrom = a => { if (a && a.dataset.ab){ ensureView('antibiotics'); abF = 'all'; $('#abq').value = a.dataset.ab; renderAb(); } };
+const kbFrom = a => { if (a && a.dataset.kb){ ensureView('abbreviations'); $('#kbq').value = a.dataset.kb; renderKb(); } };
+const axFrom = a => { if (a && a.dataset.ax){ ensureView('antidotes'); $('#axq').value = a.dataset.ax; renderAx(); } };
+if ($('#axq')) $('#axq').addEventListener('input', renderAx);
+$('#palbody').addEventListener('click', e => axFrom(e.target.closest('a[data-ax]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) axFrom(palLinks()[palSel]); }, true);
+if ($('#kbq')) $('#kbq').addEventListener('input', renderKb);
+$('#palbody').addEventListener('click', e => kbFrom(e.target.closest('a[data-kb]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) kbFrom(palLinks()[palSel]); }, true);
 $('#palbody').addEventListener('click', e => abFrom(e.target.closest('a[data-ab]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) abFrom(palLinks()[palSel]); }, true);
 const dgFrom = a => { if (a && a.dataset.dg){ ensureView('dilution'); dgF = 'all'; $('#dgq').value = a.dataset.dg; renderDg(); } };
