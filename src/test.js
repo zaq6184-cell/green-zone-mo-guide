@@ -131,7 +131,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const gopts = await q.locator('#run button[data-go]').allInnerTexts();
     ok(gopts.some(t => /Team leader of the shift/.test(t)) && gopts.some(t => /More department memos/.test(t)), 'the Green Zone rules offer the team leader and the department memos');
     await q.goto(base + '#gz-rules--gzm'); await q.waitForTimeout(700);
-    ok(await q.locator('#run button[data-go]').count() === 11, 'the Green Zone memo menu has eleven memos');
+    ok(await q.locator('#run button[data-go]').count() === 13, 'the Green Zone memo menu has thirteen memos');
     await q.goto(base + '#gz-rules--tl'); await q.waitForTimeout(700);
     ok(await q.evaluate(() => { const o = document.querySelector('#cur .opts'), c = document.querySelector('#cur .figmemo'); return !!o && !!c && !!(o.compareDocumentPosition(c) & Node.DOCUMENT_POSITION_FOLLOWING) && c.querySelectorAll('[data-ppage]').length === 2 && /3\(1\)23/.test(c.textContent); }) && seen.length === 0, 'the team leader step shows its memo card below the options, with two pages and none loaded');
     for (const b of await q.locator('#cur .checks input').all()) await b.check();
@@ -139,7 +139,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await q.locator('#cur button.opt[data-go="0"]').click(); await q.waitForTimeout(700);
     ok(await q.evaluate(() => document.querySelectorAll('#cur .figtl .tl-r').length === 3 && /2\.00 pm/.test(document.querySelector('#cur .figtl').textContent) && /7\.00 am/.test(document.querySelector('#cur .figtl').textContent)), 'the shift chart shows the three shifts, with the first and last case');
     await q.goto(base + '#yellow-zone'); await q.waitForTimeout(700);
-    ok(await q.locator('#run button[data-go]').count() === 10, 'the Yellow Zone opens on its menu of ten');
+    ok(await q.locator('#run button[data-go]').count() === 11, 'the Yellow Zone opens on its menu of eleven');
     await q.goto(base + '#yellow-zone--flow'); await q.waitForTimeout(600);
     ok(await q.evaluate(() => /Aliran pesakit di Zon Kuning/.test(document.querySelector('#cur').textContent)), 'the old Yellow Zone flow link still opens the flow');
     await q.goto(base + '#yellow-zone--cvcb'); await q.waitForTimeout(700);
@@ -150,7 +150,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await q.keyboard.press('Escape'); await q.waitForTimeout(150);
     const mf = await q.evaluate(() => Object.entries(MEMOS).filter(([, m]) => !m.dir).flatMap(([k, m]) => m.pages.map(([n]) => `memo/${k}-p${n}.webp`)));
     const onDisk = fs.readdirSync(path.join(__dirname, '..', 'app', 'memo')).map(f => 'memo/' + f).sort();
-    ok(mf.length === 45 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos and the 4 of the pink EM Watch form, and nothing else (' + onDisk.length + ' on disk)');
+    ok(mf.length === 77 && JSON.stringify(onDisk) === JSON.stringify([...mf].sort()), 'app/memo holds exactly the 41 pages of the 22 memos, the 4 of the pink EM Watch form and the 32 of the memos, letters and antimicrobial guides of 21 Nov 2026, and nothing else (' + onDisk.length + ' on disk)');
     ok(await q.evaluate(() => { const d = document.createElement('div'); d.innerHTML = FIGS['memo-2022-19'](); const a = d.querySelector('a.pill'); return !!a && a.href === MEMO_LIST && a.target === '_blank'; }), 'each memo card links to the department\'s own memo list');
     // EMACC follows memo (01)24 of 11 Jan 2024 (Krishna, 12 Nov 2026)
     await q.goto(base + '#emacc--need'); await q.waitForTimeout(700);
@@ -195,7 +195,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(await q.evaluate(() => !document.querySelector('#lb').hidden && document.querySelector('#lbimg').naturalWidth > 0) && seen.length === 1, 'the site plan opens on a tap');
     await q.keyboard.press('Escape'); await q.waitForTimeout(150);
     await q.goto(base + '#prescribing'); await q.waitForTimeout(700);
-    ok(await q.locator('#run button[data-go]').count() === 17, 'Prescribing at HKL opens on its seventeen topics');
+    ok(await q.locator('#run button[data-go]').count() === 19, 'Prescribing at HKL opens on its nineteen topics');
     // Two documents that open only with an MOH sign-in (12 Nov 2026): the facts in the guide's own words, the picture their link-page tile
     await q.goto(base + '#prescribing--ams'); await q.waitForTimeout(700);
     ok(await q.evaluate(() => { const c = document.querySelector('#cur'); return /Antimicrobial Request Form/.test(c.innerText) && /72 hours/.test(c.innerText) && /OPAT/.test(c.innerText) && !!c.querySelector('.figmemo [data-ppage="sp/tile-c01"]') && /MOH sign-in/.test(c.querySelector('.figmemo').innerText) && /7 Apr 2026/.test(c.innerText); }) && !seen.some(f => /tile-c01/.test(f)), 'the stewardship topic gives the policy\'s rules (request form, 72-hour review, OPAT readmission through the ED), with its tile card and date, and loads no picture before a tap');
@@ -1012,6 +1012,41 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
       ok(!re.test(art) && !re.test(idx) && await p.evaluate(r => !new RegExp(r).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('emwatch')), 'the clinic\'s mobile number printed on the form is nowhere in the guide, page or data'); }
     ok(await p.evaluate(() => ['pink form', 'borang pink', 'google meet', 'borang kebenaran', 'emwatch'].every(q => { const r = findMore(q); return (r.r || r)[0].href === '#em-watch'; }) && ['klinik kesihatan', 'clinic referral', 'referral form', 'borang', 'pink urine'].every(q => { const r = findMore(q); return !(r.r || r).slice(0, 2).some(x => x.href === '#em-watch'); })), 'search: the pink form, its Malay name and Google Meet open EM Watch first, while clinic, form and borang searches keep their own first results');
     p.off('request', onReq); }
+  /* 21 Nov 2026: memos and letters the department circulated, 2019 to 2026 (data26.js) */
+  { const seenN = [], onReqN = r => { if (/\/memo\/(20(19|22|25|26)-|far-|upsk|med-mau25|nefro-hd|kpk-|abx-)/.test(r.url())) seenN.push(r.url()); }; p.on('request', onReqN);
+    await go(p, '#gz-rules--gzn', 450);
+    ok(await p.locator('#run button[data-go]').count() === 7, 'the Green Zone rules open the seven memos of 2025 and 2026');
+    await go(p, '#infection-alerts--measles', 450);
+    const ms = await p.evaluate(() => { const c = document.querySelector('#cur .figmemo'), t = document.querySelector('#cur').textContent;
+      return {t:/Demam tinggi \(≥ 38°C\)/.test(t) && /4 days before to 4 days after the rash/.test(t) && /"Suspected Measles"/.test(t), pages:c ? [...c.querySelectorAll('[data-ppage]')].map(b => b.dataset.ppage) : [], link:c ? !!c.querySelector('a.pill') : null}; });
+    ok(ms.t && JSON.stringify(ms.pages) === JSON.stringify(['memo/2026-measles-p1', 'memo/2026-measles-p2']) && ms.link === false && seenN.length === 0, 'suspected measles: the memo of 19 Nov 2026 and its triage guide, quoted as printed, its pages loading only on a tap' + (seenN.length ? ' ' + JSON.stringify(seenN) : ''));
+    await p.locator('#cur [data-ppage="memo/2026-measles-p2"]').click(); await p.waitForFunction(() => { const i = document.querySelector('#lbimg'); return i.complete && i.naturalWidth > 0; }, null, {timeout:6000}).catch(() => {}); await p.waitForTimeout(150);
+    const lbN = await p.evaluate(() => ({open:!document.querySelector('#lb').hidden, src:document.querySelector('#lbimg').getAttribute('src'), w:document.querySelector('#lbimg').naturalWidth}));
+    ok(lbN.open && lbN.src === 'memo/2026-measles-p2.webp' && lbN.w === 1240 && seenN.length === 1, 'the triage guide opens full size on a tap' + (lbN.open && seenN.length === 1 ? '' : ' ' + JSON.stringify({lbN, seenN})));
+    await p.keyboard.press('Escape'); await p.waitForTimeout(200);
+    await go(p, '#blood-tests--forms', 450);
+    const lf = await p.evaluate(() => [...document.querySelectorAll('#cur .figmemo')].map(c => ({chip:c.querySelector('.mm-chip').textContent, pages:c.querySelectorAll('[data-ppage]').length})));
+    ok(lf.length === 3 && lf.every(c => /Pathology letter/.test(c.chip) && c.pages === 0), 'the lab request forms step names its three pathology letters, without pages (they name staff throughout)' + (lf.length === 3 ? '' : ' ' + JSON.stringify(lf)));
+    await go(p, '#mau-admission', 450);
+    ok(await p.evaluate(() => [...document.querySelectorAll('#run [role="tab"], #run .ptab-bar button')].some(x => /2025 criteria/.test(x.textContent)) && /2025 criteria tab/.test(P['mau-admission'].nodes.crit.hint)), 'MAU: the 2025 criteria from General Medicine are a dated tab beside the 2022 checklist');
+    ok(await p.evaluate(() => P['gz-rules'].nodes.gzm.opts.length === 13 && P['yellow-zone'].nodes.hd && P['abdominal-pain'].dept.some(d => /Bil\. 9\/2024/.test(d.src) && d.fig === 'memo-kpk-ectopic') && P['infection-alerts'].nodes.nipah.fig === 'memo-2026-nipah'
+      && CONFIRM[0].includes('21 Nov 2026') && V8[0][3].includes('#blood-tests') && APP_VER === 'Version 8, updated 21 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
+    ok(await p.evaluate(() => Object.entries({'measles':'#infection-alerts', 'campak':'#infection-alerts', 'dispatch book':'#blood-tests', 'winspirin':'#prescribing', 'phq-9':'#referral-rules'}).every(([q, h]) => { const r = findMore(q), a = (r.r || r)[0]; return !!a && a.href.startsWith(h); })), 'search: measles, campak, dispatch book, winspirin and PHQ-9 open their new steps');
+    if (guardRe('announcements')) { const re = new RegExp(guardRe('announcements')), art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
+      ok(!re.test(art) && !re.test(idx) && await p.evaluate(r => !new RegExp(r).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('announcements')), 'no patient, password, link or registration number from these documents is anywhere in the guide, page or data'); }
+    /* The ED antimicrobial guides (data27.js): bands marked only where the guide prints them, nothing stored */
+    await go(p, '#antibiotics', 500);
+    const abSet = async v => p.evaluate(v => { const i = document.querySelector('#abcr'); i.value = v; i.dispatchEvent(new Event('input')); return {on:document.querySelectorAll('#abl .ab-b.on').length, gaps:[...new Set([...document.querySelectorAll('#abl .ab-gap')].map(g => g.textContent))]}; }, v);
+    const a25 = await abSet('25'), a55 = await abSet('55'), a40 = await abSet('40'), a305 = await abSet('30.5');
+    ok(a25.on === 20 && a25.gaps.length === 0 && a55.on === 3 && /No printed band covers 55 ml\/min: the usual dose column prints no CrCl/.test(a55.gaps.join()) && a40.on === 21 && /share their ends: 40 ml\/min sits in two/.test(a40.gaps.join()) && /30\.5 ml\/min falls between the printed bands/.test(a305.gaps.join()), 'antimicrobials: a CrCl marks only the bands the guide prints, says when bands share an end, and never rounds into one' + (a25.on === 20 && a55.on === 3 && a40.on === 21 ? '' : ' ' + JSON.stringify({a25, a55, a40, a305})));
+    const abv = await p.evaluate(() => { document.querySelector('#abcr').value = ''; document.querySelector('#abcr').dispatchEvent(new Event('input')); const q = document.querySelector('#abq'); q.value = 'ceftri'; q.dispatchEvent(new Event('input'));
+      const names = [...document.querySelectorAll('#abl .ab-n')].map(n => n.textContent), cards = [...document.querySelectorAll('#absrc .figmemo')].map(c => c.querySelectorAll('[data-ppage]').length);
+      q.value = ''; q.dispatchEvent(new Event('input'));
+      return {names, cards, rows:document.querySelectorAll('#abl .ab-r').length, cg:/1\.23/.test(document.querySelector('#abcg').textContent) && /BMI > 30/.test(document.querySelector('#abcg').textContent), tile:/ED antimicrobial guides/.test((document.querySelector('#tabx') || {}).textContent || ''),
+        store:Object.keys(localStorage).filter(k => /ab|crcl/i.test(k) && !/^gz-(tabs|clips)$/.test(k))}; });
+    ok(abv.names.length === 2 && abv.names.every(n => /^Ceftriaxone/.test(n)) && abv.rows === 54 && JSON.stringify(abv.cards) === JSON.stringify([4, 2]) && abv.cg && abv.tile && abv.store.length === 0 && !seenN.some(u => /abx-/.test(u)), 'antimicrobials: find by name, 54 rows in all, the guide\'s own formula with both obesity definitions, both guides as covered pages loaded only on a tap, a Shift tools tile, nothing stored' + (abv.rows === 54 ? '' : ' ' + JSON.stringify(abv)));
+    ok(await p.evaluate(() => { const r = (findMore('ceftriaxone').r || findMore('ceftriaxone')), k = r.findIndex(a => a.ab === 'Ceftriaxone'), d = drugsFor(['vancomycin']); return k > 0 && r[k].href === '#antibiotics' && !r[0].ab && d.length === 1 && /Antimicrobial guide/.test(drugCard(d[0])); }), 'antimicrobials: search offers the drug in the guides after the pages that mention it, and the drug finder card points to it');
+    p.off('request', onReqN); }
   ok(await p.evaluate(() => !/9 Jul 2024/.test(JSON.stringify(P))), 'memo (10)24 is no longer dated 9 Jul 2024');
   await go(p, '#home', 300);
   /* The medical interpreters (memo of 9 Jul 2026) */
@@ -1593,13 +1628,13 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await eq.goto(U + '#em-watch', {waitUntil:'load'}); await eq.waitForTimeout(600);
     const e1 = await eq.evaluate(() => ({stored:localStorage.getItem('gz-round'), n:V8.length, note:!!document.querySelector('.chg-n'), mark:CHG.size}));
     ok(e1.stored === String(e1.n) && !e1.note && e1.mark === 0, 'changed: on a first open the phone stores the count of rounds and marks nothing');
-    await eq.evaluate(() => localStorage.setItem('gz-round', String(V8.length - 5))); await eq.reload({waitUntil:'load'}); await eq.waitForTimeout(700);
+    await eq.evaluate(() => localStorage.setItem('gz-round', String(V8.length - 1 - V8.findIndex(v => /pink EM Watch form/.test(v[0]))))); await eq.reload({waitUntil:'load'}); await eq.waitForTimeout(700);
     const e2 = await eq.evaluate(() => ({note:(document.querySelector('.chg-n') || {}).textContent || '', stored:localStorage.getItem('gz-round'), n:V8.length}));
-    ok(/Changed since you last opened the guide: The pink EM Watch form/.test(e2.note) && e2.stored === String(e2.n), 'changed: five rounds later, EM Watch opens with what changed in it, and the count moves on');
+    ok(/Changed since you last opened the guide: The pink EM Watch form/.test(e2.note) && e2.stored === String(e2.n), 'changed: rounds later, EM Watch opens with what changed in it, and the count moves on');
     await eq.evaluate(() => { location.hash = '#rules'; }); await eq.waitForTimeout(500);
     ok(await eq.evaluate(() => [...document.querySelectorAll('#v-rules .badge.b-chg')].length >= 1), 'changed: the rules list marks EM Watch Changed');
     await eq.evaluate(() => { location.hash = '#home'; }); await eq.waitForTimeout(500);
-    ok(await eq.evaluate(() => document.querySelectorAll('#newcard .chg-d').length === 5), 'changed: What\'s new on the home page marks the five rounds that are new to this phone');
+    ok(await eq.evaluate(() => document.querySelectorAll('#newcard .chg-d').length === 1 + V8.findIndex(v => /pink EM Watch form/.test(v[0]))), 'changed: What\'s new on the home page marks the rounds that are new to this phone');
     await ec.close();
 
     /* The reference beside the step (18 Nov 2026), on a desktop */

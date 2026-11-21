@@ -62,8 +62,9 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 18 Nov 2026';
+const APP_VER = 'Version 8, updated 21 Nov 2026';
 const V8 = [
+  ['Department memos and letters, 2019 to 2026','Two dozen memos and letters the department circulated, read from their pages and placed where you look for them: suspected measles (memo of 19 Nov 2026) and the department\'s own Nipah memo in Infection alerts; seven memos of 2025 and 2026 on the Green Zone rules (primary team review within 2 hours, waiting for emergency surgery, IV paracetamol and IV albumin, Lampiran A, fever after chemotherapy, moving a patient within HKL, sick leave for staff), with two older ones; the dispatch book, POCT results and the laboratory\'s rules in Blood tests; medicines for a foreign patient and dispersible aspirin in Prescribing; psychology counselling in Referral rules; the 2025 MAU criteria as a dated tab; haemodialysis in the Yellow Zone; and the 2024 ectopic pregnancy circular on Abdominal pain. A new page in Shift tools, ED antimicrobial guides, holds the department\'s two quick guides of February 2024: the dose of each antimicrobial for each band of kidney function (type a CrCl and the printed band is marked), and how to reconstitute, dilute and give each injectable. Each step shows its source, with its pages at a tap where they can be shown.',[['#gz-rules--gzn','Green Zone: memos of 2025 and 2026'],['#infection-alerts--measles','Suspected measles'],['#blood-tests','Blood tests: the lab\'s rules'],['#prescribing--fgnrx','A foreign patient: 5 days'],['#antibiotics','ED antimicrobial guides']],['#gz-rules','#infection-alerts','#blood-tests','#prescribing','#referral-rules','#mau-admission','#yellow-zone','#abdominal-pain','#missed-fractures']],
   ['Open now','The home page shows what holds at this moment, in Malaysia time: whether EMACC, EM Watch and the Animal Bite Clinic are in session (until when, or the next session), the shift, and the hours that change a route (MAU office hours, the Observation Ward\'s medical officer, LA OT for orthopaedic cases, Code Blue at SCACC after 1700 hr). The steps that print those hours show the same, live. Only the hours the sources print; sessions only, nothing about booking.',[['#home','Home'],['#emacc--clinic','EMACC hours']]],
   ['Changed since you last looked','From the next update on, an entry that changed since you last opened the guide carries a Changed mark in the library and a line at its top, and What\'s new on the home page marks what is new to you. Your phone keeps only a count of the updates it has seen.',[['#new','What\'s new']]],
   ['The reference beside the step','On a computer, or a tablet held sideways, the route panel beside the step can show the pathway\'s reference tabs instead (Reference beside the step), so a table or the advice stays in view while you answer. Your route moves to the strip above the step.',[['#renal-colic','Renal colic']]],
@@ -278,6 +279,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'From the department memos and letters added on 21 Nov 2026. Still to confirm: (1) the department\'s Nipah memo HKL/JK/98/123/8 prints "28 Januari 2025" but was circulated in January 2026, and the POCT review memo prints "6 Mac 2025" but cites a meeting of 4 Dec 2025: which year is right; (2) whether the memo on a patient treated elsewhere within 24 hours (HKL/JK/98/188/3(5)19, 4 Feb 2019) and the memo on CT or MRI before discharge (HKL/JK/98/188/3(28)22, 14 Dec 2022) are still in force, and how the registration sticker marks a visit within 24 hours; (3) which criteria the review of IV paracetamol and IV albumin used (letter HKL/JK/98/188/1, May 2026); (4) Lampiran A for foreign patients (memo of 6 Jul 2026): its flow chart prints the forms as CIP/JKT-02 and CIP/JK-01 where the memo prints BPK/JKT-02 and CIP/JKT-01, and it does not say what happens when no specialist is present; (5) MAU: the 2022 criteria the entry follows, or the General Medicine letter of 7 Feb 2025 (oxygen up to a Venturi mask at 40%, 100 kg or less, pregnancy excluded); (6) whether the aspirin dispersible brands of the pharmacy letter of 9 Nov 2022 are still the ones supplied; (7) EMACC\'s days: an undated meeting minute circulated on 3 Jan 2025 says EMACC runs Monday to Saturday, Saturday until 1 pm, with at most 10 Monday appointments, where the guide (the guide owner, 12 Nov 2026) says Monday to Friday, 8 am to 3 pm; (8) whether the department\'s two antimicrobial quick guides (dilution, and adult dosing), 2nd edition, February 2024, are still the current editions.',
   'Open now (18 Nov 2026) reads the hours the sources print. Four print an hour but not the days: MAU office hours, 8 am to 5 pm (the MAU admission note); the Observation Ward\'s medical officer, 10 am to 10 pm (memo HKL/JK/98/188/3(6)23); LA OT taking orthopaedic cases, 8 am to 9 pm only (department policy 2026, 22.3.3); and office hours at SCACC ending at 1700 hr, with no start (Code Blue Manual, 4.2). Which days does each hold, and when do SCACC office hours start? EMACC follows the guide owner\'s 8 am to 3 pm, Monday to Friday, where the memo of 11 Jan 2024 prints 7.30 am to 3.30 pm. The guide cannot know public holidays.',
   'From the calculators built into the guide on 16 Nov 2026 (CALC-RESEARCH.md). Still to confirm: (1) which D-dimer assay the HKL laboratory runs: the age-adjusted cut-off (ADJUST-PE) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE; (2) the AF CPG (2012), Table 14 footnote: a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed \u2265200 mmol/L; (3) the Ottawa SAH rule\'s age: 40 or older (JAMA 2013) or over 40 (CMAJ 2017, Figure 1): the guide uses 40 or older; (4) burns: the department\'s own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA, VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses; (5) alcohol withdrawal: the department\'s regimen for a CIWA-Ar of 10 or more, which the guide\'s sources do not give.',
   'From the children\'s heart and breathing rates added on 16 Nov 2026 (Fleming et al., Lancet 2011, Web Tables 4 and 5): the paper gives centiles of healthy children and does not say which centile makes a rate abnormal. Still to confirm: which ranges or centile the department and its paediatric triage use for a child\'s heart rate and breathing rate, and whether the guide should mark one.',
@@ -1035,7 +1037,7 @@ function search(q, loose){
     }
     if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
     /* An ED pharmacy drug comes after the pathways, rules and guidelines that mention it (the list keeps its own order) */
-    if (e.kind === 'Drug' || e.kind === 'Dilution') s = Math.min(s, 1);
+    if (e.kind === 'Drug' || e.kind === 'Dilution' || e.kind === 'Antimicrobial') s = Math.min(s, 1);
     return {e, s};
   }).filter(Boolean).sort((a, b) => (b.s - a.s) || (a.e.href.includes('--') - b.e.href.includes('--'))).slice(0, 14).map(r => r.e);
 }
@@ -1337,7 +1339,7 @@ function smartFind(q, kw){
   const M = msQuery(q) && AIMS.state === 'ready' ? AIMS : AI, MIN = M === AIMS ? AIMS_MIN : AI_MIN, WEAK = M === AIMS ? AIMS_WEAK : AI_WEAK;
   if (M.state !== 'ready') return null;
   /* drug lists, the CPG shelf's links and outside links stay after the guide's own pages, as in keyword search */
-  const side = i => /^(Drug|Dilution|National CPG|Link)$/.test(IDX[i].kind);
+  const side = i => /^(Drug|Dilution|Antimicrobial|National CPG|Link)$/.test(IDX[i].kind);
   const pick = s => { const sc = aiScores(M, s); if (!sc) return null; let m = 0; for (let i = 0; i < IDX.length; i++) if (sc.best[i] > m && !side(i)) m = sc.best[i]; return {sc, m}; };
   /* A word the guide does not know was corrected by spelling: meaning decides whether the correction or the word as typed
      is closer ("asthama" is asthma; "sprain" is not "strain") */
@@ -1543,7 +1545,7 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose, snip){
-  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ab ? ` data-ab="${esc(e.ab)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -1614,9 +1616,10 @@ const DRUG_SALT = /^(hcl|hydrochloride|sulphate|sulfate|phosphate|citrate|maleat
 const drugName = g => { const w = g.trim().split(/\s+/); if (!DRUG_TWO.test(w[0].toLowerCase())) while (w.length > 1 && DRUG_SALT.test(w[w.length - 1])) w.pop(); return w.join(' '); };
 function drugIndex(){
   if (DRUGS) return DRUGS;
-  const M = new Map(), add = (g0, kind, i) => { const g = drugName(g0), k = g.toLowerCase(); if (!M.has(k)) M.set(k, {g, k, rx:[], dg:[]}); M.get(k)[kind].push(i); };
+  const M = new Map(), add = (g0, kind, i) => { const g = drugName(g0), k = g.toLowerCase(); if (!M.has(k)) M.set(k, {g, k, rx:[], dg:[], ab:[]}); M.get(k)[kind].push(i); };
   if (typeof EDRX !== 'undefined') EDRX.items.forEach(i => add(rxGeneric(i[1]), 'rx', i));
   if (typeof EDDG !== 'undefined') EDDG.items.forEach(i => add(dgGeneric(i[1]), 'dg', i));
+  if (typeof ABX !== 'undefined'){ ABX.dose.renal.rows.forEach(r => add(r[6], 'ab', {n:r[0], g:r[6]})); ABX.dose.none.forEach(r => add(r[3], 'ab', {n:r[0], g:r[3]})); ABX.dil.rows.forEach(r => add(r[4], 'ab', {n:r[1], g:r[4]})); }
   DRUGS = [...M.values()].map(d => {
     const w = d.k.split(/[\s/]+/), f = w[0].length < 4 ? d.k : DRUG_TWO.test(w[0]) && w[1] ? w[0] + ' ' + w[1] : w[0];
     return {...d, f, g:d.rx.length ? drugName(rxGeneric(d.rx[0][1])) : d.g.charAt(0).toUpperCase() + d.g.slice(1).toLowerCase()};
@@ -1659,7 +1662,8 @@ function drugCard(d){
   const HI = '<span class="tag hi" title="On the hospital\'s 2026 high-alert list">High alert</span>';
   const rows = d.rx.slice(0, 3).map(i => `<a class="dc-r" href="#pharmacy" data-rx="${esc(rxGeneric(i[1]))}"><span class="k">ED pharmacy</span><span class="v">${esc(i[1])}</span><span class="tag">${esc(i[2] || 'Not in the formulary')}</span></a>`).join('')
     + (d.rx.length > 3 ? `<a class="dc-r more" href="#pharmacy" data-rx="${esc(rxGeneric(d.rx[0][1]))}"><span class="v">${d.rx.length - 3} more on the pharmacy list</span></a>` : '')
-    + d.dg.map(i => `<a class="dc-r" href="#dilution" data-dg="${esc(dgGeneric(i[1]))}"><span class="k">Dilution guide</span><span class="v">${esc(i[1])}, ${pages(i)}</span>${i[6] ? HI : ''}</a>`).join('');
+    + d.dg.map(i => `<a class="dc-r" href="#dilution" data-dg="${esc(dgGeneric(i[1]))}"><span class="k">Dilution guide</span><span class="v">${esc(i[1])}, ${pages(i)}</span>${i[6] ? HI : ''}</a>`).join('')
+    + (d.ab || []).slice(0, 2).map(i => `<a class="dc-r" href="#antibiotics" data-ab="${esc(i.g)}"><span class="k">Antimicrobial guide</span><span class="v">${esc(i.n)}</span></a>`).join('');
   const lasa = typeof EDRX_LASA === 'undefined' ? '' : d.rx.filter(i => EDRX_LASA[i[0]]).map(i => { const o = EDRX.items.find(x => x[0] === EDRX_LASA[i[0]]); return o ? `<p class="dc-lasa">${svg('info')}<span>Look-alike pair on the Emergency Pharmacy's top 10: <b>${esc(i[1])}</b> and <b>${esc(o[1])}</b>.</span></p>` : ''; }).join('');
   const items = st.flatMap(e => e.ns.length ? e.ns.map(s => `<li><a href="${s.href}"><b>${esc(e.t)}</b><span>${esc(s.t)}</span></a></li>`) : [`<li><a href="#${e.id}"><b>${esc(e.t)}</b><span>Named in its reference tabs</span></a></li>`]);
   const ent = x => `${x} entr${x === 1 ? 'y' : 'ies'}`;
@@ -4143,6 +4147,75 @@ function renderToolsDg(){
   if (typeof EDDG === 'undefined' || !$('#tdg')) return;
   withTiles($('#tdg'), `${tileMedia(DG_TILE())}<div class="row"><span class="ic">${svg('syringe')}</span><h2>ED dosing and dilution guide</h2><span class="tag">${EDDG.items.length}</span></div><p>The department's guide to injectable drugs, 3rd edition, January 2026: find a drug, open its pages.</p><ul class="gl"><li><span>Drugs</span><b>${EDDG.items.length}</b></li><li><span>High alert</span><b>${EDDG.items.filter(i => i[6]).length}</b></li></ul><span class="go-l">Open the guide${svg('chev')}</span>`);
 }
+/* ================= The ED antimicrobial guides (21 Nov 2026, data27.js from src/abx.js) =================
+   The department's two quick guides, 2nd edition, February 2024: reconstitution, dilution and rate for 25 injectable
+   antimicrobials, and adult doses with the dose for each band of kidney function. Every cell as printed. Type a CrCl and the
+   bands the guide prints for it are marked; the page never rounds into a band and never picks a weight (the guide defines obese
+   two ways), and nothing typed is stored. */
+let abF = 'all';
+const AB_TILE = () => TILE_KEYS.has('infect') ? 'infect' : 'doses';
+/* A printed band's own numbers: "31-50 ml/min", "> 60", "<10 ml/min & regular HD", "CrCl >40ml/min", "Normal or CrCl >50 ml/min" */
+function abIn(band, x){
+  const t = String(band).split('\n')[0];
+  let m = /(\d+)\s*[-–]\s*(\d+)/.exec(t); if (m) return x >= +m[1] && x <= +m[2];
+  m = />\s*(\d+)/.exec(t); if (m) return x > +m[1];
+  m = /<\s*(\d+)/.exec(t); if (m) return x < +m[1];
+  return false;
+}
+const abLines = s => esc(s).replace(/\n/g, ' <br>');
+function abCr(){ const v = parseFloat(($('#abcr') && $('#abcr').value || '').replace(',', '.')); return isFinite(v) && v >= 0 && v <= 400 ? v : null; }
+function renderAb(){
+  if (typeof ABX === 'undefined' || !$('#abl')) return;
+  const q = ($('#abq').value || '').trim().toLowerCase(), x = abCr(), D = ABX.dose;
+  const hit = (...s) => !q || s.some(v => String(v).toLowerCase().includes(q));
+  const re = q ? new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
+  const hl = s => re ? String(s).split(re).map((v, k) => k % 2 ? `<mark>${esc(v)}</mark>` : esc(v)).join('') : esc(s);
+  const nOf = {renal:D.renal.rows.length + 2, none:D.none.length, dil:ABX.dil.rows.length};
+  $('#abf').innerHTML = [['all', 'All'], ['renal', 'Kidney function'], ['none', 'No renal change'], ['dil', 'Dilution and rate']].map(([k, t]) => `<button type="button" data-abf="${k}" aria-pressed="${abF === k}">${t}${k === 'all' ? '' : ` <span class="n">${nOf[k]}</span>`}</button>`).join('');
+  const gapMsg = (bands, usual) => x === null ? '' : bands.some(b => abIn(b, x)) ? '' : `<p class="ab-gap">${svg('info')}<span>${usual && x > 50 ? `No printed band covers ${x} ml/min: the usual dose column prints no CrCl.` : `${x} ml/min falls between the printed bands.`}</span></p>`;
+  const band = (h, v, on, cls) => `<div class="ab-b${on ? ' on' : ''}${cls ? ' ' + cls : ''}"><dt>${abLines(h)}</dt> <dd>${abLines(v)}</dd></div> `;
+  const S = [];
+  if (abF === 'all' || abF === 'renal'){
+    const rows = D.renal.rows.filter(r => hit(r[0], r[6]));
+    const g = hit('gentamicin', 'endocarditis') ? D.gent : null, v = hit('vancomycin') ? D.vanc : null;
+    if (rows.length || g || v) S.push(`<section class="phx-g ab-sec" id="ab-renal"><h2>Dose by kidney function</h2><ul class="phx-l">` + rows.map(r => {
+      const own = /^Piperacillin/i.test(r[6]), heads = own ? [r[2], r[3], r[4]].map(c => c.split('\n')[0]) : D.renal.head.slice(1);
+      const vals = own ? [r[2], r[3], r[4]].map(c => c.split('\n').slice(1).join('\n')) : [r[2], r[3], r[4]];
+      return `<li class="ab-r" data-abn="${esc(r[6])}"><b class="ab-n">${hl(r[0])}</b> <dl class="ab-bands">${band('Usual dose', r[1], false, 'usual')}${heads.map((h, k) => band(h + (own ? '' : ''), vals[k], x !== null && abIn(h, x))).join('')}</dl>`
+        + (r[7] ? `<p class="ab-note">${esc(r[7])}</p>` : '') + (/merged cell/.test(r[5]) ? `<p class="ab-note">As printed: ${esc(r[5].replace(/ are one merged cell| is one merged cell/, ' share one cell').replace(/all three renal columns share one cell/, 'the three bands share one cell'))}.</p>` : '') + gapMsg(heads, true) + '</li> ';
+    }).join('')
+      + (g ? `<li class="ab-r" data-abn="Gentamicin"><b class="ab-n">${esc(g.title)}</b> <dl class="ab-bands">${g.rows.map(([h, d]) => band('CrCl ' + h, d, x !== null && abIn(h, x))).join('')}</dl><p class="ab-note">${esc(g.foot)}</p><ul class="ab-tdm">${g.tdm.map(t => `<li>${esc(t)}</li>`).join('')}</ul>${x !== null && g.rows.filter(([h]) => abIn(h, x)).length > 1 ? `<p class="ab-gap">${svg('info')}<span>The printed bands share their ends: ${x} ml/min sits in two of them.</span></p>` : gapMsg(g.rows.map(r => r[0]))}</li>` : '')
+      + (v ? `<li class="ab-r" data-abn="Vancomycin"><b class="ab-n">${esc(v.title)}</b> <dl class="ab-bands">${v.rows.map(([h, d, t]) => band(h, d + '\n\nFirst levels: ' + t.replace(/▪\s*/g, '').replace(/\n/g, '; '), x !== null && abIn(h, x))).join('')}</dl><p class="ab-note">Dose by actual body weight (ABW), as printed.</p>${gapMsg(v.rows.map(r => r[0]).filter(h => /\d/.test(h)))}</li>` : '')
+      + '</ul></section>');
+  }
+  if (abF === 'all' || abF === 'none'){
+    const rows = D.none.filter(r => hit(r[0], r[3]));
+    if (rows.length) S.push(`<section class="phx-g ab-sec" id="ab-none"><h2>No change with kidney function</h2><ul class="phx-l">` + rows.map(r => `<li class="ab-r" data-abn="${esc(r[3])}"><b class="ab-n">${hl(r[0])}</b> <dl class="ab-bands">${band('Usual dose', r[1], false, 'usual')}${r[2] ? band('Notes', r[2], false, 'usual') : ''}</dl></li>`).join('') + '</ul></section>');
+  }
+  if (abF === 'all' || abF === 'dil'){
+    const rows = ABX.dil.rows.filter(r => hit(r[1], r[4]));
+    if (rows.length) S.push(`<section class="phx-g ab-sec" id="ab-dil"><h2>Reconstitution, dilution and rate</h2><ul class="phx-l">` + rows.map(r => `<li class="ab-r ab-d" data-abn="${esc(r[4])}"><b class="ab-n">${hl(r[1])}</b> <dl class="ab-bands">${band('Reconstitution and dilution', r[2], false, 'usual')}${band('Rate', r[3], false, 'usual')}</dl>${r[5] ? `<p class="ab-note">${esc(r[5])}</p>` : ''}</li>`).join('') + `</ul><p class="ab-note">${esc(ABX.dil.foot)}</p></section>`);
+  }
+  $('#abn').textContent = x !== null ? `CrCl ${x} ml/min: the printed bands that cover it are marked.` : 'Type a CrCl to mark the printed band for it.';
+  $('#abl').innerHTML = S.join('') || '<p class="empty">No antimicrobial in the two guides matches. Try its generic name, or the ED dosing and dilution guide.</p>';
+}
+function renderAbStatic(){
+  if (typeof ABX === 'undefined' || !$('#abhero')) return;
+  const D = ABX.dose;
+  withTiles($('#abhero'), `${tileMedia(AB_TILE())}<span class="lbl">ETD HKL · 2nd edition · Feb 2024</span><h2>${D.renal.rows.length + D.none.length + 2} antimicrobials</h2><p>Doses by kidney function, and how to reconstitute, dilute and give ${ABX.dil.rows.length} injectables.</p>`);
+  $('#abcg').innerHTML = `<summary>${svg('calc')}<span>How the guide works out CrCl</span></summary><div class="ab-cgb"><p class="ab-k">Cockcroft-Gault, as printed</p><ul>${D.cg.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
+    <p class="ab-k">Which weight</p><ul>${D.wnotes.map(l => `<li>${esc(l)}</li>`).join('')}</ul><ul>${D.weights.map(([d, f]) => `<li><b>${esc(d)}</b>: ${abLines(f)}</li>`).join('')}</ul>
+    <p class="ab-note">${esc(D.obese)} The guide does not say which to use, so this page leaves the weight to you and marks only the band for the CrCl you type.</p>
+    <p><a class="pill" href="#calc-crcl">${svg('calc')}CrCl calculator (CKD CPG)</a></p></div>`;
+  $('#absrc').innerHTML = (typeof MEMOS !== 'undefined' && MEMOS['abx-dose'] ? memoHTML('abx-dose') + memoHTML('abx-dil') : '')
+    + `<p class="lk-note">Sources: ${esc(D.src)}; ${esc(ABX.dil.src)}. Prepared by the department's clinical (EM) pharmacists and approved for use by the head of department on 8 Feb 2024: department documents (standing rule 6), every cell as printed. Whether the 2nd edition is still current is under Still to confirm. Nothing you type here is stored.</p>`;
+}
+function renderToolsAb(){
+  if (typeof ABX === 'undefined' || !$('#tabx')) return;
+  const D = ABX.dose;
+  withTiles($('#tabx'), `${tileMedia(AB_TILE())}<div class="row"><span class="ic">${svg('pill')}</span><h2>ED antimicrobial guides</h2><span class="tag">${D.renal.rows.length + D.none.length + 2}</span></div><p>The department's quick guides, February 2024: the dose for each band of kidney function, and how to give each injectable.</p><ul class="gl"><li><span>By kidney function</span><b>${D.renal.rows.length + 2}</b></li><li><span>Injectables</span><b>${ABX.dil.rows.length}</b></li></ul>`);
+}
+
 function renderToolsLinks(){
   withTiles($('#tlk'), `${tileMedia('links')}<div class="row"><span class="ic">${svg('link')}</span><h2>ED links</h2><span class="tag">${LINKS.reduce((a, g) => a + g.items.length, 0)}</span></div><p>The department's forms, hospital systems and folders, from the ETD HKL link page.</p><ul class="gl">${LINKS.map(g => `<li><span>${esc(g.h)}</span><b>${g.items.length}</b></li>`).join('')}</ul>`);
   /* Reading X-rays (11 Nov 2026): the tile lists the films from the guide's own start menu, so it never drifts from the entry */
@@ -5018,7 +5091,7 @@ function route(){
   else if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
+  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'antibiotics', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
   else if (h === 'share'){ renderShare(); changed = showView('share'); }
   else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
@@ -5206,7 +5279,7 @@ if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden =
    calculators, Install, the library, the extensions, the ED links). Each is now drawn the first time it is shown (showView), the
    first time a search hands over to it, or when the phone is idle after the first screen, one page per idle moment. */
 const LAZY = {pathways:[renderLib], rules:[renderRules], calc:[renderCalcHub, renderCalc], numbers:[renderNums, () => { if (typeof EXTDIR !== 'undefined' && $('#extdir')){ renderExtStatic(); renderExt(); } }],
-  links:[renderLinks], pharmacy:[renderRxStatic, renderRx], dilution:[renderDgStatic, renderDg], new:[renderDrive], install:[renderInstall]};
+  links:[renderLinks], pharmacy:[renderRxStatic, renderRx], dilution:[renderDgStatic, renderDg], antibiotics:[renderAbStatic, renderAb], new:[renderDrive], install:[renderInstall]};
 const lazyDone = new Set();
 function ensureView(v){ if (!LAZY[v] || lazyDone.has(v)) return; lazyDone.add(v); LAZY[v].forEach(f => f()); }
 function lazyIdle(){
@@ -5214,7 +5287,7 @@ function lazyIdle(){
   const go = () => { ensureView(v); lazyIdle(); };
   if (window.requestIdleCallback) requestIdleCallback(go, {timeout:2000}); else setTimeout(go, 150); /* Safari has no requestIdleCallback */
 }
-renderHome(); renderSideSaved(); renderDcheck(); renderToolsCalc(); renderToolsLinks(); renderToolsRx(); renderToolsDg();
+renderHome(); renderSideSaved(); renderDcheck(); renderToolsCalc(); renderToolsLinks(); renderToolsRx(); renderToolsDg(); renderToolsAb();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
 $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
@@ -5229,6 +5302,11 @@ if (typeof EDRX !== 'undefined'){
     EDDG.items.forEach(i => { const g = i[1].split(/\s(?=\d)|\s\(|;|,/)[0].trim(); IDX.push({href:'#dilution', title:g + ' (ED dilution guide)', kind:'Dilution', meta:'Dosing and dilution guide, p' + i[4] + (i[5] !== i[4] ? '–' + i[5] : ''), body:i[1], ic:'syringe', c:'c-meta', dg:g}); });
   }
   Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
+}
+/* The ED antimicrobial guides (21 Nov 2026): the page, and each antimicrobial by its name */
+if (typeof ABX !== 'undefined'){
+  IDX.push({href:'#antibiotics', title:'ED antimicrobial guides', kind:'Tool', meta:'Doses by kidney function, and how to give injectable antimicrobials (Feb 2024)', body:'antibiotic antibiotics antimicrobial renal dose crcl creatinine clearance kidney dilution reconstitution reconstitute infusion rate', kw:'antibiotic antibiotics antimicrobial antimicrobials crcl', ic:'pill', c:'c-meta'});
+  const seen = new Set(); [...ABX.dose.renal.rows.map(r => r[6]), ...ABX.dose.none.map(r => r[3]), ...ABX.dil.rows.map(r => r[4]), 'Gentamicin', 'Vancomycin'].forEach(g => { const k = g.toLowerCase(); if (seen.has(k)) return; seen.add(k); IDX.push({href:'#antibiotics', title:g + ' (ED antimicrobial guides)', kind:'Antimicrobial', meta:'ED antimicrobial guides: dose by kidney function, dilution and rate', body:g, ic:'pill', c:'c-meta', ab:g}); });
 }
 renderJourney(false); setupTour(); startQuiz(); renderAbout(); renderViewHeroes(); renderPins(); remWire();
 
@@ -5329,6 +5407,11 @@ $('#rxq').addEventListener('input', renderRx);
 $('#dgq').addEventListener('input', renderDg);
 $('#dgf').addEventListener('click', e => { const b = e.target.closest('[data-df]'); if (b){ dgF = b.dataset.df; renderDg(); const nb = $(`#dgf [data-df="${dgF}"]`); if (nb) nb.focus(); } });
 $('#dgaz').addEventListener('click', e => { const b = e.target.closest('[data-dl]'); if (b){ const s = document.getElementById('dg-' + b.dataset.dl); if (s) s.scrollIntoView({block:'start'}); } });
+if ($('#abq')){ $('#abq').addEventListener('input', renderAb); $('#abcr').addEventListener('input', renderAb);
+  $('#abf').addEventListener('click', e => { const b = e.target.closest('[data-abf]'); if (b){ abF = b.dataset.abf; renderAb(); const nb = $(`#abf [data-abf="${abF}"]`); if (nb) nb.focus(); } }); }
+const abFrom = a => { if (a && a.dataset.ab){ ensureView('antibiotics'); abF = 'all'; $('#abq').value = a.dataset.ab; renderAb(); } };
+$('#palbody').addEventListener('click', e => abFrom(e.target.closest('a[data-ab]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) abFrom(palLinks()[palSel]); }, true);
 const dgFrom = a => { if (a && a.dataset.dg){ ensureView('dilution'); dgF = 'all'; $('#dgq').value = a.dataset.dg; renderDg(); } };
 $('#palbody').addEventListener('click', e => dgFrom(e.target.closest('a[data-dg]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) dgFrom(palLinks()[palSel]); }, true);

@@ -4,6 +4,17 @@ Moved from `CLAUDE.md` on 10 Nov 2026. The questions still to confirm with the d
 
 Still to confirm with the department (the app lists them under Still to confirm on its What's new page, from `CONFIRM` in `engine.js`):
 
+**Memos and letters added on 21 Nov 2026 (`data26.js`, `data27.js`)** (also in the app):
+- The department's Nipah memo HKL/JK/98/123/8 prints "28 Januari 2025" but was circulated in January 2026; the POCT review memo prints "6 Mac 2025" but cites a meeting of 4 Dec 2025. Which year is right?
+- Are the memo on a patient treated elsewhere within 24 hours (HKL/JK/98/188/3(5)19, 4 Feb 2019) and the memo on CT or MRI before discharge (HKL/JK/98/188/3(28)22, 14 Dec 2022) still in force, and how does the registration sticker mark a visit within 24 hours?
+- Which criteria did the review of IV paracetamol and IV albumin use (letter HKL/JK/98/188/1, May 2026)?
+- Lampiran A for foreign patients (memo of 6 Jul 2026): its flow chart prints the forms as CIP/JKT-02 and CIP/JK-01 where the memo prints BPK/JKT-02 and CIP/JKT-01; what happens when no specialist is present?
+- MAU: the 2022 criteria the entry follows, or the General Medicine letter of 7 Feb 2025 (oxygen up to a Venturi mask at 40%, 100 kg or less, pregnancy excluded)?
+- Are the aspirin dispersible brands of the pharmacy letter of 9 Nov 2022 still the ones supplied?
+- EMACC's days: an undated meeting minute circulated on 3 Jan 2025 says Monday to Saturday, Saturday until 1 pm, at most 10 Monday appointments; the guide says Monday to Friday, 8 am to 3 pm (Krishna, 12 Nov 2026).
+- Are the department's two antimicrobial quick guides (2nd edition, February 2024) still the current editions?
+- Leads only, not built (no issuer or date, or a caption): the colour codes poster's "1133 (SCACC)" for Code Blue; the POCT critical result letter (page 1 only, Lampiran A missing); the criteria for further FBC testing; the ED shortlist of medicines with an animal source; referring to physiotherapy on the form, not a memo; the 2026 CVC insertion form against the 2024 ED form; minute extracts on re-triage, asthma at R2 and CCA patients; Borang 9 to the JKM for SCAN cases.
+
 **The ED extension directory (12 Nov 2026)** (also in the app): the list ("Nombor Sambungan Jabatan – ED") prints no issuer or date. Three numbers are printed for two rooms each: 6699 (Bilik Porter PPK; Pejabat Rekod Kecemasan), 6590 (the MOIC, Bilik Pegawai Perubatan (YM); Bilik PPK (YM)) and 5346 (Bilik Ketua Jururawat; Pejabat Pengurusan (Penyelia/Matron)): shared lines, or slips? Who keeps the list, and its date?
 
 **Open now (added 18 Nov 2026)** (also in the app): four sources print an hour but not the days: MAU office hours, 8 am to 5 pm (the MAU admission note); the Observation Ward's medical officer, 10 am to 10 pm (memo HKL/JK/98/188/3(6)23); LA OT taking orthopaedic cases, 8 am to 9 pm only (department policy 2026, 22.3.3); and office hours at SCACC ending at 1700 hr, with no start (Code Blue Manual, 4.2). Which days does each hold, and when do SCACC office hours start? EMACC follows Krishna's 8 am to 3 pm, Monday to Friday, where memo (01)24 prints 7.30 am to 3.30 pm. The guide cannot know public holidays.

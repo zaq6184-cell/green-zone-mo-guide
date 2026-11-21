@@ -2301,6 +2301,31 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
   .ref-side .refcol .refsw{display:inline-flex;gap:8px;min-height:40px;margin:0 0 10px;padding:6px 12px;border:0;border-radius:12px;background:var(--surface-2);color:var(--accent);font:800 .84rem/1.2 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
 }
 @media (min-width:981px) and (max-width:1099px){.run-grid.ref-side > .refcol{top:84px;max-height:calc(100vh - 108px)}}
+/* ================= The 21 Nov 2026 round: the ED antimicrobial guides ================= */
+.ab-cr{display:flex;align-items:center;gap:8px;padding:0 14px;height:52px;border-radius:18px;background:var(--pearl);box-shadow:var(--pearl-sh);font:800 .9rem/1 var(--body);color:var(--ink)}
+.ab-cr input{width:6.5em;min-width:0;height:36px;padding:0 10px;border:0;border-radius:10px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:700 1rem var(--mono)}
+.ab-cr small{font:600 .78rem/1 var(--body);color:var(--muted)}
+.ab-cg{margin:0 0 12px;border-radius:var(--r-lg);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.ab-cg summary{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 14px;font:800 .92rem/1.2 var(--body);color:var(--ink);cursor:pointer}
+.ab-cg summary svg{width:18px;height:18px;color:var(--accent)}
+.ab-cgb{padding:0 14px 12px;font-size:.86rem;line-height:1.45;color:var(--ink)}
+.ab-cgb ul{margin:0 0 8px;padding-left:18px;display:grid;gap:4px}
+.ab-k{margin:8px 0 4px;font:800 .72rem/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ab-r{display:grid;gap:8px;padding:10px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.ab-n{font:800 .95rem/1.3 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.ab-n mark{background:var(--accent-soft);color:inherit;border-radius:3px;padding:0 1px}
+.ab-bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin:0}
+.ab-b{display:grid;gap:3px;align-content:start;padding:8px 10px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.ab-b dt{font:800 .72rem/1.25 var(--body);letter-spacing:.03em;color:var(--muted)}
+.ab-b dd{margin:0;font:600 .86rem/1.4 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.ab-b.on{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
+.ab-b.on dt{color:var(--accent)}
+.ab-note{margin:0;font-size:.78rem;line-height:1.4;color:var(--muted)}
+.ab-tdm{margin:0;padding-left:18px;display:grid;gap:3px;font-size:.8rem;line-height:1.4;color:var(--ink-2)}
+.ab-gap{display:flex;align-items:flex-start;gap:6px;margin:0;font:700 .8rem/1.4 var(--body);color:var(--observe)}
+.ab-gap svg{flex:none;width:15px;height:15px;margin-top:2px}
+#absrc{margin-top:14px;display:grid;gap:10px}
+@media (max-width:480px){.ab-bands{grid-template-columns:1fr 1fr}.ab-b.usual{grid-column:1 / -1}}
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -2410,7 +2435,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p><span class="vkey">Nothing you tick or type is saved.</span> <span class="vmore">A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs.</span> <button type="button" class="vmore-b" data-vmore aria-expanded="false">More</button></p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-indigo tool-go" id="tdg" href="#dilution"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-indigo tool-go" id="tdg" href="#dilution"></a><a class="tile t-plum tool-go" id="tabx" href="#antibiotics"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -2469,6 +2494,20 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <div id="dgl"></div>
         <section class="dg-icu" id="dgicu" aria-labelledby="h-dgicu"></section>
         <p class="lk-note" id="dgsrc"></p>
+      </div></section>
+
+      <!-- ED antimicrobial guides (21 Nov 2026): data27.js, built by src/abx.js -->
+      <section class="view" data-view="antibiotics" id="v-antibiotics" hidden aria-labelledby="h-antibiotics"><div class="vw">
+        <header class="vhead"><div><h1 id="h-antibiotics">ED antimicrobial guides</h1>
+          <p>The department's two quick guides, as printed: the adult dose for each band of kidney function, and how to reconstitute, dilute and give each injectable antimicrobial. Nothing you type is stored.</p></div></header>
+        <div class="tile t-plum phx-hero" id="abhero"></div>
+        <div class="lk-top"><label class="find"><span data-icon="search"></span><span class="vh">Find an antimicrobial</span><input id="abq" type="search" placeholder="Find an antimicrobial, for example ceftriaxone" autocomplete="off" spellcheck="false"></label>
+          <label class="ab-cr"><span>CrCl</span><input id="abcr" type="number" inputmode="decimal" min="0" max="400" step="1" placeholder="e.g. 45" aria-label="Creatinine clearance in ml/min"><small>ml/min</small></label>
+          <div class="seg" id="abf" role="group" aria-label="Show"></div></div>
+        <p class="phx-count" id="abn" aria-live="polite"></p>
+        <details class="ab-cg" id="abcg"></details>
+        <div id="abl"></div>
+        <div id="absrc"></div>
       </div></section>
 
       <!-- ED pharmacy drug list (12 Nov 2026): data19.js, built by src/edrx.js -->

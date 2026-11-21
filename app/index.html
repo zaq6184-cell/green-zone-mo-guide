@@ -2302,6 +2302,31 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
   .ref-side .refcol .refsw{display:inline-flex;gap:8px;min-height:40px;margin:0 0 10px;padding:6px 12px;border:0;border-radius:12px;background:var(--surface-2);color:var(--accent);font:800 .84rem/1.2 var(--body);box-shadow:inset 0 0 0 1px var(--line)}
 }
 @media (min-width:981px) and (max-width:1099px){.run-grid.ref-side > .refcol{top:84px;max-height:calc(100vh - 108px)}}
+/* ================= The 21 Nov 2026 round: the ED antimicrobial guides ================= */
+.ab-cr{display:flex;align-items:center;gap:8px;padding:0 14px;height:52px;border-radius:18px;background:var(--pearl);box-shadow:var(--pearl-sh);font:800 .9rem/1 var(--body);color:var(--ink)}
+.ab-cr input{width:6.5em;min-width:0;height:36px;padding:0 10px;border:0;border-radius:10px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:700 1rem var(--mono)}
+.ab-cr small{font:600 .78rem/1 var(--body);color:var(--muted)}
+.ab-cg{margin:0 0 12px;border-radius:var(--r-lg);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.ab-cg summary{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 14px;font:800 .92rem/1.2 var(--body);color:var(--ink);cursor:pointer}
+.ab-cg summary svg{width:18px;height:18px;color:var(--accent)}
+.ab-cgb{padding:0 14px 12px;font-size:.86rem;line-height:1.45;color:var(--ink)}
+.ab-cgb ul{margin:0 0 8px;padding-left:18px;display:grid;gap:4px}
+.ab-k{margin:8px 0 4px;font:800 .72rem/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ab-r{display:grid;gap:8px;padding:10px 12px;border-radius:14px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.ab-n{font:800 .95rem/1.3 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.ab-n mark{background:var(--accent-soft);color:inherit;border-radius:3px;padding:0 1px}
+.ab-bands{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin:0}
+.ab-b{display:grid;gap:3px;align-content:start;padding:8px 10px;border-radius:12px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.ab-b dt{font:800 .72rem/1.25 var(--body);letter-spacing:.03em;color:var(--muted)}
+.ab-b dd{margin:0;font:600 .86rem/1.4 var(--body);color:var(--ink);overflow-wrap:anywhere}
+.ab-b.on{background:var(--accent-soft);box-shadow:inset 0 0 0 2px var(--accent)}
+.ab-b.on dt{color:var(--accent)}
+.ab-note{margin:0;font-size:.78rem;line-height:1.4;color:var(--muted)}
+.ab-tdm{margin:0;padding-left:18px;display:grid;gap:3px;font-size:.8rem;line-height:1.4;color:var(--ink-2)}
+.ab-gap{display:flex;align-items:flex-start;gap:6px;margin:0;font:700 .8rem/1.4 var(--body);color:var(--observe)}
+.ab-gap svg{flex:none;width:15px;height:15px;margin-top:2px}
+#absrc{margin-top:14px;display:grid;gap:10px}
+@media (max-width:480px){.ab-bands{grid-template-columns:1fr 1fr}.ab-b.usual{grid-column:1 / -1}}
 </style>
 
 <a class="skip" href="#home">Skip to the guide</a>
@@ -2411,7 +2436,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
       <section class="view" data-view="tools" id="v-tools" hidden aria-labelledby="h-tools"><div class="vw">
         <header class="vhead"><div><h1 id="h-tools">Shift tools</h1>
           <p><span class="vkey">Nothing you tick or type is saved.</span> <span class="vmore">A discharge safety check built from the department's rules and Million Ringgit Habits, and the calculators, built from the ebook, the department's notes and the national CPGs.</span> <button type="button" class="vmore-b" data-vmore aria-expanded="false">More</button></p></div></header>
-        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-indigo tool-go" id="tdg" href="#dilution"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
+        <div class="tools"><div class="tool" id="dcheck"></div><div class="tools-r"><a class="tile t-bronze tool-go" id="tcx" href="#calc"></a><a class="tile t-slate tool-go" id="txr" href="#xray-guide" hidden></a><a class="tile t-teal tool-go" id="tlk" href="#links"></a><a class="tile t-emerald tool-go" id="trx" href="#pharmacy"></a><a class="tile t-indigo tool-go" id="tdg" href="#dilution"></a><a class="tile t-plum tool-go" id="tabx" href="#antibiotics"></a><a class="tile t-teal tool-go in-tool" id="tin" href="#install"></a></div></div>
       </div></section>
 
       <!-- Calculators -->
@@ -2470,6 +2495,20 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <div id="dgl"></div>
         <section class="dg-icu" id="dgicu" aria-labelledby="h-dgicu"></section>
         <p class="lk-note" id="dgsrc"></p>
+      </div></section>
+
+      <!-- ED antimicrobial guides (21 Nov 2026): data27.js, built by src/abx.js -->
+      <section class="view" data-view="antibiotics" id="v-antibiotics" hidden aria-labelledby="h-antibiotics"><div class="vw">
+        <header class="vhead"><div><h1 id="h-antibiotics">ED antimicrobial guides</h1>
+          <p>The department's two quick guides, as printed: the adult dose for each band of kidney function, and how to reconstitute, dilute and give each injectable antimicrobial. Nothing you type is stored.</p></div></header>
+        <div class="tile t-plum phx-hero" id="abhero"></div>
+        <div class="lk-top"><label class="find"><span data-icon="search"></span><span class="vh">Find an antimicrobial</span><input id="abq" type="search" placeholder="Find an antimicrobial, for example ceftriaxone" autocomplete="off" spellcheck="false"></label>
+          <label class="ab-cr"><span>CrCl</span><input id="abcr" type="number" inputmode="decimal" min="0" max="400" step="1" placeholder="e.g. 45" aria-label="Creatinine clearance in ml/min"><small>ml/min</small></label>
+          <div class="seg" id="abf" role="group" aria-label="Show"></div></div>
+        <p class="phx-count" id="abn" aria-live="polite"></p>
+        <details class="ab-cg" id="abcg"></details>
+        <div id="abl"></div>
+        <div id="absrc"></div>
       </div></section>
 
       <!-- ED pharmacy drug list (12 Nov 2026): data19.js, built by src/edrx.js -->
@@ -12969,6 +13008,808 @@ P['children'].see = [...(P['children'].see || []), ['#ed-scores--vitals', 'Heart
   if (S && S.nodes.fuwatch) S.nodes.fuwatch.links = [...(S.nodes.fuwatch.links || []), ['#em-watch--form', 'The pink EM Watch form']];
 })();
 
+/* ================= 21 Nov 2026: memos and letters the department circulated, 2019 to 2026 =================
+   Source: documents the Emergency & Trauma Department circulated to its staff, which Krishna gave on 21 Nov 2026 ("add the
+   content into this app. but only relevent ones only. make it premium"). 381 files and 238 pictures were sorted (the
+   run-through is on this PC only); what went in is below, each document read from its page images, every number checked on an
+   enlarged crop. Each goes in as a labelled note with its own number and date (standing rule 6): the department's own memos as
+   department notes, the other departments' letters as hospital notes, and the MOH ectopic pregnancy circular beside the 2018
+   one already in the guide. Pages show as snapshots (app/memo/<key>-p<N>.webp, built by src/memos.js) with signatures, name
+   blocks, registration numbers, incident background, a link with its QR code and a possible identity number covered; letters
+   that name staff throughout show no pages. Nothing here is from memory (rule 8): where a document stops, the step says so. */
+(function(){
+  const DEPT = ' A department note (standing rule 6).', HOSP = ' A hospital note (standing rule 6).';
+  const NOPAGES = 'Not shown as pages: the letter names staff throughout. Read from its page images.';
+  const add = (k, o) => { MEMOS[k] = Object.assign({list:false}, o); };
+
+  /* ---------------- The sources ---------------- */
+  add('2026-measles', {kind:'Department memo', ref:'HKL/JK/98/123/8', date:'19 Nov 2026', t:'Pengurusan kes disyaki campak (measles) di kaunter triage',
+    pages:[[1, 'Memo'], [2, 'Triage guide']], cap:'The memo and its one-page triage guide, a page at a tap. The signature block and the guide\'s three clinical photographs are covered.'});
+  add('2026-nipah', {kind:'Department memo', ref:'HKL/JK/98/123/8', date:'printed 28 Jan 2025', t:'Kesiapsiagaan Jabatan Kecemasan HKL bagi pengurusan kes disyaki virus Nipah (NiV)',
+    pages:[[1, 'Memo']], cap:'The memo as scanned; the signature block is covered. It was circulated in January 2026: the printed year is under Still to confirm.'});
+  add('2026-ptrev', {kind:'Department memo', ref:'HKL/JK/98/188/3', date:'30 Apr 2026', t:'Penambaikan mengenai kelewatan tinjauan (review) pasukan primer (primary team) di Zon Hijau',
+    pages:[[1, 'Memo']], cap:'The memo as scanned, its title spelt as printed; the signature block is covered.'});
+  add('2026-eot', {kind:'Department memo', ref:'HKL/JK/98/188/3( )26', date:'5 Mar 2026', t:'Penambahbaikan tatacara pengurusan dan komunikasi pesakit kes pembedahan kecemasan di Jabatan Kecemasan',
+    pages:[[1, 'Page 1'], [2, 'Page 2']], cap:'The memo as scanned: its background paragraph and the signature block are covered.'});
+  add('2026-ivpcm', {kind:'Department letter', ref:'HKL/JK/98/188/1', date:'May 2026', t:'Penggunaan IV paracetamol dan IV albumin (5%, 20% dan 25%)',
+    pages:[[1, 'Letter']], cap:'The letter as it was circulated, a phone screenshot of its page; the signature is covered.'});
+  add('2026-lampa', {kind:'Department memo', ref:'HKL/JK/98/188/3(11)26', date:'6 Jul 2026', t:'Penambahbaikan proses kerja penggunaan Lampiran A pesakit warga asing Jabatan Kecemasan dan Trauma',
+    pages:[[1, 'Memo'], [2, 'Memo, page 2'], [3, 'Flow chart'], [4, 'Flow chart: disposition']], cap:'The memo and its flow chart as scanned; the signature block is covered. Its two forms and Lampiran A itself are not shown.'});
+  add('2025-move', {kind:'Department memo', ref:'HKL/JK/98/188/3(28)25', date:'26 Nov 2025', t:'Pengurusan pergerakan/pemindahan pesakit (intrafasility transfer) Jabatan Kecemasan dan Trauma',
+    pages:[[1, 'Memo']], cap:'The memo as scanned; the signature block is covered.'});
+  add('2025-chemo', {kind:'Department memo', ref:'HKL/JK/98/188/3(23)25', date:'12 Feb 2025', t:'Pengurusan pesakit pasca-kemoterapi dengan demam',
+    pages:[[1, 'Memo']], cap:'The memo as scanned; the signature block and registration numbers are covered.'});
+  add('2025-mcstaff', {kind:'Department memo', ref:'HKL/JK/98/3(26)25', date:'7 Aug 2025', t:'Amalan pemberian sijil cuti sakit oleh pegawai perubatan kecemasan kepada kakitangan Jabatan Kecemasan',
+    pages:[[1, 'Memo']], cap:'The memo as scanned, its number as printed; the signature block is covered.'});
+  add('2019-rev24', {kind:'Department memo', ref:'HKL/JK/98/188/3(5)19', date:'4 Feb 2019', t:'Penambahbaikan rawatan pesakit yang telah menerima rawatan di fasiliti kesihatan lebih dari 1 kali dalam masa 24jam',
+    pages:[[1, 'Memo']], cap:'The memo as scanned; the signature block is covered.'});
+  add('2022-ctmri', {kind:'Department memo', ref:'HKL/JK/98/188/3(28)22', date:'14 Dec 2022', t:'Penambahbaikan bagi kes-kes \'missed intracranial bleeding & missed fracture\' dalam pengimejan CT/MRI',
+    pages:[[1, 'Memo']], cap:'The memo as scanned; the signature block and registration numbers are covered.'});
+  add('2026-dispatch', {kind:'Department memo', ref:'HKL/JK/98/140/11', date:'Sep 2026', t:'Penggunaan Buku Penghantaran (Dispatch Book)',
+    pages:[[1, 'Memo']], cap:'The memo as scanned; the signature block is covered.'});
+  add('2026-pocrev', {kind:'Department memo', ref:'HKL/JK/98/188/3( )26', date:'printed 6 Mar 2025', t:'Tatacara semakan keputusan ujian POCT di Jabatan Kecemasan dan Trauma',
+    pages:[[1, 'Memo']], cap:'The memo as it was circulated, a photograph of the page: its background paragraph and the signature block are covered.'});
+  add('pat-hiv', {kind:'Pathology letter', ref:'HKL/PAT/98/180/4 (28) Jld. 9', date:'7 Nov 2024', t:'Makluman penambahbaikan penghantaran sampel bagi ujian saringan serologi Human Immunodeficiency Virus (HIV) di Unit Mikrobiologi, Jabatan Patologi, HKL', pages:[], cap:NOPAGES});
+  add('pat-bhcg', {kind:'Pathology letter', ref:'HKL/PAT/98/180/4(39) Jld. 12', date:'19 Mar 2026', t:'Pemakluman perubahan pengurusan ujian segera beta-human chorionic gonadotropin (BHCG) di Unit Makmal Teras, Jabatan Patologi, HKL', pages:[], cap:NOPAGES});
+  add('pat-fbp', {kind:'Pathology letter', ref:'HKL/PAT/98/180/2-3(47) Jld. 2', date:'29 Jun 2026', t:'Makluman garis panduan indikasi dan keperluan maklumat klinikal bagi permohonan ujian full blood picture (FBP), lupus anticoagulant (LA), dan inherited thrombophilia panel', pages:[], cap:NOPAGES});
+  add('pat-tubes', {kind:'Pathology letter', ref:'HKL/PAT/98/180/2-8 (7) Jld. 2', date:'May 2024', t:'Penolakan spesimen yang tidak memenuhi kriteria isipadu di Unit Makmal Teras, Jabatan Patologi HKL', pages:[], cap:NOPAGES});
+  add('pat-cra', {kind:'Pathology letter', ref:'HKL/PAT/98/180/4(36) Jld. 10', date:'2 Jul 2025', t:'Tatacara penghantaran sampel dan penggunaan borang PER PAT 301 bagi penghantaran sampel ke Common Receiving Area (CRA)', pages:[], cap:NOPAGES});
+  add('far-foreign', {kind:'Pharmacy memo', ref:'HKL/FAR/PSF/98/100-1/1/5 (33)', date:'9 Feb 2024', t:'Pembekalan ubat kepada warga asing di fasiliti KKM',
+    pages:[[1, 'Infographic']], cap:'The pharmacy\'s infographic as circulated; a picture that may show a real identity card is covered. The memo and the MOH guideline are summarised in the step.'});
+  add('far-aspirin', {kind:'Pharmacy letter', ref:'HKL/FAR/FA/98/182-1/2/1(46)', date:'9 Nov 2022', t:'Pemakluman perubahan arahan cara administrasi ubat acetylsalicylic acid dispersible tablet 300mg',
+    pages:[[1, 'Letter, page 1']], cap:'The first page of the letter, with the new instruction.'});
+  add('upsk', {kind:'Counselling unit criteria', ref:'Referral form HKL/UPsK/01', date:'in force 3 Mar 2025', t:'Kriteria rujukan pesakit untuk Perkhidmatan Psikologi Kaunseling, Hospital Kuala Lumpur',
+    pages:[[1, 'Criteria'], [2, 'Flow chart']], cap:'The unit\'s criteria and flow chart as printed.'});
+  add('med-mau25', {kind:'General Medicine letter', ref:'(400) HKL/PBTN/98/100/29-01', date:'7 Feb 2025; erratum 20 Feb 2025', t:'Pengemaskinian kriteria kemasukan pesakit perubatan ke wad bukan perubatan (lodger), Pre Discharge Lounge (PDL), MH2A dan MH1B',
+    pages:[[1, 'The criteria table']], cap:'The letter\'s table of criteria; a link and its QR code are covered.'});
+  add('nefro-hd', {kind:'Nephrology form', ref:'HKL/NEFRO/090', date:'Dec 2024; letter 15 Jan 2025', t:'Request form for acute hemodialysis in Emergency Department',
+    pages:[[1, 'The form, page 1']], cap:'The form\'s first page, blank, with its indications.'});
+  add('kpk-ectopic', {kind:'MOH circular', ref:'Surat Pekeliling KPK Bil. 9/2024, KKM.600-30/3/1 Jld.6 (57)', date:'13 Jun 2024', t:'Arahan tindakan untuk mencegah kematian ibu yang disebabkan oleh kehamilan luar rahim (ectopic pregnancy)',
+    pages:[[1, 'Page 1'], [2, 'Lampiran 1: flow chart']], cap:'The circular\'s first page and its flow chart. Printed pages 5 to 7 are missing from the copy circulated.'});
+  add('abx-dose', {kind:'Department guide', ref:'Adult dosing of common antimicrobial agents, 2nd edition', date:'Feb 2024', t:'Adult dosing of common antimicrobial agents used in the Emergency & Trauma Department, Hospital Kuala Lumpur',
+    pages:[[1, 'Page 1: CrCl, no renal change'], [2, 'Page 2: by kidney function'], [3, 'Page 3: continued; gentamicin'], [4, 'Page 4: vancomycin']], cap:'The guide as printed, a page at a tap; the names and the approver\'s signature are covered.'});
+  add('abx-dil', {kind:'Department guide', ref:'Quick guide on injectable antimicrobial dilution, 2nd edition', date:'Feb 2024', t:'Quick guide on injectable antimicrobial dilution & administration, Emergency and Trauma Department, Hospital Kuala Lumpur',
+    pages:[[1, 'Page 1'], [2, 'Page 2']], cap:'The guide as printed, a page at a tap; the names and the approver\'s signature are covered.'});
+  SPFIGS.tglab = ['pat-cra', 'pat-hiv', 'pat-fbp'];
+
+  const S = (k, more, kind) => `Source: ${(MEMOS[k].kind || 'memo').replace(/^Department /, '').toLowerCase()} ${MEMOS[k].ref}, ${MEMOS[k].date}${more ? ', ' + more : ''}.` + (kind || DEPT);
+
+  /* ---------------- Green Zone rules: the memos of 2025 and 2026 ---------------- */
+  const G = P['gz-rules'];
+  const gi = G.nodes.menu.opts.findIndex(o => o[1] === 'gzm');
+  G.nodes.menu.opts.splice(gi + 1, 0, ['Memos of 2025 and 2026', 'gzn']);
+  G.nodes.gzn = {q:'Which memo?', hint:'Memos and letters of the Emergency & Trauma Department, HKL, 2025 and 2026, as department notes. Each step shows its source.', opts:[
+    ['Primary team review: 2 hours, then the EP', 'ptrev'],
+    ['Waiting for emergency surgery', 'eot'],
+    ['IV paracetamol and IV albumin: the EP signs', 'ivpcm'],
+    ['Foreign patient with Lampiran A', 'lampa'],
+    ['Fever after chemotherapy', 'chemo'],
+    ['Moving a patient within HKL', 'move'],
+    ['Sick leave for department staff', 'mcs']]};
+
+  G.nodes.ptrev = {end:'neutral', title:'Primary team review: within 2 hours of your referral', fig:'memo-2026-ptrev', items:[
+    'The primary team\'s target is to review the patient "dalam tempoh dua (2) jam selepas rujukan dibuat oleh pegawai perubatan di Zon Hijau": within two hours of your referral (3)',
+    'Not seen by the primary team after two hours: tell the Emergency Physician on duty ("memaklumkan perkara ini kepada Pakar Perubatan Kecemasan (EP) yang bertugas"), to speed it up (3)',
+    'So that you can look after the other Green Zone patients instead of waiting on one case (4)'],
+    links:[['#gz-rules--delay', 'Disposition is delayed']], gap:S('2026-ptrev', 'paragraphs 3 and 4') + ' It does not say where the time of the referral is recorded.'};
+
+  G.nodes.eot = {end:'neutral', title:'Waiting for emergency surgery: tell the primary team and OT at once', fig:'memo-2026-eot', items:[
+    'Tell the primary team and the OT at once ("dengan kadar segera") if the patient becomes unstable, or if anything will stop the patient reaching OT within 30 minutes of the time set (3 i)',
+    'The zone\'s Team Leader makes sure each patient has a named MO in charge ("patient ownership"); write that MO\'s name clearly in the clinical notes (3 ii)',
+    'Record every assessment, change in the patient\'s state and treatment plan in time order ("secara kronologi") (3 iii)',
+    'In force at once (4)'],
+    links:[['#gz-rules--tl', 'Team leader of the shift']], gap:S('2026-eot', 'after the Mortality and Morbidity meeting of 13 Feb 2026 and the morning management meeting of 2 Mar 2026; its running number is blank as printed') + ' Its background paragraph is covered on the page.'};
+
+  G.nodes.ivpcm = {end:'neutral', title:'IV paracetamol and IV albumin: only with an Emergency Physician\'s signature', fig:'memo-2026-ivpcm', items:[
+    '"Dimaklumkan bahawa penggunaan ubat IV Paracetamol serta IV Albumin (5%, 20% dan 25%) di Jabatan Kecemasan dan Trauma, Hospital Kuala Lumpur adalah hanya dibenarkan dengan tandatangan dan pengesahan Pakar Perubatan Kecemasan": in the ED, IV paracetamol and IV albumin 5%, 20% and 25% only with the signature and approval of an Emergency Physician (2)',
+    'Why: a review found that most patients given them did not meet the criteria set for their use (3). The letter does not print the criteria'],
+    links:[['#yellow-zone--alb', 'Human albumin (memo of 2024)'], ['#dilution', 'ED dosing and dilution guide']],
+    gap:S('2026-ivpcm', 'paragraphs 2 and 3; its date prints no day') + ' Which criteria the review used is under Still to confirm.'};
+
+  G.nodes.lampa = {end:'neutral', title:'Foreign patient with Lampiran A (deposit deferred)', fig:'memo-2026-lampa', items:[
+    'Lampiran A is for a foreign patient whose deposit is deferred because of a critical situation ("penangguhan pembayaran deposit kerana situasi kritikal") (2)',
+    'Only a specialist signs Lampiran A ("hanya boleh ditandatangani oleh Pegawai Perubatan Pakar sahaja") and fills in the specialist\'s clinical assessment form, BPK/JKT-02 (2.2; Nota Penting I and II). The flow chart names the Emergency Physician for both',
+    'The patient is registered into a definitive ward or the department\'s pseudo ward (R1, R2, YZ, YZ EXT, TENT, RECCU 1, RECCU 2 or Y OBS) on the admission slip, with Lampiran A attached (2.3; flow chart)',
+    'The zone team (doctor, PPP or JT) keeps the PER-PD 301 form and records every investigation and procedure done on the CIP form, CIP/JKT-01 (2.4; flow chart)',
+    'At disposition (discharge, own risk or admission): update PER-PD 301 and the CIP form; on admission the ward bed is registered in BOAT (flow chart, page 2)',
+    'In force from 6 Jul 2026 (3)'],
+    links:[['#prescribing--fgnrx', 'Medicines for a foreign patient: 5 days']],
+    gap:S('2026-lampa', 'with its two-page flow chart; the running number is filled in by hand') + ' The flow chart calls the specialist\'s form "CIP/JKT-02" and the CIP form "CIP/JK-01", where the memo and the forms print BPK/JKT-02 and CIP/JKT-01. Lampiran A itself is not attached, and the memo does not say what happens when no specialist is present: under Still to confirm.'};
+
+  G.nodes.chemo = {end:'refer', title:'Fever after chemotherapy: refer to Oncology, never discharge first', fig:'memo-2025-chemo', items:[
+    'A patient with fever after chemotherapy belongs to a special population ("populasi khas"): assess as high risk, "dengan kemungkinan demam neutropenik sehingga dibuktikan sebaliknya": neutropenic fever until proven otherwise (2)',
+    'Refer to the Oncology Department for further assessment and the decision on disposition (3)',
+    '"Pesakit tidak boleh didiscaj tanpa penilaian daripada doktor Jabatan Onkologi": do not discharge before a doctor from Oncology has assessed the patient (3)'],
+    gap:S('2025-chemo') + ' The memo gives no temperature, no time since chemotherapy and no neutrophil count, and the guide adds none (rule 8).'};
+
+  G.nodes.move = {end:'neutral', title:'Moving a patient within HKL: the 200 kg line', fig:'memo-2025-move', items:[
+    'Estimated weight under 200 kg: the intrafacility ambulance (2.1)',
+    '200 kg or more: the zone staff push the patient on a patient trolley (2.1)',
+    'The ambulance stretcher is always pushed by 2 staff, the driver with another, when collecting the patient and taking them to the ward, so that it does not tip over (2.2)',
+    'In force at once (3)'],
+    gap:S('2025-move')};
+
+  G.nodes.mcs = {end:'neutral', title:'Sick leave for department staff: 2 days at most', fig:'memo-2025-mcstaff', items:[
+    'An ED MO gives the department\'s own staff a sick leave certificate "tidak melebihi 2 (DUA) hari": no more than 2 days (3)',
+    'More than 2 days needed: refer to the Emergency Physician and to the primary team (3.1, 3.2)',
+    'Frequent sick leave for the same problem: refer to the primary team (3.3)',
+    'A fellow ED medical officer: a certificate only with the Emergency Physician\'s permission (4)',
+    'In force at once'],
+    gap:S('2025-mcstaff', 'after the morning management meeting of 29 Jul 2025; its number as printed')};
+
+  /* Two older memos join "More department memos" */
+  G.nodes.gzm.hint = G.nodes.gzm.hint.replace('2021 to 2024', '2019 to 2024');
+  G.nodes.gzm.opts.push(['Treated elsewhere in the last 24 hours', 'rev24'], ['CT or MRI before discharge: the EP reviews', 'ctmri']);
+  G.nodes.rev24 = {end:'neutral', title:'Treated elsewhere in the last 24 hours: consult a master\'s trainee or the EP', fig:'memo-2019-rev24', items:[
+    'Ask every patient whether they were treated at any public or private health facility in the 24 hours before (2)',
+    'Treated in the 24 hours before: "hendaklah mendapatkan konsultasi dari Pegawai Perubatan Sarjana atau Pakar Kecemasan untuk perawatan selanjutnya": consult a master\'s trainee or the Emergency Physician on further care (3)'],
+    gap:S('2019-rev24', 'its running number handwritten') + ' A memo of 2019: whether it is still in force, and how the registration sticker marks such a visit, are under Still to confirm.'};
+  G.nodes.ctmri = {end:'neutral', title:'CT or MRI before discharge: the EP reviews the images', fig:'memo-2022-ctmri', items:[
+    'A patient who had CT or MRI and is going home: refer to the Emergency Physician to review the images (2.1)',
+    '"Wajib memberi rawatan susulan seperti EMACC/EMWATCH": give follow-up, such as EMACC or EM Watch, to reassess the patient and for the formal CT or MRI report (2.2)'],
+    links:[['#emacc', 'EMACC'], ['#em-watch', 'EM Watch'], ['#missed-fractures', 'Missed fractures']],
+    gap:S('2022-ctmri') + ' A memo of 2022: whether it is still in force is under Still to confirm.'};
+  if (P['missed-fractures']) P['missed-fractures'].see = [...(P['missed-fractures'].see || []), ['#gz-rules--ctmri', 'CT or MRI before discharge (memo 2022)']];
+
+  /* ---------------- Infection alerts: measles, and the department's own Nipah memo ---------------- */
+  const I = P['infection-alerts'];
+  const ni = I.nodes.menu.opts.findIndex(o => o[1] === 'nipah');
+  I.nodes.menu.opts.splice(ni + 1, 0, ['Suspected measles', 'measles']);
+  I.nodes.measles = {end:'refer', title:'Suspected measles: N95, isolate, tell Infection Control', fig:'memo-2026-measles', items:[
+    'Suspect measles with all three: a high fever, 38°C or more ("Demam tinggi (≥ 38°C)"); at least one of cough, coryza or conjunctivitis; and a red maculopapular rash, starting on the face and hairline and spreading to the neck, trunk and limbs, usually around day 4 after the first symptoms (triage guide)',
+    'Koplik spots, fine white spots inside the cheek, are more specific (triage guide)',
+    'At once: wear an N95 mask (or equivalent); isolate the patient (an isolation room, or a negative-pressure room if there is one); tell the medical officer and the Infection Control team at once; record and label "Suspected Measles" on the triage system or EMR (triage guide, immediate actions)',
+    'Infectious from 4 days before to 4 days after the rash. It spreads by droplets and through the air, and can stay in the air for up to 2 hours after the patient leaves: use a separate triage route and keep other patients away (triage guide)',
+    'Incubation 7 to 14 days. At higher risk of complications: infants under 1 year, pregnant women and the immunocompromised. Complications: pneumonia, ear infection, diarrhoea or dehydration, encephalitis, and SSPE in the long term (triage guide)'],
+    links:[['#infection-alerts--notify', 'Notifying an infection']],
+    gap:S('2026-measles', 'and its one-page triage guide, "Measles (campak): panduan pantas di triage ED HKL", which prints no date of its own') + ' The guide aims at "pengurusan & notifikasi yang pantas" but prints no notification step: see Notifying an infection. Its clinical photographs are covered on the page.'};
+
+  const NV = I.nodes.nipah;
+  NV.items = [...NV.items,
+    'The department\'s own memo: a suspected case is fever with neurological or respiratory symptoms and travel or contact within 14 days in a risk area (India: West Bengal, and Bangladesh, as the CPRC updates). Full PPE including N95 or PAPR; avoid nebulisation; intubation only by RSI, by experienced staff (department memo, 3)',
+    'Where: unstable (MTS 1–2) in R1 cubicle 1 or 2 only; stable (MTS 3 or higher) in the Decon Room; never in an ordinary zone (department memo, 3)',
+    'Tell the Shift Leader, Infection Control and the PKD/CPRC at once about every suspected case, with full documentation; samples for confirmation only on the CPRC\'s or PKD\'s instruction (department memo, 3)'];
+  NV.fig = 'memo-2026-nipah';
+  NV.gap += ' Also the department\'s memo HKL/JK/98/123/8, printed "28 Januari 2025" and circulated in January 2026: the year is under Still to confirm.' + DEPT;
+
+  /* ---------------- Blood tests: sending samples, POCT results, the laboratory's rules ---------------- */
+  const B = P['blood-tests'];
+  B.nodes.menu.opts.push(['Sending samples: the dispatch book', 'disp'], ['POCT results: sign and stamp', 'poctrev'], ['Lab request forms: PER-PAT 301, HIV, FBP', 'forms'], ['Filling and mixing tubes', 'tubes'], ['Urgent beta-hCG: call the lab first', 'bhcg']);
+  B.nodes.disp = {end:'neutral', title:'The dispatch book: every blood sample sent', fig:'memo-2026-dispatch', items:[
+    'From 27 Sep 2026 every place where blood samples are collected keeps a dispatch book (buku penghantaran) (2, 3)',
+    'For each sample write: the sample to be tested, with a complete form; the patient\'s name and IC or RN; the requester\'s name or stamp; the date and time of the request (3 i to iv)',
+    'The PPK or porter who takes the samples to the laboratory checks that every form is complete and goes with its sample, writes their name and the time the samples were taken, and has the dispatch stamped by the laboratory (4)'],
+    gap:S('2026-dispatch', 'dated September 2026 with no day')};
+  B.nodes.poctrev = {end:'neutral', title:'POCT results: to the treating MO at once; sign and stamp each one', fig:'memo-2026-pocrev', items:[
+    'POCT results (ABG, VBG, ECG, FBC stat) go to the treating medical officer or specialist at once ("dengan segera") (3 i)',
+    'On every result you review, write the time and date, stamp it and sign it ("didokumentasi masa, tarikh, dicop dan ditandatangani") (3 ii)',
+    'In force at once (4)'],
+    links:[['#gz-rules--poct', 'Stat FBC and ABG on the POCT machine']],
+    gap:S('2026-pocrev', 'after the Mortality and Morbidity meeting of 4 Dec 2025; its running number is blank') + ' A memo citing a meeting of December 2025 cannot date from March 2025, so the year is under Still to confirm. Its background paragraph is covered on the page.'};
+  B.nodes.forms = {end:'neutral', title:'Lab request forms: PER-PAT 301', fig:'sp-tglab', items:[
+    'Write every test you request on the front of the PER-PAT 301 form (CRA letter, Lampiran 1)',
+    'Tests done by different laboratories go on separate forms and in separate bags; for example HbA1c, done by Special Chemical Pathology (CRA letter, Lampiran 1)',
+    'Routine core laboratory tests share one form: LDH, FBC, LFT, AST, ESR and coagulation profile. Endocrine tests, tumour markers and FBP are not routine and each needs its own form (CRA letter, Lampiran 1)',
+    'HIV screening (HIV Combo): its own 1 ml plain tube and its own PER-PAT 301, sent apart from every other test. HBsAg and anti-HCV each need their own 1 ml plain tube and may share one form (HIV letter, 3; from 1 Dec 2024)',
+    'FBP, lupus anticoagulant and the inherited thrombophilia panel: write the indication and the relevant clinical history on PER-PAT 301 ("WAJIB"); an incomplete request may be delayed or rejected (FBP letter, 3 and 4)',
+    'FBP is requested only by a medical officer or specialist. After office hours only for urgent cases (acute leukaemia or MAHA), or before a blood transfusion when an FBP indication is met; otherwise discuss with the pathology medical officer (FBP letter, Lampiran 1)',
+    'Lupus anticoagulant and thrombophilia: the checklist goes with the form, with the date and time of sampling; the letter suggests not sending them during an acute event (FBP letter, Lampiran 4)'],
+    gap:'Sources: Pathology letters HKL/PAT/98/180/4(36) Jld. 10, 2 Jul 2025 (sending to the CRA); HKL/PAT/98/180/4 (28) Jld. 9, 7 Nov 2024 (HIV); HKL/PAT/98/180/2-3(47) Jld. 2, 29 Jun 2026 (FBP, lupus anticoagulant and thrombophilia).' + HOSP};
+  B.nodes.tubes = {end:'neutral', title:'Filling and mixing blood tubes', fig:'memo-pat-tubes', items:[
+    'Fill every biochemistry tube to its marked level ("mengikut paras yang ditandakan"): the core laboratory rejects under-filled samples, from 3 Jun 2024 (5, 6)',
+    'Take most care with tests that share a tube: renal profile, LFT, calcium, magnesium and phosphate (3)',
+    'Mix gently by turning the tube over: plain tubes, with or without gel, 6 to 8 times; lithium heparin and fluoride/oxalate tubes 8 to 10 times (Lampiran 1)'],
+    gap:S('pat-tubes', 'the day of the date not readable', HOSP)};
+  B.nodes.bhcg = {end:'neutral', title:'Urgent beta-hCG: call the core laboratory first', fig:'memo-pat-bhcg', items:[
+    'Before you send an urgent beta-hCG, tell the core laboratory\'s medical officer, on ext 7569 or 5610 (4 i)',
+    'After office hours: tell the on-call pathology medical officer before the sample goes (4 ii)',
+    'From 1 Apr 2026 (5)'],
+    gap:S('pat-bhcg', '', HOSP)};
+
+  /* ---------------- Prescribing at HKL ---------------- */
+  const R = P['prescribing'];
+  R.nodes.menu.opts.push(['A foreign patient: medicines for 5 days', 'fgnrx'], ['Aspirin 300 mg dispersible: 75 or 150 mg', 'asa']);
+  R.nodes.fgnrx = {end:'neutral', title:'A foreign patient: medicines for 5 days, with ten exceptions', fig:'memo-far-foreign', items:[
+    'A foreign patient with a non-communicable disease gets medicines for five days only. Write two prescriptions: the first for 5 days from the MOH facility, the second for further supply, to be bought at a private pharmacy (guideline 8.1)',
+    'The same 5-day limit applies to medicines that need special approval (ubat kelulusan khas) (pharmacy memo, 3)',
+    'Full supply, not limited to 5 days, only for (guideline 8.2): permanent residents, themselves only; children aged 12 and under with a Malaysian birth certificate and a citizen or permanent-resident parent; non-citizen spouses of Malaysians with a valid marriage certificate; infectious diseases under the 1988 Act; fixed courses such as antibiotics (the full regimen); holders of a valid UNHCR card; detainees (immigration depots, police lock-ups, prisons); pregnant women, for treatment, not supplements; injections given by MOH staff, including psychiatric injections; and patients discharged from hospital when the medical officer judges that more than 5 days are needed'],
+    links:[['#gz-rules--lampa', 'Foreign patient with Lampiran A']],
+    gap:'Source: pharmacy memo HKL/FAR/PSF/98/100-1/1/5 (33), 9 Feb 2024, with its infographic, and the MOH guideline on the Fees (Medical) (Cost of Services) Order 2014, section 8 (KSU circular Bil. 2/2019).' + HOSP};
+  R.nodes.asa = {end:'neutral', title:'Aspirin 300 mg dispersible: 75 or 150 mg a day', fig:'memo-far-aspirin', items:[
+    'Do not prescribe the 300 mg dispersible tablet (Winspirin®) cut into 150 mg or 75 mg doses: "pemotongan tablet kepada dos 150mg dan 75mg adalah tidak dibenarkan" (3)',
+    'The patient dissolves one 300 mg tablet in 10 ml of water, takes the dose and throws the rest away: 2.5 ml once a day (a quarter tablet, 75 mg OD) or 5 ml once a day (half a tablet, 150 mg OD). The solution is made at each dose and taken at once (4)',
+    'Aspirin 100 mg with glycine 45 mg (Wincardia®) stays available, where the patient\'s need justifies it (4)'],
+    links:[['#acs', 'Acute coronary syndrome']],
+    gap:S('far-aspirin', '', HOSP) + ' The brands are those of 2022: whether they are still the ones supplied is under Still to confirm.'};
+  R.nodes.cosign.gap += ' The Director sent it again with letter (96)HKL/UPK/98/2/1 Jld.28, 14 Jul 2026.';
+  R.see = [...(R.see || []), ['#gz-rules--ivpcm', 'IV paracetamol and IV albumin: the EP signs']];
+
+  /* ---------------- Referral rules: psychology counselling ---------------- */
+  const F = P['referral-rules'];
+  const pi = F.nodes.menu.opts.findIndex(o => o[1] === 'psy');
+  F.nodes.menu.opts.splice(pi + 1, 0, ['Psychology counselling (UPsK)', 'counsel']);
+  F.nodes.counsel = {end:'refer', title:'Psychology counselling: screen with PHQ-9 and GAD-7 first', fig:'memo-upsk', items:[
+    'A medical officer may refer to the Psychology Counselling Unit (UPsK) a patient with an issue in Table A (mental health, social, medical, marriage and family) causing a psychological effect in Table B (stress, anxiety, depression, burnout, adjustment, sadness and grief, emotional instability) (1)',
+    'Screen first with both PHQ-9 and GAD-7 ("PERLU disaring terlebih dahulu") (2)',
+    'A score of 14 or below: refer to UPsK on the referral form HKL/UPsK/01, with both scores (2)',
+    'A score of 15 or above on either test: refer to the Department of Psychiatry and Mental Health instead (3)',
+    'The patient agrees, and can talk with the counsellor in Bahasa Melayu (5, 6)',
+    'Not for UPsK: a patient with a psychiatric diagnosis; a child or adolescent with a child psychiatric diagnosis; a referral made to reach a diagnosis; a patient already seeing a (clinical) psychology officer; a foreign national (exclusions 1 to 5)'],
+    links:[['#referral-rules--psy', 'Psychiatry']],
+    gap:'Source: Unit Psikologi Kaunseling HKL, referral criteria and flow chart, in force 3 Mar 2025, with the referral form HKL/UPsK/01.' + HOSP + ' The flow chart prints the bands 15 to 19 and over 20, so a score of exactly 20 has no band; its text sends 15 and above to Psychiatry.'};
+
+  /* ---------------- Admission to MAU: the 2025 criteria, as a dated note ---------------- */
+  const M = P['mau-admission'];
+  M.notes = [...(M.notes || []), {l:'2025 criteria', notes:[{h:'The 2025 criteria from General Medicine (a dated note)', fig:'memo-med-mau25',
+    src:'General Medicine letter (400) HKL/PBTN/98/100/29-01, 7 Feb 2025, and its erratum (03) HKL/PBTN/98/100/29-01 JLD 2, 20 Feb 2025', items:[
+    'MAU (Block MHKL): expected to go home within 72 hours ("<72 jam"); body weight 100 kg or less; no intensive care bed needed (acute, subacute, HDW, CCU or CRW); oxygen up to a Venturi mask at 40% ("sehingga VM40%"); respiratory rate 9–20; systolic BP 100 or more without inotropes; heart rate 60–110; fully alert, GCS 15/15; no isolation precautions; no active suicidal ideas or attempt; no ongoing chest pain',
+    'Not for MAU: acute MI; hypertensive emergency; DKA or HHS; thyroid storm; acute stroke; active upper GI bleed; acute psychosis, altered mental state or seizure; shock (cardiogenic, septic or distributive, hypovolaemic); ESRD on haemodialysis; dengue fever; pregnant women ("Wanita hamil")',
+    'MH2A takes patients from the ED on the same criteria as MAU',
+    'A lodger bed (a non-medical ward): no new case from the ED that a medical specialist has not yet seen (erratum, 20 Feb 2025)',
+    'The Pre Discharge Lounge (PDL) takes no new admissions',
+    'A patient outside the criteria is admitted only on the decision of the medical specialist on duty',
+    'It differs from the 2022 checklist this entry follows: oxygen up to a Venturi mask at 40% against nasal prongs at 3 L/min, a 100 kg limit, pregnancy excluded, no age line. Which set leads is under Still to confirm']}]}];
+  M.notesFoot = 'Source: General Medicine letter (400) HKL/PBTN/98/100/29-01, 7 Feb 2025, and its erratum of 20 Feb 2025.' + HOSP;
+  if (M.nodes.crit) M.nodes.crit.hint = ((M.nodes.crit.hint || '') + ' General Medicine updated these criteria on 7 Feb 2025: see the 2025 criteria tab.').trim();
+
+  /* ---------------- Yellow Zone: haemodialysis in the ED ---------------- */
+  const Y = P['yellow-zone'];
+  Y.nodes.menu.opts.push(['Haemodialysis in the ED: the Nephrology form', 'hd']);
+  Y.nodes.hd = {end:'neutral', title:'Acute haemodialysis in the ED: the Nephrology request form', fig:'memo-nefro-hd', items:[
+    'A patient who needs haemodialysis in the ED: the Nephrology team fills in form HKL/NEFRO/090, and every haemodialysis prescription is discussed with a nephrology specialist or consultant (letter, 2; the form)',
+    'The form goes with the patient on admission to the ward (letter, 2)',
+    'Have the virology ready: MRSA, CRE and PTB status, and HBsAg, HBsAb, anti-HCV and anti-HIV; the form asks for a hard copy of the results',
+    'The form\'s indications, ticked as they apply: severe hyperkalaemia unresponsive to medical management ("CKD/ESRF K+ > 6.5 mmol and AKI > 6mmol", as printed); severe fluid overload or acute pulmonary oedema unresponsive to diuretics (needing 40% oxygen or more by Venturi mask to keep SpO2 at 94% or more); severe metabolic acidosis unresponsive to treatment (pH under 7.1 or bicarbonate under 12 mmol/L); severe poisoning with a substance dialysis removes (for example methanol, ethylene glycol); oliguric or anuric AKI despite adequate resuscitation, in the presence of any of the above'],
+    gap:'Source: Nephrology letter HKL/NEFR/98/182/10/11, 15 Jan 2025, with form HKL/NEFRO/090 (issue 01, Dec 2024).' + HOSP};
+
+  /* ---------------- Abdominal pain: the 2024 ectopic pregnancy circular beside the 2018 one ---------------- */
+  const A = P['abdominal-pain'];
+  /* Search words: distinctive ones only */
+  const KW = (x, w) => { if (x) x.kw = ((x.kw || '') + ' ' + w).trim(); };
+  KW(I, 'measles campak koplik'); KW(F, 'kaunseling counselling upsk phq-9 gad-7'); KW(R, 'warga asing winspirin wincardia dispersible'); KW(B, 'dispatch despatch per-pat bhcg hiv thrombophilia');
+  KW(Y, 'hemodialysis haemodialysis nefrologi');
+
+  if (A && A.dept) A.dept.splice(1, 0, {h:'Girls and women aged 15 to 49: ectopic pregnancy (2024)', src:'KPK circular Bil. 9/2024, KKM.600-30/3/1 Jld.6 (57), 13 Jun 2024', fig:'memo-kpk-ectopic', items:[
+    'Any girl or woman aged 15 to 49 with lower abdominal pain, vaginal bleeding or both: take the history with the LNMP, examine, and do a urine pregnancy test, even if she is unmarried, denies sex or has no amenorrhoea (Lampiran 1)',
+    'Treat every suspected ectopic pregnancy as an emergency, "dengan kadar SEGERA (urgency)" (3.2)',
+    'UPT positive: ultrasound. Not an intrauterine pregnancy, or unsure: "Rujuk Hospital / Pakar O&G dengan SEGERA", refer to hospital or the O&G specialist at once (Lampiran 1)',
+    'A national circular, newer than the 2018 one above. Printed pages 5 to 7 are missing from the copy circulated']});
+})();
+
+/* ================= GENERATED by src/abx.js: do not edit by hand =================
+   Quick guide on injectable antimicrobial dilution & administration, Emergency and Trauma Department, Hospital Kuala Lumpur, 2nd edition, February 2024;
+   Adult dosing of common antimicrobial agents used in the Emergency & Trauma Department, Hospital Kuala Lumpur, 2nd edition, February 2024.
+   Both prepared by the ED's clinical (EM) pharmacists, reviewed by the Pharmacy Department and approved for use by the head of
+   the Emergency and Trauma Department (8 Feb 2024): department documents (standing rule 6), every cell as printed. */
+const ABX = {
+ "dil": {
+  "src": "Quick guide on injectable antimicrobial dilution & administration, Emergency and Trauma Department, Hospital Kuala Lumpur, 2nd edition, February 2024",
+  "foot": "D5W = dextrose 5% in water; IV = intravenous infusion; NS = normal saline; ROF = restriction of fluids; WFI = water for injection",
+  "rows": [
+   [
+    "1",
+    "Acyclovir 250mg",
+    "Recon. each vial with 10ml of NS\nFurther dilute total dose to 100ml NS",
+    "IVI over 1 hour",
+    "Acyclovir",
+    ""
+   ],
+   [
+    "2",
+    "Amoxicillin + Clavulanic Acid (Augmentin®) 1.2g",
+    "Recon. each vial with 20ml of WFI or NS",
+    "Slow bolus over 3 mins",
+    "Amoxicillin/Clavulanic Acid",
+    ""
+   ],
+   [
+    "3",
+    "Ampicillin + Sulbactam (Unasyn®) 1.5g",
+    "Recon. each vial with 10ml of WFI\nFurther dilute to 20ml NS or D5W",
+    "Slow bolus over 3 mins",
+    "Ampicillin/Sulbactam",
+    ""
+   ],
+   [
+    "4",
+    "Ampicillin 500mg",
+    "Recon. each vial with 5ml of WFI\nFurther dilute to 100ml of NS\n(max. conc 30mg/ml)",
+    "IVI over 30 mins",
+    "Ampicillin",
+    ""
+   ],
+   [
+    "5",
+    "Artesunate 60mg",
+    "Recon. with 1 ml of diluent provided (bicarbonate solution)\nAdd additional 5ml of NS into the reconstituted solution (final volume = 6ml; final conc. 10mg/ml)\n*Gently swirl up to 5 mins. DO NOT SHAKE.",
+    "Slow bolus over 1 – 2 mins",
+    "Artesunate",
+    ""
+   ],
+   [
+    "6",
+    "Azithromycin 500mg",
+    "Recon. with pre-packed diluent OR\nRecon. 500 mg vial with 5 ml WFI.\nFurther dilute to 500 ml NS or D5W or\nROF: 250 ml NS or D5W",
+    "500ml – IVI over 3 hours\n250ml – IVI over 1 hour",
+    "Azithromycin",
+    ""
+   ],
+   [
+    "7",
+    "Benzylpenicillin 1MU (600mg) or 5MU (3g)",
+    "Recon. 1 MU with 5ml WFI OR\n5 MU with 10ml WFI\nFurther dilute total dose to 20 ml D5W",
+    "IVI over 30 mins",
+    "Benzylpenicillin",
+    ""
+   ],
+   [
+    "8",
+    "Cefazolin 1g",
+    "Recon. each vial with 5ml of WFI\nFurther dilute to 20ml NS or D5W",
+    "Slow bolus over 3 mins",
+    "Cefazolin",
+    ""
+   ],
+   [
+    "9",
+    "Cefepime 1g",
+    "Recon. each vial with 10ml NS, no need further dilution.",
+    "Slow bolus over 3 mins",
+    "Cefepime",
+    ""
+   ],
+   [
+    "10",
+    "Cefoperazone (Cefobid®) 1g",
+    "Recon. each vial with 5ml of NS\nFurther dilute to 20ml NS or D5W",
+    "Slow bolus over 3 mins",
+    "Cefoperazone",
+    ""
+   ],
+   [
+    "11",
+    "Ceftazidime (Fortum®) 1g",
+    "Recon. each vial with 10 ml of WFI",
+    "Slow bolus over 3 mins",
+    "Ceftazidime",
+    ""
+   ],
+   [
+    "12",
+    "Ceftriaxone (Rocephin®) 1g",
+    "Recon. each vial with 10ml of NS\nFurther dilute to 50 NS or D5W\nROF: Recon. each vial with 10ml NS, no need further dilution.⁵",
+    "IVI over 30 mins\nSlow bolus over 2 – 3 mins",
+    "Ceftriaxone",
+    "The guide prints \"Further dilute to 50 NS\" with no unit."
+   ],
+   [
+    "13",
+    "Cefuroxime 750mg or 1.5g",
+    "Recon. 750 mg vial with 6 ml WFI\nRecon. 1500 mg vial with 15 ml WFI\nMay further dilute to 20ml NS",
+    "Slow bolus over 3 mins",
+    "Cefuroxime",
+    ""
+   ],
+   [
+    "14",
+    "Clindamycin phosphate 300mg/2ml",
+    "300 – 600mg: dilute to 50ml with NS or D5W\n900 – 1200mg: dilute to 100ml with NS or D5W",
+    "IVI over 1 hour",
+    "Clindamycin phosphate",
+    ""
+   ],
+   [
+    "15",
+    "Cloxacillin 500mg",
+    "Recon. each vial with 5ml of WFI\nFurther dilute to 100ml NS\nROF: Recon. each vial with 5ml NS, no need further dilution.⁶",
+    "IVI over 30 mins\nSlow bolus over 3 mins (monitor for thrombophlebitis)",
+    "Cloxacillin",
+    ""
+   ],
+   [
+    "16",
+    "Ciprofloxacin 200mg/100ml",
+    "Use undiluted",
+    "IVI over 1 hour",
+    "Ciprofloxacin",
+    ""
+   ],
+   [
+    "17",
+    "Ertapenem",
+    "Recon. each vial with 10ml of NS\nFurther dilute to 50ml NS",
+    "IVI over 1 hour",
+    "Ertapenem",
+    "The guide prints no strength for ertapenem."
+   ],
+   [
+    "18",
+    "Erythromycin lactobionate 500mg",
+    "Recon. each vial with 10ml WFI\nFurther dilute to 50ml NS",
+    "IVI over 30 mins.",
+    "Erythromycin lactobionate",
+    ""
+   ],
+   [
+    "19",
+    "Fluconazole 100mg/50ml",
+    "Use undiluted",
+    "IVI each vial over 30 mins.",
+    "Fluconazole",
+    ""
+   ],
+   [
+    "20",
+    "Gentamicin 80mg/2ml",
+    "Dilute with 100ml NS or D5W",
+    "IVI over 1 hour",
+    "Gentamicin",
+    ""
+   ],
+   [
+    "21",
+    "Meropenem 1g",
+    "Recon. each vial with 20 ml of WFI",
+    "Slow bolus over 3 mins",
+    "Meropenem",
+    ""
+   ],
+   [
+    "22",
+    "Metronidazole 500mg/100ml",
+    "Use undiluted",
+    "IVI over 30 mins",
+    "Metronidazole",
+    ""
+   ],
+   [
+    "23",
+    "Piperacillin + Tazobactam (Tazocin®) 4.5g",
+    "Reconstitute 1 vial in 20ml of NS",
+    "Slow bolus over 3 mins",
+    "Piperacillin/Tazobactam",
+    "This row prints its own CrCl bands (above 40, 20 to 40, under 20 ml/min) in place of the column headings."
+   ],
+   [
+    "24",
+    "Streptomycin 1g",
+    "IM (preferred)\nRecon. with WFI or NS to get the following conc. (solution swells):\n1.8ml (concentration = 400mg/ml)\n3.2ml (concentration = 250mg/ml)\n4.2ml (concentration = 200mg/ml)\nIV (only when requested by prescriber)\nRecon. as per IM above\nFurther dilute required dose in 100 ml NS or D5W",
+    "IM\nIVI over 1 hour",
+    "Streptomycin",
+    "No route is printed."
+   ],
+   [
+    "25",
+    "Vancomycin 500mg",
+    "Dilute 1 vial with 10ml of WFI\nFurther dilute with 100ml NS\nFinal concentration 5mg/ml\nFor patient on ROF, max. concentration is 10mg/ml",
+    "▪ IVI 500mg in 100ml NS over 1 hour,\n▪ IVI 1000mg in 100ml NS over 2 hours\n▪ Max. infusion rate 10mg/min.",
+    "Vancomycin",
+    ""
+   ]
+  ]
+ },
+ "dose": {
+  "src": "Adult dosing of common antimicrobial agents used in the Emergency & Trauma Department, Hospital Kuala Lumpur, 2nd edition, February 2024",
+  "cg": [
+   "Males: CrCl (ml/min) = (140 - Age) x IBW* x 1.23 / Sr. Creat (µmol/L)",
+   "Females: CrCl (ml/min) = (140 - Age) x IBW* x 1.04 / Sr. Creat (µmol/L)",
+   "* IBW = Ideal Body Weight"
+  ],
+  "wnotes": [
+   "Use Actual Body Weight (ABW) when BMI < 18.5 kg/m2",
+   "Obese patient (>IBW 20%): use Adjusted Body Weight (AdjBW)"
+  ],
+  "weights": [
+   [
+    "IBW",
+    "[Male]: 50 + [0.91 x (height{cm} – 152.4)]\n[Female]: 45.5 + [0.91 x (height{cm} – 152.4)]"
+   ],
+   [
+    "AdjBW",
+    "IBW + [0.4 x (ABW – IBW)]"
+   ]
+  ],
+  "obese": "Its footnotes to tables B and C define obese as BMI > 30kg/m², where its weight note says more than 20% over IBW.",
+  "none": [
+   [
+    "Artesunate (IV)",
+    "2.4mg/kg/dose at 0 hours, 12 hours & 24 hours",
+    "Require ID team referral",
+    "Artesunate"
+   ],
+   [
+    "Azithromycin (IV, PO)",
+    "500mg stat, then q24h",
+    "",
+    "Azithromycin"
+   ],
+   [
+    "Cefoperazone (IV)",
+    "2g stat, then 1 – 2g q12h",
+    "",
+    "Cefoperazone"
+   ],
+   [
+    "Ceftriaxone (IV)",
+    "*2g stat, then q24h\nMeningitis = 2g stat, then q12h",
+    "Hypo-albuminemia (Albumin < 25g/L):\n*2g stat, then 1g q12h",
+    "Ceftriaxone"
+   ],
+   [
+    "Clindamycin (IV, PO)",
+    "600 – 900mg stat, then q8h",
+    "",
+    "Clindamycin"
+   ],
+   [
+    "Cloxacillin (IV)",
+    "1 - 2g stat, then q4-6h*\n* Higher dose for Endocarditis",
+    "",
+    "Cloxacillin"
+   ],
+   [
+    "Isoniazid (PO)",
+    "5 (4 – 6) mg/kg stat, then q24h",
+    "ABW; use IBW if obese\nMax. dose: 300mg/day",
+    "Isoniazid"
+   ],
+   [
+    "Metronidazole (IV)",
+    "500mg stat, then TDS",
+    "Liver impairment: Child-Pugh C\n250mg TDS",
+    "Metronidazole"
+   ],
+   [
+    "Rifampicin (PO)",
+    "10 (8 – 12) mg/kg stat, then q24h",
+    "ABW; use IBW if obese\nMax. dose: 600mg/day",
+    "Rifampicin"
+   ]
+  ],
+  "renal": {
+   "head": [
+    "Usual dose",
+    "31-50 ml/min",
+    "10-30 ml/min",
+    "<10 ml/min & regular HD"
+   ],
+   "rows": [
+    [
+     "Acyclovir (IV)",
+     "10mg/kg/dose stat, then q8h\n(ABW; use AdjBW if obese)",
+     "10mg/kg/dose stat, then q12h",
+     "10mg/kg/dose stat, then q24h",
+     "5mg/kg/dose stat, then q24h",
+     "",
+     "Acyclovir",
+     ""
+    ],
+    [
+     "Amoxicillin/Clavulanic Acid (Augmentin) (IV)",
+     "1.2g stat, then q8h",
+     "Unchanged",
+     "1.2g stat, then q12h",
+     "1.2g stat, then q24h",
+     "",
+     "Amoxicillin/Clavulanic Acid",
+     ""
+    ],
+    [
+     "Ampicillin/Sulbactam (Unasyn) (IV)",
+     "3g stat, then 1.5g – 3g q6h",
+     "3g stat, then 1.5 – 3g q8h",
+     "3g stat, then 1.5 – 3g q12h",
+     "3g stat, then 1.5 – 3g q24h",
+     "",
+     "Ampicillin/Sulbactam",
+     ""
+    ],
+    [
+     "Ampicillin (IV) (Endocarditis dose)",
+     "2g stat, then q4H",
+     "2g stat, then q6h",
+     "2g stat, then q8h",
+     "2g stat, then q12h",
+     "",
+     "Ampicillin",
+     ""
+    ],
+    [
+     "Benzylpenicillin (IV) (Endocarditis dose)",
+     "4 MU stat, then q4h",
+     "4 MU stat, then 3 MU q4h",
+     "4 MU stat, then 3 MU q4h",
+     "4 MU stat, then 2 MU q4h",
+     "31-50 and 10-30 ml/min are one merged cell",
+     "Benzylpenicillin",
+     ""
+    ],
+    [
+     "Cefazolin (IV)",
+     "2g stat, then 1 – 2g q8h",
+     "Unchanged",
+     "2g stat, then 1 – 2g q12h",
+     "2g stat, then 1g q24h",
+     "",
+     "Cefazolin",
+     ""
+    ],
+    [
+     "Cefepime (IV)",
+     "2g stat, then 1-2g q12h – q8h*\n*Higher dose for meningitis, febrile neutropenia, severe pneumonia, endocarditis, bacteraemia",
+     "2g stat, then 1-2g q12h",
+     "2g stat, then 1-2g q24h",
+     "2g stat, then 1g q24h",
+     "",
+     "Cefepime",
+     ""
+    ],
+    [
+     "Ceftazidime (IV)",
+     "2g stat, then q8h",
+     "2g stat, then q12h",
+     "2g stat, then q24h",
+     "2g stat, then 1g q24h",
+     "",
+     "Ceftazidime",
+     ""
+    ],
+    [
+     "Cefuroxime (IV)",
+     "1.5g stat, then 750mg – 1.5g q8h",
+     "Unchanged",
+     "1.5g stat, then 750mg – 1.5g q12h",
+     "1.5g stat, then 750mg – 1.5g q24h",
+     "",
+     "Cefuroxime",
+     ""
+    ],
+    [
+     "Ciprofloxacin (IV)",
+     "400mg stat, then q8-12h\n*Higher dose to cover P. aeruginosa",
+     "unchanged",
+     "400mg stat, then q12-24h",
+     "400mg stat, then q24h",
+     "",
+     "Ciprofloxacin",
+     ""
+    ],
+    [
+     "Ertapenem (IV)",
+     "1g stat, then q24h",
+     "unchanged",
+     "500mg stat, then q24h",
+     "500mg stat, then q24h",
+     "10-30 and <10 ml/min & regular HD are one merged cell",
+     "Ertapenem",
+     "The guide prints no strength for ertapenem."
+    ],
+    [
+     "Ethambutol (PO)",
+     "15 (15 – 20) mg/kg stat, then q24h (max. dose 1600mg)\n(ABW; use IBW if obese)",
+     "unchanged",
+     "15 – 25 mg/kg/dose stat, then 3 times/week",
+     "15 – 25 mg/kg/dose stat, then 3 times/week",
+     "10-30 and <10 ml/min & regular HD are one merged cell",
+     "Ethambutol",
+     ""
+    ],
+    [
+     "Fluconazole (IV)",
+     "800mg stat, then 400mg q24h",
+     "800mg stat, then 200 – 400mg q24h",
+     "800mg stat, then 200 – 400mg q24h",
+     "800mg stat, then 200 – 400mg q24h",
+     "all three renal columns are one merged cell",
+     "Fluconazole",
+     ""
+    ],
+    [
+     "Meropenem (IV)",
+     "1g – 2g stat, then 1g – 2g* q8h\n(*higher dose for CNS infection)",
+     "1g – 2g stat, then q12h",
+     "500mg – 1g stat, then q12h",
+     "500mg – 1gm stat, then q24h",
+     "",
+     "Meropenem",
+     ""
+    ],
+    [
+     "Oseltamivir (Tamiflu) (PO)",
+     "75mg stat, then q12h",
+     "75mg stat, then q24h x 5 days",
+     "75mg stat, then q24h x 5 days",
+     "75mg stat dose only.\nHD: 30mg post HD for total 3 doses.",
+     "31-50 and 10-30 ml/min are one merged cell",
+     "Oseltamivir",
+     ""
+    ],
+    [
+     "Piperacillin/Tazobactam (Tazocin)",
+     "4.5g stat, then q6h",
+     "CrCl >40ml/min\nUnchanged",
+     "20-40 ml/min\n4.5g stat, then q8h",
+     "<20ml/min\n4.5g stat, then 2.25g q6h",
+     "this row prints its own CrCl bands (>40, 20-40, <20 ml/min) in bold inside the cells, overriding the column headings",
+     "Piperacillin/Tazobactam",
+     "This row prints its own CrCl bands (above 40, 20 to 40, under 20 ml/min) in place of the column headings."
+    ],
+    [
+     "Pyrazinamide",
+     "25 (20 – 30) mg/kg stat, then q24h (max. dose 2g)\n(ABW; use IBW if obese)",
+     "unchanged",
+     "20 – 30 mg/kg/dose stat, then 3 times/week",
+     "20 – 30 mg/kg/dose stat, then 3 times/week",
+     "10-30 and <10 ml/min & regular HD are one merged cell",
+     "Pyrazinamide",
+     "No route is printed."
+    ],
+    [
+     "Streptomycin (tuberculosis only)",
+     "12 – 15 mg/kg stat, then q24h (max. dose 1g)\n(ABW; use IBW if obese)",
+     "unchanged",
+     "12 – 15 mg/kg/dose stat, then 3 times/week",
+     "12 – 15 mg/kg/dose stat, then 3 times/week",
+     "10-30 and <10 ml/min & regular HD are one merged cell",
+     "Streptomycin",
+     "No route is printed."
+    ]
+   ]
+  },
+  "gent": {
+   "title": "Gentamicin in endocarditis",
+   "rows": [
+    [
+     "> 60",
+     "3mg/kg stat, then q24h"
+    ],
+    [
+     "40 – 60",
+     "2mg/kg stat, then q24h"
+    ],
+    [
+     "20 – 40",
+     "1mg/kg stat, then q24h"
+    ],
+    [
+     "< 20 / HD",
+     "1mg/kg stat, re-dose based on TDM"
+    ]
+   ],
+   "foot": "* Use IBW. Use ABW for malnourished or BMI < 18.5 kg/m² and AdjBW for obese patients.",
+   "tdm": [
+    "Initial TDM gentamicin. Normal renal function: at the 2nd dose (post 2 hours and post 6 hours)",
+    "Renally impaired: initial trough at 24 hours post 1st dose; a post level after the 2nd dose (to determine the subsequent dose). Draw the blood 30 minutes after a 30-minute infusion"
+   ]
+  },
+  "vanc": {
+   "title": "Vancomycin",
+   "rows": [
+    [
+     "Normal or CrCl >50 ml/min",
+     "20 – 25 mg/kg (max. 2g/dose) stat, then 15 – 20 mg/kg q12h\n(To start 12 hours after stat dose)",
+     "▪ After the 3rd dose\n▪ Pre: 30 minutes before the 4th dose\n▪ Post: 1 hour after completion of 4th dose"
+    ],
+    [
+     "30 – 50 ml/min",
+     "20 – 25 mg/kg (max. 2g/dose) stat, then 15 – 20 mg/kg q24h\n(To start 24 hours after stat dose)",
+     "▪ 24 hours after the 1st MD"
+    ],
+    [
+     "<30ml/min",
+     "20 – 25 mg/kg (max. 2g/dose) stat, then re-dose based on TDM",
+     "▪ 24 hours after the LD"
+    ],
+    [
+     "HD",
+     "20 – 25 mg/kg (max. 2g/dose) stat, then re-dose based on TDM\nPatients will require 5-10mg/kg supplemental dose post-HD (~ 500 – 1000mg)",
+     "▪ if LD pre-HD, initial level 24 hours after the supplemental dose\n▪ if LD post-HD, initial level 24 hours post-HD"
+    ]
+   ]
+  }
+ }
+};
+
 
 /* ================= Green Zone MO Guide, version 8: the engine =================
    One page, one view at a time, routed on the hash:
@@ -13033,8 +13874,9 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 18 Nov 2026';
+const APP_VER = 'Version 8, updated 21 Nov 2026';
 const V8 = [
+  ['Department memos and letters, 2019 to 2026','Two dozen memos and letters the department circulated, read from their pages and placed where you look for them: suspected measles (memo of 19 Nov 2026) and the department\'s own Nipah memo in Infection alerts; seven memos of 2025 and 2026 on the Green Zone rules (primary team review within 2 hours, waiting for emergency surgery, IV paracetamol and IV albumin, Lampiran A, fever after chemotherapy, moving a patient within HKL, sick leave for staff), with two older ones; the dispatch book, POCT results and the laboratory\'s rules in Blood tests; medicines for a foreign patient and dispersible aspirin in Prescribing; psychology counselling in Referral rules; the 2025 MAU criteria as a dated tab; haemodialysis in the Yellow Zone; and the 2024 ectopic pregnancy circular on Abdominal pain. A new page in Shift tools, ED antimicrobial guides, holds the department\'s two quick guides of February 2024: the dose of each antimicrobial for each band of kidney function (type a CrCl and the printed band is marked), and how to reconstitute, dilute and give each injectable. Each step shows its source, with its pages at a tap where they can be shown.',[['#gz-rules--gzn','Green Zone: memos of 2025 and 2026'],['#infection-alerts--measles','Suspected measles'],['#blood-tests','Blood tests: the lab\'s rules'],['#prescribing--fgnrx','A foreign patient: 5 days'],['#antibiotics','ED antimicrobial guides']],['#gz-rules','#infection-alerts','#blood-tests','#prescribing','#referral-rules','#mau-admission','#yellow-zone','#abdominal-pain','#missed-fractures']],
   ['Open now','The home page shows what holds at this moment, in Malaysia time: whether EMACC, EM Watch and the Animal Bite Clinic are in session (until when, or the next session), the shift, and the hours that change a route (MAU office hours, the Observation Ward\'s medical officer, LA OT for orthopaedic cases, Code Blue at SCACC after 1700 hr). The steps that print those hours show the same, live. Only the hours the sources print; sessions only, nothing about booking.',[['#home','Home'],['#emacc--clinic','EMACC hours']]],
   ['Changed since you last looked','From the next update on, an entry that changed since you last opened the guide carries a Changed mark in the library and a line at its top, and What\'s new on the home page marks what is new to you. Your phone keeps only a count of the updates it has seen.',[['#new','What\'s new']]],
   ['The reference beside the step','On a computer, or a tablet held sideways, the route panel beside the step can show the pathway\'s reference tabs instead (Reference beside the step), so a table or the advice stays in view while you answer. Your route moves to the strip above the step.',[['#renal-colic','Renal colic']]],
@@ -13249,6 +14091,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'From the department memos and letters added on 21 Nov 2026. Still to confirm: (1) the department\'s Nipah memo HKL/JK/98/123/8 prints "28 Januari 2025" but was circulated in January 2026, and the POCT review memo prints "6 Mac 2025" but cites a meeting of 4 Dec 2025: which year is right; (2) whether the memo on a patient treated elsewhere within 24 hours (HKL/JK/98/188/3(5)19, 4 Feb 2019) and the memo on CT or MRI before discharge (HKL/JK/98/188/3(28)22, 14 Dec 2022) are still in force, and how the registration sticker marks a visit within 24 hours; (3) which criteria the review of IV paracetamol and IV albumin used (letter HKL/JK/98/188/1, May 2026); (4) Lampiran A for foreign patients (memo of 6 Jul 2026): its flow chart prints the forms as CIP/JKT-02 and CIP/JK-01 where the memo prints BPK/JKT-02 and CIP/JKT-01, and it does not say what happens when no specialist is present; (5) MAU: the 2022 criteria the entry follows, or the General Medicine letter of 7 Feb 2025 (oxygen up to a Venturi mask at 40%, 100 kg or less, pregnancy excluded); (6) whether the aspirin dispersible brands of the pharmacy letter of 9 Nov 2022 are still the ones supplied; (7) EMACC\'s days: an undated meeting minute circulated on 3 Jan 2025 says EMACC runs Monday to Saturday, Saturday until 1 pm, with at most 10 Monday appointments, where the guide (the guide owner, 12 Nov 2026) says Monday to Friday, 8 am to 3 pm; (8) whether the department\'s two antimicrobial quick guides (dilution, and adult dosing), 2nd edition, February 2024, are still the current editions.',
   'Open now (18 Nov 2026) reads the hours the sources print. Four print an hour but not the days: MAU office hours, 8 am to 5 pm (the MAU admission note); the Observation Ward\'s medical officer, 10 am to 10 pm (memo HKL/JK/98/188/3(6)23); LA OT taking orthopaedic cases, 8 am to 9 pm only (department policy 2026, 22.3.3); and office hours at SCACC ending at 1700 hr, with no start (Code Blue Manual, 4.2). Which days does each hold, and when do SCACC office hours start? EMACC follows the guide owner\'s 8 am to 3 pm, Monday to Friday, where the memo of 11 Jan 2024 prints 7.30 am to 3.30 pm. The guide cannot know public holidays.',
   'From the calculators built into the guide on 16 Nov 2026 (CALC-RESEARCH.md). Still to confirm: (1) which D-dimer assay the HKL laboratory runs: the age-adjusted cut-off (ADJUST-PE) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE; (2) the AF CPG (2012), Table 14 footnote: a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed \u2265200 mmol/L; (3) the Ottawa SAH rule\'s age: 40 or older (JAMA 2013) or over 40 (CMAJ 2017, Figure 1): the guide uses 40 or older; (4) burns: the department\'s own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA, VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses; (5) alcohol withdrawal: the department\'s regimen for a CIWA-Ar of 10 or more, which the guide\'s sources do not give.',
   'From the children\'s heart and breathing rates added on 16 Nov 2026 (Fleming et al., Lancet 2011, Web Tables 4 and 5): the paper gives centiles of healthy children and does not say which centile makes a rate abnormal. Still to confirm: which ranges or centile the department and its paediatric triage use for a child\'s heart rate and breathing rate, and whether the guide should mark one.',
@@ -14006,7 +14849,7 @@ function search(q, loose){
     }
     if (e.kind === 'Pathway' || e.kind === 'Guideline') s += .5;
     /* An ED pharmacy drug comes after the pathways, rules and guidelines that mention it (the list keeps its own order) */
-    if (e.kind === 'Drug' || e.kind === 'Dilution') s = Math.min(s, 1);
+    if (e.kind === 'Drug' || e.kind === 'Dilution' || e.kind === 'Antimicrobial') s = Math.min(s, 1);
     return {e, s};
   }).filter(Boolean).sort((a, b) => (b.s - a.s) || (a.e.href.includes('--') - b.e.href.includes('--'))).slice(0, 14).map(r => r.e);
 }
@@ -14308,7 +15151,7 @@ function smartFind(q, kw){
   const M = msQuery(q) && AIMS.state === 'ready' ? AIMS : AI, MIN = M === AIMS ? AIMS_MIN : AI_MIN, WEAK = M === AIMS ? AIMS_WEAK : AI_WEAK;
   if (M.state !== 'ready') return null;
   /* drug lists, the CPG shelf's links and outside links stay after the guide's own pages, as in keyword search */
-  const side = i => /^(Drug|Dilution|National CPG|Link)$/.test(IDX[i].kind);
+  const side = i => /^(Drug|Dilution|Antimicrobial|National CPG|Link)$/.test(IDX[i].kind);
   const pick = s => { const sc = aiScores(M, s); if (!sc) return null; let m = 0; for (let i = 0; i < IDX.length; i++) if (sc.best[i] > m && !side(i)) m = sc.best[i]; return {sc, m}; };
   /* A word the guide does not know was corrected by spelling: meaning decides whether the correction or the word as typed
      is closer ("asthama" is asthma; "sprain" is not "strain") */
@@ -14514,7 +15357,7 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose, snip){
-  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
+  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ab ? ` data-ab="${esc(e.ab)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
 }
 function renderPal(){
   const q = $('#gq').value.trim(), body = $('#palbody');
@@ -14585,9 +15428,10 @@ const DRUG_SALT = /^(hcl|hydrochloride|sulphate|sulfate|phosphate|citrate|maleat
 const drugName = g => { const w = g.trim().split(/\s+/); if (!DRUG_TWO.test(w[0].toLowerCase())) while (w.length > 1 && DRUG_SALT.test(w[w.length - 1])) w.pop(); return w.join(' '); };
 function drugIndex(){
   if (DRUGS) return DRUGS;
-  const M = new Map(), add = (g0, kind, i) => { const g = drugName(g0), k = g.toLowerCase(); if (!M.has(k)) M.set(k, {g, k, rx:[], dg:[]}); M.get(k)[kind].push(i); };
+  const M = new Map(), add = (g0, kind, i) => { const g = drugName(g0), k = g.toLowerCase(); if (!M.has(k)) M.set(k, {g, k, rx:[], dg:[], ab:[]}); M.get(k)[kind].push(i); };
   if (typeof EDRX !== 'undefined') EDRX.items.forEach(i => add(rxGeneric(i[1]), 'rx', i));
   if (typeof EDDG !== 'undefined') EDDG.items.forEach(i => add(dgGeneric(i[1]), 'dg', i));
+  if (typeof ABX !== 'undefined'){ ABX.dose.renal.rows.forEach(r => add(r[6], 'ab', {n:r[0], g:r[6]})); ABX.dose.none.forEach(r => add(r[3], 'ab', {n:r[0], g:r[3]})); ABX.dil.rows.forEach(r => add(r[4], 'ab', {n:r[1], g:r[4]})); }
   DRUGS = [...M.values()].map(d => {
     const w = d.k.split(/[\s/]+/), f = w[0].length < 4 ? d.k : DRUG_TWO.test(w[0]) && w[1] ? w[0] + ' ' + w[1] : w[0];
     return {...d, f, g:d.rx.length ? drugName(rxGeneric(d.rx[0][1])) : d.g.charAt(0).toUpperCase() + d.g.slice(1).toLowerCase()};
@@ -14630,7 +15474,8 @@ function drugCard(d){
   const HI = '<span class="tag hi" title="On the hospital\'s 2026 high-alert list">High alert</span>';
   const rows = d.rx.slice(0, 3).map(i => `<a class="dc-r" href="#pharmacy" data-rx="${esc(rxGeneric(i[1]))}"><span class="k">ED pharmacy</span><span class="v">${esc(i[1])}</span><span class="tag">${esc(i[2] || 'Not in the formulary')}</span></a>`).join('')
     + (d.rx.length > 3 ? `<a class="dc-r more" href="#pharmacy" data-rx="${esc(rxGeneric(d.rx[0][1]))}"><span class="v">${d.rx.length - 3} more on the pharmacy list</span></a>` : '')
-    + d.dg.map(i => `<a class="dc-r" href="#dilution" data-dg="${esc(dgGeneric(i[1]))}"><span class="k">Dilution guide</span><span class="v">${esc(i[1])}, ${pages(i)}</span>${i[6] ? HI : ''}</a>`).join('');
+    + d.dg.map(i => `<a class="dc-r" href="#dilution" data-dg="${esc(dgGeneric(i[1]))}"><span class="k">Dilution guide</span><span class="v">${esc(i[1])}, ${pages(i)}</span>${i[6] ? HI : ''}</a>`).join('')
+    + (d.ab || []).slice(0, 2).map(i => `<a class="dc-r" href="#antibiotics" data-ab="${esc(i.g)}"><span class="k">Antimicrobial guide</span><span class="v">${esc(i.n)}</span></a>`).join('');
   const lasa = typeof EDRX_LASA === 'undefined' ? '' : d.rx.filter(i => EDRX_LASA[i[0]]).map(i => { const o = EDRX.items.find(x => x[0] === EDRX_LASA[i[0]]); return o ? `<p class="dc-lasa">${svg('info')}<span>Look-alike pair on the Emergency Pharmacy's top 10: <b>${esc(i[1])}</b> and <b>${esc(o[1])}</b>.</span></p>` : ''; }).join('');
   const items = st.flatMap(e => e.ns.length ? e.ns.map(s => `<li><a href="${s.href}"><b>${esc(e.t)}</b><span>${esc(s.t)}</span></a></li>`) : [`<li><a href="#${e.id}"><b>${esc(e.t)}</b><span>Named in its reference tabs</span></a></li>`]);
   const ent = x => `${x} entr${x === 1 ? 'y' : 'ies'}`;
@@ -17114,6 +17959,75 @@ function renderToolsDg(){
   if (typeof EDDG === 'undefined' || !$('#tdg')) return;
   withTiles($('#tdg'), `${tileMedia(DG_TILE())}<div class="row"><span class="ic">${svg('syringe')}</span><h2>ED dosing and dilution guide</h2><span class="tag">${EDDG.items.length}</span></div><p>The department's guide to injectable drugs, 3rd edition, January 2026: find a drug, open its pages.</p><ul class="gl"><li><span>Drugs</span><b>${EDDG.items.length}</b></li><li><span>High alert</span><b>${EDDG.items.filter(i => i[6]).length}</b></li></ul><span class="go-l">Open the guide${svg('chev')}</span>`);
 }
+/* ================= The ED antimicrobial guides (21 Nov 2026, data27.js from src/abx.js) =================
+   The department's two quick guides, 2nd edition, February 2024: reconstitution, dilution and rate for 25 injectable
+   antimicrobials, and adult doses with the dose for each band of kidney function. Every cell as printed. Type a CrCl and the
+   bands the guide prints for it are marked; the page never rounds into a band and never picks a weight (the guide defines obese
+   two ways), and nothing typed is stored. */
+let abF = 'all';
+const AB_TILE = () => TILE_KEYS.has('infect') ? 'infect' : 'doses';
+/* A printed band's own numbers: "31-50 ml/min", "> 60", "<10 ml/min & regular HD", "CrCl >40ml/min", "Normal or CrCl >50 ml/min" */
+function abIn(band, x){
+  const t = String(band).split('\n')[0];
+  let m = /(\d+)\s*[-–]\s*(\d+)/.exec(t); if (m) return x >= +m[1] && x <= +m[2];
+  m = />\s*(\d+)/.exec(t); if (m) return x > +m[1];
+  m = /<\s*(\d+)/.exec(t); if (m) return x < +m[1];
+  return false;
+}
+const abLines = s => esc(s).replace(/\n/g, ' <br>');
+function abCr(){ const v = parseFloat(($('#abcr') && $('#abcr').value || '').replace(',', '.')); return isFinite(v) && v >= 0 && v <= 400 ? v : null; }
+function renderAb(){
+  if (typeof ABX === 'undefined' || !$('#abl')) return;
+  const q = ($('#abq').value || '').trim().toLowerCase(), x = abCr(), D = ABX.dose;
+  const hit = (...s) => !q || s.some(v => String(v).toLowerCase().includes(q));
+  const re = q ? new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
+  const hl = s => re ? String(s).split(re).map((v, k) => k % 2 ? `<mark>${esc(v)}</mark>` : esc(v)).join('') : esc(s);
+  const nOf = {renal:D.renal.rows.length + 2, none:D.none.length, dil:ABX.dil.rows.length};
+  $('#abf').innerHTML = [['all', 'All'], ['renal', 'Kidney function'], ['none', 'No renal change'], ['dil', 'Dilution and rate']].map(([k, t]) => `<button type="button" data-abf="${k}" aria-pressed="${abF === k}">${t}${k === 'all' ? '' : ` <span class="n">${nOf[k]}</span>`}</button>`).join('');
+  const gapMsg = (bands, usual) => x === null ? '' : bands.some(b => abIn(b, x)) ? '' : `<p class="ab-gap">${svg('info')}<span>${usual && x > 50 ? `No printed band covers ${x} ml/min: the usual dose column prints no CrCl.` : `${x} ml/min falls between the printed bands.`}</span></p>`;
+  const band = (h, v, on, cls) => `<div class="ab-b${on ? ' on' : ''}${cls ? ' ' + cls : ''}"><dt>${abLines(h)}</dt> <dd>${abLines(v)}</dd></div> `;
+  const S = [];
+  if (abF === 'all' || abF === 'renal'){
+    const rows = D.renal.rows.filter(r => hit(r[0], r[6]));
+    const g = hit('gentamicin', 'endocarditis') ? D.gent : null, v = hit('vancomycin') ? D.vanc : null;
+    if (rows.length || g || v) S.push(`<section class="phx-g ab-sec" id="ab-renal"><h2>Dose by kidney function</h2><ul class="phx-l">` + rows.map(r => {
+      const own = /^Piperacillin/i.test(r[6]), heads = own ? [r[2], r[3], r[4]].map(c => c.split('\n')[0]) : D.renal.head.slice(1);
+      const vals = own ? [r[2], r[3], r[4]].map(c => c.split('\n').slice(1).join('\n')) : [r[2], r[3], r[4]];
+      return `<li class="ab-r" data-abn="${esc(r[6])}"><b class="ab-n">${hl(r[0])}</b> <dl class="ab-bands">${band('Usual dose', r[1], false, 'usual')}${heads.map((h, k) => band(h + (own ? '' : ''), vals[k], x !== null && abIn(h, x))).join('')}</dl>`
+        + (r[7] ? `<p class="ab-note">${esc(r[7])}</p>` : '') + (/merged cell/.test(r[5]) ? `<p class="ab-note">As printed: ${esc(r[5].replace(/ are one merged cell| is one merged cell/, ' share one cell').replace(/all three renal columns share one cell/, 'the three bands share one cell'))}.</p>` : '') + gapMsg(heads, true) + '</li> ';
+    }).join('')
+      + (g ? `<li class="ab-r" data-abn="Gentamicin"><b class="ab-n">${esc(g.title)}</b> <dl class="ab-bands">${g.rows.map(([h, d]) => band('CrCl ' + h, d, x !== null && abIn(h, x))).join('')}</dl><p class="ab-note">${esc(g.foot)}</p><ul class="ab-tdm">${g.tdm.map(t => `<li>${esc(t)}</li>`).join('')}</ul>${x !== null && g.rows.filter(([h]) => abIn(h, x)).length > 1 ? `<p class="ab-gap">${svg('info')}<span>The printed bands share their ends: ${x} ml/min sits in two of them.</span></p>` : gapMsg(g.rows.map(r => r[0]))}</li>` : '')
+      + (v ? `<li class="ab-r" data-abn="Vancomycin"><b class="ab-n">${esc(v.title)}</b> <dl class="ab-bands">${v.rows.map(([h, d, t]) => band(h, d + '\n\nFirst levels: ' + t.replace(/▪\s*/g, '').replace(/\n/g, '; '), x !== null && abIn(h, x))).join('')}</dl><p class="ab-note">Dose by actual body weight (ABW), as printed.</p>${gapMsg(v.rows.map(r => r[0]).filter(h => /\d/.test(h)))}</li>` : '')
+      + '</ul></section>');
+  }
+  if (abF === 'all' || abF === 'none'){
+    const rows = D.none.filter(r => hit(r[0], r[3]));
+    if (rows.length) S.push(`<section class="phx-g ab-sec" id="ab-none"><h2>No change with kidney function</h2><ul class="phx-l">` + rows.map(r => `<li class="ab-r" data-abn="${esc(r[3])}"><b class="ab-n">${hl(r[0])}</b> <dl class="ab-bands">${band('Usual dose', r[1], false, 'usual')}${r[2] ? band('Notes', r[2], false, 'usual') : ''}</dl></li>`).join('') + '</ul></section>');
+  }
+  if (abF === 'all' || abF === 'dil'){
+    const rows = ABX.dil.rows.filter(r => hit(r[1], r[4]));
+    if (rows.length) S.push(`<section class="phx-g ab-sec" id="ab-dil"><h2>Reconstitution, dilution and rate</h2><ul class="phx-l">` + rows.map(r => `<li class="ab-r ab-d" data-abn="${esc(r[4])}"><b class="ab-n">${hl(r[1])}</b> <dl class="ab-bands">${band('Reconstitution and dilution', r[2], false, 'usual')}${band('Rate', r[3], false, 'usual')}</dl>${r[5] ? `<p class="ab-note">${esc(r[5])}</p>` : ''}</li>`).join('') + `</ul><p class="ab-note">${esc(ABX.dil.foot)}</p></section>`);
+  }
+  $('#abn').textContent = x !== null ? `CrCl ${x} ml/min: the printed bands that cover it are marked.` : 'Type a CrCl to mark the printed band for it.';
+  $('#abl').innerHTML = S.join('') || '<p class="empty">No antimicrobial in the two guides matches. Try its generic name, or the ED dosing and dilution guide.</p>';
+}
+function renderAbStatic(){
+  if (typeof ABX === 'undefined' || !$('#abhero')) return;
+  const D = ABX.dose;
+  withTiles($('#abhero'), `${tileMedia(AB_TILE())}<span class="lbl">ETD HKL · 2nd edition · Feb 2024</span><h2>${D.renal.rows.length + D.none.length + 2} antimicrobials</h2><p>Doses by kidney function, and how to reconstitute, dilute and give ${ABX.dil.rows.length} injectables.</p>`);
+  $('#abcg').innerHTML = `<summary>${svg('calc')}<span>How the guide works out CrCl</span></summary><div class="ab-cgb"><p class="ab-k">Cockcroft-Gault, as printed</p><ul>${D.cg.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
+    <p class="ab-k">Which weight</p><ul>${D.wnotes.map(l => `<li>${esc(l)}</li>`).join('')}</ul><ul>${D.weights.map(([d, f]) => `<li><b>${esc(d)}</b>: ${abLines(f)}</li>`).join('')}</ul>
+    <p class="ab-note">${esc(D.obese)} The guide does not say which to use, so this page leaves the weight to you and marks only the band for the CrCl you type.</p>
+    <p><a class="pill" href="#calc-crcl">${svg('calc')}CrCl calculator (CKD CPG)</a></p></div>`;
+  $('#absrc').innerHTML = (typeof MEMOS !== 'undefined' && MEMOS['abx-dose'] ? memoHTML('abx-dose') + memoHTML('abx-dil') : '')
+    + `<p class="lk-note">Sources: ${esc(D.src)}; ${esc(ABX.dil.src)}. Prepared by the department's clinical (EM) pharmacists and approved for use by the head of department on 8 Feb 2024: department documents (standing rule 6), every cell as printed. Whether the 2nd edition is still current is under Still to confirm. Nothing you type here is stored.</p>`;
+}
+function renderToolsAb(){
+  if (typeof ABX === 'undefined' || !$('#tabx')) return;
+  const D = ABX.dose;
+  withTiles($('#tabx'), `${tileMedia(AB_TILE())}<div class="row"><span class="ic">${svg('pill')}</span><h2>ED antimicrobial guides</h2><span class="tag">${D.renal.rows.length + D.none.length + 2}</span></div><p>The department's quick guides, February 2024: the dose for each band of kidney function, and how to give each injectable.</p><ul class="gl"><li><span>By kidney function</span><b>${D.renal.rows.length + 2}</b></li><li><span>Injectables</span><b>${ABX.dil.rows.length}</b></li></ul>`);
+}
+
 function renderToolsLinks(){
   withTiles($('#tlk'), `${tileMedia('links')}<div class="row"><span class="ic">${svg('link')}</span><h2>ED links</h2><span class="tag">${LINKS.reduce((a, g) => a + g.items.length, 0)}</span></div><p>The department's forms, hospital systems and folders, from the ETD HKL link page.</p><ul class="gl">${LINKS.map(g => `<li><span>${esc(g.h)}</span><b>${g.items.length}</b></li>`).join('')}</ul>`);
   /* Reading X-rays (11 Nov 2026): the tile lists the films from the guide's own start menu, so it never drifts from the entry */
@@ -17989,7 +18903,7 @@ function route(){
   else if (P[h]) showPath(h);
   else if ((m = h.match(/^([\w-]+?)--(\w+)$/)) && P[m[1]] && P[m[1]].nodes[m[2]]) showPath(m[1], m[2]);
   else if (h === 'pathways' || h === 'saved' || h === 'guidelines'){ const f = {saved:'saved', guidelines:'cpg'}[h]; if (f && libF !== f){ libF = f; renderLib(); } changed = showView('pathways'); }
-  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
+  else if (['rules', 'tools', 'numbers', 'links', 'pharmacy', 'dilution', 'antibiotics', 'new', 'poster', 'about', 'install'].includes(h)) changed = showView(h);
   else if (h === 'share'){ renderShare(); changed = showView('share'); }
   else if ((m = h.match(/^calc(?:-([a-z0-9]+))?$/))){
     const id = m[1] && CALCS[m[1]] ? m[1] : null;
@@ -18177,7 +19091,7 @@ if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden =
    calculators, Install, the library, the extensions, the ED links). Each is now drawn the first time it is shown (showView), the
    first time a search hands over to it, or when the phone is idle after the first screen, one page per idle moment. */
 const LAZY = {pathways:[renderLib], rules:[renderRules], calc:[renderCalcHub, renderCalc], numbers:[renderNums, () => { if (typeof EXTDIR !== 'undefined' && $('#extdir')){ renderExtStatic(); renderExt(); } }],
-  links:[renderLinks], pharmacy:[renderRxStatic, renderRx], dilution:[renderDgStatic, renderDg], new:[renderDrive], install:[renderInstall]};
+  links:[renderLinks], pharmacy:[renderRxStatic, renderRx], dilution:[renderDgStatic, renderDg], antibiotics:[renderAbStatic, renderAb], new:[renderDrive], install:[renderInstall]};
 const lazyDone = new Set();
 function ensureView(v){ if (!LAZY[v] || lazyDone.has(v)) return; lazyDone.add(v); LAZY[v].forEach(f => f()); }
 function lazyIdle(){
@@ -18185,7 +19099,7 @@ function lazyIdle(){
   const go = () => { ensureView(v); lazyIdle(); };
   if (window.requestIdleCallback) requestIdleCallback(go, {timeout:2000}); else setTimeout(go, 150); /* Safari has no requestIdleCallback */
 }
-renderHome(); renderSideSaved(); renderDcheck(); renderToolsCalc(); renderToolsLinks(); renderToolsRx(); renderToolsDg();
+renderHome(); renderSideSaved(); renderDcheck(); renderToolsCalc(); renderToolsLinks(); renderToolsRx(); renderToolsDg(); renderToolsAb();
 withTiles($('#lkhero'), `${tileMedia('links')}<span class="lbl">The ETD HKL link page</span><h2>Open the original${svg('ext')}</h2><p>Every link on it, the response registers too, with your MOH account.</p>`);
 $('#tl-keyn .tl').textContent = 'All ' + NUMS.length;
 /* the links are found by search, each opening the ED links page */
@@ -18200,6 +19114,11 @@ if (typeof EDRX !== 'undefined'){
     EDDG.items.forEach(i => { const g = i[1].split(/\s(?=\d)|\s\(|;|,/)[0].trim(); IDX.push({href:'#dilution', title:g + ' (ED dilution guide)', kind:'Dilution', meta:'Dosing and dilution guide, p' + i[4] + (i[5] !== i[4] ? '–' + i[5] : ''), body:i[1], ic:'syringe', c:'c-meta', dg:g}); });
   }
   Object.entries(G).forEach(([g, is]) => IDX.push({href:'#pharmacy', title:g + ' (ED pharmacy)', kind:'Drug', meta:'ED pharmacy · ' + [...new Set(is.map(i => i[2] || 'not in the formulary'))].join(', '), body:is.map(i => i[1]).join(' · '), ic:'pill', c:'c-meta', rx:g}));
+}
+/* The ED antimicrobial guides (21 Nov 2026): the page, and each antimicrobial by its name */
+if (typeof ABX !== 'undefined'){
+  IDX.push({href:'#antibiotics', title:'ED antimicrobial guides', kind:'Tool', meta:'Doses by kidney function, and how to give injectable antimicrobials (Feb 2024)', body:'antibiotic antibiotics antimicrobial renal dose crcl creatinine clearance kidney dilution reconstitution reconstitute infusion rate', kw:'antibiotic antibiotics antimicrobial antimicrobials crcl', ic:'pill', c:'c-meta'});
+  const seen = new Set(); [...ABX.dose.renal.rows.map(r => r[6]), ...ABX.dose.none.map(r => r[3]), ...ABX.dil.rows.map(r => r[4]), 'Gentamicin', 'Vancomycin'].forEach(g => { const k = g.toLowerCase(); if (seen.has(k)) return; seen.add(k); IDX.push({href:'#antibiotics', title:g + ' (ED antimicrobial guides)', kind:'Antimicrobial', meta:'ED antimicrobial guides: dose by kidney function, dilution and rate', body:g, ic:'pill', c:'c-meta', ab:g}); });
 }
 renderJourney(false); setupTour(); startQuiz(); renderAbout(); renderViewHeroes(); renderPins(); remWire();
 
@@ -18300,6 +19219,11 @@ $('#rxq').addEventListener('input', renderRx);
 $('#dgq').addEventListener('input', renderDg);
 $('#dgf').addEventListener('click', e => { const b = e.target.closest('[data-df]'); if (b){ dgF = b.dataset.df; renderDg(); const nb = $(`#dgf [data-df="${dgF}"]`); if (nb) nb.focus(); } });
 $('#dgaz').addEventListener('click', e => { const b = e.target.closest('[data-dl]'); if (b){ const s = document.getElementById('dg-' + b.dataset.dl); if (s) s.scrollIntoView({block:'start'}); } });
+if ($('#abq')){ $('#abq').addEventListener('input', renderAb); $('#abcr').addEventListener('input', renderAb);
+  $('#abf').addEventListener('click', e => { const b = e.target.closest('[data-abf]'); if (b){ abF = b.dataset.abf; renderAb(); const nb = $(`#abf [data-abf="${abF}"]`); if (nb) nb.focus(); } }); }
+const abFrom = a => { if (a && a.dataset.ab){ ensureView('antibiotics'); abF = 'all'; $('#abq').value = a.dataset.ab; renderAb(); } };
+$('#palbody').addEventListener('click', e => abFrom(e.target.closest('a[data-ab]')), true);
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) abFrom(palLinks()[palSel]); }, true);
 const dgFrom = a => { if (a && a.dataset.dg){ ensureView('dilution'); dgF = 'all'; $('#dgq').value = a.dataset.dg; renderDg(); } };
 $('#palbody').addEventListener('click', e => dgFrom(e.target.closest('a[data-dg]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) dgFrom(palLinks()[palSel]); }, true);
@@ -18493,7 +19417,7 @@ window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Imag
    - When the connection drops, says whether the saved guide still works.
    - When a newer version of the guide has been saved while an older page is open, offers Reload. */
 (() => {
-  const PAGE = '42156f9c73d6'; /* this page's id, which build.js also writes into sw.js */
+  const PAGE = '2aad9ad603de'; /* this page's id, which build.js also writes into sw.js */
 
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };
