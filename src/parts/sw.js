@@ -12,9 +12,15 @@
               any kept film, sound or poster sheet whose file has changed. Then it tells open pages which page it
               carries, so a page from an older build can offer Reload (pwa.js).
    The page   Network first, revalidated past the browser's own cache, so a phone online gets the newest guide. The
-              saved copy when the network fails or has not delivered the page within 4 seconds: a hung Wi-Fi connection
-              would otherwise leave the MO waiting a minute or more. The page is read in full before it is shown, so a
-              connection that drops halfway falls back to the saved copy instead of a broken page.
+              saved copy when the network fails or has not delivered the page within 1.5 seconds (4 seconds until
+              23 Nov 2026): a hung Wi-Fi connection would otherwise leave the MO waiting a minute or more. The page is read
+              in full before it is shown, so a connection that drops halfway falls back to the saved copy instead of a
+              broken page. One request for the page at a time: an open while one is still on its way waits on that one,
+              and gets the saved copy at once when it has already waited 1.5 seconds. Measured on 23 Nov 2026, every open
+              after a hang waited the full time again, likely because a second request queued behind the stuck one in
+              the browser's cache. So for up to 30 seconds after a stuck request, opens show the saved copy without
+              asking the network again; a request still unanswered after 30 seconds is given up. A newer build still arrives: the browser
+              checks sw.js on each open, and its worker offers Reload (pwa.js).
    Stills     From the cache, else from the network (and saved, if the copy matches the build).
    Films, sounds and the full poster sheets
               Never fetched ahead. A film or sound is kept once it has played and the browser has loaded all of it, from
@@ -32,7 +38,8 @@ const KEEP = __KEEP__; /* path: hash, kept once used */
 const SIZE = __SIZE__; /* path: bytes, for the kept files: what Save everything would download */
 const NAME = 'green-zone-mo-guide-', CACHE = NAME + VERSION, KEPT = NAME + 'kept', FONTS = NAME + 'fonts';
 const BASE = new URL('./', self.location.href).href;
-const WAIT = 4000;
+const WAIT = 1500, GIVE_UP = 30000;
+let pending = null; /* the page request on its way: {got, at} */
 const PLAYED = /^(media|audio|clips)\/.+\.(mp4|mp3)$/; /* the films and sounds a person plays (tile loops are decoration) */
 
 const hash = async buf => [...new Uint8Array(await crypto.subtle.digest('SHA-256', buf))].slice(0, 8).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -110,18 +117,24 @@ self.addEventListener('fetch', e => {
 });
 
 async function page(e){
-  /* The newest page, revalidated past the browser's cache and read in full */
-  const got = fetch(e.request.url, {cache: 'no-cache', credentials: 'same-origin'}).then(async res => {
-    if (!res.ok) return res; /* an error page: shown only when nothing is saved */
-    const h = new Headers(res.headers); h.delete('content-encoding'); h.delete('content-length');
-    return new Response(await res.arrayBuffer(), {status: res.status, statusText: res.statusText, headers: h});
-  });
+  /* The newest page, revalidated past the browser's cache and read in full; one request at a time, given up after 30 s */
+  if (!pending){
+    const ctl = new AbortController(), stop = setTimeout(() => ctl.abort(), GIVE_UP);
+    const got = fetch(e.request.url, {cache: 'no-cache', credentials: 'same-origin', signal: ctl.signal}).then(async res => {
+      const h = new Headers(res.headers); h.delete('content-encoding'); h.delete('content-length');
+      return {ok: res.ok, body: await res.arrayBuffer(), init: {status: res.status, statusText: res.statusText, headers: h}};
+    }).finally(() => { clearTimeout(stop); if (pending && pending.got === got) pending = null; });
+    pending = {got, at: Date.now()};
+  }
+  const {got, at} = pending;
+  const answer = a => new Response(a.body, a.init); /* each open its own copy of the one answer */
   const saved = await caches.match(BASE, {cacheName: CACHE});
-  if (!saved) return got;
-  let timer;
-  const res = await Promise.race([got.catch(() => null), new Promise(r => { timer = setTimeout(r, WAIT, null); })]);
+  if (!saved) return got.then(answer); /* an error page too: shown only when nothing is saved */
+  const left = WAIT - (Date.now() - at);
+  let timer, res = null;
+  if (left > 0) res = await Promise.race([got.catch(() => null), new Promise(r => { timer = setTimeout(r, left, null); })]);
   clearTimeout(timer);
-  if (res && res.ok) return res;
+  if (res && res.ok) return answer(res);
   e.waitUntil(got.catch(() => {})); /* a late answer still lands in the browser's cache, ready for the next update */
   return saved;
 }

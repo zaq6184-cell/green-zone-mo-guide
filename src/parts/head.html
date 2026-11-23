@@ -2392,8 +2392,34 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .ax-t tr:last-child td{border-bottom:0}
 @media (min-width:761px){.spin-pin span{display:inline}}
 @media (prefers-reduced-motion:reduce){.spin-loading .spin-wait{animation:none;border-color:#3ddc97}}
+/* The 23 Nov 2026 round: a faster, lighter first open, and page transitions.
+   The ready bar: a thin bar at the top while the page is still arriving on a slow network (measured on slowed 4G: the
+   home screen paints at about 0.7 s, the guide answers taps at about 5 s). It shows only after 0.7 s, so a quick open
+   never sees it, and the guide removes it once it is ready. */
+.boot{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;z-index:300;overflow:hidden;pointer-events:none;opacity:0;animation:bootin .3s .7s forwards}
+.boot::before{content:"";position:absolute;top:0;bottom:0;left:0;width:36%;border-radius:0 3px 3px 0;background:linear-gradient(90deg,transparent,var(--accent) 30%,var(--mint));animation:bootrun 1.15s .7s var(--ease) infinite}
+@keyframes bootin{to{opacity:1}}
+@keyframes bootrun{from{transform:translateX(-100%)}to{transform:translateX(280%)}}
+@media (prefers-reduced-motion:reduce){.boot::before{animation:none;width:100%;opacity:.55}}
+/* Page transitions (vtGo in engine.js): the page cross-fades and rises a little, a tile grows into the banner, back
+   slides in from the left; the top bar and the tab bar stay still. Only while a transition runs (.vt-on). */
+@media (prefers-reduced-motion:no-preference){
+  :root.vt-on #topbar{view-transition-name:gz-top}
+  :root.vt-on #tabbar{view-transition-name:gz-tabs}
+  ::view-transition-group(*){animation-duration:.22s;animation-timing-function:var(--ease)}
+  ::view-transition-old(root){animation:vtout .12s ease-in both}
+  ::view-transition-new(root){animation:vtin .22s var(--ease) both}
+  :root.vt-back::view-transition-old(root){animation:vtoutb .16s ease-in both}
+  :root.vt-back::view-transition-new(root){animation:vtinb .24s var(--ease) both}
+  ::view-transition-old(gz-hero),::view-transition-new(gz-hero){height:100%;width:100%;object-fit:cover;animation-duration:.22s}
+  @keyframes vtout{to{opacity:0}}
+  @keyframes vtin{from{opacity:0;transform:translateY(8px)}}
+  @keyframes vtoutb{to{opacity:0;transform:translateX(28px)}}
+  @keyframes vtinb{from{opacity:0;transform:translateX(-28px)}}
+}
 </style>
 
+<div class="boot" id="gzboot" role="progressbar" aria-label="Getting the guide ready"></div>
 <a class="skip" href="#home">Skip to the guide</a>
 <div class="app">
   <div class="gbm" id="gbm" hidden role="dialog" aria-label="Back through this visit"><div class="gbm-h"><b>Back through this visit</b><small>Newest first. Kept in memory only: a reload clears it.</small></div><ol id="gbml"></ol></div>

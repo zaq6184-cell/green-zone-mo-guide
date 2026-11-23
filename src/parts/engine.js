@@ -62,10 +62,11 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 21 Nov 2026';
+const APP_VER = 'Version 8, updated 23 Nov 2026';
 const V8 = [
+  [`Faster on a weak signal, and pages that move`, `The installed guide now opens its saved copy after 1.5 seconds with no answer from the network (it waited 4), and once the hospital Wi-Fi has hung, the next open no longer waits again: measured on a slowed phone, 4.3 seconds down to 1.8 on a stuck connection, and to 0.3 for the open after it. A newer version still arrives, with Reload. On the claude.ai link, and on the web app with Data Saver on, a first visit no longer downloads the journey's five pictures and the tour's cover (about 320 KB) until you open those pages (the installed web app still saves them in the background, for use offline), and a thin bar at the top shows while a slow first open is still arriving. A tool tile now grows into its page's banner as it opens, and the back button slides the earlier page back in; other links still open at once, and with reduced motion pages change as before.`, [['#install', 'Install the guide'], ['#tools', 'Shift tools']]],
   [`Antidotes, abbreviations and the documents left out`, `The Ministry of Health's Antidotes Quick Guide (First Edition, January 2022): all 38 antidotes with their preparation, dose and storage as printed, in Shift tools, in search and on the drug card, with the lines its reader found doubtful marked. The MOH abbreviation list (Bil.1/2024, 2,665 rows): type an abbreviation in search to see its meaning as the list prints it. Discharge at own risk, the MOH procedure (circular Bil. 24/2021), in Safe practice; fever after a flood, treated as suspected leptospirosis (Bil. 26/2021), and smoking products and vaping, notified within 24 hours (Bil. 25/2026), in Infection alerts; the department's CME on reading a CT brain; and the CME deck on the aggressive patient on the behavioural disturbance pathway. Each with its source and date; the questions they raise are under Still to confirm.`, [['#antidotes', 'Antidotes'], ['#abbreviations', 'Abbreviations'], ['#ct-brain', 'Reading a CT brain'], ['#safe-practice--aorkpk', 'Own risk: the MOH procedure']], ['#safe-practice', '#infection-alerts', '#behavioural-disturbance', '#ct-brain']],
-  [`The route, in 3D`, `The patient journey ends on a glass model of the five stops of a Green Zone visit, made in Blender for this guide: drag it, or use the slider, to turn it all the way round, and tap a number for what happens at that stop. Only its first view loads (7 KB) until you turn it; the rest is one 140 KB picture, kept once used. Four new banners move too: antidotes, abbreviations, CT brain and the aggressive patient.`, [['#journey', 'Patient journey']]],
+  [`The route, in 3D`, `The patient journey ends on a glass model of the five stops of a Green Zone visit, made in Blender for this guide: drag it, or use the slider, to turn it all the way round, and tap a number for what happens at that stop. Only its first view loads (7 KB) until you turn it; the rest is one 166 KB picture, kept once used. Four new banners move too: antidotes, abbreviations, CT brain and the aggressive patient.`, [['#journey', 'Patient journey']]],
   ['Department memos and letters, 2019 to 2026','Two dozen memos and letters the department circulated, read from their pages and placed where you look for them: suspected measles (memo of 19 Nov 2026) and the department\'s own Nipah memo in Infection alerts; seven memos of 2025 and 2026 on the Green Zone rules (primary team review within 2 hours, waiting for emergency surgery, IV paracetamol and IV albumin, Lampiran A, fever after chemotherapy, moving a patient within HKL, sick leave for staff), with two older ones; the dispatch book, POCT results and the laboratory\'s rules in Blood tests; medicines for a foreign patient and dispersible aspirin in Prescribing; psychology counselling in Referral rules; the 2025 MAU criteria as a dated tab; haemodialysis in the Yellow Zone; and the 2024 ectopic pregnancy circular on Abdominal pain. A new page in Shift tools, ED antimicrobial guides, holds the department\'s two quick guides of February 2024: the dose of each antimicrobial for each band of kidney function (type a CrCl and the printed band is marked), and how to reconstitute, dilute and give each injectable. Each step shows its source, with its pages at a tap where they can be shown.',[['#gz-rules--gzn','Green Zone: memos of 2025 and 2026'],['#infection-alerts--measles','Suspected measles'],['#blood-tests','Blood tests: the lab\'s rules'],['#prescribing--fgnrx','A foreign patient: 5 days'],['#antibiotics','ED antimicrobial guides']],['#gz-rules','#infection-alerts','#blood-tests','#prescribing','#referral-rules','#mau-admission','#yellow-zone','#abdominal-pain','#missed-fractures']],
   ['Open now','The home page shows what holds at this moment, in Malaysia time: whether EMACC, EM Watch and the Animal Bite Clinic are in session (until when, or the next session), the shift, and the hours that change a route (MAU office hours, the Observation Ward\'s medical officer, LA OT for orthopaedic cases, Code Blue at SCACC after 1700 hr). The steps that print those hours show the same, live. Only the hours the sources print; sessions only, nothing about booking.',[['#home','Home'],['#emacc--clinic','EMACC hours']]],
   ['Changed since you last looked','From the next update on, an entry that changed since you last opened the guide carries a Changed mark in the library and a line at its top, and What\'s new on the home page marks what is new to you. Your phone keeps only a count of the updates it has seen.',[['#new','What\'s new']]],
@@ -979,6 +980,8 @@ const store = {
   del(k){ try { localStorage.removeItem(k); } catch(e){} }
 };
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const VT_OK = typeof document.startViewTransition === 'function'; /* page transitions: vtGo */
+let vtOn = false;
 const kindOf = p => p.kind ? p.kind : p.grp === 'cpg' ? 'Guideline' : p.grp !== 'rules' ? 'Pathway' : p.sub === 'protocol' ? 'Protocol' : 'Rule';
 const metaOf = p => p.page ? 'Ebook p' + p.page : (p.src || '');
 const kindLabel = (p, k) => (p.kinds && p.kinds[k]) || (p.grp === 'rules' ? KIND_R : p.grp === 'cpg' ? KIND_G : KIND)[k];
@@ -2025,7 +2028,7 @@ function showView(name, sub){
     $$('#viewport > .view').forEach(v => { v.hidden = v.dataset.view !== name; });
     const el = $(`#viewport > .view[data-view="${name}"]`);
     el.classList.remove('enter', 'enter-back');
-    if (!REDUCED && routed){ void el.offsetWidth; el.classList.add('enter'); }
+    if (!REDUCED && routed && !vtOn){ void el.offsetWidth; el.classList.add('enter'); }
   }
   curView = name; curSub = sub || null;
   markNav();
@@ -2056,7 +2059,7 @@ function showLearn(sub){
   $$('#ltabs [data-lt]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lt === sub));
   $$('#v-learn [data-lp]').forEach(p => { p.hidden = p.dataset.lp !== sub; });
   if (sub === 'tour') tourOpen(); else pauseTour();
-  if (sub !== 'journey') stopJourney();
+  if (sub !== 'journey') stopJourney(); else journeySeen();
   setTopTitle({journey:'Patient journey', tour:'90-second tour', quiz:'Quick check'}[sub] || 'Learn');
   markNav();
   return changed;
@@ -4429,12 +4432,21 @@ function renderToolsLinks(){
 /* ================= Journey: looping clips and narration ================= */
 let step = 0, playAll = false, stageVisible = false, clipsOn = false;
 const voice = new Audio(); voice.preload = 'none';
+/* The journey's pictures (about 290 KB for the five stops) load only once its page is shown, not on every first visit
+   (23 Nov 2026): a phone on mobile data that never opens the journey never fetches them. On the first showing the
+   other stops' pictures are fetched too, so moving between stops stays instant. */
+let jSeen = false;
+function journeySeen(){
+  if (jSeen) return; jSeen = true;
+  const v = $('#jclip'); if (v && v.dataset.poster){ v.setAttribute('poster', v.dataset.poster); v.removeAttribute('data-poster'); }
+  JOURNEY.forEach(s => { const im = new Image(); im.src = s.img; });
+}
 function renderJourney(anim){
   const js = $('#jspin'); if (js && !js.firstChild) js.innerHTML = spinHTML('route');
   $('#rail').innerHTML = JOURNEY.map((s, i) => `<li><button type="button" class="${s.optional ? 'maybe' : ''}" data-i="${i}" ${i === step ? 'aria-current="step"' : ''} aria-label="Stop ${i + 1}: ${esc(s.short)}${s.optional ? ', only if needed' : ''}"><span class="n">${svg(s.ic)}</span><b>${esc(s.short)}</b><small>${esc(s.sub)}</small></button></li>`).join('');
   const s = JOURNEY[step], stage = $('#stage');
   const nc = s.note && s.note.c ? ` style="--c:var(--${s.note.c});--cs:var(--${s.note.c}-soft)"` : '';
-  stage.innerHTML = `<figure><video id="jclip" muted loop playsinline preload="none" poster="${s.img}" width="1280" height="720" aria-label="${esc(s.alt)}"></video>
+  stage.innerHTML = `<figure><video id="jclip" muted loop playsinline preload="none" ${jSeen ? `poster="${s.img}"` : `data-poster="${s.img}"`} width="1280" height="720" aria-label="${esc(s.alt)}"></video>
       <div class="cap" id="jcap" hidden></div>
       <div class="ctl"><button type="button" class="mbtn" id="jlisten" aria-pressed="false">${svg('volume')}<span class="bl">Listen</span></button><button type="button" class="mbtn" id="jclipbtn">${svg(clipsOn ? 'pause' : 'play')}<span class="bl">${clipsOn ? 'Pause clip' : 'Play clip'}</span></button></div></figure>
     <div class="txt">
@@ -4510,13 +4522,15 @@ function setupTour(){
   let L = store.get('gz-tour-lang', 'en'); if (!TOUR_LANGS[L]) L = 'en';
   const sp = $('#speeds');
   [0.75, 1, 1.25, 1.5].forEach(r => sp.insertAdjacentHTML('beforeend', `<button type="button" data-rate="${r}" aria-pressed="${r === 1}">${r}×</button>`));
-  /* The film for this language and these colours. Its cover goes in at once, the film only once the tour has opened, and
+  /* The film for this language and these colours. Its cover and its film go in only once the tour has opened (the cover
+     went in at once until 23 Nov 2026: 30 KB on every first visit, for a page most visits never open), and
      never with load(): Chrome treats a call to load() as overriding preload="none" and downloads the film (Chrome 157,
      10 Nov 2026: the first 26 seconds, about 1 MB, on a first visit with no tap). With src alone, nothing downloads until
      play, a chapter, a line of the transcript or Resume. */
   const putFilm = () => {
     const f = film(TOUR_LANGS[L]);
-    if (v.getAttribute('poster') !== f.cover) v.setAttribute('poster', f.cover);
+    v.dataset.cover = f.cover; /* the cover chosen (no download) */
+    if (armed && v.getAttribute('poster') !== f.cover) v.setAttribute('poster', f.cover);
     startAt = 0;
     if (armed){ shown = f.src; retried = false; $('#vmsg').hidden = true; v.src = f.src; }
   };
@@ -5388,8 +5402,8 @@ function navAfter(hh, target){
       state = {id:target.st.id, trail:target.st.trail.map(t => ({...t})), cur:p.nodes[target.st.cur] ? target.st.cur : p.start};
       ptabSel = target.st.tab; land = false; draw(false); setTopTitle(p.title);
     }
-    const y = target.y; requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)));
-    if (!REDUCED){ const v = $('#viewport > .view:not([hidden])'); if (v){ v.classList.remove('enter', 'enter-back'); void v.offsetWidth; v.classList.add('enter-back'); } }
+    const y = target.y; if (vtOn) window.scrollTo(0, y); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)));
+    if (!REDUCED && !vtOn){ const v = $('#viewport > .view:not([hidden])'); if (v){ v.classList.remove('enter', 'enter-back'); void v.offsetWidth; v.classList.add('enter-back'); } }
     if (target.pal) setTimeout(() => openPal(target.pal), 0);
   }
   navDraw(!target && navFrom === 'content' && Date.now() - navFromAt < 2000);
@@ -5411,7 +5425,57 @@ function navDraw(peek){
 function navBack(i){
   const s = NAV[i]; if (!s) return;
   closeNavList(false); navWant = s; buzz('tick');
-  if (location.hash === s.h) route(); else location.hash = s.h;
+  vtGo(() => { if (location.hash === s.h) route(); else location.hash = s.h; }, {back:true});
+}
+/* Page transitions (23 Nov 2026): a tap on a tile that opens a page grows the tile into the page's banner, and the back
+   button slides the earlier page in from the left. Measured at CPU slowed 4 times on a phone: a transition shows the new
+   page about one to four frames later (tile 293 ms against 227, back 150 against 126) and finishes about 0.3 s after
+   that; on other links (a library row, a search result) Chrome aborted it and the page came 40 to 90 ms later for nothing,
+   so plain links change page at once, as before. The View
+   Transitions API (Chrome 111, Safari 18, Firefox 144; same-document transitions Baseline since October 2025); where a
+   browser lacks it, or motion is reduced, the page changes as before. Rules kept: never for an answer on the same page,
+   200 ms or so, a tap during one finishes it at once, and the guide never waits on an event that may not come (250 ms at
+   most). While the new page is drawn the browser holds the old picture, so nothing in between shows. */
+function vtGo(go, o){
+  o = o || {};
+  if (!VT_OK || REDUCED || vtOn || document.hidden){ go(); return; }
+  const root = document.documentElement, src = o.src && o.src.isConnected ? o.src : null;
+  root.classList.add('vt-on'); root.classList.toggle('vt-back', !!o.back);
+  if (src) src.style.viewTransitionName = 'gz-hero';
+  vtOn = true;
+  let t;
+  const skip = () => { try { if (t) t.skipTransition(); } catch(e){} };
+  const end = () => {
+    vtOn = false; root.classList.remove('vt-on', 'vt-back');
+    removeEventListener('pointerdown', skip, true);
+    $$('[style*="view-transition-name"]').forEach(el => { el.style.viewTransitionName = ''; });
+  };
+  try {
+    t = document.startViewTransition(() => new Promise(res => {
+      if (src) src.style.viewTransitionName = '';
+      const h0 = location.hash; let to = 0;
+      const done = () => {
+        clearTimeout(to); removeEventListener('hashchange', done);
+        if (src){ const hero = $('#viewport > .view:not([hidden]) :is(.run-hero, .phx-hero, .lk-hero)'); if (hero && hero.getClientRects().length) hero.style.viewTransitionName = 'gz-hero'; }
+        res();
+      };
+      to = setTimeout(done, 250);
+      addEventListener('hashchange', done); /* after route(), whose listener came first */
+      try { go(); } catch(e){ done(); throw e; }
+      if (location.hash === h0) done(); /* routed at once, or nothing changed */
+    }));
+  } catch(e){ end(); go(); return; }
+  addEventListener('pointerdown', skip, {capture:true, once:true});
+  t.ready.catch(() => {}); /* skipped or aborted (the screen turned, say): the page has changed all the same */
+  t.finished.then(end, end);
+}
+/* A tap on a tile that links to another page of the guide: through a page transition. Other links, links that other
+   handlers take over (preventDefault), the search page, a step of the page already open, and links with a modifier key
+   change page at once. */
+function vtPage(h){
+  if (!h || h.length < 2 || h === '#search') return false;
+  const id = x => x.slice(1).split('--')[0];
+  return id(h) !== id(location.hash || '#home');
 }
 /* The hold list: the earlier pages of this visit, newest first */
 let navListFrom = null;
@@ -5795,7 +5859,16 @@ const glowAt = e => {
 document.addEventListener('pointermove', glowAt, {passive:true});
 document.addEventListener('pointerdown', glowAt, {passive:true});
 ['pointerup', 'pointercancel'].forEach(k => document.addEventListener(k, e => { if (e.pointerType !== 'mouse') glowOff(); }, {passive:true}));
+document.addEventListener('click', e => {
+  if (!VT_OK || REDUCED || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!a || a.target || a.hasAttribute('download')) return;
+  const h = a.getAttribute('href'), src = a.closest('.tile:not(.run-hero):not(.phx-hero)');
+  if (!src || !vtPage(h)) return;
+  e.preventDefault();
+  vtGo(() => { location.hash = h; }, {src});
+});
 window.addEventListener('hashchange', route);
 route();
+{ const bt = $('#gzboot'); if (bt) bt.remove(); } /* the guide is ready: the ready bar goes */
 requestAnimationFrame(() => setTimeout(lazyIdle, 50));
-window.addEventListener('load', () => JOURNEY.forEach(s => { const im = new Image(); im.src = s.img; }));

@@ -61,6 +61,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     /* Every film from media/ this page asks for, from its own requests (the server is shared by pages left open, and the
        resource timing buffer drops entries once full): none may load before a tap */
     p.films = []; p.on('request', r => { const f = new URL(r.url()).pathname; if (/^\/media\/[^/]+\.mp4$/.test(f)) p.films.push(f); });
+    /* and the pictures that are not on the first screen: the journey's stops and the films' covers (23 Nov 2026) */
+    p.pics = []; p.on('request', r => { const f = new URL(r.url()).pathname; if (/^\/img\/gz-0[2-6]|^\/media\/[^/]+poster\.webp$/.test(f)) p.pics.push(f); });
     return p;
   };
   const noFilm = (p, msg) => ok(!p.films.length, msg + (p.films.length ? ': ' + [...new Set(p.films)].join(', ') : ''));
@@ -79,8 +81,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => /5333/.test(document.querySelector('#kn-a').textContent)), 'Code Blue tile shows ext 5333');
   ok(await p.evaluate(() => document.querySelectorAll('#quick a .dots i').length) > 8, 'quick routes show how each can end');
   ok(await p.evaluate(() => { const s = document.querySelector('#daynight'); return !!s && s.getAttribute('role') === 'switch' && s.getAttribute('aria-checked') === 'false' && s.querySelectorAll('svg.i').length === 2; }), 'home shows the Day and Night switch, set to day');
-  ok(await p.evaluate(() => { const v = document.querySelector('#vid'); return v.getAttribute('poster') === 'media/explainer-poster.webp' && !v.hasAttribute('src') && v.readyState === 0; }), 'in day colours the tour has the day cover, and no film until the tour opens');
+  ok(await p.evaluate(() => { const v = document.querySelector('#vid'); return v.dataset.cover === 'media/explainer-poster.webp' && !v.hasAttribute('poster') && !v.hasAttribute('src') && v.readyState === 0; }), 'in day colours the tour has the day cover chosen, and neither cover nor film loads until the tour opens');
   noFilm(p, 'no film from media/ loads before a tap');
+  ok(!p.pics.length && await p.evaluate(() => !document.querySelector('#gzboot')), 'a first open fetches no picture that is off screen (the journey\'s stops, the tour\'s cover), and the ready bar has gone' + (p.pics.length ? ': ' + p.pics.join(', ') : ''));
   ok(await p.evaluate(() => document.querySelector('#v-poster [data-sheet="1"] img').getAttribute('src') === 'poster/sheet1-thumb.webp'), 'in day colours the poster page has the day sheets');
   ok(await p.evaluate(() => APP_URL) === 'https://zaq6184-cell.github.io/green-zone-mo-guide/', 'Copy link builds links on the public web app');
   ok(await p.evaluate(() => document.querySelectorAll('#kn-a .tm img, #kn-b .tm img').length) === 2, 'Code Blue and Code Stroke tiles have their pictures');
@@ -807,6 +810,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.evaluate(() => location.hash === '#home' && document.querySelector('#t-intro').classList.contains('done')), 'finishing the intro goes home and marks it seen');
   // Journey
   await go(p, '#journey-4', 400);
+  ok(await p.evaluate(() => !!document.querySelector('#jclip').getAttribute('poster')) && new Set(p.pics.filter(f => /^\/img\/gz-0/.test(f))).size === 5, 'the journey\'s pictures load once its page opens, all five stops');
   ok(await p.evaluate(() => document.querySelector('#rail [aria-current="step"]').dataset.i) === '3', '#journey-4 selects stop 4');
   await p.screenshot({path:out + '/d-journey-4.png', fullPage:true});
   // Home with saved items
@@ -1030,7 +1034,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#mau-admission', 450);
     ok(await p.evaluate(() => [...document.querySelectorAll('#run [role="tab"], #run .ptab-bar button')].some(x => /2025 criteria/.test(x.textContent)) && /2025 criteria tab/.test(P['mau-admission'].nodes.crit.hint)), 'MAU: the 2025 criteria from General Medicine are a dated tab beside the 2022 checklist');
     ok(await p.evaluate(() => P['gz-rules'].nodes.gzm.opts.length === 13 && P['yellow-zone'].nodes.hd && P['abdominal-pain'].dept.some(d => /Bil\. 9\/2024/.test(d.src) && d.fig === 'memo-kpk-ectopic') && P['infection-alerts'].nodes.nipah.fig === 'memo-2026-nipah'
-      && CONFIRM[0].includes('21 Nov 2026') && V8.find(v => /^Department memos and letters/.test(v[0]))[3].includes('#blood-tests') && APP_VER === 'Version 8, updated 21 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
+      && CONFIRM[0].includes('21 Nov 2026') && V8.find(v => /^Department memos and letters/.test(v[0]))[3].includes('#blood-tests') && APP_VER === 'Version 8, updated 23 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
     ok(await p.evaluate(() => Object.entries({'measles':'#infection-alerts', 'campak':'#infection-alerts', 'dispatch book':'#blood-tests', 'winspirin':'#prescribing', 'phq-9':'#referral-rules'}).every(([q, h]) => { const r = findMore(q), a = (r.r || r)[0]; return !!a && a.href.startsWith(h); })), 'search: measles, campak, dispatch book, winspirin and PHQ-9 open their new steps');
     if (guardRe('announcements')) { const re = new RegExp(guardRe('announcements')), art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
       ok(!re.test(art) && !re.test(idx) && await p.evaluate(r => !new RegExp(r).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('announcements')), 'no patient, password, link or registration number from these documents is anywhere in the guide, page or data'); }
@@ -1107,6 +1111,27 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     sp.sheet = await p.evaluate(() => spinReady.has('route') && /spin\/route\.webp/.test(document.querySelector('#jspin .spin-sheet').style.backgroundImage));
     ok(sp.i === 6 && sp.ready && sp.left === sp.want && sp.pins === 5 && /^1\. Triage/.test(sp.info) && sp.sheet, 'the 3D route turns to the view asked for, its five labels follow it, and a label opens its stop' + (sp.i === 6 && sp.ready && sp.left === sp.want && sp.sheet ? '' : ' ' + JSON.stringify(sp)));
   }
+  /* Page transitions (23 Nov 2026): a tile grows into the page's banner, back slides, an answer has none */
+  {
+    await go(p, '#tools', 500);
+    await p.evaluate(() => { window.__vt = []; const f = document.startViewTransition.bind(document);
+      document.startViewTransition = cb => { const t = f(cb); t.updateCallbackDone.then(() => { const h = document.querySelector('#viewport > .view:not([hidden]) :is(.run-hero, .phx-hero, .lk-hero)');
+        __vt.push({h:location.hash, hero:h ? h.style.viewTransitionName : '', back:document.documentElement.classList.contains('vt-back'), enter:!!document.querySelector('#viewport > .view.enter:not([hidden])')}); }); return t; }; });
+    await p.click('#trx'); await p.waitForTimeout(700);
+    const v1 = await p.evaluate(() => ({vt:__vt.slice(), view:curView, on:vtOn, cls:document.documentElement.className, names:document.querySelectorAll('[style*="view-transition-name"]').length}));
+    ok(v1.vt.length === 1 && v1.vt[0].h === '#pharmacy' && v1.vt[0].hero === 'gz-hero' && !v1.vt[0].back && !v1.vt[0].enter && v1.view === 'pharmacy' && !v1.on && !/vt-/.test(v1.cls) && !v1.names,
+      'page transitions: a tool tile grows into the page\'s banner, with no fade on top, and leaves nothing behind' + (v1.vt.length === 1 && v1.vt[0].hero ? '' : ' ' + JSON.stringify(v1)));
+    await p.click('.side-back'); await p.waitForTimeout(700);
+    const v2 = await p.evaluate(() => ({vt:__vt.slice(), view:curView}));
+    ok(v2.vt.length === 2 && v2.vt[1].h === '#tools' && v2.vt[1].back && v2.view === 'tools', 'page transitions: the back button slides the earlier page back' + (v2.vt.length === 2 ? '' : ' ' + JSON.stringify(v2)));
+    await go(p, '#interpreter', 500);
+    const n0 = await p.evaluate(() => __vt.length);
+    await p.click('#cur button.opt[data-go="2"]'); await p.waitForTimeout(300);
+    ok(await p.evaluate(n => __vt.length === n && state.cur === 'call', n0), 'page transitions: none for an answer on the same page');
+    await go(p, '#pathways', 500);
+    await p.click('#libgrid .pc h3 a'); await p.waitForTimeout(400);
+    ok(await p.evaluate(n => __vt.length === n && curView === 'run', n0), 'page transitions: none for a plain link, such as a library row, which opens at once');
+  }
   await go(p, '#home', 300);
   /* The medical interpreters (memo of 9 Jul 2026) */
   await go(p, '#interpreter', 400);
@@ -1136,12 +1161,12 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(dn.gap >= 4 && dn.clear >= -1 && dn.right >= 15 && dn.oneLine && dn.w >= 44, `phone: the switch sits beside a one-line title, clear of the greeting (${JSON.stringify(dn)})`);
   await p.tap('#daynight'); await p.waitForTimeout(450);
   const pn = await p.evaluate(() => ({theme:document.documentElement.dataset.theme, on:document.querySelector('#daynight').getAttribute('aria-checked'), saved:localStorage.getItem('gz-theme'),
-    src:document.querySelector('#vid').getAttribute('src'), cover:document.querySelector('#vid').getAttribute('poster'), thumb:document.querySelector('#v-poster [data-sheet="2"] img').getAttribute('src')}));
+    src:document.querySelector('#vid').getAttribute('src'), cover:document.querySelector('#vid').dataset.cover, poster:document.querySelector('#vid').getAttribute('poster'), thumb:document.querySelector('#v-poster [data-sheet="2"] img').getAttribute('src')}));
   ok(pn.theme === 'dark' && pn.on === 'true' && pn.saved === '"dark"', 'phone: the home switch turns the night colours on and remembers it');
-  ok(pn.cover === 'media/explainer-night-poster.webp' && pn.src === null && pn.thumb === 'poster/sheet2-night-thumb.webp', 'night colours bring the night film\'s cover (the film waits for the tour) and the night sheets');
+  ok(pn.cover === 'media/explainer-night-poster.webp' && pn.poster === null && pn.src === null && pn.thumb === 'poster/sheet2-night-thumb.webp', 'night colours choose the night film\'s cover (cover and film wait for the tour) and the night sheets');
   await p.screenshot({path:out + '/p-home-night.png'});
   await p.tap('#daynight'); await p.waitForTimeout(450);
-  ok(await p.evaluate(() => document.documentElement.dataset.theme === 'light' && document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-poster.webp'), 'a second tap brings the day colours back');
+  ok(await p.evaluate(() => document.documentElement.dataset.theme === 'light' && document.querySelector('#daynight').getAttribute('aria-checked') === 'false' && document.querySelector('#vid').dataset.cover === 'media/explainer-poster.webp'), 'a second tap brings the day colours back');
   for (const v of VIEWS.slice(1)){
     await go(p, '#' + v);
     ok(await hscroll(p) <= 0, `phone #${v} no sideways scroll`);
@@ -1775,9 +1800,9 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   p = await mk({...phone, colorScheme:'dark'}, 'phone-dark');
   await p.goto(U, {waitUntil:'networkidle'}); await p.waitForTimeout(800);
   await p.screenshot({path:out + '/pd-home.png'});
-  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'true' && !document.querySelector('#vid').hasAttribute('src') && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-night-poster.webp'), 'on Auto, a dark phone gets the switch at night and the night film\'s cover');
+  ok(await p.evaluate(() => document.querySelector('#daynight').getAttribute('aria-checked') === 'true' && !document.querySelector('#vid').hasAttribute('src') && !document.querySelector('#vid').hasAttribute('poster') && document.querySelector('#vid').dataset.cover === 'media/explainer-night-poster.webp'), 'on Auto, a dark phone gets the switch at night and the night film\'s cover');
   await go(p, '#tour', 400);
-  ok(await p.evaluate(() => document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-night-720p.mp4'), 'opening the tour puts in the night film');
+  ok(await p.evaluate(() => document.querySelector('#vid').getAttribute('src') === 'media/green-zone-explainer-night-720p.mp4' && document.querySelector('#vid').getAttribute('poster') === 'media/explainer-night-poster.webp'), 'opening the tour puts in the night film and its cover');
   await p.screenshot({path:out + '/pd-tour.png'});
   await go(p, '#poster', 400);
   ok(await hscroll(p) <= 0, 'phone dark poster no sideways scroll');
