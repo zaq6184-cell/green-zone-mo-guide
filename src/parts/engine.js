@@ -5443,15 +5443,17 @@ function vtGo(go, o){
   root.classList.add('vt-on'); root.classList.toggle('vt-back', !!o.back);
   if (src) src.style.viewTransitionName = 'gz-hero';
   vtOn = true;
-  let t;
+  let t, started = false, dog = 0;
   const skip = () => { try { if (t) t.skipTransition(); } catch(e){} };
   const end = () => {
+    clearTimeout(dog);
     vtOn = false; root.classList.remove('vt-on', 'vt-back');
     removeEventListener('pointerdown', skip, true);
     $$('[style*="view-transition-name"]').forEach(el => { el.style.viewTransitionName = ''; });
   };
   try {
     t = document.startViewTransition(() => new Promise(res => {
+      started = true;
       if (src) src.style.viewTransitionName = '';
       const h0 = location.hash; let to = 0;
       const done = () => {
@@ -5465,6 +5467,10 @@ function vtGo(go, o){
       if (location.hash === h0) done(); /* routed at once, or nothing changed */
     }));
   } catch(e){ end(); go(); return; }
+  /* The browser changes the page only after it has drawn the old one. Where it draws no frame (a page behind another
+     window, seen on 23 Nov 2026 in a hidden browser pane), the tap would wait; after 300 ms the transition is skipped,
+     which changes the page at once. */
+  dog = setTimeout(() => { if (!started) skip(); }, 300);
   addEventListener('pointerdown', skip, {capture:true, once:true});
   t.ready.catch(() => {}); /* skipped or aborted (the screen turned, say): the page has changed all the same */
   t.finished.then(end, end);

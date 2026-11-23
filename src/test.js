@@ -1128,6 +1128,17 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const n0 = await p.evaluate(() => __vt.length);
     await p.click('#cur button.opt[data-go="2"]'); await p.waitForTimeout(300);
     ok(await p.evaluate(n => __vt.length === n && state.cur === 'call', n0), 'page transitions: none for an answer on the same page');
+    /* A page that draws no frame (behind another window): the tap still changes page, by skipping the transition */
+    const nf = await p.evaluate(async () => { location.hash = '#tools'; await new Promise(r => setTimeout(r, 400));
+      /* a stand-in for a browser that draws no frame: the update runs only when the transition is skipped */
+      const counted = document.startViewTransition; /* the counting wrapper above, put back after */
+      let held = null; document.startViewTransition = cb => { let skipped = false; const done = new Promise(r => { held = () => { if (!skipped){ skipped = true; Promise.resolve(cb()).then(r); } }; });
+        return {skipTransition: held, ready: Promise.reject(new Error('held')), updateCallbackDone: done, finished: done}; };
+      document.querySelector('#trx').click();
+      const at200 = location.hash; await new Promise(r => setTimeout(r, 700));
+      document.startViewTransition = counted;
+      return {at200, at700:location.hash, view:curView, on:vtOn}; });
+    ok(nf.at200 === '#tools' && nf.at700 === '#pharmacy' && nf.view === 'pharmacy' && !nf.on, 'page transitions: where the page draws no frame, the tap still opens its page within about 300 ms' + (nf.at700 === '#pharmacy' ? '' : ' ' + JSON.stringify(nf)));
     await go(p, '#pathways', 500);
     await p.click('#libgrid .pc h3 a'); await p.waitForTimeout(400);
     ok(await p.evaluate(n => __vt.length === n && curView === 'run', n0), 'page transitions: none for a plain link, such as a library row, which opens at once');
