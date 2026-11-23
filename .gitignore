@@ -71,3 +71,18 @@ LECTURE-REVIEW.md
 
 # The department memo run-through lists the titles of all 99 internal memos: on this PC only (Krishna, 12 Nov 2026)
 MEMO-RUN-THROUGH.md
+# The cancer pain leaflet film (23 Nov 2026): renders, frames and working media stay on this PC
+video/cancer-pain-home/.hyperframes/
+video/cancer-pain-home/renders/
+video/cancer-pain-home/work/snap*/
+video/cancer-pain-home/work/render-frames/
+video/cancer-pain-home/work/*.mp4
+video/cancer-pain-home/work/*.wav
+video/cancer-pain-home/work/check*.json
+video/cancer-pain-home/work/snap*.json
+video/cancer-pain-home/work/*.log
+video/cancer-pain-home/work/*.err
+video/cancer-pain-home/work/*.md5
+video/cancer-pain-home/assets/bg.mp4
+video/cancer-pain-home/assets/vo-*.wav
+video/cancer-pain-home-ms/

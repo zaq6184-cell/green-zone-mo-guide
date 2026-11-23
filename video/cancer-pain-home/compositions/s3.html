@@ -1,0 +1,94 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334;
+  --indigo-1:#3d4597; --indigo-2:#2a3072; --indigo-3:#191d4a;
+  --teal-1:#157481; --teal-2:#0f5a64; --teal-3:#093d45;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --lav:#d8c4fa;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-plum{--j1:var(--plum-1);--j2:var(--plum-2);--j3:var(--plum-3)}
+.j-indigo{--j1:var(--indigo-1);--j2:var(--indigo-2);--j3:var(--indigo-3)}
+.j-teal{--j1:var(--teal-1);--j2:var(--teal-2);--j3:var(--teal-3)}
+.j-sapphire{--j1:var(--sapphire-1);--j2:var(--sapphire-2);--j3:var(--sapphire-3)}
+.hd{position:absolute;left:56px;right:56px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font-weight:800;line-height:1.06;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.card{position:absolute;left:56px;width:968px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;width:864px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{position:relative;flex:none}
+.it p{font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink);overflow-wrap:anywhere}
+.qn{font-weight:900;color:var(--jq)}
+.lead{position:absolute;left:52px;top:44px;width:864px;font-weight:900;line-height:1.18;letter-spacing:-.01em;color:var(--jq);overflow-wrap:anywhere}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+.ul{position:absolute;left:40px;width:888px;list-style:none;display:flex;flex-direction:column;gap:8px}
+.ul li{display:flex;align-items:center;gap:18px;padding:10px 16px 10px 10px;border-radius:20px;font-weight:700;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}
+.ul li .mk{width:56px;height:56px;border-radius:18px;padding:12px;flex:none}
+#s3-card{--jq:var(--teal-1)}
+#s3-hd{top:52px;height:128px}
+#s3-hd h2{font-size:60px}
+#s3-card{top:216px;height:808px}
+#s3-i0{top:44px;height:668px;opacity:0}
+#s3-i0 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s3-i0 p{margin-top:34px !important;font-size:58px}
+#s3-i1{top:44px;height:668px;opacity:0}
+#s3-i1 .disc{width:96px;height:96px;border-radius:29px;padding:22px}
+#s3-i1 p{margin-top:26px !important;font-size:48px}
+#s3-i2{top:44px;height:668px;opacity:0}
+#s3-i2 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s3-i2 p{margin-top:34px !important;font-size:58px}
+#s3-i3{top:44px;height:668px;opacity:0}
+#s3-i3 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s3-i3 p{margin-top:34px !important;font-size:58px}</style>
+<div id="root" data-composition-id="s3" data-width="1080" data-height="1080">
+  <div class="hd" id="s3-hd"><div class="disc jw j-teal"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 20.5a5 5 0 0 1-7-7l6-6a5 5 0 0 1 7 7z"/><path d="m8.5 8.5 7 7"/></svg></div><h2 data-w="h">What should I know about PAIN RELIEVING MEDICATIONS?</h2></div>
+  <div class="card" id="s3-card">
+    <div class="it" id="s3-i0"><div class="disc jw j-teal" id="s3-c0"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 20.5a5 5 0 0 1-7-7l6-6a5 5 0 0 1 7 7z"/><path d="m8.5 8.5 7 7"/></svg></div><p data-w="i"><span class="qn">How is cancer pain treated?</span> Cancer pain can be treated using medications (like opioids, non-opioids or adjuvant drugs), physical therapies, psychological &amp; spiritual support &amp; in some cases, interventional procedures.</p></div>
+    <div class="it" id="s3-i1"><div class="disc jw j-teal" id="s3-c1"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 4h7v3h-7z"/><path d="M15.5 5.5h2a1.5 1.5 0 0 1 1.5 1.5v12.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 19.5V7a1.5 1.5 0 0 1 1.5-1.5h2"/><path d="M8.5 11.5h7M8.5 15.5h4.5"/></svg></div><p data-w="i"><span class="qn">What types of pain medications are available?</span> Medications include: Over-the-counter pain relievers (e.g. paracetamol, ibuprofen);&#32;<br>Prescription opioids (e.g. morphine, oxycodone);&#32;<br>Adjuvant medications (e.g. antidepressants/ anticonvulsants for nerve pain)</p></div>
+    <div class="it" id="s3-i2"><div class="disc jw j-teal" id="s3-c2"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 19 6.5V12c0 4.2-3 7.3-7 8.5-4-1.2-7-4.3-7-8.5V6.5z"/><path d="m9 12 2.2 2.2L15.2 10"/></svg></div><p data-w="i"><span class="qn">Will I become addicted to pain medications?</span> Addiction is rare when opioids are used under medical supervision for cancer pain. Your doctor will prescribe them safely to minimise risks.</p></div>
+    <div class="it" id="s3-i3"><div class="disc jw j-teal" id="s3-c3"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6h.01"/></svg></div><p data-w="i"><span class="qn">What are the side effects of pain medications?</span> Common side effects include constipation, nausea, drowsiness, &amp; dizziness. Your doctor can provide treatments to manage these side effects.</p></div>
+    <div class="dots"><i id="s3-d0"></i><i id="s3-d1"></i><i id="s3-d2"></i><i id="s3-d3"></i></div>
+  </div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s3-hd",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.3);
+  tl.fromTo("#s3-card",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.42);
+  tl.fromTo("#s3-i0",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},3.95);
+  tl.fromTo("#s3-c0",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},4);
+  tl.fromTo("#s3-d0",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#157481",duration:.35,ease:"power2.out"},3.95);
+  tl.fromTo("#s3-i0",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},20.72);
+  tl.fromTo("#s3-d0",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},21.02);
+  tl.fromTo("#s3-i1",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},21.02);
+  tl.fromTo("#s3-c1",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},21.07);
+  tl.fromTo("#s3-d1",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#157481",duration:.35,ease:"power2.out"},21.02);
+  tl.fromTo("#s3-i1",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},41.82);
+  tl.fromTo("#s3-d1",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},42.12);
+  tl.fromTo("#s3-i2",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},42.12);
+  tl.fromTo("#s3-c2",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},42.17);
+  tl.fromTo("#s3-d2",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#157481",duration:.35,ease:"power2.out"},42.12);
+  tl.fromTo("#s3-i2",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},55.29);
+  tl.fromTo("#s3-d2",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},55.59);
+  tl.fromTo("#s3-i3",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},55.59);
+  tl.fromTo("#s3-c3",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},55.64);
+  tl.fromTo("#s3-d3",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#157481",duration:.35,ease:"power2.out"},55.59);
+  tl.fromTo("#s3-hd",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},69.08);
+  tl.fromTo("#s3-card",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},69.08);
+  window.__timelines["s3"] = tl;
+})();
+</script>
+</template>

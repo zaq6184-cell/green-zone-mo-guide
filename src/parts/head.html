@@ -101,7 +101,7 @@ img,video{max-width:100%}
 .skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:12px}
 .skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
 kbd{font:700 .72rem/1 var(--mono);border:1px solid var(--line-2);border-bottom-width:2px;border-radius:7px;padding:3px 6px;background:var(--surface-2);color:var(--muted)}
-mark{background:var(--mark);color:inherit;border-radius:4px;padding:0 1px}
+mark{background:var(--mark);color:var(--ink);border-radius:4px;padding:0 1px}
 svg.i{width:20px;height:20px;flex:none}
 .num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
@@ -1581,6 +1581,15 @@ thead th{border-top:0;background:var(--surface-2);color:var(--muted);font-weight
 .intro-steps li.on{background:var(--gold)}
 .intro-txt h2{margin:6px 0 0;font:900 clamp(1.7rem,3.8vw,2.5rem)/1.04 var(--display);letter-spacing:-.03em}
 .intro-txt p{margin:0;font-size:1.02rem;opacity:.86}
+/* The intro read aloud (23 Nov 2026): Listen, and the narration's language */
+.intro-say{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.intro-say button{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border:0;border-radius:999px;background:var(--glass);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);font:700 .86rem var(--body);cursor:pointer}
+.intro-say button:hover{background:var(--glass-2)}
+.intro-say button svg{width:17px;height:17px}
+.intro-say .intro-l[aria-pressed="true"]{background:#fff;color:var(--sapphire-1,#1f3b8f)}
+.intro-lang{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:rgba(0,0,0,.18)}
+.intro-lang button{min-height:34px;padding:0 12px;background:transparent;box-shadow:none}
+.intro-lang button[aria-pressed="true"]{background:rgba(255,255,255,.92);color:#14211b}
 .intro-nav{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:14px}
 .intro-nav button{border:0;background:var(--glass);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
 .intro-nav button:not(.go):hover{background:var(--glass-2)}
@@ -1843,7 +1852,7 @@ details.dgrp summary small{font:700 .76rem var(--mono);color:var(--muted);margin
 .ext-t b{font:700 .95rem/1.3 var(--body);color:var(--ink);overflow-wrap:anywhere}
 .ext-t small{font-size:.76rem;line-height:1.35;color:var(--muted)}
 .ext-xs{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;flex:none;max-width:62%}
-#extf .n{font:700 .72rem var(--mono);margin-left:3px;opacity:.8}
+#extf .n{font:700 .72rem var(--mono);margin-left:3px}
 @media (max-width:560px){#extf{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;overscroll-behavior-x:contain}#extf::-webkit-scrollbar{display:none}#extf button{flex:none}}
 
 /* ---------- Voice search, forgiving search, Copy route and home care advice for the patient (12 Nov 2026) ---------- */
@@ -2154,6 +2163,24 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 
 /* Pinned calculators and steps: a row at the top of the home page */
 .pins{margin-top:12px}
+/* Pick up where you left off (23 Nov 2026): one card under the search box, the step one tap away; the cross forgets it */
+.resume{position:relative;margin-top:12px}
+.rsm{display:flex;align-items:center;gap:12px;min-height:72px;padding:10px 52px 10px 10px;border-radius:20px;background:var(--pearl);box-shadow:var(--pearl-sh);color:var(--ink);text-decoration:none}
+.rsm:hover{box-shadow:var(--sh-3),inset 0 0 0 1.5px var(--accent)}
+.rsm:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.rsm .ic{flex:none;width:44px;height:44px;border-radius:14px}
+.rsm .ic svg{width:21px;height:21px}
+.rsm-t{display:grid;gap:2px;min-width:0;flex:1}
+.rsm-t small{font:700 .72rem/1.2 var(--body);color:var(--accent);letter-spacing:.01em}
+.rsm-t small time{color:var(--muted);font-weight:600}
+.rsm-t small time::before{content:" · "}
+.rsm-t b{font:800 .95rem/1.25 var(--display);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rsm-t span{font:600 .82rem/1.3 var(--body);color:var(--ink-2,var(--muted));display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rsm-go{flex:none;display:grid;place-items:center;color:var(--accent)}
+.rsm-go svg{width:18px;height:18px}
+.rsm-x{position:absolute;top:50%;right:8px;translate:0 -50%;display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:12px;background:transparent;color:var(--muted);cursor:pointer}
+.rsm-x:hover{background:var(--key);box-shadow:var(--rim);color:var(--ink)}
+.rsm-x svg{width:16px;height:16px}
 .pins-h{display:flex;align-items:baseline;gap:8px;margin:0 2px 8px}
 .pins-h h2{margin:0;font:850 1rem/1.2 var(--display)}
 .pins-h small{font:700 .74rem var(--mono);color:var(--muted)}
@@ -2425,7 +2452,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
   <div class="gbm" id="gbm" hidden role="dialog" aria-label="Back through this visit"><div class="gbm-h"><b>Back through this visit</b><small>Newest first. Kept in memory only: a reload clears it.</small></div><ol id="gbml"></ol></div>
   <aside class="side" id="side" aria-label="Guide menu">
     <div class="side-top">
-      <a class="brand" href="#home"><span class="mark" aria-hidden="true" data-mark></span><span class="bt"><b>Green Zone</b><small>MO Guide · ED HKL</small></span></a>
+      <a class="brand" href="#home" aria-label="Green Zone MO Guide: home"><span class="mark" aria-hidden="true" data-mark></span><span class="bt"><b>Green Zone</b><small>MO Guide · ED HKL</small></span></a>
       <button type="button" class="ib ghost" id="sideclose" aria-label="Close menu" data-icon="x"></button>
     </div>
     <button type="button" class="side-search" data-find><span data-icon="search"></span><span>Search</span><kbd>/</kbd></button>
@@ -2460,7 +2487,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
     <header class="top" id="topbar">
       <button type="button" class="ib" id="menubtn" aria-label="Open menu" aria-controls="side" aria-expanded="false" data-icon="menu"></button>
       <button type="button" class="gback" id="gback" data-gback hidden aria-haspopup="true" aria-expanded="false" aria-label="Back"><span data-icon="back"></span><span class="gb-l" id="gbl" aria-hidden="true"></span></button>
-      <a class="brand" href="#home"><span class="mark" aria-hidden="true" data-mark></span><span class="bt"><b>Green Zone</b></span></a>
+      <a class="brand" href="#home" aria-label="Green Zone MO Guide: home"><span class="mark" aria-hidden="true" data-mark></span><span class="bt"><b>Green Zone</b></span></a>
       <span class="top-title" id="toptitle" aria-hidden="true"></span>
       <button type="button" class="ib" data-find aria-label="Search the guide" data-icon="search"></button>
       <button type="button" class="ib" data-settings aria-label="Settings" data-icon="sliders"></button>
@@ -2472,6 +2499,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
         <header class="hello"><div><h1 id="h-home">Green Zone <span>MO Guide</span></h1><p class="hello-sub"><span id="greet">On shift</span><span class="hs-l"> · Emergency &amp; Trauma, Hospital Kuala Lumpur · MTS 4–5</span><span class="hs-s"> · ED HKL · MTS 4–5</span></p></div>
           <button type="button" class="dn" id="daynight" role="switch" aria-checked="false" aria-label="Night colours"><span class="dn-l">Night colours</span><span class="dn-t" aria-hidden="true"><span class="dn-k"></span><span class="dn-i dn-sun" data-icon-in="sun"></span><span class="dn-i dn-moon" data-icon-in="moon"></span></span></button></header>
         <button type="button" class="searchbox" data-find id="herosearch"><span data-icon="search"></span><span>Symptom, rule, dose or number</span><kbd>/</kbd></button>
+        <section class="resume" id="pickup" aria-label="Pick up where you left off" hidden></section>
         <section class="pins" id="pins" aria-label="Pinned calculators and steps" hidden></section>
         <div class="bento" id="bento">
           <section class="tile t-emerald zt" aria-labelledby="h-zone">
@@ -2509,7 +2537,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
           <div class="seg" id="libf" role="group" aria-label="Show"></div>
         </div>
         <div class="cats" id="libcats" role="group" aria-label="Body system"></div>
-        <div class="legend" aria-label="Outcome colours"><span class="od admit">Admit</span><span class="od observe">Observation</span><span class="od discharge">Discharge</span><span class="od refer">Refer</span><span class="od neutral">Next step</span></div>
+        <div role="group" class="legend" aria-label="Outcome colours"><span class="od admit">Admit</span><span class="od observe">Observation</span><span class="od discharge">Discharge</span><span class="od refer">Refer</span><span class="od neutral">Next step</span></div>
         <div id="libgrid"></div>
       </div></section>
 
@@ -2661,7 +2689,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
               <video id="vid" controls playsinline preload="none" width="1280" height="720" aria-describedby="vdesc"></video>
               <div class="vmsg" id="vmsg" hidden>The video could not play in this browser. Try opening this guide in Chrome or Safari.</div>
               <div class="speeds" id="tlang" role="group" aria-label="Narration language"><span>Narration</span><button type="button" data-lang="en" aria-pressed="true" lang="en">English</button><button type="button" data-lang="ms" aria-pressed="false" lang="ms">Bahasa Melayu</button></div>
-              <div class="chaps" id="chaps" aria-label="Chapters"></div>
+              <div role="group" class="chaps" id="chaps" aria-label="Chapters"></div>
               <div class="speeds" id="speeds"><span>Speed</span></div>
             </div>
             <div>

@@ -277,7 +277,7 @@ P['head-injury-cpg'] = {
 };
 
 /* The ebook pathway points to the national guideline (a link only: its content stays as written) */
-P['mild-tbi'].see = [...(P['mild-tbi'].see || []), ['#head-injury-cpg', 'Head injury CPG (2015)']];
+P['mild-tbi'].see = [...(P['mild-tbi'].see || []), ['#head-injury-cpg', 'Head injury CPG (2015)']]; // @light
 
 /* ----- CPG Management of Acute Coronary Syndromes, 1st edition (2026) -----
    Issued by the MOH, the National Heart Association of Malaysia (NHAM) and the Academy of Medicine Malaysia (p1); it joins
@@ -578,7 +578,7 @@ P['acs-cpg'] = {
 };
 
 /* The ebook pathway points to the national guideline (a link only: its content stays as written) */
-P['acs'].see = [...(P['acs'].see || []), ['#acs-cpg', 'ACS CPG, 1st edition (2026)']];
+P['acs'].see = [...(P['acs'].see || []), ['#acs-cpg', 'ACS CPG, 1st edition (2026)']]; // @light
 
 /* ----- CPG Management of Diabetic Foot, 2nd edition (MaHTAS, 2018), for all patients with diabetes mellitus who are at risk or have developed diabetic foot (p vi) -----
    Printed page = PDF page minus 17 (p1 is PDF 18); front matter = PDF page minus 5 (Algorithm A is p x, Algorithm B p xi).
@@ -886,7 +886,7 @@ P['diabetic-foot-cpg'] = {
 };
 
 /* The ebook's cellulitis pathway points to the national guideline (a link only: its content stays as written) */
-P['cellulitis'].see = [...(P['cellulitis'].see || []), ['#diabetic-foot-cpg', 'Diabetic foot CPG, 2nd edition (2018)']];
+P['cellulitis'].see = [...(P['cellulitis'].see || []), ['#diabetic-foot-cpg', 'Diabetic foot CPG, 2nd edition (2018)']]; // @light
 
 /* ----- CPG Management of Foreign Body Ingestion in Children (MaHTAS, 2025), for patients ≤18 years old (p iii) -----
    Printed page = PDF page minus 20; front matter = PDF page minus 4 (Algorithms 1 to 6 are p xi to xvi). The algorithms and
@@ -1180,11 +1180,11 @@ P['fb-children-cpg'] = {
 };
 
 /* The department's swallowed foreign body step points to the national guideline: a link only, its wording stays */
-P['children'].see = [...(P['children'].see || []), ['#fb-children-cpg', 'Foreign body ingestion CPG (2025)']];
+P['children'].see = [...(P['children'].see || []), ['#fb-children-cpg', 'Foreign body ingestion CPG (2025)']]; // @light
 /* Where the CPG is stricter, the link sits on the step itself, as the gout rule's does: the department sends an asymptomatic
    button battery in the stomach or beyond home, where the CPG removes a gastric battery within 24 hours if the child is aged
    <5 years or the battery is ≥20 mm (Recommendation 3, p25). Which the Green Zone follows is open item 17. */
-P['children'].nodes.bbhome.links = [...(P['children'].nodes.bbhome.links || []), ['#fb-children-cpg--bb', 'CPG 2025: battery in the stomach, under 5 or 20 mm or more']];
+P['children'].nodes.bbhome.links = [...(P['children'].nodes.bbhome.links || []), ['#fb-children-cpg--bb', 'CPG 2025: battery in the stomach, under 5 or 20 mm or more']]; // @light
 
 /* The ACS CPG's copyright holders, named in the footer of its reference tabs (the others are MaHTAS's) */
 P['acs-cpg'].ack = 'the National Heart Association of Malaysia (NHAM) and the Academy of Medicine Malaysia';

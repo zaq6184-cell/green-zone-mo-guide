@@ -1,3 +1,16 @@
+/* ================= The page in two parts (23 Nov 2026) =================
+   Krishna: "Build 1 to 5" (1: open faster on a weak signal). Measured on 23 Nov 2026 (a phone at CPU slowed 4 times, slowed 4G):
+   the home screen painted at about 0.7 s, but the guide answered taps only at about 5 s, when the whole page had arrived. The
+   national guidelines, the X-ray guide, the abdominal pain handbook and the scores (MORE_IDS, written by build.js with
+   P_ORDER) now come in a second script at the end of the page, so this one starts the guide as soon as it has arrived. Until
+   the second has run (gzMore), a page that needs it waits, with the ready bar showing, and opens once it is here; the home
+   page, search and the department's own pathways and rules open at once. Lines in those files that change other entries
+   (marked @light) stay in this part, so every pathway is whole from the start. */
+if (!document.documentElement.lang) document.documentElement.lang = 'en-GB'; /* the accessibility check of 23 Nov 2026: the claude.ai host's <html> has none */
+const MORE_SET = typeof MORE_IDS !== 'undefined' ? MORE_IDS : new Set();
+let MORE = [...MORE_SET].every(id => P[id]);
+const MORE_DO = []; /* what runs again once the rest has arrived, in the order it first ran */
+let moreWant = false;
 
 /* ================= Green Zone MO Guide, version 8: the engine =================
    One page, one view at a time, routed on the hash:
@@ -64,6 +77,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 23 Nov 2026';
 const V8 = [
+  [`Quicker on a weak signal, pick up where you left off, and the cancer pain film`, `On a weak signal the guide now starts before the whole page has arrived: home, search and the department's own pathways and rules answered about 1.7 seconds sooner on a slowed phone (4.6 s instead of 6.3), and a national guideline opened in that moment opens as soon as it lands. The home page offers the last step you opened, one tap away, for 12 hours: only its address and the time are kept on this phone, never an answer, and the cross forgets it. The first-shift intro can be read aloud, in English or Bahasa Melayu. The cancer pain leaflet has its own film in both languages, every line on screen as it is read, over a calm Flow Music bed. The CT brain, antidotes, abbreviations and aggressive patient banners are now Flow loops like the rest. An accessibility check (WCAG 2.2 AA, 35 views by day and by night) found the page language, the logo's name, five places with too little contrast, the search results for screen readers and wide tables a keyboard could not scroll; all fixed, and it now reports none. Pressing a tile starts its page's picture before the tap lands.`, [['#home', 'Home'], ['#intro', 'First-shift intro'], ['#cancer-pain-cpg', 'Cancer pain CPG']], ['#cancer-pain-cpg']],
   [`Faster on a weak signal, and pages that move`, `The installed guide now opens its saved copy after 1.5 seconds with no answer from the network (it waited 4), and once the hospital Wi-Fi has hung, the next open no longer waits again: measured on a slowed phone, 4.3 seconds down to 1.8 on a stuck connection, and to 0.3 for the open after it. A newer version still arrives, with Reload. On the claude.ai link, and on the web app with Data Saver on, a first visit no longer downloads the journey's five pictures and the tour's cover (about 320 KB) until you open those pages (the installed web app still saves them in the background, for use offline), and a thin bar at the top shows while a slow first open is still arriving. A tool tile now grows into its page's banner as it opens, and the back button slides the earlier page back in; other links still open at once, and with reduced motion pages change as before.`, [['#install', 'Install the guide'], ['#tools', 'Shift tools']]],
   [`Antidotes, abbreviations and the documents left out`, `The Ministry of Health's Antidotes Quick Guide (First Edition, January 2022): all 38 antidotes with their preparation, dose and storage as printed, in Shift tools, in search and on the drug card, with the lines its reader found doubtful marked. The MOH abbreviation list (Bil.1/2024, 2,665 rows): type an abbreviation in search to see its meaning as the list prints it. Discharge at own risk, the MOH procedure (circular Bil. 24/2021), in Safe practice; fever after a flood, treated as suspected leptospirosis (Bil. 26/2021), and smoking products and vaping, notified within 24 hours (Bil. 25/2026), in Infection alerts; the department's CME on reading a CT brain; and the CME deck on the aggressive patient on the behavioural disturbance pathway. Each with its source and date; the questions they raise are under Still to confirm.`, [['#antidotes', 'Antidotes'], ['#abbreviations', 'Abbreviations'], ['#ct-brain', 'Reading a CT brain'], ['#safe-practice--aorkpk', 'Own risk: the MOH procedure']], ['#safe-practice', '#infection-alerts', '#behavioural-disturbance', '#ct-brain']],
   [`The route, in 3D`, `The patient journey ends on a glass model of the five stops of a Green Zone visit, made in Blender for this guide: drag it, or use the slider, to turn it all the way round, and tap a number for what happens at that stop. Only its first view loads (7 KB) until you turn it; the rest is one 166 KB picture, kept once used. Four new banners move too: antidotes, abbreviations, CT brain and the aggressive patient.`, [['#journey', 'Patient journey']]],
@@ -134,7 +148,8 @@ const CHG_N = V8.length; let chgPrev = null;
 try { const v = localStorage.getItem('gz-round'); chgPrev = v === null || isNaN(+v) ? null : +v; localStorage.setItem('gz-round', String(CHG_N)); } catch(e){}
 const CHG_NEW = chgPrev !== null && chgPrev < CHG_N ? CHG_N - chgPrev : 0;
 const CHG = new Map(); /* entry object -> the newest round's title that changed it */
-V8.slice(0, CHG_NEW).forEach(([t, , , at]) => (at || []).forEach(h => { const p = P[h.replace(/^#/, '').split('--')[0]]; if (p && !CHG.has(p)) CHG.set(p, t); }));
+const markChg = () => V8.slice(0, CHG_NEW).forEach(([t, , , at]) => (at || []).forEach(h => { const p = P[h.replace(/^#/, '').split('--')[0]]; if (p && !CHG.has(p)) CHG.set(p, t); }));
+markChg(); MORE_DO.push(markChg);
 
 /* The first-shift intro: four screens about using the guide, with a drawn picture each */
 const INTRO = [
@@ -790,7 +805,8 @@ function filmHTML(k){
     `<ul class="xf-key" aria-label="Parts outlined on the film">${key}</ul>` +
     `<figcaption>Tap a name to light that part on the film${f.groups ? '; a group opens to its bones' : ''}. The outlines are this guide's own tracing by eye, a teaching aid and not a measurement; where one part runs on into the next, the line between them is a guide, not an edge on the film. ${esc(f.names)} ${esc(f.credit)}</figcaption></figure>`;
 }
-if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); });
+const filmFigs = () => { if (typeof XFILMS !== 'undefined') Object.keys(XFILMS).forEach(k => { FIGS['xf-' + k] = () => filmHTML(k); }); };
+filmFigs(); MORE_DO.push(filmFigs);
 /* ================= Department memos (12 Nov 2026, data18.js) =================
    A memo card on the step that quotes it: its number, date and title as printed, and its own scanned pages
    (app/memo/<key>-p<N>.webp, with the signature and registration numbers covered), each opened with a tap in the
@@ -820,7 +836,8 @@ FIGS.tlclock = () => { const R = [['Morning', '8.00 am', '2.00 pm'], ['Afternoon
    view first (abdo3d/poster.webp), the patient's right on the screen's left, labelled. Tap a region to light it and see what to
    think of there. The slider, or a sideways drag, turns the torso through 72 degrees: the 25 frames (abdo3d/fNN.webp, about
    19 KB each) download only when it is first turned. A3D (data17.js) holds each region's outline on each frame. */
-const A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : [];
+let A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : [];
+MORE_DO.push(() => { A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : []; });
 const a3pad = i => String(i).padStart(2, '0');
 const a3c = pts => { const a = pts.split(' ').map(s => s.split(',').map(Number)); return [a.reduce((t, q) => t + q[0], 0) / a.length, a.reduce((t, q) => t + q[1], 0) / a.length]; };
 function a3svg(i, on){
@@ -952,7 +969,8 @@ document.addEventListener('click', e => {
   const nb = fig.querySelector(`[data-spin-pin="${j}"]`); if (nb) nb.focus();
 });
 /* A step that reads several films shows them one after another (XGROUPS, data15.js) */
-if (typeof XGROUPS !== 'undefined') Object.keys(XGROUPS).forEach(n => { FIGS['xg-' + n] = () => XGROUPS[n].map(filmHTML).join(''); });
+const groupFigs = () => { if (typeof XGROUPS !== 'undefined') Object.keys(XGROUPS).forEach(n => { FIGS['xg-' + n] = () => XGROUPS[n].map(filmHTML).join(''); }); };
+groupFigs(); MORE_DO.push(groupFigs);
 document.addEventListener('click', e => {
   const t = e.target.closest && e.target.closest('[data-xf-toggle],[data-xk],[data-xg]'); if (!t) return;
   const fig = t.closest('.xf'); if (!fig) return;
@@ -1052,14 +1070,18 @@ const CATS = [
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
 ];
 const CAT_OF = {};
-CATS.forEach(c => { c.ids = c.ids.filter(id => P[id]); c.ids.forEach(id => { CAT_OF[id] = c; }); });
-/* Anything not placed in a group still shows, under Other pathways */
-(function(){
-  const other = Object.keys(P).filter(id => !CAT_OF[id]);
+CATS.forEach(c => { c.all = c.ids; });
+/* Each group lists the entries the page has (again when the rest arrives: gzMore); anything not placed in a group still shows,
+   under Other pathways */
+function placeCats(){
+  CATS.forEach(c => { if (c.k !== 'other'){ c.ids = c.all.filter(id => P[id]); c.ids.forEach(id => { CAT_OF[id] = c; }); } });
+  const other = Object.keys(P).filter(id => !CAT_OF[id] || CAT_OF[id].k === 'other'), at = CATS.findIndex(c => c.k === 'other');
+  if (at >= 0){ CATS[at].ids = other; other.forEach(id => { CAT_OF[id] = CATS[at]; }); return; }
   if (!other.length) return;
   const c = {k:'other', t:'Other pathways', s:'Other', ic:'path', c:'c-flow', j:'t-obsidian', ids:other};
   CATS.splice(6, 0, c); other.forEach(id => { CAT_OF[id] = c; });
-})();
+}
+placeCats(); MORE_DO.push(placeCats);
 const catOf = id => CAT_OF[id];
 
 /* ================= Search index ================= */
@@ -1083,16 +1105,29 @@ function pathWords(p){
    its title, so "chest pain" finds the ACS pathway, "asthma" the ebook's asthma pathway, "dengue" the CPG first (it leads the
    topic since 12 Nov 2026), and "MC" the medical certificate lines rather than every "mcg" */
 const KW_MORE = {acs:'chest pain', asthma:'asthma wheeze', 'missed-fractures':'fracture', 'dengue-cpg':'dengue', emacc:'MC medical certificate sick leave', 'safe-practice':'MC medical certificate sick leave'};
-Object.entries(KW_MORE).forEach(([id, w]) => { if (P[id]) P[id].kw = ((P[id].kw || '') + ' ' + w).trim(); });
+const kwDone = new Set();
+const applyKw = () => Object.entries(KW_MORE).forEach(([id, w]) => { if (P[id] && !kwDone.has(id)){ kwDone.add(id); P[id].kw = ((P[id].kw || '') + ' ' + w).trim(); } });
+applyKw(); MORE_DO.push(applyKw);
 const IDX = [];
-for (const [id, p] of Object.entries(P)){
-  const c = catOf(id);
-  IDX.push({href:'#' + id, title:p.title, kind:kindOf(p), meta:metaOf(p), body:pathWords(p).join(' · '), kw:p.kw || '', ic:c.ic, c:c.c, j:c.j});
+/* Each entry's search lines: the entry, and on a rule or guideline whose first question is a menu, each of its topics */
+function entItems(id){
+  const p = P[id], c = catOf(id), out = [{href:'#' + id, title:p.title, kind:kindOf(p), meta:metaOf(p), body:pathWords(p).join(' · '), kw:p.kw || '', ic:c.ic, c:c.c, j:c.j}];
   const m = p.nodes[p.start];
   if ((p.grp === 'rules' || p.grp === 'cpg') && m.opts && m.opts.length > 2) m.opts.forEach(([label, to]) => {
-    IDX.push({href:`#${id}--${to}`, title:label, kind:kindOf(p), meta:p.title, body:nodeWords(p.nodes[to]).join(' · '), ic:c.ic, c:c.c, j:c.j});
+    out.push({href:`#${id}--${to}`, title:label, kind:kindOf(p), meta:p.title, body:nodeWords(p.nodes[to]).join(' · '), ic:c.ic, c:c.c, j:c.j});
   });
+  return out;
 }
+const ENT_ITEMS = new Map();
+for (const id of Object.keys(P)){ const l = entItems(id); ENT_ITEMS.set(id, l); IDX.push(...l); }
+/* When the rest arrives: the entries' lines again in the page's own order (P_ORDER), the new entries' made now, before their
+   calculator links are added (as at a whole load, where those come later) */
+MORE_DO.push(() => {
+  let n = 0; ENT_ITEMS.forEach(l => { n += l.length; });
+  const block = [];
+  for (const id of Object.keys(P)){ if (!ENT_ITEMS.has(id)) ENT_ITEMS.set(id, entItems(id)); block.push(...ENT_ITEMS.get(id)); }
+  IDX.splice(0, n, ...block);
+});
 JOURNEY.forEach((s, i) => IDX.push({href:'#journey-' + (i + 1), title:`Journey stop ${i + 1}: ${s.title}`, kind:'Journey', meta:'Patient flow', body:[s.who, ...s.items, s.note ? s.note.t : ''].join(' · '), ic:'route', c:'c-flow'}));
 NUMS.forEach(n => IDX.push({href:'#numbers', title:`${n.lbl}: ${n.val}`, kind:'Number', meta:n.src, body:n.note, ic:'phone', c:'c-abdo'}));
 IDX.push({href:'#tools', title:'Discharge safety check', kind:'Tool', meta:'Shift tools', body:[...DC_ALL.flat(), ...DC_STOP.map(s => s[0] + ' ' + s[1])].join(' · '), ic:'check', c:'c-meta'});
@@ -1484,16 +1519,17 @@ function highlight(text, ts, loose){
 
 /* ================= Saved and recent (this browser only) ================= */
 const savedIds = () => store.get('gz-saved', []).filter(id => P[id]);
+const keepId = id => !!P[id] || (!MORE && MORE_SET.has(id)); /* an entry still on its way (gzMore) keeps its place in a list */
 const isSaved = id => savedIds().includes(id);
 function toggleSave(id){
-  const s = savedIds(), on = !s.includes(id);
+  const s = store.get('gz-saved', []).filter(keepId), on = !s.includes(id);
   store.set('gz-saved', on ? [id, ...s].slice(0, 24) : s.filter(x => x !== id));
   toast(on ? 'Saved to your list' : 'Removed from your list');
   refreshSaved();
   return on;
 }
 const recentIds = () => store.get('gz-recent', []).filter(id => P[id]);
-function remember(id){ store.set('gz-recent', [id, ...recentIds().filter(x => x !== id)].slice(0, 6)); }
+function remember(id){ store.set('gz-recent', [id, ...store.get('gz-recent', []).filter(keepId).filter(x => x !== id)].slice(0, 6)); }
 function rowItem(id, tag){
   const p = P[id], c = catOf(id);
   return `<li><a href="#${id}"><i class="jd ${c.j}" aria-hidden="true"></i><span class="rt"><b>${esc(p.title)}</b><small>${tag} · ${esc(metaOf(p))}</small></span>${dotsOf(outsOf(p))}${tag === 'Saved' ? svg('star', 'star', true) : svg('chev', 'chev')}</a></li>`;
@@ -1595,6 +1631,37 @@ document.addEventListener('visibilitychange', () => nowTick());
 /* ================= Pinned calculators and steps (17 Nov 2026) =================
    The star keeps a whole entry (Saved); a pin keeps one calculator or one step, shown in a row at the top of the home page, in the
    menu and in the search box. Only the addresses are kept, on this phone (gz-pins), as Saved does: nothing about a patient. */
+/* ================= Pick up where you left off (23 Nov 2026) =================
+   Krishna: "Build 1 to 5" (2). The last step opened in a pathway is kept as its address and the time only (gz-last), as pins
+   and recent are: never an answer, nothing typed (rule 4). The home page offers it at the top for 12 hours and then forgets it,
+   so it never carries into the next shift. Opening it goes to that step; the route there is filled in and marked auto, as for
+   any link to a step. The cross forgets it at once, and Settings, Clear removes it. */
+const LAST_MS = 12 * 3600 * 1000;
+function keepLast(id, node){ const p = P[id]; if (p) store.set('gz-last', {h:'#' + id + (node === p.start ? '' : '--' + node), t:Date.now()}); }
+function lastStep(){
+  const l = store.get('gz-last', null), now = Date.now();
+  if (!l || typeof l.h !== 'string' || !(l.t > 0)) return null;
+  if (now - l.t > LAST_MS || now < l.t){ store.del('gz-last'); return null; }
+  const [id, k] = l.h.slice(1).split('--'), p = P[id];
+  if (!p) return null; /* an entry still on its way (gzMore): shown once it has arrived */
+  const n = p.nodes[k || p.start];
+  if (!n){ store.del('gz-last'); return null; }
+  return {h:l.h, t:l.t, id, p, n};
+}
+const agoText = ms => { const m = Math.floor(ms / 60000); return m < 1 ? 'just now' : m < 60 ? m + ' min ago' : Math.floor(m / 60) + ' h ago'; };
+function renderResume(){
+  const el = $('#pickup'); if (!el) return;
+  const L = lastStep(); el.hidden = !L;
+  if (!L){ el.innerHTML = ''; return; }
+  const c = catOf(L.id), what = L.n.end ? kindLabel(L.p, L.n.end) + ': ' + L.n.title : nodeText(L.n);
+  el.innerHTML = `<a class="rsm" href="${L.h}"><span class="ic j ${c.j}">${svg(c.ic)}</span><span class="rsm-t"><small>Pick up where you left off <time datetime="${new Date(L.t).toISOString()}">${agoText(Date.now() - L.t)}</time></small><b>${esc(L.p.title)}</b><span>${esc(clip(what, 96))}</span></span><span class="rsm-go" aria-hidden="true">${svg('chev')}</span></a>` +
+    `<button type="button" class="rsm-x" data-rsmx aria-label="Forget this step" title="Forget">${svg('x')}</button>`;
+}
+document.addEventListener('click', e => {
+  const x = e.target.closest && e.target.closest('[data-rsmx]'); if (!x) return;
+  store.del('gz-last'); renderResume(); toast('Forgotten on this phone');
+});
+
 const PIN_MAX = 12;
 const pinOk = h => { const m = /^#calc-([a-z0-9]+)$/.exec(h); if (m) return !!CALCS[m[1]]; const [id, k] = String(h).slice(1).split('--'); return !!(P[id] && k && P[id].nodes[k]); };
 const pinIds = () => store.get('gz-pins', []).filter(pinOk);
@@ -1616,7 +1683,7 @@ function syncPins(h){
     x.setAttribute('aria-label', on ? 'Pinned to the home page. Tap to unpin' : 'Pin to the home page'); x.innerHTML = svg('pin', '', on) + (lbl ? `<span class="bl">${on ? 'Pinned' : 'Pin'}</span>` : ''); });
 }
 function togglePin(h){
-  const s = pinIds(), on = !s.includes(h);
+  const s = store.get('gz-pins', []).filter(x => pinOk(x) || keepId(String(x).slice(1).split('--')[0])), on = !s.includes(h);
   if (on && s.length >= PIN_MAX){ toast('Up to ' + PIN_MAX + ' pins: unpin one first'); return false; }
   store.set('gz-pins', on ? [h, ...s] : s.filter(x => x !== h));
   buzz('ok'); toast(on ? 'Pinned to the home page' : 'Unpinned');
@@ -1637,7 +1704,7 @@ const ent = id => { const c = catOf(id); return {href:'#' + id, title:P[id].titl
 const KIND_J = {Journey:'t-emerald', Number:'t-garnet', Tool:'t-teal', Video:'t-obsidian', Quiz:'t-plum', Update:'t-sapphire', Poster:'t-obsidian', About:'t-obsidian'};
 const jewelOf = e => e.j || (e.ic === 'calc' ? 't-bronze' : KIND_J[e.kind] || 't-obsidian');
 function palEntry(e, ts, loose, snip){
-  return `<li><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ab ? ` data-ab="${esc(e.ab)}"` : ''}${e.ax ? ` data-ax="${esc(e.ax)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
+  return `<li role="none"><a href="${e.href}"${e.rx ? ` data-rx="${esc(e.rx)}"` : ''}${e.dg ? ` data-dg="${esc(e.dg)}"` : ''}${e.ab ? ` data-ab="${esc(e.ab)}"` : ''}${e.ax ? ` data-ax="${esc(e.ax)}"` : ''}${e.ext ? ` data-extq="${esc(e.ext)}"` : ''} role="option" aria-selected="false"><span class="ic j ${jewelOf(e)}">${svg(e.ic)}</span><span class="rx"><span class="rt"><span>${ts ? highlight(e.title, ts, loose) : esc(e.title)}</span><span class="rk">${esc(e.kind)} · ${esc(e.meta)}</span></span>${ts ? `<span class="rs">${snippetOf(e, ts, loose, snip)}</span>` : ''}</span></a></li>`;
 }
 /* ================= Antidotes (21 Nov 2026) =================
    The MOH Antidotes Quick Guide (Adult Dose), First Edition, January 2022 (Pharmaceutical Services Programme), 38 antidotes,
@@ -1751,11 +1818,11 @@ function renderPal(){
   let h = '';
   if (!q){
     const s = savedIds(), r = recentIds().filter(id => !s.includes(id)).slice(0, 4);
-    if (s.length) h += '<div class="grp">Saved</div><ul class="pal-res" role="listbox">' + s.map(id => palEntry(ent(id))).join('') + '</ul>';
-    const pn = pinIds(); if (pn.length) h += '<div class="grp">Pinned</div><ul class="pal-res" role="listbox">' + pn.map(x => palEntry(pinInfo(x))).join('') + '</ul>';
-    if (r.length) h += '<div class="grp">Recent</div><ul class="pal-res" role="listbox">' + r.map(id => palEntry(ent(id))).join('') + '</ul>';
+    if (s.length) h += '<div class="grp">Saved</div><ul class="pal-res" role="listbox" aria-label="Saved">' + s.map(id => palEntry(ent(id))).join('') + '</ul>';
+    const pn = pinIds(); if (pn.length) h += '<div class="grp">Pinned</div><ul class="pal-res" role="listbox" aria-label="Pinned">' + pn.map(x => palEntry(pinInfo(x))).join('') + '</ul>';
+    if (r.length) h += '<div class="grp">Recent</div><ul class="pal-res" role="listbox" aria-label="Recent">' + r.map(id => palEntry(ent(id))).join('') + '</ul>';
     const quick = POPULAR.map(([href]) => IDX.find(e => e.href === href)).filter(Boolean);
-    h += '<div class="grp">Quick open</div><ul class="pal-res" role="listbox">' + quick.map(e => palEntry(e)).join('') +
+    h += '<div class="grp">Quick open</div><ul class="pal-res" role="listbox" aria-label="Quick open">' + quick.map(e => palEntry(e)).join('') +
       palEntry({href:'#tools', title:'Discharge safety check', kind:'Tool', meta:'Shift tools', ic:'check', c:'c-meta'}) +
       palEntry({href:'#numbers', title:'Numbers to know', kind:'Number', meta:'Code Blue, Code Stroke, MAU, EMACC, IPR', ic:'phone', c:'c-abdo'}) + '</ul>';
   } else {
@@ -1774,7 +1841,7 @@ function renderPal(){
       : AI.state === 'idle' && SAVE_DATA && prefs.ai !== 'off' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search waits while Data Saver is on.</span><button type="button" class="sm" id="gaidl">Download, 8 MB</button></div>` : '';
     const dcs = drugsFor([fixed || q, ...also]), dcard = dcs.length && dcs.length <= 2 ? dcs.map(drugCard).join('') : '', kbc = kbCard(q);
     if (KB.state === 'idle' && !SAVE_DATA && /^\S{2,10}$/.test(q)) kbLoad();
-    h = askBtn(q) + ai + (r.length ? note + dcard + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>' + kbc
+    h = askBtn(q) + ai + (r.length ? note + dcard + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox" aria-label="Search results">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>' + kbc
       : kbc + `<div class="pal-none">Nothing ${kbc ? 'else ' : ''}found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`);
   }
   if (askCtl && q){ askCtl.abort(); askCtl = null; }
@@ -2020,6 +2087,7 @@ function revealList(el){
   window.scrollTo({top:Math.max(0, window.scrollY + y - under - 12), behavior:REDUCED ? 'auto' : 'smooth'});
 }
 function showView(name, sub){
+  if (name === 'home') renderResume();
   ensureView(name);
   const from = curView, changed = name !== from;
   if (from && from !== 'run') SCROLL[from] = window.scrollY;
@@ -2183,6 +2251,14 @@ function introTile(){
   t.classList.toggle('done', done);
   withTiles(t, `${tileMedia('intro')}<span class="pl">${svg(done ? 'restart' : 'play')}</span><span><h3>${done ? 'First-shift intro' : 'First shift?'}</h3><p>${done ? 'Four quick screens, any time you want them again.' : 'Four quick screens: search, pathways, the zone and the tools.'}</p></span>`);
 }
+/* Quick routes: each with how it can end (drawn again when the rest of the page arrives: gzMore) */
+function renderQuick(){
+  $('#quick').innerHTML = POPULAR.map(([h, t]) => {
+    const m = h.slice(1).match(/^([\w-]+?)(?:--(\w+))?$/), id = m && P[m[1]] ? m[1] : null;
+    const kinds = id ? (m[2] ? endsFrom(P[id], m[2]) : outsOf(P[id])) : [], meta = id ? (m[2] ? P[id].title : metaOf(P[id])) : '';
+    return `<a href="${h}"><b>${esc(t)}</b><small>${esc(meta)}</small>${dotsOf(kinds)}</a>`;
+  }).join('');
+}
 function renderHome(){
   const d = new Date(), hr = d.getHours();
   const g = hr >= 5 && hr < 12 ? 'Good morning' : hr >= 12 && hr < 17 ? 'Good afternoon' : hr >= 17 && hr < 21 ? 'Good evening' : 'Night shift';
@@ -2192,11 +2268,7 @@ function renderHome(){
   zoneMap(true);
   renderNow();
   withTiles($('#kn-a'), numTile(0)); withTiles($('#kn-b'), numTile(1));
-  $('#quick').innerHTML = POPULAR.map(([h, t]) => {
-    const m = h.slice(1).match(/^([\w-]+?)(?:--(\w+))?$/), id = m && P[m[1]] ? m[1] : null;
-    const kinds = id ? (m[2] ? endsFrom(P[id], m[2]) : outsOf(P[id])) : [], meta = id ? (m[2] ? P[id].title : metaOf(P[id])) : '';
-    return `<a href="${h}"><b>${esc(t)}</b><small>${esc(meta)}</small>${dotsOf(kinds)}</a>`;
-  }).join('');
+  renderQuick();
   renderMine();
   statTiles();
   $('#keynums').innerHTML = [3, 4, 5].map(i => { const n = NUMS[i]; return `<div class="qnum"><div class="rt"><span>${esc(n.lbl)}</span><b id="kn${i}">${esc(n.val)}</b></div>${n.copy ? `<button type="button" class="sm" data-kcopy="${i}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</div>`; }).join('');
@@ -2328,6 +2400,7 @@ function endsHTML(p, n){
 }
 function draw(focus){
   sayStop(); /* a new step stops the reading of the last */
+  keepLast(state.id, state.cur);
   const p = P[state.id], n = p.nodes[state.cur], c = catOf(state.id), saved = isSaved(state.id), steps = state.trail.length;
   const isRule = p.grp === 'rules', sh = '#' + state.id + '--' + state.cur;
   const nowText = n.end ? kindLabel(p, n.end) + ': ' + n.title : nodeText(n);
@@ -2476,7 +2549,7 @@ function renderMap(){
   const ends = order.filter(k => p.nodes[k].end).length;
   $('#pm-title').textContent = p.title;
   $('#pm-sub').textContent = `${order.length} steps · ${ends} outcome${ends === 1 ? '' : 's'} · ${metaOf(p)}`;
-  $('#pmbody').innerHTML = `<div class="legend" aria-label="Outcome colours">${OUT_ORDER.filter(k => order.some(x => p.nodes[x].end === k)).map(k => `<span class="od ${k}">${outLbl(p, k)}</span>`).join('')}</div>
+  $('#pmbody').innerHTML = `<div role="group" class="legend" aria-label="Outcome colours">${OUT_ORDER.filter(k => order.some(x => p.nodes[x].end === k)).map(k => `<span class="od ${k}">${outLbl(p, k)}</span>`).join('')}</div>
     <ol class="pm${state.trail.length ? ' trail' : ''}">${order.map(k => {
       const n = p.nodes[k], here = k === state.cur;
       const cls = [n.end ? 'en ' + n.end : n.step ? 'st' : 'qn', here ? 'now' : on.has(k) ? 'on' : live.has(k) ? 'live' : '', n.end && !live.has(k) && !here ? 'gone' : ''].join(' ');
@@ -2501,7 +2574,7 @@ function closeMap(restore){
 /* The reference under the card: discharge advice, concerns, department notes, tables and references, as tabs */
 function tabsOf(p){
   const T = [], li = a => `<li>${esc(a)}</li>`;
-  const table = t => `<div class="tbl"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  const table = t => `<div class="tbl" tabindex="0" role="region" aria-label="${esc(t.title || t.h || 'Table')}: table"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(state.id)}</div>`});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
   const note = d => `<div class="deptnote"${d.lang ? ` lang="${d.lang}"` : ''}><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}${d.refs ? `<ol class="srcl">${d.refs.map(r => `<li>${esc(r[0])} ${r[1][0] === '#' ? `<a href="${r[1]}">Open in this guide</a>` : `<a href="${r[1]}" target="_blank" rel="noopener noreferrer">Open source${svg('ext')}</a>`}</li>`).join('')}</ol>` : ''}</div>`;
@@ -2691,7 +2764,12 @@ document.addEventListener('click', e => {
    until tapped; the tap swaps in the player, so nothing downloads before it (preload none). One film per language. */
 const FILMS = {'dengue-cpg':{
   en:{src:'media/dengue-home-720.mp4', cover:'media/dengue-home-poster.webp', thumb:'media/dengue-home-thumb.webp', t:'Watch this leaflet', d:'2 min · every line on screen as it is read'},
-  ms:{src:'media/dengue-home-ms-720.mp4', cover:'media/dengue-home-ms-poster.webp', thumb:'media/dengue-home-ms-thumb.webp', t:'Tonton risalah ini', d:'2 min · setiap baris di skrin semasa dibacakan'}}};
+  ms:{src:'media/dengue-home-ms-720.mp4', cover:'media/dengue-home-ms-poster.webp', thumb:'media/dengue-home-ms-thumb.webp', t:'Tonton risalah ini', d:'2 min · setiap baris di skrin semasa dibacakan'}},
+  /* The cancer pain leaflet (23 Nov 2026, at Krishna's choice "Cancer pain film, EN + BM"): video/cancer-pain-home, the read-aloud
+     takes as its voice, the CPG banner loop as its ground and a Flow Music bed ("Gentle Reassurance") under it */
+  'cancer-pain-cpg':{
+  en:{src:'media/cancer-pain-home-720.mp4', cover:'media/cancer-pain-home-poster.webp', thumb:'media/cancer-pain-home-thumb.webp', t:'Watch this leaflet', d:'4 min · every line on screen as it is read'},
+  ms:{src:'media/cancer-pain-home-ms-720.mp4', cover:'media/cancer-pain-home-ms-poster.webp', thumb:'media/cancer-pain-home-ms-thumb.webp', t:'Tonton risalah ini', d:'4 min · setiap baris di skrin semasa dibacakan'}}};
 function filmCard(id, lg){
   const f = FILMS[id] && FILMS[id][lg]; if (!f) return '';
   return `<div class="lfilm" lang="${lg}"><button type="button" class="lfilm-b" data-film="${f.src}" data-cover="${f.cover}"><span class="lfilm-th"><img src="${f.thumb}" alt="" width="72" height="72" loading="lazy">${svg('play')}</span><span class="lfilm-t"><b>${esc(f.t)}</b><small>${esc(f.d)}</small></span></button></div>`;
@@ -4052,10 +4130,14 @@ Object.entries({'acs-cpg':[['#calc-timi', 'TIMI risk score'], ['#calc-heart', 'H
   syncope:[['#calc-sfsr', 'San Francisco Syncope Rule'], ['#calc-csrs', 'Canadian Syncope Risk Score']], 'abdominal-pain':[['#calc-alvarado', 'Alvarado calculator']], 'abdo-handbook':[['#calc-alvarado', 'Alvarado calculator']],
   'ed-scores':['abcd2', 'sah', 'perc', 'ddimer', 'sfsr', 'csrs', 'alvarado', 'qsofa', 'news2', 'mews', 'chads', 'hasbled', 'ciwa', 'burns', 'wtage', 'vitals'].map(k => ['#calc-' + k, CALCS[k].t]), children:[['#calc-vitals', 'Heart and breathing rates by age']]}).forEach(([id, l]) => { CALC_SEE[id] = [...(CALC_SEE[id] || []), ...l]; });
 /* Add each calculator link once: an entry may already link to it (dengue already links to the shock index) */
-for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; }
+const calcSee = () => { for (const [id, l] of Object.entries(CALC_SEE)) if (P[id]){ const have = new Set((P[id].see || []).map(s => s[0])); P[id].see = [...(P[id].see || []), ...l.filter(([h]) => !have.has(h))]; } };
+calcSee(); MORE_DO.push(calcSee);
 for (const [id, c] of Object.entries(CALCS)) IDX.push({href:'#calc-' + id, title:c.t, kind:'Calculator', meta:c.src, body:[c.sub, c.note, c.kw].join(' · '), ic:'calc', c:'c-breath', j:CALC_G[c.g].j});
 CALC_LINKS.forEach(l => IDX.push({href:'#calc', title:l.t + ' (' + l.site + ', outside site)', kind:'Calculator', meta:l.href.split('/')[2], body:l.d, ic:'calc', c:'c-breath', j:CALC_G[l.g].j}));
-CPG_SHELF.filter(shelfOut).forEach(c => IDX.push({href:'#guidelines', title:c.t + ' (' + c.y + ')', kind:'National CPG', meta:'Academy of Medicine, outside site', body:[c.s, c.kw, 'clinical practice guideline cpg'].join(' · '), ic:'ext', c:'c-prot'}));
+const SHELF_IX = [];
+CPG_SHELF.filter(shelfOut).forEach(c => { const it = {href:'#guidelines', title:c.t + ' (' + c.y + ')', kind:'National CPG', meta:'Academy of Medicine, outside site', body:[c.s, c.kw, 'clinical practice guideline cpg'].join(' · '), ic:'ext', c:'c-prot'}; SHELF_IX.push([c, it]); IDX.push(it); });
+/* A shelf CPG whose entry has now arrived is the guide's own page, not an outside link */
+MORE_DO.push(() => SHELF_IX.forEach(([c, it]) => { const i = IDX.indexOf(it); if (!shelfOut(c) && i >= 0) IDX.splice(i, 1); }));
 
 /* The open calculator. Entries live in memory only: the weight and age band are shared, the rest is per calculator */
 let calcTab = 'dengue', cxOpen = false, cxGroup = 'all', cxQ = '';
@@ -4621,11 +4703,26 @@ function renderIntro(focus){
   $('#introbox').innerHTML = `<article class="tile t-sapphire intro-card"><div class="intro-art"><svg class="art" viewBox="0 0 320 220" role="img" aria-label="${esc(s.h)}">${ART[s.art]}</svg></div>
     <div class="intro-txt"><ol class="intro-steps" aria-label="Screen ${introI + 1} of ${INTRO.length}">${INTRO.map((_, i) => `<li class="${i <= introI ? 'on' : ''}"></li>`).join('')}</ol>
       <h2 id="h-intro">${esc(s.h)}</h2><p>${esc(s.p.replace('{calcs}', Object.keys(CALCS).length).replace('{nums}', NUMS.length))}</p>
+      <div class="intro-say"><button type="button" class="intro-l" data-isay aria-pressed="${introPlay}">${svg(introPlay ? 'pause' : 'volume')}<span>${introPlay ? 'Stop' : 'Listen'}</span></button><div class="intro-lang" role="group" aria-label="Narration language">${[['en', 'English'], ['ms', 'BM']].map(([k, t]) => `<button type="button" data-ilang="${k}" aria-pressed="${introLang === k}"${k === 'ms' ? ' lang="ms"' : ''}>${t}</button>`).join('')}</div></div>
       <div class="intro-nav"><button type="button" data-intro="back"${introI ? '' : ' hidden'}>${svg('back')}Back</button><span>${introI + 1} of ${INTRO.length}</span><button type="button" class="go" data-intro="${last ? 'done' : 'next'}">${last ? 'Start using the guide' : 'Next'}${svg('chev')}</button></div></div></article><nav class="intro-index" aria-label="Intro screens">${INTRO.map((x, i) => `<button type="button" class="tile ${INTRO_J[i]}" data-intro-go="${i}"${i === introI ? ' aria-current="step"' : ''}><b>${i + 1}</b><span>${esc(x.h)}</span></button>`).join('')}</nav>`;
   if (focus) $('#introbox').focus({preventScroll:true});
 }
-function introStep(d){ introI = Math.max(0, Math.min(INTRO.length - 1, introI + d)); renderIntro(true); }
-function introDone(){ store.set('gz-intro', 1); introTile(); introI = 0; location.hash = '#home'; }
+function introStep(d){ introI = Math.max(0, Math.min(INTRO.length - 1, introI + d)); renderIntro(true); if (introPlay) introSay(); }
+function introDone(){ introStop(); store.set('gz-intro', 1); introTile(); introI = 0; location.hash = '#home'; }
+/* The intro read aloud (23 Nov 2026, at Krishna's choice "Narrated first-shift intro"): each screen recorded with VoiceStudio, in
+   English (Google Kira, 0.86) or Bahasa Melayu (Malay Kore, 0.95), audio/intro-<screen>-<en|ms>.mp3. Listen plays the screen
+   on show and then moves on through the rest; Back, Next, Stop or leaving the intro stops it. Nothing downloads before the tap. */
+let introPlay = false, introLang = 'en', introAud = null;
+function introSay(){
+  if (!introAud){
+    introAud = new Audio(); introAud.preload = 'none';
+    introAud.addEventListener('ended', () => { if (!introPlay) return; if (introI < INTRO.length - 1){ introI++; renderIntro(false); introSay(); } else { introPlay = false; renderIntro(false); } });
+  }
+  stopReader(); sayStop(); pauseFilms();
+  introAud.src = `audio/intro-${introI + 1}-${introLang}.mp3`;
+  introAud.play().catch(e => { if (e && e.name === 'AbortError') return; /* the next screen's take replaced it */ introPlay = false; if (curView === 'intro') renderIntro(false); });
+}
+function introStop(){ if (introAud) introAud.pause(); if (introPlay){ introPlay = false; if (curView === 'intro') renderIntro(false); } }
 
 /* ================= What's new from the drives ================= */
 function renderDrive(){
@@ -5296,6 +5393,8 @@ function route(){
   const h = decodeURIComponent(location.hash.slice(1));
   let m, changed = false;
   closePal(false); closeSettings(false); closeSheet(); closeMap(false); closePtq(false); closeFlag(false); closeNavList(false);
+  if (h !== 'intro') introStop();
+  if (!MORE && !(h === '' || h === 'home' || h === 'search' || h === 'intro' || P[h.split('--')[0]])){ moreWant = true; return; } /* opens in gzMore */
   const navT = h === 'search' ? null : navBefore('#' + (h || 'home'));
   const pt = h.match(/^pt-([\w-]+?)(-ms)?$/), ptId = pt && ptKey(pt[1]) === pt[1] ? pt[1] : null;
   document.documentElement.classList.toggle('pt-mode', !!ptId);
@@ -5536,12 +5635,15 @@ document.addEventListener('click', e => {
 fillIcons(document);
 applyPrefs();
 clipsOn = prefs.clips === 'on';
+const fillCounts = () => {
 $('#cnt-path').textContent = Object.keys(P).length;
 $('#cnt-rule').textContent = FLOW_IDS.length + PROT_IDS.length;
 $('#cnt-calc').textContent = Object.keys(CALCS).length;
 $$('[data-ver]').forEach(e => { e.textContent = APP_VER; });
 /* Counts written in the views' own text (12 Nov 2026: they had drifted from the data) */
 $$('[data-cnt]').forEach(e => { const n = {ebook:Object.values(P).filter(x => !x.grp).length, rules:FLOW_IDS.length + PROT_IDS.length}[e.dataset.cnt]; if (n) e.textContent = n; });
+};
+fillCounts(); MORE_DO.push(fillCounts);
 if (store.get('gz-seen', 0) >= 7){ const d = $('#snav .dotn'); if (d) d.hidden = true; }
 /* ================= Pages drawn when first needed (18 Nov 2026) =================
    Krishna: "Build all five" (B). Measured with the CPU slowed four times (about a mid-range phone): the startup drew every page,
@@ -5782,7 +5884,9 @@ $('#quizbox').addEventListener('click', e => {
 /* Whole-pathway map and the intro */
 $('#pmclose').addEventListener('click', () => closeMap(true));
 $('#pmap').addEventListener('click', e => { if (e.target.id === 'pmap') closeMap(true); });
-$('#introbox').addEventListener('click', e => { const g = e.target.closest('[data-intro-go]'); if (g){ introI = +g.dataset.introGo; renderIntro(true); return; } const b = e.target.closest('[data-intro]'); if (!b) return; const a = b.dataset.intro; if (a === 'next') introStep(1); else if (a === 'back') introStep(-1); else introDone(); });
+$('#introbox').addEventListener('click', e => { const g = e.target.closest('[data-intro-go]'); if (g){ introI = +g.dataset.introGo; renderIntro(true); if (introPlay) introSay(); return; }
+  const s = e.target.closest('[data-isay]'); if (s){ if (introPlay) introStop(); else { introPlay = true; renderIntro(false); introSay(); $('#introbox [data-isay]').focus(); } return; }
+  const l = e.target.closest('[data-ilang]'); if (l){ introLang = l.dataset.ilang; renderIntro(false); if (introPlay) introSay(); $(`#introbox [data-ilang="${introLang}"]`).focus(); return; } const b = e.target.closest('[data-intro]'); if (!b) return; const a = b.dataset.intro; if (a === 'next') introStep(1); else if (a === 'back') introStep(-1); else introDone(); });
 
 /* Poster */
 $$('[data-sheet]').forEach(b => b.addEventListener('click', () => openSheet(+b.dataset.sheet)));
@@ -5810,7 +5914,7 @@ $('#settings').addEventListener('click', e => {
     if (key === 'clips') setJourneyClip(prefs.clips === 'on');
     if (key === 'tiles') tileClips();
   } else if (b.id === 'st-clear'){
-    ['gz-saved', 'gz-pins', 'gz-recent', QKEY, 'gz-quiz-best', 'gz-tour-pos', 'gz-tour-pos-ms', 'gz-tour-lang', 'gz-intro'].forEach(k => store.del(k));
+    ['gz-saved', 'gz-pins', 'gz-recent', 'gz-last', QKEY, 'gz-quiz-best', 'gz-tour-pos', 'gz-tour-pos-ms', 'gz-tour-lang', 'gz-intro'].forEach(k => store.del(k));
     refreshSaved(); syncSettings(); startQuiz(); introTile(); toast('Cleared from this browser');
   } else if (b.id === 'setclose') closeSettings(true);
 });
@@ -5874,7 +5978,41 @@ document.addEventListener('click', e => {
   e.preventDefault();
   vtGo(() => { location.hash = h; }, {src});
 });
+/* ================= A page warmed on press (23 Nov 2026) =================
+   Krishna: "Build 1 to 5" (5). A finger rests on a tile for about 100 ms before the tap lands, so on pointerdown the banner
+   picture of the page it opens starts loading (a pathway's own picture or its topic's, or the pictures at the top of a tool's
+   page), and arrives with the page instead of after it. Stills only, once each, and only for a link that is pressed; nothing
+   loads that the tap would not have loaded a moment later. */
+const WARM = new Set();
+function warmFor(h){
+  const urls = [], id = h.slice(1).split('--')[0], p = P[id];
+  if (p){ const c = catOf(id), k = p.hero || (c && c.k && TILE_KEYS.has(c.k) ? c.k : ''); if (k) urls.push('tiles/' + k + '.webp'); }
+  else { const v = /^[a-z0-9-]+$/.test(id) && $('#v-' + id); if (v) [...v.querySelectorAll(':is(.phx-hero, .lk-hero) img[src]')].slice(0, 2).forEach(im => urls.push(im.getAttribute('src'))); }
+  urls.forEach(u => { if (WARM.has(u)) return; WARM.add(u); const im = new Image(); im.decoding = 'async'; im.src = u; });
+}
+document.addEventListener('pointerdown', e => {
+  const a = e.target.closest && e.target.closest('a[href^="#"]');
+  if (a && !e.button && a.closest('.tile, .pc, .rsm, .pinc, #quick, .lrow, #gres')) warmFor(a.getAttribute('href'));
+}, {passive:true});
 window.addEventListener('hashchange', route);
 route();
-{ const bt = $('#gzboot'); if (bt) bt.remove(); } /* the guide is ready: the ready bar goes */
-requestAnimationFrame(() => setTimeout(lazyIdle, 50));
+/* The guide is ready: the ready bar goes, and pages are drawn while the phone is idle. Until the rest has arrived (gzMore) the
+   bar stays and nothing more is drawn, since those pages read it. */
+const moreReady = () => { const bt = $('#gzboot'); if (bt) bt.remove(); requestAnimationFrame(() => setTimeout(lazyIdle, 50)); };
+if (MORE) moreReady();
+/* The second script of the page calls this once it has run (build.js); DOMContentLoaded comes after it, so a failed second
+   script still lets the guide carry on with what it has */
+function gzMore(){
+  if (MORE) return;
+  MORE = true;
+  if (typeof P_ORDER !== 'undefined') P_ORDER.forEach(id => { if (P[id]){ const v = P[id]; delete P[id]; P[id] = v; } });
+  (globalThis.MORE_AFTER || []).forEach(f => f()); /* lines of the first part's data that change an entry of the second (data20.js) */
+  MORE_DO.forEach(f => f());
+  HAY_ = null; VOCAB = null; DRUGS = null;
+  [AI, AIMS].forEach(M => { if (M.state === 'ready') M.state = 'idle'; }); /* its passages are read again at the next search */
+  renderQuick(); renderMine(); statTiles(); renderPins(); renderSideSaved(); renderResume();
+  if (moreWant){ moreWant = false; route(); }
+  else if (!$('#pal').hidden && $('#gq').value.trim() && !askCtl) renderPal();
+  moreReady();
+}
+document.addEventListener('DOMContentLoaded', gzMore);

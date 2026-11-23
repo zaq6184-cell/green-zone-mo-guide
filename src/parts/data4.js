@@ -158,4 +158,4 @@ P['dengue-cpg'] = {
 };
 
 /* The ebook pathway points to the newer national guideline (a link only: its content stays as written) */
-P['dengue'].see = [...(P['dengue'].see || []), ['#dengue-cpg', 'Dengue CPG, 4th edition (2026)']];
+P['dengue'].see = [...(P['dengue'].see || []), ['#dengue-cpg', 'Dengue CPG, 4th edition (2026)']]; // @light

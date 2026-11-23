@@ -480,4 +480,4 @@ HB_TRIG.forEach((t, i) => { P['abdo-handbook'].nodes['tg' + (i + 1)] = {end:'neu
 /* The region outcomes of p. 7 */
 HB_REGIONS.forEach((r, i) => { P['abdo-handbook'].nodes['rg' + (i + 1)] = {end:'neutral', title:r[0], items:r[1].concat([HB_LOC, 'Name a likely diagnosis, a dangerous alternative and an extra-abdominal mimic.']), links:r[2].map(l => hbl(l[0], l[1])), gap:hbp(7, '6,10-12,14,15,17,18,20,26')}; });
 /* The ebook's pathway points to the handbook; the ebook stays the department's pathway (rule 5) */
-if (P['abdominal-pain']) P['abdominal-pain'].see = (P['abdominal-pain'].see || []).concat([['#abdo-handbook','Visual handbook: abdominal pain in the ED (teaching)']]);
+if (P['abdominal-pain']) P['abdominal-pain'].see = (P['abdominal-pain'].see || []).concat([['#abdo-handbook','Visual handbook: abdominal pain in the ED (teaching)']]); // @light

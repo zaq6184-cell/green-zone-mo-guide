@@ -1,0 +1,106 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334;
+  --indigo-1:#3d4597; --indigo-2:#2a3072; --indigo-3:#191d4a;
+  --teal-1:#157481; --teal-2:#0f5a64; --teal-3:#093d45;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --lav:#d8c4fa;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-plum{--j1:var(--plum-1);--j2:var(--plum-2);--j3:var(--plum-3)}
+.j-indigo{--j1:var(--indigo-1);--j2:var(--indigo-2);--j3:var(--indigo-3)}
+.j-teal{--j1:var(--teal-1);--j2:var(--teal-2);--j3:var(--teal-3)}
+.j-sapphire{--j1:var(--sapphire-1);--j2:var(--sapphire-2);--j3:var(--sapphire-3)}
+.hd{position:absolute;left:56px;right:56px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font-weight:800;line-height:1.06;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.card{position:absolute;left:56px;width:968px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;width:864px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{position:relative;flex:none}
+.it p{font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink);overflow-wrap:anywhere}
+.qn{font-weight:900;color:var(--jq)}
+.lead{position:absolute;left:52px;top:44px;width:864px;font-weight:900;line-height:1.18;letter-spacing:-.01em;color:var(--jq);overflow-wrap:anywhere}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+.ul{position:absolute;left:40px;width:888px;list-style:none;display:flex;flex-direction:column;gap:8px}
+.ul li{display:flex;align-items:center;gap:18px;padding:10px 16px 10px 10px;border-radius:20px;font-weight:700;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}
+.ul li .mk{width:56px;height:56px;border-radius:18px;padding:12px;flex:none}
+#s7-card{--jq:var(--sapphire-1)}
+#s7-hd{top:52px;height:128px}
+#s7-hd h2{font-size:60px}
+#s7-card{top:216px;height:808px}
+#s7-lead{font-size:44px;opacity:0}
+#s7-i0{top:174px;height:538px;opacity:0}
+#s7-i0 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s7-i0 p{margin-top:34px !important;font-size:70px}
+#s7-i1{top:174px;height:538px;opacity:0}
+#s7-i1 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s7-i1 p{margin-top:34px !important;font-size:70px}
+#s7-i2{top:174px;height:538px;opacity:0}
+#s7-i2 .disc{width:80px;height:80px;border-radius:24px;padding:18px}
+#s7-i2 p{margin-top:26px !important;font-size:40px}
+#s7-i3{top:174px;height:538px;opacity:0}
+#s7-i3 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s7-i3 p{margin-top:34px !important;font-size:70px}
+#s7-i4{top:174px;height:538px;opacity:0}
+#s7-i4 .disc{width:96px;height:96px;border-radius:29px;padding:22px}
+#s7-i4 p{margin-top:26px !important;font-size:44px}</style>
+<div id="root" data-composition-id="s7" data-width="1080" data-height="1080">
+  <div class="hd" id="s7-hd"><div class="disc jw j-sapphire"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6h.01"/></svg></div><h2 data-w="h">Where can I get more help for my CANCER PAIN?</h2></div>
+  <div class="card" id="s7-card">
+    <p class="lead" id="s7-lead" data-w="p">Contact the following for help &amp; more information</p>
+    <div class="it" id="s7-i0"><div class="disc jw j-sapphire" id="s7-c0"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20.5V8.5l8-4.5 8 4.5v12"/><path d="M2.5 20.5h19"/><path d="M12 8.5v5M9.5 11h5"/><path d="M10 20.5v-3.5h4v3.5"/></svg></div><p data-w="i">Nearest health clinic/hospital</p></div>
+    <div class="it" id="s7-i1"><div class="disc jw j-sapphire" id="s7-c1"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M15.5 5.2a3 3 0 0 1 0 5.6M17 14.3a5.5 5.5 0 0 1 3.5 5.7"/></svg></div><p data-w="i">Non-governmental organisations (NGOs) for pain &amp; palliative care</p></div>
+    <div class="it" id="s7-i2"><div class="disc jw j-sapphire" id="s7-c2"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.8 6 3.8 9.5s-1.2 6.9-3.8 9.5M12 2.5C9.4 5.1 8.2 8.5 8.2 12s1.2 6.9 3.8 9.5"/></svg></div><p data-w="i">Malaysian Hospice &amp; Palliative Care Council (MHPCC) (https://www.malaysianhospicecouncil.com/)</p></div>
+    <div class="it" id="s7-i3"><div class="disc jw j-sapphire" id="s7-c3"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.8 6 3.8 9.5s-1.2 6.9-3.8 9.5M12 2.5C9.4 5.1 8.2 8.5 8.2 12s1.2 6.9 3.8 9.5"/></svg></div><p data-w="i">Malaysian Association for the Study of Pain (http://masp.org.my)</p></div>
+    <div class="it" id="s7-i4"><div class="disc jw j-sapphire" id="s7-c4"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-14a2 2 0 0 1 2-2h13v14H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h13"/><path d="M8.5 7.5h6"/></svg></div><p data-w="i">For further information, refer to the Clinical Practice Guidelines Management of Cancer Pain (Second Edition) available on the following websites: Ministry of Health Malaysia: https://www.moh.gov.my;&#32;<br>Academy of Medicine Malaysia: http://www.acadmed.org.my</p></div>
+    <div class="dots"><i id="s7-d0"></i><i id="s7-d1"></i><i id="s7-d2"></i><i id="s7-d3"></i><i id="s7-d4"></i></div>
+  </div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s7-hd",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.3);
+  tl.fromTo("#s7-card",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.42);
+  tl.fromTo("#s7-lead",{y:24,opacity:0},{y:0,opacity:1,duration:.4,ease:"power3.out"},3.16);
+  tl.fromTo("#s7-i0",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},6.99);
+  tl.fromTo("#s7-c0",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},7.04);
+  tl.fromTo("#s7-d0",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#24477f",duration:.35,ease:"power2.out"},6.99);
+  tl.fromTo("#s7-i0",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},9.28);
+  tl.fromTo("#s7-d0",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},9.58);
+  tl.fromTo("#s7-i1",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},9.58);
+  tl.fromTo("#s7-c1",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},9.63);
+  tl.fromTo("#s7-d1",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#24477f",duration:.35,ease:"power2.out"},9.58);
+  tl.fromTo("#s7-i1",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},14.79);
+  tl.fromTo("#s7-d1",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},15.09);
+  tl.fromTo("#s7-i2",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},15.09);
+  tl.fromTo("#s7-c2",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},15.14);
+  tl.fromTo("#s7-d2",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#24477f",duration:.35,ease:"power2.out"},15.09);
+  tl.fromTo("#s7-i2",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},22.57);
+  tl.fromTo("#s7-d2",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},22.87);
+  tl.fromTo("#s7-i3",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},22.87);
+  tl.fromTo("#s7-c3",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},22.92);
+  tl.fromTo("#s7-d3",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#24477f",duration:.35,ease:"power2.out"},22.87);
+  tl.fromTo("#s7-i3",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},27.75);
+  tl.fromTo("#s7-d3",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},28.05);
+  tl.fromTo("#s7-i4",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},28.05);
+  tl.fromTo("#s7-c4",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},28.1);
+  tl.fromTo("#s7-d4",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#24477f",duration:.35,ease:"power2.out"},28.05);
+  tl.fromTo("#s7-hd",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},49.357);
+  tl.fromTo("#s7-card",{y:0,opacity:1},{y:60,opacity:0,duration:.45,ease:"power2.in",immediateRender:false},49.307);
+  window.__timelines["s7"] = tl;
+})();
+</script>
+</template>

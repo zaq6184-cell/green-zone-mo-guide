@@ -1,0 +1,129 @@
+{
+ "src": "CPG Management of Cancer Pain (2nd ed., 2023): patient information leaflets 1 (English) and 2 (Bahasa Melayu), issued with the CPG by the Ministry of Health Malaysia, the Malaysian Association for the Study of Pain and the Academy of Medicine Malaysia. Reproduced with acknowledgement, unchanged. The pain scale pictures and the Total Pain diagram are not reproduced.",
+ "en": {
+  "lang": "English",
+  "title": "Cancer pain",
+  "groups": [
+   {
+    "h": "What causes CANCER PAIN?",
+    "items": [
+     "Cancer pain can result from the tumour pressing on organs, nerves or bones.",
+     "It may also be caused by cancer treatments like chemotherapy, radiation or surgery."
+    ]
+   },
+   {
+    "h": "Assessing your CANCER PAIN",
+    "p": "There are several tools that can be used to assess pain (e.g. Ministry of Health (MoH) Pain Scale).",
+    "items": [
+     "The MoH pain scale combines the NRS, VAS, & faces scale. Patients point to their pain level on a scale from 0 to 10.",
+     "For children under 7 & cognitively impaired adults, the IASP Faces Pain Scale or FLACC scale may be used. In sedated & intubated patients, pain is assessed through observation including on behaviour.",
+     "Cancer pain affects not only your physical well-being but also your emotional, social & spiritual health."
+    ]
+   },
+   {
+    "h": "What should I know about PAIN RELIEVING MEDICATIONS?",
+    "items": [
+     "How is cancer pain treated? Cancer pain can be treated using medications (like opioids, non-opioids or adjuvant drugs), physical therapies, psychological & spiritual support & in some cases, interventional procedures.",
+     "What types of pain medications are available? Medications include: Over-the-counter pain relievers (e.g. paracetamol, ibuprofen); Prescription opioids (e.g. morphine, oxycodone); Adjuvant medications (e.g. antidepressants/ anticonvulsants for nerve pain)",
+     "Will I become addicted to pain medications? Addiction is rare when opioids are used under medical supervision for cancer pain. Your doctor will prescribe them safely to minimise risks.",
+     "What are the side effects of pain medications? Common side effects include constipation, nausea, drowsiness, & dizziness. Your doctor can provide treatments to manage these side effects."
+    ]
+   },
+   {
+    "h": "If I use morphine or other opioids for my pain now, will it be less effective later on when pain gets worse?",
+    "items": [
+     "No, you should not worry about this. Good pain relief will lead to better physical, mental & social well being which will help you cope with your cancer."
+    ]
+   },
+   {
+    "h": "If I use morphine, does that mean I'm nearing the end of my life?",
+    "items": [
+     "No, taking morphine does not mean you are near the end of life. It is used to manage pain & improve comfort at any stage of cancer. Many people take it for a long time while continuing treatment & daily activities. Talk to your doctor if you have concerns."
+    ]
+   },
+   {
+    "h": "How can my family or caregivers help?",
+    "p": "Family & caregivers can:",
+    "items": [
+     "help track your pain levels",
+     "assist with medication schedules",
+     "provide emotional & physical support"
+    ]
+   },
+   {
+    "h": "Where can I get more help for my CANCER PAIN?",
+    "p": "Contact the following for help & more information",
+    "items": [
+     "Nearest health clinic/hospital",
+     "Non-governmental organisations (NGOs) for pain & palliative care",
+     "Malaysian Hospice & Palliative Care Council (MHPCC) (https://www.malaysianhospicecouncil.com/)",
+     "Malaysian Association for the Study of Pain (http://masp.org.my)",
+     "For further information, refer to the Clinical Practice Guidelines Management of Cancer Pain (Second Edition) available on the following websites: Ministry of Health Malaysia: https://www.moh.gov.my; Academy of Medicine Malaysia: http://www.acadmed.org.my"
+    ]
+   }
+  ]
+ },
+ "ms": {
+  "lang": "Bahasa Melayu",
+  "title": "Sakit akibat kanser",
+  "groups": [
+   {
+    "h": "Apakah punca SAKIT AKIBAT KANSER?",
+    "items": [
+     "Sakit akibat kanser boleh berlaku apabila ketumbuhan menekan organ, saraf atau tulang.",
+     "Ia juga boleh disebabkan oleh rawatan kanser seperti kemoterapi, radioterapi atau pembedahan."
+    ]
+   },
+   {
+    "h": "Menilai SAKIT AKIBAT KANSER anda",
+    "p": "Terdapat beberapa alat yang boleh digunakan untuk menilai kesakitan (contoh: Ministry of Health (MoH) Pain Scale).",
+    "items": [
+     "MoH pain scale menggabungkan NRS, VAS, & Skala Muka. Pesakit menilai tahap kesakitan mereka pada skala dari 0 hingga 10.",
+     "Bagi kanak-kanak di bawah 7 tahun & orang dewasa dengan gangguan kognitif, IASP Faces Pain Scale atau FLACC scale boleh digunakan. Bagi pesakit yang tidak sedar & diintubasi, kesakitan dinilai melalui pemerhatian termasuklah ke atas tingkah laku.",
+     "Sakit kanser bukan sahaja menjejaskan kesejahteraan fizikal anda, tetapi juga kesihatan emosi, sosial & kerohanian."
+    ]
+   },
+   {
+    "h": "Apa yang perlu saya tahu tentang UBAT MELEGAKAN SAKIT?",
+    "items": [
+     "Bagaimana sakit akibat kanser dirawat? Sakit akibat kanser boleh dirawat dengan ubat-ubatan (seperti opioid, bukan opioid atau ubat adjuvan), terapi fizikal, sokongan psikologi & kerohanian, serta dalam beberapa kes, prosedur khas.",
+     "Apakah jenis ubat tahan sakit yang ada? Ubat-ubatan termasuk: Ubat tahan sakit tanpa preskripsi (contoh: paracetamol, ibuprofen); Opioid dengan preskripsi (contoh: morfin, oksikodon); Ubat adjuvan (contoh: antidepresan/antikejang untuk sakit saraf)",
+     "Adakah saya akan menjadi ketagih kepada ubat tahan sakit? Ketagihan jarang berlaku apabila opioid digunakan di bawah pengawasan perubatan untuk sakit kanser. Doktor anda akan mempreskripsikannya dengan selamat bagi mengurangkan risiko.",
+     "Apakah kesan sampingan ubat tahan sakit? Kesan sampingan biasa termasuk sembelit, loya, mengantuk & pening. Doktor anda boleh memberikan rawatan untuk menguruskan kesan sampingan ini."
+    ]
+   },
+   {
+    "h": "Jika saya guna morfin atau opioid sekarang, adakah ia kurang berkesan bila sakit saya makin teruk?",
+    "items": [
+     "Tidak, anda tidak perlu risau mengenainya. Kelegaan sakit yang baik akan meningkatkan kesejahteraan fizikal, mental & sosial anda, yang dapat membantu anda mengharungi kanser dengan lebih baik."
+    ]
+   },
+   {
+    "h": "Jika saya ambil morfin, adakah itu tanda saya di penghujung hayat?",
+    "items": [
+     "Tidak, mengambil morfin tidak bermakna anda hampir ke akhir hayat. Ia digunakan untuk mengawal kesakitan & memberi keselesaan pada setiap peringkat kanser. Ramai yang menggunakannya dalam jangka panjang sambil meneruskan rawatan & aktiviti harian. Jika anda ada kebimbangan, berbincanglah dengan doktor anda."
+    ]
+   },
+   {
+    "h": "Bagaimana keluarga atau penjaga boleh membantu?",
+    "p": "Keluarga & penjaga boleh:",
+    "items": [
+     "membantu memantau tahap kesihatan anda",
+     "membantu mengatur jadual ubat",
+     "memberi sokongan emosi & fizikal"
+    ]
+   },
+   {
+    "h": "Di mana saya boleh dapatkan bantuan tambahan untuk SAKIT AKIBAT KANSER?",
+    "p": "Hubungi pihak berikut untuk bantuan & maklumat lanjut:",
+    "items": [
+     "Klinik kesihatan/hospital terdekat",
+     "Pertubuhan bukan kerajaan (NGO) untuk penjagaan kesakitan & paliatif",
+     "Malaysian Hospice & Palliative Care Council (MHPCC) (https://www.malaysianhospicecouncil.com/)",
+     "Malaysian Association for the Study of Pain (http://masp.org.my)",
+     "Untuk maklumat lanjut, rujuk kepada Clinical Practice Guidelines Management of Cancer Pain (Second Edition) boleh didapati di laman sesawang berikut: Kementerian Kesihatan Malaysia: https://www.moh.gov.my; Academy of Medicine Malaysia: http://www.acadmed.org.my"
+    ]
+   }
+  ]
+ }
+}

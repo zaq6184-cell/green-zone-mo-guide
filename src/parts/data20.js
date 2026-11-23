@@ -300,7 +300,9 @@ const SP_PAGE = 'https://linktr.ee/hkldoctors_starterpack', SP_FARM = 'https://l
   link('safe-practice', 'rx', ['#prescribing--check', 'Prescribing at HKL: the check before you sign']);
   link('prescribing', 'allergy', ['#safe-practice--rx', 'The ED memo of 21 Dec 2023']);
   /* Dengue: the CPG leads the topic; the direct admission to the observation ward is a department route beside it */
-  link('dengue-cpg', 'yellow', ['#gz-rules--dengue', 'Direct admission to the observation ward (department memo)']);
+  /* The CPG entry comes in the page's second part (build.js): where it has not arrived yet, the link joins it then (gzMore) */
+  const dlink = () => link('dengue-cpg', 'yellow', ['#gz-rules--dengue', 'Direct admission to the observation ward (department memo)']);
+  if (P['dengue-cpg']) dlink(); else (globalThis.MORE_AFTER = globalThis.MORE_AFTER || []).push(dlink);
   link('gz-rules', 'dnot', ['#dengue-cpg', 'Dengue CPG, 4th edition (2026)']);
   /* The angry or aggressive visitor: the HKL code and number are on Communication on shift */
   const gr = node('new-hkl', 'grey');

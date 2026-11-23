@@ -838,6 +838,9 @@ P['xray-guide'].kinds = {neutral:'What the sources say'};
 }
 
 /* See-also links to the X-ray guide, and from it to the department's notes on commonly missed fractures (data12.js) */
-[['missed-fractures', 'Reading X-rays in the Green Zone'], ['safe-practice', 'Reading X-rays in the Green Zone'], ['trauma-walkins', 'Reading X-rays in the Green Zone'], ['referral-rules', 'Reading X-rays in the Green Zone'], ['hip-fracture-cpg', 'Reading X-rays in the Green Zone']]
+/* @light: the department's entries, in the first part of the page (build.js) */
+[['missed-fractures', 'Reading X-rays in the Green Zone'], ['safe-practice', 'Reading X-rays in the Green Zone'], ['trauma-walkins', 'Reading X-rays in the Green Zone'], ['referral-rules', 'Reading X-rays in the Green Zone']]
   .forEach(([id, t]) => { if (P[id]) (P[id].see = P[id].see || []).push(['#xray-guide', t]); });
+/* @end light */
+if (P['hip-fracture-cpg']) (P['hip-fracture-cpg'].see = P['hip-fracture-cpg'].see || []).push(['#xray-guide', 'Reading X-rays in the Green Zone']);
 if (P['missed-fractures']) (P['xray-guide'].see = P['xray-guide'].see || []).push(['#missed-fractures', 'Commonly missed fractures on X-ray (department notes)']);

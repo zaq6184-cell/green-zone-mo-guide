@@ -449,9 +449,9 @@ P['snakebite-moh'] = {
 };
 
 /* Links from related entries (links only: their content stays as written). Guarded, so the file also loads on its own. */
-if (P['mau-admission']) P['mau-admission'].see = [...(P['mau-admission'].see || []), ['#snakebite-moh', 'Snakebite: MOH guideline 2017']];
-if (P['anaphylaxis']) P['anaphylaxis'].see = [...(P['anaphylaxis'].see || []), ['#snakebite-moh--rxe', 'Snakebite: a reaction to antivenom']];
-if (P['animal-bites']) P['animal-bites'].see = [...(P['animal-bites'].see || []), ['#snakebite-moh', 'Snakebite: MOH guideline 2017']];
+if (P['mau-admission']) P['mau-admission'].see = [...(P['mau-admission'].see || []), ['#snakebite-moh', 'Snakebite: MOH guideline 2017']]; // @light
+if (P['anaphylaxis']) P['anaphylaxis'].see = [...(P['anaphylaxis'].see || []), ['#snakebite-moh--rxe', 'Snakebite: a reaction to antivenom']]; // @light
+if (P['animal-bites']) P['animal-bites'].see = [...(P['animal-bites'].see || []), ['#snakebite-moh', 'Snakebite: MOH guideline 2017']]; // @light
 
 /* An MOH guideline, not a CPG: its own footer and outcome label */
 P['snakebite-moh'].notesFoot = 'From the MOH Guideline: Management of Snakebite (2017), with its page numbers, in the guide\'s own words: it prints no permission to reproduce it, so nothing here is quoted. Facts from Land Snakes of Medical Significance in Malaysia (2nd edition, 2017; all rights reserved) are cited as the MST book.';

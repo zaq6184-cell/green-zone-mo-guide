@@ -1,0 +1,59 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334;
+  --indigo-1:#3d4597; --indigo-2:#2a3072; --indigo-3:#191d4a;
+  --teal-1:#157481; --teal-2:#0f5a64; --teal-3:#093d45;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --lav:#d8c4fa;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-plum{--j1:var(--plum-1);--j2:var(--plum-2);--j3:var(--plum-3)}
+.j-indigo{--j1:var(--indigo-1);--j2:var(--indigo-2);--j3:var(--indigo-3)}
+.j-teal{--j1:var(--teal-1);--j2:var(--teal-2);--j3:var(--teal-3)}
+.j-sapphire{--j1:var(--sapphire-1);--j2:var(--sapphire-2);--j3:var(--sapphire-3)}
+.hd{position:absolute;left:56px;right:56px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font-weight:800;line-height:1.06;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.card{position:absolute;left:56px;width:968px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;width:864px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{position:relative;flex:none}
+.it p{font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink);overflow-wrap:anywhere}
+.qn{font-weight:900;color:var(--jq)}
+.lead{position:absolute;left:52px;top:44px;width:864px;font-weight:900;line-height:1.18;letter-spacing:-.01em;color:var(--jq);overflow-wrap:anywhere}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+.ul{position:absolute;left:40px;width:888px;list-style:none;display:flex;flex-direction:column;gap:8px}
+.ul li{display:flex;align-items:center;gap:18px;padding:10px 16px 10px 10px;border-radius:20px;font-weight:700;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}
+.ul li .mk{width:56px;height:56px;border-radius:18px;padding:12px;flex:none}
+#s0-t{position:absolute;left:108px;top:118px;width:864px;color:#fff;font:900 96px/1.0 'Figtree';letter-spacing:-.035em;text-shadow:0 4px 30px rgba(0,0,0,.5);text-wrap:balance}
+#s0-t span{display:inline-block}
+#s0-k{position:absolute;left:108px;top:258px;display:flex;align-items:center;gap:14px;padding:12px 22px 12px 14px;border-radius:999px;background:rgba(216,196,250,.16);box-shadow:inset 0 0 0 1.5px rgba(216,196,250,.55);color:#ece3ff;font:700 32px/1 'Figtree'}
+#s0-k i{display:block;width:30px;height:30px;border-radius:50%;background:var(--lav)}</style>
+<div id="root" data-composition-id="s0" data-width="1080" data-height="1080">
+  <h1 id="s0-t" data-w="title"><span id="s0-w0">Cancer</span> <span id="s0-w1">pain</span></h1>
+  <div id="s0-k"><i></i><span data-x="chip">Cancer Pain CPG, 2nd edition · Leaflet 1</span></div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s0-w0",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},1.9);
+  tl.fromTo("#s0-w1",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},1.97);
+  tl.fromTo("#s0-k",{x:-30,opacity:0},{x:0,opacity:1,duration:.45,ease:"power3.out"},0.5);
+  tl.fromTo("#s0-t",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},3.26);
+  tl.fromTo("#s0-k",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},3.26);
+  window.__timelines["s0"] = tl;
+})();
+</script>
+</template>

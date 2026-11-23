@@ -690,7 +690,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#cancer-pain-cpg', 400); await p.click('#ptab [data-pt="leaflet"]'); await p.waitForTimeout(150);
   for (const lg of ['en', 'ms']){
     await p.click('#tp-leaflet [data-leaf="' + lg + '"]'); await p.waitForTimeout(150);
-    ok(await p.evaluate(lg => { const box = document.querySelector('#leaf .lsn'), L = READ['leaf-cancerpain-' + lg].lines; return box.dataset.read === 'leaf-cancerpain-' + lg && L.length === document.querySelectorAll('#leaf .leaf-t, #leaf .leaf-g > h5, #leaf .leaf-g > p, #leaf .leaf-g li').length && L.every(l => readLine(box, l[1], l[2])) && !document.querySelector('#leaf .lfilm'); }, lg), 'every line of the cancer pain leaflet (' + lg + ') has its own mark, and it has no film');
+    ok(await p.evaluate(lg => { const box = document.querySelector('#leaf .lsn'), L = READ['leaf-cancerpain-' + lg].lines; return box.dataset.read === 'leaf-cancerpain-' + lg && L.length === document.querySelectorAll('#leaf .leaf-t, #leaf .leaf-g > h5, #leaf .leaf-g > p, #leaf .leaf-g li').length && L.every(l => readLine(box, l[1], l[2])) && document.querySelector('#leaf .lfilm-b').dataset.film === 'media/cancer-pain-home' + (lg === 'ms' ? '-ms' : '') + '-720.mp4'; }, lg), 'every line of the cancer pain leaflet (' + lg + ') has its own mark, and its film in the same language (23 Nov 2026)');
   }
   ok(Object.values(await p.evaluate(() => READ)).every(r => fs.existsSync(path.join(__dirname, '..', 'app', r.src)) && r.marks[0] === 0 && r.marks.every((m, i, a) => !i || m > a[i - 1]) && r.marks[r.marks.length - 1] < r.dur), 'every narration file exists, and its section marks run in order inside it');
   await go(p, '#dengue-cpg', 400); await p.click('#ptab [data-pt="leaflet"]'); await p.waitForTimeout(150);
@@ -1228,7 +1228,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#asthma--m1', 500);
   await p.tap('[data-remind]'); await p.waitForTimeout(200);
   ok(await p.evaluate(() => !document.querySelector('#rmd').hidden && rems.length === 1 && rems[0].m === 10 && /Reassess after 10 minutes/.test(document.querySelector('#rmd').innerText) && /^(10:00|9:5\d)$/.test(document.querySelector('#rmd output').textContent)), 'a reminder starts from the step, for the 10 minutes it prints');
-  ok(await p.evaluate(() => Object.keys(localStorage).every(k => !/rem/i.test(k) && !String(localStorage.getItem(k)).includes('asthma--m1'))), 'a reminder is not stored');
+  ok(await p.evaluate(() => Object.keys(localStorage).every(k => !/rem/i.test(k) && (k === 'gz-last' || !String(localStorage.getItem(k)).includes('asthma--m1')))), 'a reminder is not stored (gz-last, the last step opened, belongs to the pick-up card)');
   await p.evaluate(() => { navigator.vibrate = x => { (window.__vib = window.__vib || []).push(x); return true; }; rems[0].end = Date.now() - 1; remTick(); });
   await p.waitForTimeout(250);
   ok(await p.evaluate(() => document.querySelector('#rmd').classList.contains('is-due') && /Due now/.test(document.querySelector('#rmd').innerText) && JSON.stringify(window.__vib || []) === JSON.stringify([BUZZ.alarm]) && /Reminder due: Reassess after 10 minutes/.test(document.querySelector('#rmdlive').textContent)), 'when it is due it buzzes the alarm, opens the tray and says so');
@@ -2184,6 +2184,109 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
       ok(await hscroll(q) <= 0 && await q.evaluate(() => [...document.querySelectorAll('#instbox button, #instbox a')].filter(e => e.offsetParent !== null).every(e => { const r = e.getBoundingClientRect(); return r.left >= -1 && r.right <= innerWidth + 1; })), `${where}: no sideways scroll, and no control clipped at the edges`);
       await q.screenshot({path:out + `/${name}.png`, fullPage:true});
     }
+  }
+
+  /* The page in two parts (23 Nov 2026): the guide starts while the second script is still on its way. A server sends the page
+     up to its second script and holds the rest until released: home, a department pathway and search work, a guideline waits and
+     opens when the rest arrives, and then everything (entries and their order, the search index, groups, links, figures, counts,
+     the home page's quick routes) is exactly as in a page loaded whole. */
+  {
+    const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8'), first = html.indexOf('\n<script>\n'), cut = html.indexOf('\n<script>\n', first + 5);
+    ok(first > 0 && cut > first && /\ngzMore\(\);\n<\/script>/.test(html.slice(cut)) && /const MORE_IDS = new Set\(\[/.test(html.slice(first, first + 400)), 'the page is in two parts, the second ending with gzMore()');
+    let release; const held = new Promise(r => { release = r; });
+    const hs = http.createServer((req, res) => {
+      const u = req.url.split('?')[0];
+      if (u === '/held/' || u === '/whole/'){ res.writeHead(200, {'Content-Type':'text/html; charset=utf-8'}); if (u === '/whole/') return res.end(html); res.write(html.slice(0, cut) + ' '.repeat(4096)); held.then(() => res.end(html.slice(cut))); return; }
+      const f = path.join(root, decodeURIComponent(u.replace(/^\/(held|whole)\//, '/')));
+      if (/sw\.js$/.test(u) || !f.startsWith(root) || !fs.existsSync(f) || fs.statSync(f).isDirectory()){ res.writeHead(404); res.end(); return; }
+      res.writeHead(200); res.end(fs.readFileSync(f));
+    }).listen(PORT + 2);
+    const ctx = await b.newContext({viewport:{width:390, height:844}, serviceWorkers:'block'}), q = await ctx.newPage(), perr = [];
+    q.on('pageerror', e => perr.push(e.message));
+    q.goto(`http://localhost:${PORT + 2}/held/#home`).catch(() => {});
+    await q.waitForFunction(() => typeof curView !== 'undefined' && curView === 'home', null, {timeout:30000});
+    const pre = await q.evaluate(() => ({more:MORE, boot:!!document.querySelector('#gzboot'), dengue:!P['dengue-cpg'], renal:!!P['renal-colic']}));
+    ok(!pre.more && pre.boot && pre.dengue && pre.renal, 'two parts: home is ready before the rest arrives, with the ready bar still showing');
+    await go(q, '#renal-colic', 400);
+    ok(await q.evaluate(() => curView === 'run' && state.id === 'renal-colic'), 'two parts: a department pathway opens before the rest arrives');
+    await go(q, '#dengue', 400);
+    ok(await q.evaluate(() => curView === 'run' && /follows the CPG Management of Dengue/.test(P.dengue.nodes[P.dengue.start].hint) && P.dengue.see[0][0] === '#dengue-cpg'), 'two parts: an ebook pathway already carries the lines its guideline adds (marked @light)');
+    await go(q, '#search', 300); await q.fill('#gq', 'renal colic'); await q.waitForTimeout(500);
+    ok(await q.evaluate(() => document.querySelector('#gres a') && document.querySelector('#gres a').getAttribute('href') === '#renal-colic'), 'two parts: search works before the rest arrives');
+    await q.keyboard.press('Escape');
+    await go(q, '#dengue-cpg', 400);
+    ok(await q.evaluate(() => curView === 'run' && state.id === 'dengue' && moreWant && !!document.querySelector('#gzboot')), 'two parts: a guideline waits, the ready bar showing');
+    release(); await q.waitForFunction(() => MORE, null, {timeout:30000}); await q.waitForTimeout(800);
+    ok(await q.evaluate(() => curView === 'run' && state.id === 'dengue-cpg' && !document.querySelector('#gzboot')), 'two parts: the waiting guideline opens once the rest arrives, and the ready bar goes');
+    const snap = () => ({keys:Object.keys(P), idx:IDX.map(e => [e.href, e.title, e.kind, e.meta, e.body, e.kw || '', e.ic, e.c, e.j]), cats:CATS.map(c => [c.k, c.ids.join()]),
+      ent:Object.entries(P).map(([k, p]) => [k, JSON.stringify(p.see || []), p.kw || '', JSON.stringify(p.nodes)]), figs:Object.keys(FIGS).sort(), chg:CHG.size, a3:A3_REG.length,
+      cnt:[...document.querySelectorAll('[data-cnt],#cnt-path,#cnt-rule,#cnt-calc')].map(e => e.textContent), quick:document.querySelector('#quick').innerHTML});
+    const A = await q.evaluate(snap), r = await ctx.newPage(); await r.goto(`http://localhost:${PORT + 2}/whole/#home`); await r.waitForFunction(() => typeof MORE !== 'undefined' && MORE && curView); await r.waitForTimeout(400);
+    const W = await r.evaluate(snap), diff = Object.keys(W).filter(k => JSON.stringify(A[k]) !== JSON.stringify(W[k]));
+    ok(!diff.length, 'two parts: once the rest has arrived, entries, their order, the search index, groups, links, figures, counts and quick routes match a page loaded whole' + (diff.length ? ' ' + diff.join(', ') : ''));
+    ok(!perr.length, 'two parts: no page errors' + (perr.length ? ' ' + perr.join(' | ') : ''));
+    await ctx.close(); hs.close();
+  }
+
+  /* Pick up where you left off (23 Nov 2026): the last step's address and time only, offered on home for 12 hours, forgotten by the cross */
+  {
+    const ctx = await b.newContext({viewport:{width:390, height:844}, serviceWorkers:'block'}), q = await ctx.newPage();
+    await q.goto(U + '#home'); await q.waitForFunction(() => typeof MORE !== 'undefined' && MORE && curView === 'home');
+    ok(await q.evaluate(() => document.querySelector('#pickup').hidden && !localStorage.getItem('gz-last')), 'pick up: nothing offered on a first open');
+    await go(q, '#renal-colic', 400); await q.click('#v-run .opts button, #v-run button.opt'); await q.waitForTimeout(300);
+    const kept = await q.evaluate(() => ({ls:JSON.parse(localStorage.getItem('gz-last')), cur:'#' + state.id + '--' + state.cur}));
+    ok(kept.ls && kept.ls.h === kept.cur && Object.keys(kept.ls).sort().join() === 'h,t', 'pick up: only the step\'s address and the time are kept');
+    await go(q, '#home', 400);
+    const card = await q.evaluate(() => { const r = document.querySelector('#pickup'); return {shown:!r.hidden, href:r.querySelector('a.rsm').getAttribute('href'), t:r.textContent}; });
+    ok(card.shown && card.href === kept.cur && /Renal colic/.test(card.t) && /just now/.test(card.t), 'pick up: home offers the step, one tap away');
+    await q.click('#pickup a.rsm'); await q.waitForTimeout(500);
+    ok(await q.evaluate(c => location.hash === c && curView === 'run' && state.trail.every(x => x.auto), kept.cur), 'pick up: the card opens that step, its route marked auto');
+    await q.evaluate(() => localStorage.setItem('gz-last', JSON.stringify({h:'#renal-colic', t:Date.now() - 13 * 3600e3}))); await go(q, '#home', 300);
+    ok(await q.evaluate(() => document.querySelector('#pickup').hidden && !localStorage.getItem('gz-last')), 'pick up: forgotten after 12 hours');
+    await q.evaluate(() => localStorage.setItem('gz-last', JSON.stringify({h:'#renal-colic', t:Date.now() - 5 * 60e3}))); await go(q, '#pathways', 200); await go(q, '#home', 300);
+    ok(await q.evaluate(() => /5 min ago/.test(document.querySelector('#pickup').textContent)), 'pick up: says how long ago');
+    await q.click('#pickup [data-rsmx]'); await q.waitForTimeout(200);
+    ok(await q.evaluate(() => document.querySelector('#pickup').hidden && !localStorage.getItem('gz-last')), 'pick up: the cross forgets it');
+    await q.screenshot({path:out + '/p-resume.png'});
+    /* A page warmed on press: a pressed tile starts its page's banner picture, nothing else */
+    const seen = []; q.on('request', x => { if (/\/tiles\/[^/]+\.webp$/.test(x.url())) seen.push(x.url().split('/').pop()); });
+    await q.setViewportSize({width:1366, height:900}); await go(q, '#pathways', 500); seen.length = 0; /* wide: the library is unfolded */
+    const row = q.locator('#libgrid .pc h3 a').first(), href = await row.getAttribute('href');
+    const want = await q.evaluate(h => { const id = h.slice(1), p = P[id], c = catOf(id); return (p.hero || c.k) + '.webp'; }, href);
+    await q.evaluate(() => WARM.clear());
+    const box = await row.boundingBox(); await q.mouse.move(box.x + 5, box.y + 5); await q.mouse.down(); await q.waitForTimeout(150);
+    ok(seen.includes(want) && seen.length <= 2, 'warm on press: pressing a library row starts its banner picture before the tap lands (' + seen.join(', ') + ')');
+    await q.mouse.up(); await ctx.close();
+  }
+
+  /* The intro read aloud (23 Nov 2026): nothing downloads before Listen; Listen plays the screen on show in the language chosen */
+  {
+    const ctx = await b.newContext({viewport:{width:390, height:844}, serviceWorkers:'block'}), q = await ctx.newPage(), got = [];
+    q.on('request', x => { if (/\/audio\/intro-/.test(x.url())) got.push(x.url().split('/').pop()); });
+    await q.goto(U + '#intro'); await q.waitForFunction(() => typeof MORE !== 'undefined' && MORE && curView === 'intro'); await q.waitForTimeout(400);
+    ok(!got.length && await q.evaluate(() => !!document.querySelector('#introbox [data-isay]') && document.querySelectorAll('#introbox [data-ilang]').length === 2), 'intro voice: Listen and the language choice, nothing downloaded before a tap');
+    ok(['en', 'ms'].every(l => [1, 2, 3, 4].every(i => fs.existsSync(path.join(root, 'audio', `intro-${i}-${l}.mp3`)))), 'intro voice: four screens recorded in English and in Bahasa Melayu');
+    await q.click('#introbox [data-isay]'); await q.waitForTimeout(600);
+    ok(got.includes('intro-1-en.mp3') && await q.evaluate(() => introPlay && /intro-1-en\.mp3$/.test(introAud.src)), 'intro voice: Listen plays the first screen in English');
+    await q.click('#introbox [data-ilang="ms"]'); await q.waitForTimeout(400);
+    ok(await q.evaluate(() => /intro-1-ms\.mp3$/.test(introAud.src) && introPlay), 'intro voice: BM switches the narration to Bahasa Melayu');
+    await q.click('#introbox [data-intro="next"]'); await q.waitForTimeout(400);
+    ok(await q.evaluate(() => /intro-2-ms\.mp3$/.test(introAud.src) && introPlay), 'intro voice: Next carries on reading the next screen');
+    await go(q, '#home', 300);
+    ok(await q.evaluate(() => !introPlay && introAud.paused), 'intro voice: leaving the intro stops it');
+    await ctx.close();
+  }
+
+  /* The cancer pain leaflet's film (23 Nov 2026): a card in each language, nothing loaded before a tap */
+  {
+    const ctx = await b.newContext({viewport:{width:390, height:844}, serviceWorkers:'block'}), q = await ctx.newPage(), got = [];
+    q.on('request', x => { if (/cancer-pain-home/.test(x.url())) got.push(x.url().split('/').pop()); });
+    ok(['cancer-pain-home-720.mp4', 'cancer-pain-home-ms-720.mp4', 'cancer-pain-home-poster.webp', 'cancer-pain-home-ms-poster.webp', 'cancer-pain-home-thumb.webp', 'cancer-pain-home-ms-thumb.webp'].every(f => fs.existsSync(path.join(root, 'media', f))), 'cancer pain film: both languages, with covers, are in media/');
+    await q.goto(U + '#pt-cancer-pain-cpg'); await q.waitForFunction(() => typeof MORE !== 'undefined' && MORE && curView === 'pt'); await q.waitForTimeout(500);
+    ok(await q.evaluate(() => { const b = document.querySelector('.lfilm-b'); return !!b && b.dataset.film === 'media/cancer-pain-home-720.mp4'; }) && !got.some(f => /\.mp4$/.test(f)), 'cancer pain film: the patient page offers it, and no film loads before a tap');
+    await q.goto(U + '#pt-cancer-pain-cpg-ms'); await q.waitForTimeout(600);
+    ok(await q.evaluate(() => { const b = document.querySelector('.lfilm-b'); return !!b && b.dataset.film === 'media/cancer-pain-home-ms-720.mp4'; }), 'cancer pain film: the Malay page offers the Malay film');
+    await ctx.close();
   }
 
   console.log('errors:', errs.length ? '\n  ' + errs.join('\n  ') : 'none');

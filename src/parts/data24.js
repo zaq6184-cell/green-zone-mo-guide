@@ -305,7 +305,7 @@ P['ed-scores'] = {
 };
 P['ed-scores'].kinds = {neutral:'What the source says'};
 P['ed-scores'].notesFoot = 'Each score is in the guide\'s own words from the source named on its step, read on 16 Nov 2026, and credited to its authors. Two are quoted because their owners allow it: MEWS (abdominal trauma CPG 2025, MaHTAS) and the CIWA-Ar items (the scale states it is not copyrighted). Nothing is copied from MDCalc or any other calculator site. A score supports judgement; it does not replace the ebook\'s pathway or a department protocol.';
-P['stroke-tia'].see = [...(P['stroke-tia'].see || []), ['#ed-scores--abcd2', 'ABCD2 score (Johnston 2007)']];
-P['syncope'].see = [...(P['syncope'].see || []), ['#ed-scores--sfsr', 'San Francisco Syncope Rule'], ['#ed-scores--csrs', 'Canadian Syncope Risk Score']];
-P['abdominal-pain'].see = [...(P['abdominal-pain'].see || []), ['#ed-scores--alvarado', 'Alvarado score']];
-P['children'].see = [...(P['children'].see || []), ['#ed-scores--vitals', 'Heart and breathing rates by age (Fleming 2011)']];
+P['stroke-tia'].see = [...(P['stroke-tia'].see || []), ['#ed-scores--abcd2', 'ABCD2 score (Johnston 2007)']]; // @light
+P['syncope'].see = [...(P['syncope'].see || []), ['#ed-scores--sfsr', 'San Francisco Syncope Rule'], ['#ed-scores--csrs', 'Canadian Syncope Risk Score']]; // @light
+P['abdominal-pain'].see = [...(P['abdominal-pain'].see || []), ['#ed-scores--alvarado', 'Alvarado score']]; // @light
+P['children'].see = [...(P['children'].see || []), ['#ed-scores--vitals', 'Heart and breathing rates by age (Fleming 2011)']]; // @light

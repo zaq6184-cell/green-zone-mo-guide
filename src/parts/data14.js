@@ -27,12 +27,14 @@ const XFILMS = {
 /* Dengue (Krishna, 12 Nov 2026: "Follow dengue cpg", and "for the dengue topic in the app. please follow the latet cpg 2026"):
    the CPG, 4th edition, is the lead for dengue. The home route and searches open the CPG entry, and the ebook's pathway says so
    on its first step and lists the CPG first under See also. The ebook's own pathway is left as printed (rule 5). */
-if (P['dengue'] && P['dengue-cpg']){
+/* @light: runs in the first part of the page (build.js), with the pathways it changes */
+if (P['dengue']){
   const first = P['dengue'].nodes[P['dengue'].start];
   const note = 'For dengue this guide follows the CPG Management of Dengue in Adults, 4th edition (2026): open that entry first. The pathway below is the ebook\'s, as printed; it follows the 3rd edition (2015).';
   first.hint = first.hint ? note + ' ' + first.hint : note;
   P['dengue'].see = [['#dengue-cpg', 'Dengue CPG, 4th edition (2026): follow this first'], ...(P['dengue'].see || []).filter(s => s[0] !== '#dengue-cpg')];
 }
+/* @end light */
 /* Dengue triage (Krishna, 12 Nov 2026: "dengue part : MTS level 4, Green"): pregnancy, age 65 and over, and obesity follow the
    Quick Reference's Group B1 (p5: possible referral to hospital, MTS level 4, Green), not Appendix 7's high-risk line (Yellow,
    MTS level 3), which was the choice of 9 Nov 2026. The three leave the warning-signs step and join the co-morbids step, in the

@@ -1,0 +1,94 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334;
+  --indigo-1:#3d4597; --indigo-2:#2a3072; --indigo-3:#191d4a;
+  --teal-1:#157481; --teal-2:#0f5a64; --teal-3:#093d45;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --lav:#d8c4fa;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-plum{--j1:var(--plum-1);--j2:var(--plum-2);--j3:var(--plum-3)}
+.j-indigo{--j1:var(--indigo-1);--j2:var(--indigo-2);--j3:var(--indigo-3)}
+.j-teal{--j1:var(--teal-1);--j2:var(--teal-2);--j3:var(--teal-3)}
+.j-sapphire{--j1:var(--sapphire-1);--j2:var(--sapphire-2);--j3:var(--sapphire-3)}
+.hd{position:absolute;left:56px;right:56px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font-weight:800;line-height:1.06;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.card{position:absolute;left:56px;width:968px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;width:864px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{position:relative;flex:none}
+.it p{font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink);overflow-wrap:anywhere}
+.qn{font-weight:900;color:var(--jq)}
+.lead{position:absolute;left:52px;top:44px;width:864px;font-weight:900;line-height:1.18;letter-spacing:-.01em;color:var(--jq);overflow-wrap:anywhere}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+.ul{position:absolute;left:40px;width:888px;list-style:none;display:flex;flex-direction:column;gap:8px}
+.ul li{display:flex;align-items:center;gap:18px;padding:10px 16px 10px 10px;border-radius:20px;font-weight:700;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}
+.ul li .mk{width:56px;height:56px;border-radius:18px;padding:12px;flex:none}
+#s2-card{--jq:var(--indigo-1)}
+#s2-hd{top:84px;height:96px}
+#s2-hd h2{font-size:60px}
+#s2-card{top:216px;height:808px}
+#s2-i0{top:44px;height:668px;opacity:0}
+#s2-i0 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s2-i0 p{margin-top:34px !important;font-size:70px}
+#s2-i1{top:44px;height:668px;opacity:0}
+#s2-i1 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s2-i1 p{margin-top:34px !important;font-size:70px}
+#s2-i2{top:44px;height:668px;opacity:0}
+#s2-i2 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s2-i2 p{margin-top:34px !important;font-size:58px}
+#s2-i3{top:44px;height:668px;opacity:0}
+#s2-i3 .disc{width:112px;height:112px;border-radius:34px;padding:26px}
+#s2-i3 p{margin-top:34px !important;font-size:70px}</style>
+<div id="root" data-composition-id="s2" data-width="1080" data-height="1080">
+  <div class="hd" id="s2-hd"><div class="disc jw j-indigo"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 1 1 17 0"/><path d="m12 17 4-5.2"/><path d="M6.5 17h.01M17.5 17h.01M12 8.5v.01"/></svg></div><h2 data-w="h">Assessing your CANCER PAIN</h2></div>
+  <div class="card" id="s2-card">
+    <div class="it" id="s2-i0"><div class="disc jw j-indigo" id="s2-c0"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 17a8.5 8.5 0 1 1 17 0"/><path d="m12 17 4-5.2"/><path d="M6.5 17h.01M17.5 17h.01M12 8.5v.01"/></svg></div><p data-w="p">There are several tools that can be used to assess pain (e.g. Ministry of Health (MoH) Pain Scale).</p></div>
+    <div class="it" id="s2-i1"><div class="disc jw j-indigo" id="s2-c1"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="8" width="19" height="8" rx="1.5"/><path d="M6.5 8v3.5M10 8v2.5M13.5 8v3.5M17 8v2.5"/></svg></div><p data-w="i">The MoH pain scale combines the NRS, VAS, &amp; faces scale. Patients point to their pain level on a scale from 0 to 10.</p></div>
+    <div class="it" id="s2-i2"><div class="disc jw j-indigo" id="s2-c2"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9 10h.01M15 10h.01"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0"/></svg></div><p data-w="i">For children under 7 &amp; cognitively impaired adults, the IASP Faces Pain Scale or FLACC scale may be used. In sedated &amp; intubated patients, pain is assessed through observation including on behaviour.</p></div>
+    <div class="it" id="s2-i3"><div class="disc jw j-indigo" id="s2-c3"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg></div><p data-w="i">Cancer pain affects not only your physical well-being but also your emotional, social &amp; spiritual health.</p></div>
+    <div class="dots"><i id="s2-d0"></i><i id="s2-d1"></i><i id="s2-d2"></i><i id="s2-d3"></i></div>
+  </div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s2-hd",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.3);
+  tl.fromTo("#s2-card",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.42);
+  tl.fromTo("#s2-i0",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},2.27);
+  tl.fromTo("#s2-c0",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},2.32);
+  tl.fromTo("#s2-d0",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#3d4597",duration:.35,ease:"power2.out"},2.27);
+  tl.fromTo("#s2-i0",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},10.01);
+  tl.fromTo("#s2-d0",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},10.31);
+  tl.fromTo("#s2-i1",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},10.31);
+  tl.fromTo("#s2-c1",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},10.36);
+  tl.fromTo("#s2-d1",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#3d4597",duration:.35,ease:"power2.out"},10.31);
+  tl.fromTo("#s2-i1",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},19.71);
+  tl.fromTo("#s2-d1",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},20.01);
+  tl.fromTo("#s2-i2",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},20.01);
+  tl.fromTo("#s2-c2",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},20.06);
+  tl.fromTo("#s2-d2",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#3d4597",duration:.35,ease:"power2.out"},20.01);
+  tl.fromTo("#s2-i2",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},35.89);
+  tl.fromTo("#s2-d2",{width:54},{width:18,duration:.3,ease:"power2.inOut",immediateRender:false},36.19);
+  tl.fromTo("#s2-i3",{y:36,opacity:0},{y:0,opacity:1,duration:.45,ease:"power3.out"},36.19);
+  tl.fromTo("#s2-c3",{scale:.6,opacity:0},{scale:1,opacity:1,duration:.32,ease:"back.out(2.2)"},36.24);
+  tl.fromTo("#s2-d3",{width:18,backgroundColor:"#dbe2de"},{width:54,backgroundColor:"#3d4597",duration:.35,ease:"power2.out"},36.19);
+  tl.fromTo("#s2-hd",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},44.34);
+  tl.fromTo("#s2-card",{y:0,opacity:1},{y:-24,opacity:0,duration:.3,ease:"power2.in",immediateRender:false},44.34);
+  window.__timelines["s2"] = tl;
+})();
+</script>
+</template>

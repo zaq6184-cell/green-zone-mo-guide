@@ -1,0 +1,57 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+:root, #root{
+  --ink:#0f1a15; --ink-2:#26352e; --muted:#53635b; --line:#dbe2de; --surface:#ffffff; --surface-2:#f5f7f6;
+  --emerald-1:#0d7049; --emerald-2:#0a5a3b; --emerald-3:#063d28;
+  --plum-1:#6a3473; --plum-2:#4a2150; --plum-3:#2f1334;
+  --indigo-1:#3d4597; --indigo-2:#2a3072; --indigo-3:#191d4a;
+  --teal-1:#157481; --teal-2:#0f5a64; --teal-3:#093d45;
+  --sapphire-1:#24477f; --sapphire-2:#16305c; --sapphire-3:#0d1f3e;
+  --lav:#d8c4fa;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+#root, #root *{box-sizing:border-box}
+#root{font-family:'Figtree',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#root h1,#root h2,#root p,#root ul{margin:0;padding:0}
+.ic{display:block;width:100%;height:100%}
+.jw{color:#fff;background:radial-gradient(120% 85% at 0 0,rgba(255,255,255,.16),transparent 55%),var(--grain),linear-gradient(150deg,var(--j1),var(--j2) 55%,var(--j3));background-size:auto,180px 180px,auto;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.16),0 18px 30px -16px var(--j3)}
+.j-emerald{--j1:var(--emerald-1);--j2:var(--emerald-2);--j3:var(--emerald-3)}
+.j-plum{--j1:var(--plum-1);--j2:var(--plum-2);--j3:var(--plum-3)}
+.j-indigo{--j1:var(--indigo-1);--j2:var(--indigo-2);--j3:var(--indigo-3)}
+.j-teal{--j1:var(--teal-1);--j2:var(--teal-2);--j3:var(--teal-3)}
+.j-sapphire{--j1:var(--sapphire-1);--j2:var(--sapphire-2);--j3:var(--sapphire-3)}
+.hd{position:absolute;left:56px;right:56px;display:flex;align-items:center;gap:24px;color:#fff}
+.hd .disc{width:88px;height:88px;border-radius:28px;padding:20px;flex:none}
+.hd h2{font-weight:800;line-height:1.06;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.card{position:absolute;left:56px;width:968px;border-radius:44px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.18),0 50px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1.5px var(--line);overflow:hidden}
+.it{position:absolute;left:52px;width:864px;display:flex;flex-direction:column;justify-content:center}
+.it .disc{position:relative;flex:none}
+.it p{font-weight:700;line-height:1.24;letter-spacing:-.01em;color:var(--ink);overflow-wrap:anywhere}
+.qn{font-weight:900;color:var(--jq)}
+.lead{position:absolute;left:52px;top:44px;width:864px;font-weight:900;line-height:1.18;letter-spacing:-.01em;color:var(--jq);overflow-wrap:anywhere}
+.dots{position:absolute;left:52px;bottom:48px;display:flex;gap:12px;align-items:center}
+.dots i{display:block;width:18px;height:18px;border-radius:9px;background:var(--line)}
+.ul{position:absolute;left:40px;width:888px;list-style:none;display:flex;flex-direction:column;gap:8px}
+.ul li{display:flex;align-items:center;gap:18px;padding:10px 16px 10px 10px;border-radius:20px;font-weight:700;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}
+.ul li .mk{width:56px;height:56px;border-radius:18px;padding:12px;flex:none}
+#s8-box{position:absolute;left:80px;right:80px;bottom:80px;padding:30px 28px 32px;border-radius:32px;background:rgba(8,8,20,.66);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.08);color:#fff}
+#s8-k{font:800 30px/1 'Figtree';letter-spacing:.02em;color:#e3d6ff;opacity:0}
+#s8-src{margin-top:16px !important;font:700 36px/1.3 'Figtree';overflow-wrap:anywhere;text-shadow:0 2px 18px rgba(0,0,0,.6);opacity:0}
+#s8-gz{margin-top:30px !important;display:flex;align-items:center;gap:16px;font:800 34px/1 'Figtree';opacity:0}
+#s8-gz i{display:block;width:44px;height:44px;border-radius:14px}</style>
+<div id="root" data-composition-id="s8" data-width="1080" data-height="1080">
+  <div id="s8-box"><p id="s8-k" data-x="source">Source</p><p id="s8-src" data-w="src">CPG Management of Cancer Pain (2nd ed., 2023): patient information leaflets 1 (English) and 2 (Bahasa Melayu), issued with the CPG by the Ministry of Health Malaysia, the Malaysian Association for the Study of Pain and the Academy of Medicine Malaysia. Reproduced with acknowledgement, unchanged. The pain scale pictures and the Total Pain diagram are not reproduced.</p><p id="s8-gz"><i class="jw j-emerald"></i><span data-x="guide">Green Zone MO Guide</span></p></div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s8-k",{opacity:0},{opacity:1,duration:0.4,ease:"power1.out",immediateRender:false},0.35);
+  tl.fromTo("#s8-src",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.5);
+  tl.fromTo("#s8-gz",{y:40,rotation:1.5,opacity:0},{y:0,rotation:0,opacity:1,duration:.45,ease:"power3.out"},0.9);
+  window.__timelines["s8"] = tl;
+})();
+</script>
+</template>

@@ -33,16 +33,55 @@ const stop = msg => { console.error(msg); process.exit(1); };
 /* LF line endings throughout, as git keeps the files (.gitattributes), so the hashes in sw.js match what GitHub Pages serves */
 const read = f => fs.readFileSync(path.join(PARTS, f), 'utf8').replace(/\r\n?/g, '\n');
 const hash16 = data => crypto.createHash('sha256').update(data).digest('hex').slice(0, 16);
-const js = SCRIPTS.map(read).join('\n');
+/* The page in two parts (23 Nov 2026, Krishna's "Build 1 to 5"): the browser runs a script as soon as it has arrived, so the
+   guide starts while the rest of the page is still on its way. The first script holds the department's pathways and rules and
+   the engine; the second, at the end of the page, holds the national guidelines, the X-ray guide, the abdominal pain handbook
+   and the scores (HEAVY), and ends by calling gzMore() in engine.js. A line in a HEAVY file that changes another entry ends with
+   "// @light" (or sits in a block that opens with a "@light" comment and closes with an "@end light" comment), and stays in the first script at its file's place, so every
+   entry the first script has is whole. MORE_IDS names the entries still to come and P_ORDER the order of every entry, as in a
+   single script. The artifact page is the same two scripts. */
+const HEAVY = new Set(['data4.js', 'data5.js', 'data6.js', 'data7.js', 'data9.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data24.js']);
+const parts2 = (text) => {
+  const light = [], heavy = []; let on = false;
+  for (const l of text.split('\n')){
+    if (/^\/\* @light\b/.test(l)){ on = true; light.push(l); continue; }
+    if (on && /^\/\* @end light \*\/$/.test(l)){ on = false; light.push(l); continue; }
+    (on || /\/\/ @light\s*$/.test(l) ? light : heavy).push(l);
+  }
+  if (on) stop('A "/* @light" block has no "/* @end light */".');
+  return {light:light.join('\n'), heavy:heavy.join('\n')};
+};
+/* Run the data files as the page will (nothing else runs: they only fill P) to learn every entry's place and which entries the
+   second script brings; the first script's data must run without the second */
+const keysOf = files => { const src = files.join('\n') + '\nreturn Object.keys(P);'; try { return new Function(src)(); } catch (e) { stop('The data does not run: ' + e.message); } };
+const DATA = SCRIPTS.filter(f => f !== 'engine.js');
+const P_ORDER = keysOf(DATA.map(read));
+const lightKeys = new Set(keysOf(DATA.map(f => HEAVY.has(f) ? parts2(read(f)).light : read(f))));
+const MORE_IDS = P_ORDER.filter(id => !lightKeys.has(id));
+/* The two parts must build exactly the entries one script builds: the first part's data, then the second's, then the lines of
+   the first that wait for an entry of the second (MORE_AFTER, as gzMore runs them), compared entry by entry */
+{
+  const runP = src => { globalThis.MORE_AFTER = []; try { return new Function(src + '\n(globalThis.MORE_AFTER || []).forEach(f => f());\nreturn JSON.stringify(P_ORDER_.map(k => [k, P[k]]));').call(null); } catch (e) { stop('The data does not run in two parts: ' + e.message); } finally { delete globalThis.MORE_AFTER; } };
+  globalThis.P_ORDER_ = P_ORDER;
+  const whole = runP(DATA.map(read).join('\n'));
+  const two = runP(DATA.map(f => HEAVY.has(f) ? parts2(read(f)).light : read(f)).join('\n') + '\n' + DATA.filter(f => HEAVY.has(f)).map(f => parts2(read(f)).heavy).join('\n'));
+  delete globalThis.P_ORDER_;
+  if (whole !== two){ const a = JSON.parse(whole), b = JSON.parse(two), i = a.findIndex((x, j) => JSON.stringify(x) !== JSON.stringify(b[j])); stop('In two parts the entry ' + a[i][0] + ' comes out differently: a line in a second-part file that changes another entry needs "// @light", or a first-part line that changes a second-part entry must wait for it (MORE_AFTER, see data20.js).'); }
+}
+const js1 = `const MORE_IDS = new Set(${JSON.stringify(MORE_IDS)}), P_ORDER = ${JSON.stringify(P_ORDER)};\n` +
+  SCRIPTS.map(f => HEAVY.has(f) ? parts2(read(f)).light : read(f)).join('\n');
+const js2 = SCRIPTS.filter(f => HEAVY.has(f)).map(f => parts2(read(f)).heavy).join('\n') + '\ngzMore();';
+const js = js1 + '\n' + js2;
 
 try {
   new Function(js); // parse only: nothing runs
+  new Function(js1);
 } catch (e) {
   stop('The joined script does not parse: ' + e.message);
 }
 
 const head = read('head.html');
-const page = head + '\n<script>\n' + js + '\n</script>\n';
+const page = head + '\n<script>\n' + js1 + '\n</script>\n<script>\n' + js2 + '\n</script>\n';
 if (!page.startsWith('<title>')) console.warn('Warning: the page should start with its <title> (the artifact host reads it from the first 8 KB).');
 if (/serviceWorker|manifest\.webmanifest|apple-touch-icon|\bsw\.js\b/.test(page)) stop('The artifact page must not mention the service worker, the manifest or the touch icon: they belong in parts/pwa.js and build.js, for app/ only.');
 
@@ -76,7 +115,7 @@ const OG = '<title>Green Zone MO Guide</title>' +
 
 /* The same skeleton the artifact host wraps around the page, plus the tab icon and, for the web app, its link preview,
    manifest, touch icon, home screen name (iOS) and the browser bar's colour (pwa.js keeps it with the Day and Night switch) */
-const SHELL = '<!doctype html><html><head><meta charset="utf-8">' + OG +
+const SHELL = '<!doctype html><html lang="en-GB"><head><meta charset="utf-8">' + OG +
   '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' + encodeURIComponent(ICON) + '">' +
   '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">' +
   '<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png">' +
@@ -148,6 +187,7 @@ fs.writeFileSync(path.join(APP, 'sw.js'), sw);
 
 const kb = n => Math.round(n / 1024) + ' KB', mb = n => (n / 1048576).toFixed(1) + ' MB';
 console.log('Built ' + path.join(OUT, 'green-zone-pathways.html') + ' (' + kb(Buffer.byteLength(page)) + ')');
+console.log(`Two parts: ${P_ORDER.length} entries, ${MORE_IDS.length} in the second script (${Math.round(Buffer.byteLength(js2) / 1024)} KB of ${Math.round(Buffer.byteLength(js) / 1024)} KB)`);
 console.log('Built ' + path.join(APP, 'index.html') + ', manifest.webmanifest and sw.js (build ' + VERSION + ', page ' + PAGE_ID + ')');
 console.log('Offline: saves ' + Object.keys(PRE).length + ' files (' + mb(preBytes) + ') at install; keeps ' + Object.keys(KEEP).length + ' films, sounds, loops and poster sheets (' + mb(keepBytes) + ' in all) only once used');
 const missing = ['img', 'media', 'poster', 'clips', 'audio', 'tiles', 'icons'].filter(d => !fs.existsSync(path.join(APP, d)));

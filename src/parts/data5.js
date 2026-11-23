@@ -296,10 +296,10 @@ P['asthma-cpg'] = {
 };
 
 /* The ebook pathway points to the newer national guideline (a link only: its content stays as written) */
-P['asthma'].see = [...(P['asthma'].see || []), ['#asthma-cpg', 'Asthma CPG, 2nd edition (2024)']];
+P['asthma'].see = [...(P['asthma'].see || []), ['#asthma-cpg', 'Asthma CPG, 2nd edition (2024)']]; // @light
 
 /* The Asthma Zone flow points to the national guideline too */
-P['asthma-zone'].see = [...(P['asthma-zone'].see || []), ['#asthma-cpg', 'Asthma CPG, 2nd edition (2024)']];
+P['asthma-zone'].see = [...(P['asthma-zone'].see || []), ['#asthma-cpg', 'Asthma CPG, 2nd edition (2024)']]; // @light
 
 /* ----- CPG Management of Gout, 2nd edition (MaHTAS, 2021), for adults (p vi) -----
    Printed page = PDF page minus 17; the algorithm is p xi. Greek mu is written as the micro sign, apostrophes are plain,
@@ -447,4 +447,4 @@ P['gout-cpg'] = {
 };
 
 /* The Green Zone gout rule (department letter of 29 Nov 2024) points to the national guideline: a link only, its wording stays */
-P['gz-rules'].nodes.gout.links = [...(P['gz-rules'].nodes.gout.links || []), ['#gout-cpg', 'Gout CPG, 2nd edition (2021)']];
+P['gz-rules'].nodes.gout.links = [...(P['gz-rules'].nodes.gout.links || []), ['#gout-cpg', 'Gout CPG, 2nd edition (2021)']]; // @light

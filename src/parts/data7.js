@@ -231,8 +231,8 @@ P['avulsed-tooth-cpg'] = {
 };
 
 /* Related department entries point to the national guideline: links only, their wording stays */
-P['trauma-walkins'].see = [...(P['trauma-walkins'].see || []), ['#avulsed-tooth-cpg', 'Knocked-out permanent tooth: CPG 2019']];
-P['children'].see = [...(P['children'].see || []), ['#avulsed-tooth-cpg', 'Knocked-out permanent tooth: CPG 2019']];
+P['trauma-walkins'].see = [...(P['trauma-walkins'].see || []), ['#avulsed-tooth-cpg', 'Knocked-out permanent tooth: CPG 2019']]; // @light
+P['children'].see = [...(P['children'].see || []), ['#avulsed-tooth-cpg', 'Knocked-out permanent tooth: CPG 2019']]; // @light
 
 /* ----- CPG on Management of Geriatric Hip Fracture (MaHTAS, 2023), first edition, for patients with suspected and confirmed GHF
    (evidence on patients aged 60 years old and above) (p vi) -----
@@ -443,13 +443,13 @@ P['hip-fracture-cpg'] = {
 };
 
 /* Links from related entries to the national guideline: links only, their wording stays (rules 5 and 6) */
-P['pain'].see = [...(P['pain'].see || []), ['#hip-fracture-cpg--pain', 'Hip fracture CPG (2023): analgesia in the elderly']];
-P['referral-rules'].nodes.orthoc.links = [...(P['referral-rules'].nodes.orthoc.links || []), ['#hip-fracture-cpg--frx', 'Hip fracture in an older adult: CPG 2023']];
+P['pain'].see = [...(P['pain'].see || []), ['#hip-fracture-cpg--pain', 'Hip fracture CPG (2023): analgesia in the elderly']]; // @light
+P['referral-rules'].nodes.orthoc.links = [...(P['referral-rules'].nodes.orthoc.links || []), ['#hip-fracture-cpg--frx', 'Hip fracture in an older adult: CPG 2023']]; // @light
 /* Where the CPG asks for more than the department's notes (open item): a suspected hip fracture in an older adult with a normal
    X-ray gets CT or MRI and an orthopaedic referral (Recommendation 1, p6; chapter 5, p6), where the notes give a follow-up X-ray
    or EMACC within 3 days */
-P['referral-rules'].nodes.orthcl.links = [...(P['referral-rules'].nodes.orthcl.links || []), ['#hip-fracture-cpg--occ', 'Older adult, normal hip X-ray: CPG 2023']];
-P['safe-practice'].nodes.limb.links = [...(P['safe-practice'].nodes.limb.links || []), ['#hip-fracture-cpg--occ', 'Older adult, normal hip X-ray: CPG 2023']];
+P['referral-rules'].nodes.orthcl.links = [...(P['referral-rules'].nodes.orthcl.links || []), ['#hip-fracture-cpg--occ', 'Older adult, normal hip X-ray: CPG 2023']]; // @light
+P['safe-practice'].nodes.limb.links = [...(P['safe-practice'].nodes.limb.links || []), ['#hip-fracture-cpg--occ', 'Older adult, normal hip X-ray: CPG 2023']]; // @light
 /* For engine.js, not a data file (check-data.js okHref does not accept #calc-pain or #calc-analgesia in data files):
    CALC_SEE['hip-fracture-cpg'] = [['#calc-pain', 'Pain scales (PAINAD)']];
    #calc-analgesia computes the ebook's weight-based doses, not this CPG's Appendix 3 doses: add it only with that label. */
@@ -667,8 +667,8 @@ P['sinusitis-cpg'] = {
 };
 
 /* Department entries point to the national guideline: links only, their wording stays (rule 6) */
-P['referral-rules'].see = [...(P['referral-rules'].see || []), ['#sinusitis-cpg--early', 'Rhinosinusitis CPG (2016): referral to ORL']];
-P['outpatient-referral'].see = [...(P['outpatient-referral'].see || []), ['#sinusitis-cpg--early', 'Rhinosinusitis: early referral to ORL (CPG 2016)']];
+P['referral-rules'].see = [...(P['referral-rules'].see || []), ['#sinusitis-cpg--early', 'Rhinosinusitis CPG (2016): referral to ORL']]; // @light
+P['outpatient-referral'].see = [...(P['outpatient-referral'].see || []), ['#sinusitis-cpg--early', 'Rhinosinusitis: early referral to ORL (CPG 2016)']]; // @light
 
 /* ----- CPG Management of Sore Throat (Ministry of Health Malaysia, Academy of Medicine of Malaysia and Malaysian Society of
    Infectious Diseases and Chemotherapy, April 2003), MOH/P/PAK/68.03 (GU), for children and adults from the community (p iii) -----
@@ -880,7 +880,7 @@ P['sore-throat-cpg'] = {
    calculator is built; see throat-review.md, section d). */
 
 /* See-also from related entries: links only, their wording stays */
-P['children'].see = [...(P['children'].see || []), ['#sore-throat-cpg', 'Sore throat CPG (2003): child antibiotic doses']];
+P['children'].see = [...(P['children'].see || []), ['#sore-throat-cpg', 'Sore throat CPG (2003): child antibiotic doses']]; // @light
 /* The rhinosinusitis entry (sinusitis-cpg) is drafted in parallel: guarded, so this line is harmless if it runs first or that
    entry is not built. If it is not built, also drop '#sinusitis-cpg' from see above (okHref rejects it). */
 if (P['sinusitis-cpg']) P['sinusitis-cpg'].see = [...(P['sinusitis-cpg'].see || []), ['#sore-throat-cpg', 'Sore throat CPG (2003)']];
@@ -1051,14 +1051,14 @@ P['copd-cpg'] = {
 };
 
 /* The department's Asthma Zone flow and the asthma entries point to the national COPD guideline: links only, their wording stays */
-P['asthma-zone'].see = [...(P['asthma-zone'].see || []), ['#copd-cpg', 'COPD CPG (2009)']];
+P['asthma-zone'].see = [...(P['asthma-zone'].see || []), ['#copd-cpg', 'COPD CPG (2009)']]; // @light
 P['asthma-cpg'].see = [...(P['asthma-cpg'].see || []), ['#copd-cpg', 'COPD CPG (2009)']];
-P['asthma'].see = [...(P['asthma'].see || []), ['#copd-cpg', 'COPD CPG (2009)']];
-P['pneumonia'].see = [...(P['pneumonia'].see || []), ['#copd-cpg', 'COPD flare-up CPG (2009)']];
+P['asthma'].see = [...(P['asthma'].see || []), ['#copd-cpg', 'COPD CPG (2009)']]; // @light
+P['pneumonia'].see = [...(P['pneumonia'].see || []), ['#copd-cpg', 'COPD flare-up CPG (2009)']]; // @light
 /* Optional, as the gout rule and the children's battery step do: where the CPG differs on the department's own step, the link sits
    on the step. The Asthma Zone discharge (BA/COPD protocol, 27 Mar 2020) gives prednisolone 30 mg once daily for 5 days; for COPD
    the CPG gives 30-40 mg daily for 7-14 days (p36, p40). Which the Green Zone follows for COPD is an open question. */
-P['asthma-zone'].nodes.dc.links = [...(P['asthma-zone'].nodes.dc.links || []), ['#copd-cpg--home', 'COPD (CPG 2009): prednisolone 30-40 mg for 7-14 days']];
+P['asthma-zone'].nodes.dc.links = [...(P['asthma-zone'].nodes.dc.links || []), ['#copd-cpg--home', 'COPD (CPG 2009): prednisolone 30-40 mg for 7-14 days']]; // @light
 P['copd-cpg'].own = true;
 
 /* ----- CPG Management of Type 2 Diabetes Mellitus, 6th edition (December 2020), summarised -----
@@ -1271,8 +1271,8 @@ P['t2dm-cpg'] = {
 };
 
 /* The ebook pathways and the other CPG entries point here (links only: their content stays as written) */
-P['hyperglycaemia'].see = [...(P['hyperglycaemia'].see || []), ['#t2dm-cpg', 'Type 2 diabetes CPG (2020)']];
-P['hypoglycaemia'].see = [...(P['hypoglycaemia'].see || []), ['#t2dm-cpg--hypo', 'Type 2 diabetes CPG (2020): low sugar']];
+P['hyperglycaemia'].see = [...(P['hyperglycaemia'].see || []), ['#t2dm-cpg', 'Type 2 diabetes CPG (2020)']]; // @light
+P['hypoglycaemia'].see = [...(P['hypoglycaemia'].see || []), ['#t2dm-cpg--hypo', 'Type 2 diabetes CPG (2020): low sugar']]; // @light
 P['diabetic-foot-cpg'].see = [...(P['diabetic-foot-cpg'].see || []), ['#t2dm-cpg', 'Type 2 diabetes CPG (2020)']];
 P['dengue-cpg'].nodes.msglt.links = [...(P['dengue-cpg'].nodes.msglt.links || []), ['#t2dm-cpg--eudka', 'Type 2 diabetes CPG: euglycaemic ketoacidosis']];
 /* For the integrator, not active here:
@@ -1533,7 +1533,7 @@ P['cancer-pain-cpg'] = {
 };
 
 /* The ebook pathway points to the national guideline (a link only: its content stays as written) */
-P['pain'].see = [...(P['pain'].see || []), ['#cancer-pain-cpg', 'Cancer pain CPG, 2nd edition (2023)']];
+P['pain'].see = [...(P['pain'].see || []), ['#cancer-pain-cpg', 'Cancer pain CPG, 2nd edition (2023)']]; // @light
 
 /* ----- CPG Prevention and Treatment of Venous Thromboembolism (August 2013), summarised -----
    Cover: Malaysian Society of Haematology, National Heart Association of Malaysia, Ministry of Health Malaysia and the
@@ -1758,7 +1758,7 @@ P['vte-cpg'] = {
 };
 
 /* The ebook pathway and two CPG entries point here: links only, their wording stays (rule 5) */
-P['dvt'].see = [...(P['dvt'].see || []), ['#vte-cpg', 'VTE CPG (2013)']];
+P['dvt'].see = [...(P['dvt'].see || []), ['#vte-cpg', 'VTE CPG (2013)']]; // @light
 P['head-injury-cpg'].see = [...(P['head-injury-cpg'].see || []), ['#vte-cpg--hiw', 'VTE CPG (2013): warfarin and head injury, with doses']];
 P['dengue-cpg'].see = [...(P['dengue-cpg'].see || []), ['#vte-cpg--dw', 'VTE CPG (2013): dengue on warfarin']];
 /* For engine.js (calculator links go through CALC_SEE, as for acs-cpg):
@@ -2003,13 +2003,13 @@ P['ckd-cpg'] = {
 };
 
 /* The related pathways point to the national guideline (links only: their content stays as written) */
-P['renal-colic'].see = [...(P['renal-colic'].see || []), ['#ckd-cpg--nsaid', 'CKD CPG (2018): NSAIDs in CKD']];
-P['pain'].see = [...(P['pain'].see || []), ['#ckd-cpg--nsaid', 'CKD CPG (2018): avoid NSAIDs in CKD']];
-P['hyperglycaemia'].see = [...(P['hyperglycaemia'].see || []), ['#ckd-cpg--dm', 'CKD CPG (2018): diabetes medicines by kidney function']];
-P['hypoglycaemia'].see = [...(P['hypoglycaemia'].see || []), ['#ckd-cpg--dm', 'CKD CPG (2018): sulfonylureas in CKD']];
-P['hypertensive-urgency'].see = [...(P['hypertensive-urgency'].see || []), ['#ckd-cpg--bp', 'CKD CPG (2018): blood pressure medicines in CKD']];
-P['heart-failure'].see = [...(P['heart-failure'].see || []), ['#ckd-cpg--acei', 'CKD CPG (2018): ACE inhibitor or ARB with a rising creatinine or potassium']];
-P['dvt'].see = [...(P['dvt'].see || []), ['#ckd-cpg--rx', 'CKD CPG (2018): creatinine clearance (Cockcroft-Gault)']];
+P['renal-colic'].see = [...(P['renal-colic'].see || []), ['#ckd-cpg--nsaid', 'CKD CPG (2018): NSAIDs in CKD']]; // @light
+P['pain'].see = [...(P['pain'].see || []), ['#ckd-cpg--nsaid', 'CKD CPG (2018): avoid NSAIDs in CKD']]; // @light
+P['hyperglycaemia'].see = [...(P['hyperglycaemia'].see || []), ['#ckd-cpg--dm', 'CKD CPG (2018): diabetes medicines by kidney function']]; // @light
+P['hypoglycaemia'].see = [...(P['hypoglycaemia'].see || []), ['#ckd-cpg--dm', 'CKD CPG (2018): sulfonylureas in CKD']]; // @light
+P['hypertensive-urgency'].see = [...(P['hypertensive-urgency'].see || []), ['#ckd-cpg--bp', 'CKD CPG (2018): blood pressure medicines in CKD']]; // @light
+P['heart-failure'].see = [...(P['heart-failure'].see || []), ['#ckd-cpg--acei', 'CKD CPG (2018): ACE inhibitor or ARB with a rising creatinine or potassium']]; // @light
+P['dvt'].see = [...(P['dvt'].see || []), ['#ckd-cpg--rx', 'CKD CPG (2018): creatinine clearance (Cockcroft-Gault)']]; // @light
 P['gout-cpg'].see = [...(P['gout-cpg'].see || []), ['#ckd-cpg', 'CKD CPG, 2nd edition (2018)']];
 P['diabetic-foot-cpg'].see = [...(P['diabetic-foot-cpg'].see || []), ['#ckd-cpg--abx', 'CKD CPG (2018): oral antibiotics by kidney function']];
 
