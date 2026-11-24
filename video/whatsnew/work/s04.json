@@ -1,0 +1,252 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,280"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 280
+			},
+			"text": " And"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,280",
+				"to": "00:00:00,560"
+			},
+			"offsets": {
+				"from": 280,
+				"to": 560
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,560",
+				"to": "00:00:00,940"
+			},
+			"offsets": {
+				"from": 560,
+				"to": 940
+			},
+			"text": " home"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,940",
+				"to": "00:00:01,390"
+			},
+			"offsets": {
+				"from": 940,
+				"to": 1390
+			},
+			"text": " page"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,390",
+				"to": "00:00:01,890"
+			},
+			"offsets": {
+				"from": 1390,
+				"to": 1890
+			},
+			"text": " offers"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,890",
+				"to": "00:00:02,220"
+			},
+			"offsets": {
+				"from": 1890,
+				"to": 2220
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,220",
+				"to": "00:00:02,590"
+			},
+			"offsets": {
+				"from": 2220,
+				"to": 2590
+			},
+			"text": " last"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,590",
+				"to": "00:00:02,980"
+			},
+			"offsets": {
+				"from": 2590,
+				"to": 2980
+			},
+			"text": " step"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,980",
+				"to": "00:00:03,200"
+			},
+			"offsets": {
+				"from": 2980,
+				"to": 3200
+			},
+			"text": " you"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,200",
+				"to": "00:00:04,020"
+			},
+			"offsets": {
+				"from": 3200,
+				"to": 4020
+			},
+			"text": " opened,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,020",
+				"to": "00:00:04,120"
+			},
+			"offsets": {
+				"from": 4020,
+				"to": 4120
+			},
+			"text": " so"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,120",
+				"to": "00:00:04,340"
+			},
+			"offsets": {
+				"from": 4120,
+				"to": 4340
+			},
+			"text": " you"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,340",
+				"to": "00:00:04,570"
+			},
+			"offsets": {
+				"from": 4340,
+				"to": 4570
+			},
+			"text": " can"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,570",
+				"to": "00:00:04,830"
+			},
+			"offsets": {
+				"from": 4570,
+				"to": 4830
+			},
+			"text": " pick"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,830",
+				"to": "00:00:04,920"
+			},
+			"offsets": {
+				"from": 4830,
+				"to": 4920
+			},
+			"text": " up"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,920",
+				"to": "00:00:05,260"
+			},
+			"offsets": {
+				"from": 4920,
+				"to": 5260
+			},
+			"text": " where"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,260",
+				"to": "00:00:05,460"
+			},
+			"offsets": {
+				"from": 5260,
+				"to": 5460
+			},
+			"text": " you"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,460",
+				"to": "00:00:05,780"
+			},
+			"offsets": {
+				"from": 5460,
+				"to": 5780
+			},
+			"text": " left"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,780",
+				"to": "00:00:06,180"
+			},
+			"offsets": {
+				"from": 5780,
+				"to": 6180
+			},
+			"text": " off."
+		}
+	]
+}

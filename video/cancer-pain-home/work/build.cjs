@@ -252,7 +252,12 @@ ${p.lead ? `#${id}-lead{font-size:${p.ls}px;opacity:0}\n` : ''}${p.G.list
       : p.shown.map((_, i) => `#${id}-i${i}{top:${p.top}px;height:${p.areaH}px;opacity:0}\n#${id}-i${i} .disc{width:${p.items[i].disc}px;height:${p.items[i].disc}px;border-radius:${Math.round(p.items[i].disc * .3)}px;padding:${Math.round(p.items[i].disc * .23)}px}\n#${id}-i${i} p{margin-top:${p.items[i].gap}px !important;font-size:${p.items[i].s}px}`).join('\n')}`;
     const head = `  <div class="hd" id="${id}-hd"><div class="disc jw j-${jw}">${svg(p.G.hd)}</div><h2 data-w="h">${esc(p.g.h)}</h2></div>`;
     const leadH = p.lead ? `\n    <p class="lead" id="${id}-lead" data-w="p">${esc(p.lead)}</p>` : '';
-    const js = [enter(`#${id}-hd`, 0.3), enter(`#${id}-card`, 0.42)];
+    /* The card comes with the heading, unless the voice takes more than 5 s to read the heading (section 4's question of 108
+       characters, 24 Nov 2026): then the heading stands alone over the ribbon while it is read, and the card enters with its first
+       line (finishing as that line starts to rise), so it never sits empty */
+    const firstAt = at(s, p.lead ? 1 : p.first) - start, cardAt = firstAt - 0.42 > 5 ? r3(firstAt - 0.65) : 0.42;
+    const js = [enter(`#${id}-hd`, 0.3), enter(`#${id}-card`, cardAt)];
+    if (cardAt !== 0.42) log.push(`${id}: card enters at ${cardAt} s, with its first line (heading read alone for ${r3(firstAt)} s)`);
     if (p.lead) js.push(`  tl.fromTo("#${id}-lead",{y:24,opacity:0},{y:0,opacity:1,duration:.4,ease:"power3.out"},${r3(at(s, 1) - start - 0.2)});`);
     let body;
     if (p.G.list) {

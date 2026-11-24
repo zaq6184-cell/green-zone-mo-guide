@@ -1,0 +1,29 @@
+<template>
+<style>
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-700-latin.woff2') format('woff2');font-weight:700;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-800-latin.woff2') format('woff2');font-weight:800;font-style:normal;font-display:block}
+@font-face{font-family:'Figtree';src:url('assets/fonts/figtree-900-latin.woff2') format('woff2');font-weight:900;font-style:normal;font-display:block}
+#root, #root *{box-sizing:border-box}
+#root{position:absolute;inset:0;font-family:'Figtree',sans-serif;color:#0f1a15;-webkit-font-smoothing:antialiased}
+#root p,#root h1,#root h2{margin:0}
+
+.ttl{position:absolute;left:150px;top:330px;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.45)}
+.ttl h1{font-weight:900;font-size:112px;line-height:1;letter-spacing:-.035em;opacity:0}
+.ttl h1 em{font-style:normal;color:#7cf0b4}
+.ttl p{margin-top:26px !important;font-weight:800;font-size:40px;line-height:1.2;color:rgba(255,255,255,.88);opacity:0}
+.gz{display:flex;align-items:center;gap:18px;margin-top:44px !important;font-weight:800;font-size:34px;opacity:0}
+.gz i{display:block;width:46px;height:46px;border-radius:15px;background:linear-gradient(150deg,#0d7049,#0a5a3b 55%,#063d28);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18)}
+</style>
+<div id="root" data-composition-id="open" data-width="1920" data-height="1080">
+<div class="ttl"><h1 id="open-h">What's <em>new</em></h1><p id="open-p">in the Green Zone MO Guide</p></div>
+</div>
+<script>
+(function(){
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#open-h",{opacity:0,y:40},{opacity:1,y:0,duration:.6,ease:"power3.out"},0.8);
+  tl.fromTo("#open-p",{opacity:0,y:30},{opacity:1,y:0,duration:.5,ease:"power3.out"},1.93);
+  tl.fromTo(".ttl",{opacity:1},{opacity:0,duration:.35,ease:"power2.in",immediateRender:false},5.97);
+  window.__timelines["open"] = tl;
+})();
+</script>
+</template>

@@ -86,3 +86,32 @@ video/cancer-pain-home/work/*.md5
 video/cancer-pain-home/assets/bg.mp4
 video/cancer-pain-home/assets/vo-*.wav
 video/cancer-pain-home-ms/
+# The discharge advice films (24 Nov 2026): the seven film projects (written in full by work/build.cjs), renders, frames and working media stay on this PC
+video/advice-home/*/
+!video/advice-home/work/
+!video/advice-home/assets/
+video/advice-home/work/snap*/
+video/advice-home/work/final-frames/
+video/advice-home/work/*.mp4
+video/advice-home/work/*.wav
+video/advice-home/work/*.jpg
+video/advice-home/work/*.log
+video/advice-home/work/check-*.txt
+video/advice-home/work/build-*.txt
+video/advice-home/work/adv-*.txt
+video/advice-home/assets/bg-*.mp4
+video/advice-home/assets/vo-*.wav
+video/advice-home/assets/music.mp3
+# What's new in 60 seconds (24 Nov 2026): renders, takes and working media stay on this PC
+video/whatsnew/.hyperframes/
+video/whatsnew/work/*.mp4
+video/whatsnew/work/*.wav
+video/whatsnew/work/vo-raw/
+video/whatsnew/work/snap*/
+video/whatsnew/work/final/
+video/whatsnew/work/shots-png/
+video/whatsnew/work/*.log
+video/whatsnew/work/check*.json
+video/whatsnew/assets/flow/
+video/whatsnew/assets/vo/
+video/whatsnew/assets/music.mp3

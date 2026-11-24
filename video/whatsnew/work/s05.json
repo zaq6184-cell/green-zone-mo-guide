@@ -1,0 +1,208 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,060"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 60
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,060",
+				"to": "00:00:00,250"
+			},
+			"offsets": {
+				"from": 60,
+				"to": 250
+			},
+			"text": " The"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,250",
+				"to": "00:00:00,720"
+			},
+			"offsets": {
+				"from": 250,
+				"to": 720
+			},
+			"text": " dengue"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,720",
+				"to": "00:00:01,010"
+			},
+			"offsets": {
+				"from": 720,
+				"to": 1010
+			},
+			"text": " and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,010",
+				"to": "00:00:01,450"
+			},
+			"offsets": {
+				"from": 1010,
+				"to": 1450
+			},
+			"text": " cancer"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,450",
+				"to": "00:00:01,790"
+			},
+			"offsets": {
+				"from": 1450,
+				"to": 1790
+			},
+			"text": " pain"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,790",
+				"to": "00:00:02,670"
+			},
+			"offsets": {
+				"from": 1790,
+				"to": 2670
+			},
+			"text": " leaflets"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,670",
+				"to": "00:00:02,720"
+			},
+			"offsets": {
+				"from": 2670,
+				"to": 2720
+			},
+			"text": " now"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,720",
+				"to": "00:00:03,070"
+			},
+			"offsets": {
+				"from": 2720,
+				"to": 3070
+			},
+			"text": " have"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,070",
+				"to": "00:00:03,510"
+			},
+			"offsets": {
+				"from": 3070,
+				"to": 3510
+			},
+			"text": " short"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,510",
+				"to": "00:00:03,970"
+			},
+			"offsets": {
+				"from": 3510,
+				"to": 3970
+			},
+			"text": " films"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,970",
+				"to": "00:00:04,230"
+			},
+			"offsets": {
+				"from": 3970,
+				"to": 4230
+			},
+			"text": " in"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,230",
+				"to": "00:00:04,630"
+			},
+			"offsets": {
+				"from": 4230,
+				"to": 4630
+			},
+			"text": " English"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,630",
+				"to": "00:00:04,840"
+			},
+			"offsets": {
+				"from": 4630,
+				"to": 4840
+			},
+			"text": " and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,840",
+				"to": "00:00:05,350"
+			},
+			"offsets": {
+				"from": 4840,
+				"to": 5350
+			},
+			"text": " Bahasa"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:05,350",
+				"to": "00:00:05,960"
+			},
+			"offsets": {
+				"from": 5350,
+				"to": 5960
+			},
+			"text": " Melayu."
+		}
+	]
+}

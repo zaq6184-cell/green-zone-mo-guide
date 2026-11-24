@@ -75,8 +75,9 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 23 Nov 2026';
+const APP_VER = 'Version 8, updated 24 Nov 2026';
 const V8 = [
+  [`Discharge advice in Bahasa Melayu, the advice as films, and What's new in 60 seconds`, `The seven discharge advice tabs (mild head injury, dengue, the Asthma Zone, gastroenteritis, renal colic, abdominal pain and hypoglycaemia) now switch to Bahasa Melayu, line for line, with a Malay read-aloud, and their patient pages and QR codes come in Malay too: the translation is the guide's own, approved by the guide owner on 24 Nov 2026. Each of the seven tabs also has a short film, every line on screen as it is read, for the patient to watch on the tab or their own phone. The patient journey can be heard in Bahasa Melayu, with Malay captions. What's new opens on a 60-second film of what changed. The cancer pain film no longer shows an empty card in its fourth part.`, [['#renal-colic', 'Renal colic'], ['#journey', 'Patient journey'], ['#new', "What's new"]], ['#mild-tbi', '#dengue', '#asthma-zone', '#gastroenteritis', '#renal-colic', '#abdominal-pain', '#hypoglycaemia']],
   [`Quicker on a weak signal, pick up where you left off, and the cancer pain film`, `On a weak signal the guide now starts before the whole page has arrived: home, search and the department's own pathways and rules answered about 1.7 seconds sooner on a slowed phone (4.6 s instead of 6.3), and a national guideline opened in that moment opens as soon as it lands. The home page offers the last step you opened, one tap away, for 12 hours: only its address and the time are kept on this phone, never an answer, and the cross forgets it. The first-shift intro can be read aloud, in English or Bahasa Melayu. The cancer pain leaflet has its own film in both languages, every line on screen as it is read, over a calm Flow Music bed. The CT brain, antidotes, abbreviations and aggressive patient banners are now Flow loops like the rest. An accessibility check (WCAG 2.2 AA, 35 views by day and by night) found the page language, the logo's name, five places with too little contrast, the search results for screen readers and wide tables a keyboard could not scroll; all fixed, and it now reports none. Pressing a tile starts its page's picture before the tap lands.`, [['#home', 'Home'], ['#intro', 'First-shift intro'], ['#cancer-pain-cpg', 'Cancer pain CPG']], ['#cancer-pain-cpg']],
   [`Faster on a weak signal, and pages that move`, `The installed guide now opens its saved copy after 1.5 seconds with no answer from the network (it waited 4), and once the hospital Wi-Fi has hung, the next open no longer waits again: measured on a slowed phone, 4.3 seconds down to 1.8 on a stuck connection, and to 0.3 for the open after it. A newer version still arrives, with Reload. On the claude.ai link, and on the web app with Data Saver on, a first visit no longer downloads the journey's five pictures and the tour's cover (about 320 KB) until you open those pages (the installed web app still saves them in the background, for use offline), and a thin bar at the top shows while a slow first open is still arriving. A tool tile now grows into its page's banner as it opens, and the back button slides the earlier page back in; other links still open at once, and with reduced motion pages change as before.`, [['#install', 'Install the guide'], ['#tools', 'Shift tools']]],
   [`Antidotes, abbreviations and the documents left out`, `The Ministry of Health's Antidotes Quick Guide (First Edition, January 2022): all 38 antidotes with their preparation, dose and storage as printed, in Shift tools, in search and on the drug card, with the lines its reader found doubtful marked. The MOH abbreviation list (Bil.1/2024, 2,665 rows): type an abbreviation in search to see its meaning as the list prints it. Discharge at own risk, the MOH procedure (circular Bil. 24/2021), in Safe practice; fever after a flood, treated as suspected leptospirosis (Bil. 26/2021), and smoking products and vaping, notified within 24 hours (Bil. 25/2026), in Infection alerts; the department's CME on reading a CT brain; and the CME deck on the aggressive patient on the behavioural disturbance pathway. Each with its source and date; the questions they raise are under Still to confirm.`, [['#antidotes', 'Antidotes'], ['#abbreviations', 'Abbreviations'], ['#ct-brain', 'Reading a CT brain'], ['#safe-practice--aorkpk', 'Own risk: the MOH procedure']], ['#safe-practice', '#infection-alerts', '#behavioural-disturbance', '#ct-brain']],
@@ -297,6 +298,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'From the Malay versions added on 24 Nov 2026 (approved by the guide owner the same day). Still to confirm: the Asthma Zone advice comes from the asthma memo of Nov 2025, while its patient page names the ebook as its source.',
   `From the documents added on 21 Nov 2026 at the guide owner's "add the documents that was left out". Still to confirm: (1) the MOH procedure for discharge at own risk (KPK circular Bil. 24/2021) is written for ward inpatients and never mentions the emergency department: does the department apply it in the ED, and is its Borang A the AOR form the department policy 2026 (32.3) means; (2) the MOH abbreviation list Bil.1/2024 prints no issuer, date or rule for its use, and gives only the meanings it prints (TDS only as "Toilet, Debridement And Suturing", BD only as "Binswanger's Disease"): whether the department uses it, and where its do-not-use list (named in its row 1500) is; (3) the leptospirosis circular Bil. 26/2021 prints the child's amoxicillin as "50 mg/kg dose oral 608 hourly" (in both copies circulated), gives no regimen for children aged 8 and over, and is written for primary care: what the department uses; (4) the smoking products circular Bil. 25/2026 names no route for sending its notification form to the PKD: how the department sends it; (5) the CME deck on the aggressive patient (circulated 13 Oct 2026, undated) has its own dose table (slide 53, haloperidol, olanzapine, risperidone, lorazepam, diazepam and midazolam): how it compares with the ebook's table on the behavioural disturbance pathway, which stays the department's route; (6) the MOH Antidotes Quick Guide (2022) prints lines its reader found doubtful, shown as printed with a Check mark: calcium gluconate's maximum "3000-6000mg/kg/dose" after 60 mg/kg/dose; dantrolene's indication "Malignant hypothermia" and its 70 ml title against 60 ml of water for injection; atropine "0.5 to 2.4 mg/kg/hour"; bromocriptine's two maximums; D-penicillamine's two daily doses; methylene blue's two dose paragraphs; folinic acid's 50 mg/5 ml title against 50 mg/ml; and the storage tables of idarucizumab and the 3-factor PCC, which contradict the text under them; whether a later edition exists; and how its entries compare with the ebook\'s pathways and the hospital\'s regimens (N-acetylcysteine with the paracetamol overdose pathway and the HKL NAC regimen; naloxone and flumazenil), which has not been done; (7) the aggressive patient deck\'s HKL risk-of-violence form prints "> 2" factors for high risk and "≥ 2" for moderate (slide 22); (8) the CT brain CME prints the narrow window as "WW: 8 WL:32" (slide 4), shown as printed.`,
   'From the department memos and letters added on 21 Nov 2026. Still to confirm: (1) the department\'s Nipah memo HKL/JK/98/123/8 prints "28 Januari 2025" but was circulated in January 2026, and the POCT review memo prints "6 Mac 2025" but cites a meeting of 4 Dec 2025: which year is right; (2) whether the memo on a patient treated elsewhere within 24 hours (HKL/JK/98/188/3(5)19, 4 Feb 2019) and the memo on CT or MRI before discharge (HKL/JK/98/188/3(28)22, 14 Dec 2022) are still in force, and how the registration sticker marks a visit within 24 hours; (3) which criteria the review of IV paracetamol and IV albumin used (letter HKL/JK/98/188/1, May 2026); (4) Lampiran A for foreign patients (memo of 6 Jul 2026): its flow chart prints the forms as CIP/JKT-02 and CIP/JK-01 where the memo prints BPK/JKT-02 and CIP/JKT-01, and it does not say what happens when no specialist is present; (5) MAU: the 2022 criteria the entry follows, or the General Medicine letter of 7 Feb 2025 (oxygen up to a Venturi mask at 40%, 100 kg or less, pregnancy excluded); (6) whether the aspirin dispersible brands of the pharmacy letter of 9 Nov 2022 are still the ones supplied; (7) EMACC\'s days: an undated meeting minute circulated on 3 Jan 2025 says EMACC runs Monday to Saturday, Saturday until 1 pm, with at most 10 Monday appointments, where the guide (the guide owner, 12 Nov 2026) says Monday to Friday, 8 am to 3 pm; (8) whether the department\'s two antimicrobial quick guides (dilution, and adult dosing), 2nd edition, February 2024, are still the current editions.',
   'Open now (18 Nov 2026) reads the hours the sources print. Four print an hour but not the days: MAU office hours, 8 am to 5 pm (the MAU admission note); the Observation Ward\'s medical officer, 10 am to 10 pm (memo HKL/JK/98/188/3(6)23); LA OT taking orthopaedic cases, 8 am to 9 pm only (department policy 2026, 22.3.3); and office hours at SCACC ending at 1700 hr, with no start (Code Blue Manual, 4.2). Which days does each hold, and when do SCACC office hours start? EMACC follows the guide owner\'s 8 am to 3 pm, Monday to Friday, where the memo of 11 Jan 2024 prints 7.30 am to 3.30 pm. The guide cannot know public holidays.',
@@ -2575,7 +2577,7 @@ function closeMap(restore){
 function tabsOf(p){
   const T = [], li = a => `<li>${esc(a)}</li>`;
   const table = t => `<div class="tbl" tabindex="0" role="region" aria-label="${esc(t.title || t.h || 'Table')}: table"><table><thead><tr>${t.head.map(x => `<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-  if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:(READ_ADV[state.id] ? listenBar(READ_ADV[state.id], 'Listen to this advice') : '') + `<ol id="advlist">${p.advice.map(li).join('')}</ol><div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(state.id)}</div>`});
+  if (p.advice) T.push({k:'advice', l:'Discharge advice', cls:'t-advice', html:advHTML(p)});
   if (p.concerns) T.push({k:'concerns', l:'Practical concerns', cls:'t-concern', html:`<ul>${p.concerns.map(li).join('')}</ul><p class="hint">Consider admission if any are present.</p>`});
   const note = d => `<div class="deptnote"${d.lang ? ` lang="${d.lang}"` : ''}><h3>${esc(d.h)}</h3><p class="src">${esc(d.src)}</p>${d.fig ? figHTML(d.fig) : ''}${d.items ? `<ul>${d.items.map(li).join('')}</ul>` : ''}${d.table ? table(d.table) : ''}${d.refs ? `<ol class="srcl">${d.refs.map(r => `<li>${esc(r[0])} ${r[1][0] === '#' ? `<a href="${r[1]}">Open in this guide</a>` : `<a href="${r[1]}" target="_blank" rel="noopener noreferrer">Open source${svg('ext')}</a>`}</li>`).join('')}</ol>` : ''}</div>`;
   if (p.leaflet) T.push({k:'leaflet', l:'Home care advice', cls:'t-advice', html:leafletHTML(p)});
@@ -2634,6 +2636,13 @@ const READ = {
   'adv-hypo-en':{src:'audio/adv-hypo-en.mp3', dur:38.23, marks:[0, 23.46],
     lines:[[0,0,0],[7.57,0,1],[17.49,0,2],[23.46,0,3],[27.92,0,4]]}
 };
+/* Discharge advice in Bahasa Melayu (24 Nov 2026, at Krishna's "all five"): ADVICE_MS in data31.js translates each tab's own lines,
+   one for one, for his check (the English stays the source: rule 5); READ_MS, beside it, times its read-aloud (VoiceStudio, Malay
+   Kore). A tab offers Bahasa Melayu only when its translation has every line. */
+if (typeof READ_MS !== 'undefined') Object.assign(READ, READ_MS);
+const advMs = id => typeof ADVICE_MS !== 'undefined' && P[id] && ADVICE_MS[id] && ADVICE_MS[id].length === (P[id].advice || []).length ? ADVICE_MS[id] : null;
+const ADV_MS_SRC = 'Bahasa Melayu: this guide\'s translation of the ebook\'s advice, line for line; the English version is the source.';
+const ADV_MS_PT = 'Terjemahan Bahasa Melayu bagi nasihat dalam e-buku Jabatan Kecemasan & Trauma, Hospital Kuala Lumpur (2025).';
 const READ_LEAF = {'dengue-cpg':'leaf-dengue', 'cancer-pain-cpg':'leaf-cancerpain'}, READ_ADV = {'mild-tbi':'adv-tbi-en', 'dengue':'adv-dengue-en', 'asthma-zone':'adv-asthma-en', 'gastroenteritis':'adv-gastro-en', 'renal-colic':'adv-renal-en', 'abdominal-pain':'adv-abdo-en', 'hypoglycaemia':'adv-hypo-en'};
 const mmss = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
 const reader = new Audio(); reader.preload = 'none';
@@ -2770,16 +2779,30 @@ const FILMS = {'dengue-cpg':{
   'cancer-pain-cpg':{
   en:{src:'media/cancer-pain-home-720.mp4', cover:'media/cancer-pain-home-poster.webp', thumb:'media/cancer-pain-home-thumb.webp', t:'Watch this leaflet', d:'4 min · every line on screen as it is read'},
   ms:{src:'media/cancer-pain-home-ms-720.mp4', cover:'media/cancer-pain-home-ms-poster.webp', thumb:'media/cancer-pain-home-ms-thumb.webp', t:'Tonton risalah ini', d:'4 min · setiap baris di skrin semasa dibacakan'}}};
+/* The seven discharge advice tabs as films (24 Nov 2026, at Krishna's "all five"): video/advice-home, the English read-aloud as the
+   voice, each entry's banner loop as the ground and the cancer pain film's Flow Music bed; shown on the advice tab and the patient
+   page. The Malay films follow once the Malay advice is checked. Each takes its entry's banner still as its cover, so the
+   claude.ai copy, which holds at most 511 files a version, gains only the film. */
+FILMS['mild-tbi'] = {en:{src:'media/adv-tbi-720.mp4', cover:'tiles/brain.webp', thumb:'tiles/brain.webp', t:'Watch this advice', d:'1 min · every line on screen as it is read'}};
+FILMS['dengue'] = {en:{src:'media/adv-dengue-720.mp4', cover:'tiles/infect.webp', thumb:'tiles/infect.webp', t:'Watch this advice', d:'52 s · every line on screen as it is read'}};
+FILMS['asthma-zone'] = {en:{src:'media/adv-asthma-720.mp4', cover:'tiles/flow.webp', thumb:'tiles/flow.webp', t:'Watch this advice', d:'1 min · every line on screen as it is read'}};
+FILMS['gastroenteritis'] = {en:{src:'media/adv-gastro-720.mp4', cover:'tiles/abdo.webp', thumb:'tiles/abdo.webp', t:'Watch this advice', d:'51 s · every line on screen as it is read'}};
+FILMS['renal-colic'] = {en:{src:'media/adv-renal-720.mp4', cover:'tiles/abdo.webp', thumb:'tiles/abdo.webp', t:'Watch this advice', d:'55 s · every line on screen as it is read'}};
+FILMS['abdominal-pain'] = {en:{src:'media/adv-abdo-720.mp4', cover:'tiles/abdo.webp', thumb:'tiles/abdo.webp', t:'Watch this advice', d:'40 s · every line on screen as it is read'}};
+FILMS['hypoglycaemia'] = {en:{src:'media/adv-hypo-720.mp4', cover:'tiles/meta.webp', thumb:'tiles/meta.webp', t:'Watch this advice', d:'52 s · every line on screen as it is read'}};
+/* What's new in 60 seconds (24 Nov 2026, at Krishna's "all five with the Flow clips"): video/whatsnew, the guide's own screens,
+   three Flow Studio clips, Kira's narration (VoiceStudio) and a Flow Music bed, captions burnt in; on the What's new page */
+FILMS.whatsnew = {en:{src:'media/whatsnew-720.mp4', cover:'media/whatsnew-poster.webp', thumb:'media/whatsnew-poster.webp', w:1280, h:720, t:'What\'s new, in 60 seconds', d:'1 min · narrated, with captions'}};
 function filmCard(id, lg){
   const f = FILMS[id] && FILMS[id][lg]; if (!f) return '';
-  return `<div class="lfilm" lang="${lg}"><button type="button" class="lfilm-b" data-film="${f.src}" data-cover="${f.cover}"><span class="lfilm-th"><img src="${f.thumb}" alt="" width="72" height="72" loading="lazy">${svg('play')}</span><span class="lfilm-t"><b>${esc(f.t)}</b><small>${esc(f.d)}</small></span></button></div>`;
+  return `<div class="lfilm" lang="${lg}"><button type="button" class="lfilm-b" data-film="${f.src}" data-cover="${f.cover}"${f.w ? ` data-w="${f.w}" data-h="${f.h}"` : ""}><span class="lfilm-th"><img src="${f.thumb}" alt="" width="72" height="72" loading="lazy">${svg('play')}</span><span class="lfilm-t"><b>${esc(f.t)}</b><small>${esc(f.d)}</small></span></button></div>`;
 }
 function pauseFilms(){ $$('.lfilm video').forEach(v => { if (!v.paused) v.pause(); }); }
 document.addEventListener('click', e => {
   const b = e.target.closest('.lfilm-b'); if (!b) return;
   stopReader(); stopJourney(); pauseTour();
   const box = b.parentElement;
-  box.innerHTML = `<video class="lfilm-v" controls playsinline preload="none" width="720" height="720" poster="${b.dataset.cover}" src="${b.dataset.film}"></video>`;
+  box.innerHTML = `<video class="lfilm-v" controls playsinline preload="none" width="${b.dataset.w || 720}" height="${b.dataset.h || 720}" style="aspect-ratio:${b.dataset.w || 720}/${b.dataset.h || 720}" poster="${b.dataset.cover}" src="${b.dataset.film}"></video>`;
   const v = box.querySelector('video');
   v.addEventListener('play', stopReader);
   v.play().catch(() => {});
@@ -2787,6 +2810,17 @@ document.addEventListener('click', e => {
 
 /* The CPG's home care leaflet (Appendix 5B) in English or Bahasa Melayu. The choice lives in memory only */
 let leafLang = 'en';
+/* The Discharge advice tab: English, or Bahasa Melayu where the translation is complete; its read-aloud and film in the same language */
+const advRead = (id, lg) => { const k = READ_ADV[id]; if (!k) return ''; const m = k.replace(/-en$/, '-ms'); return lg === 'ms' ? (READ[m] ? m : '') : k; };
+let advSel = 'en'; /* the advice tab's own language, in memory: English unless the MO switched */
+const advLang = id => advMs(id) ? advSel : 'en';
+function advHTML(p){
+  const id = state.id, ms = advMs(id), lg = advLang(id), rk = advRead(id, lg), lines = lg === 'ms' ? ms : p.advice;
+  return (ms ? `<div class="seg leaf-lang" role="group" aria-label="Language of the advice">${[['en', 'English'], ['ms', 'Bahasa Melayu']].map(([k, t]) => `<button type="button" data-advlang="${k}" aria-pressed="${lg === k}" lang="${k}">${t}</button>`).join('')}</div>` : '')
+    + (rk ? listenBar(rk, lg === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen to this advice') : '') + filmCard(id, lg)
+    + `<ol id="advlist" lang="${lg}">${lines.map(a => `<li>${esc(a)}</li>`).join('')}</ol>` + (lg === 'ms' ? `<p class="src">${esc(ADV_MS_SRC)}</p>` : '')
+    + `<div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(id)}</div>`;
+}
 function leafletHTML(p){
   const L = p.leaflet, d = L[leafLang];
   return `<div class="leaf" id="leaf" lang="${leafLang}"><div class="seg leaf-lang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(k => `<button type="button" data-leaf="${k}" aria-pressed="${leafLang === k}" lang="${k}">${esc(L[k].lang)}</button>`).join('')}</div>
@@ -4530,7 +4564,7 @@ function renderJourney(anim){
   const nc = s.note && s.note.c ? ` style="--c:var(--${s.note.c});--cs:var(--${s.note.c}-soft)"` : '';
   stage.innerHTML = `<figure><video id="jclip" muted loop playsinline preload="none" ${jSeen ? `poster="${s.img}"` : `data-poster="${s.img}"`} width="1280" height="720" aria-label="${esc(s.alt)}"></video>
       <div class="cap" id="jcap" hidden></div>
-      <div class="ctl"><button type="button" class="mbtn" id="jlisten" aria-pressed="false">${svg('volume')}<span class="bl">Listen</span></button><button type="button" class="mbtn" id="jclipbtn">${svg(clipsOn ? 'pause' : 'play')}<span class="bl">${clipsOn ? 'Pause clip' : 'Play clip'}</span></button></div></figure>
+      <div class="ctl"><button type="button" class="mbtn" id="jlisten" aria-pressed="false">${svg('volume')}<span class="bl">Listen</span></button>${jMs() ? `<span class="seg jlang" id="jlang" role="group" aria-label="Narration language">${[['en', 'EN'], ['ms', 'BM']].map(([k, t]) => `<button type="button" data-jlang="${k}" aria-pressed="${jLang === k}" lang="${k}">${t}</button>`).join('')}</span>` : ''}<button type="button" class="mbtn" id="jclipbtn">${svg(clipsOn ? 'pause' : 'play')}<span class="bl">${clipsOn ? 'Pause clip' : 'Play clip'}</span></button></div></figure>
     <div class="txt">
       <h2>${esc(s.title)}</h2>
       <span class="who${s.mo ? ' mo' : ''}${s.optional ? ' optional' : ''}">${esc(s.who)}</span>
@@ -4547,6 +4581,7 @@ function renderJourney(anim){
   if (clipsOn && stageVisible) v.play().catch(() => {});
   $('#jclipbtn').onclick = () => setJourneyClip(!clipsOn);
   $('#jlisten').onclick = () => { if (!voice.paused && voice.dataset.i == step){ stopVoice(); setPlayAll(false); } else listen(step); };
+  const jl = $('#jlang'); if (jl) jl.onclick = ev => { const b = ev.target.closest('[data-jlang]'); if (!b) return; const was = !voice.paused; jLang = b.dataset.jlang; $$('#jlang [data-jlang]').forEach(x => x.setAttribute('aria-pressed', x === b)); if (was) listen(step); };
   $('#jprev').onclick = () => { setPlayAll(false); stopVoice(); setStep(step - 1, true); };
   $('#jnext').onclick = () => { setPlayAll(false); stopVoice(); setStep(step + 1, true); };
 }
@@ -4560,9 +4595,13 @@ function setStep(i, anim){ step = Math.max(0, Math.min(JOURNEY.length - 1, i)); 
 function setListen(on){ const b = $('#jlisten'); if (!b) return; b.innerHTML = svg(on ? 'pause' : 'volume') + `<span class="bl">${on ? 'Stop' : 'Listen'}</span>`; b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
 function setPlayAll(on){ playAll = on; $('#playall').innerHTML = svg(on ? 'pause' : 'play') + (on ? 'Stop playing' : 'Play all stops'); }
 /* Show the narration as captions, one sentence at a time, timed by sentence length */
+/* The journey's narration in English or Bahasa Melayu (24 Nov 2026): JOURNEY_MS in data31.js, audio/stop<n>-ms.mp3 (VoiceStudio, Malay Kore) */
+let jLang = 'en';
+const jMs = () => typeof JOURNEY_MS !== 'undefined' && JOURNEY_MS.length === JOURNEY.length;
 function listen(i){
-  const s = JOURNEY[i], parts = s.say.match(/[^.?!]+[.?!]+/g) || [s.say], total = s.say.length;
-  voice.pause(); voice.src = s.audio; voice.dataset.i = i; voice.currentTime = 0;
+  const s = JOURNEY[i], ms = jLang === 'ms' && jMs(), say = ms ? JOURNEY_MS[i] : s.say, parts = say.match(/[^.?!]+[.?!]+/g) || [say], total = say.length;
+  voice.pause(); voice.src = ms ? s.audio.replace(/\.mp3$/, '-ms.mp3') : s.audio; voice.dataset.i = i; voice.currentTime = 0;
+  const cc = $('#jcap'); if (cc) cc.lang = ms ? 'ms' : 'en';
   const cap = $('#jcap');
   voice.ontimeupdate = () => {
     if (!voice.duration) return;
@@ -4737,7 +4776,7 @@ function renderDrive(){
     return `<details class="dgrp"${open ? ' open' : ''}><summary>MO Drive: ${t} <small>${rows.length}</small></summary><ul class="drows">${rows.map(([f, , txt, links]) => row([f, txt, links])).join('')}</ul></details>`;
   }).join('');
   h += `<div class="confirm tile t-champagne"><h2>Still to confirm</h2><ol>${CONFIRM.map(c => `<li>${esc(c)}</li>`).join('')}</ol></div>`;
-  $('#drive').innerHTML = h;
+  $('#drive').innerHTML = filmCard('whatsnew', 'en') + h;
 }
 
 /* Banners for What's new, Sources and about, and the wall poster (the 12 Nov 2026 review): a Flow Studio loop in the style of
@@ -5327,7 +5366,7 @@ const PT_TXT = {
 let ptCur = null, ptBack = false;
 function renderPt(id, lang, back){
   ptCur = id;
-  const p = P[id], lg = lang === 'ms' && p.leaflet && PT_QR[id].ms ? 'ms' : 'en', T = PT_TXT[lg];
+  const p = P[id], lg = lang === 'ms' && PT_QR[id].ms && (p.leaflet || advMs(id)) ? 'ms' : 'en', T = PT_TXT[lg];
   let body;
   if (p.leaflet){
     const L = p.leaflet, d = L[lg];
@@ -5337,9 +5376,12 @@ function renderPt(id, lang, back){
       <h2 class="leaf-t">${esc(d.title)}</h2>${d.groups.map(g => `<section class="leaf-g${g.warn ? ' warn' : ''}"><h5>${g.warn ? svg('stop') : ''}${esc(g.h)}</h5>${g.p ? `<p>${esc(g.p)}</p>` : ''}<ul>${g.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}
       <p class="src">${esc(L.src)}</p></div>`;
   } else {
-    body = `<div class="pt-adv" lang="en">${READ_ADV[id] ? listenBar(READ_ADV[id], 'Listen to this advice') : ''}
-      <h2 class="leaf-t">${esc(p.title)}</h2><ol class="pt-list">${p.advice.map(a => `<li>${esc(stripPages(a))}</li>`).join('')}</ol>
-      <p class="src">From <i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025).</p></div>`;
+    const rk = advRead(id, lg), lines = lg === 'ms' ? advMs(id) : p.advice;
+    body = `<div class="pt-adv" lang="${lg}">${PT_QR[id].ms && advMs(id) ? `<div class="seg leaf-lang" role="group" aria-label="Language">${[['en', 'English'], ['ms', 'Bahasa Melayu']].map(([k, t]) => `<button type="button" data-ptlang="${k}" aria-pressed="${lg === k}" lang="${k}">${t}</button>`).join('')}</div>` : ''}
+      ${rk ? listenBar(rk, lg === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen to this advice') : ''}
+      ${filmCard(id, lg)}
+      <h2 class="leaf-t">${esc(p.title)}</h2><ol class="pt-list">${lines.map(a => `<li>${esc(stripPages(a))}</li>`).join('')}</ol>
+      <p class="src">${lg === 'ms' ? esc(ADV_MS_PT) : 'From <i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025).'}</p></div>`;
   }
   $('#ptbody').innerHTML = (back ? `<button type="button" class="sm pt-back" data-ptback>${svg('back')}<span>Back to the guide</span></button>` : '') + `<header class="pt-h"><span class="mark" aria-hidden="true" data-mark></span><div class="pt-ht"><small>${esc(T.dept)}</small><h1 id="h-pt">${esc(T.h)}</h1></div>
     <button type="button" class="sm pt-size" data-ptsize aria-pressed="${prefs.size === 'large'}" aria-label="${esc(T.size)}"><b class="aa" aria-hidden="true">Aa</b><span aria-hidden="true">${esc(T.size)}</span></button></header>${body}<p class="pt-f">${esc(T.foot)}</p>`;
@@ -5359,14 +5401,14 @@ let ptqId = null, ptqLang = 'en', ptqFrom = null;
 function drawPtq(){
   const k = ptqId, q = PT_QR[k][ptqLang] || PT_QR[k].en, p = P[k], n = q.n;
   $('#ptqbody').innerHTML = `<p class="ptq-t"><b>${esc(p.leaflet ? p.leaflet[q === PT_QR[k].ms ? 'ms' : 'en'].title : p.title)}</b></p>
-    ${PT_QR[k].ms ? `<div class="seg" id="ptqlang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(x => `<button type="button" data-ptql="${x}" aria-pressed="${ptqLang === x}" lang="${x}">${esc(p.leaflet[x].lang)}</button>`).join('')}</div>` : ''}
+    ${PT_QR[k].ms && (p.leaflet || advMs(k)) ? `<div class="seg" id="ptqlang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(x => `<button type="button" data-ptql="${x}" aria-pressed="${ptqLang === x}" lang="${x}">${esc(p.leaflet ? p.leaflet[x].lang : {en:'English', ms:'Bahasa Melayu'}[x])}</button>`).join('')}</div>` : ''}
     <div class="ptq-c"><svg viewBox="-4 -4 ${n + 8} ${n + 8}" role="img" aria-label="QR code that opens this advice on the patient's phone"><rect x="-4" y="-4" width="${n + 8}" height="${n + 8}" fill="#fff"/><path d="${q.d}" fill="#000" shape-rendering="crispEdges"/></svg></div>
     <p class="ptq-how">Ask the patient to point their phone camera at the code. The advice opens on their phone${READ_LEAF[k] || READ_ADV[k] ? ', with Listen' : ''}, and nothing about them is sent or kept.</p>
     <div class="ptq-a"><span class="ptq-u" id="ptqu">${esc(q.u)}</span><button type="button" class="sm" data-ptqcopy>${svg('copy')}<span class="bl">Copy link</span></button><a class="btn sm" href="#pt-${k}${q === PT_QR[k].ms ? '-ms' : ''}" data-ptqopen>${svg('ext')}<span>See what they see</span></a></div>`;
 }
 function openPtq(id, lang){
   const k = ptKey(id); if (!k) return;
-  ptqId = k; ptqLang = lang === 'ms' && PT_QR[k].ms ? 'ms' : 'en'; ptqFrom = document.activeElement;
+  ptqId = k; ptqLang = lang === 'ms' && PT_QR[k].ms && (P[k].leaflet || advMs(k)) ? 'ms' : 'en'; ptqFrom = document.activeElement;
   drawPtq();
   $('#ptq').hidden = false; document.documentElement.style.overflow = 'hidden';
   $('#ptqclose').focus();
@@ -5384,7 +5426,7 @@ $('#ptq').addEventListener('click', e => {
   else if (b.hasAttribute('data-ptqcopy')) copyText($('#ptqu').textContent, {btn:b, el:$('#ptqu'), ok:'Link copied'});
   else if (b.hasAttribute('data-ptqopen')) closePtq(false);
 });
-document.addEventListener('click', e => { const b = e.target.closest('[data-ptqr]'); if (b) openPtq(b.dataset.ptqr, b.dataset.lang || (typeof leafLang !== 'undefined' ? leafLang : 'en')); });
+document.addEventListener('click', e => { const b = e.target.closest('[data-ptqr]'); if (!b) return; const id = b.dataset.ptqr; openPtq(id, b.dataset.lang || (P[id] && P[id].leaflet ? leafLang : advLang(id))); }); /* the language on screen: the leaflet's, or the advice tab's own */
 const ptqBtn = (id, cls) => ptKey(id) ? `<button type="button" class="${cls || 'sm'}" data-ptqr="${id}">${svg('qr')}<span class="bl">Show to patient</span></button>` : '';
 
 /* ================= Routing ================= */
@@ -5758,8 +5800,9 @@ $('#run').addEventListener('click', e => {
   else if (b.hasAttribute('data-copyout')) copyText([p.title + ': ' + n.title, ...(n.items || []).map(i => '- ' + i)].join('\n'), {btn:b, el:b.closest('.res').querySelector('.res-b') || b.closest('.res').querySelector('h2')});
   /* Advice is copied for the patient: page references stay on screen but not in the copied text */
   else if (b.hasAttribute('data-copyscript')) copyText(p.script.lines.join('\n'), {btn:b, el:$('#advlist')});
-  else if (b.hasAttribute('data-copyadvice')) copyText(p.advice.map((a, i) => (i + 1) + '. ' + a.replace(/\s*\([^()]*\bp\s?(?:\d|[ivxl]+\b)[^()]*\)/g, '')).join('\n'), {btn:b, el:$('#advlist')});
+  else if (b.hasAttribute('data-copyadvice')) copyText((advLang(state.id) === 'ms' ? advMs(state.id) : p.advice).map((a, i) => (i + 1) + '. ' + a.replace(/\s*\([^()]*\bp\s?(?:\d|[ivxl]+\b)[^()]*\)/g, '')).join('\n'), {btn:b, el:$('#advlist')});
   else if (b.hasAttribute('data-copyleaf')) copyText(leafletText(p), {btn:b, el:$('#leaf')});
+  else if (b.dataset.advlang){ stopReader(); advSel = b.dataset.advlang; $('#tp-advice').innerHTML = advHTML(p); fillIcons($('#tp-advice')); const nb = $(`#tp-advice [data-advlang="${advSel}"]`); if (nb) nb.focus(); }
   else if (b.dataset.leaf){ stopReader(); leafLang = b.dataset.leaf; $('#tp-leaflet').innerHTML = leafletHTML(p); const nb = $(`#tp-leaflet [data-leaf="${leafLang}"]`); if (nb) nb.focus(); }
   else if (b.hasAttribute('data-showadvice')){ selectTab(p.leaflet ? 'leaflet' : 'advice'); $('#ptab').scrollIntoView({block:'start', behavior: REDUCED ? 'auto' : 'smooth'}); }
   else if (b.dataset.pt !== undefined) selectTab(b.dataset.pt);

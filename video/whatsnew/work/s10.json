@@ -1,0 +1,131 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,060"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 60
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,060",
+				"to": "00:00:00,220"
+			},
+			"offsets": {
+				"from": 60,
+				"to": 220
+			},
+			"text": " Tap"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,220",
+				"to": "00:00:00,590"
+			},
+			"offsets": {
+				"from": 220,
+				"to": 590
+			},
+			"text": " apart"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,590",
+				"to": "00:00:00,740"
+			},
+			"offsets": {
+				"from": 590,
+				"to": 740
+			},
+			"text": " to"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,740",
+				"to": "00:00:01,030"
+			},
+			"offsets": {
+				"from": 740,
+				"to": 1030
+			},
+			"text": " find"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,030",
+				"to": "00:00:01,180"
+			},
+			"offsets": {
+				"from": 1030,
+				"to": 1180
+			},
+			"text": " it"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,180",
+				"to": "00:00:01,330"
+			},
+			"offsets": {
+				"from": 1180,
+				"to": 1330
+			},
+			"text": " on"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,330",
+				"to": "00:00:01,550"
+			},
+			"offsets": {
+				"from": 1330,
+				"to": 1550
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,550",
+				"to": "00:00:02,100"
+			},
+			"offsets": {
+				"from": 1550,
+				"to": 2100
+			},
+			"text": " film."
+		}
+	]
+}

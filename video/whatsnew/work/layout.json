@@ -1,0 +1,243 @@
+{
+ "film": 58.73,
+ "scenes": [
+  {
+   "id": "open",
+   "start": 0,
+   "end": 6.37,
+   "dur": 6.37
+  },
+  {
+   "id": "b2",
+   "end": 16.58,
+   "start": 6.37,
+   "dur": 10.21
+  },
+  {
+   "id": "b3",
+   "end": 28.19,
+   "start": 16.58,
+   "dur": 11.61
+  },
+  {
+   "id": "bridge",
+   "end": 30.19,
+   "start": 28.19,
+   "dur": 2
+  },
+  {
+   "id": "b4",
+   "end": 38.89,
+   "start": 30.19,
+   "dur": 8.7
+  },
+  {
+   "id": "b5",
+   "end": 51.35,
+   "start": 38.89,
+   "dur": 12.46
+  },
+  {
+   "id": "close",
+   "end": 58.73,
+   "start": 51.35,
+   "dur": 7.38
+  }
+ ],
+ "sentences": [
+  {
+   "id": "s01",
+   "at": 0.84,
+   "end": 3.28,
+   "text": "What's new in the Green Zone guide?"
+  },
+  {
+   "id": "s02",
+   "at": 3.54,
+   "end": 6.02,
+   "text": "Here is what changed for you on shift."
+  },
+  {
+   "id": "s03",
+   "at": 6.79,
+   "end": 9.65,
+   "text": "On a weak signal, the guide now answers sooner."
+  },
+  {
+   "id": "s04",
+   "at": 10.05,
+   "end": 16.23,
+   "text": "And the home page offers the last step you opened, so you can pick up where you left off."
+  },
+  {
+   "id": "s05",
+   "at": 17.07,
+   "end": 23.03,
+   "text": "The dengue and cancer pain leaflets now have short films, in English and Bahasa Melayu."
+  },
+  {
+   "id": "s06",
+   "at": 23.43,
+   "end": 27.59,
+   "text": "The first-shift intro can be read aloud in either language."
+  },
+  {
+   "id": "s07",
+   "at": 30.64,
+   "end": 34.2,
+   "text": "In Shift tools, the antidotes quick guide is a tap away."
+  },
+  {
+   "id": "s08",
+   "at": 34.6,
+   "end": 38.54,
+   "text": "Type an abbreviation in search to see what it stands for."
+  },
+  {
+   "id": "s09",
+   "at": 39.39,
+   "end": 43.75,
+   "text": "Reading X-rays shows real films with the normal anatomy outlined."
+  },
+  {
+   "id": "s10",
+   "at": 44.14,
+   "end": 46.24,
+   "text": "Tap a part to find it on the film."
+  },
+  {
+   "id": "s11",
+   "at": 46.63,
+   "end": 51.05,
+   "text": "And over fifty calculators each name the source they are built from."
+  },
+  {
+   "id": "s12",
+   "at": 51.89,
+   "end": 56.13,
+   "text": "Open What's new any time to see what changed since you last looked."
+  }
+ ],
+ "captions": [
+  [
+   0.8,
+   "What's new in the Green Zone guide?"
+  ],
+  [
+   3.63,
+   "Here is what changed"
+  ],
+  [
+   4.75,
+   "for you on shift."
+  ],
+  [
+   6.82,
+   "On a weak signal,"
+  ],
+  [
+   7.67,
+   "the guide now answers sooner."
+  ],
+  [
+   10,
+   "And the home page offers"
+  ],
+  [
+   11.84,
+   "the last step you opened,"
+  ],
+  [
+   13.97,
+   "so you can pick up"
+  ],
+  [
+   14.87,
+   "where you left off."
+  ],
+  [
+   17.03,
+   "The dengue and cancer pain leaflets"
+  ],
+  [
+   19.64,
+   "now have short films,"
+  ],
+  [
+   20.94,
+   "in English and Bahasa Melayu."
+  ],
+  [
+   23.38,
+   "The first-shift intro"
+  ],
+  [
+   24.91,
+   "can be read aloud"
+  ],
+  [
+   26.33,
+   "in either language."
+  ],
+  [
+   30.59,
+   "In Shift tools,"
+  ],
+  [
+   31.45,
+   "the antidotes quick guide"
+  ],
+  [
+   33.31,
+   "is a tap away."
+  ],
+  [
+   34.55,
+   "Type an abbreviation in search"
+  ],
+  [
+   36.84,
+   "to see what it stands for."
+  ],
+  [
+   39.34,
+   "Reading X-rays shows real films"
+  ],
+  [
+   41.53,
+   "with the normal anatomy outlined."
+  ],
+  [
+   44.1,
+   "Tap a part"
+  ],
+  [
+   44.63,
+   "to find it on the film."
+  ],
+  [
+   46.59,
+   "And over fifty calculators"
+  ],
+  [
+   48.63,
+   "each name the source"
+  ],
+  [
+   49.7,
+   "they are built from."
+  ],
+  [
+   51.85,
+   "Open What's new any time"
+  ],
+  [
+   53.63,
+   "to see what changed"
+  ],
+  [
+   54.85,
+   "since you last looked."
+  ]
+ ]
+}

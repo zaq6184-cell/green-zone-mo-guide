@@ -14,7 +14,7 @@ if (!APP_URL) throw new Error('APP_URL not found in engine.js');
 /* id: languages. Leaflets in both languages; the read-aloud advice tabs in English (as recorded) */
 const LIST = {
   'dengue-cpg': ['en', 'ms'], 'cancer-pain-cpg': ['en', 'ms'],
-  'mild-tbi': ['en'], 'asthma-zone': ['en'], 'gastroenteritis': ['en'], 'renal-colic': ['en'], 'abdominal-pain': ['en'], 'hypoglycaemia': ['en']
+  'mild-tbi': ['en', 'ms'], 'asthma-zone': ['en', 'ms'], 'gastroenteritis': ['en', 'ms'], 'renal-colic': ['en', 'ms'], 'abdominal-pain': ['en', 'ms'], 'hypoglycaemia': ['en', 'ms']
 };
 
 const out = {};

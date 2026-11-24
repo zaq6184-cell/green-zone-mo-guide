@@ -1,0 +1,164 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,130"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 130
+			},
+			"text": " In"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,130",
+				"to": "00:00:00,580"
+			},
+			"offsets": {
+				"from": 130,
+				"to": 580
+			},
+			"text": " Shift"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,580",
+				"to": "00:00:00,910"
+			},
+			"offsets": {
+				"from": 580,
+				"to": 910
+			},
+			"text": " Tools,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,910",
+				"to": "00:00:01,150"
+			},
+			"offsets": {
+				"from": 910,
+				"to": 1150
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,150",
+				"to": "00:00:01,910"
+			},
+			"offsets": {
+				"from": 1150,
+				"to": 1910
+			},
+			"text": " Antidote's"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,910",
+				"to": "00:00:02,300"
+			},
+			"offsets": {
+				"from": 1910,
+				"to": 2300
+			},
+			"text": " quick"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,300",
+				"to": "00:00:02,770"
+			},
+			"offsets": {
+				"from": 2300,
+				"to": 2770
+			},
+			"text": " guide"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,770",
+				"to": "00:00:02,840"
+			},
+			"offsets": {
+				"from": 2770,
+				"to": 2840
+			},
+			"text": " is"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,840",
+				"to": "00:00:02,900"
+			},
+			"offsets": {
+				"from": 2840,
+				"to": 2900
+			},
+			"text": " a"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,900",
+				"to": "00:00:03,090"
+			},
+			"offsets": {
+				"from": 2900,
+				"to": 3090
+			},
+			"text": " tap"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,090",
+				"to": "00:00:03,560"
+			},
+			"offsets": {
+				"from": 3090,
+				"to": 3560
+			},
+			"text": " away."
+		}
+	]
+}

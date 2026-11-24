@@ -1,0 +1,776 @@
+{
+ "voiceLUFS": -18.3,
+ "gainDb": 2.3,
+ "sentences": [
+  {
+   "id": "s01",
+   "text": "What's new in the Green Zone guide?",
+   "dur": 2.558,
+   "heard": "What's new in the Green Zone Guide?",
+   "words": [
+    {
+     "w": "What's",
+     "s": 0.06,
+     "e": 0.46
+    },
+    {
+     "w": "new",
+     "s": 0.46,
+     "e": 0.69
+    },
+    {
+     "w": "in",
+     "s": 0.69,
+     "e": 0.84
+    },
+    {
+     "w": "the",
+     "s": 0.84,
+     "e": 1.09
+    },
+    {
+     "w": "Green",
+     "s": 1.09,
+     "e": 1.46
+    },
+    {
+     "w": "Zone",
+     "s": 1.46,
+     "e": 1.77
+    },
+    {
+     "w": "guide?",
+     "s": 1.77,
+     "e": 2.44
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "text": "Here is what changed for you on shift.",
+   "dur": 2.638,
+   "heard": "Here is what changed for you on Shift.",
+   "words": [
+    {
+     "w": "Here",
+     "s": 0.19,
+     "e": 0.3
+    },
+    {
+     "w": "is",
+     "s": 0.3,
+     "e": 0.46
+    },
+    {
+     "w": "what",
+     "s": 0.46,
+     "e": 0.75
+    },
+    {
+     "w": "changed",
+     "s": 0.75,
+     "e": 1.31
+    },
+    {
+     "w": "for",
+     "s": 1.31,
+     "e": 1.49
+    },
+    {
+     "w": "you",
+     "s": 1.49,
+     "e": 1.71
+    },
+    {
+     "w": "on",
+     "s": 1.71,
+     "e": 1.91
+    },
+    {
+     "w": "shift.",
+     "s": 1.91,
+     "e": 2.48
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "text": "On a weak signal, the guide now answers sooner.",
+   "dur": 3.104,
+   "heard": "On a weak signal, the guide now answers sooner.",
+   "words": [
+    {
+     "w": "On",
+     "s": 0.13,
+     "e": 0.13
+    },
+    {
+     "w": "a",
+     "s": 0.13,
+     "e": 0.19
+    },
+    {
+     "w": "weak",
+     "s": 0.19,
+     "e": 0.45
+    },
+    {
+     "w": "signal,",
+     "s": 0.45,
+     "e": 0.98
+    },
+    {
+     "w": "the",
+     "s": 0.98,
+     "e": 1.45
+    },
+    {
+     "w": "guide",
+     "s": 1.45,
+     "e": 1.52
+    },
+    {
+     "w": "now",
+     "s": 1.52,
+     "e": 1.72
+    },
+    {
+     "w": "answers",
+     "s": 1.72,
+     "e": 2.2
+    },
+    {
+     "w": "sooner.",
+     "s": 2.2,
+     "e": 2.86
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "text": "And the home page offers the last step you opened, so you can pick up where you left off.",
+   "dur": 6.3,
+   "heard": "And the home page offers the last step you opened, so you can pick up where you left off.",
+   "words": [
+    {
+     "w": "And",
+     "s": 0.05,
+     "e": 0.28
+    },
+    {
+     "w": "the",
+     "s": 0.28,
+     "e": 0.56
+    },
+    {
+     "w": "home",
+     "s": 0.56,
+     "e": 0.94
+    },
+    {
+     "w": "page",
+     "s": 0.94,
+     "e": 1.39
+    },
+    {
+     "w": "offers",
+     "s": 1.39,
+     "e": 1.89
+    },
+    {
+     "w": "the",
+     "s": 1.89,
+     "e": 2.22
+    },
+    {
+     "w": "last",
+     "s": 2.22,
+     "e": 2.59
+    },
+    {
+     "w": "step",
+     "s": 2.59,
+     "e": 2.98
+    },
+    {
+     "w": "you",
+     "s": 2.98,
+     "e": 3.2
+    },
+    {
+     "w": "opened,",
+     "s": 3.2,
+     "e": 4.02
+    },
+    {
+     "w": "so",
+     "s": 4.02,
+     "e": 4.12
+    },
+    {
+     "w": "you",
+     "s": 4.12,
+     "e": 4.34
+    },
+    {
+     "w": "can",
+     "s": 4.34,
+     "e": 4.57
+    },
+    {
+     "w": "pick",
+     "s": 4.57,
+     "e": 4.83
+    },
+    {
+     "w": "up",
+     "s": 4.83,
+     "e": 4.92
+    },
+    {
+     "w": "where",
+     "s": 4.92,
+     "e": 5.26
+    },
+    {
+     "w": "you",
+     "s": 5.26,
+     "e": 5.46
+    },
+    {
+     "w": "left",
+     "s": 5.46,
+     "e": 5.78
+    },
+    {
+     "w": "off.",
+     "s": 5.78,
+     "e": 6.18
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "text": "The dengue and cancer pain leaflets now have short films, in English and Bahasa Melayu.",
+   "dur": 6.074,
+   "heard": "The dengue and cancer pain leaflets now have short films in English and Bahasa Melayu.",
+   "words": [
+    {
+     "w": "The",
+     "s": 0.06,
+     "e": 0.25
+    },
+    {
+     "w": "dengue",
+     "s": 0.25,
+     "e": 0.72
+    },
+    {
+     "w": "and",
+     "s": 0.72,
+     "e": 1.01
+    },
+    {
+     "w": "cancer",
+     "s": 1.01,
+     "e": 1.45
+    },
+    {
+     "w": "pain",
+     "s": 1.45,
+     "e": 1.79
+    },
+    {
+     "w": "leaflets",
+     "s": 1.79,
+     "e": 2.67
+    },
+    {
+     "w": "now",
+     "s": 2.67,
+     "e": 2.72
+    },
+    {
+     "w": "have",
+     "s": 2.72,
+     "e": 3.07
+    },
+    {
+     "w": "short",
+     "s": 3.07,
+     "e": 3.51
+    },
+    {
+     "w": "films,",
+     "s": 3.51,
+     "e": 3.97
+    },
+    {
+     "w": "in",
+     "s": 3.97,
+     "e": 4.23
+    },
+    {
+     "w": "English",
+     "s": 4.23,
+     "e": 4.63
+    },
+    {
+     "w": "and",
+     "s": 4.63,
+     "e": 4.84
+    },
+    {
+     "w": "Bahasa",
+     "s": 4.84,
+     "e": 5.35
+    },
+    {
+     "w": "Melayu.",
+     "s": 5.35,
+     "e": 5.96
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "text": "The first-shift intro can be read aloud in either language.",
+   "dur": 4.056,
+   "heard": "The first shift intro can be read aloud in either language.",
+   "words": [
+    {
+     "w": "The",
+     "s": 0.05,
+     "e": 0.32
+    },
+    {
+     "w": "first-shift",
+     "s": 0.32,
+     "e": 1.02,
+     "guessed": true
+    },
+    {
+     "w": "intro",
+     "s": 1.02,
+     "e": 1.58
+    },
+    {
+     "w": "can",
+     "s": 1.58,
+     "e": 1.77
+    },
+    {
+     "w": "be",
+     "s": 1.77,
+     "e": 2.05
+    },
+    {
+     "w": "read",
+     "s": 2.05,
+     "e": 2.43
+    },
+    {
+     "w": "aloud",
+     "s": 2.43,
+     "e": 3
+    },
+    {
+     "w": "in",
+     "s": 3,
+     "e": 3.13
+    },
+    {
+     "w": "either",
+     "s": 3.13,
+     "e": 3.52
+    },
+    {
+     "w": "language.",
+     "s": 3.52,
+     "e": 4.16
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "text": "In Shift tools, the antidotes quick guide is a tap away.",
+   "dur": 3.73,
+   "heard": "In Shift Tools, the Antidote's quick guide is a tap away.",
+   "words": [
+    {
+     "w": "In",
+     "s": 0.05,
+     "e": 0.13
+    },
+    {
+     "w": "Shift",
+     "s": 0.13,
+     "e": 0.58
+    },
+    {
+     "w": "tools,",
+     "s": 0.58,
+     "e": 0.91
+    },
+    {
+     "w": "the",
+     "s": 0.91,
+     "e": 1.15
+    },
+    {
+     "w": "antidotes",
+     "s": 1.15,
+     "e": 1.91
+    },
+    {
+     "w": "quick",
+     "s": 1.91,
+     "e": 2.3
+    },
+    {
+     "w": "guide",
+     "s": 2.3,
+     "e": 2.77
+    },
+    {
+     "w": "is",
+     "s": 2.77,
+     "e": 2.84
+    },
+    {
+     "w": "a",
+     "s": 2.84,
+     "e": 2.9
+    },
+    {
+     "w": "tap",
+     "s": 2.9,
+     "e": 3.09
+    },
+    {
+     "w": "away.",
+     "s": 3.09,
+     "e": 3.56
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "text": "Type an abbreviation in search to see what it stands for.",
+   "dur": 3.952,
+   "heard": "Type an abbreviation in SEARCH to see what it stands for.",
+   "words": [
+    {
+     "w": "Type",
+     "s": 0.05,
+     "e": 0.37
+    },
+    {
+     "w": "an",
+     "s": 0.37,
+     "e": 0.52
+    },
+    {
+     "w": "abbreviation",
+     "s": 0.52,
+     "e": 1.58
+    },
+    {
+     "w": "in",
+     "s": 1.58,
+     "e": 1.73
+    },
+    {
+     "w": "search",
+     "s": 1.73,
+     "e": 2.34
+    },
+    {
+     "w": "to",
+     "s": 2.34,
+     "e": 2.42
+    },
+    {
+     "w": "see",
+     "s": 2.42,
+     "e": 2.63
+    },
+    {
+     "w": "what",
+     "s": 2.63,
+     "e": 2.91
+    },
+    {
+     "w": "it",
+     "s": 2.91,
+     "e": 3.05
+    },
+    {
+     "w": "stands",
+     "s": 3.05,
+     "e": 3.5
+    },
+    {
+     "w": "for.",
+     "s": 3.5,
+     "e": 3.94
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "text": "Reading X-rays shows real films with the normal anatomy outlined.",
+   "dur": 4.362,
+   "heard": "Reading x-rays shows real films with the normal anatomy outlined.",
+   "words": [
+    {
+     "w": "Reading",
+     "s": 0.05,
+     "e": 0.58
+    },
+    {
+     "w": "X-rays",
+     "s": 0.58,
+     "e": 1.04
+    },
+    {
+     "w": "shows",
+     "s": 1.04,
+     "e": 1.44
+    },
+    {
+     "w": "real",
+     "s": 1.44,
+     "e": 1.86
+    },
+    {
+     "w": "films",
+     "s": 1.86,
+     "e": 2.24
+    },
+    {
+     "w": "with",
+     "s": 2.24,
+     "e": 2.48
+    },
+    {
+     "w": "the",
+     "s": 2.48,
+     "e": 2.7
+    },
+    {
+     "w": "normal",
+     "s": 2.7,
+     "e": 3.15
+    },
+    {
+     "w": "anatomy",
+     "s": 3.15,
+     "e": 3.76
+    },
+    {
+     "w": "outlined.",
+     "s": 3.76,
+     "e": 4.36
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "text": "Tap a part to find it on the film.",
+   "dur": 2.228,
+   "heard": "Tap apart to find it on the film.",
+   "words": [
+    {
+     "w": "Tap",
+     "s": 0.06,
+     "e": 0.22
+    },
+    {
+     "w": "a",
+     "s": 0.22,
+     "e": 0.405,
+     "guessed": true
+    },
+    {
+     "w": "part",
+     "s": 0.405,
+     "e": 0.59,
+     "guessed": true
+    },
+    {
+     "w": "to",
+     "s": 0.59,
+     "e": 0.74
+    },
+    {
+     "w": "find",
+     "s": 0.74,
+     "e": 1.03
+    },
+    {
+     "w": "it",
+     "s": 1.03,
+     "e": 1.18
+    },
+    {
+     "w": "on",
+     "s": 1.18,
+     "e": 1.33
+    },
+    {
+     "w": "the",
+     "s": 1.33,
+     "e": 1.55
+    },
+    {
+     "w": "film.",
+     "s": 1.55,
+     "e": 2.1
+    }
+   ]
+  },
+  {
+   "id": "s11",
+   "text": "And over fifty calculators each name the source they are built from.",
+   "dur": 4.306,
+   "heard": "and over 50 calculators, each name the source they are built from.",
+   "words": [
+    {
+     "w": "And",
+     "s": 0.06,
+     "e": 0.26
+    },
+    {
+     "w": "over",
+     "s": 0.26,
+     "e": 0.61
+    },
+    {
+     "w": "fifty",
+     "s": 0.61,
+     "e": 1.13,
+     "guessed": true
+    },
+    {
+     "w": "calculators",
+     "s": 1.13,
+     "e": 2.1
+    },
+    {
+     "w": "each",
+     "s": 2.1,
+     "e": 2.35
+    },
+    {
+     "w": "name",
+     "s": 2.35,
+     "e": 2.69
+    },
+    {
+     "w": "the",
+     "s": 2.69,
+     "e": 2.9
+    },
+    {
+     "w": "source",
+     "s": 2.9,
+     "e": 3.17
+    },
+    {
+     "w": "they",
+     "s": 3.17,
+     "e": 3.42
+    },
+    {
+     "w": "are",
+     "s": 3.42,
+     "e": 3.61
+    },
+    {
+     "w": "built",
+     "s": 3.61,
+     "e": 4.18
+    },
+    {
+     "w": "from.",
+     "s": 4.18,
+     "e": 4.42
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "text": "Open What's new any time to see what changed since you last looked.",
+   "dur": 4.385,
+   "heard": "Open what's new any time to see what changed since you last looked.",
+   "words": [
+    {
+     "w": "Open",
+     "s": 0.06,
+     "e": 0.36
+    },
+    {
+     "w": "What's",
+     "s": 0.36,
+     "e": 0.9
+    },
+    {
+     "w": "new",
+     "s": 0.9,
+     "e": 1.17
+    },
+    {
+     "w": "any",
+     "s": 1.17,
+     "e": 1.44
+    },
+    {
+     "w": "time",
+     "s": 1.44,
+     "e": 1.84
+    },
+    {
+     "w": "to",
+     "s": 1.84,
+     "e": 2.01
+    },
+    {
+     "w": "see",
+     "s": 2.01,
+     "e": 2.22
+    },
+    {
+     "w": "what",
+     "s": 2.22,
+     "e": 2.59
+    },
+    {
+     "w": "changed",
+     "s": 2.59,
+     "e": 3.06
+    },
+    {
+     "w": "since",
+     "s": 3.06,
+     "e": 3.31
+    },
+    {
+     "w": "you",
+     "s": 3.31,
+     "e": 3.48
+    },
+    {
+     "w": "last",
+     "s": 3.48,
+     "e": 3.71
+    },
+    {
+     "w": "looked.",
+     "s": 3.71,
+     "e": 4.24
+    }
+   ]
+  }
+ ]
+}

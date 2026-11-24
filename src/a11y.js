@@ -14,7 +14,7 @@ const VIEWS = [
   ['home'], ['pathways'], ['renal-colic'], ['renal-colic', 'answer'], ['rules'], ['gz-rules--ivab'], ['tools'], ['calc'], ['calc-news2'], ['calc-dfluid'],
   ['numbers'], ['links'], ['pharmacy'], ['dilution'], ['antibiotics'], ['antidotes'], ['abbreviations'], ['guidelines'], ['dengue-cpg'], ['dengue-cpg', 'tabs'],
   ['xray-guide--ank'], ['abdo-handbook'], ['code-blue'], ['journey'], ['tour'], ['quiz'], ['new'], ['about'], ['install'], ['share'], ['intro'],
-  ['pt-dengue-cpg'], ['search', 'palette'], ['home', 'settings'], ['home', 'menu']
+  ['pt-dengue-cpg'], ['search', 'palette'], ['home', 'settings'], ['home', 'menu'], ['renal-colic', 'advms'], ['journey-2'], ['pt-renal-colic-ms']
 ];
 const srv = spawn(process.execPath, [path.join(__dirname, 'serve.js')], {env:{...process.env, PORT:String(port)}, stdio:'ignore'});
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -32,6 +32,7 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
       if (act === 'palette') { await p.fill('#gq', 'dengue'); await p.waitForTimeout(400); }
       if (act === 'settings') await p.evaluate(() => openSettings());
       if (act === 'menu') await p.click('#menubtn').catch(() => {});
+      if (act === 'advms'){ await p.evaluate(() => selectTab('advice')); await p.click('#tp-advice [data-advlang="ms"]').catch(() => {}); }
       await p.waitForTimeout(300);
       await p.addScriptTag({content:axe});
       const r = await p.evaluate(async () => {

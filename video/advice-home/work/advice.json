@@ -1,0 +1,355 @@
+{
+ "made": "2026-11-23T18:34:20.008Z",
+ "parts": [
+  "data.js",
+  "data2.js",
+  "data3.js",
+  "data4.js",
+  "data5.js",
+  "data6.js",
+  "data7.js",
+  "data8.js",
+  "data9.js",
+  "data10.js",
+  "data11.js",
+  "data12.js",
+  "data13.js",
+  "data14.js",
+  "data15.js",
+  "data16.js",
+  "data17.js",
+  "data18.js",
+  "data19.js",
+  "data20.js",
+  "data21.js",
+  "data22.js",
+  "data23.js",
+  "data24.js",
+  "data25.js",
+  "data26.js",
+  "data27.js",
+  "data28.js",
+  "data29.js",
+  "data30.js",
+  "data31.js"
+ ],
+ "missingParts": [],
+ "words": {
+  "TILE_KEYS": [
+   "all",
+   "heart",
+   "breath",
+   "brain",
+   "abdo",
+   "infect",
+   "meta",
+   "flow",
+   "prot",
+   "codeblue",
+   "codestroke",
+   "paths",
+   "rules",
+   "dc",
+   "calc",
+   "intro",
+   "tip",
+   "kids",
+   "doses",
+   "scores",
+   "calm",
+   "head",
+   "dengue",
+   "cardio",
+   "tox",
+   "dcpg",
+   "asthcpg",
+   "goutcpg",
+   "fbcpg",
+   "footcpg",
+   "acscpg",
+   "headcpg",
+   "ckdcpg",
+   "sinuscpg",
+   "toothcpg",
+   "hipcpg",
+   "paincpg",
+   "t2dmcpg",
+   "vtecpg",
+   "copdcpg",
+   "throatcpg",
+   "injury",
+   "interp",
+   "snakecpg",
+   "links",
+   "comms",
+   "rabies",
+   "abdohb",
+   "pharm",
+   "newhkl",
+   "prescr",
+   "dilute",
+   "whatsnew",
+   "sources",
+   "poster",
+   "extdir",
+   "ctbrain",
+   "antidote",
+   "abbrev",
+   "aggress"
+  ],
+  "CATS": [
+   {
+    "k": "heart",
+    "ids": [
+     "acs",
+     "acs-cpg",
+     "heart-failure",
+     "hypertensive-urgency",
+     "svt",
+     "syncope",
+     "dvt",
+     "vte-cpg"
+    ]
+   },
+   {
+    "k": "breath",
+    "ids": [
+     "asthma",
+     "asthma-cpg",
+     "copd-cpg",
+     "pneumonia",
+     "sinusitis-cpg",
+     "anaphylaxis"
+    ]
+   },
+   {
+    "k": "brain",
+    "ids": [
+     "stroke-tia",
+     "mild-tbi",
+     "head-injury-cpg",
+     "behavioural-disturbance"
+    ]
+   },
+   {
+    "k": "abdo",
+    "ids": [
+     "abdominal-pain",
+     "abdo-handbook",
+     "gastroenteritis",
+     "biliary",
+     "renal-colic",
+     "ckd-cpg",
+     "scrotal-pain",
+     "fb-children-cpg"
+    ]
+   },
+   {
+    "k": "infect",
+    "ids": [
+     "dengue",
+     "dengue-cpg",
+     "cellulitis",
+     "sore-throat-cpg"
+    ]
+   },
+   {
+    "k": "meta",
+    "ids": [
+     "hyperglycaemia",
+     "hypoglycaemia",
+     "t2dm-cpg",
+     "diabetic-foot-cpg",
+     "gout-cpg",
+     "paracetamol-overdose",
+     "snakebite-moh",
+     "pain",
+     "cancer-pain-cpg"
+    ]
+   },
+   {
+    "k": "injury",
+    "ids": [
+     "xray-guide",
+     "hip-fracture-cpg",
+     "avulsed-tooth-cpg"
+    ]
+   },
+   {
+    "k": "scores",
+    "ids": [
+     "ed-scores"
+    ]
+   }
+  ],
+  "srcEn": "From The Clinical Pathway in Emergency for Medical Officer, Emergency & Trauma Department, Hospital Kuala Lumpur (2025).",
+  "srcEnHTML": "From <i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025).",
+  "srcMs": "Terjemahan Bahasa Melayu bagi nasihat dalam e-buku Jabatan Kecemasan & Trauma, Hospital Kuala Lumpur (2025).",
+  "chipMs": "Nasihat penjagaan di rumah"
+ },
+ "films": {
+  "tbi": {
+   "id": "mild-tbi",
+   "title": "Mild traumatic brain injury",
+   "meta": "Ebook p25–26",
+   "ebook": true,
+   "loop": "brain",
+   "en": [
+    "After a concussion, the patient should be accompanied by a responsible adult if possible",
+    "Go to the nearest Emergency Department for: loss of consciousness, disorientation, new deafness, imbalance, blurred or double vision, weakness of any limb, excessive sleepiness or drowsiness, vomiting, bleeding from either ear, fitting, or severe headache not relieved by painkillers",
+    "Do stay within reach of a telephone, rest, sleep regularly, and take painkillers such as paracetamol for headache",
+    "Don't stay at home alone for 48 hours after leaving hospital",
+    "Don't drink alcohol or take recreational drugs",
+    "Don't take aspirin or sleeping tablets",
+    "Don't play or train for any contact sport for at least 3 weeks without consulting your doctor",
+    "Don't drive"
+   ],
+   "ms": [
+    "Selepas gegaran otak, pesakit sebaiknya ditemani oleh seorang dewasa yang bertanggungjawab, jika boleh",
+    "Pergi ke Jabatan Kecemasan yang terdekat jika berlaku: hilang kesedaran, keliru, pekak yang baru berlaku, hilang imbangan badan, penglihatan kabur atau berganda, lemah pada mana-mana tangan atau kaki, terlalu mengantuk atau sentiasa mahu tidur, muntah, berdarah dari mana-mana telinga, sawan, atau sakit kepala yang teruk dan tidak hilang dengan ubat tahan sakit",
+    "Pastikan telefon sentiasa dekat dengan anda, berehat, tidur dengan teratur, dan ambil ubat tahan sakit seperti paracetamol untuk sakit kepala",
+    "Jangan tinggal seorang diri di rumah selama 48 jam selepas keluar dari hospital",
+    "Jangan minum arak atau mengambil dadah",
+    "Jangan ambil aspirin atau pil tidur",
+    "Jangan bermain atau berlatih sukan yang melibatkan perlanggaran badan sekurang-kurangnya 3 minggu tanpa berbincang dengan doktor anda",
+    "Jangan memandu"
+   ]
+  },
+  "dengue": {
+   "id": "dengue",
+   "title": "Dengue fever",
+   "meta": "Ebook p31–32",
+   "ebook": true,
+   "loop": "infect",
+   "en": [
+    "Do: adequate bed rest",
+    "Do: adequate fluid intake (more than 8 glasses or 2 litres for an average person)",
+    "Do: take paracetamol (not more than 4 g a day)",
+    "Do: tepid sponging",
+    "Do: use mosquito repellent or rest under a mosquito net, even in the daytime",
+    "Do: look for and remove mosquito breeding places in and around the home",
+    "Don't take NSAIDs (painkillers); if already taking them, consult your doctor",
+    "Antibiotics are not required",
+    "Don't use massage, cupping or quasa"
+   ],
+   "ms": [
+    "Lakukan: rehat secukupnya",
+    "Lakukan: minum air secukupnya (lebih daripada 8 gelas atau 2 liter bagi orang biasa)",
+    "Lakukan: ambil paracetamol (tidak melebihi 4 g sehari)",
+    "Lakukan: lap badan dengan kain yang dibasahkan dengan air suam",
+    "Lakukan: guna ubat penghalau nyamuk atau berehat di dalam kelambu, walaupun pada waktu siang",
+    "Lakukan: cari dan hapuskan tempat pembiakan nyamuk di dalam dan di sekitar rumah",
+    "Jangan ambil NSAIDs (ubat tahan sakit); jika anda sudah mengambilnya, rujuk doktor anda",
+    "Antibiotik tidak diperlukan",
+    "Jangan berurut, berbekam atau buat gua sha"
+   ]
+  },
+  "asthma": {
+   "id": "asthma-zone",
+   "title": "Asthma Zone flow",
+   "meta": "Asthma memo, Nov 2025",
+   "ebook": false,
+   "loop": "flow",
+   "en": [
+    "Preventer (budesonide MDI) every day; reliever (salbutamol MDI) when needed",
+    "Getting worse (waking at night, worse with a cold): reliever every 4 hours, keep taking the preventer, and come to hospital if not better, bringing the MDI and spacer",
+    "Severe (wheeze that does not settle, breathless, hard to talk): come straight to hospital or call an ambulance, taking 4 puffs of the reliever every 4 minutes on the way",
+    "Wash the spacer once a week in soapy water, rinse and let it air dry; do not wipe it with a cloth or tissue or brush the inside",
+    "Know your triggers: smoke, animal fur, cold air, dust, exercise and infections"
+   ],
+   "ms": [
+    "Ubat pencegah (MDI budesonide) setiap hari; ubat pelega (MDI salbutamol) apabila perlu",
+    "Semakin teruk (terjaga pada waktu malam, bertambah teruk ketika selesema): ambil ubat pelega setiap 4 jam, teruskan ubat pencegah, dan datang ke hospital jika tidak bertambah baik, dengan membawa MDI dan spacer",
+    "Teruk (berdehit yang tidak reda, sesak nafas, susah bercakap): terus datang ke hospital atau hubungi ambulans, dan ambil 4 sedutan ubat pelega setiap 4 minit dalam perjalanan",
+    "Basuh spacer seminggu sekali dengan air sabun, bilas dan biarkan ia kering sendiri; jangan lap dengan kain atau tisu, dan jangan berus bahagian dalamnya",
+    "Kenali pencetus asma anda: asap, bulu haiwan, udara sejuk, habuk, senaman dan jangkitan"
+   ]
+  },
+  "gastro": {
+   "id": "gastroenteritis",
+   "title": "Acute gastroenteritis (adult)",
+   "meta": "Ebook p17–18",
+   "ebook": true,
+   "loop": "abdo",
+   "en": [
+    "Continue taking prescribed medications as directed",
+    "Drink plenty of fluid (ORS, clear soups, diluted fruit juices) to prevent dehydration",
+    "Avoid caffeinated, alcoholic and sugary drinks, as they can worsen diarrhoea",
+    "Get plenty of rest",
+    "Hand hygiene, especially after using the toilet and before eating",
+    "Seek medical help for persistent vomiting or inability to keep fluids down, blood in stools or persistent high fever, or severe abdominal pain or worsening symptoms"
+   ],
+   "ms": [
+    "Teruskan mengambil ubat yang diberi oleh doktor seperti yang diarahkan",
+    "Minum banyak air (ORS, sup jernih, jus buah yang dicairkan) untuk mengelakkan kekurangan air dalam badan",
+    "Elakkan minuman berkafein, beralkohol dan bergula, kerana ia boleh memburukkan cirit-birit",
+    "Rehat secukupnya",
+    "Jaga kebersihan tangan, terutamanya selepas menggunakan tandas dan sebelum makan",
+    "Dapatkan rawatan jika muntah berterusan atau setiap kali minum dimuntahkan semula, terdapat darah dalam najis atau demam tinggi yang berterusan, atau sakit perut yang teruk atau simptom semakin teruk"
+   ]
+  },
+  "renal": {
+   "id": "renal-colic",
+   "title": "Renal colic",
+   "meta": "Ebook p53–54",
+   "ebook": true,
+   "loop": "abdo",
+   "en": [
+    "Stay hydrated: drink 6 to 8 glasses of water a day as directed, to help decrease pain and flush blockages from the urinary tract",
+    "Strain urine every time you pass urine, and bring any stones passed to the doctor for investigation",
+    "Take regular pain medications as directed by the doctor",
+    "Seek help at the nearest hospital if pain, fever or vomiting worsens, or for changes in urine: less urine, cloudiness, foul smell",
+    "Keep active; kidney stones are more common if you are not active or sit much of the day",
+    "Rest, and abstain from alcohol and seafood"
+   ],
+   "ms": [
+    "Minum air secukupnya: minum 6 hingga 8 gelas air sehari seperti yang diarahkan, untuk membantu mengurangkan sakit dan mengeluarkan sumbatan dari saluran kencing",
+    "Tapis air kencing setiap kali anda membuang air kecil, dan bawa batu yang keluar kepada doktor untuk diperiksa",
+    "Ambil ubat tahan sakit secara berkala seperti yang diarahkan oleh doktor",
+    "Dapatkan bantuan di hospital yang terdekat jika sakit, demam atau muntah bertambah teruk, atau jika air kencing berubah: kencing berkurang, keruh, berbau busuk",
+    "Kekal aktif; batu karang lebih kerap berlaku jika anda kurang aktif atau banyak duduk sepanjang hari",
+    "Berehat, dan jauhi arak dan makanan laut"
+   ]
+  },
+  "abdo": {
+   "id": "abdominal-pain",
+   "title": "Abdominal pain",
+   "meta": "Ebook p10–11",
+   "ebook": true,
+   "loop": "abdo",
+   "en": [
+    "Return to hospital immediately if pain worsens or new symptoms appear, such as vomiting, diarrhoea, fever or bleeding from the back passage",
+    "Avoid caffeine, fatty foods and spicy foods",
+    "Take simple analgesia such as paracetamol and anti-reflux medications",
+    "Return for follow-up at EMACC or EMWATCH in 24 to 48 hours"
+   ],
+   "ms": [
+    "Datang semula ke hospital dengan segera jika sakit bertambah teruk atau timbul simptom baru, seperti muntah, cirit-birit, demam atau berdarah dari dubur",
+    "Elakkan kafein, makanan berlemak dan makanan pedas",
+    "Ambil ubat tahan sakit biasa seperti paracetamol, dan ubat anti-refluks",
+    "Datang semula untuk rawatan susulan di EMACC atau EMWATCH dalam masa 24 hingga 48 jam"
+   ]
+  },
+  "hypo": {
+   "id": "hypoglycaemia",
+   "title": "Hypoglycaemia",
+   "meta": "Ebook p43–44",
+   "ebook": true,
+   "loop": "meta",
+   "en": [
+    "Avoid driving, cycling, swimming or heavy machinery for the next 24–48 hours",
+    "Hypoglycaemia awareness may be reduced for 48–72 hours: check blood sugar before meals, exercise and driving",
+    "Always carry quick-acting carbohydrate (hard candy, dextrose tablets)",
+    "Record all glucose readings and bring them to the next check-up",
+    "Seek medical help if a hypo causes unconsciousness or seizures, does not improve with quick-acting carbohydrate, or blood sugar stays low"
+   ],
+   "ms": [
+    "Elakkan memandu, berbasikal, berenang atau mengendalikan jentera berat untuk 24–48 jam yang akan datang",
+    "Anda mungkin kurang dapat merasakan tanda gula darah rendah selama 48–72 jam: periksa gula darah sebelum makan, bersenam dan memandu",
+    "Sentiasa bawa karbohidrat yang cepat bertindak (gula-gula keras, tablet dekstrosa)",
+    "Catat semua bacaan gula darah dan bawa catatan itu semasa pemeriksaan yang akan datang",
+    "Dapatkan rawatan jika gula darah rendah (hipo) menyebabkan pengsan atau sawan, tidak pulih dengan karbohidrat yang cepat bertindak, atau gula darah kekal rendah"
+   ]
+  }
+ }
+}

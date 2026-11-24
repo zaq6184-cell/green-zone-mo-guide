@@ -673,7 +673,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   noFilm(p, 'up to this first film tap, no film from media/ has loaded on this page');
   await p.click('#leaf .lfilm-b'); await p.waitForTimeout(400);
   ok(await p.evaluate(() => { const v = document.querySelector('#leaf .lfilm video'); return !!v && v.src.endsWith('media/dengue-home-720.mp4') && v.controls && reader.paused; }), 'tapping the film card swaps in the player and stops the narration');
-  ok(Object.values(await p.evaluate(() => FILMS)).every(f => ['en', 'ms'].every(l => ['src', 'cover', 'thumb'].every(k => fs.existsSync(path.join(__dirname, '..', 'app', f[l][k]))) && !/FILM_/.test(f[l].d))), 'every leaflet film, cover and thumbnail exists, with its length written');
+  ok(Object.values(await p.evaluate(() => FILMS)).every(f => Object.keys(f).every(l => ['src', 'cover', 'thumb'].every(k => fs.existsSync(path.join(__dirname, '..', 'app', f[l][k]))) && !/FILM_/.test(f[l].d))), 'every film (leaflets, advice and the What\'s new film), cover and thumbnail exists, with its length written');
   await p.click('#tp-leaflet [data-leaf="ms"]'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => reader.paused && document.querySelector('#leaf .lsn').dataset.read === 'leaf-dengue-ms' && !document.querySelector('.reading, .rl-on')), 'switching to Bahasa Melayu stops the English narration and offers the Malay one');
   ok(await p.evaluate(() => { const box = document.querySelector('#leaf .lsn'), L = READ['leaf-dengue-ms'].lines; return L.length === document.querySelectorAll('#leaf .leaf-t, #leaf .leaf-g > h5, #leaf .leaf-g > p, #leaf .leaf-g li').length && L.every(l => readLine(box, l[1], l[2])); }), 'every Malay leaflet line has its own mark on its own element');
@@ -1034,7 +1034,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#mau-admission', 450);
     ok(await p.evaluate(() => [...document.querySelectorAll('#run [role="tab"], #run .ptab-bar button')].some(x => /2025 criteria/.test(x.textContent)) && /2025 criteria tab/.test(P['mau-admission'].nodes.crit.hint)), 'MAU: the 2025 criteria from General Medicine are a dated tab beside the 2022 checklist');
     ok(await p.evaluate(() => P['gz-rules'].nodes.gzm.opts.length === 13 && P['yellow-zone'].nodes.hd && P['abdominal-pain'].dept.some(d => /Bil\. 9\/2024/.test(d.src) && d.fig === 'memo-kpk-ectopic') && P['infection-alerts'].nodes.nipah.fig === 'memo-2026-nipah'
-      && CONFIRM[0].includes('21 Nov 2026') && V8.find(v => /^Department memos and letters/.test(v[0]))[3].includes('#blood-tests') && APP_VER === 'Version 8, updated 23 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
+      && CONFIRM.some(c => c.includes('21 Nov 2026')) && V8.find(v => /^Department memos and letters/.test(v[0]))[3].includes('#blood-tests') && APP_VER === 'Version 8, updated 24 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
     ok(await p.evaluate(() => Object.entries({'measles':'#infection-alerts', 'campak':'#infection-alerts', 'dispatch book':'#blood-tests', 'winspirin':'#prescribing', 'phq-9':'#referral-rules'}).every(([q, h]) => { const r = findMore(q), a = (r.r || r)[0]; return !!a && a.href.startsWith(h); })), 'search: measles, campak, dispatch book, winspirin and PHQ-9 open their new steps');
     if (guardRe('announcements')) { const re = new RegExp(guardRe('announcements')), art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
       ok(!re.test(art) && !re.test(idx) && await p.evaluate(r => !new RegExp(r).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('announcements')), 'no patient, password, link or registration number from these documents is anywhere in the guide, page or data'); }
@@ -1399,7 +1399,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const qrm2 = require('./qr.js');
     const codes = await p.evaluate(() => Object.entries(PT_QR).flatMap(([id, o]) => Object.entries(o).map(([lg, q]) => ({id, lg, ...q}))));
     const grid = q => { const m = Array.from({length:q.n}, () => Array(q.n).fill(false)); for (const [, x, y, n] of q.d.matchAll(/M(\d+) (\d+)h(\d+)/g)) for (let i = 0; i < +n; i++) m[+y][+x + i] = true; return m; };
-    ok(codes.length === 10 && codes.every(q => { const d = qrm2.decode(grid(q)); return d.eccOk && d.text === q.u && q.u === 'https://zaq6184-cell.github.io/green-zone-mo-guide/#pt-' + q.id + (q.lg === 'ms' ? '-ms' : ''); }), 'patient QR: all 10 codes read back as their own #pt- address on the web app');
+    ok(codes.length === 16 && codes.every(q => { const d = qrm2.decode(grid(q)); return d.eccOk && d.text === q.u && q.u === 'https://zaq6184-cell.github.io/green-zone-mo-guide/#pt-' + q.id + (q.lg === 'ms' ? '-ms' : ''); }), 'patient QR: all 16 codes (since 24 Nov 2026 the six advice pages in Bahasa Melayu too) read back as their own #pt- address on the web app');
     ok(await p.evaluate(() => Object.keys(PT_QR).every(id => (P[id].leaflet && READ_LEAF[id]) || (P[id].advice && READ_ADV[id])) && Object.keys(READ_ADV).every(id => ptKey(id)) && ptKey('dengue') === 'dengue-cpg' && !ptKey('cellulitis')), 'patient QR: only advice written for the patient (the two leaflets and the read-aloud advice); the ebook\'s dengue hands out the CPG leaflet; none for cellulitis');
     await go(p, '#pt-dengue-cpg-ms', 600);
     ok(await p.evaluate(() => document.documentElement.classList.contains('pt-mode') && curView === 'pt' && getComputedStyle(document.querySelector('#topbar')).display === 'none' && getComputedStyle(document.querySelector('#tabbar')).display === 'none' && document.querySelector('#h-pt').textContent === 'Nasihat penjagaan di rumah' && !!document.querySelector('#ptbody .lsn[data-read="leaf-dengue-ms"]') && document.querySelectorAll('#ptbody .leaf-g').length === P['dengue-cpg'].leaflet.ms.groups.length) && await hscroll(p) <= 0, 'patient page: #pt-dengue-cpg-ms shows the Malay leaflet with Listen, and nothing else from the guide, with no sideways scroll');
@@ -2283,9 +2283,49 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     q.on('request', x => { if (/cancer-pain-home/.test(x.url())) got.push(x.url().split('/').pop()); });
     ok(['cancer-pain-home-720.mp4', 'cancer-pain-home-ms-720.mp4', 'cancer-pain-home-poster.webp', 'cancer-pain-home-ms-poster.webp', 'cancer-pain-home-thumb.webp', 'cancer-pain-home-ms-thumb.webp'].every(f => fs.existsSync(path.join(root, 'media', f))), 'cancer pain film: both languages, with covers, are in media/');
     await q.goto(U + '#pt-cancer-pain-cpg'); await q.waitForFunction(() => typeof MORE !== 'undefined' && MORE && curView === 'pt'); await q.waitForTimeout(500);
-    ok(await q.evaluate(() => { const b = document.querySelector('.lfilm-b'); return !!b && b.dataset.film === 'media/cancer-pain-home-720.mp4'; }) && !got.some(f => /\.mp4$/.test(f)), 'cancer pain film: the patient page offers it, and no film loads before a tap');
+    ok(await q.evaluate(() => { const b = document.querySelector('#ptbody .lfilm-b'); return !!b && b.dataset.film === 'media/cancer-pain-home-720.mp4'; }) && !got.some(f => /\.mp4$/.test(f)), 'cancer pain film: the patient page offers it, and no film loads before a tap');
     await q.goto(U + '#pt-cancer-pain-cpg-ms'); await q.waitForTimeout(600);
-    ok(await q.evaluate(() => { const b = document.querySelector('.lfilm-b'); return !!b && b.dataset.film === 'media/cancer-pain-home-ms-720.mp4'; }), 'cancer pain film: the Malay page offers the Malay film');
+    ok(await q.evaluate(() => { const b = document.querySelector('#ptbody .lfilm-b'); return !!b && b.dataset.film === 'media/cancer-pain-home-ms-720.mp4'; }), 'cancer pain film: the Malay page offers the Malay film');
+    await ctx.close();
+  }
+
+  /* 24 Nov 2026: the discharge advice in Bahasa Melayu, the journey in Bahasa Melayu, the advice films and What's new in 60 seconds */
+  {
+    const ctx = await b.newContext({viewport:{width:390, height:844}, serviceWorkers:'block'}), q = await ctx.newPage(), got = [];
+    q.on('request', x => { if (/\/media\/(adv-|whatsnew)[^/]*\.mp4|\/audio\/(adv-[a-z]+-ms|stop\d-ms)/.test(x.url())) got.push(x.url().split('/').pop()); });
+    await q.goto(U + '#renal-colic'); await q.waitForFunction(() => typeof MORE !== 'undefined' && MORE && curView === 'run'); await q.waitForTimeout(300);
+    const all = await q.evaluate(() => Object.keys(READ_ADV).map(id => [id, !!advMs(id), !!READ[READ_ADV[id].replace(/-en$/, '-ms')], !!(FILMS[id] && FILMS[id].en)]));
+    ok(all.length === 7 && all.every(r => r[1] && r[2] && r[3]), 'Malay advice: all seven tabs have a complete translation, a Malay read-aloud and an English film' + (all.every(r => r[1] && r[2] && r[3]) ? '' : ' ' + JSON.stringify(all)));
+    ok(['tbi', 'dengue', 'asthma', 'gastro', 'renal', 'abdo', 'hypo'].every(k => fs.existsSync(path.join(root, 'media', `adv-${k}-720.mp4`)) && fs.existsSync(path.join(root, 'audio', `adv-${k}-ms.mp3`))) && [1, 2, 3, 4, 5].every(i => fs.existsSync(path.join(root, 'audio', `stop${i}-ms.mp3`))), 'Malay advice and journey: every film and recording is in app/');
+    await q.evaluate(() => selectTab('advice')); await q.waitForTimeout(250);
+    const en = await q.evaluate(() => ({seg:document.querySelectorAll('#tp-advice [data-advlang]').length, film:(document.querySelector('#tp-advice .lfilm-b') || {}).dataset || {}, read:document.querySelector('#tp-advice .lsn').dataset.read, n:document.querySelectorAll('#advlist li').length}));
+    ok(en.seg === 2 && en.film.film === 'media/adv-renal-720.mp4' && en.film.cover === 'tiles/abdo.webp' && en.read === 'adv-renal-en' && en.n === 6 && !got.length, 'advice tab: English and Bahasa Melayu, the English film (its banner still as cover) and read-aloud, nothing loaded before a tap');
+    await q.click('#tp-advice [data-advlang="ms"]'); await q.waitForTimeout(250);
+    const ms = await q.evaluate(() => ({lang:document.querySelector('#advlist').lang, n:document.querySelectorAll('#advlist li').length, first:document.querySelector('#advlist li').textContent === ADVICE_MS['renal-colic'][0], read:document.querySelector('#tp-advice .lsn').dataset.read, film:!!document.querySelector('#tp-advice .lfilm-b'), src:/translation/.test(document.querySelector('#tp-advice .src').textContent), pressed:document.querySelector('#tp-advice [data-advlang="ms"]').getAttribute('aria-pressed')}));
+    ok(ms.lang === 'ms' && ms.n === 6 && ms.first && ms.read === 'adv-renal-ms' && !ms.film && ms.src && ms.pressed === 'true', 'advice tab: Bahasa Melayu shows the translation line for line, its Malay read-aloud, a note that it is a translation, and no film (none in Malay yet)');
+    await q.evaluate(() => navigator.clipboard && (navigator.clipboard.writeText = async t => { window.__clip = t; }));
+    await q.click('#tp-advice [data-copyadvice]'); await q.waitForTimeout(200);
+    ok(await q.evaluate(() => !window.__clip || /^1\. Minum/.test(window.__clip)), 'advice tab: Copy advice copies the language on screen');
+    await q.goto(U + '#pt-renal-colic-ms'); await q.waitForTimeout(700);
+    const pt = await q.evaluate(() => ({view:curView, lang:document.querySelector('.pt-adv').lang, seg:document.querySelectorAll('[data-ptlang]').length, first:document.querySelector('.pt-list li').textContent === ADVICE_MS['renal-colic'][0], read:document.querySelector('.pt-adv .lsn').dataset.read, src:/Terjemahan/.test(document.querySelector('.pt-adv .src').textContent)}));
+    ok(pt.view === 'pt' && pt.lang === 'ms' && pt.seg === 2 && pt.first && pt.read === 'adv-renal-ms' && pt.src, 'patient page: renal colic advice in Bahasa Melayu, with its read-aloud and a Malay source line');
+    await q.goto(U + '#pt-renal-colic'); await q.waitForTimeout(600);
+    ok(await q.evaluate(() => document.querySelector('.pt-adv').lang === 'en' && document.querySelector('#ptbody .lfilm-b').dataset.film === 'media/adv-renal-720.mp4'), 'patient page: the English page offers the advice film');
+    await q.click('#ptbody .lfilm-b'); await q.waitForTimeout(500);
+    ok(got.some(f => f === 'adv-renal-720.mp4'), 'advice film: loads only after a tap');
+    /* The journey in Bahasa Melayu */
+    await q.goto(U + '#journey-2'); await q.waitForTimeout(900);
+    ok(await q.evaluate(() => document.querySelectorAll('#jlang [data-jlang]').length === 2 && JOURNEY_MS.length === JOURNEY.length), 'journey: EN and BM beside Listen');
+    await q.click('#jlang [data-jlang="ms"]'); await q.click('#jlisten'); await q.waitForTimeout(900);
+    ok(await q.evaluate(() => /stop2-ms\.mp3$/.test(voice.src) && document.querySelector('#jcap').lang === 'ms' && JOURNEY_MS[1].startsWith(document.querySelector('#jcap').textContent.trim())), 'journey: BM plays the Malay narration with Malay captions');
+    await q.evaluate(() => stopJourney());
+    /* What's new in 60 seconds */
+    got.length = 0; await q.goto(U + '#new'); await q.waitForTimeout(800);
+    const wn = await q.evaluate(() => { const b = document.querySelector('#drive .lfilm-b'); return b && {film:b.dataset.film, w:b.dataset.w, h:b.dataset.h}; });
+    ok(wn && wn.film === 'media/whatsnew-720.mp4' && wn.w === '1280' && wn.h === '720' && !got.length && fs.existsSync(path.join(root, 'media', 'whatsnew-720.mp4')), 'What\'s new: the 60-second film at the top of the page, 16:9, nothing loaded before a tap');
+    await q.click('#drive .lfilm-b'); await q.waitForTimeout(500);
+    ok(await q.evaluate(() => { const v = document.querySelector('#drive .lfilm-v'); return !!v && v.getAttribute('width') === '1280' && /1280\s*\/\s*720/.test(v.style.aspectRatio); }) && got.includes('whatsnew-720.mp4'), 'What\'s new: a tap plays it in a 16:9 player');
+    await q.screenshot({path:out + '/p-whatsnew-film.png'});
     await ctx.close();
   }
 

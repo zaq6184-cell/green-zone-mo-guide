@@ -1,0 +1,164 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,370"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 370
+			},
+			"text": " Type"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,370",
+				"to": "00:00:00,520"
+			},
+			"offsets": {
+				"from": 370,
+				"to": 520
+			},
+			"text": " an"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,520",
+				"to": "00:00:01,580"
+			},
+			"offsets": {
+				"from": 520,
+				"to": 1580
+			},
+			"text": " abbreviation"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,580",
+				"to": "00:00:01,730"
+			},
+			"offsets": {
+				"from": 1580,
+				"to": 1730
+			},
+			"text": " in"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,730",
+				"to": "00:00:02,340"
+			},
+			"offsets": {
+				"from": 1730,
+				"to": 2340
+			},
+			"text": " SEARCH"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,340",
+				"to": "00:00:02,420"
+			},
+			"offsets": {
+				"from": 2340,
+				"to": 2420
+			},
+			"text": " to"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,420",
+				"to": "00:00:02,630"
+			},
+			"offsets": {
+				"from": 2420,
+				"to": 2630
+			},
+			"text": " see"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,630",
+				"to": "00:00:02,910"
+			},
+			"offsets": {
+				"from": 2630,
+				"to": 2910
+			},
+			"text": " what"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,910",
+				"to": "00:00:03,050"
+			},
+			"offsets": {
+				"from": 2910,
+				"to": 3050
+			},
+			"text": " it"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,050",
+				"to": "00:00:03,500"
+			},
+			"offsets": {
+				"from": 3050,
+				"to": 3500
+			},
+			"text": " stands"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,500",
+				"to": "00:00:03,940"
+			},
+			"offsets": {
+				"from": 3500,
+				"to": 3940
+			},
+			"text": " for."
+		}
+	]
+}

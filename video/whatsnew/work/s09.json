@@ -1,0 +1,153 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,050"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 50
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,050",
+				"to": "00:00:00,580"
+			},
+			"offsets": {
+				"from": 50,
+				"to": 580
+			},
+			"text": " Reading"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,580",
+				"to": "00:00:01,040"
+			},
+			"offsets": {
+				"from": 580,
+				"to": 1040
+			},
+			"text": " x-rays"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,040",
+				"to": "00:00:01,440"
+			},
+			"offsets": {
+				"from": 1040,
+				"to": 1440
+			},
+			"text": " shows"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,440",
+				"to": "00:00:01,860"
+			},
+			"offsets": {
+				"from": 1440,
+				"to": 1860
+			},
+			"text": " real"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,860",
+				"to": "00:00:02,240"
+			},
+			"offsets": {
+				"from": 1860,
+				"to": 2240
+			},
+			"text": " films"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,240",
+				"to": "00:00:02,480"
+			},
+			"offsets": {
+				"from": 2240,
+				"to": 2480
+			},
+			"text": " with"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,480",
+				"to": "00:00:02,700"
+			},
+			"offsets": {
+				"from": 2480,
+				"to": 2700
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,700",
+				"to": "00:00:03,150"
+			},
+			"offsets": {
+				"from": 2700,
+				"to": 3150
+			},
+			"text": " normal"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,150",
+				"to": "00:00:03,760"
+			},
+			"offsets": {
+				"from": 3150,
+				"to": 3760
+			},
+			"text": " anatomy"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,760",
+				"to": "00:00:04,360"
+			},
+			"offsets": {
+				"from": 3760,
+				"to": 4360
+			},
+			"text": " outlined."
+		}
+	]
+}

@@ -1,0 +1,175 @@
+{
+	"systeminfo": "WHISPER : VITISAI = 0 | COREML = 0 | OPENVINO = 0 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | OPENMP = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "large",
+		"multilingual": true,
+		"vocab": 51866,
+		"audio": {
+			"ctx": 1500,
+			"state": 1280,
+			"head": 20,
+			"layer": 32
+		},
+		"text": {
+			"ctx": 448,
+			"state": 1280,
+			"head": 20,
+			"layer": 4
+		},
+		"mels": 128,
+		"ftype": 8
+	},
+	"params": {
+		"model": "C:/Users/user/.flow-mcp/models/ggml-large-v3-turbo-q5_0.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:00,060"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 60
+			},
+			"text": ""
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,060",
+				"to": "00:00:00,260"
+			},
+			"offsets": {
+				"from": 60,
+				"to": 260
+			},
+			"text": " and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,260",
+				"to": "00:00:00,610"
+			},
+			"offsets": {
+				"from": 260,
+				"to": 610
+			},
+			"text": " over"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:00,610",
+				"to": "00:00:01,130"
+			},
+			"offsets": {
+				"from": 610,
+				"to": 1130
+			},
+			"text": " 50"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:01,130",
+				"to": "00:00:02,100"
+			},
+			"offsets": {
+				"from": 1130,
+				"to": 2100
+			},
+			"text": " calculators,"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,100",
+				"to": "00:00:02,350"
+			},
+			"offsets": {
+				"from": 2100,
+				"to": 2350
+			},
+			"text": " each"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,350",
+				"to": "00:00:02,690"
+			},
+			"offsets": {
+				"from": 2350,
+				"to": 2690
+			},
+			"text": " name"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,690",
+				"to": "00:00:02,900"
+			},
+			"offsets": {
+				"from": 2690,
+				"to": 2900
+			},
+			"text": " the"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:02,900",
+				"to": "00:00:03,170"
+			},
+			"offsets": {
+				"from": 2900,
+				"to": 3170
+			},
+			"text": " source"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,170",
+				"to": "00:00:03,420"
+			},
+			"offsets": {
+				"from": 3170,
+				"to": 3420
+			},
+			"text": " they"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,420",
+				"to": "00:00:03,610"
+			},
+			"offsets": {
+				"from": 3420,
+				"to": 3610
+			},
+			"text": " are"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:03,610",
+				"to": "00:00:04,180"
+			},
+			"offsets": {
+				"from": 3610,
+				"to": 4180
+			},
+			"text": " built"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:04,180",
+				"to": "00:00:04,420"
+			},
+			"offsets": {
+				"from": 4180,
+				"to": 4420
+			},
+			"text": " from."
+		}
+	]
+}
