@@ -252,7 +252,10 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await q.close(); }
   if (guardRe('starterpack')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('starterpack')), 'no signer, staff name or registration number from the starter pack documents is copied');
   if (guardRe('pharmacy')) ok(await p.evaluate(re => !new RegExp(re).test(JSON.stringify(EDRX) + document.body.textContent), guardRe('pharmacy')), 'no name or registration number of the pharmacists who signed the list is copied');
+  /* since 26 Nov 2026 the current alerts card can sit above the bento, so bring the tiles on screen first */
+  await p.evaluate(() => document.querySelector('#t-paths').scrollIntoView({block:'center'})); await p.waitForTimeout(900);
   ok(await p.evaluate(() => { const on = ['#t-paths', '#t-rules', '#t-dc', '#t-calc', '#t-intro', '#tl-tip'].map(s => document.querySelector(s + ' .tm')).filter(el => { const r = el.getBoundingClientRect(); return (Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height >= .5; }); return on.length > 0 && on.every(el => el.querySelector('video')); }), 'the home tiles on screen start their loops');
+  await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(300);
   await p.screenshot({path:out + '/d-home.png'});
   await p.click('#zmap [data-zs="3"]'); await p.waitForTimeout(250);
   ok(await p.evaluate(() => !document.querySelector('#zx').hidden && /CCA/.test(document.querySelector('#zx h3').textContent)), 'a zone stop opens its rules');
@@ -1034,7 +1037,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#mau-admission', 450);
     ok(await p.evaluate(() => [...document.querySelectorAll('#run [role="tab"], #run .ptab-bar button')].some(x => /2025 criteria/.test(x.textContent)) && /2025 criteria tab/.test(P['mau-admission'].nodes.crit.hint)), 'MAU: the 2025 criteria from General Medicine are a dated tab beside the 2022 checklist');
     ok(await p.evaluate(() => P['gz-rules'].nodes.gzm.opts.length === 13 && P['yellow-zone'].nodes.hd && P['abdominal-pain'].dept.some(d => /Bil\. 9\/2024/.test(d.src) && d.fig === 'memo-kpk-ectopic') && P['infection-alerts'].nodes.nipah.fig === 'memo-2026-nipah'
-      && CONFIRM.some(c => c.includes('21 Nov 2026')) && V8.find(v => /^Department memos and letters/.test(v[0]))[3].includes('#blood-tests') && APP_VER === 'Version 8, updated 24 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
+      && CONFIRM.some(c => c.includes('21 Nov 2026')) && V8.find(v => /^Department memos and letters/.test(v[0]))[3].includes('#blood-tests') && APP_VER === 'Version 8, updated 26 Nov 2026'), 'the two older memos, haemodialysis, the 2024 ectopic circular, the Nipah memo, Still to confirm, What\'s new and the version line are in place');
     ok(await p.evaluate(() => Object.entries({'measles':'#infection-alerts', 'campak':'#infection-alerts', 'dispatch book':'#blood-tests', 'winspirin':'#prescribing', 'phq-9':'#referral-rules'}).every(([q, h]) => { const r = findMore(q), a = (r.r || r)[0]; return !!a && a.href.startsWith(h); })), 'search: measles, campak, dispatch book, winspirin and PHQ-9 open their new steps');
     if (guardRe('announcements')) { const re = new RegExp(guardRe('announcements')), art = fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8'), idx = fs.readFileSync(path.join(__dirname, '..', 'app', 'index.html'), 'utf8');
       ok(!re.test(art) && !re.test(idx) && await p.evaluate(r => !new RegExp(r).test(JSON.stringify(P) + JSON.stringify(MEMOS) + document.body.textContent), guardRe('announcements')), 'no patient, password, link or registration number from these documents is anywhere in the guide, page or data'); }
@@ -1061,7 +1064,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#antidotes', 1200);
     const ax = await p.evaluate(() => { const q = document.querySelector('#axq'), out = {cards:document.querySelectorAll('#axl .ax').length};
       q.value = 'naloxone'; q.dispatchEvent(new Event('input'));
-      const o = document.querySelector('#axl .ax[open]'); out.heads = o ? [...o.querySelectorAll('h4')].map(h => h.textContent) : [];
+      const o = document.querySelector('#axl .ax[open]'); out.heads = o ? [...o.querySelectorAll('.ax-f h3')].map(h => h.textContent) : []; /* h3 since 25 Nov 2026: no level skipped under the banner's h2 */
       q.value = 'calcium gluconate'; q.dispatchEvent(new Event('input'));
       out.cal = (document.querySelector('#axl .ax .ab-gap') || {}).textContent || '';
       q.value = 'paracetamol'; q.dispatchEvent(new Event('input'));
@@ -1439,20 +1442,24 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     /* The suggested answer in thumb reach */
     await go(p, '#renal-colic', 500);
     ok(!(await p.$('#ansbar')), 'answer bar: a question without a checklist has none');
+    await p.setViewportSize({width:390, height:740}); /* since 25 Nov 2026 the step starts higher on a phone, so a shorter screen puts its keys under the tab bar */
     await go(p, '#renal-colic--urgent', 600);
     await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(250);
     await p.evaluate(() => document.querySelector('#cur .checks input').click()); await p.waitForTimeout(400);
     const ab = await p.evaluate(() => { const b = document.querySelector('#ansbar'), s = document.querySelector('#cur button.opt.sugg'), r = s.getBoundingClientRect(), br = b.getBoundingClientRect(), tb = document.querySelector('#tabbar').getBoundingClientRect();
       return {shown:!b.hidden, label:b.querySelector('b') && b.querySelector('b').textContent, sugg:s.querySelector('span').textContent, below:r.top > innerHeight - 112, aboveTab:br.bottom <= tb.top, h:br.height}; });
     ok(ab.below && ab.shown && ab.label === ab.sugg && ab.aboveTab && ab.h >= 44, 'answer bar: with the keys under the tab bar, a tick brings up the suggested answer in a bar just above it');
+    if (!ab.below) console.log('  (answer bar check: ' + JSON.stringify(ab) + ')');
     await p.screenshot({path:out + '/p-ansbar.png'});
     await p.evaluate(() => document.querySelector('#cur button.opt.sugg').scrollIntoView({block:'center'})); await p.waitForTimeout(400);
     ok(await p.evaluate(() => document.querySelector('#ansbar').hidden), 'answer bar: it hides while the suggested key itself is on screen');
     await p.evaluate(() => scrollTo(0, 0)); await p.waitForTimeout(400);
     const to = await p.evaluate(() => P['renal-colic'].nodes.urgent.opts[0][1]);
     await p.click('#ansbar'); await p.waitForTimeout(400);
+    ok(await p.evaluate(() => !document.documentElement.classList.contains('ab-on')), 'answer bar: once it has answered, the next step keeps no room for it');
     ok(await p.evaluate(to => state.cur === to && state.trail[state.trail.length - 1].label === P['renal-colic'].nodes.urgent.opts[0][0], to), 'answer bar: a tap answers with the suggested key');
     ok(await p.evaluate(() => { const t = document.querySelector('.trailx'); return !!t && t.scrollLeft >= t.scrollWidth - t.clientWidth - 2 && !!document.querySelector('.trailw .tlbl') && /: you answered /.test(t.querySelector('button .vh').textContent); }), 'route trail: it opens on the newest answer, its label stays put, and each answer names its question for a screen reader');
+    await p.setViewportSize({width:390, height:844});
     ok(await p.evaluate(() => [...document.querySelectorAll('.strip .end')].every(e => getComputedStyle(e).backgroundColor === 'rgba(0, 0, 0, 0)')), 'route: on a phone the endings are plain dots and words');
 
     /* The outcome card */
@@ -1616,14 +1623,14 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(said1.s && said1.s.lang === 'en-GB' && said1.s.v === 'English UK' && said1.all.includes(said1.q) && /Answers: /.test(said1.all) && !/Read aloud|Something wrong|Copy/.test(said1.all), 'read aloud: the step is read by the phone\'s own British English voice, its question and its answers, and none of the buttons');
     await tq.goto(U + '#dengue-cpg', {waitUntil:'load'}); await tq.waitForTimeout(500);
     await tq.evaluate(() => { window.__said = []; selectTab('leaflet'); }); await tq.click('#run [data-leaf="ms"]'); await tq.waitForTimeout(150);
-    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    await tq.click('#run [data-say="tab"]:visible'); await tq.waitForTimeout(250);
     const said2 = await tq.evaluate(() => ({all:window.__said.map(s => s.t).join(' '), s:window.__said[0], title:P['dengue-cpg'].leaflet.ms.title}));
     ok(said2.s && said2.s.lang === 'ms-MY' && said2.s.v === 'Malay' && said2.all.includes(said2.title), 'read aloud: the Malay side of a leaflet is read by a Malay voice');
     await tq.evaluate(() => { window.__said = []; window.__noms = true; });
-    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    await tq.click('#run [data-say="tab"]:visible'); await tq.waitForTimeout(250);
     ok(await tq.evaluate(() => window.__said.length === 0), 'read aloud: with no Malay voice on the phone it says so, rather than reading Malay in an English voice');
-    await tq.evaluate(() => { window.__noms = false; window.__hold = true; }); await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(100);
-    const reading = await tq.evaluate(() => ({on:!!sayOn, c:window.__cancel, label:document.querySelector('#run [data-say="tab"] span').textContent}));
+    await tq.evaluate(() => { window.__noms = false; window.__hold = true; }); await tq.click('#run [data-say="tab"]:visible'); await tq.waitForTimeout(100);
+    const reading = await tq.evaluate(() => ({on:!!sayOn, c:window.__cancel, label:sayOn && sayOn.querySelector('span').textContent})); /* the visible one: since 25 Nov 2026 a tab with a recording carries it in its Listen bar */
     await tq.evaluate(() => { location.hash = '#renal-colic'; }); await tq.waitForTimeout(300);
     ok(reading.on && reading.label === 'Stop reading' && await tq.evaluate(c => !sayOn && window.__cancel > c, reading.c), 'read aloud: while it reads, the button says Stop reading, and leaving the page stops it');
     /* 18 Nov 2026: the pink EM Watch form: an English step with a Malay-titled card reads in English; each consent tab in its own voice */
@@ -1633,11 +1640,11 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const said3 = await tq.evaluate(() => ({s:window.__said[0], all:window.__said.map(s => s.t).join(' ')}));
     ok(said3.s && said3.s.lang === 'en-GB' && /Fill in the pink EM Watch form/.test(said3.all), 'read aloud: the EM Watch form step reads in English, though its card\'s title is Malay');
     await tq.evaluate(() => { sayStop(); window.__said = []; selectTab('n0'); }); await tq.waitForTimeout(150);
-    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    await tq.click('#run [data-say="tab"]:visible'); await tq.waitForTimeout(250);
     const said4 = await tq.evaluate(() => ({s:window.__said[0], all:window.__said.map(s => s.t).join(' ')}));
     ok(said4.s && said4.s.lang === 'ms-MY' && said4.s.v === 'Malay' && /Kebenaran Rawatan/.test(said4.all) && /Saya adalah pesakit atau penjaga yang sah/.test(said4.all), 'read aloud: the EM Watch consent in Malay is read by a Malay voice, as printed');
     await tq.evaluate(() => { sayStop(); window.__said = []; selectTab('n1'); }); await tq.waitForTimeout(150);
-    await tq.click('#run [data-say="tab"]'); await tq.waitForTimeout(250);
+    await tq.click('#run [data-say="tab"]:visible'); await tq.waitForTimeout(250);
     const said5 = await tq.evaluate(() => ({s:window.__said[0], all:window.__said.map(s => s.t).join(' ')}));
     ok(said5.s && said5.s.lang === 'en-GB' && /Treatment consent/.test(said5.all) && /I am the patient or authorised guardian/.test(said5.all), 'read aloud: the English consent is read by an English voice');
     await tc.close();
@@ -1698,6 +1705,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const onc = await b.newContext({...phone, reducedMotion:'reduce', timezoneId:'Europe/London'}), onq = await onc.newPage(); onq.on('pageerror', e => errs.push('open now PAGEERROR: ' + e.message));
     await onq.clock.setFixedTime(new Date('2026-11-17T06:40:00Z')); /* Tuesday 2.40 pm in Malaysia, 6.40 am in London */
     await onq.goto(U + '#home', {waitUntil:'load'}); await onq.waitForFunction(() => document.querySelectorAll('#tl-now .nowl a').length >= 3, null, {timeout:6000}).catch(() => {});
+    await onq.evaluate(() => { document.querySelector('#tl-now .nowsum').open = true; }); /* on a phone the tile opens on one line (25 Nov 2026) */
     const on1 = await onq.evaluate(() => ({t:document.querySelector('#tl-now [data-nowt]').textContent, sh:document.querySelector('#tl-now .nowsh').textContent, emacc:document.querySelector('#tl-now [data-nowk="emacc"]').innerText, cls:document.querySelector('#tl-now [data-nowk="emacc"]').className}));
     ok(on1.t === 'Tue 2.40 pm' && on1.sh === 'AM shift' && /In session until 3 pm \(20 min left\)/.test(on1.emacc) && on1.cls === 'on', 'open now: the home tile reads Malaysia time on a phone set to London (Tuesday 2.40 pm, AM shift, EMACC in session for 20 more minutes)' + (on1.cls === 'on' ? '' : ' ' + JSON.stringify(on1)));
     const ost = await onq.evaluate(() => { const H = k => HOURS.find(h => h.k === k), L = (k, dow, h, m) => hoursState(H(k), {dow, min:h * 60 + m}).line;
@@ -2054,14 +2062,21 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await p.keyboard.press('Escape');
 
     /* A sound is kept once played, from the same download, and a part of one or an unplayed film is not */
-    ok(await playIt(p, 'audio/stop2.mp3'), 'web app: a sound plays through the worker');
-    ok(await until(p, ([k, u, h]) => caches.open(k).then(c => c.match(u)).then(r => !!r && r.headers.get('X-GZ-Hash') === h), [KEPT, W + 'audio/stop2.mp3', KEEP['audio/stop2.mp3']], 8000), 'web app: once played, the sound is kept, and it matches the build');
-    const asked = log.filter(l => l.startsWith('/audio/stop2.mp3'));
+    ok(await playIt(p, 'audio/intro-1-en.mp3'), 'web app: a sound plays through the worker');
+    ok(await until(p, ([k, u, h]) => caches.open(k).then(c => c.match(u)).then(r => !!r && r.headers.get('X-GZ-Hash') === h), [KEPT, W + 'audio/intro-1-en.mp3', KEEP['audio/intro-1-en.mp3']], 8000), 'web app: once played, the sound is kept, and it matches the build');
+    const asked = log.filter(l => l.startsWith('/audio/intro-1-en.mp3'));
     ok(asked.length > 0 && asked.every(l => / bytes=\d+-\d* /.test(l)), 'web app: it was kept from the player\'s own download, with nothing fetched twice (' + asked.join(', ') + ')');
-    const part = await p.evaluate(async () => { const r = await fetch('audio/stop3.mp3', {headers:{Range:'bytes=0-99'}}); return [r.status, (await r.arrayBuffer()).byteLength]; });
+    const part = await p.evaluate(async () => { const r = await fetch('audio/intro-3-en.mp3', {headers:{Range:'bytes=0-99'}}); return [r.status, (await r.arrayBuffer()).byteLength]; });
     await p.waitForTimeout(400);
-    ok(part[0] === 206 && part[1] === 100 && !(await kept(p, 'audio/stop3.mp3')), 'web app: part of a sound (a byte range) is passed on but not kept');
+    ok(part[0] === 206 && part[1] === 100 && !(await kept(p, 'audio/intro-3-en.mp3')), 'web app: part of a sound (a byte range) is passed on but not kept');
     ok(await p.evaluate(async k => !(await (await caches.open(k)).keys()).some(r => /\.mp4$/.test(r.url)), KEPT), 'web app: no film is kept before it has been played');
+    /* The journey's narration (26 Nov 2026): one file per language, fetched whole on the first Listen and kept by the worker */
+    await go(p, '#journey-2', 700);
+    ok(!log.some(l => l.startsWith('/audio/stops-')), 'web app: the journey asks for no narration before Listen');
+    await p.tap('#jlisten');
+    ok(await until(p, () => !voice.paused && voice.dataset.i === '1' && voice.currentTime >= JSTOPS_AUDIO.en.s[1].at, null, 8000), 'web app: Listen plays the stop from the joined narration');
+    ok(await until(p, ([k, u, h]) => caches.open(k).then(c => c.match(u)).then(r => !!r && r.headers.get('X-GZ-Hash') === h), [KEPT, W + 'audio/stops-en.mp3', KEEP['audio/stops-en.mp3']], 8000), 'web app: the joined narration is fetched whole and kept, and it matches the build');
+    await p.evaluate(() => stopJourney());
 
     /* Offline */
     await ctx.setOffline(true);
@@ -2083,13 +2098,17 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#pathways', 700);
     ok(await until(p, () => { const im = [...document.querySelectorAll('#libcats .tm img')]; return im.length === 11 && im.every(i => i.complete && i.naturalWidth === 640); }, null, 8000), 'offline: the topic tiles show their saved pictures');
     await p.screenshot({path:out + '/p-offline-pathways.png'});
-    ok(await playIt(p, 'audio/stop2.mp3'), 'offline: the kept sound plays');
-    const rng = await p.evaluate(async () => { const r = await fetch('audio/stop2.mp3', {headers:{Range:'bytes=100-199'}}); return [r.status, r.headers.get('content-range'), (await r.arrayBuffer()).byteLength]; });
-    ok(rng[0] === 206 && rng[1] === 'bytes 100-199/' + fs.statSync(path.join(root, 'audio', 'stop2.mp3')).size && rng[2] === 100, 'offline: the kept sound answers byte ranges, so it can seek');
-    ok(await p.evaluate(() => fetch('audio/stop4.mp3').then(() => false, () => true)), 'offline: a sound never played is not there, as nothing was fetched ahead');
+    ok(await playIt(p, 'audio/intro-1-en.mp3'), 'offline: the kept sound plays');
+    const rng = await p.evaluate(async () => { const r = await fetch('audio/intro-1-en.mp3', {headers:{Range:'bytes=100-199'}}); return [r.status, r.headers.get('content-range'), (await r.arrayBuffer()).byteLength]; });
+    ok(rng[0] === 206 && rng[1] === 'bytes 100-199/' + fs.statSync(path.join(root, 'audio', 'intro-1-en.mp3')).size && rng[2] === 100, 'offline: the kept sound answers byte ranges, so it can seek');
+    ok(await p.evaluate(() => fetch('audio/intro-4-en.mp3').then(() => false, () => true)), 'offline: a sound never played is not there, as nothing was fetched ahead');
+    await go(p, '#journey-3', 700);
+    await p.tap('#jlisten');
+    ok(await until(p, () => !voice.paused && voice.dataset.i === '2' && voice.currentTime >= JSTOPS_AUDIO.en.s[2].at, null, 8000), 'offline: Listen plays the journey from the kept narration');
+    await p.evaluate(() => stopJourney());
     await go(p, '#home', 300);
     await p.tap('#topbar [data-settings]');
-    ok(await until(p, () => /Films and sounds you have played through are kept \(1 so far\)/.test(document.querySelector('#st-off').textContent), null, 5000), 'offline: Settings counts the films and sounds kept');
+    ok(await until(p, () => /Films and sounds you have played through are kept \(2 so far\)/.test(document.querySelector('#st-off').textContent), null, 5000), 'offline: Settings counts the films and sounds kept');
     await p.keyboard.press('Escape');
     ok(!perr.length, 'offline: no script errors' + (perr.length ? ': ' + perr.join('; ') : ''));
     const cother = cerr.filter(t => !/Failed to load resource|ERR_INTERNET_DISCONNECTED|net::ERR_|FetchEvent/.test(t));
@@ -2111,7 +2130,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(nNew === nPre, `update: the newer build has every file saved (${nNew} of ${nPre})`);
     const fetched = log.slice(from).filter(l => !/^\/sw\.js /.test(l));
     ok(!fetched.length, 'update: the unchanged page and stills come from the old cache, nothing downloaded again' + (fetched.length ? ': ' + fetched.slice(0, 5).join(', ') : ''));
-    ok(await kept(p, 'audio/stop2.mp3') === KEEP['audio/stop2.mp3'], 'update: the kept sound stays kept, as its file has not changed');
+    ok(await kept(p, 'audio/intro-1-en.mp3') === KEEP['audio/intro-1-en.mp3'] && await kept(p, 'audio/stops-en.mp3') === KEEP['audio/stops-en.mp3'], 'update: the kept sounds stay kept, as their files have not changed');
     ok(await hscroll(p) <= 0 && await p.evaluate(() => { const u = document.querySelector('#gz-upd'), r = u.getBoundingClientRect(), t = document.querySelector('#tabbar').getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.bottom <= t.top && r.height < 60; }), 'update: the notice fits the phone on one line, above the tab bar');
     await p.screenshot({path:out + '/p-update.png'});
     await Promise.all([p.waitForEvent('load'), p.tap('#gz-upd .tb')]);
@@ -2292,11 +2311,11 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   /* 24 Nov 2026: the discharge advice in Bahasa Melayu, the journey in Bahasa Melayu, the advice films and What's new in 60 seconds */
   {
     const ctx = await b.newContext({viewport:{width:390, height:844}, serviceWorkers:'block'}), q = await ctx.newPage(), got = [];
-    q.on('request', x => { if (/\/media\/(adv-|whatsnew)[^/]*\.mp4|\/audio\/(adv-[a-z]+-ms|stop\d-ms)/.test(x.url())) got.push(x.url().split('/').pop()); });
+    q.on('request', x => { if (/\/media\/(adv-|whatsnew)[^/]*\.mp4|\/audio\/(adv-[a-z]+-ms|stops-ms)/.test(x.url())) got.push(x.url().split('/').pop()); });
     await q.goto(U + '#renal-colic'); await q.waitForFunction(() => typeof MORE !== 'undefined' && MORE && curView === 'run'); await q.waitForTimeout(300);
     const all = await q.evaluate(() => Object.keys(READ_ADV).map(id => [id, !!advMs(id), !!READ[READ_ADV[id].replace(/-en$/, '-ms')], !!(FILMS[id] && FILMS[id].en)]));
     ok(all.length === 7 && all.every(r => r[1] && r[2] && r[3]), 'Malay advice: all seven tabs have a complete translation, a Malay read-aloud and an English film' + (all.every(r => r[1] && r[2] && r[3]) ? '' : ' ' + JSON.stringify(all)));
-    ok(['tbi', 'dengue', 'asthma', 'gastro', 'renal', 'abdo', 'hypo'].every(k => fs.existsSync(path.join(root, 'media', `adv-${k}-720.mp4`)) && fs.existsSync(path.join(root, 'audio', `adv-${k}-ms.mp3`))) && [1, 2, 3, 4, 5].every(i => fs.existsSync(path.join(root, 'audio', `stop${i}-ms.mp3`))), 'Malay advice and journey: every film and recording is in app/');
+    ok(['tbi', 'dengue', 'asthma', 'gastro', 'renal', 'abdo', 'hypo'].every(k => fs.existsSync(path.join(root, 'media', `adv-${k}-720.mp4`)) && fs.existsSync(path.join(root, 'audio', `adv-${k}-ms.mp3`))) && fs.existsSync(path.join(root, 'audio', 'stops-ms.mp3')), 'Malay advice and journey: every film and recording is in app/');
     await q.evaluate(() => selectTab('advice')); await q.waitForTimeout(250);
     const en = await q.evaluate(() => ({seg:document.querySelectorAll('#tp-advice [data-advlang]').length, film:(document.querySelector('#tp-advice .lfilm-b') || {}).dataset || {}, read:document.querySelector('#tp-advice .lsn').dataset.read, n:document.querySelectorAll('#advlist li').length}));
     ok(en.seg === 2 && en.film.film === 'media/adv-renal-720.mp4' && en.film.cover === 'tiles/abdo.webp' && en.read === 'adv-renal-en' && en.n === 6 && !got.length, 'advice tab: English and Bahasa Melayu, the English film (its banner still as cover) and read-aloud, nothing loaded before a tap');
@@ -2316,8 +2335,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     /* The journey in Bahasa Melayu */
     await q.goto(U + '#journey-2'); await q.waitForTimeout(900);
     ok(await q.evaluate(() => document.querySelectorAll('#jlang [data-jlang]').length === 2 && JOURNEY_MS.length === JOURNEY.length), 'journey: EN and BM beside Listen');
-    await q.click('#jlang [data-jlang="ms"]'); await q.click('#jlisten'); await q.waitForTimeout(900);
-    ok(await q.evaluate(() => /stop2-ms\.mp3$/.test(voice.src) && document.querySelector('#jcap').lang === 'ms' && JOURNEY_MS[1].startsWith(document.querySelector('#jcap').textContent.trim())), 'journey: BM plays the Malay narration with Malay captions');
+    await q.click('#jlang [data-jlang="ms"]'); await q.click('#jlisten'); await q.waitForFunction(() => !voice.paused, null, {timeout:8000}).catch(() => {}); await q.waitForTimeout(400);
+    ok(await q.evaluate(() => voice.dataset.lang === 'ms' && voice.dataset.i === '1' && /^blob:/.test(voice.src) && voice.currentTime >= JSTOPS_AUDIO.ms.s[1].at && document.querySelector('#jcap').lang === 'ms' && JOURNEY_MS[1].startsWith(document.querySelector('#jcap').textContent.trim())), 'journey: BM plays the Malay narration with Malay captions');
     await q.evaluate(() => stopJourney());
     /* What's new in 60 seconds */
     got.length = 0; await q.goto(U + '#new'); await q.waitForTimeout(800);
@@ -2329,6 +2348,319 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await ctx.close();
   }
 
+  /* ---------- The 25 Nov 2026 round: the design review's upgrades (REVIEW.md, section 11) ---------- */
+  {
+    const P25 = {viewport:{width:390, height:844}, isMobile:true, hasTouch:true, deviceScaleFactor:1, serviceWorkers:'block'};
+    const ctx = await b.newContext({...P25, reducedMotion:'reduce'}), q = await ctx.newPage();
+    q.on('pageerror', e => errs.push('25 Nov PAGEERROR: ' + e.message));
+    q.on('console', m => { if (m.type() === 'error') errs.push('25 Nov: ' + m.text()); });
+    const settle = async (ms = 400) => q.waitForTimeout(ms);
+
+    /* 1. A calculator's citation reads "Source:"; a real gap keeps "Not in the source:". Every literal gap line is pinned: the
+       citations (an author with et al. or a second author, or a source with its year) and nothing else */
+    const parts = path.join(__dirname, 'parts'), eng = fs.readFileSync(path.join(parts, 'engine.js'), 'utf8');
+    const citeRe = new RegExp(eng.match(/const CITE_RE = \/(.*)\/;/)[1]), gapsAll = new Set();
+    fs.readdirSync(parts).filter(f => /\.js$/.test(f)).forEach(f => { const t = fs.readFileSync(path.join(parts, f), 'utf8'); for (const m of t.matchAll(/gap:\s*'((?:[^'\\]|\\.)*)'/g)) gapsAll.add(m[1].replace(/\\'/g, "'")); });
+    const cites = [...gapsAll].filter(g => citeRe.test(g)), realStart = [...gapsAll].filter(g => !citeRe.test(g));
+    ok(cites.length === 34 && cites.every(g => /^([A-Z][a-z'-]+ [A-Z]{1,2}( et al|, [A-Z])|Head injury CPG|VTE CPG|AF CPG|Abdominal trauma CPG|CMAJ|RCP|Royal|Victorian)/.test(g)) && !realStart.some(g => /^[A-Z][a-z'-]+ [A-Z]{1,2} et al\b/.test(g) || /^(Head injury|AF|VTE|Abdominal trauma) CPG (19|20)\d\d,/.test(g)),
+      'calculator sources: 34 gap lines open on their citation and read Source:, and no other gap line starts with an author or a source and year' + (cites.length === 34 ? '' : ' (' + cites.length + ')'));
+    await q.goto(U + '#calc-news2'); await settle(900);
+    const fill = async vals => q.evaluate(v => { Object.entries(v).forEach(([k, x]) => { const i = document.querySelector('#cf-' + k); i.value = x; i.dispatchEvent(new Event('input', {bubbles:true})); }); }, vals);
+    await fill({rr:'28', sp:'90', sbp:'88', pr:'135', tp:'39.5'}); await settle();
+    const n2 = await q.evaluate(() => ({cite:(document.querySelector('#couts .cx-cite') || {}).textContent || '', gaps:[...document.querySelectorAll('#couts .cx-gap')].map(g => g.textContent), copy:calcText()}));
+    ok(/^Source: RCP, NEWS2, 2017/.test(n2.cite) && !n2.gaps.some(g => /Not in the source:\s*RCP/.test(g)) && /\nSource: RCP, NEWS2, 2017/.test(n2.copy) && !/Not in the source: RCP/.test(n2.copy), 'NEWS2: its citation reads "Source: RCP, NEWS2, 2017", on screen and in Copy' + (n2.cite ? '' : ' ' + JSON.stringify(n2)));
+    await q.goto(U + '#calc-insulin'); await settle(700);
+    await q.evaluate(() => { const i = document.querySelector('#cf-wt'); i.value = '50'; i.dispatchEvent(new Event('input', {bubbles:true})); });
+    await q.click('#calcbox [data-pv="0.4"]'); await settle();
+    ok(await q.evaluate(() => [...document.querySelectorAll('#couts .cx-gap')].some(g => /^Not in the source:/.test(g.textContent.trim())) && !document.querySelector('#couts .cx-cite')), 'a real gap still reads "Not in the source:" (insulin, the missing split)');
+
+    /* 2. One reference-list pattern: top-bar titles, the lead's first sentence with More, the banner's count and edition only,
+       placeholders that fit, one filter row, no skipped heading, the abbreviation list's examples and its source folded */
+    for (const [h, t, ph] of [['antidotes', 'Antidotes', 'Antidote or poison'], ['abbreviations', 'Abbreviations', 'Letters or a word'], ['antibiotics', 'Antimicrobial guides', 'Antimicrobial']]){
+      await q.goto(U + '#' + h); await settle(900);
+      const r = await q.evaluate(([h, ph]) => { const v = document.querySelector('#v-' + h), inp = v.querySelector('.lk-top input[type="search"]'), cs = getComputedStyle(inp);
+        const room = inp.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), ctx2 = document.createElement('canvas').getContext('2d'); ctx2.font = cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+        return {top:document.querySelector('#toptitle').textContent, key:!!v.querySelector('.vhead .vkey'), more:getComputedStyle(v.querySelector('.vhead .vmore')).display, clamp:getComputedStyle(v.querySelector('.vhead p')).webkitLineClamp, heroP:!!v.querySelector('.phx-hero p'), ph:inp.placeholder, fits:ctx2.measureText(inp.placeholder).width <= room, side:document.documentElement.scrollWidth <= innerWidth}; }, [h, ph]);
+      ok(r.top === t && r.key && r.more === 'none' && (r.clamp === 'none' || r.clamp === '' || r.clamp === 'unset') && !r.heroP && r.ph === ph && r.fits && r.side, `${h}: the top bar names it, the lead opens on its first sentence with More, the banner keeps its count and edition, and the find box's "${ph}" fits at 390 px` + (r.top === t && r.fits ? '' : ' ' + JSON.stringify(r)));
+    }
+    await q.goto(U + '#antidotes'); await q.waitForFunction(() => document.querySelectorAll('#axl .ax').length > 30, null, {timeout:8000}).catch(() => {});
+    await q.evaluate(() => { document.querySelector('#axl .ax').open = true; });
+    ok(await q.evaluate(() => !document.querySelector('#axl h4') && document.querySelectorAll('#axl .ax-f h3').length > 0 && !!document.querySelector('#axhero h2')), 'antidotes: the headings inside an antidote are h3 under the banner\'s h2, with no level skipped');
+    await q.goto(U + '#antibiotics'); await settle(700);
+    ok(await q.evaluate(() => { const f = document.querySelector('#abf'), cs = getComputedStyle(f), rows = new Set([...f.querySelectorAll('button')].map(b => Math.round(b.getBoundingClientRect().top))); return cs.flexWrap === 'nowrap' && rows.size === 1 && FADE_ROWS.includes('#abf') && getComputedStyle(document.querySelector('#abl .ab-r')).backgroundColor === 'rgba(0, 0, 0, 0)'; }), 'antimicrobial guides: the filters sit in one row that scrolls, and each drug is one card whose bands are recessed rows');
+    await q.goto(U + '#abbreviations'); await q.waitForFunction(() => KB.state === 'ready', null, {timeout:8000}).catch(() => {});
+    await settle(300);
+    const kb0 = await q.evaluate(() => ({tries:[...document.querySelectorAll('#kbl [data-kbx]')].map(b => b.textContent), about:!!document.querySelector('#kbsrc details.kb-about:not([open]) .lk-note')}));
+    await q.click('#kbl [data-kbx="TCA"]'); await settle(300);
+    const kb1 = await q.evaluate(() => ({q:document.querySelector('#kbq').value, rows:[...document.querySelectorAll('#kbl .kb-r')].map(r => r.querySelector('.kb-a').textContent + '=' + r.querySelector('.kb-m').textContent)}));
+    ok(kb0.tries.join() === 'KIV,TCA,AOR' && kb0.about && kb1.q === 'TCA' && kb1.rows.some(r => r === 'TCA=To Come Again / Appointment'), 'abbreviations: three example searches fill the box and show the list\'s own row; the source is folded under About this list');
+
+    /* 3. A calculator opens on itself on a phone, with paired fields in line, short units inside the field, and a result bar while
+       the result is off screen (never coloured without a verdict) */
+    await q.goto(U + '#calc-news2'); await settle(900);
+    const c3 = await q.evaluate(() => { const h = document.querySelector('#v-calc .vhead').getBoundingClientRect(), a = document.querySelector('#cf-rr').getBoundingClientRect(), b2 = document.querySelector('#cf-sp').getBoundingClientRect(), f = document.querySelector('#cf-sp').closest('.field');
+      return {head:h.height <= 1, h1:!!document.querySelector('#v-calc h1#h-calc'), first:Math.round(document.querySelector('#calcbox .tool-h').getBoundingClientRect().top), pair:Math.abs(a.top - b2.top) < 1 && Math.abs(a.bottom - b2.bottom) < 1, unit:(f.querySelector('.fu') || {}).textContent, label:f.querySelector('label').textContent}; });
+    ok(c3.head && c3.h1 && c3.first < 120 && c3.pair && c3.unit === '%' && /SpO2\s*\(%\)/.test(c3.label), 'calculator on a phone: it opens on its own banner (the hub\'s heading kept for screen readers), paired fields line up, and the unit sits inside the field and stays in its label' + (c3.head && c3.pair ? '' : ' ' + JSON.stringify(c3)));
+    await fill({rr:'28', sp:'90', sbp:'88', pr:'135', tp:'39.5'}); await q.evaluate(() => scrollTo(0, 0)); await settle(500);
+    const bar1 = await q.evaluate(() => { const b = document.querySelector('#cxbar'), vd = calcLast && calcLast.verdict; return {shown:!b.hidden, cls:b.className, want:vd ? 'k-' + ({ok:'discharge', stop:'admit', refer:'refer', next:'neutral'}[vd.cls]) : 'k-none', fig:(b.querySelector('b') || {}).textContent, above:b.getBoundingClientRect().bottom <= document.querySelector('#tabbar').getBoundingClientRect().top}; });
+    await q.evaluate(() => document.querySelector('#couts').scrollIntoView({block:'center'})); await settle(500);
+    const bar2 = await q.evaluate(() => document.querySelector('#cxbar').hidden);
+    ok(bar1.shown && bar1.cls.includes(bar1.want) && /\d/.test(bar1.fig || '') && bar1.above && bar2, 'calculator result bar: once filled it shows the figure and the verdict\'s own colour above the tab bar while the result is off screen, and hides when the result is on screen' + (bar1.shown && bar2 ? '' : ' ' + JSON.stringify({bar1, bar2})));
+    await q.click('#cxclear'); await q.evaluate(() => scrollTo(0, 0)); await settle(400);
+    ok(await q.evaluate(() => document.querySelector('#cxbar').hidden), 'calculator result bar: Clear takes it away');
+    await q.goto(U + '#calc-timi'); await settle(700);
+    await q.evaluate(() => { const c = document.querySelector('#calcbox input[type="checkbox"]'); if (c){ c.checked = true; c.dispatchEvent(new Event('change', {bubbles:true})); } scrollTo(0, 0); }); await settle(500);
+    ok(await q.evaluate(() => { const b = document.querySelector('#cxbar'); return !b || b.hidden || !/k-discharge/.test(b.className); }), 'calculator result bar: TIMI never turns it green');
+
+    /* 4. The runner's header on a phone */
+    await q.goto(U + '#renal-colic'); await settle(800);
+    await q.click('#cur button.opt'); await settle(500);
+    const r4 = await q.evaluate(() => { const lib = document.querySelector('.run-hero .chip.lib'), last = document.querySelector('.trailx button.last'); return {lib:!!lib && getComputedStyle(lib).display !== 'none' && lib.getAttribute('href') === '#pathways', top:getComputedStyle(document.querySelector('.run-top')).display, tq:last && getComputedStyle(last.querySelector('.tq')).display !== 'none' && last.querySelector('.tq').textContent.length > 3, qTop:document.querySelector('#cur').getBoundingClientRect().top / innerHeight}; });
+    ok(r4.lib && r4.top === 'none' && r4.tq && r4.qTop < 0.4, 'runner on a phone: the library link is the banner\'s first chip, the newest route chip names its question, and the question starts in the top 40%' + (r4.lib && r4.tq ? '' : ' ' + JSON.stringify(r4)));
+
+    /* 5. Grouped search: heads with counts, the order the search gave, one listbox the arrows walk */
+    await q.goto(U + '#home'); await settle(600);
+    await q.evaluate(() => openPal('ceftriaxone')); await settle(700); /* its results run from the guide's pages into the drug lists */
+    await q.focus('#gq');
+    const s5 = await q.evaluate(() => { const hrefs = () => [...document.querySelectorAll('#gres a')].map(a => a.getAttribute('href') + (a.dataset.rx || a.dataset.dg || a.dataset.ab || a.dataset.ax || ''));
+      const grouped = hrefs(), heads = [...document.querySelectorAll('#gres .pal-gh')].map(h => h.textContent), keep = palGrouped;
+      palGrouped = (r, d) => r.map(d).join(''); renderPal(); const flat = hrefs(); palGrouped = keep; renderPal();
+      return {same:grouped.join() === flat.join() && grouped.length > 3, heads, lists:document.querySelectorAll('#gres').length, roles:[...document.querySelectorAll('#gres > li')].every(li => li.getAttribute('role') === 'group' || li.getAttribute('role') === 'none')}; });
+    await q.keyboard.press('ArrowDown'); await q.keyboard.press('ArrowDown');
+    const sel = await q.evaluate(() => { const L = palLinks(); return L.findIndex(a => a.getAttribute('aria-selected') === 'true'); });
+    const s5b = await q.evaluate(() => { const a = document.querySelector('#gres a'), m = document.querySelector('#gres .rt mark'), hov = getComputedStyle(document.documentElement).getPropertyValue('--surface-3'); return {mark:m ? getComputedStyle(m).textDecorationLine : 'none', voice:document.querySelector('#gmlang .ml-k') && document.querySelector('#gmlang .ml-k').textContent}; });
+    ok(s5.same && s5.heads.length >= 2 && s5.heads.every(h => /^(In the guide|Calculators|Drug lists|Outside the guide)\d+$/.test(h)) && s5.lists === 1 && s5.roles && sel === 2, 'search: results sit under quiet heads with counts, in exactly the order the search gave, in one listbox that the arrows walk' + (s5.same && sel === 2 ? '' : ' ' + JSON.stringify({s5, sel})));
+    ok(s5b.mark.includes('underline') && s5b.voice === 'Voice', 'search: a match in a title is underlined, not boxed, and the voice language button says Voice');
+    ok(await q.evaluate(() => { const css = [...document.querySelectorAll('style')].map(s => s.textContent).join(''); return /\.pal-res a:hover\{background:var\(--surface-3\)\}/.test(css) && /\.pal-res a\[aria-selected="true"\]\{background:var\(--accent-soft\);box-shadow:inset 3px 0 0 var\(--accent\)\}/.test(css); }), 'search: hover and the selected row are drawn differently');
+    await q.evaluate(() => closePal(false));
+
+    /* 6. The accessibility variants */
+    const mq = await q.evaluate(() => { const seen = new Set(); const walk = rs => [...rs].forEach(r => { if (r.media) seen.add(r.media.mediaText); if (r.cssRules) walk(r.cssRules); }); [...document.styleSheets].forEach(s => { try { walk(s.cssRules); } catch(e){} }); return [...seen].join(' | '); });
+    ok(/prefers-reduced-transparency: reduce/.test(mq) && /prefers-contrast: more/.test(mq) && /forced-colors: active/.test(mq), 'accessibility: the stylesheet answers reduced transparency, more contrast and forced colours');
+    const ctxC = await b.newContext({...P25, contrast:'more', reducedMotion:'reduce'}).catch(() => null);
+    if (ctxC){ const qc = await ctxC.newPage(); await qc.goto(U + '#renal-colic'); await qc.waitForTimeout(800);
+      ok(await qc.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() === '#38463f' && getComputedStyle(document.querySelector('.run-hero .chip.j')).backgroundColor === 'rgba(0, 0, 0, 0.55)'), 'accessibility: with more contrast, muted ink darkens and the banner chips turn solid'); await ctxC.close(); }
+
+    /* 8. A shorter home: the Now tile opens on one line and stays as it was when it redraws; the shift has left its header */
+    await q.goto(U + '#home'); await settle(800);
+    const n8 = await q.evaluate(() => { const t = document.querySelector('#tl-now'), s = t.querySelector('.nowsum'); const closed = !s.open && s.getBoundingClientRect().height < 80; s.open = true; renderNow(); return {closed, line:t.querySelector('.nowsum summary').textContent, kept:t.querySelector('.nowsum').open, head:t.querySelector('.tile-h').textContent, shift:!!t.querySelector('.nowsum .nowsh'), names:document.querySelectorAll('#t-rules .gl span').length && [...document.querySelectorAll('#t-rules .gl span')].every(s => s.scrollWidth <= s.clientWidth + 1 && getComputedStyle(s).whiteSpace !== 'nowrap')}; });
+    ok(n8.closed && /(In session|No clinic in session now|Not in session)/.test(n8.line) && /EMACC/.test(n8.line) && n8.kept && !/shift/i.test(n8.head) && n8.shift && n8.names, 'home on a phone: Now opens on one line of today\'s clinics and stays open across its 30-second redraw; the shift moved inside; the Rules tile shows whole names' + (n8.closed && n8.kept ? '' : ' ' + JSON.stringify(n8)));
+    ok(await q.evaluate(() => { const c = [...document.querySelectorAll('#keynums .qnum b')].find(b => b.textContent === 'Counter 10'); return !c || (c.classList.contains('w') && !/Mono/.test(getComputedStyle(c).fontFamily)); }), 'numbers: Counter 10 is set in words, not in mono');
+
+    /* 9. The night outcome: day fills exactly as the ebook prints them; at night the same hue, quieter, and the primary in its soft tint */
+    const fillsOf = async () => q.evaluate(() => ['admit', 'observe', 'discharge', 'refer', 'neutral'].map(k => getComputedStyle(document.documentElement).getPropertyValue('--b-' + k).trim()));
+    await q.goto(U + '#renal-colic--home'); await settle(700);
+    const day = await fillsOf(), dayPri = await q.evaluate(() => getComputedStyle(document.querySelector('.res .res-f .primary')).backgroundColor);
+    await q.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await settle(200);
+    const night = await fillsOf(), nPri = await q.evaluate(() => ({bg:getComputedStyle(document.querySelector('.res .res-f .primary')).backgroundColor, soft:getComputedStyle(document.documentElement).getPropertyValue('--discharge-soft').trim()}));
+    await q.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+    ok(day.join() === '#c42a20,#f0ae1c,#13834c,#5a44c4,#41544b' && night.every((v, i) => v && v !== day[i]) && dayPri === 'rgb(255, 255, 255)' && nPri.bg !== 'rgb(255, 255, 255)' && nPri.soft === '#10301f' && nPri.bg === 'rgb(16, 48, 31)', 'night outcome: by day the five fills are the ebook\'s own; at night each is quieter, and the primary takes the soft tint' + (night.every((v, i) => v !== day[i]) ? '' : ' ' + JSON.stringify({day, night, nPri})));
+
+    /* 10. One film card, one listen control, the same stack in both languages */
+    await q.evaluate(() => selectTab('advice')); await settle(300);
+    const t10 = await q.evaluate(() => ({say:getComputedStyle(document.querySelector('#ptab .ptab-say')).display, link:!!document.querySelector('#tp-advice .lsn .lsn-tts[data-say="tab"]')}));
+    await q.click('#tp-advice [data-advlang="ms"]'); await settle(300);
+    const t10b = await q.evaluate(() => { const note = document.querySelector('#tp-advice .adv-ms'), lsn = document.querySelector('#tp-advice .lsn'); return {order:!!note && !!lsn && !!(note.compareDocumentPosition(lsn) & Node.DOCUMENT_POSITION_FOLLOWING) && !!(document.querySelector('#tp-advice .leaf-lang').compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING), gap:Math.round(lsn.getBoundingClientRect().top - document.querySelector('#tp-advice .leaf-lang').getBoundingClientRect().bottom)}; });
+    await q.click('#tp-advice [data-advlang="en"]'); await settle(300);
+    const gapEn = await q.evaluate(() => Math.round(document.querySelector('#tp-advice .lsn').getBoundingClientRect().top - document.querySelector('#tp-advice .leaf-lang').getBoundingClientRect().bottom));
+    ok(t10.say === 'none' && t10.link && t10b.order && gapEn >= 12 && gapEn <= 16, 'advice tab: the phone\'s voice is a small link in the recorded bar, the translation note sits under the switch, and the switch keeps 12 to 16 px above the bar' + (t10b.order ? '' : ' ' + JSON.stringify({t10, t10b, gapEn})));
+    await q.goto(U + '#new'); await settle(800);
+    ok(await q.evaluate(() => { const im = document.querySelector('#drive .lfilm-th img'), card = document.querySelector('#drive .lfilm'); return !!im && getComputedStyle(im).objectPosition.startsWith('0%') && parseFloat(getComputedStyle(card).marginBottom) >= 12; }), 'film card: What\'s new keeps its title in the cover and a margin below, like the leaflet\'s');
+
+    /* 11. Native details and the compact tab bar, off by default */
+    ok(await q.evaluate(() => { const css = [...document.querySelectorAll('style')].map(s => s.textContent).join(''); return /@starting-style/.test(css) && /100dvh/.test(css) && /\.gz-app body\{background:var\(--amb-3\)\}/.test(css); }), 'native details: @starting-style for the sheets, dvh heights, and the web app\'s body on the top bar\'s ground');
+    await q.goto(U + '#pathways'); await settle(700);
+    await q.evaluate(() => { scrollTo(0, 60); }); await settle(100); await q.evaluate(() => { scrollTo(0, 900); }); await settle(300);
+    const tb0 = await q.evaluate(() => ({pref:prefs.tabc, min:document.documentElement.classList.contains('tb-min'), stored:localStorage.getItem('gz-tabc')}));
+    ok(tb0.pref === 'off' && !tb0.min && tb0.stored === null, 'compact tab bar: off by default, so scrolling leaves the tab bar as it is');
+    await ctx.close();
+    const ctxT = await b.newContext({...P25}), qt = await ctxT.newPage(); qt.on('pageerror', e => errs.push('tab bar PAGEERROR: ' + e.message));
+    await qt.goto(U + '#pathways'); await qt.waitForTimeout(800);
+    await qt.evaluate(() => openSettings()); await qt.waitForTimeout(300); await qt.click('#st-tabc [data-val="on"]'); await qt.click('#setclose'); await qt.waitForTimeout(300);
+    await qt.evaluate(() => scrollTo(0, 100)); await qt.waitForTimeout(120); await qt.evaluate(() => scrollTo(0, 700)); await qt.waitForTimeout(400);
+    const tb1 = await qt.evaluate(() => ({min:document.documentElement.classList.contains('tb-min'), h:Math.round(document.querySelector('#tabbar').getBoundingClientRect().height), stored:localStorage.getItem('gz-tabc'), label:document.querySelector('#tabbar a').textContent.trim()}));
+    await qt.evaluate(() => scrollTo(0, 400)); await qt.waitForTimeout(400);
+    const tb2 = await qt.evaluate(() => document.documentElement.classList.contains('tb-min'));
+    ok(tb1.min && tb1.h < 60 && tb1.stored === '"on"' && tb1.label === 'Home' && !tb2, 'compact tab bar: switched on, it folds to its icons scrolling down (the labels stay for screen readers) and opens scrolling up' + (tb1.min && !tb2 ? '' : ' ' + JSON.stringify({tb1, tb2})));
+    await ctxT.close();
+  }
+
+  /* ---------- The 26 Nov 2026 content round: current alerts, the asthma CPG's corrected web version, NAG links, Nipah, the abbreviation circular ---------- */
+  {
+    const P26 = {viewport:{width:390, height:844}, isMobile:true, hasTouch:true, deviceScaleFactor:1, serviceWorkers:'block'};
+    const ctx = await b.newContext({...P26, reducedMotion:'reduce'}), q = await ctx.newPage();
+    q.on('pageerror', e => errs.push('26 Nov PAGEERROR: ' + e.message));
+    q.on('console', m => { if (m.type() === 'error') errs.push('26 Nov: ' + m.text()); });
+    const settle = async (ms = 400) => q.waitForTimeout(ms);
+    const whole = () => q.waitForFunction(() => !!P['asthma-cpg'] && !!P['diabetic-foot-cpg'], null, {timeout:15000}).catch(() => {});
+
+    /* Current alerts: the in-date lines, each with its date, its source in a new tab and a pill to the guide's own page */
+    await q.goto(U + '#home'); await whole(); await settle(700);
+    const al = await q.evaluate(() => { renderAlerts('2026-11-26'); const el = document.querySelector('#alerts'), rows = [...el.querySelectorAll('.al-r')];
+      return {hidden:el.hidden, head:(el.querySelector('.al-h h2') || {}).textContent, n:(el.querySelector('.al-h .tag') || {}).textContent, keys:rows.map(r => r.dataset.alk).join(),
+        texts:rows.every((r, i) => r.querySelector('.al-t').textContent === ALERTS[i].t), dates:rows.every((r, i) => r.querySelector('.al-m').textContent.includes(ALERTS[i].d)),
+        srcs:rows.every((r, i) => { const a = r.querySelector('a.al-src'); return a.getAttribute('href') === ALERTS[i].href && a.target === '_blank' && /noopener/.test(a.rel) && /noreferrer/.test(a.rel); }),
+        pills:rows.map(r => r.querySelector('a.al-go').getAttribute('href')).join(), out:[...el.querySelectorAll('a[href^="http"]')].every(a => a.target === '_blank'),
+        sb:el.previousElementSibling && el.previousElementSibling.id, wide:document.documentElement.scrollWidth <= innerWidth, stored:Object.keys(localStorage).filter(k => /alert/i.test(k)).length}; });
+    ok(!al.hidden && al.head === 'Current alerts' && /3$/.test(al.n) && al.keys === 'dengue,rabies,flood' && al.texts && al.dates && al.srcs && al.out && al.pills === '#dengue-cpg,#animal-bites,#infection-alerts--lepto' && al.sb === 'pins' && al.wide && al.stored === 0,
+      'current alerts: on 26 Nov 2026 the home card shows its three lines in the guide\'s words, each with its date, its source opening in a new tab and a pill to the guide\'s own page, under the search box, nothing stored and nothing sideways at 390 px' + (al.keys === 'dengue,rabies,flood' && al.wide ? '' : ' ' + JSON.stringify(al)));
+    /* Folded on a phone (Krishna, 26 Nov 2026: "Fold to one line"): the band, the heading and one line naming the alerts, so the Code Blue tile stays on the first screen */
+    const fo = await q.evaluate(() => { const el = document.querySelector('#alerts'), sum = el.querySelector('.al-sum'), m = el.querySelector('.al-more'), cs = getComputedStyle(sum);
+      const cb = document.querySelector('[data-tm="codeblue"]'), cbt = cb && cb.closest('.tile, a, section'), tab = [...document.querySelectorAll('nav, .tabs, #tabs')].find(n => getComputedStyle(n).position === 'fixed' && n.getBoundingClientRect().top > 600);
+      return {folded:!el.classList.contains('open') && getComputedStyle(el.querySelector('.al-l')).display === 'none', sum:[...sum.querySelectorAll('span')].map(x => x.textContent).join('|'), want:ALERTS.map(a => a.s).join('|'),
+        fits:sum.scrollWidth <= sum.clientWidth, one:sum.getBoundingClientRect().height <= parseFloat(cs.lineHeight) * 1.5 + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom), h:Math.round(el.getBoundingClientRect().height),
+        more:getComputedStyle(m).display !== 'none' && m.getAttribute('aria-expanded') === 'false', inPage:[...el.querySelectorAll('.al-t')].length === 3,
+        cb:cbt ? Math.round(cbt.getBoundingClientRect().bottom) : null, tab:tab ? Math.round(tab.getBoundingClientRect().top) : null}; });
+    ok(fo.folded && fo.sum === fo.want && fo.fits && fo.one && fo.h <= 140 && fo.more && fo.inPage && fo.cb !== null && fo.tab !== null && fo.cb <= fo.tab,
+      'current alerts on a phone: folded to the band, the heading and one line naming the three alerts (whole, at 390 px), the full lines still in the page, and the Code Blue tile on the first screen above the tab bar' + (fo.folded && fo.one && fo.cb <= fo.tab ? '' : ' ' + JSON.stringify(fo)));
+    await q.screenshot({path:out + '/p-home-alerts-folded.png'});
+    const cl = await q.evaluate(() => { const el = document.querySelector('#alerts'), m = el.querySelector('.al-more'), r = {};
+      el.querySelector('.al-sum').click(); r.bySum = el.classList.contains('open') && m.getAttribute('aria-expanded') === 'true' && m.textContent === 'Less' && getComputedStyle(el.querySelector('.al-sum')).display === 'none';
+      m.click(); r.closed1 = !el.classList.contains('open');
+      m.click(); const t = el.querySelector('.al-t'), cs = getComputedStyle(t);
+      r.open = el.classList.contains('open') && getComputedStyle(el.querySelector('.al-l')).display !== 'none' && t.getBoundingClientRect().height > parseFloat(cs.lineHeight) * 1.5;
+      r.short = getComputedStyle(el.querySelector('.al-s')).display === 'none' && getComputedStyle(el.querySelector('.al-gs')).display !== 'none';
+      r.full = cs.webkitLineClamp === 'none' || cs.display !== '-webkit-box';
+      m.click(); r.closed = !el.classList.contains('open') && m.textContent === 'More'; return r; });
+    ok(cl.bySum && cl.closed1 && cl.open && cl.short && cl.full && cl.closed, 'current alerts on a phone: More in the heading, or a tap on the folded line, opens every line in full with the source\'s short link and the pill\'s short label, and Less folds it again' + (cl.bySum && cl.open && cl.closed ? '' : ' ' + JSON.stringify(cl)));
+    await q.evaluate(() => document.querySelector('#alerts .al-more').click()); await settle(200);
+    await q.screenshot({path:out + '/p-home-alerts.png'});
+    await q.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await settle(200);
+    const dk = await q.evaluate(() => ({bg:getComputedStyle(document.querySelector('#alerts')).backgroundImage, ink:getComputedStyle(document.querySelector('#alerts .al-t')).color, wide:document.documentElement.scrollWidth <= innerWidth}));
+    await q.screenshot({path:out + '/pd-home-alerts.png'});
+    await q.evaluate(() => document.documentElement.removeAttribute('data-theme')); await settle(200);
+    const lt = await q.evaluate(() => getComputedStyle(document.querySelector('#alerts .al-t')).color);
+    ok(dk.ink !== lt && /gradient/.test(dk.bg) && dk.wide, 'current alerts at night: the pearl card takes the night tokens, and nothing scrolls sideways' + (dk.ink !== lt ? '' : ' ' + JSON.stringify([dk, lt])));
+    /* A line past its date hides itself (Malaysia time), and the card hides when none is in date */
+    const dt = await q.evaluate(() => { const keys = () => [...document.querySelectorAll('#alerts .al-r')].map(r => r.dataset.alk).join(), real = Date.now, r = {};
+      Date.now = () => Date.parse('2026-12-06T15:59:00Z'); renderAlerts(); r.last = keys();   /* 6 Dec, 11.59 pm in Malaysia: the dengue line's last minute */
+      Date.now = () => Date.parse('2026-12-06T16:01:00Z'); renderAlerts(); r.next = keys(); r.n = document.querySelector('#alerts .al-h .tag').textContent; /* 7 Dec, 12.01 am */
+      Date.now = real;
+      renderAlerts('2027-03-31'); r.flood = keys();
+      renderAlerts('2027-04-01'); r.none = document.querySelector('#alerts').hidden && !document.querySelector('#alerts').innerHTML;
+      return r; });
+    ok(dt.last === 'dengue,rabies,flood' && dt.next === 'rabies,flood' && /2$/.test(dt.n) && dt.flood === 'flood' && dt.none, 'current alerts: a line hides itself after its date in Malaysia time (the dengue line goes at midnight on 6 Dec 2026), and the card hides when none is in date' + (dt.next === 'rabies,flood' && dt.none ? '' : ' ' + JSON.stringify(dt)));
+    /* Its pills open the guide's own pages, the second part's dengue CPG too */
+    await q.evaluate(() => { renderAlerts('2026-11-26'); if (!document.querySelector('#alerts').classList.contains('open')) document.querySelector('#alerts .al-more').click(); });
+    await q.click('#alerts a.al-go[href="#animal-bites"]'); await settle(700);
+    const pa = await q.evaluate(() => ({h:location.hash, run:!document.querySelector('#v-run').hidden, t:(document.querySelector('.run-hero h1') || {}).textContent || ''}));
+    await q.goto(U + '#home'); await settle(700); await q.evaluate(() => { renderAlerts('2026-11-26'); if (!document.querySelector('#alerts').classList.contains('open')) document.querySelector('#alerts .al-more').click(); });
+    await q.click('#alerts a.al-go[href="#dengue-cpg"]'); await settle(900);
+    const pd = await q.evaluate(() => ({h:location.hash, t:(document.querySelector('.run-hero h1') || {}).textContent || '', want:P['dengue-cpg'].title, wantA:P['animal-bites'].title}));
+    ok(pa.h === '#animal-bites' && pa.run && pa.t === pd.wantA && pd.h === '#dengue-cpg' && pd.t === pd.want, 'current alerts: the pills open the guide\'s own pages (animal bites, the dengue CPG)' + (pa.run && pd.t ? '' : ' ' + JSON.stringify([pa, pd])));
+
+    /* The asthma CPG follows its corrected web version: SpO2 ≥94% and moderate 90 – 94%; 93 to 95% is gone */
+    const as = await q.evaluate(() => { const j = JSON.stringify(P['asthma-cpg']); return {ge94:j.includes('target saturation ≥94%'), mod:j.includes('90 – 94%'), old:/93 to 95|90 – 95%/.test(j), room:j.includes('SpO2 ≥94% under room air'),
+      confirm:CONFIRM.some(c => /≤95% in Algorithms 3 and 4, and the current quick reference/.test(c)) && !CONFIRM.some(c => /four oxygen targets/.test(c)) && CONFIRM.some(c => /ipratropium bromide 0\.5 mg stat in the severe box/.test(c))}; });
+    ok(as.ge94 && as.mod && !as.old && as.room && as.confirm, 'asthma CPG: oxygen to a target saturation ≥94%, moderate SpO2 90 – 94% and SpO2 ≥94% under room air, with no 93 to 95% left; Still to confirm says what the quick reference prints' + (as.ge94 && !as.old && as.confirm ? '' : ' ' + JSON.stringify(as)));
+
+    /* National Antimicrobial Guideline: links and topic names only, on the outcomes the round names */
+    const nag = await q.evaluate(() => { const want = [['cellulitis', 'opd', 2], ['pneumonia', 'opd', 2], ['animal-bites', 'wound', 1], ['animal-bites', 'abc', 1], ['renal-colic', 'uro', 1], ['infection-alerts', 'lepto', 1], ['diabetic-foot-cpg', 'mild', 1], ['diabetic-foot-cpg', 'mod', 1], ['diabetic-foot-cpg', 'sevx', 1]];
+      const isNag = l => /^https:\/\/sites\.google\.com\/moh\.gov\.my\/nag\//.test(l[0]), all = [];
+      const each = want.map(([id, k, n]) => { const nd = P[id].nodes[k], L = (nd.links || []).filter(isNag); all.push(...L); return L.length === n && !(nd.items || []).some(i => /National Antimicrobial|\bNAG\b/.test(i)); });
+      const elsewhere = Object.values(P).reduce((c, e) => c + Object.values(e.nodes).reduce((d, nd) => d + (nd.links || []).filter(isNag).length, 0), 0);
+      return {each:each.every(Boolean), n:all.length, elsewhere, labels:all.every(l => /^(National Antimicrobial Guideline|NAG)\b/.test(l[1]) && !/\d\s*(mg|g|ml|mcg)\b/i.test(l[1])),
+        gastro:!(P.gastroenteritis.nodes.opd.links || []).some(isNag), confirm:CONFIRM.some(c => /National Antimicrobial Guideline's online updates/.test(c) && /melioidosis/.test(c))}; });
+    ok(nag.each && nag.n === 11 && nag.elsewhere === 11 && nag.labels && nag.gastro && nag.confirm, 'NAG: eleven links on cellulitis, pneumonia, animal bites, urosepsis, leptospirosis and the diabetic foot, labelled by topic only, with no dose and no NAG text in any step, and the check against them under Still to confirm' + (nag.n === 11 && nag.each ? '' : ' ' + JSON.stringify(nag)));
+    await q.goto(U + '#cellulitis--opd'); await settle(800);
+    ok(await q.evaluate(() => { const a = [...document.querySelectorAll('#cur a.pill.ext')].filter(x => /sites\.google\.com\/moh\.gov\.my\/nag\//.test(x.href)); return a.length === 2 && a.every(x => x.target === '_blank' && /noopener/.test(x.rel)); }), 'NAG: the cellulitis outcome shows its two links, opening in a new tab');
+    await q.goto(U + '#renal-colic--uro'); await settle(800);
+    await q.screenshot({path:out + '/p-renal-uro-nag.png'});
+    await q.goto(U + '#antibiotics'); await settle(900);
+    ok(await q.evaluate(() => { const n = document.querySelector('#absrc .lk-note'), a = n && n.querySelector('a[href="https://sites.google.com/moh.gov.my/nag/information/whats-new"]'); return !!a && a.target === '_blank' && /predate the National Antimicrobial Guideline's online updates of Dec 2025 and Jan 2026/.test(n.textContent); }), 'antimicrobial guides: the source note says they predate the NAG updates of Dec 2025 and Jan 2026, with its What\'s new page');
+
+    /* Nipah: the national guideline of January 2026 in the guide's own words, with its sections and pages */
+    const nv = await q.evaluate(() => { const n = P['infection-alerts'].nodes.nipah, it = n.items.join('\n');
+      return {n:n.items.length, lines:[/above 37\.5 °C/, /SpO2 below 95%/, /Health Alert Card/, /probable case/, /within 24 hours/, /close contacts/].every(r => r.test(it)), cites:(it.match(/\(national guideline, Jan 2026, /g) || []).length,
+        gap:/circular KPK Bil\. 16\/2026 \(KKM\.600-29\/4\/44 Jld\.2\(4\), 6 May 2026\)/.test(n.gap), link:(n.links || []).some(l => /moh\.gov\.my\/en\/publications-and-reports\/circulars\/.+bil-16-2026/.test(l[0])),
+        hosp:!/Sungai Buloh|Tunku Azizah/.test(it), refs:P['infection-alerts'].refs.some(r => /Bil\. 16\/2026/.test(r)), confirm:CONFIRM.some(c => /Bil\. 16\/2026/.test(c) && /Sungai Buloh/.test(c) && /Third Edition/.test(c))}; });
+    await q.goto(U + '#infection-alerts--nipah'); await settle(800);
+    const nvs = await q.evaluate(() => ({txt:document.querySelector('#cur').innerText, wide:document.documentElement.scrollWidth <= innerWidth}));
+    await q.screenshot({path:out + '/p-nipah-national.png', fullPage:true});
+    ok(nv.n === 15 && nv.lines && nv.cites === 6 && nv.gap && nv.link && nv.hosp && nv.refs && nv.confirm && /national guideline, Jan 2026, 4\.2, p11/.test(nvs.txt) && nvs.wide,
+      'Nipah: six lines from the national guideline of January 2026 in the guide\'s own words with section and page, its circular cited by number and date, no hospital list copied, and the differences and mpox under Still to confirm' + (nv.n === 15 && nv.cites === 6 && nv.confirm ? '' : ' ' + JSON.stringify(nv)));
+
+    /* The abbreviation list names its circular */
+    await q.goto(U + '#abbreviations'); await q.waitForFunction(() => KB.state === 'ready', null, {timeout:8000}).catch(() => {}); await settle(300);
+    const kb = await q.evaluate(() => { const n = document.querySelector('#kbsrc .lk-note'), a = n && n.querySelector('a[href*="surat-pekeliling-kpk-bil-4-2024"]'); return {t:n ? n.textContent : '', a:!!a && a.target === '_blank', c:CONFIRM.some(c => /circular KPK Bil\.4\/2024 \(19 Apr 2024\)/.test(c)) && !CONFIRM.some(c => /Bil\.1\/2024 prints no issuer/.test(c))}; });
+    ok(/Surat Pekeliling Ketua Pengarah Kesihatan Bil\.4\/2024/.test(kb.t) && /19 April 2024/.test(kb.t) && !/prints no issuer/.test(kb.t) && kb.a && kb.c, 'abbreviations: the source line names circular Bil.4/2024 of 19 April 2024 with its link, and Still to confirm keeps only the do-not-use list');
+
+    /* What's new: one round naming every entry whose content changed */
+    ok(await q.evaluate(() => APP_VER === 'Version 8, updated 26 Nov 2026' && /^Current alerts/.test(V8[0][0]) && ['#asthma-cpg', '#infection-alerts', '#cellulitis', '#pneumonia', '#animal-bites', '#renal-colic', '#diabetic-foot-cpg'].every(h => V8[0][3].includes(h)) && V8[0][3].every(h => !!P[h.slice(1)])), 'What\'s new: the 26 Nov 2026 round names the seven entries whose content changed');
+    await ctx.close();
+
+    /* On a wide screen the card shows each source's full name, the pill's full label and every line in full */
+    const ctxW = await b.newContext({viewport:{width:1280, height:900}, serviceWorkers:'block', reducedMotion:'reduce'}), w = await ctxW.newPage();
+    w.on('pageerror', e => errs.push('26 Nov wide PAGEERROR: ' + e.message));
+    await w.goto(U + '#home'); await w.waitForTimeout(900); await w.evaluate(() => renderAlerts('2026-11-26'));
+    const wd = await w.evaluate(() => ({s:getComputedStyle(document.querySelector('#alerts .al-s')).display, gf:getComputedStyle(document.querySelector('#alerts .al-gf')).display, more:getComputedStyle(document.querySelector('#alerts .al-more')).display, clamp:getComputedStyle(document.querySelector('#alerts .al-t')).webkitLineClamp, cols:new Set([...document.querySelectorAll('#alerts .al-r')].map(r => Math.round(r.getBoundingClientRect().top))).size === 1 ? document.querySelectorAll('#alerts .al-r').length : 0, h:Math.round(document.querySelector('#alerts').getBoundingClientRect().height)}));
+    await w.screenshot({path:out + '/d-home-alerts.png'});
+    ok(wd.s !== 'none' && wd.gf !== 'none' && wd.more === 'none' && (wd.clamp === 'none' || wd.clamp === '') && wd.cols === 3 && wd.h < 360, 'current alerts on a wide screen: side by side, with the source\'s full name, the pill\'s full label and each line in full' + (wd.cols === 3 && wd.h < 360 ? '' : ' ' + JSON.stringify(wd)));
+    await ctxW.close();
+  }
+  /* ---------- 26 Nov 2026, part 2: header bands on five pearl cards, and the journey's narration in two files ---------- */
+  {
+    const PB = {viewport:{width:390, height:844}, isMobile:true, hasTouch:true, deviceScaleFactor:1, serviceWorkers:'block'};
+    const ctx = await b.newContext({...PB}), q = await ctx.newPage(), got = [];
+    q.on('pageerror', e => errs.push('26 Nov b PAGEERROR: ' + e.message));
+    q.on('console', m => { if (m.type() === 'error') errs.push('26 Nov b: ' + m.text()); });
+    q.on('request', x => { if (/\/audio\/stops?/.test(x.url())) got.push(x.url().split('/').pop()); });
+    const settle = async (ms = 400) => q.waitForTimeout(ms);
+
+    /* Bands: the five keys, on their cards, decorative, through the tile machinery */
+    await q.goto(U + '#home'); await settle(1500); await q.evaluate(() => renderAlerts('2026-11-26')); await settle(300);
+    const bd = await q.evaluate(() => {
+      const want = {'#alerts':'alerts', '#tl-now':'opennow', '#tl-keyn':'keynums', '#tl-rules':'rulesband', '#tl-new':'newsband'};
+      return {keys:Object.entries(want).every(([s, k]) => { const t = document.querySelector(s + ' > .tm.band'); return !!t && t.dataset.tm === k && t.getAttribute('aria-hidden') === 'true' && !t.querySelector('a,button,[tabindex]') && TILE_KEYS.has(k); }),
+        heads:Object.keys(want).every(s => { const h = document.querySelector(s + ' > .tile-h h2, ' + s + ' > .al-h h2'), t = document.querySelector(s + ' > .tm.band'); if (!h || !t) return false; const a = h.getBoundingClientRect(), r = t.getBoundingClientRect(); return a.bottom <= r.bottom + 2 && getComputedStyle(h).color === 'rgb(255, 255, 255)'; }),
+        h:Math.round(document.querySelector('#alerts > .tm.band').getBoundingClientRect().height), lean:!document.querySelector('#tl-keyn.lit'),
+        files:['alerts', 'opennow', 'keynums', 'newsband', 'rulesband'].length, wide:document.documentElement.scrollWidth <= innerWidth, max:document.querySelectorAll('.tm[data-play]').length <= TILE_MAX,
+        alertsPlay:document.querySelector('#alerts > .tm.band').hasAttribute('data-play')}; });
+    ok(bd.keys && bd.heads && bd.h >= 64 && bd.h <= 80 && bd.wide && bd.max && bd.alertsPlay && ['alerts', 'opennow', 'keynums', 'newsband', 'rulesband'].every(k => fs.existsSync(path.join(root, 'tiles', k + '.mp4')) && fs.existsSync(path.join(root, 'tiles', k + '.webp'))),
+      'bands: the five Flow loops sit as 64 to 80 px bands on Now, the alerts, More numbers, Three rules to keep and New in version 8, decorative, their headings in white over the band, through the tile machinery and its cap' + (bd.keys && bd.heads ? '' : ' ' + JSON.stringify(bd)));
+    /* Now redraws every 30 s and keeps its band (the same node, so a playing loop never restarts); the alerts card with nothing in date hides band and all */
+    const kept1 = await q.evaluate(() => { const a = document.querySelector('#tl-now > .tm.band'); renderNow(); renderNow(); return a === document.querySelector('#tl-now > .tm.band') && document.querySelectorAll('#tl-now > .tm.band').length === 1 && !!document.querySelector('#tl-now .nowsum'); });
+    const gone = await q.evaluate(() => { renderAlerts('2027-04-01'); const el = document.querySelector('#alerts'), r = el.hidden && !el.querySelector('.tm'); renderAlerts('2026-11-26'); return r && !el.hidden && el.querySelectorAll(':scope > .tm.band').length === 1; });
+    ok(kept1 && gone, 'bands: Now keeps its band across its redraws, and the alerts card with nothing in date hides, band and all');
+    /* Moving tiles off: the bands keep their stills and no loop plays */
+    await q.evaluate(() => { prefs.tiles = 'off'; tileClips(); }); await settle(300);
+    ok(await q.evaluate(() => !document.querySelector('.tm.band[data-play]') && [...document.querySelectorAll('.tm.band')].every(t => !!t.querySelector('img'))), 'bands: with Moving tiles off they show their stills and play nothing');
+    await q.evaluate(() => { prefs.tiles = 'on'; tileClips(); });
+    await q.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark')); await settle(300);
+    ok(await q.evaluate(() => getComputedStyle(document.querySelector('#tl-keyn > .tile-h h2')).color === 'rgb(255, 255, 255)' && document.documentElement.scrollWidth <= innerWidth), 'bands at night: the headings stay white over the band, nothing sideways');
+    await q.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+
+    /* The journey: two files now, the old ten gone, nothing fetched before a tap; a stop plays from its offset and stops at its end, captions in step */
+    ok(['stops-en.mp3', 'stops-ms.mp3'].every(f => fs.existsSync(path.join(root, 'audio', f))) && [1, 2, 3, 4, 5].every(i => !fs.existsSync(path.join(root, 'audio', `stop${i}.mp3`)) && !fs.existsSync(path.join(root, 'audio', `stop${i}-ms.mp3`)))
+      && !fs.readFileSync(path.join(__dirname, '..', 'green-zone-pathways.html'), 'utf8').match(/audio\/stop\d/), 'journey: its narration is two files, stops-en.mp3 and stops-ms.mp3; the ten stop files are gone, and nothing names them');
+    await q.goto(U + '#journey-2'); await settle(900);
+    ok(!got.length, 'journey: no narration is fetched before Listen');
+    await q.evaluate(() => { voice.defaultPlaybackRate = 2; voice.playbackRate = 2; voice.muted = true; });
+    await q.click('#jlisten');
+    await q.waitForFunction(() => !voice.paused && voice.currentTime > 0, null, {timeout:8000}).catch(() => {});
+    const j1 = await q.evaluate(() => { const g = JSTOPS_AUDIO.en.s[1]; return {i:voice.dataset.i, blob:/^blob:/.test(voice.src), t:voice.currentTime, at:g.at, end:g.at + g.dur, cap:document.querySelector('#jcap').textContent.trim(), first:(JOURNEY[1].say.match(/[^.?!]+[.?!]+/g) || [JOURNEY[1].say])[0].trim()}; });
+    ok(j1.i === '1' && j1.blob && j1.t >= j1.at - .05 && j1.t < j1.end && got.length === 1 && got[0] === 'stops-en.mp3', 'journey: Listen fetches the English file once and plays stop 2 from its own offset, from a blob' + (j1.t >= j1.at - .05 ? '' : ' ' + JSON.stringify(j1)));
+    /* captions follow the segment's own clock: at about two thirds in, the caption is the sentence that time points to */
+    const parts = await q.evaluate(() => JOURNEY[1].say.match(/[^.?!]+[.?!]+/g) || [JOURNEY[1].say]);
+    await q.waitForFunction(() => voice.currentTime - JSTOPS_AUDIO.en.s[1].at > JSTOPS_AUDIO.en.s[1].dur * .65 || voice.paused, null, {timeout:8000}).catch(() => {});
+    const mid = await q.evaluate(p => { const g = JSTOPS_AUDIO.en.s[1], el = voice.currentTime - g.at, total = JOURNEY[1].say.length, at = el / g.dur * total; let acc = 0, k = 0; for (; k < p.length - 1; k++){ acc += p[k].length; if (at < acc) break; } return {want:p[k].trim(), cap:document.querySelector('#jcap').textContent.trim(), paused:voice.paused}; }, parts);
+    ok(mid.paused || mid.cap === mid.want || parts.length === 1, 'journey: the captions are timed from the stop\'s own start' + (mid.cap === mid.want ? '' : ' ' + JSON.stringify(mid)));
+    await q.waitForFunction(() => voice.paused, null, {timeout:9000}).catch(() => {});
+    const j2 = await q.evaluate(() => { const g = JSTOPS_AUDIO.en.s[1]; return {paused:voice.paused, t:voice.currentTime, end:g.at + g.dur, next:JSTOPS_AUDIO.en.s[2].at, cap:document.querySelector('#jcap').hidden, btn:document.querySelector('#jlisten').getAttribute('aria-pressed')}; });
+    ok(j2.paused && j2.t >= j2.end - .1 && j2.t < j2.next && j2.cap && j2.btn === 'false', 'journey: the stop ends at its own end, before the next stop begins, and its captions close' + (j2.paused && j2.t < j2.next ? '' : ' ' + JSON.stringify(j2)));
+    /* The second stop of the same language reuses the blob: nothing fetched again */
+    await q.click('#jnext'); await settle(500); await q.click('#jlisten');
+    await q.waitForFunction(() => !voice.paused && voice.dataset.i === '2', null, {timeout:6000}).catch(() => {});
+    ok(await q.evaluate(() => voice.currentTime >= JSTOPS_AUDIO.en.s[2].at - .05) && got.length === 1, 'journey: the next stop seeks within the same file, with nothing fetched again');
+    await q.evaluate(() => stopJourney());
+    await q.screenshot({path:out + '/p-journey-joined.png'});
+    /* A host that refuses blob: media (the claude.ai frame is not proven to allow one): the Malay file plays from its own address instead */
+    await q.evaluate(() => { const mk = URL.createObjectURL.bind(URL); URL.createObjectURL = () => mk(new Blob(['not audio'], {type:'audio/mpeg'})); jLang = 'ms'; listen(2); });
+    await q.waitForFunction(() => !voice.paused && /audio\/stops-ms\.mp3$/.test(voice.src), null, {timeout:8000}).catch(() => {});
+    ok(await q.evaluate(() => !voice.paused && /audio\/stops-ms\.mp3$/.test(voice.src) && JDIRECT.ms === true && voice.dataset.i === '2' && voice.dataset.lang === 'ms'), 'journey: when blob: media is refused, the stop plays from the joined file\'s own address');
+    await q.evaluate(() => { stopJourney(); jLang = 'en'; });
+    await ctx.close();
+  }
   console.log('errors:', errs.length ? '\n  ' + errs.join('\n  ') : 'none');
   console.log(fails ? fails + ' FAILED' : 'all checks passed');
   console.log('screenshots: ' + out);

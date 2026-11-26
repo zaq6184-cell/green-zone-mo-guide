@@ -161,6 +161,21 @@
     'Tell the Shift Leader, Infection Control and the PKD/CPRC at once about every suspected case, with full documentation; samples for confirmation only on the CPRC\'s or PKD\'s instruction (department memo, 3)'];
   NV.fig = 'memo-2026-nipah';
   NV.gap += ' Also the department\'s memo HKL/JK/98/123/8, printed "28 Januari 2025" and circulated in January 2026: the year is under Still to confirm.' + DEPT;
+  /* 25 Nov 2026 (built 26 Nov 2026, at the guide owner's go-ahead): the national guideline of January 2026 (circular KPK Bil. 16/2026,
+     6 May 2026), in the guide's own words with section and page; it prints no reproduction terms, so nothing is quoted or copied as
+     laid out. The HKL memos above stay the department's route (rule 6); where they differ is under Still to confirm. Cited by number
+     and date only, with no page pictures (rule 3). */
+  const NG = ' (national guideline, Jan 2026, ';
+  NV.items = [...NV.items,
+    'National guideline: suspect it with a fever (history, or above 37.5 °C) and neurological symptoms (headache, dizziness, vomiting, confusion, seizures, paralysis, coma or a change in behaviour) or respiratory symptoms (cough, shortness of breath), and, in the 14 days before onset, travel from an affected area such as West Bengal, India, or exposure to a confirmed case, to bats, bat-contaminated food or pigs there, or to date palm sap there' + NG + '4.2, p11)',
+    'Warning signs: prolonged fever, a reduced level of consciousness, seizures, shortness of breath, SpO2 below 95%' + NG + 'Table 1, p13)',
+    'The guideline works in phases. While no other country reports imported cases (phase 1), a suspected case with mild symptoms and no warning signs may go home with a Health Alert Card for 14 days of self-monitoring; with warning signs, admit to an isolation ward. Once other countries report imported cases (phase 2), admit every suspected case. It does not say which phase applies now: ask the EP or Infection Control' + NG + 'Table 1, p13, and Annex 1, p29)',
+    'A suspected case with a negative or inconclusive result is a probable case and is still monitored for 14 days' + NG + '4.3, p11)',
+    'Notify every suspected, probable or confirmed case within 24 hours to the nearest health office, by phone or e-Notification' + NG + '5, p12)',
+    'Staff who handled the patient or the samples without complete PPE are close contacts and are monitored for 14 days' + NG + '10.1 and 10.2, pp16 to 17)'];
+  NV.gap += ' The national lines: Guidelines on the Management of Nipah Virus (NiV) Infection in Malaysia, Disease Control Division, January 2026, issued with circular KPK Bil. 16/2026 (KKM.600-29/4/44 Jld.2(4), 6 May 2026), in the guide\'s own words.';
+  NV.links = [...(NV.links || []), ['https://www.moh.gov.my/en/publications-and-reports/circulars/list-of-circulars/surat-pekeliling-ketua-pengarah-kesihatan-bil-16-2026-pelaksanaan-garis-panduan-pengurusan-jangkitan-virus-nipah-niv-di-malaysia-edisi-kemaskini-januari-2026', 'National Nipah guideline, Jan 2026 (circular Bil. 16/2026)']];
+  if (I.refs && !I.refs.some(r => /Bil\. 16\/2026/.test(r))) I.refs.push('Guidelines on the Management of Nipah Virus (NiV) Infection in Malaysia, Disease Control Division, MOH, January 2026; circular KPK Bil. 16/2026, 6 May 2026');
 
   /* ---------------- Blood tests: sending samples, POCT results, the laboratory's rules ---------------- */
   const B = P['blood-tests'];

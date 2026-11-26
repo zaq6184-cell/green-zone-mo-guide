@@ -12,6 +12,7 @@ desktop.ini
 
 # Design review screenshots (regenerate with node .impeccable/review-shots.js)
 .impeccable/review/
+.impeccable/review-2026-11/*.png
 
 # Explainer project: renders, review frames and scratch (the sources and timings stay)
 video/explainer/.hyperframes/

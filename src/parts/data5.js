@@ -34,8 +34,8 @@ P['asthma-cpg'] = {
     sv:{check:'any', q:'Any severe feature?', hint:'Table 9 (p37). Listed: the severe cells no other column shares. Alert, normal blood pressure, wheezing and PaCO2 <40 mmHg or normal are printed for milder grades too; the cells shared with life-threatening were asked at the step before.',
       items:['Speech: speaks in words','Respiratory rate: >25/min','Pulse rate: >120/min','Use of accessory muscles: very evident'],
       opts:[['Yes, present','svt'],['None','md']]},
-    md:{check:'any', q:'Any moderate feature?', hint:'Table 9 (p37). Left out: alert, normal blood pressure and wheezing (printed for mild too) and PaCO2 <40 mmHg (printed for severe too). An SpO2 of 95% is in both mild (≥95%) and moderate (90 – 95%). Algorithms 3 and 4 print mild as SpO2 <95% with accessory muscle use present; Table 9 prints ≥95% and absent. Mild and moderate share one treatment box in Algorithm 4.',
-      items:['Speech: speaks in phrases','Respiratory rate: >20/min','Pulse rate: 100 – 120/min','Use of accessory muscles: present','Oxygen saturation (SpO2): 90 – 95%','PaO2: <80 mmHg'],
+    md:{check:'any', q:'Any moderate feature?', hint:'Table 9 (p37). Left out: alert, normal blood pressure and wheezing (printed for mild too) and PaCO2 <40 mmHg (printed for severe too). Table 9 prints mild SpO2 ≥95% and moderate 90 – 94%. Algorithms 3 and 4 print mild as SpO2 ≤95% with accessory muscle use present; Table 9 prints ≥95% and absent. Mild and moderate share one treatment box in Algorithm 4.',
+      items:['Speech: speaks in phrases','Respiratory rate: >20/min','Pulse rate: 100 – 120/min','Use of accessory muscles: present','Oxygen saturation (SpO2): 90 – 94%','PaO2: <80 mmHg'],
       opts:[['Yes, present: moderate','mmt'],['None: mild','mmt']]},
     mmt:{step:'Mild or moderate: initial management (Algorithm 4, p xiv)', items:[
       'SABA 4 - 10 puffs by pMDI + spacer (preferable patient\'s own) or via nebuliser, repeat every 20 minutes for 1 hour',
@@ -43,19 +43,19 @@ P['asthma-cpg'] = {
       'Nebulised salbutamol (Appendix 9, p86): 2.5 to 5 mg every 20 minutes for the first hour (3 doses)',
       'Prednisolone: 0.5 - 1 mg/kg with a maximum of 50 mg stat (the Prednisolone by weight calculator works out the range)',
       'The suggested daily dose of prednisolone ranges from 0.5 to 1 mg/kg of the ideal body weight with a maximum of 50 mg daily (p40)',
-      'Controlled oxygen (if available): target saturation 93 to 95%',
+      'Controlled oxygen (if available): target saturation ≥94%',
       'Pregnant: early referral to critical care is recommended for moderate to severe asthma exacerbations (8.2, p50)'], next:'mmr'},
-    mmr:{q:'Clinical improvement?', hint:'A footnote on Algorithm 4 (p xiv) reads: Improvement of symptoms (not needing continuous SABA) and SpO2 >94% under room air. The algorithm does not mark which arrow it belongs to. Monitoring and evaluation of severity of asthma exacerbation should include mental status, vital signs and respiratory assessment (Recommendation 13, p42).',
+    mmr:{q:'Clinical improvement?', hint:'A footnote on Algorithm 4 (p xiv) reads: Improvement of symptoms (not needing continuous SABA) and SpO2 ≥94% under room air. The asterisk marks both clinical improvement arrows: from the mild and moderate box to discharge, and from the severe box to monitoring and evaluation. Monitoring and evaluation of severity of asthma exacerbation should include mental status, vital signs and respiratory assessment (Recommendation 13, p42).',
       opts:[['Clinical improvement','dc'],['No clinical improvement','svt']]},
     svt:{step:'Severe, or no improvement: treatment (Algorithm 4, p xiv)', items:[
       'SABA via oxygen driven nebuliser, repeat every 20 minutes for 1 hour',
       'Nebulised salbutamol (Appendix 9, p86): 2.5 to 5 mg every 20 minutes for the first hour (3 doses), then 2.5 to 10 mg every 1 to 4 hours as needed, or 10 to 15 mg/hour by continuous nebulisation',
       'Ipratropium bromide nebuliser 0.5 mg every 4 - 6 hours',
-      'Controlled oxygen: target saturation 93 to 95%',
+      'Controlled oxygen: target saturation ≥94%',
       'Consider HFNC',
       'IV hydrocortisone 100 mg stat',
       'IV magnesium sulphate 2 g infusion over 20 minutes (single dose)'], next:'svr'},
-    svr:{q:'Clinical improvement?', hint:'Algorithm 4 footnote (p xiv): improvement of symptoms (not needing continuous SABA) and SpO2 >94% under room air. In severe or life-threatening asthma, monitor vital signs continuously or at least every 15 – 30 minutes (7.3), and arterial blood gases should be done (Recommendation 13, p42).',
+    svr:{q:'Clinical improvement?', hint:'Algorithm 4 footnote (p xiv): improvement of symptoms (not needing continuous SABA) and SpO2 ≥94% under room air. In severe or life-threatening asthma, monitor vital signs continuously or at least every 15 – 30 minutes (7.3), and arterial blood gases should be done (Recommendation 13, p42).',
       opts:[['Clinical improvement','svadm'],['No clinical improvement','ltx']]},
     svadm:{end:'admit', title:'Monitoring and evaluation, then refer for admission', items:[
       'Monitoring and evaluation: conscious level, SpO2, PR, BP; PaO2 and PaCO2; CXR for complication and alternative diagnosis',
@@ -67,7 +67,7 @@ P['asthma-cpg'] = {
     ltx:{end:'refer', title:'Life-threatening: treat, and refer early to critical care', items:[
       'SABA via oxygen driven nebuliser, repeat every 20 minutes for 1 hour',
       'Ipratropium bromide nebulizer 0.5 mg every 4 - 6 hours',
-      'Controlled oxygen: target saturation 93 to 95%',
+      'Controlled oxygen: target saturation ≥94%',
       'Consider early intubation: patients with signs of respiratory distress, worsening hypoxaemia, hypercapnia or altered mental status or also failure to respond to maximal medical therapy',
       'IV hydrocortisone 100 mg stat (if not given earlier)',
       'IV magnesium sulphate 2 g infusion over 20 minutes (single dose) (if not given earlier)',
@@ -124,7 +124,7 @@ P['asthma-cpg'] = {
       'Asthma patients should be encouraged to breastfeed and their asthma medications should be continued during lactation',
       'Asthma in pregnancy is an indication for referral (chapter 9, p58)'],
       links:[['#asthma-cpg--ref','Referral to a respiratory physician']],
-      gap:'CPG 8.2 (p50), Recommendation 16 (p51) and chapter 9 (p58). The target in pregnancy, 94 and 98%, differs from Algorithm 4 (93 to 95%).'},
+      gap:'CPG 8.2 (p50), Recommendation 16 (p51) and chapter 9 (p58). The target in pregnancy, between 94 and 98%, has an upper limit that Algorithm 4 (≥94%) does not.'},
 
     /* Chapter 9, Referral (p58) */
     ref:{check:'any', q:'Any indication for referral to a respiratory physician?', hint:'Chapter 9 (p58): timely referral to a respiratory physician or physicians experienced in asthma management.',
@@ -152,15 +152,15 @@ P['asthma-cpg'] = {
         ['Blood pressure','Normal','Normal','Normal/hypotension','Hypotension'],
         ['Use of accessory muscles','Absent','Present','Very evident','Paradoxical chest movement/absent'],
         ['Breath sounds','Wheezing','Wheezing','Wheezing','Silent chest'],
-        ['Oxygen saturation (SpO2)','≥95%','90 – 95%','<90%','<90%'],
+        ['Oxygen saturation (SpO2)','≥95%','90 – 94%','<90%','<90%'],
         ['PaO2','Normal','<80 mmHg','<60 mmHg','< 60 mmHg'],
         ['PaCO2','Normal','<40 mmHg','<40 mmHg or normal','>45 mmHg']]}},
       {h:'Where the algorithms print it differently', src:'Algorithms 3 and 4 (p xiii and xiv) against Table 9 (p37). Each is quoted as printed.', items:[
-        'Mild SpO2: <95% (Algorithms 3 and 4); ≥95% (Table 9)',
+        'Mild SpO2: ≤95% (Algorithms 3 and 4); ≥95% (Table 9). Moderate SpO2 is 90 – 94% in all three',
         'Mild use of accessory muscles: Present (Algorithms 3 and 4); Absent (Table 9)',
         'Mild respiratory rate: Normal (Algorithms 3 and 4); Normal/ (Table 9, with nothing after the slash)',
         'Moderate PaCO2: <40 mmHg or normal (Algorithm 3); <40 mmHg (Algorithm 4 and Table 9)',
-        'Printed in two columns: SpO2 <90% and PaO2 <60 mmHg (severe and life-threatening); 95% (mild ≥95% and moderate 90 – 95%); normal PaCO2 (mild, and severe <40 mmHg or normal); PaCO2 <40 mmHg (moderate and severe)',
+        'Printed in two columns: SpO2 <90% and PaO2 <60 mmHg (severe and life-threatening); normal PaCO2 (mild, and severe <40 mmHg or normal); PaCO2 <40 mmHg (moderate and severe)',
         'Table 9 has no PEF row, although the text before it says symptoms, signs and lung function measurements (PEF/FEV1) are used to classify; PEF or FEV1 may not be applicable to be used in acute asthma exacerbation (p37)']},
       {h:'Assessment, monitoring and evaluation', src:'CPG 7.1 (p36–37), Recommendation 8 (p38), 7.3 (p41–42), Recommendation 13 (p42) and chapter 3 (p4). Table 8, the risk factors for asthma-related death, is the first step of Grade and treat.', items:[
         'Rapid clinical assessment of severity should be performed for all asthma exacerbation. Treatment should be initiated immediately based on severity of asthma exacerbation (Recommendation 8).',
@@ -170,7 +170,7 @@ P['asthma-cpg'] = {
         'Oxygen saturation levels of <90% indicates the need for aggressive management. Saturation should be assessed before oxygen is commenced or five minutes after oxygen is removed or when saturation stabilises.',
         'Arterial blood gas (ABG) measurement is not routinely required. It should be considered for patients with PEFR <50% or those who do not respond to initial treatment or are deteriorating.',
         'A PaO2<60 mmHg and a normal or increased PaCO2 (especially >45 mmHg) indicates respiratory failure.',
-        'Chest X-ray should be considered in patients who do not respond to treatment or if an alternative diagnosis or complication e.g. pneumothorax, pneumomediastinum or pneumonia is suspected (7.3).',
+        'CXR should be considered in patients who do not respond to treatment or if an alternative diagnosis or complication e.g. pneumothorax, pneumomediastinum or pneumonia is suspected (7.3).',
         'Severe or life-threatening: vital signs, monitor continuously or at least every 15 – 30 minutes, including SpO2, respiratory rate, heart rate and blood pressure; mental status, monitor for any signs of lethargy, restlessness or other changes indicating hypoxia or hypercapnia, or confusion; auscultation, regularly check for changes in breath sounds, rhonchi or silent chest. A rising or normal PaCO2 may indicate impending respiratory arrest.',
         'In severe and life-threatening asthma arterial blood gases should be done (Recommendation 13).',
         'Whenever possible, PEFR should be recorded before treatment is initiated. It should be monitored at 1-hour post treatment and at regular intervals until a clear response has occurred or a plateau is reached (p4).']}
@@ -180,7 +180,7 @@ P['asthma-cpg'] = {
         'Patients with asthma exacerbation are often hypoxaemic and may require oxygen therapy.',
         'Oxygen saturation of ≥94% should be maintained in all hypoxic asthma patients.',
         'In asthma exacerbation in emergency department, high flow nasal cannula should be considered over conventional oxygen therapy.',
-        'Algorithm 4 (p xiv): controlled oxygen, target saturation 93 to 95% (if available, in the mild and moderate box). Consider HFNC is printed in the severe box only.',
+        'Algorithm 4 (p xiv): controlled oxygen, target saturation ≥94% (if available, in the mild and moderate box). Consider HFNC is printed in the severe box only.',
         'Pregnancy: oxygen saturation should be maintained between 94 and 98% (p50).']},
       {h:'β2-agonists', src:'CPG 7.2 and Recommendation 10 (p39)', items:[
         'Inhaled β2-agonists is the first-line treatment in asthma exacerbation.',
@@ -194,7 +194,7 @@ P['asthma-cpg'] = {
         ['Ipratropium bromide 0.5 mg and salbutamol 2.5 mg/unit dose vial (UDV)','1 UDV every 4 to 6 hours'],
         ['Comment','Recommend to dilute the drug solution dose to a final volume of 4 – 5 ml in jet nebuliser unless the nebulizer is specifically designed for a small fill volume']]}},
       {h:'Ipratropium bromide', src:'CPG 7.2 (p39), Algorithms 3 and 4 (p xiii and xiv)', items:[
-        'A Cochrane systematic review demonstrated that combined inhaled therapy (ipratropium bromide + SABA) was more effective than SABA alone in adult patients with asthma exacerbation presenting to ED in terms of lower risk of hospitalisation, improved FEV1 and improved PEF.',
+        'A Cochrane systematic review demonstrated that combined inhaled therapy (ipratropium bromide - SABA) was more effective than SABA alone in adult patients with asthma exacerbation presenting to ED in terms of lower risk of hospitalisation, improved FEV1 and improved PEF.',
         'Algorithm 4 gives ipratropium bromide nebuliser 0.5 mg every 4 - 6 hours in the severe and life-threatening boxes; Algorithm 3 (primary care) gives 0.5 mg stat.']},
       {h:'Systemic corticosteroids', src:'CPG 7.2 (p39–40) and Recommendation 11 (p40)', items:[
         'Systemic corticosteroids should be given in all patients with asthma exacerbation.',
@@ -265,7 +265,7 @@ P['asthma-cpg'] = {
       {h:'Algorithm 1: initiation of asthma treatment', src:'CPG p xi. Confirmed asthma: assess for asthma control, assess for risk factors for asthma exacerbation and address modifiable risk factors.', items:[
         'Well-controlled asthma (ACT ≥20 or ‘NO’ to all GINA questionnaire): maintenance low-dose ICS + PRN SABA OR PRN ICS-formoterol OR PRN ICS-SABA.',
         'Not well controlled, with symptoms most days OR night-time awakening ≥ 1 a week OR FEV1 <80% of predicted or LLN: maintenance low-dose ICS-LABA OR low-to-medium-dose ICS.',
-        'Not well controlled, with daily symptoms OR night-time awakening ≥ 1 a week OR FEV1 <80% of predicted or LLN: maintenance medium-to-high-dose ICS-LABA OR medium-dose ICS-LABA with add-on LAMA. The text on p9 joins the FEV1 criterion here with AND.',
+        'Not well controlled, with daily symptoms OR night-time awakening ≥ 1 a week AND FEV1 <80% of predicted or LLN: maintenance medium-to-high-dose ICS-LABA OR medium-dose ICS-LABA with add-on LAMA.',
         'Reliever: SABA OR ICS-SABA OR ICS-formoterol (if maintenance includes ICS-formoterol), e.g. budesonide-formoterol or beclometasone diproprionate-formoterol.',
         'Reassess asthma symptoms at 3 - 6 months. Inhaler technique and adherence to treatment should be assessed at every clinic/hospital visit and before escalating treatment.',
         'Refer to Table 7 for ICS dosing category. LTRA may be added to maintenance therapy if the patient has concurrent allergic rhinitis.']},
@@ -288,7 +288,7 @@ P['asthma-cpg'] = {
         'These clinical practice guidelines (CPG) are meant to be guides for clinical practice, based on the best available evidence at the time of development. The guidelines should not override the responsibility of the practitioners to make decisions appropriate to the circumstances of the individual. This should be done in consultation with the patients and their families or guardians, taking into account the management options available locally.']}
     ]}
   ],
-  refs:['Ministry of Health Malaysia. Clinical Practice Guidelines: Management of Asthma in Adults (Second Edition). Putrajaya: Malaysian Health Technology Assessment Section (MaHTAS), Medical Development Division; 2024. Available at https://mymahtas.moh.gov.my',
+  refs:['Ministry of Health Malaysia. Clinical Practice Guidelines: Management of Asthma in Adults (Second Edition). Putrajaya: Malaysian Health Technology Assessment Section (MaHTAS), Medical Development Division; 2024; web version as corrected (copy last modified 15 Oct 2025, read 25 Nov 2026). Available at https://mymahtas.moh.gov.my',
     'Copyright MaHTAS. Content reproduced with a copyright acknowledgement to MaHTAS: not changed, not sold, not used to promote or endorse any product or service, and not used in an inappropriate or misleading context.',
     'Table 9 is adapted in the CPG from: Plaza Moral V, Alobid I, Álvarez Rodríguez C, et al. GEMA 5.3. Spanish Guideline on the Management of Asthma. Open Respir Arch. 2023;5(4):100277. Table 7 is from: Global Initiative for Asthma. Global Strategy for Asthma Management and Prevention, 2024.',
     'Appendix 9 sources, as the CPG lists them (p86): drug information databases (Lexicomp), Formulari Ubat KKM (FUKKM), medication package insert, Micromedex and the electronic Medicines Compendium (eMC).'],

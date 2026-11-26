@@ -1,5 +1,7 @@
 # CPG Management of Asthma in Adults, 2nd edition (2024): review for the Green Zone MO Guide
 
+> **Note, 26 Nov 2026:** this review describes the 2024 file. The corrected web version of the same 2nd edition (copy last modified 15 Oct 2025) changes the SpO2 thresholds in Algorithms 3 and 4 and Table 9, the improvement footnote and its asterisks, Algorithm 1's AND, and a few quoted words; the guide follows it since 26 Nov 2026. See `CPG-REVIEW-ASTHMA-2026.md` for every change and the edits made. Points 1, 5, 8, 14, 28 and 29 of (b), the SpO2, oxygen and discharge rows of (c), (d)2 and (d)3, and the (e) rows on SpO2 below are superseded there.
+
 **In the app since 9 Nov 2026** (Academy CPG round): the entry *Asthma in adults: CPG 2nd edition* (`#asthma-cpg`) beside the ebook's asthma pathway and the Asthma Zone flow, with five reference tabs (Severity, Drugs, Action plan, Inhaler and spacer, Treatment steps), and two calculators: prednisolone by weight (`#calc-apred`) and the action plan PEF zones (`#calc-apef`). The Table 9 grading stays a stepper, not a calculator (section d). Where the CPG and the ebook differ is listed under Still to confirm in the app (items 11 and 12).
 
 Reviewed 9 Nov 2026, line by line, for the entry `P['asthma-cpg']` in `src/parts/data5.js` and its two calculators. "The draft" below means that entry.

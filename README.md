@@ -88,6 +88,7 @@ The two claude.ai links are private until you share them from the page's Share m
 
 ## Version history
 
+- **A calmer, clearer design, current alerts and moving tiles (26 Nov 2026):** source lines say "Source:" or "Not in the source:" plainly; a calculator keeps its result in view; search groups its results; night outcome colours are quieter; home shows dated alerts (dengue, rabies, the monsoon) with their sources; the asthma CPG follows its corrected web version; the National Antimicrobial Guideline is linked where antibiotics are chosen; Nipah follows the national guideline; five home tiles carry moving Flow bands.
 - **Advice in Bahasa Melayu and as films (24 Nov 2026):** the seven discharge advice tabs switch to Bahasa Melayu with a Malay read-aloud and Malay patient pages (a translation awaiting a Malay-speaking doctor's check); each has a short film; the patient journey can be heard in Malay; What's new opens on a 60-second film.
 - **Quicker on a weak signal, pick up where you left off, and the cancer pain film (23 Nov 2026):** the guide starts before the whole page has arrived (taps answered about 1.7 s sooner on a slowed phone); home offers the last step you opened for 12 hours; an accessibility check (WCAG 2.2 AA) found nothing left to fix after its fixes; the first-shift intro can be read aloud in English or Bahasa Melayu; the cancer pain leaflet has its own film in both languages; four banners are now Flow loops.
 - **Faster on a weak signal, and pages that move (23 Nov 2026):** the installed guide opens its saved copy after 1.5 s with no answer from the network (4 s before), and an open after the Wi-Fi hangs no longer waits again (measured on a slowed phone: 4.3 s to 1.8 s, and to 0.3 s for the next open); on the claude.ai link and with Data Saver on, a first visit no longer downloads the journey's pictures and the tour's cover (about 320 KB) until those pages open (the web app's worker still saves them in the background, for offline use); a thin bar shows while a slow first open arrives; and a tool tile grows into its page's banner, and back slides the earlier page in (other links still open at once).
@@ -145,6 +146,8 @@ The two claude.ai links are private until you share them from the page's Share m
 Six journey clips with Omni 1.1 Flash at 12 credits each: **72 credits**. On 8 Nov 2026, eleven 8-second tile loops with Omni 1.1 Flash: Flow reported 12 credits each (**132 credits**), while the account balance fell from 896 to 814. Later on 8 Nov 2026, six more tile loops for the home tiles: **72 credits** (814 to 742). On 9 Nov 2026, six loops for the calculator groups: **72 credits** (742 to 670), then two for the Heart and Poisoning and allergy groups: **24 credits** (670 to 646). The stills (Nano Banana) cost nothing. No other paid generation was used.
 
 On 10 Nov 2026, two more loops (24 credits; 492 to 468): the snakebite banner, a malachite-green glass viper turning in 3D, and the interpreter banner, which was not used because the clip added a third bubble; the interpreter banner moves by a slow push-in made from its still instead.
+
+On 26 Nov 2026, five loops for the home tiles' bands (Omni 1.1 Flash, 12 credits each): **60 credits**, by Flow's per-job quotes.
 
 ## Still to confirm
 

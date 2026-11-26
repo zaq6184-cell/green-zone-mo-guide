@@ -14,7 +14,11 @@ const VIEWS = [
   ['home'], ['pathways'], ['renal-colic'], ['renal-colic', 'answer'], ['rules'], ['gz-rules--ivab'], ['tools'], ['calc'], ['calc-news2'], ['calc-dfluid'],
   ['numbers'], ['links'], ['pharmacy'], ['dilution'], ['antibiotics'], ['antidotes'], ['abbreviations'], ['guidelines'], ['dengue-cpg'], ['dengue-cpg', 'tabs'],
   ['xray-guide--ank'], ['abdo-handbook'], ['code-blue'], ['journey'], ['tour'], ['quiz'], ['new'], ['about'], ['install'], ['share'], ['intro'],
-  ['pt-dengue-cpg'], ['search', 'palette'], ['home', 'settings'], ['home', 'menu'], ['renal-colic', 'advms'], ['journey-2'], ['pt-renal-colic-ms']
+  ['pt-dengue-cpg'], ['search', 'palette'], ['home', 'settings'], ['home', 'menu'], ['renal-colic', 'advms'], ['journey-2'], ['pt-renal-colic-ms'],
+  /* 25 Nov 2026: the Now tile opened, a calculator's result bar, the abbreviation list's examples and About, grouped search */
+  ['home', 'now'], ['calc-news2', 'filled'], ['abbreviations', 'about'], ['search', 'grouped'],
+  /* 26 Nov 2026: the current alerts card opened in full, the Nipah step with the national lines, an outcome with NAG links */
+  ['home', 'alerts'], ['infection-alerts--nipah'], ['cellulitis--opd']
 ];
 const srv = spawn(process.execPath, [path.join(__dirname, 'serve.js')], {env:{...process.env, PORT:String(port)}, stdio:'ignore'});
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -32,6 +36,11 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
       if (act === 'palette') { await p.fill('#gq', 'dengue'); await p.waitForTimeout(400); }
       if (act === 'settings') await p.evaluate(() => openSettings());
       if (act === 'menu') await p.click('#menubtn').catch(() => {});
+      if (act === 'now') await p.evaluate(() => { const d = document.querySelector('.nowsum'); if (d) d.open = true; });
+      if (act === 'filled'){ await p.evaluate(() => { [['rr', '28'], ['sp', '90'], ['sbp', '88'], ['pr', '135'], ['tp', '39.5']].forEach(([k, v]) => { const i = document.querySelector('#cf-' + k); if (i){ i.value = v; i.dispatchEvent(new Event('input', {bubbles:true})); } }); scrollTo(0, 0); }); await p.waitForTimeout(400); }
+      if (act === 'about') await p.evaluate(() => { const d = document.querySelector('.kb-about'); if (d) d.open = true; });
+      if (act === 'alerts') await p.evaluate(() => { renderAlerts('2026-11-26'); const m = document.querySelector('#alerts .al-more'); if (m) m.click(); });
+      if (act === 'grouped') { await p.fill('#gq', 'ceftriaxone'); await p.waitForTimeout(500); }
       if (act === 'advms'){ await p.evaluate(() => selectTab('advice')); await p.click('#tp-advice [data-advlang="ms"]').catch(() => {}); }
       await p.waitForTimeout(300);
       await p.addScriptTag({content:axe});

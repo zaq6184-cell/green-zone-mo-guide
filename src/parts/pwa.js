@@ -16,6 +16,7 @@
 (() => {
   const PAGE = '__PAGE__'; /* this page's id, which build.js also writes into sw.js */
 
+  document.documentElement.classList.add('gz-app'); /* the web app's body takes the top bar's ground, which Safari 26 tints its bars from (25 Nov 2026) */
   const tints = [...document.querySelectorAll('meta[name="theme-color"]')];
   const tint = () => { const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim(); if (bg) tints.forEach(m => m.setAttribute('content', bg)); };
   tint();

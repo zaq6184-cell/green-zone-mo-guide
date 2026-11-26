@@ -11,7 +11,7 @@ const d = JSON.parse(fs.readFileSync(SRC, 'utf8'));
 const rows = d.rows.map(r => [r.abbr, r.meaning, r.page, +r.other.BIL]);
 rows.forEach((r, i) => { if (r[3] !== i + 1) throw new Error('row ' + (i + 1) + ' is numbered ' + r[3]); if (!r[0] || !r[1]) throw new Error('row ' + (i + 1) + ' has an empty cell'); });
 const out = {meta:{t:d.meta.title, n:rows.length, pages:61,
-  note:'No issuer, reference, date, signature or reproduction wording is printed; the file was posted to the department channel on 1 Aug 2024.'}, rows};
+  note:'Issued with Surat Pekeliling Ketua Pengarah Kesihatan Bil.4/2024 (KKM.100-1/6/1 Jld.2 (16), 19 April 2024); the file was posted to the department channel on 1 Aug 2024.'}, rows};
 fs.mkdirSync(path.dirname(OUT), {recursive:true});
 fs.writeFileSync(OUT, JSON.stringify(out));
 console.log('wrote', OUT, rows.length, 'rows,', fs.statSync(OUT).size, 'bytes');

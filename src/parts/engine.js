@@ -26,32 +26,32 @@ const EBOOK_PDF = 'https://drive.google.com/file/d/1VrOsrSTS10YKPrXE5Krgw4wn6EmU
 
 /* ================= Content: journey, rules, numbers, tour, quiz, Drive run-through ================= */
 const JOURNEY = [
-  {short:'Triage', ic:'triage', sub:'MTS 4 or 5', img:'img/gz-02-triage.webp', clip:'clips/stop1-triage.mp4', audio:'audio/stop1.mp3',
+  {short:'Triage', ic:'triage', sub:'MTS 4 or 5', img:'img/gz-02-triage.webp', clip:'clips/stop1-triage.mp4',
    say:'Patients move one way. Triage, then secondary triage, then ECG, irrigation or dressing if needed, and on to you.',
    alt:'Illustration: a triage nurse takes a seated patient\'s blood pressure at the Green Zone counter',
    who:'Triage', title:'Triage, then secondary triage',
    items:['Triage gives the patient MTS level 4 or 5, which brings them to the Green Zone','Then secondary triage','Then ECG, wound irrigation or dressing, only if needed','Patients move one way, and next they come to you'],
    links:[['#gz-rules--oneway','No repeat tests after secondary triage'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--dengue','Dengue from a KK: straight to OW?'],['#asthma-zone','Asthma: the 5000 queue'],['#children--pat','Children: ETD or PEDWCH']]},
-  {short:'You, the MO', ic:'stetho', sub:'Consultation', img:'img/gz-03-consult.webp', clip:'clips/stop2-consult.mp4', audio:'audio/stop2.mp3', mo:true,
+  {short:'You, the MO', ic:'stetho', sub:'Consultation', img:'img/gz-03-consult.webp', clip:'clips/stop2-consult.mp4', mo:true,
    say:'You fill in the green slip. For the diagnosis, open its pathway.',
    alt:'Illustration: a medical officer writes notes while a patient sits across the desk in the consultation room',
    who:'You, the MO', title:'Consultation room',
    items:['See the patient and open the ebook pathway for the diagnosis','Fill in the green treatment slip (slip hijau) and attach the queue number','Ask the patient to put the slip in the Red Box and wait in the waiting tent','If an X-ray is needed, send the patient to the X-ray counter'],
    note:{href:'#gz-rules--wait', k:'Never waits outside', t:'The elderly, NSTEMI or ACS, and anyone who needs stat medication and monitoring: bring them inside.'},
    links:[['#pathways','Open a pathway'],['#oscc--dv','Domestic violence missed at triage']]},
-  {short:'Treatment room', ic:'syringe', sub:'PPP', img:'img/gz-04-treatment.webp', clip:'clips/stop3-treatment.mp4', audio:'audio/stop3.mp3',
+  {short:'Treatment room', ic:'syringe', sub:'PPP', img:'img/gz-04-treatment.webp', clip:'clips/stop3-treatment.mp4',
    say:'The treatment room calls the queue number, carries out each order, and documents it.',
    alt:'Illustration: a nurse prepares a drip beside a patient resting in a treatment chair',
    who:'PPP, treatment room', title:'Treatment room (PPP)',
    items:['Takes the slip from the Red Box and calls the queue number','Carries out each procedure you ordered, and documents each one','Tells the patient the next step of the plan'],
    links:[['#blood-tests--gxm','GXM sample: label at the bedside']]},
-  {short:'CCA', ic:'chair', sub:'Only if needed', img:'img/gz-05-cca.webp', clip:'clips/stop4-cca.mp4', audio:'audio/stop4.mp3', optional:true,
+  {short:'CCA', ic:'chair', sub:'Only if needed', img:'img/gz-05-cca.webp', clip:'clips/stop4-cca.mp4', optional:true,
    say:'Waiting for results? Send the patient to the CCA. The elderly, ACS, or anyone needing stat drugs never waits outside.',
    alt:'Illustration: patients seated in rows of chairs in the Chair Centric Area while a nurse checks a monitor',
    who:'Only if results are pending, or for observation or referral', title:'CCA, the Chair Centric Area',
    items:['PPP escorts the patient to the CCA and hands over to Yellow Zone Extension staff','Staff seat the patient, write the details on the whiteboard, record vital signs on the slip and monitor','When observation ends they send the patient back to the doctor\'s room, and the slip returns to the Green Zone MO','You stay responsible for the patient you sent, and the BHT goes with them'],
    links:[['#gz-rules--wait','Where to seat patients who cannot wait outside'],['#gz-rules--ivab','IV antibiotics on a CCA chair'],['#yellow-zone--flow','Uptriage: the Yellow Zone flow']]},
-  {short:'Review and finish', ic:'review', sub:'Back to you', img:'img/gz-06-review.webp', clip:'clips/stop5-review.mp4', audio:'audio/stop5.mp3', mo:true,
+  {short:'Review and finish', ic:'review', sub:'Back to you', img:'img/gz-06-review.webp', clip:'clips/stop5-review.mp4', mo:true,
    say:'Before discharge, reassess and review every result. After a CT brain, ask the EP to review, and book EMACC or EMWATCH follow-up. Unsure, or the disposition is stuck? Call the EP in charge.',
    alt:'Illustration: two doctors review a CT brain image on a screen while a patient waits nearby',
    who:'You, the MO', title:'Review, then finish',
@@ -75,8 +75,10 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 
 /* Version 8: the redesign, for the home card and What's new */
 /* The version line in the footer and Settings: change it with each round */
-const APP_VER = 'Version 8, updated 24 Nov 2026';
+const APP_VER = 'Version 8, updated 26 Nov 2026';
 const V8 = [
+  [`Current alerts, the asthma CPG's corrected oxygen targets, and national guideline links`, `The home page shows current public health alerts, each dated, with its source and a tap to the guide's own page: dengue rising in Selangor, a rabies death after a dog bite without post-exposure prophylaxis, and the northeast monsoon floods. Each alert hides itself once it is out of date. The asthma CPG entry follows the CPG's corrected web version: oxygen to a target saturation of 94% and above, moderate SpO2 90 to 94%, and SpO2 94% and above under room air for improvement. Cellulitis, pneumonia, animal bites, urosepsis, leptospirosis and the diabetic foot link to the National Antimicrobial Guideline's updated topics (links only: its terms allow no copying). Suspected Nipah adds the national guideline of January 2026, in the guide's own words with its sections and pages, and the abbreviation list names its circular (Bil.4/2024). What differs from the department's documents is under Still to confirm.`, [['#home', 'Home'], ['#asthma-cpg', 'Asthma CPG'], ['#infection-alerts--nipah', 'Suspected Nipah']], ['#asthma-cpg', '#infection-alerts', '#cellulitis', '#pneumonia', '#animal-bites', '#renal-colic', '#diabetic-foot-cpg']],
+  [`Calmer screens: sources named, calculators that open on themselves, and a quieter night`, `A calculator now names its source as Source: (NEWS2 said "Not in the source" above its own citation), and keeps "Not in the source" for what its source leaves out. On a phone a calculator opens on its own banner, short units sit inside their boxes, and once you have typed, a slim bar above the tab bar keeps the result in reach while it is off screen. The antidotes, abbreviations and antimicrobial guides now follow one page pattern, with their names in the top bar; search results sit under quiet heads with counts, in the same order; the Now tile on the home page opens on one line; and at night the outcome colours are the same hues, quieter. Settings has a new switch to try: Compact tab bar while scrolling (off). No clinical content changed.`, [['#calc-news2', 'NEWS2'], ['#antidotes', 'Antidotes'], ['#home', 'Home']]],
   [`Discharge advice in Bahasa Melayu, the advice as films, and What's new in 60 seconds`, `The seven discharge advice tabs (mild head injury, dengue, the Asthma Zone, gastroenteritis, renal colic, abdominal pain and hypoglycaemia) now switch to Bahasa Melayu, line for line, with a Malay read-aloud, and their patient pages and QR codes come in Malay too: the translation is the guide's own, approved by the guide owner on 24 Nov 2026. Each of the seven tabs also has a short film, every line on screen as it is read, for the patient to watch on the tab or their own phone. The patient journey can be heard in Bahasa Melayu, with Malay captions. What's new opens on a 60-second film of what changed. The cancer pain film no longer shows an empty card in its fourth part.`, [['#renal-colic', 'Renal colic'], ['#journey', 'Patient journey'], ['#new', "What's new"]], ['#mild-tbi', '#dengue', '#asthma-zone', '#gastroenteritis', '#renal-colic', '#abdominal-pain', '#hypoglycaemia']],
   [`Quicker on a weak signal, pick up where you left off, and the cancer pain film`, `On a weak signal the guide now starts before the whole page has arrived: home, search and the department's own pathways and rules answered about 1.7 seconds sooner on a slowed phone (4.6 s instead of 6.3), and a national guideline opened in that moment opens as soon as it lands. The home page offers the last step you opened, one tap away, for 12 hours: only its address and the time are kept on this phone, never an answer, and the cross forgets it. The first-shift intro can be read aloud, in English or Bahasa Melayu. The cancer pain leaflet has its own film in both languages, every line on screen as it is read, over a calm Flow Music bed. The CT brain, antidotes, abbreviations and aggressive patient banners are now Flow loops like the rest. An accessibility check (WCAG 2.2 AA, 35 views by day and by night) found the page language, the logo's name, five places with too little contrast, the search results for screen readers and wide tables a keyboard could not scroll; all fixed, and it now reports none. Pressing a tile starts its page's picture before the tap lands.`, [['#home', 'Home'], ['#intro', 'First-shift intro'], ['#cancer-pain-cpg', 'Cancer pain CPG']], ['#cancer-pain-cpg']],
   [`Faster on a weak signal, and pages that move`, `The installed guide now opens its saved copy after 1.5 seconds with no answer from the network (it waited 4), and once the hospital Wi-Fi has hung, the next open no longer waits again: measured on a slowed phone, 4.3 seconds down to 1.8 on a stuck connection, and to 0.3 for the open after it. A newer version still arrives, with Reload. On the claude.ai link, and on the web app with Data Saver on, a first visit no longer downloads the journey's five pictures and the tour's cover (about 320 KB) until you open those pages (the installed web app still saves them in the background, for use offline), and a thin bar at the top shows while a slow first open is still arriving. A tool tile now grows into its page's banner as it opens, and the back button slides the earlier page back in; other links still open at once, and with reduced motion pages change as before.`, [['#install', 'Install the guide'], ['#tools', 'Shift tools']]],
@@ -298,9 +300,10 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'From the content round of 26 Nov 2026 (national documents read on 25 Nov 2026). Still to confirm: (1) the national Nipah guideline (January 2026), brought into force by circular KPK Bil. 16/2026 of 6 May 2026, after the UKI memo (3 Mar 2026) and the department memo: its list of hospitals for confirmed cases (Annex 5) names Hospital Sungai Buloh and Hospital Tunku Azizah for Selangor, KL and Putrajaya, not HKL, while the UKI memo admits to SW28; and for screening and history-taking it asks staff for a three-ply surgical mask, gown and gloves (9.1), where the department memo asks for full PPE with N95 or PAPR. Which applies at HKL, which of its phases applies now, and do the memos need updating? (2) The HKL mpox pathway (Sept 2024) predates the national Guidelines of MPOX Management Malaysia, Third Edition (18 Sep 2025), which could not be opened on 25 Nov 2026 (its download fails on mpox.moh.gov.my). The national outpatient flowchart of Sept 2024 also screens an unexplained rash with no contact, and travel to affected countries, and admits for persistent fever beyond day 5, dehydration, and age under 2 or over 60, which the HKL pathway does not list. Has the department checked its pathway against the 3rd edition?',
   'From the Malay versions added on 24 Nov 2026 (approved by the guide owner the same day). Still to confirm: the Asthma Zone advice comes from the asthma memo of Nov 2025, while its patient page names the ebook as its source.',
-  `From the documents added on 21 Nov 2026 at the guide owner's "add the documents that was left out". Still to confirm: (1) the MOH procedure for discharge at own risk (KPK circular Bil. 24/2021) is written for ward inpatients and never mentions the emergency department: does the department apply it in the ED, and is its Borang A the AOR form the department policy 2026 (32.3) means; (2) the MOH abbreviation list Bil.1/2024 prints no issuer, date or rule for its use, and gives only the meanings it prints (TDS only as "Toilet, Debridement And Suturing", BD only as "Binswanger's Disease"): whether the department uses it, and where its do-not-use list (named in its row 1500) is; (3) the leptospirosis circular Bil. 26/2021 prints the child's amoxicillin as "50 mg/kg dose oral 608 hourly" (in both copies circulated), gives no regimen for children aged 8 and over, and is written for primary care: what the department uses; (4) the smoking products circular Bil. 25/2026 names no route for sending its notification form to the PKD: how the department sends it; (5) the CME deck on the aggressive patient (circulated 13 Oct 2026, undated) has its own dose table (slide 53, haloperidol, olanzapine, risperidone, lorazepam, diazepam and midazolam): how it compares with the ebook's table on the behavioural disturbance pathway, which stays the department's route; (6) the MOH Antidotes Quick Guide (2022) prints lines its reader found doubtful, shown as printed with a Check mark: calcium gluconate's maximum "3000-6000mg/kg/dose" after 60 mg/kg/dose; dantrolene's indication "Malignant hypothermia" and its 70 ml title against 60 ml of water for injection; atropine "0.5 to 2.4 mg/kg/hour"; bromocriptine's two maximums; D-penicillamine's two daily doses; methylene blue's two dose paragraphs; folinic acid's 50 mg/5 ml title against 50 mg/ml; and the storage tables of idarucizumab and the 3-factor PCC, which contradict the text under them; whether a later edition exists; and how its entries compare with the ebook\'s pathways and the hospital\'s regimens (N-acetylcysteine with the paracetamol overdose pathway and the HKL NAC regimen; naloxone and flumazenil), which has not been done; (7) the aggressive patient deck\'s HKL risk-of-violence form prints "> 2" factors for high risk and "≥ 2" for moderate (slide 22); (8) the CT brain CME prints the narrow window as "WW: 8 WL:32" (slide 4), shown as printed.`,
-  'From the department memos and letters added on 21 Nov 2026. Still to confirm: (1) the department\'s Nipah memo HKL/JK/98/123/8 prints "28 Januari 2025" but was circulated in January 2026, and the POCT review memo prints "6 Mac 2025" but cites a meeting of 4 Dec 2025: which year is right; (2) whether the memo on a patient treated elsewhere within 24 hours (HKL/JK/98/188/3(5)19, 4 Feb 2019) and the memo on CT or MRI before discharge (HKL/JK/98/188/3(28)22, 14 Dec 2022) are still in force, and how the registration sticker marks a visit within 24 hours; (3) which criteria the review of IV paracetamol and IV albumin used (letter HKL/JK/98/188/1, May 2026); (4) Lampiran A for foreign patients (memo of 6 Jul 2026): its flow chart prints the forms as CIP/JKT-02 and CIP/JK-01 where the memo prints BPK/JKT-02 and CIP/JKT-01, and it does not say what happens when no specialist is present; (5) MAU: the 2022 criteria the entry follows, or the General Medicine letter of 7 Feb 2025 (oxygen up to a Venturi mask at 40%, 100 kg or less, pregnancy excluded); (6) whether the aspirin dispersible brands of the pharmacy letter of 9 Nov 2022 are still the ones supplied; (7) EMACC\'s days: an undated meeting minute circulated on 3 Jan 2025 says EMACC runs Monday to Saturday, Saturday until 1 pm, with at most 10 Monday appointments, where the guide (the guide owner, 12 Nov 2026) says Monday to Friday, 8 am to 3 pm; (8) whether the department\'s two antimicrobial quick guides (dilution, and adult dosing), 2nd edition, February 2024, are still the current editions.',
+  `From the documents added on 21 Nov 2026 at the guide owner's "add the documents that was left out". Still to confirm: (1) the MOH procedure for discharge at own risk (KPK circular Bil. 24/2021) is written for ward inpatients and never mentions the emergency department: does the department apply it in the ED, and is its Borang A the AOR form the department policy 2026 (32.3) means; (2) the MOH abbreviation list Bil.1/2024 was issued with circular KPK Bil.4/2024 (19 Apr 2024), which allows only the Ministry's approved abbreviations in medical records, and gives only the meanings it prints (TDS only as "Toilet, Debridement And Suturing", BD only as "Binswanger's Disease"): where its do-not-use list (named in its row 1500, and not attached to the circular) is; (3) the leptospirosis circular Bil. 26/2021 prints the child's amoxicillin as "50 mg/kg dose oral 608 hourly" (in both copies circulated), gives no regimen for children aged 8 and over, and is written for primary care: what the department uses; (4) the smoking products circular Bil. 25/2026 names no route for sending its notification form to the PKD: how the department sends it; (5) the CME deck on the aggressive patient (circulated 13 Oct 2026, undated) has its own dose table (slide 53, haloperidol, olanzapine, risperidone, lorazepam, diazepam and midazolam): how it compares with the ebook's table on the behavioural disturbance pathway, which stays the department's route; (6) the MOH Antidotes Quick Guide (2022) prints lines its reader found doubtful, shown as printed with a Check mark: calcium gluconate's maximum "3000-6000mg/kg/dose" after 60 mg/kg/dose; dantrolene's indication "Malignant hypothermia" and its 70 ml title against 60 ml of water for injection; atropine "0.5 to 2.4 mg/kg/hour"; bromocriptine's two maximums; D-penicillamine's two daily doses; methylene blue's two dose paragraphs; folinic acid's 50 mg/5 ml title against 50 mg/ml; and the storage tables of idarucizumab and the 3-factor PCC, which contradict the text under them; whether a later edition exists; and how its entries compare with the ebook\'s pathways and the hospital\'s regimens (N-acetylcysteine with the paracetamol overdose pathway and the HKL NAC regimen; naloxone and flumazenil), which has not been done; (7) the aggressive patient deck\'s HKL risk-of-violence form prints "> 2" factors for high risk and "≥ 2" for moderate (slide 22); (8) the CT brain CME prints the narrow window as "WW: 8 WL:32" (slide 4), shown as printed.`,
+  'From the department memos and letters added on 21 Nov 2026. Still to confirm: (1) the department\'s Nipah memo HKL/JK/98/123/8 prints "28 Januari 2025" but was circulated in January 2026, and the POCT review memo prints "6 Mac 2025" but cites a meeting of 4 Dec 2025: which year is right; (2) whether the memo on a patient treated elsewhere within 24 hours (HKL/JK/98/188/3(5)19, 4 Feb 2019) and the memo on CT or MRI before discharge (HKL/JK/98/188/3(28)22, 14 Dec 2022) are still in force, and how the registration sticker marks a visit within 24 hours; (3) which criteria the review of IV paracetamol and IV albumin used (letter HKL/JK/98/188/1, May 2026); (4) Lampiran A for foreign patients (memo of 6 Jul 2026): its flow chart prints the forms as CIP/JKT-02 and CIP/JK-01 where the memo prints BPK/JKT-02 and CIP/JKT-01, and it does not say what happens when no specialist is present; (5) MAU: the 2022 criteria the entry follows, or the General Medicine letter of 7 Feb 2025 (oxygen up to a Venturi mask at 40%, 100 kg or less, pregnancy excluded); (6) whether the aspirin dispersible brands of the pharmacy letter of 9 Nov 2022 are still the ones supplied; (7) EMACC\'s days: an undated meeting minute circulated on 3 Jan 2025 says EMACC runs Monday to Saturday, Saturday until 1 pm, with at most 10 Monday appointments, where the guide (the guide owner, 12 Nov 2026) says Monday to Friday, 8 am to 3 pm; (8) whether the department\'s two antimicrobial quick guides (dilution, and adult dosing), 2nd edition, February 2024, are still the current editions, and whether they have been checked against the National Antimicrobial Guideline\'s online updates since (vancomycin, Appendix 1, Sep 2024; cellulitis, bite-related infections, UTI and urosepsis, CAP, influenza, infectious diarrhoea and melioidosis, Dec 2025 and Jan 2026).',
   'Open now (18 Nov 2026) reads the hours the sources print. Four print an hour but not the days: MAU office hours, 8 am to 5 pm (the MAU admission note); the Observation Ward\'s medical officer, 10 am to 10 pm (memo HKL/JK/98/188/3(6)23); LA OT taking orthopaedic cases, 8 am to 9 pm only (department policy 2026, 22.3.3); and office hours at SCACC ending at 1700 hr, with no start (Code Blue Manual, 4.2). Which days does each hold, and when do SCACC office hours start? EMACC follows the guide owner\'s 8 am to 3 pm, Monday to Friday, where the memo of 11 Jan 2024 prints 7.30 am to 3.30 pm. The guide cannot know public holidays.',
   'From the calculators built into the guide on 16 Nov 2026 (CALC-RESEARCH.md). Still to confirm: (1) which D-dimer assay the HKL laboratory runs: the age-adjusted cut-off (ADJUST-PE) holds only for highly sensitive assays, and the VTE CPG (2013, p46) says the whole blood agglutination D-dimer used in most Malaysian laboratories is not sensitive in ruling out VTE; (2) the AF CPG (2012), Table 14 footnote: a symbol is lost in print before 160 (hypertension), 2 (bilirubin) and 3 (enzymes), and the creatinine threshold is printed \u2265200 mmol/L; (3) the Ottawa SAH rule\'s age: 40 or older (JAMA 2013) or over 40 (CMAJ 2017, Figure 1): the guide uses 40 or older; (4) burns: the department\'s own referral route, its fluid formula (RCH uses 3 ml/kg/%TBSA, VicBurns 3 to 4, its adult poster 4) and the paediatric TBSA chart it uses; (5) alcohol withdrawal: the department\'s regimen for a CIWA-Ar of 10 or more, which the guide\'s sources do not give.',
   'From the children\'s heart and breathing rates added on 16 Nov 2026 (Fleming et al., Lancet 2011, Web Tables 4 and 5): the paper gives centiles of healthy children and does not say which centile makes a rate abnormal. Still to confirm: which ranges or centile the department and its paediatric triage use for a child\'s heart rate and breathing rate, and whether the guide should mark one.',
@@ -319,8 +322,8 @@ const CONFIRM = [
   'Where the calculators\' sources stop: paracetamol at exactly 50 kg; a creatinine clearance of exactly 30 for fondaparinux and Clexane; how to split the total daily insulin dose into basal and bolus; which SOAP band counts as moderate dehydration, and how to treat a child over 10% dehydrated; whether there is a first-line drug at BARS 7; for paracetamol overdose, the activated charcoal dose, the N-acetylcysteine regimen (answered in part on 12 Nov 2026: the hospital\'s circular of 10 Jan 2022, on the paracetamol overdose entry and its calculator, gives three bags, or two with fluid restriction or under 40 kg; the MOH Antidotes Quick Guide, 2022, gives two), the nomogram treatment line and which band exactly 8 hours belongs to; and child doses in anaphylaxis.',
   'Which dengue source the Green Zone follows where the ebook (built from the CPG 3rd edition, 2015) and the CPG 4th edition (2026) differ: shock CRT over 2 or over 3 seconds; persistent vomiting over 2 times in 24 hours or over 3 a day; the list of warning signs (the ebook has persistent diarrhoea and a tender liver, the CPG liver enlargement over 2 cm, postural hypotension and reduced urine output); and oral fluids (2 litres a day, or 200 ml an hour while awake).',
   'Points inside the dengue CPG (4th edition) itself: Algorithm 1 starts 3–5 ml/kg/hr for 1 hour, the text (p44) for 1–2 hours; Table 5 has no row for exactly 5 days of fever, and covers 9 of the 16 result patterns; and the CPG gives no formula for the MAP.',
-  'Which asthma source the Green Zone follows where the ebook (built from the 2017 CPG) and the Asthma in Adults CPG, 2nd edition (2024) differ: prednisolone 30 mg a day for 5 days, or 0.5 to 1 mg/kg with a maximum of 50 mg for 5 to 7 days; IV magnesium sulphate 2.47 g or 2 g; SC terbutaline, which the CPG keeps for critical care; ipratropium at moderate and every 20 minutes, or for severe only every 4 to 6 hours; a severe respiratory rate over 30 or over 25; grading and discharge on PEF, which Table 9 does not use; a discharge SpO2 over 95% or over 94%; and an observation route, which the CPG does not have. The full table is in CPG-REVIEW-ASTHMA.md.',
-  'Points inside the asthma CPG (2nd edition) itself: Table 9 prints SpO2 <90% and PaO2 <60 mmHg under both severe and life-threatening, and the guide lists them as life-threatening by its note to classify using the most severe parameters; mild SpO2 is ≥95% in Table 9 but <95% in Algorithms 3 and 4; four oxygen targets (93 to 95%, ≥94%, >94% for improvement, 94 to 98% in pregnancy); prednisolone by the ideal body weight, with no formula; IV hydrocortisone 100 mg stat or 200 mg a day in divided doses; and follow-up within 1 to 2 weeks or within seven days.',
+  'Which asthma source the Green Zone follows where the ebook (built from the 2017 CPG) and the Asthma in Adults CPG, 2nd edition (2024) differ: prednisolone 30 mg a day for 5 days, or 0.5 to 1 mg/kg with a maximum of 50 mg for 5 to 7 days; IV magnesium sulphate 2.47 g or 2 g; SC terbutaline, which the CPG keeps for critical care; ipratropium at moderate and every 20 minutes, or for severe only every 4 to 6 hours; a severe respiratory rate over 30 or over 25; grading and discharge on PEF, which Table 9 does not use; a discharge SpO2 over 95% or 94% and above; and an observation route, which the CPG does not have. The full table is in CPG-REVIEW-ASTHMA.md.',
+  'Points inside the asthma CPG (2nd edition) itself: Table 9 prints SpO2 <90% and PaO2 <60 mmHg under both severe and life-threatening, and the guide lists them as life-threatening by its note to classify using the most severe parameters; mild SpO2 is ≥95% in Table 9 but ≤95% in Algorithms 3 and 4, and the current quick reference prints ≥95% and accessory muscle use absent; oxygen targets of ≥94% (the algorithms, Recommendation 9 and the improvement footnote) and 94 to 98% in pregnancy; prednisolone by the ideal body weight, with no formula; IV hydrocortisone 100 mg stat or 200 mg a day in divided doses; and follow-up within 1 to 2 weeks or within seven days. The current quick reference differs from the CPG in its emergency department algorithm too: ipratropium bromide 0.5 mg stat in the severe box (the CPG: every 4 - 6 hours), no Consider HFNC, and deescalate where the CPG now says step-down; the guide follows the CPG.',
   'The gout CPG (2nd edition, 2021): the Green Zone gout rule (HKL letter, 29 Nov 2024) words several of Recommendation 12\'s rheumatology referral criteria differently (men under 30, against early onset at age <30 years; at least three months of allopurinol), which may come from the letter itself. The CPG gives no pathway for suspected septic arthritis or joint aspiration, no NSAID course length and no gastroprotection. Inside it: colchicine 1.2 mg then 0.6 mg in the trials (p35) but 1 mg then 0.5 mg in Appendix 5B (p68); no renal row for a CrCl of 90 or more; and NSAIDs in pregnancy restricted to the first and second trimester (Appendix 5C) but avoided from 20 weeks (FDA advice, p40). The full review is in CPG-REVIEW-GOUT.md.',
   'The head injury CPG (2015) against the ebook\'s mild TBI pathway: the CPG admits every patient aged 65 or over or on an anticoagulant or antiplatelet whatever the CT shows (a boxed statement, p19), where the ebook can send them home after a normal CT; it counts vomiting twice or more, the ebook more than twice; its advice card covers 24 hours, the ebook 48; it has six urgent-CT factors the ebook lacks, and no PTA charting. Inside it: three observation schedules, a six-hour observation with no start point, and no list of indications for neuro-trauma referral. The full review is in CPG-REVIEW-HEAD-INJURY.md.',
   'The ACS CPG (1st edition, 2026) against the ebook\'s chest pain pathway: Key Recommendation 8 says a patient with chest pain suspected of ACS should NOT be triaged to a green or non-critical zone; it scores by HEART or by TIMI (TIMI only with a high-sensitivity troponin), with TIMI 0 or 1 to go home, where the Obsess protocol asks for TIMI under 1, and the department policy (2026, 19.1.2) prints "Skor TIMI ≤ 1"; it calls labelling troponin results positive or negative inappropriate; and low-risk unstable angina may go home. Inside it: Flowchart 6 gives no route for a conventional troponin taken under 6 hours from onset, a single hs-cTn is timed three ways, HEART has no row for exactly 3 risk factors, and the alteplase dose is printed up to 5 mg. Whether HKL\'s troponin is high-sensitivity, and its 99th percentile, are to confirm. The full review is in CPG-REVIEW-ACS.md.',
@@ -1609,11 +1612,17 @@ function hoursState(h, now){
 const nowRow = (h, now) => { const s = hoursState(h, now); return `<li><a href="${h.at}" class="${s.on ? 'on' : ''}" data-nowk="${h.k}"><i class="nd" aria-hidden="true"></i><span class="nt-t"><b>${esc(h.t)}</b><span>${esc(s.line)}</span></span><small>${esc(h.hrs)}</small></a></li>`; };
 function renderNow(){
   const el = $('#tl-now'); if (!el) return;
-  const now = myNow(), open = !!(el.querySelector('details') || {}).open, sh = hoursState(HOURS.find(h => h.k === 'shift'), now);
-  el.innerHTML = `<div class="tile-h"><h2 id="h-now">Now</h2><span class="tag mono" data-nowt>${esc(nowLabel(now))}</span><a class="tag nowsh" href="#gz-rules--cv">${esc(sh.shift)} shift</a></div>
-    <ul class="nowl">${HOURS.filter(h => h.kind === 'session').map(h => nowRow(h, now)).join('')}</ul>
-    <details class="nowmore"${open ? ' open' : ''}><summary>Hours that change a route${svg('chev')}</summary><ul class="nowl">${HOURS.filter(h => h.kind === 'span' || h.kind === 'after').map(h => nowRow(h, now)).join('')}</ul></details>
-    <p class="sub">Malaysia time, from this phone's clock, against the hours the guide's sources print. Sessions only: it says nothing about booking.</p>`;
+  /* Phones (25 Nov 2026): the tile opens on one line, the clinics in session and not, from the same rows; a tap opens today's rows,
+     the hours that change a route and the shift. Open or shut, it stays as it was when it redraws every 30 s. */
+  const now = myNow(), was = el.querySelector('.nowsum'), open = was ? was.open : innerWidth > 760, more = !!(el.querySelector('.nowmore') || {}).open, sh = hoursState(HOURS.find(h => h.k === 'shift'), now);
+  const ses = HOURS.filter(h => h.kind === 'session').map(h => [h, hoursState(h, now)]), inS = ses.filter(x => x[1].on).map(x => x[0].t + (x[0].ph ? ' (unless today is a public holiday)' : '')), outS = ses.filter(x => !x[1].on).map(x => x[0].t);
+  const line = (inS.length ? `<b>In session:</b> ${esc(inS.join(', '))}` : '') + (inS.length && outS.length ? '<i aria-hidden="true"> · </i>' : '') + (outS.length ? `<b>${inS.length ? 'Not in session' : 'No clinic in session now'}:</b> ${esc(outS.join(', '))}` : '');
+  setBanded(el, 'opennow', `<div class="tile-h"><h2 id="h-now">Now</h2><span class="tag mono" data-nowt>${esc(nowLabel(now))}</span></div>
+    <details class="nowsum"${open ? ' open' : ''}><summary><span class="ns-l">${line}</span><span class="ns-c">${svg('chev')}<span class="vh">Today's hours</span></span></summary>
+    <ul class="nowl">${ses.map(([h]) => nowRow(h, now)).join('')}</ul>
+    <details class="nowmore"${more ? ' open' : ''}><summary>Hours that change a route${svg('chev')}</summary><ul class="nowl">${HOURS.filter(h => h.kind === 'span' || h.kind === 'after').map(h => nowRow(h, now)).join('')}</ul></details>
+    <p class="nowshr"><a class="nowsh" href="#gz-rules--cv">${esc(sh.shift)} shift</a><span>${esc(sh.line.replace(/^\w+ shift, /, ''))}, by the critical result memo</span></p>
+    <p class="sub">Malaysia time, from this phone's clock, against the hours the guide's sources print. Sessions only: it says nothing about booking.</p></details>`);
 }
 /* On a step: the hours it prints or uses, live, with the time they were read at */
 const nowChipsIn = (hs, now) => `<span class="nowc-t">${svg('clock')}${esc(nowLabel(now))}</span>` + hs.map(h => { const s = hoursState(h, now); return `<span class="nowc-c${s.on ? ' on' : ''}" data-nowk="${h.k}"><b>${esc(h.t)}:</b> ${esc(s.line)}</span>`; }).join('');
@@ -1624,11 +1633,57 @@ function nowChips(id, node){
 function nowTick(){
   if (document.hidden) return;
   const now = myNow();
-  if (curView === 'home') renderNow();
+  if (curView === 'home'){ renderNow(); renderAlerts(); }
   $$('.nowc').forEach(el => { el.innerHTML = nowChipsIn(HOURS.filter(h => el.dataset.nowc.split(' ').includes(h.k)), now); });
 }
 setInterval(nowTick, 30000);
 document.addEventListener('visibilitychange', () => nowTick());
+
+/* ================= Current alerts (26 Nov 2026) =================
+   The content round approved by the guide owner on 25 Nov 2026 (CONTENT-DRAFT-2026-11.md, item 1): dated public health alerts on
+   the home page, each in the guide's own words with its date, its source and the guide's own page it opens. No clinical advice:
+   the guide's page carries that (rule 8). A line hides itself after `until` (inclusive, the date in Malaysia, UTC+8, as myNow
+   reads it), and the card hides itself when none is in date. Check each source again before `until`, and replace or remove the
+   line. The rabies and flood lines rest on news pages quoting the state and the Health Ministry (no statement was found on
+   moh.gov.my); the dengue line on JKN Selangor's own report. Drawn from the page's first part; nothing is stored. */
+const ALERTS = [
+  {k:'dengue', s:'Dengue, Selangor', at:'#dengue-cpg', atl:'Dengue CPG, 4th edition', ats:'Dengue CPG',
+   t:'Dengue is rising in Selangor: 34,820 cases in weeks 1 to 45 of 2026, 70.7% more than the same weeks of 2025, and 33 deaths against 6.',
+   d:'Week 45, 8 to 14 Nov 2026', src:'JKN Selangor, situation report ME45/2026', sl:'JKN Selangor',
+   href:'https://jknselangor.moh.gov.my/images/2026/denggi/ME45_26.pdf', until:'2026-12-06'},
+  {k:'rabies', s:'Rabies, Kedah', at:'#animal-bites', atl:'Animal bites and rabies', ats:'Animal bites',
+   t:'Rabies: a man in Kedah died in September 2026 after a stray dog bite in August. He had been seen at a health facility and was not given post-exposure prophylaxis.',
+   d:'27 Sep 2026', src:'Kedah State Health Department, as reported by Bernama in The Star', sl:'The Star',
+   href:'https://www.thestar.com.my/news/nation/2026/09/27/man-dies-of-rabies-in-kedah039s-first-human-case-since-1998', until:'2026-12-31'},
+  {k:'flood', s:'Floods', at:'#infection-alerts--lepto', atl:'Fever after a flood: leptospirosis', ats:'Leptospirosis',
+   t:'Northeast monsoon, 27 Oct 2026 to March 2027: the Health Ministry names leptospirosis, diarrhoea, food poisoning and respiratory tract infections as flood-related illnesses.',
+   d:'9 Nov 2026', src:'Health Ministry statement, as reported by The Star', sl:'The Star',
+   href:'https://www.thestar.com.my/news/nation/2026/11/09/floods-85-emergency-medical-teams-on-standby-says-health-ministry', until:'2027-03-31'}
+];
+const myDay = () => new Date(Date.now() + 8 * 3600e3).toISOString().slice(0, 10);
+const alertsIn = day => ALERTS.filter(a => (day || myDay()) <= a.until);
+function renderAlerts(day){
+  const el = $('#alerts'); if (!el) return;
+  const A = alertsIn(day), keys = A.map(a => a.k).join(' ');
+  if (el.dataset.alset === keys && (A.length ? el.innerHTML : !el.innerHTML)) return; /* unchanged: keep focus and what is open */
+  el.dataset.alset = keys;
+  el.hidden = !A.length;
+  if (!A.length){ setBanded(el, 'alerts', ''); return; }
+  /* On a phone the card folds to its band, the heading and one line naming the alerts (Krishna, 26 Nov 2026: "Fold to one line", so
+     Code Blue stays on the first screen); More in the heading, or a tap on that line, opens every line in full. The whole text is
+     always in the page. */
+  const o = el.classList.contains('open');
+  setBanded(el, 'alerts', `<div class="al-h"><h2>Current alerts</h2><span class="tag mono"><span class="vh">In date: </span>${A.length}</span><button type="button" class="al-more" data-almore aria-expanded="${o}" aria-controls="al-l">${o ? 'Less' : 'More'}</button></div>
+    <p class="al-sum" data-alsum>${A.map(a => `<span>${esc(a.s)}</span>`).join('')}</p>
+    <ul class="al-l" id="al-l">${A.map(a => `<li class="al-r" data-alk="${a.k}"><p class="al-t">${esc(a.t)}</p>
+      <p class="al-m"><span>${esc(a.d)}</span><span class="al-s"> · Source: ${esc(a.src)}</span><span class="al-lk"> · <a class="al-src" href="${a.href}" target="_blank" rel="noopener noreferrer" title="${esc(a.src)}">${esc(a.sl)}${svg('ext')}</a></span></p>
+      <a class="pill al-go" href="${a.at}"><span class="al-gs">${esc(a.ats)}</span><span class="al-gf">${esc(a.atl)}</span>${svg('chev')}</a></li>`).join('')}</ul>`);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest && (e.target.closest('[data-almore]') || (e.target.closest('[data-alsum]') && $('#alerts [data-almore]'))); if (!b) return;
+  const o = $('#alerts').classList.toggle('open');
+  b.setAttribute('aria-expanded', o); b.textContent = o ? 'Less' : 'More';
+});
 
 /* ================= Pinned calculators and steps (17 Nov 2026) =================
    The star keeps a whole entry (Saved); a pin keeps one calculator or one step, shown in a row at the top of the home page, in the
@@ -1747,13 +1802,13 @@ function renderAx(){
   $('#axn').textContent = q ? `${hits.length} of ${R.length} antidotes` : `${R.length} antidotes, in the guide's own order. Tap one to open it.`;
   const one = hits.length === 1;
   L.innerHTML = hits.length ? `<ul class="ax-l">${hits.map(([r, i]) => `<li><details class="ax" id="ax-${i}"${one ? ' open' : ''}><summary><span class="ax-h"><b>${esc(r.n)}</b><small>${esc(r.f)}</small></span>${r.q ? `<span class="tag ax-qt" title="A line under Still to confirm">Check</span>` : ''}<span class="ax-pg">p${esc(r.p)}</span></summary>`
-    + `<div class="ax-b">${r.q ? `<p class="ab-gap">${svg('info')}<span>As printed, and under Still to confirm: ${esc(r.q)}.</span></p>` : ''}${r.h.map(([h, v]) => `<section class="ax-f"><h4>${esc(h)}</h4>${axMd(v)}</section>`).join('')}</div></details></li>`).join('')}</ul>`
+    + `<div class="ax-b">${r.q ? `<p class="ab-gap">${svg('info')}<span>As printed, and under Still to confirm: ${esc(r.q)}.</span></p>` : ''}${r.h.map(([h, v]) => `<section class="ax-f"><h3>${esc(h)}</h3>${axMd(v)}</section>`).join('')}</div></details></li>`).join('')}</ul>`
     : '<p class="empty">No antidote in the guide matches. Try the poison, or the antidote\'s generic name.</p>';
 }
 const AX_TILE = () => TILE_KEYS.has('antidote') || STILL_KEYS.has('antidote') ? 'antidote' : 'tox';
 function renderAxStatic(){
   if (!$('#axhero')) return;
-  withTiles($('#axhero'), `${tileMedia(AX_TILE())}<span class="lbl">MOH · First Edition · Jan 2022</span><h2>${typeof AXIDX !== 'undefined' ? AXIDX.length : 38} antidotes</h2><p>Preparation, dose and storage for each, as the Ministry of Health's quick guide prints them.</p>`);
+  withTiles($('#axhero'), `${tileMedia(AX_TILE())}<span class="lbl">MOH · First Edition · Jan 2022</span><h2>${typeof AXIDX !== 'undefined' ? AXIDX.length : 38} antidotes</h2>`);
   const M = AX.d && AX.d.meta;
   $('#axsrc').innerHTML = `<p class="lk-note">Source: Antidotes Quick Guide (Adult Dose), First Edition, January 2022, Pharmaceutical Services Programme, Ministry of Health Malaysia${M ? ` (${esc(M.code)}, ${esc(M.isbn)})` : ''}. Reproduced with acknowledgement and the text unmodified, as its page 2 permits: “Permission is hereby granted to reproduce information contained herein provided that such reproduction be given due acknowledgement and shall not modify the text.” Each entry's reference list, which its small raised numbers point to, is in the printed guide, and its tables are redrawn for a phone: where the guide merges a cell, its value is repeated in each row or column it covers, and two boxed notes (dantrolene, digoxin Fab) sit after their dose sections. A second reader checked every value against the page images. Its own disclaimer: “${esc(M ? M.disclaimer : 'This antidotes guide is intended to serve the user as a handy reference and not as a complete drug information resource.')}” A national guide (standing rule 8). It has not yet been compared line by line with the ebook's pathways or the hospital's own regimens (paracetamol overdose and its NAC regimen among them): those stay the department's route, and the comparison is under Still to confirm.</p>`;
 }
@@ -1763,7 +1818,8 @@ function renderToolsAx(){
 }
 /* ================= Abbreviations (21 Nov 2026) =================
    The Ministry of Health's "Senarai Kata Singkatan (Abbreviation) di Fasiliti Kementerian Kesihatan Malaysia Bil.1/2024", all
-   2,665 rows as printed (data/abbr.json, from src/abbr.js). It prints no issuer, reference, date or rule for its use. It loads
+   2,665 rows as printed (data/abbr.json, from src/abbr.js). Issued with circular KPK Bil.4/2024 (19 Apr 2024), which allows only
+   the Ministry's approved abbreviations in medical records (read 25 Nov 2026). It loads
    the first time it is needed (the page #abbreviations, or a search of 2 to 10 characters with no space; about 48 KB with
    gzip), and the web app keeps it once used. A search that is exactly an abbreviation on the list shows its meanings above
    the results; an abbreviation with several rows shows them all, as printed, and the guide never chooses between them. */
@@ -1802,14 +1858,16 @@ function renderKb(){
   const re = q ? new RegExp('(' + raw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig') : null;
   const hl = s => re ? String(s).split(re).map((v, i) => i % 2 ? `<mark>${esc(v)}</mark>` : esc(v)).join('') : esc(s);
   $('#kbn').textContent = !q ? `${KB.rows.length.toLocaleString('en-GB')} abbreviations. Type the letters, or a word in the meaning.` : hits.length ? `${hits.length} row${hits.length > 1 ? 's' : ''}${hits.length > 60 ? ': the first 60' : ''}` : '';
-  L.innerHTML = !q ? '' : hits.length ? `<ul class="phx-l kb-l">${hits.slice(0, 60).map(r => `<li class="phx kb-r"><span class="phx-t"><b class="kb-a">${hl(r[0])}</b><span class="kb-m">${hl(r[1])}</span><small class="kb-p">Row ${r[3]} · p${r[2]}</small></span></li>`).join('')}</ul>`
+  /* An empty box offers three searches; each fills the box, so the rows shown are the list's own (25 Nov 2026) */
+  L.innerHTML = !q ? `<p class="kb-try"><span>Try</span>${KB_TRY.map(a => `<button type="button" class="pill" data-kbx="${a}">${a}</button>`).join('')}</p>` : hits.length ? `<ul class="phx-l kb-l">${hits.slice(0, 60).map(r => `<li class="phx kb-r"><span class="phx-t"><b class="kb-a">${hl(r[0])}</b><span class="kb-m">${hl(r[1])}</span><small class="kb-p">Row ${r[3]} · p${r[2]}</small></span></li>`).join('')}</ul>`
     : `<p class="empty">“${esc(raw)}” is not on the list. The list says nothing about abbreviations it leaves out.</p>`;
 }
+const KB_TRY = ['KIV', 'TCA', 'AOR'];
 const KB_TILE = () => TILE_KEYS.has('abbrev') || STILL_KEYS.has('abbrev') ? 'abbrev' : 'sources';
 function renderKbStatic(){
   if (!$('#kbhero')) return;
-  withTiles($('#kbhero'), `${tileMedia(KB_TILE())}<span class="lbl">Ministry of Health · Bil.1/2024</span><h2>2,665 abbreviations</h2><p>Each with its meaning as the list prints it, on 61 pages.</p>`);
-  $('#kbsrc').innerHTML = `<p class="lk-note">Source: “Senarai Kata Singkatan (Abbreviation) di Fasiliti Kementerian Kesihatan Malaysia Bil.1/2024”, posted to the department's channel on 1 Aug 2024. The list prints no issuer, reference, date or signature, and no rule on how to use it. It prints one instruction, in its row 1500: “MSO4: Morphine Sulfate (Do Not Use This Abbreviation. Write Out The Name. Per The Do-Not-Use List.)”; that do-not-use list is not in the file. Where one abbreviation has several rows, or a row reads oddly, it is shown as printed. It gives only the meanings it prints: TDS, for example, appears only as “Toilet, Debridement And Suturing”, and BD only as “Binswanger's Disease”. Nothing you type is stored.</p>`;
+  withTiles($('#kbhero'), `${tileMedia(KB_TILE())}<span class="lbl">Ministry of Health · Bil.1/2024</span><h2>2,665 abbreviations</h2>`);
+  $('#kbsrc').innerHTML = `<details class="kb-about"><summary>${svg('info')}About this list${svg('chev')}</summary><p class="lk-note">Source: “Senarai Kata Singkatan (Abbreviation) di Fasiliti Kementerian Kesihatan Malaysia Bil.1/2024”, issued with Surat Pekeliling Ketua Pengarah Kesihatan Bil.4/2024 (KKM.100-1/6/1 Jld.2 (16), 19 April 2024), and posted to the department's channel on 1 Aug 2024. The circular discourages abbreviations in patients' medical records and allows only those the Ministry has approved; the list is in force from the circular's date and replaces the list of 21 March 2006. <a href="https://www.moh.gov.my/en/publications-and-reports/circulars/list-of-circulars/surat-pekeliling-kpk-bil-4-2024-senarai-kata-singkatan-abbreviation-di-fasiliti-kementerian-kesihatan-malaysia-kkm" target="_blank" rel="noopener noreferrer">The circular on moh.gov.my</a>. It prints one instruction, in its row 1500: “MSO4: Morphine Sulfate (Do Not Use This Abbreviation. Write Out The Name. Per The Do-Not-Use List.)”; that do-not-use list is not in the file, nor attached to the circular. Where one abbreviation has several rows, or a row reads oddly, it is shown as printed. It gives only the meanings it prints: TDS, for example, appears only as “Toilet, Debridement And Suturing”, and BD only as “Binswanger's Disease”. Nothing you type is stored.</p></details>`;
 }
 function renderToolsKb(){
   if (!$('#tkb')) return;
@@ -1843,12 +1901,25 @@ function renderPal(){
       : AI.state === 'idle' && SAVE_DATA && prefs.ai !== 'off' ? `<div class="pal-ai" id="gai">${svg('spark')}<span>Smart search waits while Data Saver is on.</span><button type="button" class="sm" id="gaidl">Download, 8 MB</button></div>` : '';
     const dcs = drugsFor([fixed || q, ...also]), dcard = dcs.length && dcs.length <= 2 ? dcs.map(drugCard).join('') : '', kbc = kbCard(q);
     if (KB.state === 'idle' && !SAVE_DATA && /^\S{2,10}$/.test(q)) kbLoad();
-    h = askBtn(q) + ai + (r.length ? note + dcard + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox" aria-label="Search results">` + r.map(e => palEntry(e, ts, loose, sm && sm.snip)).join('') + '</ul>' + kbc
+    h = askBtn(q) + ai + (r.length ? note + dcard + `<div class="grp">${r.length} result${r.length > 1 ? 's' : ''}${loose && !sm ? ' (partial matches)' : ''}</div><ul class="pal-res" id="gres" role="listbox" aria-label="Search results">` + palGrouped(r, e => palEntry(e, ts, loose, sm && sm.snip)) + '</ul>' + kbc
       : kbc + `<div class="pal-none">Nothing ${kbc ? 'else ' : ''}found for “${esc(q)}”. Try a symptom, a diagnosis, a score, a ward or a drug.</div>`);
   }
   if (askCtl && q){ askCtl.abort(); askCtl = null; }
   body.innerHTML = h; body.scrollTop = 0;
   palSel = 0; markSel(true);
+}
+/* Grouped results (25 Nov 2026): quiet heads with counts over runs of one kind, in the order the search gave. A head is drawn only
+   where every group sits in one unbroken run, so grouping never moves a result: the drug lists and the outside links sit below
+   the guide's own pages by design (13 Nov 2026), and the calculators get a head of their own only when the search put them
+   together; otherwise they stay among the guide's pages under its head. One listbox, so the arrows and Enter walk it as before. */
+const PAL_G = {guide:'In the guide', calc:'Calculators', drug:'Drug lists', out:'Outside the guide'};
+const palGrp = e => /^(Drug|Dilution|Antimicrobial|Antidote)$/.test(e.kind) ? 'drug' : /^(National CPG|Link)$/.test(e.kind) ? 'out' : e.kind === 'Calculator' ? 'calc' : 'guide';
+const palRuns = ks => ks.reduce((a, k, i) => { if (!a.length || a[a.length - 1].k !== k) a.push({k, s:i, n:0}); a[a.length - 1].n++; return a; }, []);
+function palGrouped(r, draw){
+  let ks = r.map(palGrp), runs = palRuns(ks);
+  if (runs.length !== new Set(ks).size){ ks = ks.map(k => k === 'calc' ? 'guide' : k); runs = palRuns(ks); }
+  if (runs.length < 2 || runs.length !== new Set(ks).size) return r.map(draw).join('');
+  return runs.map(u => `<li role="group" class="pal-gr" aria-label="${PAL_G[u.k]}"><div class="pal-gh" aria-hidden="true">${PAL_G[u.k]}<span>${u.n}</span></div><ul class="pal-res" role="none">${r.slice(u.s, u.s + u.n).map(draw).join('')}</ul></li>`).join('');
 }
 function palLinks(){ return $$('#palbody a').filter(a => !a.closest('.drugc')); } /* the drug card is reached by Tab; arrows and Enter keep to the results */
 function markSel(still){ palLinks().forEach((a, i) => a.setAttribute('aria-selected', i === palSel ? 'true' : 'false')); const a = palLinks()[palSel]; if (a && !still) a.scrollIntoView({block:'nearest'}); } /* new results open at the top, the drug card in full; only the arrow keys scroll */
@@ -2057,7 +2128,7 @@ function micStop(){
 $('#gmic').addEventListener('click', micStart);
 $('#gmlang').addEventListener('click', () => {
   micLang = micLang === 'en' ? 'ms' : 'en';
-  const b = $('#gmlang'); b.textContent = micLang === 'en' ? 'EN' : 'BM';
+  const b = $('#gmlang'); b.querySelector('.ml-v').textContent = micLang === 'en' ? 'EN' : 'BM';
   b.setAttribute('aria-label', 'Voice language: ' + (micLang === 'en' ? 'English' : 'Bahasa Melayu') + '. Tap to change.');
   if (micOn){ micStop(); }
 });
@@ -2073,7 +2144,7 @@ if (window.claude && typeof window.claude.use === 'function') window.claude.use(
 }).catch(() => {});
 
 /* ================= Views ================= */
-const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy', dilution:'Dilution guide', share:'Share the guide', links:'ED links'};
+const VIEW_TITLE = {home:'', pathways:'Pathways', rules:'Rules and protocols', tools:'Shift tools', calc:'Calculators', numbers:'Numbers', learn:'Learn the Green Zone', new:'What\'s new', poster:'Wall poster', about:'Sources and about', intro:'First-shift intro', install:'Install the guide', pharmacy:'ED pharmacy', dilution:'Dilution guide', share:'Share the guide', links:'ED links', antidotes:'Antidotes', abbreviations:'Abbreviations', antibiotics:'Antimicrobial guides'};
 let curView = null, curSub = null, routed = false;
 const SCROLL = {};
 /* A topic or group tile filters the list under it. On a phone the tiles fill the screen, so the list comes up to meet the
@@ -2089,7 +2160,7 @@ function revealList(el){
   window.scrollTo({top:Math.max(0, window.scrollY + y - under - 12), behavior:REDUCED ? 'auto' : 'smooth'});
 }
 function showView(name, sub){
-  if (name === 'home') renderResume();
+  if (name === 'home'){ renderResume(); renderAlerts(); }
   ensureView(name);
   const from = curView, changed = name !== from;
   if (from && from !== 'run') SCROLL[from] = window.scrollY;
@@ -2185,11 +2256,23 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir', 'ctbrain', 'antidote', 'abbrev', 'aggress']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir', 'ctbrain', 'antidote', 'abbrev', 'aggress', 'alerts', 'opennow', 'keynums', 'newsband', 'rulesband']);
 /* Stills without a loop yet (the 12 Nov 2026 review: Flow Studio stills for What's new, Sources and about, the wall poster
    and the dilution guide): shown like a tile's still, never asked for a video. Move a key to TILE_KEYS once its loop is in tiles/. */
 const STILL_KEYS = new Set([]); /* empty: the four review banners' loops and the ED extension directory's (extdir) went in on 12 Nov 2026 */
 const tileMedia = k => TILE_KEYS.has(k) || STILL_KEYS.has(k) ? `<span class="tm" aria-hidden="true" data-tm="${k}"><img src="tiles/${k}.webp" alt="" loading="lazy" decoding="async" width="640" height="360"></span>` : '';
+/* Header bands (26 Nov 2026, Krishna's "Flow loops, free up files"): a Flow loop as a short glass band across the top of a pearl
+   card (Now, the current alerts, More numbers, Three rules to keep, New in version 8), the card's own heading laid over its foot.
+   The same tile media as any other (.tm, data-tm), so Moving tiles, reduced motion, data saver and TILE_MAX all apply; decorative,
+   so aria-hidden and nothing to tab to. bandMedia draws one; setBanded redraws a card that is drawn by script (Now every 30 s, the
+   alerts) without dropping its band, so a playing loop never restarts. */
+const bandMedia = k => tileMedia(k).replace('class="tm"', 'class="tm band"');
+function setBanded(el, k, html){
+  const b = el.querySelector(':scope > .tm.band');
+  el.innerHTML = html;
+  if (!html) return;
+  if (b) el.prepend(b); else { el.insertAdjacentHTML('afterbegin', bandMedia(k)); tileClips(); }
+}
 /* At most this many loops play at once, the tiles most fully on screen first; the rest wait on their stills.
    The phone figure is a guess, to spare battery and older phones, until it is tried on a real phone. */
 const TILE_MAX = matchMedia('(max-width: 760px)').matches ? 6 : 12;
@@ -2238,6 +2321,8 @@ function numTile(i){
   const [title, rest] = n.lbl.split(/,\s*/), sub = rest ? rest.charAt(0).toUpperCase() + rest.slice(1) : (n.note.match(/^[^.]{1,32}\./) || [''])[0].replace(/\.$/, '');
   return `${i < 2 ? tileMedia(['codeblue', 'codestroke'][i]) : ''}<span class="lbl">${esc(title)}</span><div class="row"><span class="val" id="kn${i}">${ext ? '<small class="x">ext</small>' : ''}${esc(v)}</span>${n.copy ? `<button type="button" data-kcopy="${i}" data-quiet aria-label="Copy ${esc(n.lbl)}">${svg('copy')}</button>` : ''}</div>${n.href ? `<a class="tl nt-l" href="${n.href}" aria-label="${esc(n.link)}: ${esc(sub)}">${esc(sub)}${svg('chev')}</a>` : ''}`;
 }
+/* A number that is a place in words (Counter 10, MHKL level 2) is set in the body face: mono is for figures (25 Nov 2026) */
+const numWords = v => /[A-Za-z]{5,}/.test(v);
 const DC_SHORT = ['Reassessed, results reviewed', 'Safety-net advice', 'Allergy asked', 'Last vital signs', 'Walks independently', 'Advice and follow-up'];
 function statTiles(){
   const cats = CATS.filter(c => c.ids.length && !['flow', 'prot'].includes(c.k));
@@ -2273,7 +2358,7 @@ function renderHome(){
   renderQuick();
   renderMine();
   statTiles();
-  $('#keynums').innerHTML = [3, 4, 5].map(i => { const n = NUMS[i]; return `<div class="qnum"><div class="rt"><span>${esc(n.lbl)}</span><b id="kn${i}">${esc(n.val)}</b></div>${n.copy ? `<button type="button" class="sm" data-kcopy="${i}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</div>`; }).join('');
+  $('#keynums').innerHTML = [3, 4, 5].map(i => { const n = NUMS[i]; return `<div class="qnum"><div class="rt"><span>${esc(n.lbl)}</span><b id="kn${i}"${numWords(n.val) ? ' class="w"' : ''}>${esc(n.val)}</b></div>${n.copy ? `<button type="button" class="sm" data-kcopy="${i}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}</div>`; }).join('');
   renderTip();
   $('#rulecards').innerHTML = ruleRows();
   $('#newcard').innerHTML = `<ul>${V8.slice(0, 6).map(([t, , l], i) => `<li><a href="${l[0][0]}">${esc(t)}</a>${i < CHG_NEW ? '<span class="chg-d">New to you</span>' : ''}</li>`).join('')}</ul><a class="pill" href="#new">Everything new, and what came from the drives${svg('chev')}</a>`;
@@ -2403,6 +2488,7 @@ function endsHTML(p, n){
 function draw(focus){
   sayStop(); /* a new step stops the reading of the last */
   keepLast(state.id, state.cur);
+  document.documentElement.classList.remove('ab-on'); /* a step without a checklist never keeps the answer bar's room */
   const p = P[state.id], n = p.nodes[state.cur], c = catOf(state.id), saved = isSaved(state.id), steps = state.trail.length;
   const isRule = p.grp === 'rules', sh = '#' + state.id + '--' + state.cur;
   const nowText = n.end ? kindLabel(p, n.end) + ': ' + n.title : nodeText(n);
@@ -2413,7 +2499,8 @@ function draw(focus){
   const rtabs = refTabs(p); /* the reference tabs, below the step or beside it */
   /* Every entry opens on a jewel banner: a guideline's own picture (hero), or its topic group's glass loop (a topic banner) */
   const hk = p.hero || (c && c.k && TILE_KEYS.has(c.k) ? c.k : '');
-  const head = `<div class="run-cat"><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip${p.page ? ' mono' : ''}">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
+  /* On a phone the library link is the banner's first chip (25 Nov 2026): the top bar's back arrow already leads back */
+  const head = `<div class="run-cat"><a class="chip lib" href="${isRule ? '#rules' : '#pathways'}" aria-label="${isRule ? 'Rules and protocols' : 'All pathways'}">${svg(isRule ? 'rule' : 'path')}<span>${isRule ? 'Rules' : 'Pathways'}</span></a><span class="chip j ${c.j}">${svg(c.ic)}${esc(c.s)}</span><span class="chip${p.page ? ' mono' : ''}">${esc(metaOf(p))}</span>${badgeOf(p)}</div>
       <h1 id="run-title" tabindex="-1"${p.title.length > 26 ? ' class="long"' : ''}>${esc(p.title)}</h1>`;
   withTiles($('#run'), `<div class="run-h">
       <div class="run-top"><a class="back" href="${isRule ? '#rules' : '#pathways'}">${svg(isRule ? 'rule' : 'path')}<span class="bl-l">${isRule ? 'Rules and protocols' : 'All pathways'}</span><span class="bl-s">${isRule ? 'Rules' : 'Pathways'}</span></a>
@@ -2437,7 +2524,7 @@ function draw(focus){
         <p class="calc-note">Tap an earlier answer to change it. Keyboard: 1 to 9 to answer, Backspace to step back.</p>
       </aside>
       <div class="run-main">
-        <div class="strip">${steps ? `<div class="trailw"><span class="tlbl" aria-hidden="true">Route</span><div class="trailx" role="group" aria-label="Your answers so far">${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"><span><span class="vh">${esc(nodeText(p.nodes[t.node]))}: you answered </span>${esc(t.label)}<span class="vh">. Tap to change it.</span></span></button>`).join('')}</div></div>` : ''}${endsHTML(p, n)}</div>
+        <div class="strip">${steps ? `<div class="trailw"><span class="tlbl" aria-hidden="true">Route</span><div class="trailx" role="group" aria-label="Your answers so far">${state.trail.map((t, i) => `${i ? '<i aria-hidden="true"></i>' : ''}<button type="button" data-back="${i}" title="${esc(nodeText(p.nodes[t.node]))}"${i === steps - 1 ? ' class="last"' : ''}><span>${i === steps - 1 ? `<span class="tq" aria-hidden="true">${esc(trailQ(p.nodes[t.node]))}:</span> ` : ''}<span class="vh">${esc(nodeText(p.nodes[t.node]))}: you answered </span>${esc(t.label)}<span class="vh">. Tap to change it.</span></span></button>`).join('')}</div></div>` : ''}${endsHTML(p, n)}</div>
         <div class="progress" aria-hidden="true"${n.end ? ` style="--oc:var(--b-${n.end})"` : ''}><span>${n.end ? `Outcome after ${steps} step${steps === 1 ? '' : 's'}` : 'Step ' + (steps + 1)}</span>${bar}</div>
         ${nowChips(state.id, state.cur)}<div id="cur" tabindex="-1" class="cur-in">${card(n, p)}</div>
         ${remBtns(state.id, state.cur)}
@@ -2498,6 +2585,8 @@ function card(n, p){
 /* The suggested answer in thumb reach (13 Nov 2026): when the answer keys sit under the tab bar, a bar just above it carries the
    key your ticks point to, and a tap answers with it. It hides whenever that key is itself on screen. */
 let ansIO = null;
+/* The newest answer on a phone's route trail names its question, cut short with an ellipsis (25 Nov 2026) */
+const trailQ = n => nodeText(n).replace(/\s*\?$/, ''); /* cut short by the stylesheet, never reworded */
 function wireChecks(n){
   const boxes = $$('#cur .checks input'), btns = $$('#cur button.opt'), bar = $('#ansbar'), seen = new Set();
   let k = null;
@@ -2511,7 +2600,9 @@ function wireChecks(n){
       bar.setAttribute('aria-label', 'Answer: ' + l + ', suggested from what you ticked');
     }
     bar.hidden = !on;
+    document.documentElement.classList.toggle('ab-on', on); /* the page leaves room under the checklist for the bar (25 Nov 2026) */
   };
+  document.documentElement.classList.remove('ab-on');
   const upd = () => {
     const c = boxes.filter(b => b.checked).length;
     k = null;
@@ -2535,7 +2626,7 @@ function edgeFade(el){
   el.classList.toggle('ef-l', max > 4 && el.scrollLeft > 4);
   el.classList.toggle('ef-r', max > 4 && el.scrollLeft < max - 4);
 }
-const FADE_ROWS = '.trailx, #libf, #rxf, #lkf, #dgf, #extf, .pins-x';
+const FADE_ROWS = '.trailx, #libf, #rxf, #lkf, #dgf, #abf, #extf, .pins-x';
 const fadeRows = () => $$(FADE_ROWS).forEach(el => { if (el.offsetParent !== null) edgeFade(el); });
 document.addEventListener('scroll', e => { const t = e.target; if (t && t.matches && t.matches(FADE_ROWS)) edgeFade(t); }, {capture:true, passive:true});
 addEventListener('resize', () => requestAnimationFrame(fadeRows));
@@ -2814,17 +2905,21 @@ let leafLang = 'en';
 const advRead = (id, lg) => { const k = READ_ADV[id]; if (!k) return ''; const m = k.replace(/-en$/, '-ms'); return lg === 'ms' ? (READ[m] ? m : '') : k; };
 let advSel = 'en'; /* the advice tab's own language, in memory: English unless the MO switched */
 const advLang = id => advMs(id) ? advSel : 'en';
+/* One listen control (25 Nov 2026): where a recorded take exists, the phone's own voice is a small link inside its bar, and the tab's
+   "Read this tab aloud" above it gives way (the stylesheet hides it while such a tab is open) */
+const lsnTTS = h => TTS && h ? h.replace(/<\/div>$/, `<button type="button" class="lsn-tts" data-say="tab" data-label="Use this phone's voice" aria-pressed="false">${svg('volume')}<span>Use this phone's voice</span></button></div>`) : h;
 function advHTML(p){
   const id = state.id, ms = advMs(id), lg = advLang(id), rk = advRead(id, lg), lines = lg === 'ms' ? ms : p.advice;
   return (ms ? `<div class="seg leaf-lang" role="group" aria-label="Language of the advice">${[['en', 'English'], ['ms', 'Bahasa Melayu']].map(([k, t]) => `<button type="button" data-advlang="${k}" aria-pressed="${lg === k}" lang="${k}">${t}</button>`).join('')}</div>` : '')
-    + (rk ? listenBar(rk, lg === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen to this advice') : '') + filmCard(id, lg)
-    + `<ol id="advlist" lang="${lg}">${lines.map(a => `<li>${esc(a)}</li>`).join('')}</ol>` + (lg === 'ms' ? `<p class="src">${esc(ADV_MS_SRC)}</p>` : '')
+    + (lg === 'ms' ? `<p class="src adv-ms">${esc(ADV_MS_SRC)}</p>` : '') /* the note that it is a translation sits under the switch (25 Nov 2026) */
+    + (rk ? lsnTTS(listenBar(rk, lg === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen to this advice')) : '') + filmCard(id, lg)
+    + `<ol id="advlist" lang="${lg}">${lines.map(a => `<li>${esc(a)}</li>`).join('')}</ol>`
     + `<div class="pbar"><button type="button" class="sm" data-copyadvice>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(id)}</div>`;
 }
 function leafletHTML(p){
   const L = p.leaflet, d = L[leafLang];
   return `<div class="leaf" id="leaf" lang="${leafLang}"><div class="seg leaf-lang" role="group" aria-label="Language of the advice">${['en', 'ms'].map(k => `<button type="button" data-leaf="${k}" aria-pressed="${leafLang === k}" lang="${k}">${esc(L[k].lang)}</button>`).join('')}</div>
-    ${READ_LEAF[state.id] ? listenBar(READ_LEAF[state.id] + '-' + leafLang, leafLang === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen in English', d.groups.map(g => g.h.length > 28 ? g.h.slice(0, 26).replace(/\s+\S*$/, '') + '…' : g.h)) : ''}
+    ${READ_LEAF[state.id] ? lsnTTS(listenBar(READ_LEAF[state.id] + '-' + leafLang, leafLang === 'ms' ? 'Dengar dalam Bahasa Melayu' : 'Listen in English', d.groups.map(g => g.h.length > 28 ? g.h.slice(0, 26).replace(/\s+\S*$/, '') + '…' : g.h))) : ''}
     ${filmCard(state.id, leafLang)}
     <h4 class="leaf-t">${esc(d.title)}</h4>${d.groups.map(g => `<section class="leaf-g${g.warn ? ' warn' : ''}"><h5>${g.warn ? svg('stop') : ''}${esc(g.h)}</h5>${g.p ? `<p>${esc(g.p)}</p>` : ''}<ul>${g.items.map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>`).join('')}
     <p class="src">${esc(L.src)}</p></div><div class="pbar"><button type="button" class="sm" data-copyleaf>${svg('copy')}<span class="bl">Copy advice</span></button>${ptqBtn(state.id)}</div>`;
@@ -3191,7 +3286,7 @@ const CALCS = {
         const z = p > 100 ? ['Above 100% of personal best', 'warn', 'The plan has no zone above 100%: check the personal best'] : p >= 80 ? ['WELL', 'good', '80% to 100% of personal best'] : p > 79 ? ['Between 79% and 80%', 'warn', 'The plan has no zone between 79% and 80%'] : p >= 50 ? ['GETTING WORSE', 'warn', '50% to 79% of personal best'] : ['ALERT', 'bad', 'Less than 50% of personal best. ABG: it should be considered for patients with PEFR <50% (p41)'];
         out.push(['Current PEFR', `${r(v.now)} l/min, ${pc}`, z[1], `${z[0]}: ${z[2]}`, {min:0, max:120, v:Math.min(p, 120), bands:[[0, 50, 'bad'], [50, 80, 'warn'], [80, 100, 'good'], [100, 120, 'warn']]}]);
       }
-      return {outs:out, gap:'The plan\'s bands leave readings between 79% and 80% of personal best, and above 100%, without a zone. The predicted value comes only from the Appendix 4 nomogram, a picture with no formula. PEF or FEV1 may not be applicable in an acute exacerbation (p37).',
+      return {outs:out, gap:'The plan\'s bands leave readings between 79% and 80% of personal best, and above 100%, without a zone. The predicted value comes from the Appendix 4 nomogram, a scanned chart for Chinese adults in Singapore; the regression formulae printed on it (height in inches, age in years) are not built in. PEF or FEV1 may not be applicable in an acute exacerbation (p37).',
         links:[['#asthma-cpg--home', 'Discharge with an action plan']]};
     }},
   analgesia:{t:'Analgesia by weight', g:'doses', src:'Ebook p45–50', path:'#pain', kw:'paracetamol panadol ketamine pain dose mg/kg',
@@ -4202,7 +4297,9 @@ function fieldHTML(id, f){
   if (Array.isArray(f)){
     const [k, l, unit, ch] = f, x = cGet(id, k);
     if (ch) return `<div class="field"><label for="cf-${k}">${l}</label><select id="cf-${k}" data-k="${k}">${ch.map(([val, t]) => `<option value="${val}"${x === val ? ' selected' : ''}>${t}</option>`).join('')}</select></div>`;
-    return `<div class="field${k === 'wt' ? ' wt' : ''}"><label for="cf-${k}">${l}${unit ? ' (' + unit + ')' : ''}</label><input id="cf-${k}" data-k="${k}" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" value="${esc(x == null ? '' : String(x))}">${k === 'wt' ? '<small>Shared with the other dose calculators. Not saved.</small>' : ''}</div>`;
+    const inp = `<input id="cf-${k}" data-k="${k}" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" value="${esc(x == null ? '' : String(x))}">`;
+    const suf = unit && unit.length <= 6; /* a short unit sits inside the field; a long one ("per minute") stays in the label */
+    return `<div class="field${k === 'wt' ? ' wt' : ''}"><label for="cf-${k}">${l}${unit ? (suf ? `<span class="vh"> (${unit})</span>` : ' (' + unit + ')') : ''}</label>${suf ? `<span class="fin" style="--u:${unit.length}">${inp}<i class="fu" aria-hidden="true">${unit}</i></span>` : inp}${k === 'wt' ? '<small>Shared with the other dose calculators. Not saved.</small>' : ''}</div>`;
   }
   if (f.type === 'h') return `<h3 class="cf-full cf-h">${f.n ? `<b>${esc(f.n)}</b>` : ''}${esc(f.label)}</h3>`;
   const x = cGet(id, f.k);
@@ -4221,11 +4318,32 @@ function fieldHTML(id, f){
 function renderCalc(){
   const c = CALCS[calcTab], g = CALC_G[c.g], box = $('#calcbox'), {list} = calcVals(calcTab);
   withTiles(box, `<div class="tile ${g.j} tool-h cx-h">${tileMedia(g.k)}<div class="row"><span class="ic">${svg(g.ic)}</span><h2>${esc(c.t)}</h2></div><p>${esc(c.sub)}</p><div class="tags"><span class="tag">${esc(c.src)}</span><span class="tag">${esc(g.t)}</span></div></div>
-    <div class="tool-b"><div class="fields">${list.map(f => fieldHTML(calcTab, f)).join('')}</div>${c.sticky ? '<button type="button" class="cx-sticky" id="cxsticky" hidden></button>' : ''}<div class="outs" id="couts" aria-live="polite"></div>
+    <div class="tool-b"><div class="fields">${list.map(f => fieldHTML(calcTab, f)).join('')}</div>${c.sticky ? '<button type="button" class="cx-sticky" id="cxsticky" hidden></button>' : '<button type="button" class="cxbar" id="cxbar" hidden></button>'}<div class="outs" id="couts" aria-live="polite"></div>
     <p class="calc-note">${esc(c.note)}</p>
     <div class="foot cx-foot">${c.path ? `<a class="pill" href="${c.path}">Open the pathway${svg('chev')}</a>` : ''}<span class="sp"></span>${pinBtnHTML('#calc-' + calcTab, 'sm', true)}<button type="button" class="sm" id="cxcopy">${svg('copy')}<span class="bl">Copy</span></button><button type="button" class="sm" id="cxclear">${svg('restart')}<span class="bl">Clear</span></button></div></div>`);
+  if (cxIO){ cxIO.disconnect(); cxIO = null; }
+  cxSeen = true; /* until the observer says otherwise; without one the bar never shows */
+  if ($('#cxbar') && 'IntersectionObserver' in window){ cxIO = new IntersectionObserver(es => { es.forEach(en => { cxSeen = en.isIntersecting; }); cxBarDraw(); }, {rootMargin:`-60px 0px -${innerWidth <= 760 ? 112 : 24}px 0px`}); cxIO.observe($('#couts')); }
   calcOut();
   markCxCurrent();
+}
+/* The 25 Nov 2026 round: a running result in thumb reach. Once a field is filled on this calculator and its result panel is off
+   screen, a slim bar above the tab bar (at the foot of the screen elsewhere) carries the figure in mono and the verdict on its own
+   flat outcome colour; a tap scrolls to the panel, and it hides whenever the panel is on screen, as the answer bar does. The colour
+   comes only from the verdict's own class: with no verdict the bar stays obsidian, so a score that never gives a green verdict
+   (TIMI, HEART, qSOFA, children's vital signs) never turns green here either. The one-screen dengue assessment keeps its own bar. */
+let cxIO = null, cxSeen = true, cxUsed = null;
+const CXB = {ok:'discharge', stop:'admit', refer:'refer', next:'neutral'};
+function cxBarDraw(){
+  const bar = $('#cxbar'); if (!bar) return;
+  const r = calcLast, vd = r && r.verdict, o = r && r.outs && r.outs.find(x => /\d/.test(x[1]));
+  const on = cxUsed === calcTab && !cxSeen && !!(vd || o);
+  if (on){
+    bar.className = 'cxbar ' + (vd ? 'k-' + (CXB[vd.cls] || 'neutral') : 'k-none');
+    bar.innerHTML = `${o ? `<b>${esc(o[1])}</b>` : ''}<span>${esc(vd ? vd.h : o[0])}</span><small>Result${svg('chev')}</small>`;
+    bar.setAttribute('aria-label', 'Result: ' + (o ? o[0] + ' ' + o[1] + '. ' : '') + (vd ? vd.h : '') + '. Tap to see it');
+  }
+  bar.hidden = !on;
 }
 let calcLast = null;
 let cxVd = '';
@@ -4241,15 +4359,23 @@ function calcOut(){
   const sk = $('#cxsticky');
   if (sk){ const vd = r && r.verdict; sk.hidden = !vd; if (vd){ sk.className = 'cx-sticky ' + vd.cls; sk.innerHTML = `<span>${esc(vd.h)}</span><small>See the result${svg('chev')}</small>`; } }
   const box = $('#couts');
-  if (!r){ box.innerHTML = `<div class="out"><span>${list.some(f => !Array.isArray(f)) ? 'Choose or tick to see the result' : 'Fill in the boxes to see the result'}</span></div>`; return; }
+  if (!r){ cxBarDraw(); box.innerHTML = `<div class="out"><span>${list.some(f => !Array.isArray(f)) ? 'Choose or tick to see the result' : 'Fill in the boxes to see the result'}</span></div>`; return; }
   const vd = r.verdict;
   /* A figure is set in mono; an answer in words (Indicated, Not covered, a BARS level) is set in the display face */
   box.innerHTML = r.outs.map(([l, val, cls, em, sc]) => `<div class="out ${cls}"><span>${esc(l)}</span><b${/\d/.test(val) ? '' : ` class="w${val.length > 22 ? ' long' : ''}"`}>${esc(val)}</b>${em ? `<em>${esc(em)}</em>` : ''}${scaleOf(sc)}</div>`).join('')
     + (vd ? `<div class="verdict ${vd.cls}"><span>${esc(vd.h)}</span>${vd.p ? `<p>${esc(vd.p)}</p>` : ''}${vd.href ? `<a class="pill" href="${vd.href}">${esc(vd.link || 'Open the pathway step')}${svg('chev')}</a>` : ''}</div>` : '')
     + (r.lists ? r.lists.map(L => `<div class="cx-list"><h4>${esc(L.h)}</h4><dl>${L.rows.map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('')}</dl></div>`).join('') : '')
-    + (r.gap ? `<p class="cx-gap">${svg('info')}<span><b>Not in the source:</b> ${esc(r.gap)}</span></p>` : '')
+    + (r.gap ? gapHTML(r.gap) : '')
     + (r.links ? `<div class="cx-links">${r.links.map(([h, t, ext]) => ext ? `<a class="pill ext" href="${h}" target="_blank" rel="noopener noreferrer">${esc(t)}${svg('ext')}</a>` : `<a class="pill" href="${h}">${esc(t)}${svg('chev')}</a>`).join('')}</div>` : '');
+  cxBarDraw();
 }
+/* The 25 Nov 2026 round: a calculator's gap line that opens on its source (an author, "Kline JA et al.", or a source with its
+   year, "AF CPG 2012, Table 12", "RCP, NEWS2, 2017") is the citation, shown under "Source:" in the muted source style. Every other
+   gap line is a real gap and keeps "Not in the source:" with the info icon. A line that opens on its citation is shown whole under
+   Source, so a caveat the source itself prints is never labelled as missing from it. test.js pins every literal gap's kind. */
+const CITE_RE = /^(?:[A-Z][a-z'-]+ [A-Z]{1,2}(?: et al\b|, [A-Z][a-z'-]+ [A-Z]{1,2}\b)|[A-Z][^.:;]{0,58}\b(?:19|20)\d\d(?=[,;)]| \()|Royal College of |Victorian Adult Burns)/;
+const gapCite = g => CITE_RE.test(String(g || ''));
+const gapHTML = g => gapCite(g) ? `<p class="cx-cite"><b>Source:</b> ${esc(g)}</p>` : `<p class="cx-gap">${svg('info')}<span><b>Not in the source:</b> ${esc(g)}</span></p>`;
 /* A scale under a result: the bands are the thresholds already given in the note above */
 const scaleOf = s => {
   if (!s) return '';
@@ -4265,15 +4391,15 @@ function calcText(){
   const ins = list.filter(f => Array.isArray(f) && v[f[0]]).map(f => `${f[1]}: ${f[3] ? (f[3].find(o => o[0] === v[f[0]]) || [, v[f[0]]])[1] : v[f[0]] + (f[2] ? ' ' + f[2] : '')}`);
   list.filter(f => !Array.isArray(f) && (f.type === 'seg' || f.type === 'pick') && v[f.k]).forEach(f => { const o = optsOf(f).find(x => x[0] === v[f.k]); if (o) ins.push(`${f.label}: ${f.type === 'pick' ? (f.copyVal ? o[0] : o[0] + ' ' + o[1]) : o[1]}`); });
   const lines = [c.t, ...ins];
-  if (r){ r.outs.forEach(([l, val, , em]) => lines.push(`${l}: ${val}${em ? ' (' + em + ')' : ''}`)); if (r.verdict) lines.push(r.verdict.h + (r.verdict.p ? ' ' + r.verdict.p : '')); if (r.lists) r.lists.forEach(L => { lines.push(L.h + ':'); L.rows.forEach(([a, b]) => lines.push('  ' + a + ': ' + b)); }); if (r.gap) lines.push('Not in the source: ' + r.gap); }
+  if (r){ r.outs.forEach(([l, val, , em]) => lines.push(`${l}: ${val}${em ? ' (' + em + ')' : ''}`)); if (r.verdict) lines.push(r.verdict.h + (r.verdict.p ? ' ' + r.verdict.p : '')); if (r.lists) r.lists.forEach(L => { lines.push(L.h + ':'); L.rows.forEach(([a, b]) => lines.push('  ' + a + ': ' + b)); }); if (r.gap) lines.push((gapCite(r.gap) ? 'Source: ' : 'Not in the source: ') + r.gap); }
   lines.push('Source: ' + c.src + ' (Green Zone MO Guide). Check against the patient and local protocols.');
   return lines.join('\n');
 }
 function fieldOf(k){ return calcVals(calcTab).list.find(f => (Array.isArray(f) ? f[0] : f.k) === k); }
 function calcRefocus(sel){ if (!sel) return; const el = $('#calcbox ' + sel); if (el) el.focus(); }
-$('#calcbox').addEventListener('input', e => { const el = e.target.closest('input[type="number"][data-k], input[type="time"][data-k], input[type="date"][data-k]'); if (!el) return; cPut(calcTab, el.dataset.k, el.value); calcOut(); });
+$('#calcbox').addEventListener('input', e => { const el = e.target.closest('input[type="number"][data-k], input[type="time"][data-k], input[type="date"][data-k]'); if (!el) return; cxUsed = calcTab; cPut(calcTab, el.dataset.k, el.value); calcOut(); });
 $('#calcbox').addEventListener('change', e => {
-  const el = e.target;
+  const el = e.target; if (el.matches('select[data-k], input[type="checkbox"]')) cxUsed = calcTab;
   if (el.matches('select[data-k]')){ cPut(calcTab, el.dataset.k, el.value); calcOut(); }
   else if (el.matches('input[type="checkbox"][data-none]')){ const k = el.dataset.none, n = itemsOf(fieldOf(k)).length; cPut(calcTab, k + '_none', el.checked); if (el.checked){ cPut(calcTab, k, Array(n).fill(false)); el.closest('ul').querySelectorAll('input[data-k]').forEach(i => { i.checked = false; }); } calcOut(); }
   else if (el.matches('input[type="checkbox"][data-k]')){ const f = fieldOf(el.dataset.k), n = itemsOf(f).length, a = (cGet(calcTab, el.dataset.k) || Array(n).fill(false)).slice(); a[+el.dataset.i] = el.checked; cPut(calcTab, el.dataset.k, a); if (f.none && el.checked){ cPut(calcTab, el.dataset.k + '_none', false); const nb = el.closest('ul').querySelector('input[data-none]'); if (nb) nb.checked = false; } calcOut(); }
@@ -4281,9 +4407,10 @@ $('#calcbox').addEventListener('change', e => {
 $('#calcbox').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   if (b.id === 'cxcopy') return copyText(calcText(), {btn:b, el:$('#couts')});
-  if (b.id === 'cxsticky') return $('#couts').scrollIntoView({block:'start', behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
-  if (b.id === 'cxclear'){ delete cState[calcTab]; calcMem.wt = ''; calcMem.age = 'u6'; renderCalc(); return calcRefocus('#cxclear'); }
+  if (b.id === 'cxsticky' || b.id === 'cxbar') return $('#couts').scrollIntoView({block:'start', behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  if (b.id === 'cxclear'){ cxUsed = null; delete cState[calcTab]; calcMem.wt = ''; calcMem.age = 'u6'; renderCalc(); return calcRefocus('#cxclear'); }
   const k = b.dataset.k; if (!k) return;
+  cxUsed = calcTab;
   const f = fieldOf(k);
   if (b.dataset.sv != null){ cPut(calcTab, k, b.dataset.sv); if (f && f.re){ renderCalc(); return calcRefocus(`[data-k="${k}"][data-sv="${b.dataset.sv}"]`); } b.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); calcOut(); }
   else if (b.dataset.r != null){ const a = (cGet(calcTab, k) || []).slice(); a[+b.dataset.r] = +b.dataset.s; cPut(calcTab, k, a); b.parentNode.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', x === b)); calcOut(); }
@@ -4330,7 +4457,7 @@ const NUM_J = {'Emergencies':'t-obsidian', 'Admission and follow-up':'t-sapphire
 function renderNums(){
   const groups = [...new Set(NUMS.map(n => n.g))];
   $('#nums').innerHTML = groups.map(g => `<h2 class="num-group">${esc(g)}</h2><div class="nums">` + NUMS.map((n, i) => n.g !== g ? '' :
-    `<article class="tile num-card ${NUM_JI[i] || NUM_J[g] || 't-obsidian'}"><span class="lbl">${esc(n.lbl)}</span><span class="val" id="nv${i}">${esc(n.val)}</span><p>${esc(n.note)}</p>
+    `<article class="tile num-card ${NUM_JI[i] || NUM_J[g] || 't-obsidian'}"><span class="lbl">${esc(n.lbl)}</span><span class="val${numWords(n.val) ? ' w' : ''}" id="nv${i}">${esc(n.val)}</span><p>${esc(n.note)}</p>
       <div class="row">${n.copy ? `<button type="button" data-copy="${i}">${svg('copy')}<span class="bl">Copy</span></button>` : ''}${n.href ? `<a class="pill" href="${n.href}">${esc(n.link)}${svg('chev')}</a>` : ''}<span class="src">${esc(n.src)}</span></div></article>`).join('') + '</div>').join('');
 }
 
@@ -4452,7 +4579,7 @@ function renderDg(){
 }
 function renderDgStatic(){
   if (typeof EDDG === 'undefined') return;
-  withTiles($('#dghero'), `${tileMedia(DG_TILE())}<span class="lbl">ETD HKL · 3rd edition · Jan 2026</span><h2>${EDDG.items.length} injectable drugs</h2><p>Each opens the guide's own pages: dose, dilution, rate, nursing notes and Y-site compatibility.</p>`);
+  withTiles($('#dghero'), `${tileMedia(DG_TILE())}<span class="lbl">ETD HKL · 3rd edition · Jan 2026</span><h2>${EDDG.items.length} injectable drugs</h2>`);
   /* Special case (Krishna, 12 Nov 2026): the general ICU's own guide, described in the guide's own words; none of its entries copied */
   if ($('#dgicu') && typeof MEMOS !== 'undefined' && MEMOS.c16) $('#dgicu').innerHTML = `<h2 id="h-dgicu"><span class="dg-icu-k">Special case</span>A patient in the general ICU</h2>
     <ul class="dg-icu-l"><li>The general ICU has its own dilution guide: the Adult GICU Dilution Guide (HKL), 5th edition, April 2026, next review April 2031, prepared by pharmacists with the agreement of the ICU's consultant intensivists.</li>
@@ -4520,13 +4647,13 @@ function renderAb(){
 function renderAbStatic(){
   if (typeof ABX === 'undefined' || !$('#abhero')) return;
   const D = ABX.dose;
-  withTiles($('#abhero'), `${tileMedia(AB_TILE())}<span class="lbl">ETD HKL · 2nd edition · Feb 2024</span><h2>${D.renal.rows.length + D.none.length + 2} antimicrobials</h2><p>Doses by kidney function, and how to reconstitute, dilute and give ${ABX.dil.rows.length} injectables.</p>`);
+  withTiles($('#abhero'), `${tileMedia(AB_TILE())}<span class="lbl">ETD HKL · 2nd edition · Feb 2024</span><h2>${D.renal.rows.length + D.none.length + 2} antimicrobials</h2>`);
   $('#abcg').innerHTML = `<summary>${svg('calc')}<span>How the guide works out CrCl</span></summary><div class="ab-cgb"><p class="ab-k">Cockcroft-Gault, as printed</p><ul>${D.cg.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
     <p class="ab-k">Which weight</p><ul>${D.wnotes.map(l => `<li>${esc(l)}</li>`).join('')}</ul><ul>${D.weights.map(([d, f]) => `<li><b>${esc(d)}</b>: ${abLines(f)}</li>`).join('')}</ul>
     <p class="ab-note">${esc(D.obese)} The guide does not say which to use, so this page leaves the weight to you and marks only the band for the CrCl you type.</p>
     <p><a class="pill" href="#calc-crcl">${svg('calc')}CrCl calculator (CKD CPG)</a></p></div>`;
   $('#absrc').innerHTML = (typeof MEMOS !== 'undefined' && MEMOS['abx-dose'] ? memoHTML('abx-dose') + memoHTML('abx-dil') : '')
-    + `<p class="lk-note">Sources: ${esc(D.src)}; ${esc(ABX.dil.src)}. Prepared by the department's clinical (EM) pharmacists and approved for use by the head of department on 8 Feb 2024: department documents (standing rule 6), every cell as printed. Whether the 2nd edition is still current is under Still to confirm. Nothing you type here is stored.</p>`;
+    + `<p class="lk-note">Sources: ${esc(D.src)}; ${esc(ABX.dil.src)}. Prepared by the department's clinical (EM) pharmacists and approved for use by the head of department on 8 Feb 2024: department documents (standing rule 6), every cell as printed. Whether the 2nd edition is still current is under Still to confirm. These guides predate the National Antimicrobial Guideline's online updates of Dec 2025 and Jan 2026 (<a href="https://sites.google.com/moh.gov.my/nag/information/whats-new" target="_blank" rel="noopener noreferrer">its What's new page</a>). Nothing you type here is stored.</p>`;
 }
 function renderToolsAb(){
   if (typeof ABX === 'undefined' || !$('#tabx')) return;
@@ -4595,31 +4722,66 @@ function setStep(i, anim){ step = Math.max(0, Math.min(JOURNEY.length - 1, i)); 
 function setListen(on){ const b = $('#jlisten'); if (!b) return; b.innerHTML = svg(on ? 'pause' : 'volume') + `<span class="bl">${on ? 'Stop' : 'Listen'}</span>`; b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
 function setPlayAll(on){ playAll = on; $('#playall').innerHTML = svg(on ? 'pause' : 'play') + (on ? 'Stop playing' : 'Play all stops'); }
 /* Show the narration as captions, one sentence at a time, timed by sentence length */
-/* The journey's narration in English or Bahasa Melayu (24 Nov 2026): JOURNEY_MS in data31.js, audio/stop<n>-ms.mp3 (VoiceStudio, Malay Kore) */
+/* The journey's narration in English or Bahasa Melayu (24 Nov 2026): JOURNEY_MS in data31.js, audio/stops-ms.mp3 since 26 Nov 2026 (VoiceStudio, Malay Kore) */
 let jLang = 'en';
 const jMs = () => typeof JOURNEY_MS !== 'undefined' && JOURNEY_MS.length === JOURNEY.length;
+/* One file per language since 26 Nov 2026 (Krishna's "Flow loops, free up files"): the five stops joined, with 0.3 s of silence
+   between them, by src/journey-audio.js, which printed this table: each stop's start and length in seconds, from the decoded
+   samples. The first Listen fetches that language's whole file (about 345 KB) and plays it from a blob, since the claude.ai
+   artifact may not answer byte ranges and a blob always seeks; the blob stays in memory for the visit, and the web app's worker
+   keeps the file once fetched. A stop plays from its start and stops at its end (timeupdate, and a timer as a guard), and its
+   captions are timed from its own start. Nothing downloads before the tap. */
+const JSTOPS_AUDIO = {"en":{"src":"audio/stops-en.mp3","s":[{"at":0,"dur":8.153},{"at":8.453,"dur":5},{"at":13.753,"dur":5.76},{"at":19.813,"dur":8.597},{"at":28.71,"dur":14.148}]},"ms":{"src":"audio/stops-ms.mp3","s":[{"at":0,"dur":8.879},{"at":9.179,"dur":3.617},{"at":13.096,"dur":5.897},{"at":19.293,"dur":9.571},{"at":29.164,"dur":14.627}]}};
+const JBLOB = {};
+/* If a host refuses blob: media, the joined file plays from its own address instead (seeking then needs the host's byte ranges) */
+const JDIRECT = {};
+function jAudio(L){
+  if (JDIRECT[L]) return Promise.resolve(JSTOPS_AUDIO[L].src);
+  if (!JBLOB[L]) JBLOB[L] = fetch(JSTOPS_AUDIO[L].src).then(r => { if (!r.ok) throw new Error(r.status); return r.blob(); }).then(b => URL.createObjectURL(b)).catch(e => { delete JBLOB[L]; throw e; });
+  return JBLOB[L];
+}
+let jTok = 0, jGuard = 0;
 function listen(i){
-  const s = JOURNEY[i], ms = jLang === 'ms' && jMs(), say = ms ? JOURNEY_MS[i] : s.say, parts = say.match(/[^.?!]+[.?!]+/g) || [say], total = say.length;
-  voice.pause(); voice.src = ms ? s.audio.replace(/\.mp3$/, '-ms.mp3') : s.audio; voice.dataset.i = i; voice.currentTime = 0;
-  const cc = $('#jcap'); if (cc) cc.lang = ms ? 'ms' : 'en';
-  const cap = $('#jcap');
-  voice.ontimeupdate = () => {
-    if (!voice.duration) return;
-    const at = voice.currentTime / voice.duration * total; let acc = 0, k = 0;
-    for (; k < parts.length - 1; k++){ acc += parts[k].length; if (at < acc) break; }
-    const c = $('#jcap'); if (c) c.textContent = parts[k].trim();
-  };
-  voice.onended = () => {
+  const ms = jLang === 'ms' && jMs(), L = ms ? 'ms' : 'en', seg = JSTOPS_AUDIO[L].s[i], s = JOURNEY[i], say = ms ? JOURNEY_MS[i] : s.say, parts = say.match(/[^.?!]+[.?!]+/g) || [say], total = say.length;
+  const tok = ++jTok; clearTimeout(jGuard);
+  voice.pause(); voice.ontimeupdate = null; voice.onended = null; voice.dataset.i = i; voice.dataset.lang = L;
+  const cap = $('#jcap'); if (cap) cap.lang = ms ? 'ms' : 'en';
+  setListen(true);
+  const elapsed = () => voice.currentTime - seg.at;
+  const done = () => {
+    if (tok !== jTok) return;
+    jTok++; clearTimeout(jGuard); voice.pause(); voice.ontimeupdate = null; voice.onended = null;
     const c = $('#jcap'); if (c) c.hidden = true; setListen(false);
     if (playAll && i < JOURNEY.length - 1){ setStep(i + 1, true); setTimeout(() => { if (playAll) listen(i + 1); }, 350); }
     else setPlayAll(false);
   };
-  voice.play().then(() => {
-    if (cap){ cap.hidden = false; cap.textContent = parts[0].trim(); }
-    setListen(true);
-  }).catch(() => { toast('The narration could not play here'); setPlayAll(false); });
+  const guard = () => { clearTimeout(jGuard); if (tok !== jTok) return; const left = seg.dur - elapsed(); if (left <= .02) done(); else jGuard = setTimeout(guard, Math.max(30, left * 1000 / (voice.playbackRate || 1))); };
+  jAudio(L).then(url => {
+    if (tok !== jTok) return;
+    if (voice.dataset.blob !== url){ voice.preload = 'auto'; voice.src = url; voice.dataset.blob = url; }
+    const direct = () => { if (tok !== jTok || JDIRECT[L] || !/^blob:/.test(url)) return false; JDIRECT[L] = true; voice.onerror = null; listen(i); return true; };
+    voice.onerror = () => { if (!direct() && tok === jTok){ jTok++; setListen(false); toast('The narration could not play here'); setPlayAll(false); } };
+    const go = () => {
+      if (tok !== jTok) return;
+      voice.currentTime = seg.at;
+      voice.ontimeupdate = () => {
+        if (tok !== jTok) return;
+        const t = elapsed(); if (t >= seg.dur - .02){ done(); return; }
+        const at = Math.max(0, t) / seg.dur * total; let acc = 0, k = 0;
+        for (; k < parts.length - 1; k++){ acc += parts[k].length; if (at < acc) break; }
+        const c = $('#jcap'); if (c) c.textContent = parts[k].trim();
+      };
+      voice.onended = done;
+      voice.play().then(() => {
+        if (tok !== jTok){ voice.pause(); return; }
+        const c = $('#jcap'); if (c){ c.hidden = false; c.textContent = parts[0].trim(); }
+        guard();
+      }).catch(e => { if (tok !== jTok) return; if (e && e.name !== 'NotAllowedError' && direct()) return; jTok++; setListen(false); toast('The narration could not play here'); setPlayAll(false); });
+    };
+    if (voice.readyState >= 1) go(); else voice.addEventListener('loadedmetadata', go, {once:true});
+  }).catch(() => { if (tok !== jTok) return; jTok++; setListen(false); toast('The narration could not load. Check the connection and try again.'); setPlayAll(false); });
 }
-function stopVoice(){ voice.pause(); const cap = $('#jcap'); if (cap) cap.hidden = true; setListen(false); }
+function stopVoice(){ jTok++; clearTimeout(jGuard); voice.pause(); const cap = $('#jcap'); if (cap) cap.hidden = true; setListen(false); }
 function stopJourney(){ if (playAll) setPlayAll(false); stopVoice(); const v = $('#jclip'); if (v) v.pause(); }
 
 /* ================= Tour: language, chapters, transcript, speed, resume ================= */
@@ -4858,6 +5020,18 @@ function themeChanged(){
   if (!$('#lb').hidden && lbI) $('#lbimg').src = sheetSrc(lbI, false);
   tourTheme();
 }
+/* The compact tab bar (25 Nov 2026, Settings, off by default): on a phone, scrolling down by more than a little folds the tab bar to
+   its icons; scrolling up, or reaching the top or the foot of the page, brings the labels back. Never with reduced motion. */
+let tabcY = 0;
+function tabcSet(on){ document.documentElement.classList.toggle('tb-min', !!on && prefs.tabc === 'on' && !REDUCED && innerWidth <= 760); }
+addEventListener('scroll', () => {
+  const y = scrollY, d = y - tabcY;
+  if (prefs.tabc !== 'on' || REDUCED || innerWidth > 760){ tabcY = y; return; }
+  if (y < 60 || innerHeight + y >= document.documentElement.scrollHeight - 4) tabcSet(false);
+  else if (d > 12) tabcSet(true);
+  else if (d < -12) tabcSet(false);
+  if (Math.abs(d) > 12 || y < 60) tabcY = y;
+}, {passive:true});
 const prefs = {
   theme: store.get('gz-theme', 'auto'),
   size: store.get('gz-size', 'std'),
@@ -4869,7 +5043,9 @@ const prefs = {
   /* Smart search: downloads the first time it is needed, unless switched off */
   ai: store.get('gz-ai', 'on'),
   /* Voice search on this phone (English, web app): off until switched on, since it downloads about 35 MB */
-  asr: store.get('gz-asr', 'off')
+  asr: store.get('gz-asr', 'off'),
+  /* The tab bar shrinks to its icons while scrolling down on a phone (25 Nov 2026): off until Krishna has tried it */
+  tabc: store.get('gz-tabc', 'off')
 };
 let setFrom = null;
 function applyPrefs(){
@@ -4883,7 +5059,7 @@ function syncSettings(){
   $('#st-buzzrow').hidden = !CAN_BUZZ;
   $('#st-asrrow').hidden = !ASR_OK;
   aiNote();
-  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips], ['#st-tiles', prefs.tiles], ['#st-buzz', prefs.buzz], ['#st-ai', prefs.ai], ['#st-asr', prefs.asr]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
+  [['#st-theme', prefs.theme], ['#st-size', prefs.size], ['#st-clips', prefs.clips], ['#st-tiles', prefs.tiles], ['#st-buzz', prefs.buzz], ['#st-ai', prefs.ai], ['#st-asr', prefs.asr], ['#st-tabc', prefs.tabc]].forEach(([sel, v]) => $$(sel + ' button').forEach(b => b.setAttribute('aria-pressed', b.dataset.val === v)));
   const s = savedIds().length, r = recentIds().length, best = store.get(QKEY, null);
   $('#st-count').textContent = s || r || best !== null ? `${s} saved, ${r} recent${best !== null ? ', quiz best ' + best + ' of ' + QUIZ.length : ''}. Kept in this browser only.` : 'Nothing kept yet. Saved and recent pathways stay in this browser only.';
 }
@@ -5480,7 +5656,7 @@ function route(){
 const NAV_LOAD = Math.random().toString(36).slice(2, 8), NAV_MAX = 30, NAV_LIST = 8;
 let NAV = [], navSeq = 0, navHere = null, navWant = null, navPopSt = null, navPal = null, navFrom = null, navFromAt = 0, navPeekT = 0;
 const NAV_SNAPS = new Map(); /* a tagged history entry's key -> the page as it was left, for the browser's own back and forward */
-const NAV_IC = {home:'home', rules:'rule', tools:'check', calc:'calc', numbers:'phone', links:'link', pharmacy:'pill', dilution:'syringe', new:'spark', poster:'poster', about:'info', intro:'spark', install:'install', share:'share', learn:'route', pt:'heart'};
+const NAV_IC = {home:'home', rules:'rule', tools:'check', calc:'calc', numbers:'phone', links:'link', pharmacy:'pill', dilution:'syringe', antidotes:'prot', abbreviations:'rule', antibiotics:'virus', new:'spark', poster:'poster', about:'info', intro:'spark', install:'install', share:'share', learn:'route', pt:'heart'};
 addEventListener('popstate', e => { navPopSt = e.state; });
 /* Where a tap came from: a link inside the content or the search opens the arrow to show where it leads; the tab bar and the menu do not */
 document.addEventListener('click', e => {
@@ -5727,7 +5903,7 @@ if (typeof ABX !== 'undefined'){
   IDX.push({href:'#antibiotics', title:'ED antimicrobial guides', kind:'Tool', meta:'Doses by kidney function, and how to give injectable antimicrobials (Feb 2024)', body:'antibiotic antibiotics antimicrobial renal dose crcl creatinine clearance kidney dilution reconstitution reconstitute infusion rate', kw:'antibiotic antibiotics antimicrobial antimicrobials crcl', ic:'pill', c:'c-meta'});
   const seen = new Set(); [...ABX.dose.renal.rows.map(r => r[6]), ...ABX.dose.none.map(r => r[3]), ...ABX.dil.rows.map(r => r[4]), 'Gentamicin', 'Vancomycin'].forEach(g => { const k = g.toLowerCase(); if (seen.has(k)) return; seen.add(k); IDX.push({href:'#antibiotics', title:g + ' (ED antimicrobial guides)', kind:'Antimicrobial', meta:'ED antimicrobial guides: dose by kidney function, dilution and rate', body:g, ic:'pill', c:'c-meta', ab:g}); });
 }
-renderJourney(false); setupTour(); startQuiz(); renderAbout(); renderViewHeroes(); renderPins(); remWire();
+renderJourney(false); setupTour(); startQuiz(); renderAbout(); renderViewHeroes(); renderPins(); renderAlerts(); remWire();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
 document.addEventListener('click', e => {
@@ -5836,6 +6012,7 @@ if ($('#axq')) $('#axq').addEventListener('input', renderAx);
 $('#palbody').addEventListener('click', e => axFrom(e.target.closest('a[data-ax]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) axFrom(palLinks()[palSel]); }, true);
 if ($('#kbq')) $('#kbq').addEventListener('input', renderKb);
+if ($('#kbl')) $('#kbl').addEventListener('click', e => { const b = e.target.closest('[data-kbx]'); if (!b) return; const q = $('#kbq'); q.value = b.dataset.kbx; renderKb(); q.focus(); });
 $('#palbody').addEventListener('click', e => kbFrom(e.target.closest('a[data-kb]')), true);
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && !$('#pal').hidden) kbFrom(palLinks()[palSel]); }, true);
 $('#palbody').addEventListener('click', e => abFrom(e.target.closest('a[data-ab]')), true);
@@ -5950,12 +6127,13 @@ $('#settings').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   const grp = b.closest('.seg');
   if (grp && b.dataset.val){
-    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips', 'st-tiles':'tiles', 'st-buzz':'buzz', 'st-ai':'ai', 'st-asr':'asr'}[grp.id];
+    const key = {'st-theme':'theme', 'st-size':'size', 'st-clips':'clips', 'st-tiles':'tiles', 'st-buzz':'buzz', 'st-ai':'ai', 'st-asr':'asr', 'st-tabc':'tabc'}[grp.id];
     prefs[key] = b.dataset.val; store.set('gz-' + key, b.dataset.val); applyPrefs(); syncSettings();
     if (key === 'buzz') buzz('ok');
     if (key === 'asr') micShow();
     if (key === 'clips') setJourneyClip(prefs.clips === 'on');
     if (key === 'tiles') tileClips();
+    if (key === 'tabc') tabcSet(false);
   } else if (b.id === 'st-clear'){
     ['gz-saved', 'gz-pins', 'gz-recent', 'gz-last', QKEY, 'gz-quiz-best', 'gz-tour-pos', 'gz-tour-pos-ms', 'gz-tour-lang', 'gz-intro'].forEach(k => store.del(k));
     refreshSaved(); syncSettings(); startQuiz(); introTile(); toast('Cleared from this browser');
@@ -6001,7 +6179,7 @@ const glowAt = e => {
   /* 3D: a tile with a picture leans toward a mouse or pen, and its picture shifts the other way for depth. --tx and --ty run
      from -1 to 1 across the tile; the angle is smaller on a larger tile, so an edge never travels more than about 6 px.
      Not for touch: a finger that lands on a tile to scroll the page would make it wobble. */
-  if (e.pointerType !== 'touch' && !REDUCED && r.width && t.classList.contains('tile') && (t.classList.contains('hin') || t.querySelector(':scope > .tm'))){ /* .hin: Install and Share */
+  if (e.pointerType !== 'touch' && !REDUCED && r.width && t.classList.contains('tile') && (t.classList.contains('hin') || t.querySelector(':scope > .tm:not(.band)'))){ /* .hin: Install and Share; a header band (26 Nov 2026) does not lean its card */
     const nx = Math.max(-1, Math.min(1, x / r.width * 2 - 1)), ny = Math.max(-1, Math.min(1, y / r.height * 2 - 1));
     t.style.setProperty('--tx', nx.toFixed(3)); t.style.setProperty('--ty', ny.toFixed(3));
     t.style.setProperty('--ry', (nx * Math.min(4, 700 / r.width)).toFixed(2) + 'deg');
