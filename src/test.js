@@ -1113,6 +1113,14 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
       pin.click(); out.info = f.querySelector('.spin-info h4') ? f.querySelector('.spin-info h4').textContent : ''; return out; });
     sp.sheet = await p.evaluate(() => spinReady.has('route') && /spin\/route\.webp/.test(document.querySelector('#jspin .spin-sheet').style.backgroundImage));
     ok(sp.i === 6 && sp.ready && sp.left === sp.want && sp.pins === 5 && /^1\. Triage/.test(sp.info) && sp.sheet, 'the 3D route turns to the view asked for, its five labels follow it, and a label opens its stop' + (sp.i === 6 && sp.ready && sp.left === sp.want && sp.sheet ? '' : ' ' + JSON.stringify(sp)));
+    /* 27 Nov 2026: smooth turning. Between two views the next fades in by the fraction dragged; let go slowly and it settles on a whole view */
+    const sm = await p.evaluate(async () => { const f = document.querySelector('#jspin [data-spin]'), st = f.querySelector('.spin-stage').getBoundingClientRect(), x0 = st.left + st.width / 2, y0 = st.top + st.height / 2;
+      const ev = (t, x, el) => (el || document).dispatchEvent(new PointerEvent(t, {clientX:x, clientY:y0, isPrimary:true, bubbles:true})), w = ms => new Promise(z => setTimeout(z, ms));
+      const i0 = +f.dataset.i; ev('pointerdown', x0, f.querySelector('.spin-stage')); ev('pointermove', x0 - 8); await w(200); ev('pointermove', x0 - SPIN_PX * 1.5); await w(60);
+      const mid = {pos:f._pos, op:+f.querySelector('.spin-sheet2').style.opacity || 0, i:+f.dataset.i};
+      await w(300); ev('pointermove', x0 - SPIN_PX * 1.5 - 1); await w(300); ev('pointerup', x0); await w(700);
+      return {i0, n:SPIN.route.n, mid, end:{pos:f._pos, op:+f.querySelector('.spin-sheet2').style.opacity || 0, i:+f.dataset.i}}; });
+    ok(Math.abs(sm.mid.pos % 1) > .1 && sm.mid.op > .1 && sm.mid.op < .9 && Number.isInteger(sm.end.pos) && sm.end.op === 0 && sm.end.i === ((Math.round(sm.end.pos) % sm.n + sm.n) % sm.n), 'smooth turning: half-way between two views the next fades in, and let go it settles on a whole view' + ' ' + JSON.stringify(sm));
     /* The 26 Nov 2026 round: four topics from open teaching sites (data35.js), each step ending on its source line */
     const edu = await p.evaluate(() => { const ids = ['wounds', 'eye-red', 'nosebleed-ent', 'red-flags'], r = {};
       ids.forEach(id => { const e = P[id], steps = Object.values(e.nodes).filter(n => n.step); r[id] = !!e && e.own && e.grp === 'cpg' && steps.length > 0 && steps.every(n => /^Source: .+ In the guide's own words; read 26 Nov 2026\./.test(n.items[n.items.length - 1])) && Object.values(e.nodes).filter(n => n.end).every(n => n.gap); });

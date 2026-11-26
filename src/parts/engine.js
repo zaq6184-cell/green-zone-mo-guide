@@ -857,7 +857,7 @@ function a3svg(i, on){
 function abdo3dHTML(){
   if (typeof A3D === 'undefined') return '';
   return `<figure class="fig a3" data-a3 data-i="${A3D.front}" data-on="0"><div class="a3-bar"><b>The nine regions, in 3D</b></div>` +
-    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions"><div class="a3-sheet" aria-hidden="true" hidden></div>` +
+    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions"><div class="a3-sheet" aria-hidden="true" hidden></div><div class="a3-sheet2" aria-hidden="true"></div>` +
     `<svg viewBox="0 0 ${A3D.w} ${A3D.h}">${a3svg(A3D.front, 0)}</svg><span class="a3-s a3-sr">Patient's right</span><span class="a3-s a3-sl">Patient's left</span></div>` +
     `<label class="a3-turn"><span>Turn</span><input type="range" min="0" max="${A3D.frames.length - 1}" step="1" value="${A3D.front}" data-a3yaw aria-label="Turn the torso"></label>` +
     `<div class="a3-info" aria-live="polite"><p class="hint">Tap a region to light it and see what to think of there.</p></div>` +
@@ -869,6 +869,7 @@ FIGS.abdo3d = abdo3dHTML;
 const a3loaded = new Set();
 /* Shows view i (or, at the front with a region lit, that region's lit view) as its part of a packed picture; data-view says which */
 function a3view(fig, i, on){
+  const t2 = fig.querySelector('.a3-sheet2'); if (t2) t2.style.opacity = 0; /* a whole frame: no blend on top */
   const sh = fig.querySelector('.a3-sheet'), at = (url, k, cols, rows) => { const c = k % cols, r = Math.floor(k / cols);
     sh.style.cssText = `background-image:url(${url});background-size:${cols * 100}% ${rows * 100}%;background-position:${(c / (cols - 1) * 100).toFixed(3)}% ${(r / (rows - 1) * 100).toFixed(3)}%`; sh.hidden = false; };
   if (i === A3D.front && on){ at(A3S.lit, on - 1, A3S.lcols, A3S.lrows); fig.dataset.view = 'lit' + on; return; }
@@ -901,8 +902,18 @@ document.addEventListener('input', e => { const r = e.target.closest && e.target
 /* A sideways drag on the torso turns it, a step every 14 px; an upward or downward swipe still scrolls the page */
 let a3drag = null;
 document.addEventListener('pointerdown', e => { const s = e.target.closest && e.target.closest('.a3-stage'); if (s && e.isPrimary) a3drag = {s, x:e.clientX, i:+s.closest('[data-a3]').dataset.i, moved:false}; });
-document.addEventListener('pointermove', e => { if (!a3drag) return; const d = Math.round((e.clientX - a3drag.x) / 14); if (d){ a3drag.moved = true; a3frame(a3drag.s.closest('[data-a3]'), a3drag.i - d); } });
-['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, () => { a3drag = null; }));
+/* 27 Nov 2026: between two frames the next fades in by the fraction dragged (.a3-sheet2), as the turnable scenes do; it rests on a whole frame */
+function a3blend(fig, pos){
+  const top = fig.querySelector('.a3-sheet2'); if (!top) return;
+  const n = A3D.frames.length, p = Math.max(0, Math.min(n - 1, pos)), a = Math.floor(p), b = Math.min(n - 1, a + 1), t = p - a, on = +fig.dataset.on || 0;
+  if (t < .02 || t > .98 || a === b || !a3loaded.size || (on && (a === A3D.front || b === A3D.front))){ top.style.opacity = 0; return; }
+  const at = k => { const s = k < A3S.per ? 0 : 1, j = k - s * A3S.per, c = j % A3S.cols, r = Math.floor(j / A3S.cols);
+    return `background-image:url(${A3S.f[s]});background-size:${A3S.cols * 100}% ${A3S.rows * 100}%;background-position:${(c / (A3S.cols - 1) * 100).toFixed(3)}% ${(r / (A3S.rows - 1) * 100).toFixed(3)}%`; };
+  fig.querySelector('.a3-sheet').style.cssText = at(a); fig.querySelector('.a3-sheet').hidden = false; top.style.cssText = at(b) + ';opacity:' + t.toFixed(3);
+}
+document.addEventListener('pointermove', e => { if (!a3drag) return; const pos = a3drag.i - (e.clientX - a3drag.x) / 14, f = a3drag.s.closest('[data-a3]'), d = Math.round(pos);
+  if (d !== +f.dataset.i || a3drag.moved){ a3drag.moved = true; if (d !== +f.dataset.i) a3frame(f, d); a3blend(f, pos); } });
+['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, () => { const d = a3drag; a3drag = null; if (d && d.moved){ const f = d.s.closest('[data-a3]'); a3blend(f, +f.dataset.i); } }));
 /* ================= Turnable 3D scenes (21 Nov 2026) =================
    Scenes this guide modelled and rendered in Blender from its own code (src/spin3d.py; no downloaded model), each a turntable
    of SPIN[key].n views packed into one picture (spin/<key>.webp, by src/spin-pack.py, data29.js). Before a tap only the first
@@ -973,7 +984,7 @@ function spinHTML(k){
   const S = SPIN[k], I = SPIN_INFO[k], kb = Math.round(S.bytes / 1024);
   const f0 = S.first || 0;
   return `<figure class="fig spin${I.regions ? ' spin-parts' : ''}${S.h > S.w ? ' spin-tall' : ''}" data-spin="${k}" data-i="${f0}" data-on="-1"><div class="spin-bar"><b>${esc(I.t)}</b><button type="button" class="sm spin-go" data-spin-go>${svg('play')}<span>Turn in 3D</span><small>${kb} KB</small></button></div>` +
-    `<div class="spin-stage" style="aspect-ratio:${S.w}/${S.h}"><img class="spin-img" src="spin/${k}-0.webp" width="${S.w}" height="${S.h}" loading="lazy" decoding="async" alt="${esc(I.alt)}"><div class="spin-sheet" aria-hidden="true"></div>${I.regions ? `<svg class="spin-reg" viewBox="0 0 ${S.w} ${S.h}" aria-hidden="true"></svg>` : ''}<div class="spin-lbl">${spinLabels(k, f0, -1)}</div><span class="spin-wait" aria-hidden="true"></span></div>` +
+    `<div class="spin-stage" style="aspect-ratio:${S.w}/${S.h}"><img class="spin-img" src="spin/${k}-0.webp" width="${S.w}" height="${S.h}" loading="lazy" decoding="async" alt="${esc(I.alt)}"><div class="spin-sheet" aria-hidden="true"></div><div class="spin-sheet2" aria-hidden="true"></div>${I.regions ? `<svg class="spin-reg" viewBox="0 0 ${S.w} ${S.h}" aria-hidden="true"></svg>` : ''}<div class="spin-lbl">${spinLabels(k, f0, -1)}</div><span class="spin-wait" aria-hidden="true"></span></div>` +
     `<label class="spin-turn"><span>Turn</span><input type="range" min="0" max="${S.n - 1}" step="1" value="${f0}" data-spin-yaw aria-label="Turn the model" aria-valuetext="${esc(I.home || 'Front view')}"></label>` +
     `<div class="spin-info" aria-live="polite"><p class="hint">${esc(I.hint)}</p></div><figcaption>${esc(I.cap)}</figcaption></figure>`;
 }
@@ -994,10 +1005,31 @@ function spinPaint(fig, i){
   const f0 = S.first || 0;
   rg.setAttribute('aria-valuetext', i === f0 ? (SPIN_INFO[k].home || 'Front view') : `Turned ${S.at[i][0] - S.at[f0][0]} degrees`);
 }
+/* The 27 Nov 2026 round: smooth turning. Between two views the next one fades in over the current one by the fraction turned
+   (.spin-sheet2), so a drag, a glide or Turn in 3D moves smoothly instead of stepping; the labels, outlines and slider follow
+   the nearest view, and the scene settles exactly on a view when it stops (spinSettle). */
+const spinAt = (S, i) => { const c = i % S.cols, r = Math.floor(i / S.cols); return `${S.cols > 1 ? (c / (S.cols - 1) * 100).toFixed(3) : 0}% ${S.rows > 1 ? (r / (S.rows - 1) * 100).toFixed(3) : 0}%`; };
+function spinBlend(fig, pos){
+  const k = fig.dataset.spin, S = SPIN[k], top = fig.querySelector('.spin-sheet2'); if (!top) return;
+  if (!spinReady.has(k)){ top.style.opacity = 0; return; }
+  const p = S.arc ? Math.max(0, Math.min(S.n - 1, pos)) : pos, a0 = Math.floor(p), t = p - a0;
+  const a = S.arc ? a0 : ((a0 % S.n) + S.n) % S.n, b = S.arc ? Math.min(S.n - 1, a0 + 1) : (a + 1) % S.n;
+  if (t < .02 || t > .98 || a === b){ top.style.opacity = 0; return; }
+  const base = fig.querySelector('.spin-sheet'), bg = `background-image:url(spin/${k}.webp);background-size:${S.cols * 100}% ${S.rows * 100}%;background-position:`;
+  base.style.cssText = bg + spinAt(S, a); top.style.cssText = bg + spinAt(S, b) + ';opacity:' + t.toFixed(3);
+}
 function spinTo(fig, pos){
   const S = SPIN[fig.dataset.spin], i = S.arc ? Math.max(0, Math.min(S.n - 1, Math.round(pos))) : ((Math.round(pos) % S.n) + S.n) % S.n; /* an arc stops at its ends */
-  if (+fig.dataset.i === i) return;
-  fig.dataset.i = i; spinPaint(fig, i);
+  fig._pos = pos;
+  if (+fig.dataset.i !== i){ fig.dataset.i = i; spinPaint(fig, i); }
+  spinBlend(fig, pos);
+}
+/* Ease the last fraction onto the nearest view, so the picture at rest is a single sharp view */
+function spinSettle(fig){
+  const from = fig._pos == null ? +fig.dataset.i : fig._pos, to = Math.round(from); if (Math.abs(to - from) < .02 || REDUCED){ spinTo(fig, to); return; }
+  const t0 = performance.now(), id = (fig._run || 0) + 1; fig._run = id;
+  const tick = now => { if (fig._run !== id) return; const p = Math.min(1, (now - t0) / 140); spinTo(fig, from + (to - from) * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
 }
 /* Turn in 3D: once around in about 2.6 s, easing in and out (a scene that turns through an arc swings to one end, back through
    its first view to the other end, and home); never with reduced motion */
@@ -1007,7 +1039,7 @@ function spinPlay(fig){
   const tick = now => { if (fig._run !== id || !fig.isConnected) return; const p = Math.min(1, (now - t0) / dur), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
     if (S.arc){ const f0 = S.first || 0, w = Math.sin(2 * Math.PI * e); spinTo(fig, from === f0 ? f0 + w * (w > 0 ? S.n - 1 - f0 : f0) : from + (f0 - from) * e); }
     else spinTo(fig, from + e * S.n);
-    if (p < 1) requestAnimationFrame(tick); };
+    if (p < 1) requestAnimationFrame(tick); else spinSettle(fig); };
   requestAnimationFrame(tick);
 }
 let spinDrag = null;
@@ -1015,7 +1047,7 @@ document.addEventListener('pointerdown', e => {
   const st = e.target.closest && e.target.closest('.spin-stage'); if (!st || !e.isPrimary || e.target.closest('.spin-pin')) return;
   const fig = st.closest('[data-spin]'); fig._run = (fig._run || 0) + 1; fig._moved = false;
   if (!SPIN[fig.dataset.spin].regions) spinLoad(fig);
-  spinDrag = {fig, x:e.clientX, i:+fig.dataset.i, v:0, lx:e.clientX, lt:e.timeStamp};
+  spinDrag = {fig, x:e.clientX, i:fig._pos == null ? +fig.dataset.i : fig._pos, v:0, lx:e.clientX, lt:e.timeStamp};
 });
 document.addEventListener('pointermove', e => {
   if (spinDrag && Math.abs(e.clientX - spinDrag.x) > 6 && !spinDrag.fig._moved){ spinDrag.fig._moved = true; spinLoad(spinDrag.fig); }
@@ -1024,10 +1056,11 @@ document.addEventListener('pointermove', e => {
   spinTo(d.fig, d.i - (e.clientX - d.x) / SPIN_PX);
 });
 ['pointerup', 'pointercancel'].forEach(ev => document.addEventListener(ev, () => {
-  const d = spinDrag; spinDrag = null; if (!d || REDUCED || Math.abs(d.v) < .2 || !spinReady.has(d.fig.dataset.spin)) return;
+  const d = spinDrag; spinDrag = null; if (!d || !spinReady.has(d.fig.dataset.spin)) return;
+  if (REDUCED || Math.abs(d.v) < .2){ spinSettle(d.fig); return; }
   /* Glide: the speed at release, in views a frame, fading out */
-  let v = d.v * 16 / SPIN_PX, pos = +d.fig.dataset.i; const id = (d.fig._run || 0) + 1; d.fig._run = id;
-  const glide = () => { if (d.fig._run !== id) return; v *= .9; pos -= v; spinTo(d.fig, pos); if (Math.abs(v) > .04) requestAnimationFrame(glide); };
+  let v = d.v * 16 / SPIN_PX, pos = d.fig._pos == null ? +d.fig.dataset.i : d.fig._pos; const id = (d.fig._run || 0) + 1; d.fig._run = id;
+  const glide = () => { if (d.fig._run !== id) return; v *= .9; pos -= v; spinTo(d.fig, pos); if (Math.abs(v) > .04) requestAnimationFrame(glide); else spinSettle(d.fig); };
   requestAnimationFrame(glide);
 }));
 document.addEventListener('input', e => { const r = e.target.closest && e.target.closest('[data-spin-yaw]'); if (!r) return;

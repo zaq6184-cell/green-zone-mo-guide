@@ -368,7 +368,7 @@ def scene_finger():
 def scene_eye():
     """An eye in its lids, cut down the middle on the patient's left side, so the pockets where the lid lining folds back onto
     the eye (the fornices) show above and below: what an irrigation and an eversion reach."""
-    ARC.update(lo=0, hi=110, home=90)  # from the front of the eye (0) round to the cut face (90), which is the first view
+    ARC.update(lo=45, hi=135, home=90)  # 45 degrees either side of the cut face (90), the first view (27 Nov 2026: the half eye's front view read poorly)
     bpy.ops.mesh.primitive_plane_add(size=600, location=(0, 0, -1.2)); put(obj_active(), SLATE)
     import bmesh
     SCL = mat('sclera', base=(0.95, 0.96, 0.95), rough=0.3, coat=0.5, emit=(0.9, 0.95, 0.93), estr=0.04)
@@ -465,12 +465,14 @@ if BANNER:
 target, dist, elev, lens = SCENES[KEY]()
 
 # ---------- lights and the camera ----------
+# The back (rim) light: stronger for the procedure scenes and the burns figure (27 Nov 2026), so their glass edges stand out
+RIM = 1500 if KEY in ('burns', 'finger', 'eye', 'nose') else 600
 pivot = bpy.data.objects.new('pivot', None); pivot.location = target; sc.collection.objects.link(pivot)
 # The lights turn with the camera, so the scene seems to turn under a fixed studio light, and only the key light shows in
 # reflections (the others lit the slate floor with hard squares)
 for i, L in enumerate([light('AREA', (6, -5, 8), (math.radians(40), 0, math.radians(50)), 1400 if not BANNER else 520, size=7),
           light('AREA', (-8, -3, 4), (math.radians(70), 0, math.radians(-70)), 260, size=6, color=(0.8, 0.95, 1)),
-          light('AREA', (0, 9, 6), (math.radians(-55), 0, math.radians(180)), 600, size=8, color=(0.75, 1, 0.9))]):
+          light('AREA', (0, 9, 6), (math.radians(-55), 0, math.radians(180)), RIM, size=8, color=(0.75, 1, 0.9))]):
     L.location = L.location - target; L.parent = pivot
     if i:
         try: L.visible_glossy = False
