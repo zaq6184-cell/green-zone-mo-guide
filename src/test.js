@@ -105,13 +105,13 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await q.goto(p.url().split('#')[0] + '#abdo-handbook'); await q.waitForTimeout(700);
     ok(await q.locator('#run button[data-go]').count() === 12 && await q.evaluate(() => kindOf(P['abdo-handbook']) === 'Handbook' && CAT_OF['abdo-handbook'] && CAT_OF['abdo-handbook'].k === 'abdo'), 'the abdominal pain handbook opens on its twelve sections, labelled a handbook, in the abdomen group');
     await q.goto(p.url().split('#')[0] + '#abdo-handbook--loc'); await q.waitForTimeout(900);
-    const f0 = seen.filter(u => /abdo3d\/f\d/.test(u)).length;
-    ok(await q.locator('[data-a3] .a3-g').count() === 9 && f0 === 0 && await q.evaluate(() => /poster\.webp$/.test(document.querySelector('.a3-img').getAttribute('src'))), 'the 3D map shows its front view and nine regions, with no turntable frame loaded' + (f0 ? ' (' + f0 + ' frames)' : ''));
+    const f0 = seen.filter(u => /abdo3d\/(frames|front-lit)/.test(u)).length;
+    ok(await q.locator('[data-a3] .a3-g').count() === 9 && f0 === 0 && await q.evaluate(() => /poster\.webp$/.test(document.querySelector('.a3-img').getAttribute('src')) && document.querySelector('.a3-sheet').hidden), 'the 3D map shows its front view and nine regions, with no turntable frame loaded' + (f0 ? ' (' + f0 + ' frames)' : ''));
     ok(await q.evaluate(() => { const g = [...document.querySelectorAll('.a3-g')].map(x => { const b = x.getBBox(); return b.x + b.width / 2; }); return g[0] < g[1] && g[1] < g[2] && document.querySelector('.a3-sr').getBoundingClientRect().left < document.querySelector('.a3-sl').getBoundingClientRect().left && /right/i.test(document.querySelector('.a3-sr').textContent); }), 'the 3D map keeps the patient\'s right on the screen\'s left, labelled');
     await q.locator('.a3-g[data-a3r="7"]').click(); await q.waitForTimeout(300);
-    ok(await q.evaluate(() => /front-lit\/r7\.webp$/.test(document.querySelector('.a3-img').getAttribute('src')) && /Right lower/.test(document.querySelector('.a3-info').textContent) && !!document.querySelector('.a3-info a[href="#abdo-handbook--rg7"]')), 'tapping region 7 lights it and lists what to think of there, with a link to its step');
+    ok(await q.evaluate(() => document.querySelector('[data-a3]').dataset.view === 'lit7' && /front-lit\.webp/.test(document.querySelector('.a3-sheet').style.backgroundImage) && /Right lower/.test(document.querySelector('.a3-info').textContent) && !!document.querySelector('.a3-info a[href="#abdo-handbook--rg7"]')), 'tapping region 7 lights it and lists what to think of there, with a link to its step');
     await q.locator('[data-a3yaw]').fill('3'); await q.locator('[data-a3yaw]').dispatchEvent('input'); await q.waitForTimeout(900);
-    ok(await q.evaluate(() => /abdo3d\/f03\.webp$/.test(document.querySelector('.a3-img').getAttribute('src')) && document.querySelector('.a3-g.on').dataset.a3r === '7') && seen.filter(u => /abdo3d\/f\d/.test(u)).length === 25, 'turning loads the 25 frames once and keeps the lit region on the new frame');
+    ok(await q.evaluate(() => document.querySelector('[data-a3]').dataset.view === 'f3' && /frames-a\.webp/.test(document.querySelector('.a3-sheet').style.backgroundImage) && document.querySelector('.a3-g.on').dataset.a3r === '7') && seen.filter(u => /abdo3d\/frames-[ab]\.webp/.test(u)).length === 2, 'turning loads the 25 frames, packed in two pictures, once, and keeps the lit region on the new frame');
     await q.goto(p.url().split('#')[0] + '#abdo-handbook--pain'); await q.waitForTimeout(700);
     const tabs = await q.locator('#ptab [role="tab"]').allInnerTexts();
     ok(JSON.stringify(tabs) === JSON.stringify(['Quick reference', 'Sources', 'Malay script', 'Printed pages']), 'the handbook has its four tabs: Quick reference, Sources, Malay script, Printed pages (' + tabs.join(', ') + ')');
@@ -274,7 +274,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   noFilm(p, 'every view, the tour included, loads no film from media/ before a tap');
   // Topic tiles: pictures, and loops while Moving tiles is on (on by default)
   await go(p, '#pathways', 900);
-  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length) === 11, 'the eleven topic tiles have their pictures (Scores and rules since 16 Nov 2026)');
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length) === 12, 'the twelve topic tiles have their pictures (Eye, ear and nose since 26 Nov 2026)');
   ok(await p.waitForFunction(() => [...document.querySelectorAll('#libcats .tm img')].every(i => i.complete && i.naturalWidth === 640), null, {timeout:5000}).then(() => true, () => false), 'every topic picture loads');
   ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm video').length) > 0, 'the topic tiles start their loops (Moving tiles is on by default)');
   ok(await p.evaluate(() => document.querySelectorAll('.libsec .lh .tm img').length) >= 8, 'the Pathways section bars carry their topic pictures');
@@ -405,7 +405,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   await go(p, '#calc', 500);
   ok(await p.evaluate(() => document.querySelector('#calcbox').hidden), 'the calculators hub opens with no calculator open');
-  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 56 && document.querySelectorAll('#cxlist .cxl').length === 6), 'the hub lists 56 calculators and 6 outside links (5 PEMCalc, 1 MDCalc: the QTc)');
+  ok(await p.evaluate(() => document.querySelectorAll('#cxlist .cxc').length === 58 && document.querySelectorAll('#cxlist .cxl').length === 6), 'the hub lists 58 calculators and 6 outside links (5 PEMCalc, 1 MDCalc: the QTc)');
   ok(await p.evaluate(() => [...document.querySelectorAll('#cxlist .cxl a')].every(a => a.target === '_blank' && /noopener/.test(a.rel) && (a.href.startsWith('https://pemcalc.com/') || a.href.startsWith('https://www.mdcalc.com/calc/')) && /(PEMCalc|MDCalc), outside site/.test(a.closest('.pc').textContent))), 'the PEMCalc and MDCalc links open in a new tab and say they are an outside site');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats button').length === 9 && document.querySelectorAll('#cxcats .tm img').length === 9), 'the nine group tiles have their pictures');
   ok(await p.evaluate(() => document.querySelectorAll('#cxcats .tm video').length > 0), 'the calculator group tiles start their loops');
@@ -1113,6 +1113,34 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
       pin.click(); out.info = f.querySelector('.spin-info h4') ? f.querySelector('.spin-info h4').textContent : ''; return out; });
     sp.sheet = await p.evaluate(() => spinReady.has('route') && /spin\/route\.webp/.test(document.querySelector('#jspin .spin-sheet').style.backgroundImage));
     ok(sp.i === 6 && sp.ready && sp.left === sp.want && sp.pins === 5 && /^1\. Triage/.test(sp.info) && sp.sheet, 'the 3D route turns to the view asked for, its five labels follow it, and a label opens its stop' + (sp.i === 6 && sp.ready && sp.left === sp.want && sp.sheet ? '' : ' ' + JSON.stringify(sp)));
+    /* The 26 Nov 2026 round: four topics from open teaching sites (data35.js), each step ending on its source line */
+    const edu = await p.evaluate(() => { const ids = ['wounds', 'eye-red', 'nosebleed-ent', 'red-flags'], r = {};
+      ids.forEach(id => { const e = P[id], steps = Object.values(e.nodes).filter(n => n.step); r[id] = !!e && e.own && e.grp === 'cpg' && steps.length > 0 && steps.every(n => /^Source: .+ In the guide's own words; read 26 Nov 2026\./.test(n.items[n.items.length - 1])) && Object.values(e.nodes).filter(n => n.end).every(n => n.gap); });
+      r.group = CATS.some(c => c.k === 'eent' && c.ids.join() === 'eye-red,nosebleed-ent') && CAT_OF.wounds && CAT_OF.wounds.k === 'injury' && CAT_OF['red-flags'] && CAT_OF['red-flags'].k === 'brain';
+      r.confirm = CONFIRM.some(c => /open teaching sites round of 26 Nov 2026/.test(c)); r.npc = P['nosebleed-ent'].nodes.npc.items.includes('blood-stained nasal discharge/saliva'); return r; });
+    ok(Object.values(edu).every(Boolean), 'the open teaching sites round: four entries in the guide\'s own words, every step ending on its source and every outcome naming it, the eye and ENT group, the NPC CPG quoted as printed, and the open questions' + (Object.values(edu).every(Boolean) ? '' : ' ' + JSON.stringify(edu)));
+    /* The procedure scenes: on their steps, opening on their first view, the arc scenes stopping at their ends */
+    await go(p, '#wounds--db', 700);
+    const fin = await p.evaluate(() => { const f = document.querySelector('#cur [data-spin="finger"]'); return f && !spinReady.has('finger') && f.querySelectorAll('.spin-pin').length === 4 && f.classList.contains('spin-tall'); });
+    await go(p, '#eye-red--chem', 700);
+    const eye = await p.evaluate(() => { const f = document.querySelector('#cur [data-spin="eye"]'); if (!f) return false; const S = SPIN.eye; const ok1 = +f.dataset.i === S.first && S.arc && Math.abs(S.at[S.first][0] - 90) < 4;
+      spinTo(f, S.n + 5); const end = +f.dataset.i; spinTo(f, -5); return ok1 && end === S.n - 1 && +f.dataset.i === 0; });
+    ok(fin && eye, 'the finger opens on its four labels without loading its turn; the eye opens on its cut view and its arc stops at both ends' + (fin && eye ? '' : ' ' + JSON.stringify({fin, eye})));
+    /* The rule of nines in 3D: tap a part to tick its row; the back shows from behind; nothing loads before a drag */
+    await go(p, '#calc-burns', 700);
+    const bn = await p.evaluate(async () => { const f = document.querySelector('#calcbox .spin-parts'); if (!f) return {fig:false};
+      const out = {fig:true, polys:f.querySelectorAll('polygon').length, notLoaded:!spinReady.has('burns')};
+      f.querySelector('polygon[data-spin-reg="3"]').dispatchEvent(new MouseEvent('click', {bubbles:true})); await new Promise(z => setTimeout(z, 200));
+      out.tick = document.querySelector('#calcbox input[data-k="rg"][data-i="3"]').checked; out.tbsa = (document.querySelector('#couts .out b') || {}).textContent;
+      out.lit = f.querySelector('polygon[data-spin-reg="3"]').classList.contains('on');
+      const r = f.querySelector('[data-spin-yaw]'); r.value = 12; r.dispatchEvent(new Event('input', {bubbles:true})); await new Promise(z => setTimeout(z, 1200));
+      out.back = [...f.querySelectorAll('polygon')].some(x => x.dataset.spinReg === '4') && ![...f.querySelectorAll('polygon')].some(x => x.dataset.spinReg === '7');
+      document.querySelector('#calcbox input[data-k="rg"][data-i="3"]').click(); await new Promise(z => setTimeout(z, 100)); out.untick = !document.querySelector('#calcbox input[data-k="rg"][data-i="3"]').checked; return out; });
+    ok(bn.fig && bn.polys >= 7 && bn.notLoaded && bn.tick && bn.tbsa === '18%' && bn.lit && bn.back && bn.untick, 'burns: the 3D figure ticks the anterior torso (18%) on a tap, shows the back when turned, untick follows the list, and nothing loads before it is turned' + (bn.tick && bn.back ? '' : ' ' + JSON.stringify(bn)));
+    /* The two calculators of the round */
+    const la = await p.evaluate(() => { const c = CALCS.lamax.run({drug:'lido', adr:'no', lc:'10', wt:70}).outs.map(o => o[0] + ':' + o[1]); const t = CALCS.tetanus.run({hx:'over10', wd:'high'}).outs.map(o => o[1]); const t2 = CALCS.tetanus.run({hx:'in10', wd:'high'}).outs.map(o => o[1]);
+      return {c, t, t2}; });
+    ok(la.c.join('|') === 'WikEM:300 mg = 30 ml|RCEM, wounds:210 mg = 21 ml|RCEM, LA module:315 mg = 31.5 ml' && /immunoglobulin/.test(la.t[0]) && la.t[1] === '500 units' && la.t[2] === '250 IU' && la.t[3] === '0.5 ml IM' && la.t2.length === 1 && la.t2[0] === 'None needed', 'local anaesthetic maximum: each source at 70 kg (WikEM\'s 300 mg cap applies); tetanus: primed over 10 years with a high-risk wound gets vaccine and immunoglobulin, the department\'s Sero-Tet 500 units and ATT 0.5 ml first, the educational 250 IU beside them; within 10 years none' + (la.c.length ? '' : '') + ' ' + JSON.stringify(la));
   }
   /* Page transitions (23 Nov 2026): a tile grows into the page's banner, back slides, an answer has none */
   {
@@ -1188,7 +1216,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   }
   noFilm(p, 'phone: Day and Night and every view, the tour included, load no film from media/ before a tap');
   await go(p, '#pathways', 600);
-  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 11 && document.querySelectorAll('#libcats .tm video').length > 0), 'on a phone the topic tiles move by default too');
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 12 && document.querySelectorAll('#libcats .tm video').length > 0), 'on a phone the topic tiles move by default too');
   ok(await p.evaluate(() => { const n = document.querySelectorAll('.tm[data-play]').length; return n > 0 && n <= 6; }), 'a phone plays at most six loops at once');
   await p.screenshot({path:out + '/p-pathways-tiles.png'});
   await go(p, '#guidelines', 500);
@@ -1858,7 +1886,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await go(p, '#home', 400);
   await p.screenshot({path:out + '/t-home.png'});
   await go(p, '#pathways', 500);
-  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 11 && !document.querySelector('.tm video')), 'with reduced motion the tiles stay as still pictures');
+  ok(await p.evaluate(() => document.querySelectorAll('#libcats .tm img').length === 12 && !document.querySelector('.tm video')), 'with reduced motion the tiles stay as still pictures');
 
   /* ---------- The tour film: it downloads only on a tap, and chapters, the transcript, Resume, the language and
      Day/Night still work. Chrome treats a call to load() as overriding preload="none", so the film goes in only when the
@@ -2096,7 +2124,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     await go(p, '#calc-dengue', 500);
     ok(await visible(p) === 'calc', 'offline: a calculator opens');
     await go(p, '#pathways', 700);
-    ok(await until(p, () => { const im = [...document.querySelectorAll('#libcats .tm img')]; return im.length === 11 && im.every(i => i.complete && i.naturalWidth === 640); }, null, 8000), 'offline: the topic tiles show their saved pictures');
+    ok(await until(p, () => { const im = [...document.querySelectorAll('#libcats .tm img')]; return im.length === 12 && im.every(i => i.complete && i.naturalWidth === 640); }, null, 8000), 'offline: the topic tiles show their saved pictures');
     await p.screenshot({path:out + '/p-offline-pathways.png'});
     ok(await playIt(p, 'audio/intro-1-en.mp3'), 'offline: the kept sound plays');
     const rng = await p.evaluate(async () => { const r = await fetch('audio/intro-1-en.mp3', {headers:{Range:'bytes=100-199'}}); return [r.status, r.headers.get('content-range'), (await r.arrayBuffer()).byteLength]; });
@@ -2558,7 +2586,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     const nag = await q.evaluate(() => { const want = [['cellulitis', 'opd', 2], ['pneumonia', 'opd', 2], ['animal-bites', 'wound', 1], ['animal-bites', 'abc', 1], ['renal-colic', 'uro', 1], ['infection-alerts', 'lepto', 1], ['diabetic-foot-cpg', 'mild', 1], ['diabetic-foot-cpg', 'mod', 1], ['diabetic-foot-cpg', 'sevx', 1]];
       const isNag = l => /^https:\/\/sites\.google\.com\/moh\.gov\.my\/nag\//.test(l[0]), all = [];
       const each = want.map(([id, k, n]) => { const nd = P[id].nodes[k], L = (nd.links || []).filter(isNag); all.push(...L); return L.length === n && !(nd.items || []).some(i => /National Antimicrobial|\bNAG\b/.test(i)); });
-      const elsewhere = Object.values(P).reduce((c, e) => c + Object.values(e.nodes).reduce((d, nd) => d + (nd.links || []).filter(isNag).length, 0), 0);
+      const EDU = ['wounds', 'eye-red', 'nosebleed-ent', 'red-flags'], elsewhere = Object.entries(P).filter(([id]) => !EDU.includes(id)).map(([, e]) => e).reduce((c, e) => c + Object.values(e.nodes).reduce((d, nd) => d + (nd.links || []).filter(isNag).length, 0), 0);
       return {each:each.every(Boolean), n:all.length, elsewhere, labels:all.every(l => /^(National Antimicrobial Guideline|NAG)\b/.test(l[1]) && !/\d\s*(mg|g|ml|mcg)\b/i.test(l[1])),
         gastro:!(P.gastroenteritis.nodes.opd.links || []).some(isNag), confirm:CONFIRM.some(c => /National Antimicrobial Guideline's online updates/.test(c) && /melioidosis/.test(c))}; });
     ok(nag.each && nag.n === 11 && nag.elsewhere === 11 && nag.labels && nag.gastro && nag.confirm, 'NAG: eleven links on cellulitis, pneumonia, animal bites, urosepsis, leptospirosis and the diabetic foot, labelled by topic only, with no dose and no NAG text in any step, and the check against them under Still to confirm' + (nag.n === 11 && nag.each ? '' : ' ' + JSON.stringify(nag)));
@@ -2586,7 +2614,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(/Surat Pekeliling Ketua Pengarah Kesihatan Bil\.4\/2024/.test(kb.t) && /19 April 2024/.test(kb.t) && !/prints no issuer/.test(kb.t) && kb.a && kb.c, 'abbreviations: the source line names circular Bil.4/2024 of 19 April 2024 with its link, and Still to confirm keeps only the do-not-use list');
 
     /* What's new: one round naming every entry whose content changed */
-    ok(await q.evaluate(() => APP_VER === 'Version 8, updated 26 Nov 2026' && /^Current alerts/.test(V8[0][0]) && ['#asthma-cpg', '#infection-alerts', '#cellulitis', '#pneumonia', '#animal-bites', '#renal-colic', '#diabetic-foot-cpg'].every(h => V8[0][3].includes(h)) && V8[0][3].every(h => !!P[h.slice(1)])), 'What\'s new: the 26 Nov 2026 round names the seven entries whose content changed');
+    ok(await q.evaluate(() => APP_VER === 'Version 8, updated 26 Nov 2026' && (R => R && ['#asthma-cpg', '#infection-alerts', '#cellulitis', '#pneumonia', '#animal-bites', '#renal-colic', '#diabetic-foot-cpg'].every(h => R[3].includes(h)) && R[3].every(h => !!P[h.slice(1)]))(V8.find(r => /^Current alerts/.test(r[0]))) && /^Four Green Zone topics/.test(V8[0][0]) && V8[0][2].every(([h]) => /^#(calc-)?[a-z-]+$/.test(h))), 'What\'s new: the 26 Nov 2026 round names the seven entries whose content changed');
     await ctx.close();
 
     /* On a wide screen the card shows each source's full name, the pill's full label and every line in full */

@@ -10,7 +10,8 @@ const pw = require('playwright'), path = require('path'), fs = require('fs'), {s
 const PORT = Number(process.env.PORT) || 8793, URL = `http://localhost:${PORT}/`, OUT = path.join(__dirname, 'shots', 'webkit');
 fs.mkdirSync(OUT, {recursive: true});
 const VIEWS = ['#home', '#pathways', '#rules', '#tools', '#calc', '#calc-news2', '#calc-dengue', '#calc-vitals', '#numbers', '#links', '#pharmacy', '#dilution',
-  '#renal-colic', '#dengue-cpg', '#asthma--m1', '#xray-guide--wrj', '#abdo-handbook', '#code-blue', '#guidelines', '#new', '#about', '#tour', '#quiz', '#journey', '#intro', '#poster', '#install', '#share', '#search', '#pt-dengue-cpg'];
+  '#renal-colic', '#dengue-cpg', '#asthma--m1', '#xray-guide--wrj', '#abdo-handbook', '#code-blue', '#guidelines', '#new', '#about', '#tour', '#quiz', '#journey', '#intro', '#poster', '#install', '#share', '#search', '#pt-dengue-cpg',
+  '#wounds--db', '#eye-red--chem', '#nosebleed-ent--nbfa', '#red-flags', '#calc-burns', '#calc-lamax', '#calc-tetanus'];
 (async () => {
   const srv = spawn(process.execPath, [path.join(__dirname, 'serve.js')], {env: {...process.env, PORT: String(PORT)}, stdio: 'ignore'});
   await new Promise(r => setTimeout(r, 800));

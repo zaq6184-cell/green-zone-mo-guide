@@ -18,7 +18,9 @@ const VIEWS = [
   /* 25 Nov 2026: the Now tile opened, a calculator's result bar, the abbreviation list's examples and About, grouped search */
   ['home', 'now'], ['calc-news2', 'filled'], ['abbreviations', 'about'], ['search', 'grouped'],
   /* 26 Nov 2026: the current alerts card opened in full, the Nipah step with the national lines, an outcome with NAG links */
-  ['home', 'alerts'], ['infection-alerts--nipah'], ['cellulitis--opd']
+  ['home', 'alerts'], ['infection-alerts--nipah'], ['cellulitis--opd'],
+  /* 26 Nov 2026, part 3: the four topics from open teaching sites, the three procedure scenes, the burns figure and the two calculators */
+  ['wounds'], ['eye-red'], ['nosebleed-ent'], ['red-flags'], ['wounds--db'], ['eye-red--chem'], ['nosebleed-ent--nbfa'], ['eye-red--aac'], ['calc-burns'], ['calc-lamax'], ['calc-tetanus']
 ];
 const srv = spawn(process.execPath, [path.join(__dirname, 'serve.js')], {env:{...process.env, PORT:String(port)}, stdio:'ignore'});
 const wait = ms => new Promise(r => setTimeout(r, ms));

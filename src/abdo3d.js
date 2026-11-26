@@ -1,6 +1,6 @@
 /* Builds parts/data17.js, the outlines of the nine abdominal regions on each frame of the 3D turntable (12 Nov 2026).
    Reads ../sources/abdo/abdo3d-regions.json (git-ignored; written by the Blender scene sources/abdo/abdo3d.blend, which
-   renders ../app/abdo3d/f00.webp to f24.webp, front-lit/r1.webp to r9.webp and poster.webp) and keeps every other outline
+   renders the frames, the lit front views and ../app/abdo3d/poster.webp; abdo3d-pack.py packs the frames into app/abdo3d/) and keeps every other outline
    point, as SVG points strings. Usage: node abdo3d.js */
 const fs = require('fs'), path = require('path');
 const SRC = [path.join(__dirname, '..', 'sources', 'abdo', 'abdo3d-regions.json'), path.join(__dirname, '..', 'app', 'abdo3d', 'regions.json')].find(f => fs.existsSync(f));

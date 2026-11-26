@@ -27,7 +27,7 @@ const crypto = require('crypto');
 const PARTS = path.join(__dirname, 'parts');
 const OUT = path.resolve(process.argv[2] || path.join(__dirname, '..'));
 const APP = path.join(OUT, 'app');
-const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'data20.js', 'data21.js', 'data22.js', 'data23.js', 'data24.js', 'data25.js', 'data26.js', 'data27.js', 'data28.js', 'data29.js', 'data30.js', 'data31.js', 'data32.js', 'data33.js', 'engine.js'];
+const SCRIPTS = ['data.js', 'data2.js', 'data3.js', 'data4.js', 'data5.js', 'data6.js', 'data7.js', 'data8.js', 'data9.js', 'data10.js', 'data11.js', 'data12.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data18.js', 'data19.js', 'data20.js', 'data21.js', 'data22.js', 'data23.js', 'data24.js', 'data25.js', 'data26.js', 'data27.js', 'data28.js', 'data29.js', 'data30.js', 'data31.js', 'data32.js', 'data33.js', 'data34.js', 'data35.js', 'engine.js'];
 const stop = msg => { console.error(msg); process.exit(1); };
 
 /* LF line endings throughout, as git keeps the files (.gitattributes), so the hashes in sw.js match what GitHub Pages serves */
@@ -40,7 +40,7 @@ const hash16 = data => crypto.createHash('sha256').update(data).digest('hex').sl
    "// @light" (or sits in a block that opens with a "@light" comment and closes with an "@end light" comment), and stays in the first script at its file's place, so every
    entry the first script has is whole. MORE_IDS names the entries still to come and P_ORDER the order of every entry, as in a
    single script. The artifact page is the same two scripts. */
-const HEAVY = new Set(['data4.js', 'data5.js', 'data6.js', 'data7.js', 'data9.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data24.js']);
+const HEAVY = new Set(['data4.js', 'data5.js', 'data6.js', 'data7.js', 'data9.js', 'data13.js', 'data14.js', 'data15.js', 'data16.js', 'data17.js', 'data24.js', 'data34.js', 'data35.js']);
 const parts2 = (text) => {
   const light = [], heavy = []; let on = false;
   for (const l of text.split('\n')){

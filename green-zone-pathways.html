@@ -1669,6 +1669,8 @@ details.dgrp summary small{font:700 var(--fs-meta) var(--mono);color:var(--muted
 .a3-bar b{font:850 var(--fs-body)/1.2 var(--display)}
 .a3-stage{position:relative;width:100%;max-width:420px;margin:0 auto;border-radius:var(--r-md);overflow:hidden;background:var(--emerald-3);touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .a3-stage img,.a3-stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.a3-sheet{position:absolute;inset:0;background-repeat:no-repeat}
+.a3-sheet[hidden]{display:none}
 .a3-g{cursor:pointer;outline:none}
 .a3-g polygon{fill:transparent;stroke:transparent;stroke-width:3;vector-effect:non-scaling-stroke;transition:fill .2s,stroke .2s}
 .a3-g text{font:800 34px var(--display);fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(6,61,40,.65);stroke-width:5px;pointer-events:none}
@@ -2698,6 +2700,22 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .alerts.banded > .al-l,.alerts.banded > .al-sum{position:relative;z-index:1}
 /* On a wide screen the alerts card spans the page: its scene keeps about a phone's scale, centred, its sides fading into the band */
 @media (min-width:1000px){.alerts .tm.band img,.alerts .tm.band video{left:50%;width:min(100%,600px);translate:-50% 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}}
+/* ================= The 26 Nov 2026 round, part 3: the rule of nines in 3D (.spin-parts, spinRegs in engine.js) =================
+   The figure sits on the fixed dark viewer surface, so its colours are literal, as the route scene's pins are. A part's outline is
+   a faint mint line; a ticked part fills in a warm burn colour. Portrait, so the stage keeps to a phone's width on a wide screen. */
+.cf-fig{min-width:0}
+.cf-fig .fig.spin{margin:0}
+.spin-parts .spin-stage,.spin-tall .spin-stage{max-width:300px}
+.spin-reg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.spin-reg polygon{fill:rgba(61,220,151,.001);stroke:rgba(140,235,195,.42);stroke-width:1.6;stroke-linejoin:round;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .18s ease,stroke .18s ease}
+.spin-reg polygon:hover{stroke:rgba(190,255,225,.9);fill:rgba(61,220,151,.12)}
+.spin-reg polygon.on{fill:rgba(255,122,72,.5);stroke:#ffb48f;stroke-width:2}
+.spin-sum{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.spin-sum span{padding:4px 10px;border-radius:var(--r-pill);background:var(--warn-soft,rgba(255,122,72,.14));box-shadow:inset 0 0 0 1px rgba(255,122,72,.4);font:750 var(--fs-meta)/1.3 var(--body);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.spin-reg polygon{transition:none}}
+/* The procedure scenes' points sit close together, so on a wide screen too a pin shows only its number until it is chosen,
+   hovered or focused (the route keeps its names, which have room) */
+@media (min-width:761px){.spin:not([data-spin="route"]) .spin-pin:not(.on):not(:hover):not(:focus-visible) span{display:none}}
 </style>
 
 <div class="boot" id="gzboot" role="progressbar" aria-label="Getting the guide ready"></div>
@@ -3086,7 +3104,7 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 <div class="vh" id="rmdlive" role="status" aria-live="assertive"></div>
 
 <script>
-const MORE_IDS = new Set(["dengue-cpg","asthma-cpg","gout-cpg","head-injury-cpg","acs-cpg","diabetic-foot-cpg","fb-children-cpg","avulsed-tooth-cpg","hip-fracture-cpg","sinusitis-cpg","sore-throat-cpg","copd-cpg","t2dm-cpg","cancer-pain-cpg","vte-cpg","ckd-cpg","snakebite-moh","xray-guide","abdo-handbook","ed-scores"]), P_ORDER = ["abdominal-pain","gastroenteritis","biliary","cellulitis","renal-colic","mild-tbi","behavioural-disturbance","acs","anaphylaxis","asthma","pneumonia","stroke-tia","dengue","dvt","heart-failure","hypertensive-urgency","hyperglycaemia","hypoglycaemia","pain","paracetamol-overdose","svt","syncope","scrotal-pain","gz-rules","asthma-zone","emacc","referral-rules","em-watch","mau-admission","outpatient-referral","yellow-zone","oscc","blood-tests","animal-bites","infection-alerts","trauma-walkins","children","safe-practice","dengue-cpg","asthma-cpg","gout-cpg","head-injury-cpg","acs-cpg","diabetic-foot-cpg","fb-children-cpg","avulsed-tooth-cpg","hip-fracture-cpg","sinusitis-cpg","sore-throat-cpg","copd-cpg","t2dm-cpg","cancer-pain-cpg","vte-cpg","ckd-cpg","code-blue","interpreter","snakebite-moh","communication","handover","missed-fractures","cbd-2","xray-guide","abdo-handbook","new-hkl","prescribing","ed-scores","ct-brain"];
+const MORE_IDS = new Set(["dengue-cpg","asthma-cpg","gout-cpg","head-injury-cpg","acs-cpg","diabetic-foot-cpg","fb-children-cpg","avulsed-tooth-cpg","hip-fracture-cpg","sinusitis-cpg","sore-throat-cpg","copd-cpg","t2dm-cpg","cancer-pain-cpg","vte-cpg","ckd-cpg","snakebite-moh","xray-guide","abdo-handbook","ed-scores","nosebleed-ent","wounds","red-flags","eye-red"]), P_ORDER = ["abdominal-pain","gastroenteritis","biliary","cellulitis","renal-colic","mild-tbi","behavioural-disturbance","acs","anaphylaxis","asthma","pneumonia","stroke-tia","dengue","dvt","heart-failure","hypertensive-urgency","hyperglycaemia","hypoglycaemia","pain","paracetamol-overdose","svt","syncope","scrotal-pain","gz-rules","asthma-zone","emacc","referral-rules","em-watch","mau-admission","outpatient-referral","yellow-zone","oscc","blood-tests","animal-bites","infection-alerts","trauma-walkins","children","safe-practice","dengue-cpg","asthma-cpg","gout-cpg","head-injury-cpg","acs-cpg","diabetic-foot-cpg","fb-children-cpg","avulsed-tooth-cpg","hip-fracture-cpg","sinusitis-cpg","sore-throat-cpg","copd-cpg","t2dm-cpg","cancer-pain-cpg","vte-cpg","ckd-cpg","code-blue","interpreter","snakebite-moh","communication","handover","missed-fractures","cbd-2","xray-guide","abdo-handbook","new-hkl","prescribing","ed-scores","ct-brain","nosebleed-ent","wounds","red-flags","eye-red"];
 const P = {};
 
 /* ---------- Abdominal pain (p10–11) ---------- */
@@ -8378,7 +8396,7 @@ const ABX = {
 /* Generated by src/spin-pack.py from sources/spin/<key>/ (rendered by src/spin3d.py): do not edit by hand.
    SPIN: each turnable 3D scene: its frame count, frame size, grid in app/spin/<key>.webp, its size in bytes, and each
    label's place on every frame, [yaw, [[x, y, depth], ...]] in frame pixels. */
-const SPIN = {"route":{"n":24,"w":720,"h":450,"cols":6,"rows":4,"bytes":165978,"names":["s1","s2","s3","s4","s5"],"at":[[0,[[177,216,6.71],[215,123,8.99],[360,94,10.05],[505,123,8.99],[543,216,6.71]]],[15,[[155,190,7.22],[240,110,9.44],[392,96,9.99],[522,139,8.49],[502,239,6.32]]],[30,[[151,165,7.8],[270,100,9.82],[423,100,9.82],[531,158,7.98],[442,255,6.06]]],[45,[[162,142,8.41],[303,93,10.09],[451,107,9.54],[528,178,7.49],[372,262,5.95]]],[60,[[183,122,9.02],[337,90,10.24],[476,117,9.18],[511,198,7.06],[299,259,6.01]]],[75,[[213,106,9.58],[372,89,10.26],[496,130,8.76],[479,216,6.71],[236,245,6.22]]],[90,[[247,94,10.05],[407,92,10.15],[508,145,8.31],[434,229,6.48],[188,223,6.57]]],[105,[[286,86,10.4],[441,98,9.91],[511,162,7.86],[380,236,6.36],[160,198,7.05]]],[120,[[326,81,10.61],[471,107,9.56],[503,180,7.44],[323,235,6.38],[151,173,7.61]]],[135,[[367,80,10.67],[498,119,9.13],[483,197,7.08],[271,226,6.53],[157,149,8.21]]],[150,[[407,82,10.56],[518,134,8.64],[450,211,6.81],[230,211,6.81],[175,128,8.83]]],[165,[[447,88,10.3],[530,152,8.13],[408,220,6.63],[203,192,7.18],[203,111,9.4]]],[180,[[484,98,9.91],[530,172,7.63],[360,224,6.57],[190,172,7.63],[236,98,9.91]]],[195,[[517,111,9.4],[517,192,7.18],[312,220,6.63],[190,152,8.13],[273,88,10.3]]],[210,[[545,128,8.83],[490,211,6.81],[270,211,6.81],[202,134,8.64],[313,82,10.56]]],[225,[[563,149,8.21],[449,226,6.53],[237,197,7.08],[222,119,9.13],[353,80,10.67]]],[240,[[569,173,7.61],[397,235,6.38],[217,180,7.44],[249,107,9.56],[394,81,10.61]]],[255,[[560,198,7.05],[340,236,6.36],[209,162,7.86],[279,98,9.91],[434,86,10.4]]],[270,[[532,223,6.57],[286,229,6.48],[212,145,8.31],[313,92,10.15],[473,94,10.05]]],[285,[[484,245,6.22],[241,216,6.71],[224,130,8.76],[348,89,10.26],[507,106,9.58]]],[300,[[421,259,6.01],[209,198,7.06],[244,117,9.18],[383,90,10.24],[537,122,9.02]]],[315,[[348,262,5.95],[192,178,7.49],[269,107,9.54],[417,93,10.09],[558,142,8.41]]],[330,[[278,255,6.06],[189,158,7.98],[297,100,9.82],[450,100,9.82],[569,165,7.8]]],[345,[[218,239,6.32],[198,139,8.49],[328,96,9.99],[480,110,9.44],[565,190,7.22]]]]}};
+const SPIN = {"route":{"n":24,"w":720,"h":450,"cols":6,"rows":4,"bytes":165978,"names":["s1","s2","s3","s4","s5"],"at":[[0,[[177,216,6.71],[215,123,8.99],[360,94,10.05],[505,123,8.99],[543,216,6.71]]],[15,[[155,190,7.22],[240,110,9.44],[392,96,9.99],[522,139,8.49],[502,239,6.32]]],[30,[[151,165,7.8],[270,100,9.82],[423,100,9.82],[531,158,7.98],[442,255,6.06]]],[45,[[162,142,8.41],[303,93,10.09],[451,107,9.54],[528,178,7.49],[372,262,5.95]]],[60,[[183,122,9.02],[337,90,10.24],[476,117,9.18],[511,198,7.06],[299,259,6.01]]],[75,[[213,106,9.58],[372,89,10.26],[496,130,8.76],[479,216,6.71],[236,245,6.22]]],[90,[[247,94,10.05],[407,92,10.15],[508,145,8.31],[434,229,6.48],[188,223,6.57]]],[105,[[286,86,10.4],[441,98,9.91],[511,162,7.86],[380,236,6.36],[160,198,7.05]]],[120,[[326,81,10.61],[471,107,9.56],[503,180,7.44],[323,235,6.38],[151,173,7.61]]],[135,[[367,80,10.67],[498,119,9.13],[483,197,7.08],[271,226,6.53],[157,149,8.21]]],[150,[[407,82,10.56],[518,134,8.64],[450,211,6.81],[230,211,6.81],[175,128,8.83]]],[165,[[447,88,10.3],[530,152,8.13],[408,220,6.63],[203,192,7.18],[203,111,9.4]]],[180,[[484,98,9.91],[530,172,7.63],[360,224,6.57],[190,172,7.63],[236,98,9.91]]],[195,[[517,111,9.4],[517,192,7.18],[312,220,6.63],[190,152,8.13],[273,88,10.3]]],[210,[[545,128,8.83],[490,211,6.81],[270,211,6.81],[202,134,8.64],[313,82,10.56]]],[225,[[563,149,8.21],[449,226,6.53],[237,197,7.08],[222,119,9.13],[353,80,10.67]]],[240,[[569,173,7.61],[397,235,6.38],[217,180,7.44],[249,107,9.56],[394,81,10.61]]],[255,[[560,198,7.05],[340,236,6.36],[209,162,7.86],[279,98,9.91],[434,86,10.4]]],[270,[[532,223,6.57],[286,229,6.48],[212,145,8.31],[313,92,10.15],[473,94,10.05]]],[285,[[484,245,6.22],[241,216,6.71],[224,130,8.76],[348,89,10.26],[507,106,9.58]]],[300,[[421,259,6.01],[209,198,7.06],[244,117,9.18],[383,90,10.24],[537,122,9.02]]],[315,[[348,262,5.95],[192,178,7.49],[269,107,9.54],[417,93,10.09],[558,142,8.41]]],[330,[[278,255,6.06],[189,158,7.98],[297,100,9.82],[450,100,9.82],[569,165,7.8]]],[345,[[218,239,6.32],[198,139,8.49],[328,96,9.99],[480,110,9.44],[565,190,7.22]]]]},"burns":{"n":24,"w":480,"h":720,"cols":6,"rows":4,"bytes":118912,"names":["r1","r2","r3","r4","r5","r6","r7","r8"],"at":[[0,[[240,93,2.93],[119,309,2.98],[361,309,2.98],[240,241,2.92],[240,237,3.02],[200,543,3.03],[280,544,3.03],[240,388,2.96]]],[15,[[240,93,2.93],[126,308,3.07],[360,310,2.89],[236,241,2.92],[244,237,3.01],[200,540,3.07],[278,546,3.0],[236,388,2.97]]],[30,[[240,93,2.93],[140,307,3.16],[351,312,2.8],[232,241,2.93],[248,237,3.01],[204,538,3.1],[273,549,2.98],[233,388,2.97]]],[45,[[240,93,2.93],[160,306,3.24],[332,313,2.73],[228,242,2.93],[251,236,3.0],[209,535,3.12],[266,551,2.95],[230,387,2.98]]],[60,[[240,93,2.93],[183,306,3.3],[306,314,2.67],[226,242,2.95],[254,236,2.99],[217,534,3.15],[256,553,2.94],[228,387,2.99]]],[75,[[240,93,2.93],[210,305,3.33],[273,314,2.64],[224,242,2.96],[256,236,2.98],[226,532,3.16],[246,553,2.93],[226,387,3.0]]],[90,[[240,93,2.93],[238,305,3.35],[237,314,2.63],[224,242,2.97],[256,236,2.97],[235,532,3.17],[235,553,2.93],[226,386,3.01]]],[105,[[240,93,2.93],[266,305,3.34],[202,314,2.64],[224,242,2.98],[256,236,2.96],[245,532,3.17],[224,553,2.94],[226,386,3.02]]],[120,[[240,93,2.93],[293,306,3.3],[170,313,2.68],[226,242,2.99],[254,236,2.94],[255,532,3.16],[215,551,2.95],[228,386,3.03]]],[135,[[240,93,2.93],[317,306,3.25],[145,313,2.74],[229,242,3.0],[252,236,2.93],[264,534,3.14],[207,549,2.97],[230,385,3.04]]],[150,[[240,93,2.93],[338,307,3.17],[128,311,2.81],[232,242,3.01],[248,236,2.93],[271,536,3.12],[202,547,3.0],[233,385,3.04]]],[165,[[240,93,2.93],[353,308,3.09],[119,310,2.9],[236,242,3.02],[244,235,2.92],[277,538,3.09],[200,544,3.03],[236,385,3.05]]],[180,[[240,93,2.93],[361,309,2.99],[119,309,2.99],[240,242,3.02],[240,235,2.92],[280,541,3.06],[200,541,3.06],[240,385,3.05]]],[195,[[240,93,2.93],[361,310,2.9],[127,308,3.09],[244,242,3.02],[236,235,2.92],[280,544,3.03],[203,538,3.09],[243,385,3.05]]],[210,[[240,93,2.93],[352,311,2.81],[142,307,3.17],[248,242,3.01],[232,236,2.93],[278,546,3.0],[209,536,3.12],[247,385,3.04]]],[225,[[240,93,2.93],[335,313,2.74],[163,306,3.25],[251,242,3.0],[228,236,2.93],[272,549,2.97],[216,534,3.14],[250,385,3.04]]],[240,[[240,93,2.93],[310,313,2.68],[187,306,3.3],[254,242,2.99],[226,236,2.94],[265,551,2.95],[225,533,3.16],[252,386,3.03]]],[255,[[240,93,2.93],[278,314,2.64],[214,305,3.34],[256,242,2.98],[224,236,2.96],[256,552,2.94],[235,532,3.17],[254,386,3.02]]],[270,[[240,93,2.93],[243,314,2.63],[242,305,3.35],[256,242,2.97],[224,236,2.97],[245,553,2.93],[245,532,3.17],[254,386,3.01]]],[285,[[240,93,2.93],[207,314,2.64],[270,305,3.33],[256,242,2.96],[224,236,2.98],[234,553,2.93],[255,533,3.16],[254,387,3.0]]],[300,[[240,93,2.93],[174,314,2.67],[297,306,3.3],[254,242,2.95],[226,236,2.99],[224,552,2.94],[263,534,3.15],[252,387,2.99]]],[315,[[240,93,2.93],[148,313,2.73],[320,306,3.24],[252,242,2.93],[229,236,3.0],[214,551,2.95],[271,536,3.12],[250,387,2.98]]],[330,[[240,93,2.93],[129,312,2.8],[340,307,3.16],[248,241,2.93],[232,237,3.01],[207,549,2.98],[276,538,3.1],[247,388,2.97]]],[345,[[240,93,2.93],[120,310,2.89],[354,308,3.07],[244,241,2.92],[236,237,3.01],[202,546,3.0],[280,541,3.07],[244,388,2.97]]]],"regions":["Head","Right arm","Left arm","Anterior torso","Back","Right leg","Left leg","Genitalia"]},"finger":{"n":24,"w":480,"h":720,"cols":6,"rows":4,"bytes":123684,"names":["palmar","dorsal","inject","web"],"at":[[0,[[216,364,4.18],[272,368,4.41],[292,447,4.43],[188,447,4.43]]],[15,[[210,363,4.21],[277,369,4.37],[296,450,4.37],[195,444,4.49]]],[30,[[205,362,4.25],[280,371,4.32],[295,453,4.31],[205,442,4.54]]],[45,[[204,360,4.29],[280,372,4.28],[292,457,4.25],[217,440,4.57]]],[60,[[204,359,4.33],[277,374,4.24],[284,460,4.2],[230,439,4.59]]],[75,[[208,358,4.36],[272,375,4.2],[273,462,4.16],[244,439,4.6]]],[90,[[213,357,4.4],[264,377,4.17],[259,464,4.13],[257,439,4.58]]],[105,[[220,356,4.43],[255,377,4.15],[244,464,4.12],[270,441,4.56]]],[120,[[228,355,4.45],[244,378,4.14],[229,464,4.12],[281,443,4.51]]],[135,[[237,355,4.45],[233,378,4.14],[214,463,4.14],[289,445,4.46]]],[150,[[246,355,4.45],[223,377,4.15],[202,461,4.17],[294,449,4.4]]],[165,[[255,356,4.44],[214,376,4.18],[192,458,4.22],[296,452,4.34]]],[180,[[263,356,4.42],[207,375,4.21],[186,455,4.28],[294,455,4.28]]],[195,[[269,357,4.39],[202,374,4.25],[184,452,4.34],[288,458,4.22]]],[210,[[274,358,4.35],[200,372,4.29],[186,449,4.4],[278,461,4.17]]],[225,[[276,360,4.31],[201,371,4.33],[191,445,4.46],[266,463,4.14]]],[240,[[276,361,4.27],[204,369,4.38],[199,443,4.51],[251,464,4.12]]],[255,[[273,362,4.24],[210,368,4.42],[210,441,4.56],[236,464,4.12]]],[270,[[269,363,4.2],[218,367,4.45],[223,439,4.58],[221,464,4.13]]],[285,[[262,364,4.17],[226,366,4.47],[236,439,4.6],[207,462,4.16]]],[300,[[253,365,4.15],[236,366,4.48],[250,439,4.59],[196,460,4.2]]],[315,[[243,365,4.15],[246,366,4.48],[263,440,4.57],[188,457,4.25]]],[330,[[234,365,4.15],[256,366,4.46],[275,442,4.54],[185,453,4.31]]],[345,[[224,365,4.16],[265,367,4.44],[285,444,4.49],[184,450,4.37]]]]},"eye":{"n":25,"w":720,"h":540,"cols":6,"rows":5,"bytes":130442,"names":["cornea","upper","lower","lidm"],"at":[[0,[[360,272,2.67],[364,75,3.18],[364,461,3.32],[360,351,2.73]]],[5,[[341,272,2.67],[363,75,3.18],[362,461,3.32],[343,351,2.73]]],[9,[[322,272,2.68],[361,75,3.18],[361,461,3.31],[326,350,2.74]]],[14,[[304,272,2.69],[360,75,3.18],[360,461,3.31],[309,350,2.75]]],[18,[[287,271,2.7],[359,75,3.18],[359,461,3.31],[293,349,2.76]]],[23,[[270,270,2.72],[357,75,3.18],[357,461,3.32],[277,348,2.78]]],[28,[[254,270,2.74],[356,75,3.18],[356,461,3.32],[263,346,2.8]]],[32,[[239,269,2.76],[355,75,3.19],[355,460,3.32],[249,345,2.82]]],[37,[[225,268,2.79],[354,75,3.19],[354,460,3.32],[236,343,2.85]]],[41,[[213,266,2.82],[352,75,3.19],[353,460,3.32],[225,341,2.88]]],[46,[[202,265,2.86],[351,75,3.19],[352,460,3.32],[214,339,2.91]]],[50,[[192,264,2.89],[350,75,3.19],[351,460,3.32],[205,337,2.94]]],[55,[[184,263,2.93],[349,75,3.2],[350,460,3.33],[198,335,2.98]]],[60,[[177,261,2.98],[348,75,3.2],[349,459,3.33],[192,333,3.02]]],[64,[[172,260,3.02],[348,75,3.2],[348,459,3.33],[187,331,3.06]]],[69,[[169,258,3.07],[347,75,3.21],[347,459,3.34],[183,328,3.1]]],[73,[[166,257,3.11],[346,76,3.21],[347,458,3.34],[180,326,3.15]]],[78,[[165,255,3.16],[346,76,3.21],[346,458,3.34],[179,324,3.19]]],[82,[[166,254,3.21],[345,76,3.22],[346,458,3.35],[179,322,3.24]]],[87,[[167,253,3.26],[345,76,3.22],[345,457,3.35],[181,319,3.29]]],[92,[[170,251,3.31],[344,76,3.22],[345,457,3.36],[183,317,3.33]]],[96,[[174,250,3.36],[344,76,3.23],[345,457,3.36],[187,315,3.38]]],[101,[[179,249,3.41],[344,76,3.23],[345,456,3.36],[191,313,3.43]]],[105,[[184,248,3.46],[344,76,3.24],[345,456,3.37],[196,311,3.47]]],[110,[[191,247,3.51],[344,76,3.24],[345,456,3.37],[202,309,3.52]]]],"arc":[0,110],"first":20},"nose":{"n":25,"w":720,"h":540,"cols":6,"rows":5,"bytes":93170,"names":["little","soft","bones"],"at":[[-80,[[385,395,1.76],[422,333,1.9],[335,144,1.74]]],[-73,[[384,396,1.75],[431,334,1.89],[336,144,1.75]]],[-67,[[383,396,1.75],[440,336,1.87],[337,144,1.75]]],[-60,[[382,397,1.74],[448,337,1.86],[338,144,1.76]]],[-53,[[380,397,1.74],[456,338,1.84],[340,144,1.76]]],[-47,[[378,398,1.74],[462,340,1.82],[342,144,1.76]]],[-40,[[376,398,1.73],[466,341,1.8],[344,144,1.77]]],[-33,[[374,398,1.73],[470,343,1.78],[346,145,1.77]]],[-27,[[371,399,1.73],[472,345,1.76],[349,145,1.77]]],[-20,[[369,399,1.73],[472,347,1.74],[352,145,1.77]]],[-13,[[366,399,1.73],[472,348,1.72],[354,145,1.77]]],[-7,[[363,399,1.72],[469,350,1.7],[357,145,1.78]]],[0,[[360,399,1.72],[465,352,1.68],[360,145,1.78]]],[7,[[357,399,1.72],[459,354,1.66],[363,145,1.78]]],[13,[[354,399,1.73],[452,355,1.64],[366,145,1.77]]],[20,[[351,399,1.73],[443,357,1.63],[368,145,1.77]]],[27,[[349,399,1.73],[433,358,1.62],[371,145,1.77]]],[33,[[346,398,1.73],[422,359,1.6],[374,145,1.77]]],[40,[[344,398,1.73],[409,360,1.59],[376,144,1.77]]],[47,[[342,398,1.74],[396,361,1.59],[378,144,1.76]]],[53,[[340,397,1.74],[382,362,1.58],[380,144,1.76]]],[60,[[338,397,1.74],[367,362,1.58],[382,144,1.76]]],[67,[[337,396,1.75],[353,362,1.58],[383,144,1.75]]],[73,[[336,396,1.75],[339,362,1.58],[384,144,1.75]]],[80,[[335,395,1.76],[325,361,1.59],[385,144,1.74]]]],"arc":[-80,80],"first":12}};
 
 /* Generated by src/antidotes.js from the checked transcription of the MOH Antidotes Quick Guide (Adult Dose), First Edition,
    January 2022: do not edit by hand. AXIDX: [index, entry name as printed, what it is for as printed, a plain name for search,
@@ -8515,6 +8533,8 @@ const READ_MS = {
   if (P['diabetic-foot-cpg']) foot(); else (globalThis.MORE_AFTER = globalThis.MORE_AFTER || []).push(foot);
 })();
 
+
+
 /* ================= The page in two parts (23 Nov 2026) =================
    Krishna: "Build 1 to 5" (1: open faster on a weak signal). Measured on 23 Nov 2026 (a phone at CPU slowed 4 times, slowed 4G):
    the home screen painted at about 0.7 s, but the guide answered taps only at about 5 s, when the whole page had arrived. The
@@ -8594,6 +8614,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 26 Nov 2026';
 const V8 = [
+  [`Four Green Zone topics from open teaching sites, and 3D you can turn`, `Wounds (assessment, closure, stitches out, the digital block and local anaesthetic toxicity), the red eye and eye injuries, nosebleeds and the ear and nose, and the red flags in dizziness, headache and back pain: built from WikEM, RCEMLearning, LITFL and St Emlyn's, which allow reuse, in the guide's own words, every number read on its page and checked again by a second reader. Malaysian sources lead where they speak: the anaesthesia safety guideline (2024), the glaucoma, nasopharyngeal carcinoma and stroke CPGs, and the NAG by link. Where the sources differ, each step gives both. New calculators: the local anaesthetic maximum dose and tetanus after a wound. New 3D scenes you can turn: a figure for the rule of nines in the burns calculator (tap a part to count it), a finger for the digital block, the eye in section, and the nose and where it bleeds.`, [['#wounds', 'Wounds'], ['#eye-red', 'Red eye'], ['#nosebleed-ent', 'Nosebleed, ear and nose'], ['#red-flags', 'Red flags'], ['#calc-burns', 'Burns: the 3D figure']]],
   [`Current alerts, the asthma CPG's corrected oxygen targets, and national guideline links`, `The home page shows current public health alerts, each dated, with its source and a tap to the guide's own page: dengue rising in Selangor, a rabies death after a dog bite without post-exposure prophylaxis, and the northeast monsoon floods. Each alert hides itself once it is out of date. The asthma CPG entry follows the CPG's corrected web version: oxygen to a target saturation of 94% and above, moderate SpO2 90 to 94%, and SpO2 94% and above under room air for improvement. Cellulitis, pneumonia, animal bites, urosepsis, leptospirosis and the diabetic foot link to the National Antimicrobial Guideline's updated topics (links only: its terms allow no copying). Suspected Nipah adds the national guideline of January 2026, in the guide's own words with its sections and pages, and the abbreviation list names its circular (Bil.4/2024). What differs from the department's documents is under Still to confirm.`, [['#home', 'Home'], ['#asthma-cpg', 'Asthma CPG'], ['#infection-alerts--nipah', 'Suspected Nipah']], ['#asthma-cpg', '#infection-alerts', '#cellulitis', '#pneumonia', '#animal-bites', '#renal-colic', '#diabetic-foot-cpg']],
   [`Calmer screens: sources named, calculators that open on themselves, and a quieter night`, `A calculator now names its source as Source: (NEWS2 said "Not in the source" above its own citation), and keeps "Not in the source" for what its source leaves out. On a phone a calculator opens on its own banner, short units sit inside their boxes, and once you have typed, a slim bar above the tab bar keeps the result in reach while it is off screen. The antidotes, abbreviations and antimicrobial guides now follow one page pattern, with their names in the top bar; search results sit under quiet heads with counts, in the same order; the Now tile on the home page opens on one line; and at night the outcome colours are the same hues, quieter. Settings has a new switch to try: Compact tab bar while scrolling (off). No clinical content changed.`, [['#calc-news2', 'NEWS2'], ['#antidotes', 'Antidotes'], ['#home', 'Home']]],
   [`Discharge advice in Bahasa Melayu, the advice as films, and What's new in 60 seconds`, `The seven discharge advice tabs (mild head injury, dengue, the Asthma Zone, gastroenteritis, renal colic, abdominal pain and hypoglycaemia) now switch to Bahasa Melayu, line for line, with a Malay read-aloud, and their patient pages and QR codes come in Malay too: the translation is the guide's own, approved by the guide owner on 24 Nov 2026. Each of the seven tabs also has a short film, every line on screen as it is read, for the patient to watch on the tab or their own phone. The patient journey can be heard in Bahasa Melayu, with Malay captions. What's new opens on a 60-second film of what changed. The cancer pain film no longer shows an empty card in its fourth part.`, [['#renal-colic', 'Renal colic'], ['#journey', 'Patient journey'], ['#new', "What's new"]], ['#mild-tbi', '#dengue', '#asthma-zone', '#gastroenteritis', '#renal-colic', '#abdominal-pain', '#hypoglycaemia']],
@@ -8817,6 +8838,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'From the open teaching sites round of 26 Nov 2026 (WikEM, RCEMLearning, LITFL, St Emlyn\'s; sources/edu/). Still to confirm, each where the sources differ or the department\'s own practice is not written down: (1) local anaesthetic: which maximum the department uses for plain lidocaine (5 mg/kg, max 300 mg, WikEM; 3 mg/kg, RCEM wounds; 4.5 mg/kg, RCEM module) and bupivacaine, and whether adrenaline is used in fingers; (2) tetanus: the department\'s wound rule (RCEM\'s UK rule and WikEM\'s US rule differ; no current Malaysian schedule was found), and the Sero-Tet dose for prevention (the department\'s dosing and dilution guide prints 500 units once for tetanus treatment, the educational sources 250 IU), and which LA/RA guide its lignocaine page refers to; (3) nosebleed: the ENT route for a packed nose, who removes a pack and when, antibiotics with a pack, and which of a vasoconstrictor, silver nitrate, tranexamic acid and nasal packs the ED stocks; (4) the eye route for chemical injury, red flags and angle closure, the ED drugs for angle closure, and, against the MOH Standard Practice Guidelines for AMOs in Ophthalmology (2024, which the guide now leads with), the irrigation volume (2 pints, MOH; 1 to 3 litres, the teaching sites) and the pH end-point; (5) wounds: which team takes a hand tendon and a face wound, and antibiotics (the MOH AMO emergency guideline, Appendix 15, lists IV antibiotics to prevent infection; RCEM says routine prophylaxis for simple wounds has no scientific basis); (6) cauda equina: the route to MRI and the spinal team, and whether a bladder scan is used; (7) giant cell arteritis: the referral route and who starts steroids.',
   'From the content round of 26 Nov 2026 (national documents read on 25 Nov 2026). Still to confirm: (1) the national Nipah guideline (January 2026), brought into force by circular KPK Bil. 16/2026 of 6 May 2026, after the UKI memo (3 Mar 2026) and the department memo: its list of hospitals for confirmed cases (Annex 5) names Hospital Sungai Buloh and Hospital Tunku Azizah for Selangor, KL and Putrajaya, not HKL, while the UKI memo admits to SW28; and for screening and history-taking it asks staff for a three-ply surgical mask, gown and gloves (9.1), where the department memo asks for full PPE with N95 or PAPR. Which applies at HKL, which of its phases applies now, and do the memos need updating? (2) The HKL mpox pathway (Sept 2024) predates the national Guidelines of MPOX Management Malaysia, Third Edition (18 Sep 2025), which could not be opened on 25 Nov 2026 (its download fails on mpox.moh.gov.my). The national outpatient flowchart of Sept 2024 also screens an unexplained rash with no contact, and travel to affected countries, and admits for persistent fever beyond day 5, dehydration, and age under 2 or over 60, which the HKL pathway does not list. Has the department checked its pathway against the 3rd edition?',
   'From the Malay versions added on 24 Nov 2026 (approved by the guide owner the same day). Still to confirm: the Asthma Zone advice comes from the asthma memo of Nov 2025, while its patient page names the ebook as its source.',
   `From the documents added on 21 Nov 2026 at the guide owner's "add the documents that was left out". Still to confirm: (1) the MOH procedure for discharge at own risk (KPK circular Bil. 24/2021) is written for ward inpatients and never mentions the emergency department: does the department apply it in the ED, and is its Borang A the AOR form the department policy 2026 (32.3) means; (2) the MOH abbreviation list Bil.1/2024 was issued with circular KPK Bil.4/2024 (19 Apr 2024), which allows only the Ministry's approved abbreviations in medical records, and gives only the meanings it prints (TDS only as "Toilet, Debridement And Suturing", BD only as "Binswanger's Disease"): where its do-not-use list (named in its row 1500, and not attached to the circular) is; (3) the leptospirosis circular Bil. 26/2021 prints the child's amoxicillin as "50 mg/kg dose oral 608 hourly" (in both copies circulated), gives no regimen for children aged 8 and over, and is written for primary care: what the department uses; (4) the smoking products circular Bil. 25/2026 names no route for sending its notification form to the PKD: how the department sends it; (5) the CME deck on the aggressive patient (circulated 13 Oct 2026, undated) has its own dose table (slide 53, haloperidol, olanzapine, risperidone, lorazepam, diazepam and midazolam): how it compares with the ebook's table on the behavioural disturbance pathway, which stays the department's route; (6) the MOH Antidotes Quick Guide (2022) prints lines its reader found doubtful, shown as printed with a Check mark: calcium gluconate's maximum "3000-6000mg/kg/dose" after 60 mg/kg/dose; dantrolene's indication "Malignant hypothermia" and its 70 ml title against 60 ml of water for injection; atropine "0.5 to 2.4 mg/kg/hour"; bromocriptine's two maximums; D-penicillamine's two daily doses; methylene blue's two dose paragraphs; folinic acid's 50 mg/5 ml title against 50 mg/ml; and the storage tables of idarucizumab and the 3-factor PCC, which contradict the text under them; whether a later edition exists; and how its entries compare with the ebook\'s pathways and the hospital\'s regimens (N-acetylcysteine with the paracetamol overdose pathway and the HKL NAC regimen; naloxone and flumazenil), which has not been done; (7) the aggressive patient deck\'s HKL risk-of-violence form prints "> 2" factors for high risk and "≥ 2" for moderate (slide 22); (8) the CT brain CME prints the narrow window as "WW: 8 WL:32" (slide 4), shown as printed.`,
@@ -8965,7 +8987,8 @@ const ICONS = {
   feather:'<path d="M19 4C11 4 6 9 6 17v3"/><path d="M6 17c6 0 11-4 13-13M10 13h5"/>',
   ext:'<path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>',
   flask:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.4 14h9.2"/>',
-  bone:'<path d="M9.2 7.6l7.2 7.2M7.6 9.2l7.2 7.2"/><circle cx="7.8" cy="5.6" r="2"/><circle cx="5.6" cy="7.8" r="2"/><circle cx="18.4" cy="16.2" r="2"/><circle cx="16.2" cy="18.4" r="2"/>'
+  bone:'<path d="M9.2 7.6l7.2 7.2M7.6 9.2l7.2 7.2"/><circle cx="7.8" cy="5.6" r="2"/><circle cx="5.6" cy="7.8" r="2"/><circle cx="18.4" cy="16.2" r="2"/><circle cx="16.2" cy="18.4" r="2"/>',
+  eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3.2"/>'
 };
 const svg = (k, cls = '', fill = false) => `<svg class="i${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[k] || ''}</svg>`;
 /* The mark: the green floor line, leading from the door to care */
@@ -9356,8 +9379,11 @@ FIGS.tlclock = () => { const R = [['Morning', '8.00 am', '2.00 pm'], ['Afternoon
 /* ================= The 3D abdomen map (12 Nov 2026) =================
    The handbook's nine regions (p. 7) on a glass torso rendered with Blender for this guide (sources/abdo/abdo3d.blend): the front
    view first (abdo3d/poster.webp), the patient's right on the screen's left, labelled. Tap a region to light it and see what to
-   think of there. The slider, or a sideways drag, turns the torso through 72 degrees: the 25 frames (abdo3d/fNN.webp, about
-   19 KB each) download only when it is first turned. A3D (data17.js) holds each region's outline on each frame. */
+   think of there. The slider, or a sideways drag, turns the torso through 72 degrees: the 25 frames download only when it is
+   first turned. A3D (data17.js) holds each region's outline on each frame. Since 26 Nov 2026 the frames are two pictures of 13
+   and 12 (abdo3d/frames-a.webp, frames-b.webp, five to a row) and the lit front views one (abdo3d/front-lit.webp, three to a
+   row), by src/abdo3d-pack.py, so the artifact keeps room under its file limit; the view shown is a part of one (.a3-sheet). */
+const A3S = {f:['abdo3d/frames-a.webp', 'abdo3d/frames-b.webp'], per:13, cols:5, rows:3, lit:'abdo3d/front-lit.webp', lcols:3, lrows:3};
 let A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : [];
 MORE_DO.push(() => { A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : []; });
 const a3pad = i => String(i).padStart(2, '0');
@@ -9368,20 +9394,30 @@ function a3svg(i, on){
 function abdo3dHTML(){
   if (typeof A3D === 'undefined') return '';
   return `<figure class="fig a3" data-a3 data-i="${A3D.front}" data-on="0"><div class="a3-bar"><b>The nine regions, in 3D</b></div>` +
-    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions">` +
+    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions"><div class="a3-sheet" aria-hidden="true" hidden></div>` +
     `<svg viewBox="0 0 ${A3D.w} ${A3D.h}">${a3svg(A3D.front, 0)}</svg><span class="a3-s a3-sr">Patient's right</span><span class="a3-s a3-sl">Patient's left</span></div>` +
     `<label class="a3-turn"><span>Turn</span><input type="range" min="0" max="${A3D.frames.length - 1}" step="1" value="${A3D.front}" data-a3yaw aria-label="Turn the torso"></label>` +
     `<div class="a3-info" aria-live="polite"><p class="hint">Tap a region to light it and see what to think of there.</p></div>` +
     `<figcaption>Schematic regions only, as the handbook (p. 7) draws them: organs and pain can overlap. The glass torso is this guide's own model, made in Blender.</figcaption></figure>`;
 }
 FIGS.abdo3d = abdo3dHTML;
+/* The 26 Nov 2026 procedure scenes (spin3d.py), shown on the steps that name them */
+['nose', 'finger', 'eye'].forEach(k => { FIGS['spin-' + k] = () => spinHTML(k); });
 const a3loaded = new Set();
+/* Shows view i (or, at the front with a region lit, that region's lit view) as its part of a packed picture; data-view says which */
+function a3view(fig, i, on){
+  const sh = fig.querySelector('.a3-sheet'), at = (url, k, cols, rows) => { const c = k % cols, r = Math.floor(k / cols);
+    sh.style.cssText = `background-image:url(${url});background-size:${cols * 100}% ${rows * 100}%;background-position:${(c / (cols - 1) * 100).toFixed(3)}% ${(r / (rows - 1) * 100).toFixed(3)}%`; sh.hidden = false; };
+  if (i === A3D.front && on){ at(A3S.lit, on - 1, A3S.lcols, A3S.lrows); fig.dataset.view = 'lit' + on; return; }
+  if (i === A3D.front && !a3loaded.size){ sh.hidden = true; fig.dataset.view = 'poster'; return; }
+  const s = i < A3S.per ? 0 : 1; at(A3S.f[s], i - s * A3S.per, A3S.cols, A3S.rows); fig.dataset.view = 'f' + i;
+}
 function a3frame(fig, i){
   i = Math.max(0, Math.min(A3D.frames.length - 1, i));
   const on = +fig.dataset.on || 0;
   fig.dataset.i = i;
-  if (!a3loaded.size) A3D.frames.forEach((_, k) => { const im = new Image(); im.src = `abdo3d/f${a3pad(k)}.webp`; a3loaded.add(im); });
-  fig.querySelector('.a3-img').src = i === A3D.front && on ? `abdo3d/front-lit/r${on}.webp` : `abdo3d/f${a3pad(i)}.webp`;
+  if (!a3loaded.size) A3S.f.forEach(u => { const im = new Image(); im.src = u; a3loaded.add(im); });
+  a3view(fig, i, on);
   fig.querySelector('svg').innerHTML = a3svg(i, on);
   const yaw = A3D.frames[i][0], r = fig.querySelector('[data-a3yaw]'); if (+r.value !== i) r.value = i;
   r.setAttribute('aria-valuetext', yaw === 0 ? 'Front view' : Math.abs(yaw) + ' degrees toward the patient\'s ' + (yaw > 0 ? 'left' : 'right'));
@@ -9392,7 +9428,7 @@ function a3pick(fig, r){
   const i = +fig.dataset.i;
   fig.querySelectorAll('.a3-g').forEach(g => g.classList.toggle('on', +g.dataset.a3r === on));
   fig.classList.toggle('a3-pick', !!on);
-  if (i === A3D.front) fig.querySelector('.a3-img').src = on ? `abdo3d/front-lit/r${on}.webp` : (a3loaded.size ? `abdo3d/f${a3pad(i)}.webp` : 'abdo3d/poster.webp');
+  if (i === A3D.front) a3view(fig, i, on);
   const R = A3_REG[on - 1];
   fig.querySelector('.a3-info').innerHTML = on ? `<h4>${esc(R[0])}</h4><ul>${R[1].map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="links"><a class="pill" href="#abdo-handbook--rg${on}">Open region ${on}${svg('chev')}</a>${R[2].map(l => `<a class="pill" href="#abdo-handbook--${l[0]}">${esc(l[1])}</a>`).join('')}</div>` : '<p class="hint">Tap a region to light it and see what to think of there.</p>';
 }
@@ -9419,17 +9455,63 @@ const SPIN_INFO = {
     label:i => JOURNEY[i].short, dim:i => !!JOURNEY[i].optional,
     info:i => { const s = JOURNEY[i]; return `<h4>${i + 1}. ${esc(s.title)}</h4><ul>${s.items.slice(0, 3).map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="links"><a class="pill" href="#journey-${i + 1}">Open stop ${i + 1}${svg('chev')}</a></div>`; }}
 };
+/* The 26 Nov 2026 round: the rule of nines on a turnable adult figure, in the burns calculator. Its eight parts are the rows of
+   RULE_OF_NINES (data24.js, the VicBurns poster), in that order; each part's outline on each view is SPIN_REG.burns (traced by
+   spin-pack.py from the ID pass). A tap on a part ticks its row, and a tick in the list lights the part: the list stays the
+   accessible way in, so the outlines are hidden from screen readers. Nothing is stored, as for every calculator. */
+SPIN_INFO.burns = {t:'Rule of nines, in 3D', alt:'A pearl figure of an adult in eight parts, standing on a glass base',
+  hint:'Tap a part to tick it, or drag sideways to turn the figure and see the back.',
+  cap:'Adults only. The parts and their shares are the rule of nines rows below (VicBurns poster): whole regions only, not erythema; add scattered patches by the patient\'s palms. The patient\'s right is on the screen\'s left at the first view. This guide\'s own model, made in Blender.',
+  regions:true, label:j => RULE_OF_NINES[j][0] + ', ' + RULE_OF_NINES[j][1] + '%', on:j => !!(cGet('burns', 'rg') || [])[j],
+  tick:j => { const c = $(`#calcbox input[data-k="rg"][data-i="${j}"]`); if (c) c.click(); }};
+/* The 26 Nov 2026 procedure scenes. Each label says only what its step says, from the source the step names (sources/edu/). */
+const SPIN_STEP = (label, text, href, src) => ({label, info:() => `<h4>${esc(label)}</h4><p>${esc(text)}</p><div class="links"><a class="pill" href="${href}">Open the step${svg('chev')}</a></div><p class="hint">${esc(src)}</p>`}); /* drawn on a tap: esc and svg come later in this file */
+const SPIN_PTS = {
+  nose:[SPIN_STEP('Little\'s area', 'Most nosebleeds start at the front of the septum, Little\'s area (Kiesselbach\'s plexus): about 90% (WikEM) or 95% (RCEM).', '#nosebleed-ent--nbfa', 'WikEM, Epistaxis; RCEMLearning, Acute Epistaxis'),
+        SPIN_STEP('Pinch the soft part', 'Pinch the soft part of the nose firmly, pressing the nostrils together, with the patient sitting up and leaning forward (RCEM).', '#nosebleed-ent--nbfa', 'RCEMLearning, Acute Epistaxis'),
+        SPIN_STEP('The nasal bones', 'Pinch below the hard nasal bones, pressing the sides of the nose against the septum (LITFL; WikEM: over the cartilage, not the bone).', '#nosebleed-ent--nbfa', 'LITFL, A Case of Epistaxis; WikEM, Epistaxis')],
+  finger:[SPIN_STEP('Palm-side nerves', 'Two palmar digital nerves, at 4 and 8 o\'clock, nearer the midline than the back pair (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block'),
+          SPIN_STEP('Back nerves', 'Two dorsal digital nerves, at 10 and 2 o\'clock (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block'),
+          SPIN_STEP('Needle in here', 'At the base of the finger near the knuckle, to one side of the midline; advance around the bone toward the palm, about 1 ml there, then about 1 ml more as you withdraw (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block'),
+          SPIN_STEP('Then the other side', 'Repeat on the other side of the finger; stop if the skin tents (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block')],
+  eye:[SPIN_STEP('Cornea', 'An abrasion takes up fluorescein and looks green under blue light; take contact lenses out first (RCEM).', '#eye-red--fb', 'RCEMLearning, Corneal Injuries'),
+       SPIN_STEP('The fornices', 'Irrigate the cornea, the conjunctiva, the fornices and the everted lids (RCEM).', '#eye-red--chem', 'RCEMLearning, 24 Hour Ophthalmic Emergencies, part 2'),
+       SPIN_STEP('Lower (inferior) fornix', 'The pH indicator paper goes in the inferior fornix (RCEM).', '#eye-red--chemph', 'RCEMLearning, Chemical Eye Injuries in the ED'),
+       SPIN_STEP('Evert the lid', 'Evert the upper lid to find a subtarsal foreign body, unless a penetrating injury is suspected (RCEM).', '#eye-red--fb', 'RCEMLearning, Corneal Injuries')]
+};
+Object.assign(SPIN_INFO, {
+  nose:{t:'Where it bleeds, in 3D', alt:'A frosted glass face with a glass nose: the hard nasal bones at the top, the septum down the middle with a glowing spot at its front and bottom, and a mint ring around the soft part', home:'Front view',
+    hint:'Drag sideways to see the nose from the side, or tap a number.', cap:'The guide\'s own schematic model, made in Blender: not anatomy to measure from. Each label says only what its step says.',
+    label:i => SPIN_PTS.nose[i].label, info:i => SPIN_PTS.nose[i].info()},
+  finger:{t:'The digital block, in 3D', alt:'A glass finger standing up from the hand, its bones inside, four glowing nerves along its sides and two mint points at its base', home:'Palm side',
+    hint:'Drag sideways to turn the finger round, or tap a number.', cap:'The guide\'s own schematic model, made in Blender: not anatomy to measure from. Each label says only what its step says.',
+    label:i => SPIN_PTS.finger[i].label, info:i => SPIN_PTS.finger[i].info()},
+  eye:{t:'The eye in section, in 3D', alt:'An eye in its lids, cut down the middle: the lining glowing mint from the lid margins into the pockets above and below the eye, which glow amber', home:'Cut view',
+    hint:'Drag sideways to turn from the cut to the front of the eye, or tap a number.', cap:'The guide\'s own schematic model, cut down the middle, made in Blender: not anatomy to measure from. Each label says only what its step says.',
+    label:i => SPIN_PTS.eye[i].label, info:i => SPIN_PTS.eye[i].info()}
+});
 const spinOK = k => typeof SPIN !== 'undefined' && SPIN[k] && SPIN_INFO[k];
+const spinReg = k => typeof SPIN_REG !== 'undefined' && SPIN_REG[k]; /* data34.js, in the page's second part */
+/* The parts' outlines on view i, each lit when its row is ticked; the names of the ticked parts under the figure */
+function spinRegs(fig){
+  const k = fig.dataset.spin, S = SPIN[k], I = SPIN_INFO[k], R = spinReg(k); if (!R) return;
+  const i = +fig.dataset.i, sv = fig.querySelector('.spin-reg');
+  sv.innerHTML = R[i].map(([j, pts]) => `<polygon points="${pts}" data-spin-reg="${j}" class="${I.on(j) ? 'on' : ''}"><title>${esc(I.label(j))}</title></polygon>`).join('');
+  const on = S.regions.map((_, j) => j).filter(I.on);
+  fig.querySelector('.spin-info').innerHTML = on.length ? `<p class="spin-sum">${on.map(j => `<span>${esc(I.label(j))}</span>`).join('')}</p>` : `<p class="hint">${esc(I.hint)}</p>`;
+}
 function spinLabels(k, i, on){
   const S = SPIN[k], I = SPIN_INFO[k];
+  if (I.regions) return '';
   return S.at[i][1].map(([x, y, z], j) => `<button type="button" class="spin-pin${on === j ? ' on' : ''}${I.dim && I.dim(j) ? ' dim' : ''}" data-spin-pin="${j}" style="left:${(x / S.w * 100).toFixed(2)}%;top:${(y / S.h * 100).toFixed(2)}%;z-index:${Math.max(1, Math.round(100 - z * 4))}" aria-pressed="${on === j}" aria-label="${esc((j + 1) + '. ' + I.label(j))}"><i>${j + 1}</i><span>${esc(I.label(j))}</span></button>`).join('');
 }
 function spinHTML(k){
   if (!spinOK(k)) return '';
   const S = SPIN[k], I = SPIN_INFO[k], kb = Math.round(S.bytes / 1024);
-  return `<figure class="fig spin" data-spin="${k}" data-i="0" data-on="-1"><div class="spin-bar"><b>${esc(I.t)}</b><button type="button" class="sm spin-go" data-spin-go>${svg('play')}<span>Turn in 3D</span><small>${kb} KB</small></button></div>` +
-    `<div class="spin-stage" style="aspect-ratio:${S.w}/${S.h}"><img class="spin-img" src="spin/${k}-0.webp" width="${S.w}" height="${S.h}" loading="lazy" decoding="async" alt="${esc(I.alt)}"><div class="spin-sheet" aria-hidden="true"></div><div class="spin-lbl">${spinLabels(k, 0, -1)}</div><span class="spin-wait" aria-hidden="true"></span></div>` +
-    `<label class="spin-turn"><span>Turn</span><input type="range" min="0" max="${S.n - 1}" step="1" value="0" data-spin-yaw aria-label="Turn the model" aria-valuetext="Front view"></label>` +
+  const f0 = S.first || 0;
+  return `<figure class="fig spin${I.regions ? ' spin-parts' : ''}${S.h > S.w ? ' spin-tall' : ''}" data-spin="${k}" data-i="${f0}" data-on="-1"><div class="spin-bar"><b>${esc(I.t)}</b><button type="button" class="sm spin-go" data-spin-go>${svg('play')}<span>Turn in 3D</span><small>${kb} KB</small></button></div>` +
+    `<div class="spin-stage" style="aspect-ratio:${S.w}/${S.h}"><img class="spin-img" src="spin/${k}-0.webp" width="${S.w}" height="${S.h}" loading="lazy" decoding="async" alt="${esc(I.alt)}"><div class="spin-sheet" aria-hidden="true"></div>${I.regions ? `<svg class="spin-reg" viewBox="0 0 ${S.w} ${S.h}" aria-hidden="true"></svg>` : ''}<div class="spin-lbl">${spinLabels(k, f0, -1)}</div><span class="spin-wait" aria-hidden="true"></span></div>` +
+    `<label class="spin-turn"><span>Turn</span><input type="range" min="0" max="${S.n - 1}" step="1" value="${f0}" data-spin-yaw aria-label="Turn the model" aria-valuetext="${esc(I.home || 'Front view')}"></label>` +
     `<div class="spin-info" aria-live="polite"><p class="hint">${esc(I.hint)}</p></div><figcaption>${esc(I.cap)}</figcaption></figure>`;
 }
 const spinReady = new Set(), spinGet = {};
@@ -9444,29 +9526,36 @@ function spinPaint(fig, i){
   const k = fig.dataset.spin, S = SPIN[k], sh = fig.querySelector('.spin-sheet'), c = i % S.cols, r = Math.floor(i / S.cols);
   if (spinReady.has(k)) sh.style.cssText = `background-image:url(spin/${k}.webp);background-size:${S.cols * 100}% ${S.rows * 100}%;background-position:${S.cols > 1 ? (c / (S.cols - 1) * 100).toFixed(3) : 0}% ${S.rows > 1 ? (r / (S.rows - 1) * 100).toFixed(3) : 0}%`;
   fig.querySelector('.spin-lbl').innerHTML = spinLabels(k, i, +fig.dataset.on);
+  if (S.regions) spinRegs(fig);
   const rg = fig.querySelector('[data-spin-yaw]'); if (+rg.value !== i) rg.value = i;
-  rg.setAttribute('aria-valuetext', i === 0 ? 'Front view' : `Turned ${S.at[i][0]} degrees`);
+  const f0 = S.first || 0;
+  rg.setAttribute('aria-valuetext', i === f0 ? (SPIN_INFO[k].home || 'Front view') : `Turned ${S.at[i][0] - S.at[f0][0]} degrees`);
 }
 function spinTo(fig, pos){
-  const S = SPIN[fig.dataset.spin], i = ((Math.round(pos) % S.n) + S.n) % S.n;
+  const S = SPIN[fig.dataset.spin], i = S.arc ? Math.max(0, Math.min(S.n - 1, Math.round(pos))) : ((Math.round(pos) % S.n) + S.n) % S.n; /* an arc stops at its ends */
   if (+fig.dataset.i === i) return;
   fig.dataset.i = i; spinPaint(fig, i);
 }
-/* Turn in 3D: once around in about 2.6 s, easing in and out; never with reduced motion */
+/* Turn in 3D: once around in about 2.6 s, easing in and out (a scene that turns through an arc swings to one end, back through
+   its first view to the other end, and home); never with reduced motion */
 function spinPlay(fig){
   const S = SPIN[fig.dataset.spin], from = +fig.dataset.i, t0 = performance.now(), dur = 2600, id = (fig._run || 0) + 1;
   fig._run = id;
   const tick = now => { if (fig._run !== id || !fig.isConnected) return; const p = Math.min(1, (now - t0) / dur), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-    spinTo(fig, from + e * S.n); if (p < 1) requestAnimationFrame(tick); };
+    if (S.arc){ const f0 = S.first || 0, w = Math.sin(2 * Math.PI * e); spinTo(fig, from === f0 ? f0 + w * (w > 0 ? S.n - 1 - f0 : f0) : from + (f0 - from) * e); }
+    else spinTo(fig, from + e * S.n);
+    if (p < 1) requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
 }
 let spinDrag = null;
 document.addEventListener('pointerdown', e => {
   const st = e.target.closest && e.target.closest('.spin-stage'); if (!st || !e.isPrimary || e.target.closest('.spin-pin')) return;
-  const fig = st.closest('[data-spin]'); fig._run = (fig._run || 0) + 1; spinLoad(fig);
+  const fig = st.closest('[data-spin]'); fig._run = (fig._run || 0) + 1; fig._moved = false;
+  if (!SPIN[fig.dataset.spin].regions) spinLoad(fig);
   spinDrag = {fig, x:e.clientX, i:+fig.dataset.i, v:0, lx:e.clientX, lt:e.timeStamp};
 });
 document.addEventListener('pointermove', e => {
+  if (spinDrag && Math.abs(e.clientX - spinDrag.x) > 6 && !spinDrag.fig._moved){ spinDrag.fig._moved = true; spinLoad(spinDrag.fig); }
   if (!spinDrag || !spinReady.has(spinDrag.fig.dataset.spin)) return;
   const d = spinDrag, dt = Math.max(1, e.timeStamp - d.lt); d.v = (e.clientX - d.lx) / dt; d.lx = e.clientX; d.lt = e.timeStamp;
   spinTo(d.fig, d.i - (e.clientX - d.x) / SPIN_PX);
@@ -9483,6 +9572,8 @@ document.addEventListener('input', e => { const r = e.target.closest && e.target
 document.addEventListener('click', e => {
   const g = e.target.closest && e.target.closest('[data-spin-go]');
   if (g){ const fig = g.closest('[data-spin]'); spinLoad(fig).then(() => { if (!REDUCED) spinPlay(fig); }); return; }
+  const rp = e.target.closest && e.target.closest('[data-spin-reg]');
+  if (rp){ const fig = rp.closest('[data-spin]'); if (fig._moved) return; SPIN_INFO[fig.dataset.spin].tick(+rp.dataset.spinReg); spinRegs(fig); return; }
   const p = e.target.closest && e.target.closest('[data-spin-pin]'); if (!p) return;
   const fig = p.closest('[data-spin]'), k = fig.dataset.spin, j = +p.dataset.spinPin, on = +fig.dataset.on === j ? -1 : j, I = SPIN_INFO[k];
   fig.dataset.on = on; fig.classList.toggle('spin-pick', on >= 0);
@@ -9582,11 +9673,12 @@ const PROT_IDS = Object.keys(P).filter(id => P[id].sub === 'protocol');
 const CATS = [
   {k:'heart', t:'Heart and vessels', s:'Heart', ic:'heart', c:'c-heart', j:'t-garnet', ids:['acs','acs-cpg','heart-failure','hypertensive-urgency','svt','syncope','dvt','vte-cpg']},
   {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','asthma-cpg','copd-cpg','pneumonia','sinusitis-cpg','anaphylaxis']},
-  {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','behavioural-disturbance']},
+  {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','red-flags','behavioural-disturbance']},
   {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','abdo-handbook','gastroenteritis','biliary','renal-colic','ckd-cpg','scrotal-pain','fb-children-cpg']},
   {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis','sore-throat-cpg']},
   {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','t2dm-cpg','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','snakebite-moh','pain','cancer-pain-cpg']},
-  {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['xray-guide','hip-fracture-cpg','avulsed-tooth-cpg']},
+  {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['wounds','xray-guide','hip-fracture-cpg','avulsed-tooth-cpg']},
+  {k:'eent', t:'Eye, ear and nose', s:'Eye and ENT', ic:'eye', c:'c-breath', j:'t-teal', ids:['eye-red','nosebleed-ent']},
   {k:'scores', t:'Scores and rules', s:'Scores', ic:'scale', c:'c-flow', j:'t-sapphire', ids:['ed-scores']},
   {k:'flow', t:'Green Zone flow and referrals', s:'Flow and referrals', ic:'route', c:'c-flow', j:'t-emerald', ids:FLOW_IDS},
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
@@ -9704,7 +9796,7 @@ const ALIASES = [
   /* Malay */
   ['sakit perut', 'abdominal pain'], ['sakit dada', 'chest pain'], ['sesak nafas', 'breathless'], ['semput', 'asthma'], ['lelah', 'asthma'],
   ['demam denggi', 'dengue'], ['denggi', 'dengue'], ['cirit birit', 'diarrhoea'], ['muntah', 'vomiting'], ['kencing batu', 'renal colic'], ['batu karang', 'renal colic'],
-  ['gigitan anjing', 'dog bite'], ['gigitan kucing', 'cat bite'], ['gigitan ular', 'snake bite'], ['patukan ular', 'snake bite'], ['patah', 'fracture'],
+  ['gigitan anjing', 'dog bite'], ['gigitan kucing', 'cat bite'], ['gigitan ular', 'snake bite'], ['digigit anjing', 'dog bite'], ['digigit kucing', 'cat bite'], ['digigit ular', 'snake bite'], ['patukan ular', 'snake bite'], ['patah', 'fracture'],
   ['kepala terhantuk', 'head injury'], ['kecederaan kepala', 'head injury'], ['pengsan', 'syncope'], ['gula rendah', 'hypoglycaemia'], ['kencing manis', 'diabetes'],
   ['darah tinggi', 'hypertensive'], ['sakit tekak', 'sore throat'], ['resdung', 'rhinosinusitis'], ['gigi tercabut', 'avulsed tooth'], ['tertelan', 'ingestion'],
   ['alahan', 'anaphylaxis'], ['buah zakar', 'scrotal'], ['angin ahmar', 'stroke'], ['strok', 'stroke'], ['serangan jantung', 'acute coronary syndrome'], ['sakit sendi', 'gout'],
@@ -10773,7 +10865,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir', 'ctbrain', 'antidote', 'abbrev', 'aggress', 'alerts', 'opennow', 'keynums', 'newsband', 'rulesband']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir', 'ctbrain', 'antidote', 'abbrev', 'aggress', 'alerts', 'opennow', 'keynums', 'newsband', 'rulesband', 'wounds', 'eent', 'entbleed', 'redflag']);
 /* Stills without a loop yet (the 12 Nov 2026 review: Flow Studio stills for What's new, Sources and about, the wall poster
    and the dilution guide): shown like a tile's still, never asked for a video. Move a key to TILE_KEYS once its loop is in tiles/. */
 const STILL_KEYS = new Set([]); /* empty: the four review banners' loops and the ED extension directory's (extdir) went in on 12 Nov 2026 */
@@ -11087,7 +11179,7 @@ function card(n, p){
   }
   if (n.step){
     const obs = n.kind === 'observe';
-    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2 id="${sq}"><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) ? figHTML(n.fig) : ''}
+    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2 id="${sq}"><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) && !/^spin-/.test(n.fig) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) || /^spin-/.test(n.fig || '') ? figHTML(n.fig) : ''}
       <div class="opts"><button type="button" class="opt sugg" data-next><kbd>1</kbd><span>Done, continue</span>${svg('chev', 'gt')}</button></div></div></div>`;
   }
   const sc = n.check === 'score';
@@ -11480,11 +11572,11 @@ function renderDcheck(){
    Checklists and tables come straight from the pathway data, so a calculator cannot drift from its pathway. */
 const CALC_GROUPS = [
   {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'The one-screen assessment, triage vital signs, fluids, the test result, urine output, the shock index and adjusted weight'},
-  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin, asthma prednisolone, kidney function with drug doses, and the rabies vaccine and RIG'},
+  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin, asthma prednisolone, kidney function with drug doses, the rabies vaccine and RIG, and the local anaesthetic maximum'},
   {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65, Wells, McIsaac and the asthma action plan zones; ABCD2, the Ottawa SAH rule, Alvarado, qSOFA, NEWS2, MEWS and CIWA-Ar'},
   {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain (Obsess, TIMI, HEART), PE (Wells, PERC, age-adjusted D-dimer), syncope, SVT, blood pressure and AF (CHA2DS2-VASc, HAS-BLED)'},
   {k:'calm', t:'Pain and calm', j:'t-plum', ic:'feather', d:'Pain scales, BARS and RASS, and the cancer pain rescue dose'},
-  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria, the GCS and the Canadian CT Head Rule; the neck (Canadian C-spine, NEXUS); the Ottawa ankle, foot and knee rules; burns'},
+  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria, the GCS and the Canadian CT Head Rule; the neck (Canadian C-spine, NEXUS); the Ottawa ankle, foot and knee rules; burns; tetanus after a wound'},
   {k:'tox', t:'Poisoning and allergy', j:'t-obsidian', ic:'flask', d:'Paracetamol overdose and anaphylaxis'},
   {k:'kids', t:'Kids', j:'t-champagne', ic:'kid', d:'Child doses, the dehydration check, weight from age, and heart and breathing rates by age'}
 ];
@@ -12561,7 +12653,7 @@ const CALCS = {
   burns:{t:'Burns: size and fluids', g:'head', src:'VicBurns; RCH Melbourne', path:'#ed-scores--bsz', kw:'burn burns tbsa rule of nines palm parkland fluid resuscitation hartmann urine output scald luka terbakar melecur',
     sub:'TBSA by the rule of nines (adults) or your paediatric chart, then the Parkland volume and starting rate.',
     fields:v => [{k:'who', type:'seg', label:'Patient', re:true, opts:[['adult', 'Adult'], ['child', 'Child under 16']]},
-      ...((v.who || 'adult') === 'adult' ? [{k:'rg', type:'check', label:'Whole regions burnt (rule of nines; not erythema)', pts:true, items:() => RULE_OF_NINES}, ['palms', 'Scattered patches: number of the patient\'s palms', 'palms']]
+      ...((v.who || 'adult') === 'adult' ? [{type:'fig', html:() => spinHTML('burns')}, {k:'rg', type:'check', label:'Whole regions burnt (rule of nines; not erythema)', pts:true, items:() => RULE_OF_NINES}, ['palms', 'Scattered patches: number of the patient\'s palms', 'palms']]
         : [['tbsa', 'TBSA from a paediatric chart (Lund and Browder)', '%']]),
       ['wt', 'Weight', 'kg'], ['hrs', 'Hours since the burn', 'hours'], ['given', 'IV fluid already given', 'ml'],
       {k:'co', type:'seg', label:'Formula', opts:[['3', '3 ml/kg/%TBSA (RCH)'], ['4', '4 ml/kg/%TBSA (VicBurns: inhalation, electrical or other trauma)']]}],
@@ -12580,6 +12672,41 @@ const CALCS = {
       out.push(['Next 16 hours', Math.round(half / 16) + ' ml/hr', 'warn', Math.round(half) + ' ml']);
       out.push(['Urine output target', adult ? fx(0.5 * v.wt) + '\u2013' + fx(v.wt) + ' ml/hr' : fx(v.wt) + ' ml/hr', 'good', adult ? '0.5 to 1 ml/kg/hr (or 30 to 50 ml/hr)' : '1 ml/kg/hr']);
       return {outs:out, verdict:{cls:'stop', h:'Above the threshold: IV fluids and the burns team', p:'Hartmann\'s solution; titrate the rate by urine output, by 10 to 20% at a time (RCH).', href:'#ed-scores--bfx', link:'Open the step'}, gap:'The formulas set the starting rate; the urine output and fluid status set the rest (RCH).'};
+    }},
+  /* The 26 Nov 2026 round (data35.js, wounds): every figure is on the wounds entry's own steps, from the source named there.
+     Where the sources differ the calculator shows each, labelled, and chooses none (the department's choice is under Still to confirm). */
+  lamax:{t:'Local anaesthetic: maximum dose', g:'doses', src:'WikEM; RCEMLearning; CoA and MSA 2024', path:'#wounds--la', kw:'local anaesthetic anesthetic lidocaine lignocaine bupivacaine maximum dose max ml toxic toxicity wound suture digital block',
+    sub:'The most by weight, from each source, in mg and in ml of the strength you hold. The sources differ, so each is shown.',
+    fields:v => [{k:'drug', type:'seg', label:'Drug', re:true, opts:[['lido', 'Lignocaine'], ['bupi', 'Bupivacaine']]},
+      {k:'adr', type:'seg', label:'Adrenaline', opts:[['no', 'Plain'], ['yes', 'With adrenaline']]},
+      ...((v.drug || 'lido') === 'lido' ? [{k:'lc', type:'seg', label:'Strength', opts:[['10', '1% (10 mg/ml)'], ['20', '2% (20 mg/ml)']]}] : []),
+      ['wt', 'Weight (lean body weight, by the Malaysian guideline)', 'kg']],
+    note:'From WikEM (Local anesthetics), RCEMLearning (Surgical Management of Acute Wounds; the Local Anaesthetics module) and the Malaysian Guidelines on Safe Use of Medication in Anaesthesia (College of Anaesthesiologists and MSA, 2024), in the guide\'s own words. 1% lignocaine (lidocaine) is 10 mg/ml, 2% is 20 mg/ml, 0.5% bupivacaine is 5 mg/ml (WikEM). Toxicity can occur even within the maximum dose (RCEM). The department\'s dosing and dilution guide refers local anaesthesia to the LA/RA guide (printed p115).',
+    run(v){
+      if (!v.wt) return null;
+      const bad = badWt(v.wt, 2, 300); if (bad) return bad;
+      const lido = (v.drug || 'lido') === 'lido', adr = v.adr === 'yes', per = lido ? +(v.lc || 10) : 5;
+      const S = lido ? (adr ? [['WikEM', 7, 500], ['RCEM, wounds', 7], ['RCEM, LA module', 7]] : [['WikEM', 5, 300], ['RCEM, wounds', 3], ['RCEM, LA module', 4.5]])
+        : (adr ? [['WikEM', 3, 225], ['RCEM, LA module', 2]] : [['WikEM', 2.5, 175], ['RCEM, LA module', 2]]);
+      const outs = S.map(([s, k, cap]) => { const mg = cap ? Math.min(k * v.wt, cap) : k * v.wt, ml = mg / per;
+        return [s, Math.round(mg) + ' mg = ' + fx(Math.round(ml * 10) / 10) + ' ml', 'warn', k + ' mg/kg' + (cap ? ', max ' + cap + ' mg' + (k * v.wt > cap ? ' (the cap applies)' : '') : '') + ' · ' + (lido ? (per === 10 ? '1%' : '2%') : '0.5%') + ' ' + (lido ? 'lignocaine' : 'bupivacaine') + (adr ? ' with adrenaline' : '')]; });
+      return {outs, gap:'The Malaysian guideline gives the principle, not a figure: the maximum by milligrams per kilogram of lean body weight, and consider dose reductions of 10 to 20% at the extremes of age, in decompensated heart failure, in parturients, in uraemia or acidosis, and in liver disease with heart or kidney disease. No more than 0.5 mg of adrenaline at any one time (RCEM). Which figure the department uses is under Still to confirm.',
+        links:[['#wounds--last', 'Toxicity (LAST)'], ['#antidotes', 'Antidotes: lipid emulsion']]};
+    }},
+  tetanus:{t:'Tetanus after a wound', g:'head', src:'RCEMLearning; LITFL; WikEM', path:'#wounds--tet', kw:'tetanus att tig sero-tet immunoglobulin toxoid vaccine booster wound prone',
+    sub:'The UK rule RCEM gives, from the immunisation history and the wound, with WikEM\'s US rule beside it.',
+    fields:[{k:'hx', type:'pick', label:'Immunisation history', opts:[['in10', 'Adequately primed, last dose within 10 years'], ['over10', 'Adequately primed, last dose more than 10 years ago'], ['no', 'Not adequately primed, or not sure']]},
+      {k:'wd', type:'pick', label:'The wound', opts:[['clean', 'Clean'], ['prone', 'Tetanus-prone', 'For example a puncture in a contaminated setting, a foreign body, a compound fracture, sepsis, certain bites and scratches; surgery delayed over 6 hours (LITFL)'], ['high', 'High risk', 'Heavy contamination with material likely to hold spores, and/or extensive devitalised tissue (LITFL)']]}],
+    note:'RCEMLearning, Surgical Management of Acute Wounds in the ED (its table, adapted from the UK guidance); LITFL, Tetanus Immunoglobulin; WikEM, Tetanus prophylaxis and Laceration repair; in the guide\'s own words. The MOH AMO emergency guideline (2023, Appendix 15) lists tetanus status and tetanus for prophylaxis, with no schedule.',
+    run(v){
+      if (!v.hx || !v.wd) return null;
+      const VAX = 'An immediate reinforcing dose of vaccine', BOTH = VAX + ', and one dose of human tetanus immunoglobulin at a different site';
+      const T = {in10:{clean:'None needed', prone:'None needed', high:'None needed'}, over10:{clean:'None needed', prone:VAX, high:BOTH}, no:{clean:VAX, prone:BOTH, high:BOTH}};
+      const r = T[v.hx][v.wd], outs = [['UK rule (RCEM)', r, r === 'None needed' ? 'good' : 'warn', v.hx === 'no' ? 'Then complete the course: WikEM gives further doses at 1 month and 1 year' : '']];
+      if (r === BOTH){ outs.push(['Sero-Tet in the department\'s guide', '500 units', 'warn', 'Printed for tetanus treatment: IM or around the wound, once, a different site from ATT; not kept in the ED: from the A&E pharmacy, prescription signed by the ID, or the EP with the ID\'s verbal consent (dosing and dilution guide, p213). Its dose for prevention is under Still to confirm']); outs.push(['Educational sources', '250 IU', 'warn', 'WikEM: 250 units with fewer than 3 doses or none known; LITFL: 250 IU, or 500 IU if more than 24 hours have passed, with heavy contamination or after burns']); }
+      if (r !== 'None needed') outs.push(['ATT (the department\'s guide)', '0.5 ml IM', 'warn', 'Once, into the deltoid; kept in the ED fridge (dosing and dilution guide, p214)']);
+      return {outs, lists:[{h:'WikEM\'s US rule, for comparison', rows:[['Fewer than 3 doses, or unknown', 'Vaccine for a clean wound; vaccine and immunoglobulin for a dirty one'], ['3 or more doses', 'Vaccine if the last was over 10 years ago (clean) or over 5 years ago (dirty)']]}],
+        gap:'The department\'s dosing and dilution guide prints Sero-Tet\'s indication as tetanus treatment; which wounds get it, and its dose for prevention, are under Still to confirm.', links:[['#dilution', 'ED dosing and dilution guide']]};
     }},
   wtage:{t:'Child: weight from age', g:'kids', src:'Luscombe and Owens, Arch Dis Child 2007', path:'#ed-scores--wtage', kw:'weight estimate estimation age child apls formula resuscitation broselow',
     sub:'Two formulas for ages 1 to 10, when the child cannot be weighed.',
@@ -12658,6 +12785,9 @@ function bandScore(bands, x, o2){
 }
 /* Every number above must still be in the source text: the test checks each of these phrases against the pathway data */
 const CALC_FACTS = [
+  ['wounds', 'Lignocaine plain: 5 mg/kg, max 300 mg (WikEM); 3 mg/kg (RCEM wounds page); 4.5 mg/kg (RCEM local anaesthetics module)'], ['wounds', 'Lignocaine with adrenaline: 7 mg/kg (all three); max 500 mg (WikEM)'],
+  ['wounds', 'Bupivacaine: 2.5 mg/kg, max 175 mg plain, and 3 mg/kg, max 225 mg with adrenaline (WikEM); 2 mg/kg either way (RCEM module)'], ['wounds', '1% lignocaine (lidocaine) is 10 mg/ml; 2% is 20 mg/ml; 0.5% bupivacaine is 5 mg/ml (WikEM)'], ['wounds', 'IM or infiltrated around the wound, 500 units (2 vials) once'], ['wounds', 'IM 0.5 ml once into the deltoid'],
+  ['wounds', '250 IU, or 500 IU if more than 24 hours have passed, with heavy contamination or after burns (LITFL)'], ['wounds', '250 units with fewer than 3 doses or none known (WikEM)'], ['wounds', 'Adequately primed, last dose within 10 years: none needed, for any wound (RCEM)'],
   ['ed-scores', 'heart rate from 59 studies (143,346 children) and breathing rate from 20 (3,881 children)'], ['ed-scores', 'Web Tables 4 and 5, p12'],
   ['paracetamol-overdose', 'Step 1: 200 mg/kg in 500ml D5% over 4 hours, 125 ml/hr'], ['paracetamol-overdose', 'Step 2: 50 mg/kg in 500ml D5% over 8 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 1: 200 mg/kg in 250ml D5% over 4 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 2: 100 mg/kg in 500ml D5% over 16 hours, 31.25 ml/hr'], ['paracetamol-overdose', 'IV NAC 5000mg/25ml per vial'], ['paracetamol-overdose', 'to a ceiling of 110kg'], ['paracetamol-overdose', 'Fluid restriction OR BW < 40kg'],
   ['snakebite-moh', 'Put 2 ml of freshly drawn venous blood into a small, dry glass tube, new or heat-cleaned'], ['snakebite-moh', 'Leave it undisturbed at room temperature for 20 minutes, then tip it once'], ['snakebite-moh', 'Still liquid: a coagulopathy is possible. Repeat as needed'], ['snakebite-moh', 'a quick bedside test when the bite is unidentified or a pit viper is suspected'], ['snakebite-moh', 'Do not decide antivenom on the 20WBCT alone'], ['snakebite-moh', 'Yet a coagulopathy on the 20WBCT is also listed as an antivenom indication (p66)'], ['snakebite-moh', 'After an adequate dose, clotting usually returns in 3-9 hours (p75)'], ['snakebite-moh', 'Still not clotting, or not clotting again, 6 hours after the infusion ended: repeat the starting dose (p75)'], ['snakebite-moh', 'Not in the guideline: whether a partial clot counts, a schedule for repeat tests, or what to use without a glass tube'], ['snakebite-moh', 'Local envenoming 5-10 vials, systemic 10 vials; next after 1-2 hours'], ['snakebite-moh', '10 vials; next after 1-2 hours'], ['snakebite-moh', '5 vials; next after 1-2 hours'], ['snakebite-moh', 'Red-headed krait 5 vials; next after 1-2 hours. No dose as a second choice'], ['snakebite-moh', '1-3 vials; next after 1-2 hours'], ['snakebite-moh', '4 vials; next at 6 hours'], ['snakebite-moh', '3 vials; next at 6 hours'], ['snakebite-moh', 'Second choice for the pit vipers'], ['snakebite-moh', 'Coral: consider neostigmine with atropine. Those pit vipers: usually not indicated'], ['snakebite-moh', 'Starting dose for an unidentified bite: not in the guideline'], ['snakebite-moh', 'Not in Borneo: the Malayan pit viper, monocled cobra and Malayan krait (p74)'], ['snakebite-moh', 'Printed blank, so ask the EP or an expert: the leaf-nose palm, Sumatran and mountain pit vipers in Table 15 (p71), the Sabah green pit viper in Table 16 (p73)'], ['snakebite-moh', 'Its antivenom is the anti-yamakagashi antivenom, sourced from Japan; no second choice and no dose in the guideline'], ['snakebite-moh', 'Never the Indian polyvalent antivenom'], ['snakebite-moh', 'Elapid antivenoms neutralise less per vial: up to 10 vials to start in confirmed envenoming (p65)'], ['snakebite-moh', 'Adrenaline drawn up before starting: adult 0.5 mg, child 0.01 mg/kg, of 1 mg/ml (1 in 1,000) (p69)'], ['snakebite-moh', 'Reconstitute each vial with the solution supplied or 10 ml water for injection; swirl gently, never shake (p69)'], ['snakebite-moh', 'Dilute: adult 250-500 ml normal saline or D5%; child 5-10 ml/kg'], ['snakebite-moh', 'or give it undiluted'], ['snakebite-moh', 'Run at 1-2 ml/min for 10-15 minutes; with no reaction, faster, to finish within an hour (p69)'], ['snakebite-moh', 'Monitor during the infusion and for at least an hour after'], ['snakebite-moh', 'The same dose at every age, in pregnancy and with comorbidities; no contraindication'], ['snakebite-moh', 'Some severely envenomed children may need a larger volume of antivenom, given their lower volume of distribution'], ['snakebite-moh', 'Repeat the starting dose: still unclotted, or unclotted again, 6 hours after the infusion ended; within 1-2 hours if bleeding stays brisk; after 1-2 hours if paralysis or the circulation worsens, with full support'], ['snakebite-moh', 'No maximum dose or number of repeats is given'], ['anaphylaxis', 'Infusion 1 mcg/min: 1 mg (1 ml of 1:1000) in 500 ml NS at 0.5 ml/min'], ['snakebite-moh', 'Krait and sea snake paralysis does not respond like this'], ['snakebite-moh', 'Table 17 prints 1 microgm/kg/min'],
@@ -12796,7 +12926,7 @@ const itemsOf = f => (typeof f.items === 'function' ? f.items() : f.items).map(x
 function calcVals(id){
   const c = CALCS[id], v = {};
   const read = list => list.forEach(f => {
-    if (f.type === 'h') return;
+    if (f.type === 'h' || f.type === 'fig') return;
     if (Array.isArray(f)){ const [k, , , ch] = f, x = cGet(id, k); v[k] = ch ? (x || ch[0][0]) : (x === '' || x == null ? 0 : parseFloat(x) || 0); return; }
     const x = cGet(id, f.k);
     if (f.type === 'check'){ const a = x || [], it = itemsOf(f); v[f.k] = a; v[f.k + '_set'] = !!x; v[f.k + '_n'] = a.filter(Boolean).length; v[f.k + '_sum'] = it.reduce((s, row, i) => s + (a[i] ? (row[1] != null ? row[1] : 1) : 0), 0); if (f.none) v[f.k + '_none'] = !!cGet(id, f.k + '_none') && !v[f.k + '_n']; }
@@ -12818,6 +12948,7 @@ function fieldHTML(id, f){
     const suf = unit && unit.length <= 6; /* a short unit sits inside the field; a long one ("per minute") stays in the label */
     return `<div class="field${k === 'wt' ? ' wt' : ''}"><label for="cf-${k}">${l}${unit ? (suf ? `<span class="vh"> (${unit})</span>` : ' (' + unit + ')') : ''}</label>${suf ? `<span class="fin" style="--u:${unit.length}">${inp}<i class="fu" aria-hidden="true">${unit}</i></span>` : inp}${k === 'wt' ? '<small>Shared with the other dose calculators. Not saved.</small>' : ''}</div>`;
   }
+  if (f.type === 'fig') return `<div class="cf-full cf-fig">${f.html()}</div>`;
   if (f.type === 'h') return `<h3 class="cf-full cf-h">${f.n ? `<b>${esc(f.n)}</b>` : ''}${esc(f.label)}</h3>`;
   const x = cGet(id, f.k);
   if (f.type === 'time') return `<div class="field"><label for="cf-${f.k}">${esc(f.label)}</label><input id="cf-${f.k}" data-k="${f.k}" type="time" autocomplete="off" value="${esc(x || '')}"></div>`;
@@ -12843,6 +12974,7 @@ function renderCalc(){
   if ($('#cxbar') && 'IntersectionObserver' in window){ cxIO = new IntersectionObserver(es => { es.forEach(en => { cxSeen = en.isIntersecting; }); cxBarDraw(); }, {rootMargin:`-60px 0px -${innerWidth <= 760 ? 112 : 24}px 0px`}); cxIO.observe($('#couts')); }
   calcOut();
   markCxCurrent();
+  $$('#calcbox .spin-parts').forEach(spinRegs);
 }
 /* The 25 Nov 2026 round: a running result in thumb reach. Once a field is filled on this calculator and its result panel is off
    screen, a slim bar above the tab bar (at the foot of the screen elsewhere) carries the figure in mono and the verdict on its own
@@ -12919,7 +13051,7 @@ $('#calcbox').addEventListener('change', e => {
   const el = e.target; if (el.matches('select[data-k], input[type="checkbox"]')) cxUsed = calcTab;
   if (el.matches('select[data-k]')){ cPut(calcTab, el.dataset.k, el.value); calcOut(); }
   else if (el.matches('input[type="checkbox"][data-none]')){ const k = el.dataset.none, n = itemsOf(fieldOf(k)).length; cPut(calcTab, k + '_none', el.checked); if (el.checked){ cPut(calcTab, k, Array(n).fill(false)); el.closest('ul').querySelectorAll('input[data-k]').forEach(i => { i.checked = false; }); } calcOut(); }
-  else if (el.matches('input[type="checkbox"][data-k]')){ const f = fieldOf(el.dataset.k), n = itemsOf(f).length, a = (cGet(calcTab, el.dataset.k) || Array(n).fill(false)).slice(); a[+el.dataset.i] = el.checked; cPut(calcTab, el.dataset.k, a); if (f.none && el.checked){ cPut(calcTab, el.dataset.k + '_none', false); const nb = el.closest('ul').querySelector('input[data-none]'); if (nb) nb.checked = false; } calcOut(); }
+  else if (el.matches('input[type="checkbox"][data-k]')){ const f = fieldOf(el.dataset.k), n = itemsOf(f).length, a = (cGet(calcTab, el.dataset.k) || Array(n).fill(false)).slice(); a[+el.dataset.i] = el.checked; cPut(calcTab, el.dataset.k, a); if (f.none && el.checked){ cPut(calcTab, el.dataset.k + '_none', false); const nb = el.closest('ul').querySelector('input[data-none]'); if (nb) nb.checked = false; } calcOut(); $$('#calcbox .spin-parts').forEach(spinRegs); }
 });
 $('#calcbox').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
@@ -13476,10 +13608,10 @@ function renderAbout(){
     panel('Approved source', 'The ebook', '<i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025). The 23 pathways are built as written, and page numbers refer to that edition.', ['Outcome colours follow the ebook\'s boxes: red admit, green discharge, yellow observation, blue discharge advice', 'Department notes on a pathway are labelled as not in the ebook, with their source']),
     panel('Department notes', 'Green Zone flow and referrals', 'Memos, SOPs and flow charts from the department. Each entry names its source and date.', lst(FLOW_IDS)),
     panel('MO Drive, department memos and the starter pack', 'Department protocols', 'From the MO Drive (read in full on 7 Nov 2026), the department\'s memos, the triage course and the HKL doctors starter pack. Each entry names its source and date; what went in, what did not and why is listed under What\'s new.', lst(PROT_IDS)),
-    panel('National guidelines and named sources', 'Guidelines, handbook and the X-ray guide', 'National CPGs quoted as printed with their page and acknowledgement, or summarised in the guide\'s own words where their copyright gives no permission; a teaching handbook checked against its sources; and Reading X-rays from named online sources. None replaces the ebook: where they differ is under Still to confirm.', Object.keys(P).filter(id => P[id].grp === 'cpg').map(id => `<a href="#${id}">${esc(P[id].title)}</a>${P[id].src ? ' · ' + esc(P[id].src) : ''}`)),
+    panel('National guidelines and named sources', 'Guidelines, handbook and the X-ray guide', 'National CPGs quoted as printed with their page and acknowledgement, or summarised in the guide\'s own words where their copyright gives no permission; a teaching handbook checked against its sources; Reading X-rays from named online sources; and, since 26 Nov 2026, wounds, the eye, the nose and ear, and red flags from open teaching sites that allow reuse (WikEM, CC BY-SA 4.0; RCEMLearning, CC BY-NC 3.0; LITFL and St Emlyn\'s, CC BY-NC-SA 4.0), as facts in the guide\'s own words, credited on each step; none of them endorses this guide. None replaces the ebook: where they differ is under Still to confirm.', Object.keys(P).filter(id => P[id].grp === 'cpg').map(id => `<a href="#${id}">${esc(P[id].title)}</a>${P[id].src ? ' · ' + esc(P[id].src) : ''}`)),
     panel('Department lists', 'Drug lists and the dilution guide', 'The Emergency Pharmacy\'s drug list (14 Apr 2025) with the MOH formulary categories, and the department\'s dosing and dilution guide (3rd edition, January 2026), each shown as printed.', ['<a href="#pharmacy">ED pharmacy drug list</a>', '<a href="#dilution">ED dosing and dilution guide</a>']),
     panel('Version 7', 'The triage course folder', 'Six documents summarised in the Green Zone workflow map (7 Nov 2026), added as department notes.', V7.map(([f]) => esc(f))),
-    panel('Media', 'Illustrations, clips and narration', 'The illustrations and the eight-second clips are generated artwork and show no real staff or patients. The tour narration is a synthetic voice.', null),
+    panel('Media', 'Illustrations, clips and narration', 'The illustrations and the eight-second clips are generated artwork and show no real staff or patients. The tour narration is a synthetic voice. The 3D models (the route, the abdomen, the rule of nines figure, the finger, the eye and the nose) are the guide\'s own schematic models, made in Blender: not anatomy to measure from.', null),
     panel('Design', 'Why it works this way', 'In Ely and colleagues\' study, family doctors left 64% of their clinical questions unpursued and spent under two minutes on those they did pursue (BMJ 1999;319:358). So every answer here is one search or a few taps away, and the outcome box can be copied straight into the notes. The tour is short, chaptered and captioned, with a transcript and speed control, following guidance on effective educational video (Brame, CBE Life Sci Educ 2016) and accessible video players.', null)
   ].join('');
 }
@@ -14420,7 +14552,7 @@ if (typeof ABX !== 'undefined'){
   IDX.push({href:'#antibiotics', title:'ED antimicrobial guides', kind:'Tool', meta:'Doses by kidney function, and how to give injectable antimicrobials (Feb 2024)', body:'antibiotic antibiotics antimicrobial renal dose crcl creatinine clearance kidney dilution reconstitution reconstitute infusion rate', kw:'antibiotic antibiotics antimicrobial antimicrobials crcl', ic:'pill', c:'c-meta'});
   const seen = new Set(); [...ABX.dose.renal.rows.map(r => r[6]), ...ABX.dose.none.map(r => r[3]), ...ABX.dil.rows.map(r => r[4]), 'Gentamicin', 'Vancomycin'].forEach(g => { const k = g.toLowerCase(); if (seen.has(k)) return; seen.add(k); IDX.push({href:'#antibiotics', title:g + ' (ED antimicrobial guides)', kind:'Antimicrobial', meta:'ED antimicrobial guides: dose by kidney function, dilution and rate', body:g, ic:'pill', c:'c-meta', ab:g}); });
 }
-renderJourney(false); setupTour(); startQuiz(); renderAbout(); renderViewHeroes(); renderPins(); renderAlerts(); remWire();
+renderJourney(false); setupTour(); startQuiz(); renderAbout(); MORE_DO.push(renderAbout); /* the guidelines in the page's second part join its list when they arrive */ renderViewHeroes(); renderPins(); renderAlerts(); remWire();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
 document.addEventListener('click', e => {
@@ -20752,6 +20884,594 @@ P['ed-scores'] = {
 };
 P['ed-scores'].kinds = {neutral:'What the source says'};
 P['ed-scores'].notesFoot = 'Each score is in the guide\'s own words from the source named on its step, read on 16 Nov 2026, and credited to its authors. Two are quoted because their owners allow it: MEWS (abdominal trauma CPG 2025, MaHTAS) and the CIWA-Ar items (the scale states it is not copyrighted). Nothing is copied from MDCalc or any other calculator site. A score supports judgement; it does not replace the ebook\'s pathway or a department protocol.';
+
+/* Generated by src/spin-pack.py from the ID pass of a scene of parts (sources/spin/<key>/idNN.png): do not edit by hand.
+   SPIN_REG: for each such scene, on every view, each visible part's outline: [part, "x,y x,y ..."] in frame pixels. */
+const SPIN_REG = {"burns":[[[0,"234,42 245,42 254,46 265,65 267,90 261,135 268,147 211,147 218,135 212,90 214,65 221,50 233,43"],[1,"168,173 170,233 135,296 108,357 95,395 91,399 83,399 75,392 77,381 125,256 167,174"],[2,"310,173 326,197 365,283 404,387 403,394 396,399 388,399 384,395 371,357 344,296 309,233 310,174"],[3,"223,146 269,148 280,157 309,172 309,229 300,218 298,219 286,268 285,295 292,351 256,373 254,365 225,365 223,373 187,351 194,295 193,268 181,219 179,218 170,229 170,172 194,160 210,148 222,147"],[5,"187,352 224,374 224,404 231,404 224,433 217,490 209,628 203,646 197,651 186,649 183,643 186,626 183,399 187,353"],[6,"292,352 296,399 293,612 296,643 293,649 282,651 276,646 270,628 262,490 255,433 248,404 255,404 255,374 291,353"],[7,"225,366 254,366 254,404 248,403 241,392 235,395 231,403 225,404 225,367"]],[[0,"233,42 246,42 255,47 265,65 267,91 261,120 261,135 267,146 227,145 211,148 218,135 218,120 212,91 213,68 220,51 232,43"],[1,"172,174 168,183 167,203 170,226 175,233 133,316 113,361 105,388 99,394 91,394 84,387 85,379 142,231 162,188 171,175"],[2,"308,170 333,210 363,277 402,389 402,399 395,404 383,402 369,359 342,293 307,230 304,199 307,171"],[3,"227,146 268,147 281,157 307,170 303,194 306,228 300,218 295,220 285,266 284,296 291,351 249,373 247,365 221,364 217,365 216,372 189,354 193,276 180,224 174,232 169,214 168,191 171,176 212,148 226,147"],[4,"298,218 300,219 286,273 290,342 285,278 292,231 297,219"],[5,"188,353 196,361 217,373 220,404 233,402 227,422 219,484 210,625 207,633 196,644 183,646 177,636 188,618 184,455 188,354"],[6,"291,352 296,414 293,624 291,640 285,652 272,655 266,648 269,624 263,518 254,436 247,407 250,405 248,374 290,353"],[7,"218,365 247,366 249,405 240,392 235,395 232,402 221,404 218,366"]],[[0,"233,42 246,42 254,46 265,64 267,95 261,122 261,136 266,146 228,145 214,148 218,136 218,123 212,95 212,71 220,51 232,43"],[1,"177,177 172,187 171,205 176,227 183,238 132,351 122,384 116,390 109,390 103,386 102,377 155,225 176,178"],[2,"302,168 314,183 352,267 390,394 390,402 385,408 373,409 366,400 358,365 335,298 298,225 294,207 294,183 301,169"],[3,"228,146 264,146 301,168 297,171 293,183 296,221 292,217 287,227 280,273 280,301 286,352 270,357 241,373 238,365 226,364 213,364 212,372 190,353 193,273 183,233 177,227 172,205 176,179 213,149 227,147"],[4,"292,218 298,229 286,277 290,348 290,352 287,352 281,301 281,273 291,219"],[5,"190,354 213,374 218,404 233,403 237,394 238,397 231,420 224,475 215,616 211,628 205,634 190,641 182,641 176,636 175,629 181,621 189,619 193,611 188,456 190,355"],[6,"285,353 290,353 293,406 289,629 284,646 273,656 264,659 254,652 254,644 264,634 265,625 257,497 240,374 270,358 284,354"],[7,"213,365 238,366 243,405 237,393 233,402 218,403 213,366"]],[[0,"234,42 245,42 254,46 266,66 268,87 261,124 264,146 246,144 216,148 218,124 212,97 212,71 220,51 233,43"],[1,"181,188 179,205 190,258 154,349 146,380 141,386 136,387 127,382 126,375 155,286 181,189"],[2,"289,167 299,172 309,191 339,273 357,367 366,399 364,410 357,414 349,414 342,407 336,371 316,293 282,217 278,190 280,179 288,168"],[3,"246,145 261,146 290,166 283,171 277,190 282,218 273,270 273,305 278,353 257,358 232,373 230,365 213,363 209,364 209,371 194,355 195,273 181,211 180,195 186,180 212,156 215,149 245,146"],[4,"282,219 292,241 285,272 286,354 279,353 278,350 274,305 275,259 282,220"],[5,"194,356 210,372 215,401 233,403 235,400 238,416 229,486 221,615 211,630 198,635 184,636 177,629 179,619 197,614 200,610 194,451 194,357"],[6,"275,354 287,356 288,444 283,624 281,639 274,651 256,660 246,660 241,656 239,648 244,640 258,634 258,621 249,482 243,430 232,374 257,359 274,355"],[7,"210,364 230,366 236,401 216,401 210,365"]],[[0,"233,42 251,44 259,51 265,63 268,82 261,122 262,146 237,144 217,148 219,136 212,95 212,73 217,56 225,46 232,43"],[1,"191,199 198,297 180,350 174,379 171,383 163,384 156,379 156,370 179,283 191,200"],[2,"273,166 284,169 292,182 316,270 325,368 331,400 329,414 321,418 312,417 306,409 303,368 290,285 261,203 261,182 265,173 272,167"],[3,"237,145 254,145 276,165 264,173 259,187 261,208 268,225 263,271 267,354 242,359 224,373 221,364 209,363 209,370 200,358 199,270 192,195 196,185 213,163 217,149 236,146"],[4,"255,145 262,147 266,155 278,165 256,146"],[4,"268,227 283,266 281,356 267,352 264,271 268,228"],[5,"200,359 209,371 216,402 230,402 238,481 229,613 222,625 210,630 193,632 184,628 184,615 190,611 207,610 209,607 200,360"],[6,"261,355 281,357 274,627 271,643 264,653 250,659 234,661 226,656 225,645 232,639 247,637 250,627 237,442 224,374 238,362 260,356"],[7,"209,364 222,366 229,402 217,402 209,365"]],[[0,"233,42 246,42 254,46 265,64 267,91 260,126 260,146 233,144 219,147 219,126 213,99 212,75 219,53 232,43"],[1,"205,270 204,343 207,375 202,382 194,382 189,378 188,372 205,271"],[2,"255,165 267,168 276,182 288,267 288,412 280,420 267,418 263,411 261,285 240,196 242,180 247,171 254,166"],[3,"233,145 247,145 258,164 246,171 239,188 240,202 252,247 253,354 231,358 224,362 218,371 217,365 212,362 209,363 210,369 206,356 204,216 207,194 217,168 219,148 232,146"],[4,"248,145 260,147 266,167 257,162 248,146"],[4,"253,251 261,296 262,355 254,354 253,252"],[5,"207,363 217,399 223,402 224,409 232,501 237,611 235,619 230,624 214,628 196,627 190,618 196,608 219,606 207,364"],[6,"250,355 263,357 262,411 264,416 272,421 263,630 260,644 254,653 243,658 220,660 211,654 212,642 217,638 237,637 240,628 228,439 218,372 227,361 249,356"],[7,"210,363 216,365 222,401 219,401 214,387 210,364"]],[[0,"234,42 245,42 254,46 265,65 267,90 259,146 220,146 212,76 219,53 225,46 233,43"],[2,"235,165 249,168 259,186 258,263 243,375 242,409 237,419 228,421 220,418 216,409 228,299 228,262 220,189 224,176 234,166"],[3,"229,145 239,145 239,164 235,164 225,173 219,189 227,262 227,299 222,357 212,364 209,334 212,230 219,149 228,146"],[4,"240,145 256,146 260,149 270,277 267,364 259,357 247,355 258,282 260,186 253,171 240,164 240,146"],[5,"210,604 225,606 227,626 211,625 202,620 202,609 209,605"],[6,"247,356 259,358 267,365 256,510 252,626 248,645 242,653 233,657 211,658 199,653 197,645 200,638 207,635 229,634 216,410 217,416 224,421 235,421 240,417 243,409 247,357"],[6,"220,358 216,406 212,365 219,359"]],[[0,"233,42 246,42 255,47 265,65 267,91 260,126 260,147 246,144 219,146 212,74 218,54 232,43"],[1,"276,231 279,294 275,338 276,372 272,380 276,232"],[2,"217,165 228,167 235,175 239,186 239,202 225,282 201,374 196,410 191,418 180,419 173,415 171,403 196,284 202,187 207,174 216,166"],[3,"226,145 231,145 227,154 220,164 213,167 219,147 225,146"],[3,"226,278 225,354 206,358 226,279"],[4,"232,145 260,148 262,168 274,204 274,343 271,365 262,378 261,369 255,362 242,356 226,354 227,273 240,202 240,186 234,172 221,164 232,146"],[5,"272,363 261,603 256,618 249,624 241,625 247,501 255,409 261,380 272,364"],[6,"218,355 237,356 252,361 260,369 261,379 255,402 251,439 240,631 237,643 229,653 212,656 191,652 187,647 187,639 194,632 217,633 205,373 206,359 217,356"]],[[0,"233,42 246,42 254,46 265,64 267,95 261,122 262,148 242,144 217,146 218,122 212,95 212,71 220,51 232,43"],[1,"288,197 304,277 309,377 303,383 294,382 290,376 289,344 281,285 288,198"],[2,"200,166 210,168 216,176 219,186 218,209 163,375 156,408 151,415 140,416 133,412 131,402 164,291 186,186 191,174 199,167"],[3,"223,145 213,157 201,165 213,155 217,147 222,146"],[3,"211,234 215,271 212,352 198,356 197,279 211,235"],[4,"225,145 261,148 266,163 282,183 287,194 280,270 279,358 260,379 241,361 212,354 216,304 212,230 219,209 220,186 212,169 203,165 224,146"],[5,"279,359 271,605 266,620 259,625 250,626 232,621 233,602 249,604 241,481 243,442 252,392 258,381 279,360"],[6,"202,355 218,355 237,360 247,366 258,379 249,398 243,433 236,507 230,629 225,645 212,653 187,649 179,640 181,632 186,628 206,630 198,422 198,357 201,356"]],[[0,"234,42 245,42 254,46 266,66 268,87 261,124 263,148 233,144 215,146 218,124 212,97 212,71 220,51 233,43"],[1,"296,184 311,223 327,282 335,351 340,371 340,379 334,385 326,385 321,379 305,290 290,253 293,230 300,210 297,185"],[2,"187,167 196,172 200,182 201,202 198,218 136,366 125,404 120,411 110,412 102,407 101,397 118,353 168,198 178,175 186,168"],[3,"198,221 205,270 205,305 201,350 200,353 193,354 194,272 188,244 197,222"],[4,"228,145 264,149 268,157 294,181 299,194 298,216 292,230 284,273 285,355 275,367 256,380 222,358 201,353 206,305 205,259 198,220 202,188 197,172 189,166 218,146 227,146"],[5,"285,356 280,608 278,617 272,625 258,627 246,622 239,612 244,603 257,603 251,498 241,409 245,396 255,381 270,372 285,357"],[6,"194,354 222,359 254,380 244,396 235,437 227,517 221,629 217,642 208,649 187,646 176,637 176,629 180,624 197,625 191,444 193,355"]],[[0,"233,42 251,44 259,51 265,63 268,82 261,123 261,136 265,148 251,145 213,146 218,136 218,122 212,95 212,73 217,56 225,46 232,43"],[1,"302,177 322,216 345,280 367,376 367,382 361,388 352,388 347,382 341,350 322,287 296,235 304,228 308,210 308,191 303,178"],[2,"177,168 183,175 186,190 182,226 142,306 115,367 103,403 99,407 90,407 82,400 83,389 147,222 169,176 176,169"],[3,"187,218 191,227 198,273 198,301 192,352 189,352 189,348 193,278 181,230 186,219"],[4,"215,146 264,148 299,175 307,191 306,217 302,230 295,235 286,275 289,353 276,366 251,381 227,366 193,352 199,301 199,273 192,227 187,217 184,221 186,182 178,168 214,147"],[5,"289,354 291,456 287,613 280,628 268,630 256,622 252,614 253,608 263,602 263,597 256,485 243,392 252,381 276,367 289,355"],[6,"189,353 209,358 250,382 238,399 230,430 221,509 214,630 207,643 197,646 183,640 176,631 178,621 190,617 186,456 189,354"]],[[0,"233,42 246,42 254,46 265,64 267,91 261,120 261,135 268,148 252,145 212,146 218,135 218,120 212,91 213,69 219,53 232,43"],[1,"308,175 330,213 354,269 388,381 386,389 381,392 373,392 368,387 362,362 337,293 305,233 309,228 312,208 309,176"],[2,"171,170 175,191 173,229 135,299 107,362 95,398 90,402 80,401 75,396 75,387 114,284 139,225 170,171"],[3,"181,218 187,231 194,278 189,342 193,274 180,219"],[4,"219,146 267,148 307,174 311,190 308,228 305,232 299,223 286,276 291,352 277,364 246,381 188,351 195,278 186,224 181,217 174,227 176,191 173,169 198,157 211,147 218,147"],[5,"291,353 295,407 292,612 290,627 283,633 274,633 264,619 267,592 261,494 252,422 242,391 245,382 277,365 291,354"],[6,"188,352 244,381 243,389 233,402 225,436 216,518 211,620 208,635 201,641 189,640 180,628 180,620 186,613 183,414 187,353"]],[[0,"234,42 245,42 254,46 265,65 267,90 261,135 268,147 211,147 218,135 212,90 214,65 221,50 233,43"],[1,"310,173 331,206 364,279 401,385 400,392 393,397 382,394 370,357 343,293 309,232 310,174"],[2,"168,173 170,232 136,293 109,357 97,394 86,397 79,392 78,385 115,279 137,228 167,174"],[4,"223,146 269,148 280,157 309,172 310,184 309,230 300,218 297,220 286,267 285,295 292,351 240,381 187,351 194,295 193,267 182,220 179,218 170,230 170,172 194,160 210,148 222,147"],[5,"292,352 296,399 294,612 292,633 286,637 278,637 273,634 270,627 264,513 255,433 248,403 240,392 240,382 291,353"],[6,"187,352 239,382 239,392 231,403 224,433 215,513 209,627 206,634 201,637 193,637 187,633 185,612 183,399 187,353"]],[[0,"233,42 246,42 255,47 265,65 267,91 261,120 261,135 267,146 227,145 211,148 218,135 218,120 212,91 213,68 220,51 232,43"],[1,"307,170 314,176 327,199 365,284 404,387 404,396 399,401 389,402 384,398 372,362 344,299 306,229 304,191 307,171"],[2,"171,175 167,190 167,208 170,228 174,233 142,293 117,362 111,387 106,392 98,392 93,389 91,381 118,290 143,226 170,176"],[3,"298,218 300,221 286,274 290,342 285,278 292,231 297,219"],[4,"227,146 268,147 281,157 306,169 303,191 305,227 298,217 293,224 284,278 291,351 234,381 202,364 188,352 193,275 180,223 174,232 172,231 168,208 168,190 172,174 212,148 226,147"],[5,"291,352 296,414 293,613 299,620 299,628 290,640 278,641 271,635 268,620 263,518 254,436 246,402 236,389 235,381 290,353"],[6,"188,353 202,365 234,382 237,391 227,422 218,494 212,592 215,619 205,633 196,633 189,627 187,612 184,407 188,354"]],[[0,"233,42 246,42 254,46 265,64 267,95 261,122 261,136 266,146 228,145 214,148 218,136 218,123 212,95 212,71 220,51 232,43"],[1,"302,168 310,176 332,222 396,389 397,400 389,407 380,407 376,403 364,367 337,306 297,226 293,190 296,175 301,169"],[2,"177,177 171,191 171,210 175,228 183,235 157,287 138,350 132,382 127,388 118,388 113,384 112,376 134,280 157,216 176,178"],[3,"292,218 298,230 286,277 290,348 290,352 287,352 281,301 281,273 291,219"],[4,"228,146 264,146 301,168 293,182 295,221 292,217 287,227 280,273 280,301 286,352 252,366 229,381 203,366 190,353 193,272 184,235 176,228 172,210 172,191 176,179 213,149 227,147"],[5,"285,353 290,353 293,406 289,617 300,620 303,631 296,640 282,646 272,643 265,630 258,509 249,430 241,399 229,382 252,367 284,354"],[6,"190,354 203,367 227,381 236,392 223,485 216,597 216,602 226,608 227,614 223,622 211,630 199,628 192,613 188,456 190,355"]],[[0,"234,42 245,42 254,46 266,66 268,87 261,124 264,146 246,144 216,148 218,124 212,97 212,71 220,51 233,43"],[1,"288,167 296,169 301,175 315,209 361,353 378,397 378,405 372,411 361,412 354,404 343,366 282,221 278,188 281,176 287,168"],[2,"183,184 179,194 179,210 186,230 189,253 174,290 162,347 159,376 153,385 145,385 139,379 139,371 144,351 152,282 168,223 182,185"],[3,"281,221 291,244 285,272 286,354 279,353 278,350 274,305 274,270 281,222"],[4,"246,145 261,146 290,166 282,172 277,188 281,220 274,259 273,305 278,353 257,358 223,380 204,367 194,355 195,272 187,230 181,216 180,194 185,181 211,157 215,149 245,146"],[5,"275,354 287,356 288,444 282,625 297,623 303,629 302,639 283,649 267,647 259,634 244,437 235,396 225,382 245,365 274,355"],[6,"194,356 204,368 224,381 232,392 238,409 228,498 222,603 233,602 239,607 240,612 233,622 221,627 207,625 201,617 199,608 194,357"]],[[0,"233,42 251,44 259,51 265,63 268,82 261,122 262,146 237,144 217,148 219,136 212,95 212,73 217,56 225,46 232,43"],[1,"273,166 284,169 293,186 315,291 348,402 346,412 339,416 330,416 323,408 316,375 261,209 261,182 265,173 272,167"],[2,"191,197 198,285 190,344 189,376 185,382 176,383 170,377 175,277 191,198"],[3,"255,145 262,147 266,155 278,165 256,146"],[3,"268,234 282,279 281,356 267,352 264,304 267,235"],[4,"237,145 254,145 276,165 267,169 259,186 260,209 267,230 263,271 267,354 238,361 219,379 200,358 199,270 192,194 197,183 213,163 217,149 236,146"],[5,"261,355 281,357 273,630 293,628 300,637 298,645 294,648 275,653 259,650 252,641 249,629 243,507 236,433 230,398 221,380 238,362 260,356"],[6,"200,359 221,381 227,392 236,442 238,481 230,604 246,602 247,621 229,626 216,623 208,605 200,360"]],[[0,"233,42 246,42 254,46 265,64 267,91 260,126 260,146 233,144 219,147 219,126 213,99 212,75 219,53 232,43"],[1,"255,165 267,168 277,187 283,284 308,403 306,415 299,419 288,418 283,410 278,374 252,272 240,202 240,186 246,172 254,166"],[2,"203,231 204,343 207,380 203,372 204,338 200,294 203,232"],[3,"248,145 260,147 266,167 257,162 248,146"],[3,"253,278 273,358 254,354 253,279"],[4,"233,145 247,145 258,164 245,172 239,186 239,202 252,273 253,354 227,360 218,369 217,378 211,371 206,356 204,216 207,193 217,168 219,148 232,146"],[5,"250,355 267,356 274,362 262,633 285,632 292,639 292,647 288,652 267,656 250,653 244,647 239,631 231,475 225,409 218,379 219,369 224,363 237,357 249,356"],[6,"207,363 218,380 224,409 232,501 238,625 230,624 223,618 218,603 207,364"]],[[0,"234,42 245,42 254,46 265,65 267,90 259,146 220,146 212,76 219,53 225,46 233,43"],[1,"235,165 247,167 255,176 259,189 251,262 251,299 263,409 261,416 251,421 242,419 237,409 236,375 222,282 220,186 227,171 234,166"],[3,"240,145 256,146 260,149 270,277 267,364 257,357 252,299 252,262 260,189 254,173 244,164 240,164 240,146"],[4,"229,145 239,145 239,164 230,167 221,180 219,206 221,282 232,355 220,357 212,364 209,334 212,230 219,149 228,146"],[5,"227,356 232,356 233,360 236,409 239,417 244,421 255,421 262,416 263,410 250,634 272,635 279,638 282,645 280,653 268,658 246,657 237,653 231,645 227,626 223,510 212,371 213,363 226,357"],[5,"257,358 267,365 263,406 258,359"],[6,"265,604 273,605 277,609 277,620 268,625 252,626 254,606 264,605"]],[[0,"233,42 246,42 255,47 265,65 267,91 260,126 260,147 246,144 219,146 212,74 218,54 232,43"],[1,"217,165 224,165 232,171 238,183 239,196 218,285 216,411 212,418 199,420 191,412 193,367 190,280 202,185 208,172 216,166"],[2,"274,270 291,372 290,378 285,382 277,382 272,375 275,343 274,271"],[3,"232,145 260,148 262,168 274,204 273,356 269,369 270,363 267,362 262,365 261,371 259,366 248,358 226,354 227,247 239,202 240,188 233,171 221,164 232,146"],[4,"226,145 231,145 227,154 220,164 213,167 219,147 225,146"],[4,"226,251 225,354 217,355 218,296 226,252"],[5,"218,355 248,359 255,363 261,372 251,439 239,628 242,637 257,637 267,642 268,654 259,660 236,658 225,653 219,644 216,630 207,421 212,419 217,411 217,356"],[6,"272,363 260,606 283,608 289,618 283,627 265,628 249,624 244,619 242,611 247,501 255,409 256,402 262,399 272,364"],[7,"267,363 269,367 265,387 260,401 257,401 263,365 266,364"]],[[0,"233,42 246,42 254,46 265,64 267,95 261,122 262,148 242,144 217,146 218,122 212,95 212,71 220,51 232,43"],[1,"200,166 206,166 214,173 218,182 219,197 189,285 176,368 173,409 167,417 158,418 150,414 148,400 154,368 161,282 182,197 191,174 199,167"],[2,"288,199 300,283 323,370 323,379 316,384 308,383 305,379 299,350 281,297 288,200"],[3,"225,145 261,148 266,163 283,185 287,195 280,270 279,358 270,370 270,363 258,364 255,373 237,359 212,354 216,271 211,225 218,208 220,187 215,173 203,165 224,146"],[4,"223,145 213,157 201,165 213,155 217,147 222,146"],[4,"211,227 215,271 212,352 198,356 196,266 210,228"],[5,"202,355 218,355 237,360 255,374 242,442 229,627 232,637 247,639 254,645 253,656 245,661 218,655 211,649 206,635 198,422 198,357 201,356"],[6,"279,359 270,607 272,610 289,611 295,615 295,628 286,632 269,630 257,625 250,613 241,481 249,402 263,402 270,371 279,360"],[7,"264,364 270,364 270,369 262,402 250,402 256,368 263,365"]],[[0,"234,42 245,42 254,46 266,66 268,87 261,124 263,148 233,144 215,146 218,124 212,97 212,71 220,51 233,43"],[1,"187,167 195,171 200,183 201,196 197,217 163,293 143,371 137,407 130,414 122,414 115,410 113,399 122,367 140,273 170,191 180,172 186,168"],[2,"298,188 324,286 353,375 352,382 343,387 338,386 333,380 325,349 289,258 300,205 298,189"],[3,"229,145 264,149 267,156 293,180 299,195 298,211 284,273 285,355 270,371 270,364 266,363 249,365 247,373 222,358 201,353 206,305 206,270 197,218 202,190 196,171 189,166 218,146 228,146"],[4,"197,219 204,259 205,305 201,350 200,353 193,354 194,272 187,241 197,220"],[5,"194,354 222,359 247,374 232,463 221,621 221,634 235,640 240,648 238,656 233,660 223,660 209,654 202,648 197,634 191,444 193,355"],[6,"285,356 285,451 279,610 282,614 300,619 302,629 295,636 281,635 268,630 258,615 250,486 241,416 244,400 247,403 264,401 269,372 285,357"],[7,"266,364 269,364 269,371 263,401 243,401 249,366 265,365"]],[[0,"233,42 251,44 259,51 265,63 268,82 261,123 261,136 265,148 251,145 213,146 218,136 218,122 212,95 212,73 217,56 225,46 232,43"],[1,"177,168 181,171 185,183 185,207 181,225 144,298 121,365 113,400 106,409 94,408 89,402 89,394 127,267 147,219 169,176 176,169"],[2,"302,177 318,209 377,377 376,386 370,390 363,390 357,384 347,351 296,238 303,227 308,205 308,192 303,178"],[3,"215,146 264,148 299,175 306,187 305,218 300,231 296,233 286,276 289,353 267,372 266,364 253,364 241,365 238,373 209,357 193,352 199,301 199,273 192,227 187,217 183,221 186,183 182,171 178,168 214,147"],[4,"186,218 191,227 198,273 198,301 192,352 189,352 189,348 193,278 181,229 185,219"],[5,"189,353 209,358 239,374 222,497 214,625 215,634 225,644 225,652 215,659 206,656 195,646 190,629 186,456 189,354"],[6,"289,354 291,456 286,612 290,619 298,621 304,629 303,636 297,641 289,641 274,634 268,628 264,616 255,475 248,420 241,397 242,394 246,403 261,404 266,374 289,355"],[7,"253,365 266,365 261,403 246,402 242,393 236,405 241,366 252,366"]],[[0,"233,42 246,42 254,46 265,64 267,91 261,120 261,135 268,148 252,145 212,146 218,135 218,120 212,91 213,69 219,53 232,43"],[1,"171,170 175,194 172,230 137,293 110,359 96,402 84,404 77,399 77,389 116,277 146,210 170,171"],[2,"307,174 317,188 337,231 394,379 395,387 388,394 380,394 374,388 366,361 346,316 304,233 309,226 312,203 308,175"],[3,"219,146 267,148 280,159 305,173 310,183 308,226 305,232 299,224 286,277 291,352 263,372 262,365 258,364 232,365 230,373 188,351 195,296 194,266 184,220 179,218 173,228 176,194 172,170 198,157 211,147 218,147"],[4,"181,218 187,231 194,278 189,342 193,273 180,219"],[5,"188,352 231,374 229,405 232,407 225,436 216,518 210,624 213,648 207,655 194,652 188,640 186,624 183,414 187,353"],[6,"291,353 295,407 291,618 302,636 296,646 283,644 272,633 269,625 260,484 252,422 246,402 259,404 262,373 291,354"],[7,"258,365 261,365 258,404 247,402 244,395 239,392 230,405 232,366 257,366"]]]};
+
+/* ================= The 26 Nov 2026 round: four Green Zone topics from open educational sources =================
+   Krishna admitted WikEM (CC BY-SA 4.0), RCEMLearning (CC BY-NC 3.0 UK), LITFL and St Emlyn's (CC BY-NC-SA 4.0) on 26 Nov 2026
+   ("Open-licence sites") as sources of facts only (rule 8): every line here is in the guide's own words, each number read on
+   the page its step names (sources/edu/<topic>.md, checked row by row in <topic>-check.md), nothing quoted at length and no
+   table copied as laid out. A Malaysian source leads where it speaks; where the sources differ the step gives each with its
+   source, and the department's choice is under Still to confirm. Antibiotics: the National Antimicrobial Guideline by section
+   name and link only. None of this replaces the ebook (rule 5). */
+const EDU_READ = '26 Nov 2026';
+const esrc = t => 'Source: ' + t + '. In the guide\'s own words; read ' + EDU_READ + '.';
+const NAG_A10 = ['https://sites.google.com/moh.gov.my/nag/contents/section-a-adult/a10-otorhinolaryngology-infections', 'NAG 2024, A10: ear, nose and throat infections'];
+const NAG_C2 = ['https://sites.google.com/moh.gov.my/nag/contents/section-c-clinical-pathways-in-primary-care/c2-acute-otitis-media', 'NAG 2024, C2: acute otitis media'];
+const E_W1 = 'WikEM, Epistaxis', E_R1 = 'RCEMLearning, Acute Epistaxis (J D Whittaker, reviewed 12 Jun 2024)', E_L1 = 'LITFL, A Case of Epistaxis (K Guthrie, 2011)', E_S1 = 'St Emlyn\'s, the NoPAC trial (S Carley, 2021)';
+const E_W2 = 'WikEM, Nasal foreign body', E_W3 = 'WikEM, Ear foreign body', E_R2 = 'RCEMLearning, Foreign Bodies in Ears and Noses (C Davies, O Adenugba, reviewed 3 Mar 2025)';
+const E_W4 = 'WikEM, Otitis externa', E_W5 = 'WikEM, Malignant otitis externa', E_W6 = 'WikEM, Acute otitis media (a page written for children)', E_R3 = 'RCEMLearning, Ear Disease (A Pearson, 2020; the page says it has not been reviewed for over three years)';
+
+P['nosebleed-ent'] = {
+  title:'Nosebleed, ear and nose', grp:'cpg', own:true, isnew:true, hero:'entbleed',
+  src:'WikEM, RCEMLearning, LITFL and St Emlyn\'s, in the guide\'s own words; the NPC CPG (MaHTAS 2016)',
+  lead:'A nosebleed from first aid to cautery and packing, things in the nose or ear, and the painful or discharging ear, from open educational sources read on 26 Nov 2026. No Malaysian guideline read covers nosebleed care (the MOH guideline for AMOs in otorhinolaryngology is a scan and was not read); the nasopharyngeal carcinoma CPG leads on when to refer.',
+  kw:'epistaxis nosebleed nose bleed bleeding nose hidung berdarah berdarah hidung little\'s area kiesselbach cautery silver nitrate nasal pack packing rapid rhino merocel tranexamic txa nopac foreign body nose ear insect bead button battery magnet mother\'s kiss otitis externa media malignant necrotising ear pain earache sakit telinga discharge wick mastoiditis npc nasopharyngeal carcinoma',
+  start:'menu',
+  nodes:{
+    menu:{q:'What is it?', hint:'Adults in the Green Zone. A child goes where the department\'s paediatric triage (PAT) sends them.', opts:[
+      ['A nosebleed now','nbrisk'],
+      ['Something in the nose','nfb'],
+      ['Something in the ear','efb'],
+      ['Ear pain or discharge','ear'],
+      ['A one-sided nosebleed that keeps coming back, blood-stained discharge or a neck lump','npc']]},
+
+    nbrisk:{q:'Is the patient unwell, or at high risk?', hint:'RCEM: always treat a nosebleed as a circulatory emergency, especially in high-risk patients and with deranged vital signs; in the elderly, with a bleeding tendency or on an anticoagulant, a cannula and bloods. ' + esrc(E_R1),
+      opts:[['Deranged vital signs, a heavy bleed, elderly, a clotting disorder or an anticoagulant','nbres'],['None of these','nbfa']]},
+    nbres:{step:'Resuscitate first, then first aid', items:[
+      'Deranged vital signs: the patient may not belong in the Green Zone; uptriage by the department\'s rules',
+      'Elderly, a bleeding tendency or anticoagulated: at least a green cannula, and FBC, U&Es, clotting and group and save, depending on the blood loss (RCEM)',
+      'Clotting studies are not routine: only with a personal or family history of a clotting disorder (RCEM)',
+      'Protect yourself: gloves, mask and visor at least (RCEM)'],
+      gap:esrc(E_R1), links:[['#gz-rules--glance','The Green Zone at a glance']], next:'nbfa'},
+    nbfa:{step:'First aid: lean forward and pinch the soft part', fig:'spin-nose', items:[
+      'Sit the patient up and leaning forward; spit the blood out rather than swallow it (RCEM)',
+      'Pinch the soft part of the nose firmly, pressing the nostrils together, below the hard nasal bones (RCEM, WikEM, LITFL)',
+      'How long: at least 10 minutes (RCEM); 15 to 20 minutes (LITFL); at least 20 minutes before moving on (WikEM)',
+      'Sucking an ice cube has been shown to cut nasal blood flow; ice on the neck or forehead has not been shown to change it; an ice pack on the nose may help (RCEM)',
+      'Most nosebleeds start at the front of the septum, Little\'s area (Kiesselbach\'s plexus): about 90% (WikEM) or 95% (RCEM)'],
+      gap:esrc(E_R1 + '; ' + E_W1 + '; ' + E_L1), next:'nbq'},
+    nbq:{q:'After first aid, is it still bleeding?', opts:[['Stopped','nblook'],['Still bleeding','nbvc']]},
+    nbvc:{step:'Clear the clots and use a vasoconstrictor', items:[
+      'Clear the clots (blow the nose or suction), then put in a topical vasoconstrictor: oxymetazoline or phenylephrine (WikEM)',
+      'WikEM soaks cotton pledgets in a 1:1 mix of 0.05% oxymetazoline and 4% lignocaine before cautery',
+      'Tranexamic acid on a pledget: WikEM and RCEM give 500 mg of the injectable solution (500 mg in 5 ml); RCEM for adults, especially on antiplatelet drugs, who fail direct pressure, before a pack. The injection (500 mg in 5 ml) is in the department\'s dosing and dilution guide',
+      'But the NoPAC trial (496 patients) found packing needed as often with tranexamic acid as with placebo (43.7% against 41.3%), and St Emlyn\'s concludes it cannot be recommended on current evidence; WikEM notes the same trial',
+      'Which of these the department stocks and uses is under Still to confirm'],
+      gap:esrc(E_W1 + '; ' + E_R1 + '; ' + E_S1), next:'nblook'},
+    nblook:{q:'With the field now bloodless, can you see a bleeding point at the front of the septum?', hint:'Cautery is generally only effective once the bleeding has stopped and the point can be seen (WikEM).',
+      opts:[['Yes, one point at the front','nbcaut'],['It has stopped, and no point is seen','nbdc'],['Still bleeding with no point seen, from both sides, or blood running down the throat','nbpack']]},
+    nbcaut:{step:'Cautery with silver nitrate', items:[
+      'Hold the stick just proximal to the bleeding point (WikEM)',
+      'How long: a few seconds at most (WikEM); 4 to 5 seconds (LITFL); no more than 30 seconds on any one spot (RCEM)',
+      'Never cauterise both sides of the septum at one sitting: it risks a septal perforation (WikEM, LITFL)',
+      'Watch the patient for 15 minutes afterwards, before discharge (RCEM)'],
+      gap:esrc(E_W1 + '; ' + E_L1 + '; ' + E_R1), next:'nbcq'},
+    nbcq:{q:'After cautery and 15 minutes, has it stopped?', opts:[['Stopped','nbdc'],['Still bleeding','nbpack']]},
+    nbpack:{step:'Pack the nose', items:[
+      'Pack when first aid and cautery have failed, or the bleeding is from both sides (RCEM)',
+      'Two kinds: a compressed sponge or an inflatable balloon tampon; Rapid Rhino comes in 5.5 cm and 7.5 cm (RCEM)',
+      'Soak it first: in water, not saline (WikEM); in saline or distilled water (RCEM). Pass it along the floor of the nose, as horizontally as you can (WikEM, RCEM)',
+      'Watch for a minimum of 30 minutes and look at the back of the throat for further bleeding (RCEM)',
+      'A front pack that fails most likely means a bleed from the back of the nose: ENT (RCEM)',
+      'A Foley catheter (12 or 14, 5 to 10 ml of water) only as a temporary measure in the ED, when specialist help will be much delayed or the patient is deteriorating (RCEM)',
+      'A posterior pack goes with a front pack, and the patient is admitted with monitoring (WikEM)'],
+      gap:esrc(E_R1 + '; ' + E_W1) + ' The department\'s ENT route for a packed nose, and the packs it stocks, are under Still to confirm.', next:'nbadm'},
+    nbadm:{check:'any', q:'With a front pack in: any reason to admit?', hint:'RCEM\'s groups who are admitted for observation. WikEM admits for packs on both sides, anaemia with symptoms, or anaemia needing a transfusion.',
+      items:['A traumatic cause','Haemodynamic compromise or shock','A nasal pack within the last 7 days','Taking an anticoagulant','Haemoglobin measured under 10 g/dl','Uncontrolled hypertension','A significant other illness','Social reasons: lives alone, more than 20 minutes from the hospital, or no telephone or transport','The patient prefers to stay','Packs on both sides, or anaemia with symptoms or needing transfusion (WikEM)'],
+      opts:[['One or more','nbin'],['None','nbout']]},
+    nbin:{end:'admit', title:'Admit with the pack in: refer to ENT', items:['RCEM: these groups are admitted for further observation with the pack in','Refer by the department\'s ENT route','Bloods if not done: FBC, U&Es, clotting, group and save, depending on the blood loss (RCEM)'],
+      gap:esrc(E_R1 + '; ' + E_W1) + ' The department\'s route is under Still to confirm.'},
+    nbout:{end:'discharge', title:'Home with a front pack', items:[
+      'A patient with a front pack can generally go home with the pack in (LITFL)',
+      'Removal: leave it 24 to 48 hours, with ENT follow-up to take it out (RCEM); 2 to 3 days, by ENT or the ED (WikEM)',
+      'Antibiotics: no evidence that routine cover is needed for a front pack in for under 48 hours (RCEM); WikEM allows them, with no robust evidence; LITFL (2011) favoured them',
+      'WikEM: stop NSAIDs for 3 to 4 days; warfarin with a therapeutic INR may continue (RCEM admits anyone on an anticoagulant with a pack)',
+      'Give the nosebleed advice (the Advice tab)'],
+      gap:esrc(E_L1 + '; ' + E_R1 + '; ' + E_W1) + ' Antibiotic choice: NAG by name only. Who removes the pack, and when, is the department\'s call (Still to confirm).'},
+    nbdc:{end:'discharge', title:'Stopped with first aid or cautery: home', items:[
+      'No follow-up is needed when the bleeding stopped by itself, with first aid or with cautery alone (RCEM)',
+      'Give the nosebleed advice (the Advice tab)',
+      'A one-sided nosebleed that keeps coming back, or blood-stained discharge: see the NPC referral step'],
+      links:[['#nosebleed-ent--npc','When to refer for NPC']], gap:esrc(E_R1)},
+
+    nfb:{step:'Something in the nose', items:[
+      'Suspect it with a one-sided purulent or bloody discharge, or one-sided sinusitis, even with no story of putting anything in (WikEM)',
+      'A button battery or several magnets: remove it at once in the ED; involve ENT if needed (WikEM)',
+      'Positive pressure first: the "mother\'s kiss" (blow into the mouth with the other nostril closed) works in 60% (RCEM); a bag-valve-mask can be used, with care over the pressure (RCEM, WikEM)',
+      'Or a small Foley (size 6 to 8) passed beyond the object, its balloon filled with 1 to 3 ml of air, and drawn gently out (RCEM)',
+      'Cannot remove it: refer to ENT at once, not the next day: it may be breathed in during sleep (RCEM)'],
+      gap:esrc(E_W2 + '; ' + E_R2) + ' A child: the department\'s PAT triage decides where they are seen. A throat foreign body goes to the ORL MO on call (memo (5)24).',
+      links:[['#children--pat','Children: where to triage'],['#referral-rules--fbt','Throat foreign body: ORL on call']], next:'nfbend'},
+    nfbend:{end:'neutral', title:'Nose foreign body: out, or to ENT now', items:['Cannot remove it, or a complication: refer to ENT (WikEM); a nose object that will not come out goes to ENT at once, not the next day (RCEM)'],
+      links:[['#children--pat','Children: where to triage'],['#referral-rules--fbt','Throat foreign body: ORL on call']], gap:esrc(E_W2 + '; ' + E_R2)},
+
+    efb:{step:'Something in the ear', items:[
+      'A live insect: kill it first, with alcohol, 2% lignocaine or mineral oil (RCEM)',
+      'Irrigation: water or saline at body temperature, through a 14 or 16 gauge cannula on a 20 to 60 ml syringe (WikEM); aim at the side of the canal, never straight at the drum (RCEM)',
+      'Do not irrigate with a suspected perforation, grommets, a button battery or vegetable matter, which swells (WikEM)',
+      'A perforation: you may still remove the object, but put no liquid in, and refer to ENT (RCEM)',
+      'ENT should help with button batteries, sharp objects, tightly wedged objects and anything that has not come out after a few attempts (RCEM)',
+      'A button battery in the ear needs emergency removal (WikEM)'],
+      gap:esrc(E_W3 + '; ' + E_R2), next:'efbend'},
+    efbend:{end:'neutral', title:'Ear foreign body: out, or to ENT', items:['Not out: an ENT review the next day is appropriate, unless there is severe pain, a suspected perforation or a button battery (RCEM); a button battery needs emergency removal (WikEM)'], gap:esrc(E_R2 + '; ' + E_W3)},
+
+    ear:{q:'Is the tragus or the canal tender?', hint:'RCEM: in otitis externa the tragus and canal are very tender, the canal swollen, perhaps filled with debris; in acute otitis media the tragus is not tender and the drum may be red and bulging or hidden by pus.',
+      opts:[['Yes: otitis externa','oe'],['No: think of acute otitis media','aom']]},
+    oe:{step:'Otitis externa', items:[
+      'Rapid onset, generally within 48 hours, within the past 3 weeks; the pinna or tragus tender; the canal swollen and red, perhaps with debris (WikEM)',
+      'Clean the canal. If it is fully blocked, put in a wick: it should fall out by itself in 3 days as the swelling settles (WikEM)',
+      'Drops lying on the side, held there 3 to 5 minutes; at least 4 drops are typically needed to fill the canal; keep the ear dry and avoid water sports for 7 to 10 days (WikEM)',
+      'Consider systemic antibiotics when immunosuppressed, including poorly controlled diabetes (WikEM): NAG A10 by name',
+      'Refer acutely: spreading cellulitis or perichondritis (RCEM)'],
+      links:[[NAG_A10[0], NAG_A10[1], 1]], gap:esrc(E_W4 + '; ' + E_R3), next:'moe'},
+    moe:{check:'any', q:'Any sign of malignant (necrotising) otitis externa?', hint:'WikEM: diabetes and immunosuppression are the main risks; Pseudomonas causes over 90%. RCEM: beware the elderly diabetic whose ear pain stops them sleeping; untreated, it can cause cranial nerve palsies and death.',
+      items:['Diabetic or immunosuppressed, with pain out of proportion for routine otitis externa','Otitis externa not settling after 2 to 3 weeks of drops','Granulation tissue on the floor of the canal (often seen)','A facial nerve palsy (often the first nerve involved)'],
+      opts:[['One or more','moeref'],['None','oedc']]},
+    moeref:{end:'refer', title:'Possible malignant otitis externa: ENT', items:['Contact ENT, who decide where it is managed; early infection may be treated as an outpatient (WikEM)'], links:[[NAG_A10[0], NAG_A10[1], 1]], gap:esrc(E_W5 + '; ' + E_R3)},
+    oedc:{end:'discharge', title:'Otitis externa: home', items:['Drops as above, the ear kept dry, no water sports for 7 to 10 days (WikEM)'], links:[[NAG_A10[0], NAG_A10[1], 1]], gap:esrc(E_W4) + ' Antibiotic choice: NAG A10 by name only.'},
+    aom:{step:'Acute otitis media', items:[
+      'Needs acute onset (under 48 hours), fluid behind the drum and signs of inflammation: redness alone is not enough (WikEM, on a page written for children)',
+      'Usually lasts 3 days, as RCEM quotes NICE; a drum that bursts heals within 6 weeks in the vast majority once the infection settles (RCEM)',
+      'Mastoiditis: the skin behind the ear red and tender, the ear pushed forward: admission under ENT (RCEM)',
+      'Antibiotics: NAG A10 and C2 by name'],
+      links:[[NAG_C2[0], NAG_C2[1], 1], [NAG_A10[0], NAG_A10[1], 1]], gap:esrc(E_W6 + '; ' + E_R3) + ' Adult otitis media is thin in these sources.', next:'aomend'},
+    aomend:{end:'neutral', title:'Acute otitis media: mastoiditis goes to ENT', items:['Mastoiditis signs: admit under ENT (RCEM)','Antibiotics: the NAG pathway, by name'], links:[[NAG_C2[0], NAG_C2[1], 1]], gap:esrc(E_R3)},
+
+    npc:{end:'refer', title:'Refer to ORL to rule out nasopharyngeal carcinoma', items:[
+      'The Malaysian NPC CPG (Recommendation 1, p3): patients presenting with any of the following symptoms should be referred to Otorhinolaryngologists as soon as possible to rule out nasopharyngeal carcinoma:',
+      'painless neck lump (unilateral/bilateral)', 'blood-stained nasal discharge/saliva', 'unilateral ear block or hearing loss', 'headache', 'facial numbness', 'diplopia',
+      'Nasal symptoms, epistaxis among them, are present in 26 to 49.8% of patients; 75 to 85% of Malaysian patients present at an advanced stage (CPG, p3)',
+      'LITFL: a one-sided nosebleed that keeps coming back should prompt a search for a tumour'],
+      gap:'Source: CPG Management of Nasopharyngeal Carcinoma (MaHTAS, 2016), p3; the six symptoms quoted as printed, with acknowledgement to MaHTAS, as its copyright allows. ' + esrc(E_L1)}
+  },
+  advice:[
+    'Avoid blowing your nose for one week.',
+    'If you sneeze, keep your mouth open.',
+    'Avoid hot and spicy food and drinks, and alcohol, for two days.',
+    'Avoid heavy lifting, straining and bending over.',
+    'Avoid vigorous activity for one week.',
+    'Do not pick your nose.',
+    'If it bleeds again: sit up, lean forward and pinch the soft part of your nose firmly for at least 10 minutes.'],
+  notes:[
+    {l:'Where the sources differ', notes:[
+      {h:'Nosebleed', src:'The sources on each step, read ' + EDU_READ, items:[
+        'Share from the front of the nose: about 90% (WikEM), about 95% (RCEM)',
+        'How long to pinch: at least 10 minutes (RCEM), 15 to 20 (LITFL), at least 20 (WikEM)',
+        'Silver nitrate on the spot: a few seconds at most (WikEM), 4 to 5 seconds (LITFL), up to 30 seconds (RCEM)',
+        'Tranexamic acid: 500 mg topically (WikEM, RCEM) against no benefit in NoPAC (St Emlyn\'s)',
+        'Soaking a Rapid Rhino: water, not saline (WikEM), or saline or distilled water (RCEM)',
+        'When the pack comes out: 24 to 48 hours (RCEM), 2 to 3 days (WikEM)',
+        'Antibiotics with a front pack: not routinely under 48 hours (RCEM), possible on weak evidence (WikEM), given (LITFL, 2011)',
+        'Who is admitted with a pack: RCEM\'s nine groups against WikEM\'s three',
+        'Watching before home: 15 minutes after cautery and at least 30 after a pack (RCEM), 1 hour (WikEM)']},
+      {h:'Ear and nose foreign bodies', src:'RCEMLearning; WikEM', items:['A nose object that will not come out goes to ENT at once; an ear object can wait for ENT the next day, unless severe pain, a suspected perforation or a battery (RCEM)']}]},
+    {l:'Sources', notes:[
+      {h:'Educational sources (admitted 26 Nov 2026, facts only)', src:'Read ' + EDU_READ, items:[
+        'WikEM: Epistaxis; Nasal foreign body; Ear foreign body; Otitis externa; Malignant otitis externa; Acute otitis media. wikem.org, CC BY-SA 4.0',
+        'RCEMLearning (Royal College of Emergency Medicine): Acute Epistaxis; Foreign Bodies in Ears and Noses; Ear Disease. rcemlearning.co.uk, CC BY-NC 3.0',
+        'LITFL: A Case of Epistaxis (2011). litfl.com, CC BY-NC-SA 4.0',
+        'St Emlyn\'s: JC: the NoPAC trial (2021). stemlynsblog.org, CC BY-NC-SA 4.0',
+        'Each in the guide\'s own words, credited to its source; none endorses this guide']},
+      {h:'Malaysian sources', src:'MaHTAS; MOH', items:[
+        'CPG Management of Nasopharyngeal Carcinoma (MaHTAS, 2016): Recommendation 1 quoted as printed, with acknowledgement to MaHTAS',
+        'National Antimicrobial Guideline 2024 (MOH): sections A10 and C2 by name and link only; no regimen is copied']}]}],
+  notesFoot:'Facts from open educational sources in the guide\'s own words, each credited on its step (rule 8, admitted 26 Nov 2026). Where they differ, each is given with its source; the department\'s choice is under Still to confirm. Not a department protocol, and none of it replaces the ebook.'
+};
+/* Steps show their items, not a gap line or links: each step's source goes in as its last line (as data13.js does) */
+const eduSteps = id => Object.values(P[id].nodes).forEach(n => { if (n.step){ if (n.gap){ n.items = [...(n.items || []), n.gap]; delete n.gap; } delete n.links; } });
+eduSteps('nosebleed-ent');
+
+/* ---------- Wounds, local anaesthetic and tetanus (sources/edu/wounds.md, checked in wounds-check.md) ---------- */
+const W_LAC = 'WikEM, Laceration repair', W_LA = 'WikEM, Local anesthetics', W_LAST = 'WikEM, Local anesthetic systemic toxicity', W_DB = 'WikEM, Nerve block: digital block', W_FB = 'WikEM, Soft tissue foreign body', W_LIP = 'WikEM, Lip laceration', W_TET = 'WikEM, Tetanus prophylaxis';
+const R_WND = 'RCEMLearning, Surgical Management of Acute Wounds in the ED (reviewed 21 Nov 2024, modified 13 Mar 2026)', R_HAND = 'RCEMLearning, Soft Tissue Injuries of the Hand', R_LA = 'RCEMLearning, Local Anaesthetics module';
+const W_MOH = 'MOH Standard Practice Guidelines for Assistant Medical Officers in Emergency Medicine and Trauma Services (Nov 2023), Appendix 15, p100', L_LAST = 'LITFL, Local Anaesthetic Toxicity', L_TIG = 'LITFL, Tetanus Immunoglobulin (2019)', L_NB = 'LITFL, Nail bed repair (2025)', MY_ANS = 'Guidelines on Safe Use of Medication in Anaesthesia (College of Anaesthesiologists and Malaysian Society of Anaesthesiologists, 2024)';
+P['wounds'] = {
+  title:'Wounds, local anaesthetic and tetanus', grp:'cpg', own:true, isnew:true, hero:'wounds',
+  src:'WikEM, RCEMLearning and LITFL, in the guide\'s own words; the anaesthesia safety guideline (CoA and MSA, 2024)',
+  lead:'A laceration from assessment to closure: what to check and refer, how much local anaesthetic, the digital block, toxicity, tetanus and when the stitches come out. From open educational sources read on 26 Nov 2026; the Malaysian anaesthesia guideline leads on local anaesthetic safety and the MOH antidotes guide on lipid emulsion.',
+  kw:'wound wounds laceration lacerations cut luka suture sutures stitch stitches jahit glue tissue adhesive steri-strip staples local anaesthetic anesthetic lidocaine lignocaine bupivacaine maximum dose toxicity last lipid intralipid digital block ring block finger nerve block tetanus att tig sero-tet tetanus toxoid immunoglobulin suture removal stitches out tendon foreign body glass',
+  start:'menu',
+  nodes:{
+    menu:{q:'What do you need?', hint:'Bites: the guide\'s own case says do not suture the wound (TAG Warrior Course, CBD 2, case 5), and animal bites have their own entry.', opts:[
+      ['Assess the wound','wa'],
+      ['Local anaesthetic: how much','la'],
+      ['Finger: the digital block','db'],
+      ['Close it: which method, and when','wc'],
+      ['Tetanus','tet'],
+      ['Local anaesthetic toxicity (LAST)','last'],
+      ['Stitches out: when','sr']]},
+
+    wa:{step:'Assess the wound', items:[
+      'Check movement and sensation before any local anaesthetic (WikEM)',
+      'Explore to the base: a foreign body, a tendon injury, a fracture (WikEM)',
+      'Possible glass or metal: an X-ray or ultrasound (WikEM); in the hand, an X-ray when a fracture, a penetrating injury or a foreign body is suspected (RCEM)',
+      'Hand, sensation: two-point discrimination over 6 mm static or 4 mm moving is abnormal; under 80% accuracy, or testing you cannot interpret, suggests a digital nerve injury may be present (RCEM)',
+      'Hand, tendons: loss of the resting cascade may mean a flexor tendon injury; test against resistance, since up to 90% of a tendon can be cut and still move without resistance (RCEM)',
+      'Do not extend a hand wound in the ED (WikEM)',
+      'MOH (the AMO emergency guideline, Appendix 15): look for a tendon or artery cut; describe the size, shape, area and any tissue or skin loss; control bleeding by direct pressure, and do not use a tourniquet',
+      esrc(W_LAC + '; ' + R_HAND + '; ' + W_FB) + ' Malaysia: ' + W_MOH + ', cited only.'], next:'wref'},
+    wref:{check:'any', q:'Any reason to refer before closing?', hint:'From WikEM and RCEM. The guide\'s referral rules send a wound over a joint or tendon to the orthopaedic MO on call.',
+      items:['Signs of a nerve, vessel or tendon injury','A facial wound crossing a cosmetic boundary, or tissue loss','A contaminated or dirty wound (RCEM: to the speciality, for closure in theatre)','An open wound over a knuckle (MCP joint): a human bite until proven otherwise','An open wound of the wrist or forearm (zones VII and VIII)','A high-pressure injection injury (2000 to 12000 psi guns): immediate hand surgeons','Sensory loss with a hand laceration: nerve division until explored','A foreign body you cannot retrieve (WikEM: follow-up within 1 to 2 days)'],
+      opts:[['One or more','wrefer'],['None','wc']]},
+    wrefer:{end:'refer', title:'Refer before closing', items:['A tendon, nerve or vessel injury, an open hand or wrist wound, or a high-pressure injection: the hand or orthopaedic team, by the department\'s route','A wound over a joint or tendon: the orthopaedic MO on call (the guide\'s referral rules)','A face wound across a cosmetic boundary or with tissue loss: the department\'s route'],
+      links:[['#referral-rules--ortho','Orthopaedic referral (department)']], gap:esrc(W_LAC + '; ' + R_WND + '; ' + R_HAND + '; ' + W_FB) + ' Which team takes a hand tendon or a face wound at HKL is under Still to confirm.'},
+
+    la:{end:'neutral', title:'Local anaesthetic: the maximum dose', items:[
+      'Lignocaine plain: 5 mg/kg, max 300 mg (WikEM); 3 mg/kg (RCEM wounds page); 4.5 mg/kg (RCEM local anaesthetics module)',
+      'Lignocaine with adrenaline: 7 mg/kg (all three); max 500 mg (WikEM)',
+      'Bupivacaine: 2.5 mg/kg, max 175 mg plain, and 3 mg/kg, max 225 mg with adrenaline (WikEM); 2 mg/kg either way (RCEM module)',
+      '1% lignocaine (lidocaine) is 10 mg/ml; 2% is 20 mg/ml; 0.5% bupivacaine is 5 mg/ml (WikEM)',
+      'Malaysia: the maximum dose is based on milligrams per kilogram of lean body weight; consider dose reductions of 10 to 20% at the extremes of age, in decompensated heart failure, in parturients, in uraemia or acidosis, and in liver disease with heart or kidney disease (CoA and MSA 2024, pp 43, 58, 97 to 98)',
+      'No more than 0.5 mg of adrenaline injected at any one time; toxicity can happen even within the maximum dose (RCEM module)',
+      'Buffering eases the sting: 1 ml of bicarbonate to 9 ml of lignocaine (WikEM)',
+      'The department\'s dosing and dilution guide lists lignocaine 2% (100 mg in 5 ml, 20 mg/ml) and, for local or regional anaesthesia, refers to the LA/RA guide (printed p115)'],
+      links:[['#calc-lamax','Local anaesthetic: maximum dose calculator'],['#dilution','ED dosing and dilution guide: lignocaine']],
+      gap:esrc(W_LA + '; ' + R_WND + '; ' + R_LA + '; ' + W_LAC) + ' The Malaysian guideline (' + MY_ANS + ') gives the principle, not a figure in mg/kg; the sources\' figures differ, so the department\'s choice is under Still to confirm.'},
+
+    db:{step:'The digital (finger) block', fig:'spin-finger', items:[
+      'Each finger has four nerves: two on the back at 10 and 2 o\'clock, two on the palm side at 4 and 8 o\'clock; the palm-side pair lie nearer the midline (WikEM)',
+      'A 27 to 30 gauge needle on a 5 to 10 ml syringe (WikEM)',
+      'Go in at the base of the finger near the knuckle (MCP joint), to one side of the midline; advance around the bone toward the palm side (WikEM)',
+      'Inject about 1 ml for the palm-side nerve, then about 1 ml more as you withdraw for the back nerve; repeat on the other side; stop if the skin tents (WikEM)',
+      'Not through infected skin, or where the landmarks are distorted (WikEM)',
+      'Adrenaline in a finger: WikEM says studies show it is safe, on poor evidence; RCEM says avoid it in fingers, toes, ears, nose and penis; LITFL uses 1 to 2 ml of 1% lignocaine without adrenaline per side. The department\'s choice is under Still to confirm',
+      esrc(W_DB + '; ' + R_WND + '; ' + L_NB)], next:'dbend'},
+    dbend:{end:'neutral', title:'The other way in: the transthecal block', items:['WikEM\'s alternative for fingers 2 to 5, the transthecal block (its steps on WikEM\'s page): about 1.5 to 3 ml','Not with a flexor tendon injury or an infection there (WikEM)'], links:[['#calc-lamax','Maximum dose calculator']], gap:esrc(W_DB)},
+
+    wc:{step:'Clean and close', items:[
+      'Debridement matters most; no povidone-iodine or chlorhexidine inside the wound (WikEM)',
+      'Irrigate under pressure, for example through an 18 gauge; tap water is as effective as sterile water or saline (WikEM)',
+      'Timing: WikEM lists a body wound over 12 hours, or a face or scalp wound over 24 hours, as reasons not to close; RCEM: simple wounds closed within 12 to 24 hours heal by primary intention, and a contaminated wound can be infected within 6 hours',
+      'Too old to close: irrigate, explore and pack, and look again in 3 days; it may be sutured then if clean (WikEM)',
+      'Tissue glue: low tension and well apposed; three layers, letting the first dry for 30 seconds; not on bites, contaminated or puncture wounds, mucosa, or moist areas such as the groin and axilla; no antibiotic ointment over it (WikEM)',
+      'Infection risk: sutures more than staples, more than strips (RCEM); favour absorbable sutures on the face (WikEM); MOH lists suture, staples, wound closure clips and tissue adhesive (Appendix 15)',
+      'Lip: the first stitch lines up the vermilion border (6-0, WikEM); an isolated laceration inside the mouth needs closing only if over 1 cm (WikEM)',
+      esrc(W_LAC + '; ' + R_WND + '; ' + W_LIP)], next:'wab'},
+    wab:{check:'any', q:'Antibiotics: any of these?', hint:'RCEM: routine antibiotic prophylaxis for simple wounds has no scientific basis. WikEM lists when to consider it. The MOH AMO emergency guideline lists IV antibiotics to prevent infection (Appendix 15); where they differ is under Still to confirm. The choice of drug is the NAG\'s (A14, skin and soft tissue; A15, trauma), by name only.',
+      items:['Debris or faeces in the wound, or a puncture wound','A bite','Much tissue destroyed, or a neglected wound','Immune deficiency (diabetes, HIV, long-term steroids)','Peripheral arterial disease or lymphoedema','A retained foreign body (organic matter, or with diabetes or immunocompromise: WikEM)','A plantar puncture through athletic shoes (WikEM: Pseudomonas cover)'],
+      opts:[['One or more: consider antibiotics','wdcab'],['None','wdc']]},
+    wdcab:{end:'discharge', title:'Closed: home, antibiotics considered', items:['Choose by the NAG (sections A14 and A15)','Review a higher-risk wound in 24 to 48 hours (RCEM); WikEM: check at 48 to 72 hours only if high risk; there is no point checking before 48 hours','Give the wound advice (the Advice tab)'],
+      links:[['https://sites.google.com/moh.gov.my/nag/contents/section-a-adult/a14-skin-soft-tissue-infections','NAG 2024, A14: skin and soft tissue infections'],['https://sites.google.com/moh.gov.my/nag/contents/section-a-adult/a15-trauma-related-infections','NAG 2024, A15: trauma-related infections']],
+      gap:esrc(W_LAC + '; ' + R_WND) + ' Antibiotics: NAG by name only. Tetanus: decide in every injured patient.'},
+    wdc:{end:'discharge', title:'Closed: home', items:['No routine antibiotics for a simple wound (RCEM)','Keep the dressing moist, not wet; splint a wound over a flexor surface or under tension (WikEM)','Written advice; the patient knows the signs of infection (RCEM)','Stitches out by site: see "Stitches out"','Tetanus: decide in every injured patient'],
+      links:[['#wounds--tet','Tetanus'],['#wounds--sr','Stitches out: when']], gap:esrc(R_WND + '; ' + W_LAC)},
+
+    tet:{end:'neutral', title:'Tetanus: decide for every injured patient', items:[
+      'RCEM: a decision on tetanus prophylaxis must be made for every patient with an injury',
+      'Adequately primed, last dose within 10 years: none needed, for any wound (RCEM)',
+      'Adequately primed, last dose over 10 years: a clean wound needs none; a tetanus-prone wound, an immediate reinforcing dose; a high-risk wound, the dose plus one dose of human tetanus immunoglobulin at another site (RCEM)',
+      'Not adequately primed, or uncertain: a clean wound, a reinforcing dose; a tetanus-prone or high-risk wound, the dose plus immunoglobulin (RCEM); then complete the course: WikEM gives further doses at 1 month and 1 year',
+      'Tetanus-prone (UK, in RCEM\'s and LITFL\'s references): puncture injuries in a contaminated setting, wounds with a foreign body, compound fractures, wounds or burns with systemic sepsis, certain animal bites and scratches; surgery delayed more than 6 hours (LITFL)',
+      'High risk: heavy contamination with material likely to hold tetanus spores, and/or extensive devitalised tissue (LITFL)',
+      'The department\'s dosing and dilution guide (3rd edition, January 2026): tetanus toxoid vaccine (ATT), IM 0.5 ml once into the deltoid, for immunisation against tetanus in cases of injury; kept in the ED fridge (printed p214)',
+      'The same guide: tetanus immunoglobulin (Sero-Tet, 250 IU/ml), IM or infiltrated around the wound, 500 units (2 vials) once, at a different site and syringe from ATT; its printed indication is tetanus treatment; not kept in the ED: collect it from the A&E pharmacy with a prescription signed by the ID or EP, the EP with the ID\'s verbal consent (printed p213)',
+      'Immunoglobulin in the educational sources: 250 units with fewer than 3 doses or none known (WikEM); 250 IU, or 500 IU if more than 24 hours have passed, with heavy contamination or after burns (LITFL)',
+      'WikEM gives the US rule instead: fewer than 3 doses or unknown, vaccine for a clean wound and vaccine with immunoglobulin for a dirty one; 3 or more, vaccine if over 10 years (clean) or over 5 years (dirty)'],
+      links:[['#calc-tetanus','Tetanus: the decision tool'],['#dilution','ED dosing and dilution guide: Sero-Tet and ATT']],
+      gap:esrc(R_WND + '; ' + L_TIG + '; ' + W_TET + '; ' + W_LAC) + ' The department\'s dosing and dilution guide, printed pp 213 to 214, gives the ATT and Sero-Tet doses. The MOH AMO emergency guideline (Appendix 15) lists tetanus status and tetanus for prophylaxis, with no schedule; no other current Malaysian wound schedule was found, so which wounds get them, and the Sero-Tet dose for prevention, are under Still to confirm.'},
+
+    last:{step:'Local anaesthetic systemic toxicity', items:[
+      'Usually 1 to 5 minutes after the injection, but from a few seconds to as long as 60 minutes (RCEM)',
+      'Brain first (perioral numbness, tinnitus, agitation, then fits), then the heart (WikEM); the Malaysian guideline: the nervous system is the commonest (68% to 77%), and about 20% present with the heart alone (CoA and MSA 2024, pp 122 to 123)',
+      'Stop the injection and call for help; small doses of a benzodiazepine for fits (RCEM, WikEM; WikEM warns propofol may worsen heart toxicity)',
+      'Changes to the arrest drugs: no vasopressin, calcium channel blocker or beta-blocker; amiodarone for ventricular arrhythmias (WikEM)',
+      'Lipid emulsion 20%: the MOH Antidotes Quick Guide (2022) is on the guide\'s Antidotes page; the other sources\' doses differ from it and from each other (total about 12 ml/kg in WikEM, RCEM and the Malaysian guideline; 10 ml/kg in the MOH guide; 8 ml/kg in LITFL)',
+      'Monitoring: minor symptoms, at least an hour (RCEM); the Malaysian guideline advises at least 4 to 6 hours after significant heart toxicity, and says at least 2 hours may be prudent after nervous system signs alone',
+      esrc(R_WND + '; ' + W_LAST + '; ' + W_LA + '; ' + R_LA + '; ' + L_LAST) + ' Malaysia: ' + MY_ANS + '; lipid emulsion 20% must be immediately accessible wherever local anaesthetic is given (p95).'], next:'lastend'},
+    lastend:{end:'admit', title:'Toxicity: resuscitate, lipid, uptriage', items:['Move the patient to resuscitation by the department\'s rules','Lipid emulsion by the MOH Antidotes Quick Guide'], links:[['#antidotes','Antidotes: lipid emulsion (MOH, 2022)']], gap:esrc(R_LA + '; ' + W_LAST)},
+
+    sr:{end:'neutral', title:'Stitches out: when (days)', items:[
+      'Face: 5 (WikEM); 4 to 5 (RCEM)',
+      'Ear, eyelid, eyebrow, nose: 5 to 7 (WikEM)',
+      'Lip: absorbable, none to remove; non-absorbable, 3 to 5 (WikEM)',
+      'Scalp: 7 (WikEM); 10 to 14 (RCEM)',
+      'Chest and abdomen, foot and sole: 12 to 14 (WikEM)',
+      'Back, limbs, hand: 7 to 10 (WikEM); upper body and hand 7 to 10, lower body 10 to 14 (RCEM)',
+      'Over a joint: extensor side 10 to 14, flexor side 7 to 10 (WikEM); 14 to 21, splinted (RCEM)'],
+      gap:esrc(W_LAC + '; ' + R_WND) + ' Where the Klinik Kesihatan takes the stitches out is the department\'s route (referral rules).'}
+  },
+  advice:[
+    'Keep the dressing moist rather than wet.',
+    'Know the signs of infection, and come back if they appear.',
+    'Have the stitches removed on the day you were told, at your clinic.'],
+  notes:[
+    {l:'Where the sources differ', notes:[
+      {h:'Local anaesthetic', src:'Read ' + EDU_READ, items:['Lignocaine plain: 5 mg/kg, max 300 mg (WikEM), 3 mg/kg (RCEM wounds), 4.5 mg/kg (RCEM module)','Bupivacaine: 2.5 or 3 mg/kg (WikEM) against 2 mg/kg (RCEM)','Adrenaline in a finger: safe on poor evidence (WikEM), avoid (RCEM), not used (LITFL)','Lipid emulsion total: about 12 ml/kg (WikEM, RCEM, CoA and MSA), 10 ml/kg (MOH antidotes), 8 ml/kg (LITFL)']},
+      {h:'Wounds and tetanus', src:'Read ' + EDU_READ, items:['Stitches out: scalp 7 (WikEM) against 10 to 14 (RCEM); over a joint 7 to 14 against 14 to 21','When to close: WikEM splits body (12 hours) and face or scalp (24 hours); RCEM gives 12 to 24 hours','Tetanus: the UK rule (RCEM: primed, 10 years, a high-risk tier) against the US rule (WikEM: 3 doses, 5 or 10 years)']}]},
+    {l:'Sources', notes:[
+      {h:'Educational sources (admitted 26 Nov 2026, facts only)', src:'Read ' + EDU_READ, items:['WikEM: Laceration repair; Local anesthetics; Local anesthetic systemic toxicity; Nerve block: digital block; Soft tissue foreign body; Lip laceration; Tetanus prophylaxis. CC BY-SA 4.0','RCEMLearning: Surgical Management of Acute Wounds in the ED; Soft Tissue Injuries of the Hand; Local Anaesthetics module. CC BY-NC 3.0','LITFL: Tetanus Immunoglobulin; Nail bed repair. CC BY-NC-SA 4.0','Each in the guide\'s own words, credited; none endorses this guide']},
+      {h:'Malaysian sources', src:'CoA and MSA; MOH', items:[W_MOH + ': the wound checklist, cited only', 'Guidelines on Safe Use of Medication in Anaesthesia (College of Anaesthesiologists and Malaysian Society of Anaesthesiologists, 2024), with acknowledgement to CoA and MSA, as its copyright allows','MOH Antidotes Quick Guide (2022), on the guide\'s Antidotes page','National Antimicrobial Guideline 2024: sections by name and link only']}]}],
+  notesFoot:'Facts from open educational sources in the guide\'s own words, each credited on its step (rule 8, admitted 26 Nov 2026). Where they differ, each is given with its source; the department\'s choice is under Still to confirm. Not a department protocol.'
+};
+eduSteps('wounds');
+
+/* ---------- Dizziness, headache and back pain: red flags (sources/edu/redflags.md, checked in redflags-check.md) ---------- */
+const F_WV = 'WikEM, Vertigo', F_WB = 'WikEM, Benign paroxysmal positional vertigo', F_RV = 'RCEMLearning, Vertigo (reviewed 26 Feb 2026)', F_LV = 'LITFL, Vertigo: the big 3', F_LDH = 'LITFL, Dix-Hallpike manoeuvre', F_SDZ = 'St Emlyn\'s, Can I safely discharge dizzy patients from the ED? (2018)';
+const F_WHA = 'WikEM, Headache', F_WMEN = 'WikEM, Meningitis', F_WGCA = 'WikEM, Giant cell arteritis', F_WCVT = 'WikEM, Cerebral venous thrombosis', F_WPP = 'WikEM, Postpartum headache', F_WCO = 'WikEM, Carbon monoxide toxicity', F_RHA = 'RCEMLearning, Primary Headache (2022)', F_LRF = 'LITFL, Headache red flags', F_LTC = 'LITFL, Thunderclap headache', F_SHA = 'St Emlyn\'s, Headache in the Emergency Department (2014)';
+const F_WLBP = 'WikEM, Lower back pain', F_WCES = 'WikEM, Cauda equina syndrome', F_WSEA = 'WikEM, Spinal epidural abscess', F_RLBP = 'RCEMLearning, Lower Back Pain (reviewed 17 Jan 2025)', F_SCES = 'St Emlyn\'s, Re-evaluating risk factors for cauda equina (on Angus et al., EMJ 2021)', F_SBP = 'St Emlyn\'s, back pain lesson plan (awaiting clinician sign-off; relays NICE)';
+const MY_STROKE = 'CPG Management of Ischaemic Stroke, 3rd edition (Malaysian Society of Neurosciences and the Academy of Medicine of Malaysia, 2020)';
+P['red-flags'] = {
+  title:'Dizziness, headache and back pain: red flags', grp:'cpg', own:true, isnew:true, hero:'redflag',
+  src:'WikEM, RCEMLearning, LITFL and St Emlyn\'s, in the guide\'s own words; the ischaemic stroke CPG (2020)',
+  lead:'Three common Green Zone complaints and the few patients among them who must not go home: central vertigo (with HINTS, Dix-Hallpike and Epley), the dangerous headache, and cauda equina, infection or an aneurysm behind back pain. From open educational sources read on 26 Nov 2026; the Malaysian stroke CPG leads on stroke.',
+  kw:'dizzy dizziness vertigo pening giddy giddiness hints head impulse nystagmus skew dix-hallpike hallpike epley bppv vestibular neuritis posterior circulation cerebellar stroke headache sakit kepala thunderclap sah subarachnoid meningitis temporal arteritis giant cell carbon monoxide venous sinus postpartum back pain sakit belakang low back pain cauda equina saddle anaesthesia retention bladder scan epidural abscess aaa aneurysm red flags',
+  start:'menu',
+  nodes:{
+    menu:{q:'Which complaint?', hint:'The department\'s policy keeps severe dizziness and new focal neurological symptoms out of the Green Zone: uptriage when you find them.', opts:[['Dizziness or vertigo','dz1'],['Headache','ha1'],['Low back pain','bp1']]},
+
+    dz1:{q:'Which pattern is it?', hint:'WikEM sorts dizziness by its timing and trigger. ' + esrc(F_WV), opts:[
+      ['Brought on by moving the head, brief spells, well in between (triggered)','dzbppv'],
+      ['Spells that come on by themselves; well when seen (spontaneous episodic)','dzepi'],
+      ['Continuous since it began, present at rest (acute vestibular syndrome)','dzavs']]},
+    dzepi:{end:'neutral', title:'Spontaneous spells: think of the dangerous causes', items:['WikEM: the dangerous causes of spontaneous episodic dizziness are TIA, an arrhythmia and pulmonary embolism','Bedside checks: blood glucose, ECG and postural blood pressure, a full neurological examination and the eardrums (RCEM, WikEM)'],
+      links:[['#stroke-tia','Stroke and TIA'],['#syncope','Syncope'],['#ed-scores--abcd2','ABCD2 score']], gap:esrc(F_WV + '; ' + F_RV)},
+    dzavs:{check:'any', q:'Continuous vertigo: any central red flag?', hint:'RCEM: vertigo from a stroke nearly always comes with other signs of brainstem ischaemia, such as diplopia, dysarthria, numbness or weakness. The Malaysian stroke CPG: isolated vertigo can be a stroke "chameleon", more likely a stroke with known cardiovascular disease or risk factors (' + MY_STROKE + ', p43).',
+      items:['Struggles to stand or walk','Severe head or neck pain','Cranial nerve or cerebellar signs: diplopia, dysarthria, numbness, weakness, ataxia','Older, with cardiovascular disease or vascular risk factors','New hearing loss (a central sign in LITFL\'s HINTS+)'],
+      opts:[['One or more','dzcen'],['None','dzhints']]},
+    dzhints:{step:'HINTS: only for continuous vertigo with nystagmus', items:[
+      'Who: acute persistent vertigo with nystagmus and a normal neurological examination (WikEM); vertigo still continuous at the time of examination (RCEM); hours or days of vertigo at rest, not BPPV (LITFL); only with nystagmus (St Emlyn\'s)',
+      'Head impulse: an abnormal test (a corrective saccade) suggests a peripheral cause; a normal test in ongoing vertigo should worry you, as it suggests a central cause (RCEM). WikEM: failure on one side only is reassuring; a central cause can show a normal reflex or failure on both sides',
+      'Nystagmus: none, or horizontal beating one way only, is reassuring; nystagmus that changes direction, or is vertical or torsional, is more likely central (WikEM, RCEM)',
+      'Test of skew: a vertical correction on alternate cover is a central sign, highly specific but not very sensitive (WikEM, St Emlyn\'s)',
+      'HINTS+ (LITFL): new hearing loss as a fourth part; any central part makes the result central. Record "HINTS central" or "HINTS peripheral", never "negative" (WikEM)',
+      'In its first study (101 patients) HINTS was 100% sensitive and 96% specific for a central lesion, done by neuro-ophthalmologists; emergency doctors need training before relying on it (WikEM, RCEM)',
+      esrc(F_WV + '; ' + F_RV + '; ' + F_LV + '; ' + F_SDZ)], next:'dzhq'},
+    dzhq:{q:'What did HINTS show?', opts:[['Any central part, or you are not sure','dzcen'],['Every part peripheral','dzwalk']]},
+    dzwalk:{q:'Can the patient walk unaided?', hint:'An inferior cerebellar stroke often causes severe unsteadiness and falling (WikEM); severe ataxia or being unable to walk would be a good reason to admit (St Emlyn\'s).', opts:[['Walks safely','dzperi'],['Cannot walk, or badly ataxic','dzcen']]},
+    dzcen:{end:'admit', title:'Possible posterior circulation stroke: uptriage and image', items:[
+      'Uptriage: the Green Zone does not keep severe dizziness or new focal neurological symptoms (department policy)',
+      'The Malaysian stroke CPG: CT brain is mandatory and the preferred emergency imaging in suspected stroke (Key Recommendation 2, p67); dizziness or vertigo is a posterior circulation feature (Table 3.1)',
+      'Early imaging can be falsely negative: plain CT found 26% in WikEM\'s table, MRI 68.4% at 24 hours; RCEM: specialist assessment and/or neuroimaging should also be considered, especially with headache, stroke risk factors or symptoms over 48 hours',
+      'Within the stroke window: Code Stroke'],
+      links:[['#stroke-tia','Stroke and TIA'],['#gz-rules--glance','The Green Zone at a glance']], gap:'Source: ' + MY_STROKE + ', pp 43, 67; reproduced with acknowledgement to its owners. ' + esrc(F_WV + '; ' + F_RV)},
+    dzperi:{end:'discharge', title:'Peripheral and walking: home', items:[
+      'Most peripheral vertigo can go home (WikEM); LITFL: HINTS+ with nothing central is vestibular neuritis',
+      'Vestibular exercises, for peripheral vertigo that is not mild, short-lived or settling by itself: fix on an object, move the head slowly, building up, for several minutes 2 to 3 times a day (RCEM)'],
+      gap:esrc(F_WV + '; ' + F_LV + '; ' + F_RV)},
+    dzbppv:{step:'Positional vertigo: Dix-Hallpike, then Epley', items:[
+      'BPPV: brought on by movement and lasting under 2 minutes at a time (LITFL)',
+      'Not with nystagmus at rest (WikEM); not with severe neck disease, recent neck injury or vertebrobasilar insufficiency (LITFL)',
+      'Dix-Hallpike: turn the head 45° toward the side being tested, then lie the patient back quickly with the head about 20° below the horizontal (LITFL); watch for 30 seconds (RCEM) or 45 seconds (WikEM)',
+      'Positive: upbeat-torsional nystagmus with the vertigo, toward the lower ear, fading within a minute and tiring with repeats (LITFL, WikEM)',
+      'Warning: symptoms at once, or nystagmus beating away from the lower ear, call for a central cause to be considered (WikEM)',
+      'A negative test does not exclude BPPV: sensitivity 48 to 88% (LITFL); 10 to 20% are positive only on a repeat (LITFL)',
+      'Epley (WikEM): from the positive position, hold about 1 to 2 minutes; turn the head 90° the other way, so the unaffected ear faces the floor; keep each new position 1 minute; WikEM sets out the remaining steps',
+      esrc(F_LV + '; ' + F_LDH + '; ' + F_WB + '; ' + F_RV)], next:'dzbend'},
+    dzbend:{end:'discharge', title:'BPPV: home', items:['A positive Dix-Hallpike with no warning signs, treated with the Epley manoeuvre (WikEM, LITFL)'], gap:esrc(F_WB + '; ' + F_LDH)},
+
+    ha1:{check:'any', q:'Headache: any red flag?', hint:'RCEM: any red flag mandates further investigation. St Emlyn\'s: with any red flag, discuss a scan with a senior. The triage course\'s SNOOP4 cases are in CBD 2.',
+      items:['New headache over 50 (WikEM; RCEM)','Thunderclap: at its worst within a minute (LITFL; within 60 seconds, RCEM)','Worsening in frequency and severity','Fever, a stiff neck or reduced consciousness','Focal neurological signs, papilloedema or visual loss','After trauma','Immunocompromise or cancer','Worse with straining, bending or on waking; started on exertion or with sex','On an anticoagulant or antiplatelet','Jaw claudication or a tender temporal artery','A seizure or a faint','Diastolic BP over 120 (WikEM)'],
+      opts:[['One or more','ha2'],['None','hadc']]},
+    ha2:{q:'Which red flag leads?', opts:[
+      ['Thunderclap or sudden onset','hasah'],
+      ['Fever, a stiff neck, a rash or altered consciousness','hamen'],
+      ['Over 50 with a new headache, jaw claudication or visual loss','hagca'],
+      ['Pregnant or post-partum','happ'],
+      ['Anything else: focal signs, papilloedema, raised pressure, cancer, immunocompromise, anticoagulants','hact']]},
+    hasah:{end:'refer', title:'Thunderclap: CT, and think beyond SAH', items:[
+      'Use the Ottawa SAH rule for an alert patient with a headache peaking within an hour',
+      'WikEM: a negative non-contrast CT done within 6 hours of onset can rule out SAH for a thunderclap headache; if further testing is needed after a negative CT, CTA or LP',
+      'LITFL: CT is diagnostic in the first 6 hours, less sensitive after; an LP must be done if the patient presents more than 12 hours after onset',
+      'Other serious causes: cervical artery dissection (one in five presents as thunderclap), stroke, a hypertensive crisis; LITFL advises vessel imaging in most thunderclap headaches',
+      'An LP is a senior decision (St Emlyn\'s)'],
+      links:[['#ed-scores--sah','Ottawa SAH rule'],['#ct-brain','CT brain (department teaching)']], gap:esrc(F_WHA + '; ' + F_LTC + '; ' + F_SHA)},
+    hamen:{end:'admit', title:'Possible meningitis: do not wait', items:[
+      'The classic triad (headache, fever, stiff neck) is present in only about 44%, but at least 2 of 4 (with altered mental state) in 95% (WikEM)',
+      'Do not delay antibiotics for a CT, an LP or blood results (WikEM, St Emlyn\'s)',
+      'CT before LP only with immunocompromise or CNS disease, a new seizure, papilloedema, a focal deficit or a GCS under 10 to 12 (WikEM)',
+      'Antibiotics: the NAG, by name'],
+      links:[['https://sites.google.com/moh.gov.my/nag/contents/section-a-adult/a2-central-nervous-infections','NAG 2024, A2: central nervous system infections'],['#infection-alerts','Infection alerts']], gap:esrc(F_WMEN + '; ' + F_SHA)},
+    hagca:{end:'refer', title:'Over 50: giant cell arteritis', items:[
+      'Headache in 85%, loss of vision in one eye in 50%; jaw claudication and a beaded temporal artery raise the likelihood most (WikEM)',
+      'The "rule of 50s": at least 50 years old, ESR over 50 mm/hr; over 15% can have a normal ESR (WikEM)',
+      'Refer by the department\'s route'],
+      gap:esrc(F_WGCA + '; ' + F_LRF) + ' The referral route and who starts steroids are under Still to confirm.'},
+    happ:{end:'refer', title:'Pregnant or post-partum: the serious causes', items:[
+      '40% of women have a headache after delivery, most in the first week; the serious causes include pre-eclampsia, venous sinus thrombosis, PRES, stroke and a post-dural puncture headache (WikEM)',
+      'Venous sinus thrombosis: risk through pregnancy and up to 6 weeks after; headache in 74 to 92%, worse with coughing or bending; MRI and MRV are the tests (WikEM)',
+      'Refer by the department\'s route (O&G or medical)'],
+      gap:esrc(F_WPP + '; ' + F_WCVT)},
+    hact:{end:'refer', title:'Red flag: discuss a scan with a senior', items:[
+      'WikEM: consider a non-contrast head CT for a thunderclap or worst-ever headache, one unlike the usual, meningeal signs, intractable vomiting, or a new headache over 50, with cancer, HIV or neurological deficits (other than migraine aura)',
+      'Raised pressure: straining, bending or jumping sometimes point to it; papilloedema (LITFL)',
+      'Carbon monoxide: headache is its commonest symptom (85%); check a carboxyhaemoglobin, as pulse oximetry is unreliable (WikEM)',
+      'Immunocompromise: think of fungal meningitis; WikEM adds India ink and cryptococcal antigen to the LP if an AIDS-related infection is suspected'],
+      gap:esrc(F_WHA + '; ' + F_LRF + '; ' + F_WCO + '; ' + F_SHA)},
+    hadc:{end:'discharge', title:'No red flag: home', items:['A benign cause that has improved, a normal neurological examination, no red flags, able to take oral treatment, and reliable follow-up (WikEM)'],
+      links:[['#cbd-2','Triage course cases: headache']], gap:esrc(F_WHA + '; ' + F_RHA)},
+
+    bp1:{check:'any', q:'Back pain: any red flag?', hint:'The sources\' age flags differ: under 18 or over 50 (WikEM), under 20 or over 55 (RCEM).',
+      items:['Age under 18 or over 50 (WikEM); onset under 20 or over 55 (RCEM)','Bladder or bowel change, saddle numbness, sexual dysfunction, or pain or weakness in both legs','Fever, IV drug use, immunocompromise, or recent spinal surgery or an epidural','Cancer in the past, weight loss, night or unrelenting pain, thoracic pain','Pain unchanged by movement or position; generally unwell','Trauma, long-term steroids or an anticoagulant','Pain for more than 6 weeks (WikEM)','Widespread neurological symptoms, or a spinal deformity (RCEM)'],
+      opts:[['One or more','bp2'],['None','bpdc']]},
+    bp2:{q:'Which red flag leads?', opts:[
+      ['Bladder, bowel, saddle numbness or both legs: cauda equina','bpces'],
+      ['Fever, IV drug use, immunocompromise or a spinal procedure: infection','bpinf'],
+      ['Older, collapse, or pain not changed by movement: an aneurysm','bpaaa'],
+      ['Cancer, steroids, trauma or older age: fracture or cancer','bpca']]},
+    bpces:{end:'admit', title:'Possible cauda equina: urgent MRI, never home', items:[
+      'The most sensitive features: low back pain, perineal and sacral sensory loss and bladder disturbance; bladder trouble can occur with normal anal tone (RCEM)',
+      'Painless retention predicts it best, but is a late sign (WikEM)',
+      'In Angus et al. (996 patients), 11.1% had compression on MRI; loss of perineal sensation was the most sensitive single sign (50%), and the absence of perineal signs is no reason not to scan (St Emlyn\'s)',
+      'Bladder scan: WikEM says a post-void residual over 200 ml supports it (no reference given); St Emlyn\'s finds scanning of little diagnostic value, and one measurement cannot exclude it',
+      'Urgent MRI, with no delay for other work-up (RCEM, WikEM); surgery within 24 hours of the bladder symptoms (RCEM), or 24 to 48 hours of onset (WikEM)',
+      'Do not discharge suspected cauda equina (WikEM)'],
+      gap:esrc(F_RLBP + '; ' + F_WLBP + '; ' + F_WCES + '; ' + F_SCES) + ' The department\'s route to MRI and the spinal team is under Still to confirm.'},
+    bpinf:{end:'admit', title:'Possible spinal infection', items:[
+      'Fever with local back pain is an epidural abscess until proven otherwise; fever is present in only about 50%, and 98% have at least one risk factor (WikEM)',
+      'Back pain in an IV drug user is a spinal infection until proven otherwise (WikEM); consider TB (RCEM)',
+      'ESR: about 100% sensitive with these risk factors (WikEM); MRI with gadolinium is the test'],
+      gap:esrc(F_WSEA + '; ' + F_WLBP + '; ' + F_RLBP)},
+    bpaaa:{end:'admit', title:'Possible aortic aneurysm', items:[
+      'Back pain that does not behave like muscle pain (not affected by movement or position) may be an aneurysm, sepsis, cancer or an abdominal cause (RCEM)',
+      'Ultrasound to rule out an aneurysm (WikEM); St Emlyn\'s, relaying NICE: a bedside aortic scan at once, and a vascular discussion if it is positive, unavailable or not diagnostic',
+      'With collapse or shock: resuscitation, not the Green Zone'],
+      links:[['#abdo-handbook','Abdominal pain handbook']], gap:esrc(F_RLBP + '; ' + F_WLBP + '; ' + F_SBP)},
+    bpca:{end:'refer', title:'Possible fracture or cancer', items:[
+      'Post-test probability of fracture or cancer (Downie, BMJ 2013, in WikEM): over 65, 9%; long-term steroids, 33%; a history of cancer, 33%; several red flags, 90%',
+      'With a history of cancer, RCEM lists thoracic pain, progressive pain, pain on straining, local tenderness and night pain; MRI rather than plain X-rays'],
+      gap:esrc(F_WLBP + '; ' + F_RLBP)},
+    bpdc:{end:'discharge', title:'No red flag: simple back pain', items:[
+      'No routine imaging for back pain under 6 weeks with no red flags and no severe progressive deficit (WikEM)',
+      'Stay active, with pain as the limit (WikEM, RCEM)',
+      'Come back at once with new bladder or bowel trouble, saddle numbness or worsening weakness (St Emlyn\'s)'],
+      gap:esrc(F_WLBP + '; ' + F_RLBP + '; ' + F_SBP)}
+  },
+  advice:[
+    'Back pain: keep moving and carry on your daily activities as the pain allows.',
+    'Back pain: come back at once with new bladder or bowel trouble, numbness around your bottom or genitals, or weakness that gets worse.'],
+  notes:[
+    {l:'Where the sources differ', notes:[
+      {h:'Dizziness', src:'Read ' + EDU_READ, items:['Who HINTS is for: nystagmus and a normal neurological examination (WikEM), continuous vertigo (RCEM), hours or days at rest (LITFL), nystagmus required (St Emlyn\'s)','The head impulse turn: 20 to 40° (RCEM) or 10 to 15° (St Emlyn\'s)','Dix-Hallpike: watch 30 seconds (RCEM) or 45 (WikEM); sensitivity 48 to 88% (LITFL), 50 to 85% (WikEM), 55 to 88% (RCEM)']},
+      {h:'Headache and back pain', src:'Read ' + EDU_READ, items:['SAH: a CT within 6 hours can rule it out for thunderclap (WikEM); an LP after 12 hours (LITFL)','Back pain age flags: under 18 or over 50 (WikEM); under 20 or over 55 (RCEM)','Bladder scan: over 200 ml supports cauda equina (WikEM, no reference) against little diagnostic value (St Emlyn\'s)','Surgery: within 24 hours of bladder symptoms (RCEM) or 24 to 48 hours of onset (WikEM)']}]},
+    {l:'Sources', notes:[
+      {h:'Educational sources (admitted 26 Nov 2026, facts only)', src:'Read ' + EDU_READ, items:['WikEM: Vertigo; HINTS Exam; BPPV; Headache; Meningitis; Giant cell arteritis; Cerebral venous thrombosis; Postpartum headache; Carbon monoxide toxicity; Lower back pain; Cauda equina syndrome; Spinal epidural abscess. CC BY-SA 4.0','RCEMLearning: Vertigo; Primary Headache; Lower Back Pain. CC BY-NC 3.0','LITFL: Vertigo, the big 3; Dix-Hallpike manoeuvre; Headache red flags; Thunderclap headache. CC BY-NC-SA 4.0','St Emlyn\'s: dizziness journal club (2018); headache (2014); cauda equina risk factors (2021); back pain lesson plan. CC BY-NC-SA 4.0','Each in the guide\'s own words, credited; none endorses this guide']},
+      {h:'Malaysian source', src:'MSN and AMM', items:[MY_STROKE + ': Table 3.1 and section 3.2 (pp 42 to 44), Key Recommendation 2 (p67), BE-FAST (p69); with acknowledgement to its owners, as its copyright allows. No Malaysian guideline was found for headache or back pain.']}]}],
+  notesFoot:'Facts from open educational sources in the guide\'s own words, each credited on its step (rule 8, admitted 26 Nov 2026). Where they differ, each is given with its source; the department\'s choice is under Still to confirm. Not a department protocol.'
+};
+eduSteps('red-flags');
+
+/* ---------- Red eye and eye injury (sources/edu/eye.md, checked in eye-check.md) ---------- */
+const Y_CPG = 'CPG Management of Glaucoma, 2nd edition (MaHTAS, 2017)', Y_MOH = 'MOH Standard Practice Guidelines for Assistant Medical Officers in Ophthalmology (2024)';
+const Y_WCKC = 'WikEM, Caustic keratoconjunctivitis', Y_WCA = 'WikEM, Corneal abrasion', Y_WOFB = 'WikEM, Ocular foreign body', Y_WGR = 'WikEM, Globe rupture', Y_WHY = 'WikEM, Traumatic hyphema', Y_WUV = 'WikEM, Ultraviolet keratitis', Y_WSCH = 'WikEM, Subconjunctival hemorrhage', Y_WCJ = 'WikEM, Conjunctivitis', Y_WAAC = 'WikEM, Acute angle-closure glaucoma', Y_WEX = 'WikEM, Eye exam';
+const Y_RCHEM = 'RCEMLearning, Chemical Eye Injuries in the ED (2025)', Y_RCI = 'RCEMLearning, Corneal Injuries (2022)', Y_ROT = 'RCEMLearning, Ocular Trauma (2024)', Y_RIA = 'RCEMLearning, Initial Assessment of the Eye (reviewed 2025)', Y_R241 = 'RCEMLearning, 24 Hour Ophthalmic Emergencies, part 1 (2025)', Y_R242 = 'RCEMLearning, 24 Hour Ophthalmic Emergencies, part 2 (2025)';
+const Y_LCHEM = 'LITFL, The Eye In Chemical (2018)', Y_LUV = 'LITFL, Blinded By The Light', Y_LFB = 'LITFL, Something in my eye, Doc', Y_LCJ = 'LITFL, A Gritty Sticky Red Eye', Y_LRE = 'LITFL, The Red Eye Challenge', Y_LAAC = 'LITFL, Blind, Aching and Vomiting', Y_LHY = 'LITFL, Half an 8 ball', Y_SE = 'St Emlyn\'s, The dangers of FOAM (2012)';
+const NAG_A7 = ['https://sites.google.com/moh.gov.my/nag/contents/section-a-adult/a7-ocular-infections', 'NAG 2024, A7: ocular infections'];
+P['eye-red'] = {
+  title:'Red eye and eye injury', grp:'cpg', own:true, isnew:true, hero:'eent',
+  src:'WikEM, RCEMLearning, LITFL and St Emlyn\'s, in the guide\'s own words; the glaucoma CPG (MaHTAS 2017)',
+  lead:'Chemicals in the eye, a scratch or a foreign body, the red eye that must go to the eye team the same day, angle closure, an open globe, hyphaema, arc eye and conjunctivitis. From open educational sources read on 26 Nov 2026; the Malaysian glaucoma CPG leads on angle closure.',
+  kw:'eye mata red eye mata merah chemical alkali acid cement lime irrigation ph litmus fluorescein corneal abrasion scratch foreign body rust ring subtarsal evert seidel hyphaema hyphema open globe penetrating rupture shield angle closure glaucoma aac iop timolol acetazolamide pilocarpine mannitol arc eye welding uv keratitis conjunctivitis subconjunctival haemorrhage visual acuity snellen contact lens',
+  start:'menu',
+  nodes:{
+    menu:{q:'What is it?', hint:'Check the visual acuity in every patient (RCEM). How to record it is the last choice below.', opts:[
+      ['A chemical in the eye','chem'],
+      ['Something in the eye, or a scratch','fb'],
+      ['A blow or a sharp injury to the eye','inj'],
+      ['A red eye, no injury','red'],
+      ['Welding or a sun lamp: arc eye','uv'],
+      ['Recording the visual acuity','va']]},
+
+    chem:{step:'Chemical: irrigate first', fig:'spin-eye', items:[
+      'MOH (the AMO ophthalmology guideline, 2024): irrigation is recommended for every chemical injury and advisable after any foreign body in the eye; normal saline 0.9% through a drip set after topical anaesthetic drops, from the inner to the outer corner, the patient looking up, down, right and left; evert the upper and lower lids and lift particles with a cotton bud (conjunctiva and lid only); irrigate with 2 pints; recheck the pH 10 minutes later and irrigate again while it is abnormal (pp 42 to 45)',
+      'Irrigation comes before the history, the examination or any test (RCEM); start with water even before examining, unless a perforation is suspected (LITFL)',
+      'Fluid: 0.9% saline or Hartmann\'s (RCEM); WikEM: saline, Hartmann\'s or buffered saline preferred in hospital, but tap water is acceptable',
+      'Anaesthetic drops (proxymetacaine or tetracaine), but never delay irrigation for them (RCEM)',
+      'How much: start with 1 litre, for at least 10 to 15 minutes whatever the first pH (RCEM); a minimum of 1 litre through an IV giving set (RCEM); at least 30 minutes, usually about 3 litres (LITFL); WikEM: no consensus on volume or time',
+      'Evert the lids early and sweep out hidden debris; after 3 litres, look again for retained debris (RCEM)',
+      'Never try to neutralise an acid with an alkali or the reverse (WikEM)',
+      'Suspected globe rupture or perforation: delay irrigation until the eye team has assessed it (RCEM). CS spray: do not irrigate; it makes it worse (RCEM)',
+      esrc(Y_RCHEM + '; ' + Y_LCHEM + '; ' + Y_WCKC + '; ' + Y_R242 + '; ' + Y_RCI) + ' Malaysia: ' + Y_MOH + ', in the guide\'s own words.'], next:'chemph'},
+    chemph:{step:'Check the pH, and keep going until neutral', items:[
+      'MOH: litmus paper on the conjunctiva in the fornix, with the lower lid pulled down and the patient looking up; normal is pH 7 (the eye\'s normal pH is 7.4), alkaline 8 to 14, acid 1 to 6 (pp 36 to 37)',
+      'Indicator paper in the lower (inferior) fornix, 5 to 10 minutes after irrigating (RCEM); LITFL pauses for 1 minute to sample the fluid there',
+      'Target: pH 7.0 to 7.2 (RCEM); 7.0 to 7.3 (RCEM, corneal injuries); 7 (RCEM, part 2; MOH); about 7.5 after each litre (LITFL)',
+      'Abnormal: keep irrigating and check again after every litre (RCEM)',
+      'Once neutral, recheck every 15 minutes for at least an hour (RCEM); the same page\'s summary says every 5 to 10 minutes',
+      'Compare with the other eye, or your own, if in doubt (LITFL)',
+      'A painless white eye is not reassuring: it may mean limbal ischaemia (RCEM)',
+      esrc(Y_RCHEM + '; ' + Y_LCHEM + '; ' + Y_RCI + '; ' + Y_R242) + ' Malaysia: ' + Y_MOH + '.'], next:'chemend'},
+    chemend:{end:'refer', title:'Chemical injury: the eye team', items:[
+      'Alkali burns are worse than acid, as they penetrate deeper (RCEM); cement contains lime, so it is an alkali (LITFL)',
+      'An alkali injury needs immediate washout and discussion with the on-call eye team (St Emlyn\'s)',
+      'Record limbal ischaemia in clock hours (RCEM)',
+      'Fluorescein uptake: referral to an ophthalmologist is recommended, although local policy should be followed (RCEM)',
+      'Admit with corneal haze, opacity or limbal ischaemia; only an epithelial injury goes home, with eye review in 24 hours (WikEM); RCEM: a grade I injury, discussed with the eye team, may go home with chloramphenicol and follow-up in 1 to 2 days'],
+      links:[['#pharmacy','ED pharmacy list: eye drops']], gap:esrc(Y_RCHEM + '; ' + Y_LCHEM + '; ' + Y_SE + '; ' + Y_RCI + '; ' + Y_WCKC) + ' The department\'s eye referral route is under Still to confirm.'},
+
+    fb:{step:'Look properly', fig:'spin-eye', items:[
+      'Every corneal injury: visual acuity, the pupils, lid eversion and the slit lamp (RCEM)',
+      'Fluorescein: MOH wets the strip with the anaesthetic drop, touches it to the conjunctiva with the patient looking up, asks them to blink, then examines at the slit lamp under cobalt blue light (pp 39 to 40); an abrasion shows green; take contact lenses out first, or they stain (RCEM)',
+      'Foreign body not seen: evert the upper lid, unless a penetrating injury is suspected; a cotton bud lifts a subtarsal foreign body (RCEM)',
+      'Look for more than one (LITFL); multiple vertical abrasions suggest a foreign body under the upper lid (WikEM)',
+      'A Seidel sign (fluorescein streaming) means a penetrating injury; hyphaema suggests one too, and needs the eye team the same day (WikEM)',
+      'High-velocity injury (hammering, power tools): consider an intraocular foreign body (RCEM); CT orbit is the first choice, with 1.5 to 2 mm cuts (RCEM); plain films detect only 40% (WikEM)',
+      esrc(Y_RCI + '; ' + Y_LFB + '; ' + Y_WCA + '; ' + Y_WOFB + '; ' + Y_ROT) + ' Malaysia: ' + Y_MOH + '.'], next:'fbq'},
+    fbq:{q:'What did you find?', opts:[['A possible penetrating injury: Seidel, hyphaema, high velocity','inj'],['A foreign body stuck in the cornea','fbemb'],['An abrasion, or a subtarsal foreign body now out','abr']]},
+    fbemb:{end:'neutral', title:'Embedded corneal foreign body', items:[
+      'A needle may be used to lift it out, at the slit lamp or with loupes (RCEM): 25 to 30 gauge, tangential (WikEM); 18 to 30 gauge, tip pointing away from the globe (LITFL)',
+      'Repeat the Seidel test afterwards (WikEM)',
+      'A rust ring over the visual axis: the eye team (WikEM); review in 24 hours (WikEM), though a rust ring may be easier to remove 2 to 3 days later (RCEM)',
+      'Not fully removed: review within 24 hours; refer a defect lasting more than 3 days (LITFL)'],
+      gap:esrc(Y_RCI + '; ' + Y_WOFB + '; ' + Y_LFB)},
+    abr:{end:'discharge', title:'Corneal abrasion: home', items:[
+      'Anaesthetic drops are for examining only, not for treatment; never send them home (RCEM)',
+      'Eye pads do not speed healing and may worsen the pain (RCEM)',
+      'Chloramphenicol 1% ointment: no strong evidence, but one cohort study found less ulceration, especially when started within 18 hours (RCEM)',
+      'Contact lens wearer: an anti-pseudomonal drop, and no lenses until healed (RCEM); a white spot or opacity: the eye team the same day (WikEM)',
+      'No routine tetanus prophylaxis for a corneal abrasion (RCEM)',
+      'Review with fluorescein after 24 hours (RCEM; WikEM: 48 hours); refer if not healed by 72 hours, or with more pain or worse vision (RCEM)'],
+      links:[[NAG_A7[0], NAG_A7[1]],['#pharmacy','ED pharmacy list: eye drops']], gap:esrc(Y_RCI + '; ' + Y_WCA) + ' Antibiotic choice: NAG A7 by name only.'},
+
+    inj:{end:'refer', title:'Possible open globe or hyphaema: protect and refer', items:[
+      'Signs: a peaked or irregular (tear-drop) pupil, iris transillumination, a deep lid laceration, subconjunctival haemorrhage, hyphaema (RCEM, WikEM)',
+      'A rigid shield, never a patch; no unnecessary handling, not even the pressure; no Seidel test if an open globe is suspected (RCEM, WikEM)',
+      'Nil by mouth; analgesia and an antiemetic (avoid straining); prophylactic antibiotics; check tetanus (RCEM, WikEM)',
+      'Consider CT orbit if there is concern for an intraocular foreign body or the diagnosis is unclear (WikEM: sensitivity about 60%)',
+      'Hyphaema: graded by how much of the chamber it fills (I up to a third, II a third to a half, III over a half, IV total); sit the patient upright, shield, not patch (WikEM, LITFL); a rebleed at 3 to 5 days complicates about 30% (WikEM)',
+      'Hyphaema disposition is the eye team\'s decision; on anticoagulants or antiplatelet drugs, admit (WikEM)'],
+      gap:esrc(Y_ROT + '; ' + Y_R242 + '; ' + Y_WGR + '; ' + Y_WHY + '; ' + Y_LHY)},
+
+    red:{check:'any', q:'Red eye: any red flag?', hint:'RCEM: check the visual acuity in every patient, and refer urgently when serious disease such as acute angle closure, endophthalmitis, uveitis or microbial keratitis is suspected. LITFL: these usually suggest a cause inside the eye.',
+      items:['Pain, especially severe pain not relieved by anaesthetic drops','Reduced vision','Photophobia','A change in the cornea, or a pupil that reacts poorly','Recent eye surgery','A contact lens wearer (a very low threshold to refer)','Nausea or vomiting with haloes around lights'],
+      opts:[['One or more','redref'],['None','redq']]},
+    redref:{q:'Does it look like angle closure?', hint:'The CPG\'s picture: eye pain, nausea or vomiting, blurred vision with haloes; a red eye, a hazy cornea, a mid-dilated pupil that does not react, a shallow chamber.', opts:[['Yes, it may be','aac'],['No: another serious cause','redrefer']]},
+    redrefer:{end:'refer', title:'Red flag: the eye team, urgently', items:['Refer urgently by the department\'s eye route (RCEM)','A contact lens wearer with a white spot or opacity: the same day (WikEM)'], gap:esrc(Y_R241 + '; ' + Y_LRE + '; ' + Y_WCA) + ' The route is under Still to confirm.'},
+    aac:{end:'refer', title:'Acute angle closure: immediate referral', items:[
+      'The Malaysian CPG: acute angle closure is diagnosed when IOP >21 mmHg with occludable angle, with any two of the following symptoms: ocular and periocular pain; nausea and/or vomiting; history of blurring of vision and haloes; and any three of the following signs: conjunctival injection; corneal epithelial oedema; mid-dilated unreactive pupil; shallow anterior chamber (p8)',
+      'It needs immediate referral (p30); the aims are to lower the IOP urgently and relieve the acute symptoms (p14)',
+      'The CPG gives no ED drug or dose. If the eye team asks you to start: WikEM gives timolol 0.5%, 1 drop, repeated in 1 hour if needed; acetazolamide 500 mg IV or by mouth; brimonidine 0.2% or apraclonidine 1%, 1 drop; pilocarpine 1 to 2%, 1 drop every 15 minutes for 2 to 4 doses (likely ineffective until the pressure is below 40 to 50 mmHg; never over 4%)',
+      'LITFL: head up at least 30°; if the pressure and vision have not improved in 1 hour, consider mannitol (for example 1 to 2 g/kg IV over 45 minutes); steroid drops only by the eye team',
+      'The CPG: carbonic anhydrase inhibitors are contraindicated with a sulphonamide allergy, kidney stones or failure, acidosis and hypokalaemia (p16)',
+      'Of these drugs, only mannitol is in the department\'s dosing and dilution guide; timolol, acetazolamide, pilocarpine, brimonidine and apraclonidine are not on the ED pharmacy list'],
+      gap:'Source: ' + Y_CPG + ', pp 8, 14, 16, 30; the diagnostic criteria quoted as printed, with acknowledgement to MaHTAS, as its copyright allows. ' + esrc(Y_WAAC + '; ' + Y_LAAC) + ' Which of these drugs the department stocks is under Still to confirm.'},
+    redq:{q:'Which is it?', opts:[['Gritty, sticky or itchy, vision normal: conjunctivitis','conj'],['A bright red patch on the white, painless: subconjunctival haemorrhage','sch']]},
+    conj:{end:'discharge', title:'Conjunctivitis: home', items:[
+      'No single sign separates viral from bacterial (WikEM); itch and atopy point to allergy (LITFL); a sore throat, a node in front of the ear or a contact with red eyes point to a virus (WikEM)',
+      'Expect normal vision, pressure and pupils (LITFL)',
+      'Hyperacute (under 24 hours) with heavy pus and STI symptoms: think gonococcal (LITFL)',
+      'Viral conjunctivitis is highly contagious for up to 14 days or while the eyes are red and weeping (LITFL)',
+      'Contact lens wearer: a fluoroquinolone drop, no lenses until well (WikEM)'],
+      links:[[NAG_A7[0], NAG_A7[1]],['#pharmacy','ED pharmacy list: eye drops']], gap:esrc(Y_WCJ + '; ' + Y_LCJ) + ' Antibiotic choice: NAG A7 by name only.'},
+    sch:{end:'discharge', title:'Subconjunctival haemorrhage: reassure', items:[
+      'Painless, vision normal, fresh blood with clear borders on the white (WikEM)',
+      'It will generally settle in 10 to 14 days (WikEM)',
+      'If large and after trauma, keep suspecting a hidden globe rupture; one that covers the whole white (360°) is a sign of rupture (WikEM)',
+      'Bilateral and recurrent: check for a bleeding tendency and uncontrolled blood pressure (WikEM)'],
+      gap:esrc(Y_WSCH + '; ' + Y_WGR)},
+
+    uv:{end:'discharge', title:'Arc eye (UV keratitis): home', items:[
+      'Symptoms typically start 6 to 12 hours after the exposure (LITFL); fluorescein shows fine dots of uptake (WikEM)',
+      'Pain relief is the mainstay; a single dose of cyclopentolate dilates the pupil for up to 24 hours (RCEM)',
+      'Never home with anaesthetic drops: healing is delayed (RCEM)',
+      'It heals over 48 to 72 hours; review in 1 to 2 days (WikEM); come back if not clearly better at 24 hours (LITFL)'],
+      gap:esrc(Y_LUV + '; ' + Y_WUV + '; ' + Y_RCI)},
+
+    va:{end:'neutral', title:'Recording the visual acuity', items:[
+      'A Snellen chart at a set distance, usually 6 m, one eye covered at a time (RCEM)',
+      'Write it as the distance over the smallest line read: 6/12 means the size 12 line read at 6 m (RCEM)',
+      'Cannot read the top line: test at 3 m and record 3/x; then counting fingers, hand movements, light perception (RCEM)',
+      'Better with a pinhole: the loss is refractive (RCEM); test with the patient\'s glasses on (WikEM)'],
+      gap:esrc(Y_RIA + '; ' + Y_WEX)}
+  },
+  advice:[
+    'Do not wear contact lenses until the eye has healed.',
+    'Come back for your eye check when you were told, usually the next day.',
+    'Come back sooner if your vision gets worse or the pain increases.'],
+  notes:[
+    {l:'Where the sources differ', notes:[
+      {h:'Chemical injury', src:'Read ' + EDU_READ, items:['pH target: 7 (MOH; RCEM part 2), 7.0 to 7.2 (RCEM), 7.0 to 7.3 (RCEM corneal injuries), about 7.5 (LITFL)','Volume: 2 pints (MOH), no consensus (WikEM), at least 1 litre (RCEM), about 3 litres over at least 30 minutes (LITFL)','When to read the pH: 10 minutes after (MOH), 5 to 10 minutes after (RCEM), or a 1-minute pause (LITFL)','Recheck: every 15 minutes for at least an hour, or every 5 to 10 minutes (both on one RCEM page)']},
+      {h:'Abrasion, foreign body, angle closure', src:'Read ' + EDU_READ, items:['Abrasion review: 24 hours (RCEM) or 48 (WikEM)','Rust ring: review in 24 hours (WikEM), or it may be easier to remove at 2 to 3 days (RCEM); LITFL reviews within 24 hours a foreign body not fully removed','Needle: 25 to 30 gauge (WikEM) or 18 to 30 (LITFL)','Plain films for an intraocular foreign body: generally not obtained (WikEM), may help (RCEM)','Normal pressure: 10 to 21 mmHg (WikEM) or 10 to 20 (LITFL)','Angle closure: WikEM counts IOP over 21 as one of three signs; the CPG makes it a precondition, with two symptoms and three signs','Pilocarpine and timolol: WikEM\'s and LITFL\'s strengths and doses differ']}]},
+    {l:'Sources', notes:[
+      {h:'Educational sources (admitted 26 Nov 2026, facts only)', src:'Read ' + EDU_READ, items:['WikEM: Caustic keratoconjunctivitis; Corneal abrasion; Ocular foreign body; Globe rupture; Traumatic hyphema; Ultraviolet keratitis; Subconjunctival hemorrhage; Conjunctivitis; Acute angle-closure glaucoma; Eye exam. CC BY-SA 4.0','RCEMLearning: Chemical Eye Injuries in the ED; Corneal Injuries; Ocular Trauma; Initial Assessment of the Eye; 24 Hour Ophthalmic Emergencies, parts 1 and 2. CC BY-NC 3.0','LITFL: The Eye In Chemical; Blinded By The Light; Something in my eye, Doc; A Gritty Sticky Red Eye; The Red Eye Challenge; Blind, Aching and Vomiting; Half an 8 ball. CC BY-NC-SA 4.0','St Emlyn\'s: The dangers of FOAM (2012). CC BY-NC-SA 4.0','Each in the guide\'s own words, credited; none endorses this guide']},
+      {h:'Malaysian sources', src:'MaHTAS; MOH', items:[Y_CPG + ': pp 3, 7, 8, 14, 16, 30, 51; the diagnostic criteria quoted as printed, with acknowledgement to MaHTAS','MOH Standard Practice Guidelines for Assistant Medical Officers in Ophthalmology (2024): pH testing, fluorescein staining and eye irrigation (pp 36 to 45), in the guide\'s own words with acknowledgement, as its terms allow for individual use','National Antimicrobial Guideline 2024: A7 by name and link only']}]}],
+  notesFoot:'Facts from open educational sources in the guide\'s own words, each credited on its step (rule 8, admitted 26 Nov 2026). Where they differ, each is given with its source; the department\'s choice is under Still to confirm. Not a department protocol.'
+};
+eduSteps('eye-red');
+/* Each page read for these entries, linked from its Sources tab (the research files in sources/edu/ list them) */
+Object.entries({"nosebleed-ent":[["WikEM, Epistaxis","https://wikem.org/wiki/Epistaxis"],["WikEM, Nasal foreign body","https://wikem.org/wiki/Nasal_foreign_body"],["WikEM, Ear foreign body","https://wikem.org/wiki/Ear_foreign_body"],["WikEM, Otitis externa","https://wikem.org/wiki/Otitis_externa"],["WikEM, Malignant otitis externa","https://wikem.org/wiki/Malignant_otitis_externa"],["WikEM, Acute otitis media","https://wikem.org/wiki/Acute_otitis_media"],["RCEMLearning, Acute Epistaxis","https://www.rcemlearning.co.uk/reference/epistaxis/"],["RCEMLearning, Foreign Bodies in Ears and Noses","https://www.rcemlearning.co.uk/foamed/foreign-bodies-in-ears-and-noses-practical-tips-for-ed-management/"],["RCEMLearning, Ear Disease","https://www.rcemlearning.co.uk/foamed/ear-disease/"],["LITFL, A Case of Epistaxis","https://litfl.com/a-case-of-epistaxis/"],["St Emlyn's, the NoPAC trial","https://www.stemlynsblog.org/jc-the-nopac-trial-txa-does-not-work-for-epistaxis-st-emlyns/"]],"wounds":[["WikEM, Laceration repair","https://wikem.org/wiki/Laceration_repair"],["WikEM, Local anesthetics","https://wikem.org/wiki/Local_anesthetics"],["WikEM, Local anesthetic systemic toxicity","https://wikem.org/wiki/Local_anesthetic_systemic_toxicity"],["WikEM, Nerve block: digital block","https://wikem.org/wiki/Nerve_block:_digital_block"],["WikEM, Soft tissue foreign body","https://wikem.org/wiki/Soft_tissue_foreign_body"],["WikEM, Lip laceration","https://wikem.org/wiki/Lip_laceration"],["WikEM, Tetanus prophylaxis","https://wikem.org/wiki/Tetanus_prophylaxis"],["RCEMLearning, Surgical Management of Acute Wounds in the ED","https://www.rcemlearning.co.uk/reference/surgical-management-of-acute-wounds-in-the-ed/"],["RCEMLearning, Soft Tissue Injuries of the Hand","https://www.rcemlearning.co.uk/reference/soft-tissue-injuries-of-the-hand/"],["RCEMLearning, Local Anaesthetics module","https://www.rcemlearning.co.uk/modules/local-anaesthetics/"],["LITFL, Tetanus Immunoglobulin","https://litfl.com/tetanus-immunoglobulin/"],["LITFL, Local Anaesthetic Toxicity","https://litfl.com/local-anaesthetic-toxicity-ccc/"],["LITFL, Nail bed repair","https://litfl.com/procedure-nail-bed-repair-instructions/"],["The department's dosing and dilution guide: lignocaine, Sero-Tet, ATT","#dilution"]],"eye-red":[["WikEM, Caustic keratoconjunctivitis","https://wikem.org/wiki/Caustic_keratoconjunctivitis"],["WikEM, Corneal abrasion","https://wikem.org/wiki/Corneal_abrasion"],["WikEM, Ocular foreign body","https://wikem.org/wiki/Corneal_foreign_body"],["WikEM, Globe rupture","https://wikem.org/wiki/Globe_rupture"],["WikEM, Traumatic hyphema","https://wikem.org/wiki/Hyphema"],["WikEM, Ultraviolet keratitis","https://wikem.org/wiki/Ultraviolet_keratitis"],["WikEM, Subconjunctival hemorrhage","https://wikem.org/wiki/Subconjunctival_hemorrhage"],["WikEM, Conjunctivitis","https://wikem.org/wiki/Conjunctivitis"],["WikEM, Acute angle-closure glaucoma","https://wikem.org/wiki/Acute_angle-closure_glaucoma"],["WikEM, Eye exam","https://wikem.org/wiki/Eye_exam"],["RCEMLearning, Chemical Eye Injuries in the ED","https://www.rcemlearning.co.uk/foamed/chemical-eye-injuries-in-the-ed/"],["RCEMLearning, Corneal Injuries","https://www.rcemlearning.co.uk/reference/corneal-injuries/"],["RCEMLearning, Ocular Trauma","https://www.rcemlearning.co.uk/reference/ocular-trauma/"],["RCEMLearning, Initial Assessment of the Eye","https://www.rcemlearning.co.uk/reference/eye-initial-assessment/"],["RCEMLearning, 24 Hour Ophthalmic Emergencies, part 1","https://www.rcemlearning.co.uk/foamed/24-hour-ophthalmic-emergencies-part-1-acute-red-eye/"],["RCEMLearning, 24 Hour Ophthalmic Emergencies, part 2","https://www.rcemlearning.co.uk/foamed/24-hour-ophthalmic-emergencies-part-2-swollen-lids-and-ocular-trauma/"],["LITFL, The Eye In Chemical","https://litfl.com/the-eye-in-chemical/"],["LITFL, Blinded By The Light","https://litfl.com/blinded-by-the-light/"],["LITFL, Something in my eye, Doc","https://litfl.com/something-in-my-eye-doc/"],["LITFL, A Gritty Sticky Red Eye","https://litfl.com/a-gritty-sticky-red-eye/"],["LITFL, The Red Eye Challenge","https://litfl.com/the-red-eye-challenge/"],["LITFL, Blind, Aching and Vomiting","https://litfl.com/blind-aching-and-vomiting/"],["LITFL, Half an 8 ball","https://litfl.com/half-an-8-ball/"],["St Emlyn's, The dangers of FOAM","https://www.stemlynsblog.org/the-dangers-of-foam-at-st-emlyns/"]],"red-flags":[["WikEM, Vertigo","https://wikem.org/wiki/Vertigo"],["WikEM, HINTS Exam","https://wikem.org/wiki/EBQ:HINTS_Exam"],["WikEM, BPPV","https://wikem.org/wiki/Benign_paroxysmal_positional_vertigo"],["WikEM, Headache","https://wikem.org/wiki/Headache"],["WikEM, Meningitis","https://wikem.org/wiki/Meningitis"],["WikEM, Giant cell arteritis","https://wikem.org/wiki/Giant_cell_arteritis"],["WikEM, Cerebral venous thrombosis","https://wikem.org/wiki/Cerebral_venous_thrombosis"],["WikEM, Postpartum headache","https://wikem.org/wiki/Postpartum_headache"],["WikEM, Carbon monoxide toxicity","https://wikem.org/wiki/Carbon_monoxide_toxicity"],["WikEM, Lower back pain","https://wikem.org/wiki/Lower_back_pain"],["WikEM, Cauda equina syndrome","https://wikem.org/wiki/Cauda_equina_syndrome"],["WikEM, Spinal epidural abscess","https://wikem.org/wiki/Epidural_abscess_(spinal)"],["RCEMLearning, Vertigo","https://www.rcemlearning.co.uk/reference/vertigo/"],["RCEMLearning, Primary Headache","https://www.rcemlearning.co.uk/reference/primary-headache/"],["RCEMLearning, Lower Back Pain","https://www.rcemlearning.co.uk/reference/lower-back-pain/"],["LITFL, Vertigo: the big 3","https://litfl.com/vertigo/"],["LITFL, Dix-Hallpike manoeuvre","https://litfl.com/dix-hallpike-test/"],["LITFL, Headache red flags","https://litfl.com/headache-red-flags/"],["LITFL, Thunderclap headache","https://litfl.com/thunderclap-headache/"],["St Emlyn's, Can I safely discharge dizzy patients?","https://www.stemlynsblog.org/dizziness/"],["St Emlyn's, Headache in the Emergency Department","https://www.stemlynsblog.org/induction-headache/"],["St Emlyn's, Re-evaluating risk factors for cauda equina","https://www.stemlynsblog.org/risk-factors-for-cauda-equina/"],["St Emlyn's, Back pain lesson plan","https://www.stemlynsblog.org/lesson-plan-back-pain-induction/"]]}).forEach(([id, refs]) => { const t = P[id].notes.find(n => n.l === 'Sources'); t.notes[0].refs = refs; });
 
 gzMore();
 </script>

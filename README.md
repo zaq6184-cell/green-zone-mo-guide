@@ -149,6 +149,8 @@ On 10 Nov 2026, two more loops (24 credits; 492 to 468): the snakebite banner, a
 
 On 26 Nov 2026, five loops for the home tiles' bands (Omni 1.1 Flash, 12 credits each): **60 credits**, by Flow's per-job quotes.
 
+On 26 Nov 2026 (second round), four banner loops for the wounds, eye, ENT and red flags entries (Omni 1.1 Flash, 12 credits each): **48 credits**, by Flow's per-job quotes.
+
 ## Still to confirm
 
 1. How to book EM Watch: the training deck shows the recruitment step only as a picture.

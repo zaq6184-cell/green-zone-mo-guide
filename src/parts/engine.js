@@ -77,6 +77,7 @@ const MORE_RULES = [['#gz-rules--flow','Patient flow and the green slip'],['#gz-
 /* The version line in the footer and Settings: change it with each round */
 const APP_VER = 'Version 8, updated 26 Nov 2026';
 const V8 = [
+  [`Four Green Zone topics from open teaching sites, and 3D you can turn`, `Wounds (assessment, closure, stitches out, the digital block and local anaesthetic toxicity), the red eye and eye injuries, nosebleeds and the ear and nose, and the red flags in dizziness, headache and back pain: built from WikEM, RCEMLearning, LITFL and St Emlyn's, which allow reuse, in the guide's own words, every number read on its page and checked again by a second reader. Malaysian sources lead where they speak: the anaesthesia safety guideline (2024), the glaucoma, nasopharyngeal carcinoma and stroke CPGs, and the NAG by link. Where the sources differ, each step gives both. New calculators: the local anaesthetic maximum dose and tetanus after a wound. New 3D scenes you can turn: a figure for the rule of nines in the burns calculator (tap a part to count it), a finger for the digital block, the eye in section, and the nose and where it bleeds.`, [['#wounds', 'Wounds'], ['#eye-red', 'Red eye'], ['#nosebleed-ent', 'Nosebleed, ear and nose'], ['#red-flags', 'Red flags'], ['#calc-burns', 'Burns: the 3D figure']]],
   [`Current alerts, the asthma CPG's corrected oxygen targets, and national guideline links`, `The home page shows current public health alerts, each dated, with its source and a tap to the guide's own page: dengue rising in Selangor, a rabies death after a dog bite without post-exposure prophylaxis, and the northeast monsoon floods. Each alert hides itself once it is out of date. The asthma CPG entry follows the CPG's corrected web version: oxygen to a target saturation of 94% and above, moderate SpO2 90 to 94%, and SpO2 94% and above under room air for improvement. Cellulitis, pneumonia, animal bites, urosepsis, leptospirosis and the diabetic foot link to the National Antimicrobial Guideline's updated topics (links only: its terms allow no copying). Suspected Nipah adds the national guideline of January 2026, in the guide's own words with its sections and pages, and the abbreviation list names its circular (Bil.4/2024). What differs from the department's documents is under Still to confirm.`, [['#home', 'Home'], ['#asthma-cpg', 'Asthma CPG'], ['#infection-alerts--nipah', 'Suspected Nipah']], ['#asthma-cpg', '#infection-alerts', '#cellulitis', '#pneumonia', '#animal-bites', '#renal-colic', '#diabetic-foot-cpg']],
   [`Calmer screens: sources named, calculators that open on themselves, and a quieter night`, `A calculator now names its source as Source: (NEWS2 said "Not in the source" above its own citation), and keeps "Not in the source" for what its source leaves out. On a phone a calculator opens on its own banner, short units sit inside their boxes, and once you have typed, a slim bar above the tab bar keeps the result in reach while it is off screen. The antidotes, abbreviations and antimicrobial guides now follow one page pattern, with their names in the top bar; search results sit under quiet heads with counts, in the same order; the Now tile on the home page opens on one line; and at night the outcome colours are the same hues, quieter. Settings has a new switch to try: Compact tab bar while scrolling (off). No clinical content changed.`, [['#calc-news2', 'NEWS2'], ['#antidotes', 'Antidotes'], ['#home', 'Home']]],
   [`Discharge advice in Bahasa Melayu, the advice as films, and What's new in 60 seconds`, `The seven discharge advice tabs (mild head injury, dengue, the Asthma Zone, gastroenteritis, renal colic, abdominal pain and hypoglycaemia) now switch to Bahasa Melayu, line for line, with a Malay read-aloud, and their patient pages and QR codes come in Malay too: the translation is the guide's own, approved by the guide owner on 24 Nov 2026. Each of the seven tabs also has a short film, every line on screen as it is read, for the patient to watch on the tab or their own phone. The patient journey can be heard in Bahasa Melayu, with Malay captions. What's new opens on a 60-second film of what changed. The cancer pain film no longer shows an empty card in its fourth part.`, [['#renal-colic', 'Renal colic'], ['#journey', 'Patient journey'], ['#new', "What's new"]], ['#mild-tbi', '#dengue', '#asthma-zone', '#gastroenteritis', '#renal-colic', '#abdominal-pain', '#hypoglycaemia']],
@@ -300,6 +301,7 @@ const V7 = [
 ];
 const NEW7 = [['#gz-rules--oneway','One-way flow: no repeat tests'],['#gz-rules--down','Down-triage: only the EP can allow it'],['#gz-rules--ivab','IV antibiotics when no bed is free'],['#gz-rules--ep4','When the primary team is delayed'],['#gz-rules--kk','Redirect to a KK or private GP'],['#referral-rules--ortho','Orthopaedic referral: on call or clinic'],['#referral-rules--ipr','Transfer to IPR (respiratory)']];
 const CONFIRM = [
+  'From the open teaching sites round of 26 Nov 2026 (WikEM, RCEMLearning, LITFL, St Emlyn\'s; sources/edu/). Still to confirm, each where the sources differ or the department\'s own practice is not written down: (1) local anaesthetic: which maximum the department uses for plain lidocaine (5 mg/kg, max 300 mg, WikEM; 3 mg/kg, RCEM wounds; 4.5 mg/kg, RCEM module) and bupivacaine, and whether adrenaline is used in fingers; (2) tetanus: the department\'s wound rule (RCEM\'s UK rule and WikEM\'s US rule differ; no current Malaysian schedule was found), and the Sero-Tet dose for prevention (the department\'s dosing and dilution guide prints 500 units once for tetanus treatment, the educational sources 250 IU), and which LA/RA guide its lignocaine page refers to; (3) nosebleed: the ENT route for a packed nose, who removes a pack and when, antibiotics with a pack, and which of a vasoconstrictor, silver nitrate, tranexamic acid and nasal packs the ED stocks; (4) the eye route for chemical injury, red flags and angle closure, the ED drugs for angle closure, and, against the MOH Standard Practice Guidelines for AMOs in Ophthalmology (2024, which the guide now leads with), the irrigation volume (2 pints, MOH; 1 to 3 litres, the teaching sites) and the pH end-point; (5) wounds: which team takes a hand tendon and a face wound, and antibiotics (the MOH AMO emergency guideline, Appendix 15, lists IV antibiotics to prevent infection; RCEM says routine prophylaxis for simple wounds has no scientific basis); (6) cauda equina: the route to MRI and the spinal team, and whether a bladder scan is used; (7) giant cell arteritis: the referral route and who starts steroids.',
   'From the content round of 26 Nov 2026 (national documents read on 25 Nov 2026). Still to confirm: (1) the national Nipah guideline (January 2026), brought into force by circular KPK Bil. 16/2026 of 6 May 2026, after the UKI memo (3 Mar 2026) and the department memo: its list of hospitals for confirmed cases (Annex 5) names Hospital Sungai Buloh and Hospital Tunku Azizah for Selangor, KL and Putrajaya, not HKL, while the UKI memo admits to SW28; and for screening and history-taking it asks staff for a three-ply surgical mask, gown and gloves (9.1), where the department memo asks for full PPE with N95 or PAPR. Which applies at HKL, which of its phases applies now, and do the memos need updating? (2) The HKL mpox pathway (Sept 2024) predates the national Guidelines of MPOX Management Malaysia, Third Edition (18 Sep 2025), which could not be opened on 25 Nov 2026 (its download fails on mpox.moh.gov.my). The national outpatient flowchart of Sept 2024 also screens an unexplained rash with no contact, and travel to affected countries, and admits for persistent fever beyond day 5, dehydration, and age under 2 or over 60, which the HKL pathway does not list. Has the department checked its pathway against the 3rd edition?',
   'From the Malay versions added on 24 Nov 2026 (approved by the guide owner the same day). Still to confirm: the Asthma Zone advice comes from the asthma memo of Nov 2025, while its patient page names the ebook as its source.',
   `From the documents added on 21 Nov 2026 at the guide owner's "add the documents that was left out". Still to confirm: (1) the MOH procedure for discharge at own risk (KPK circular Bil. 24/2021) is written for ward inpatients and never mentions the emergency department: does the department apply it in the ED, and is its Borang A the AOR form the department policy 2026 (32.3) means; (2) the MOH abbreviation list Bil.1/2024 was issued with circular KPK Bil.4/2024 (19 Apr 2024), which allows only the Ministry's approved abbreviations in medical records, and gives only the meanings it prints (TDS only as "Toilet, Debridement And Suturing", BD only as "Binswanger's Disease"): where its do-not-use list (named in its row 1500, and not attached to the circular) is; (3) the leptospirosis circular Bil. 26/2021 prints the child's amoxicillin as "50 mg/kg dose oral 608 hourly" (in both copies circulated), gives no regimen for children aged 8 and over, and is written for primary care: what the department uses; (4) the smoking products circular Bil. 25/2026 names no route for sending its notification form to the PKD: how the department sends it; (5) the CME deck on the aggressive patient (circulated 13 Oct 2026, undated) has its own dose table (slide 53, haloperidol, olanzapine, risperidone, lorazepam, diazepam and midazolam): how it compares with the ebook's table on the behavioural disturbance pathway, which stays the department's route; (6) the MOH Antidotes Quick Guide (2022) prints lines its reader found doubtful, shown as printed with a Check mark: calcium gluconate's maximum "3000-6000mg/kg/dose" after 60 mg/kg/dose; dantrolene's indication "Malignant hypothermia" and its 70 ml title against 60 ml of water for injection; atropine "0.5 to 2.4 mg/kg/hour"; bromocriptine's two maximums; D-penicillamine's two daily doses; methylene blue's two dose paragraphs; folinic acid's 50 mg/5 ml title against 50 mg/ml; and the storage tables of idarucizumab and the 3-factor PCC, which contradict the text under them; whether a later edition exists; and how its entries compare with the ebook\'s pathways and the hospital\'s regimens (N-acetylcysteine with the paracetamol overdose pathway and the HKL NAC regimen; naloxone and flumazenil), which has not been done; (7) the aggressive patient deck\'s HKL risk-of-violence form prints "> 2" factors for high risk and "≥ 2" for moderate (slide 22); (8) the CT brain CME prints the narrow window as "WW: 8 WL:32" (slide 4), shown as printed.`,
@@ -448,7 +450,8 @@ const ICONS = {
   feather:'<path d="M19 4C11 4 6 9 6 17v3"/><path d="M6 17c6 0 11-4 13-13M10 13h5"/>',
   ext:'<path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/>',
   flask:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.4 14h9.2"/>',
-  bone:'<path d="M9.2 7.6l7.2 7.2M7.6 9.2l7.2 7.2"/><circle cx="7.8" cy="5.6" r="2"/><circle cx="5.6" cy="7.8" r="2"/><circle cx="18.4" cy="16.2" r="2"/><circle cx="16.2" cy="18.4" r="2"/>'
+  bone:'<path d="M9.2 7.6l7.2 7.2M7.6 9.2l7.2 7.2"/><circle cx="7.8" cy="5.6" r="2"/><circle cx="5.6" cy="7.8" r="2"/><circle cx="18.4" cy="16.2" r="2"/><circle cx="16.2" cy="18.4" r="2"/>',
+  eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3.2"/>'
 };
 const svg = (k, cls = '', fill = false) => `<svg class="i${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[k] || ''}</svg>`;
 /* The mark: the green floor line, leading from the door to care */
@@ -839,8 +842,11 @@ FIGS.tlclock = () => { const R = [['Morning', '8.00 am', '2.00 pm'], ['Afternoon
 /* ================= The 3D abdomen map (12 Nov 2026) =================
    The handbook's nine regions (p. 7) on a glass torso rendered with Blender for this guide (sources/abdo/abdo3d.blend): the front
    view first (abdo3d/poster.webp), the patient's right on the screen's left, labelled. Tap a region to light it and see what to
-   think of there. The slider, or a sideways drag, turns the torso through 72 degrees: the 25 frames (abdo3d/fNN.webp, about
-   19 KB each) download only when it is first turned. A3D (data17.js) holds each region's outline on each frame. */
+   think of there. The slider, or a sideways drag, turns the torso through 72 degrees: the 25 frames download only when it is
+   first turned. A3D (data17.js) holds each region's outline on each frame. Since 26 Nov 2026 the frames are two pictures of 13
+   and 12 (abdo3d/frames-a.webp, frames-b.webp, five to a row) and the lit front views one (abdo3d/front-lit.webp, three to a
+   row), by src/abdo3d-pack.py, so the artifact keeps room under its file limit; the view shown is a part of one (.a3-sheet). */
+const A3S = {f:['abdo3d/frames-a.webp', 'abdo3d/frames-b.webp'], per:13, cols:5, rows:3, lit:'abdo3d/front-lit.webp', lcols:3, lrows:3};
 let A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : [];
 MORE_DO.push(() => { A3_REG = typeof HB_REGIONS !== 'undefined' ? HB_REGIONS : []; });
 const a3pad = i => String(i).padStart(2, '0');
@@ -851,20 +857,30 @@ function a3svg(i, on){
 function abdo3dHTML(){
   if (typeof A3D === 'undefined') return '';
   return `<figure class="fig a3" data-a3 data-i="${A3D.front}" data-on="0"><div class="a3-bar"><b>The nine regions, in 3D</b></div>` +
-    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions">` +
+    `<div class="a3-stage" style="aspect-ratio:${A3D.w}/${A3D.h}"><img class="a3-img" src="abdo3d/poster.webp" width="${A3D.w}" height="${A3D.h}" loading="lazy" decoding="async" alt="A glass torso seen from the front, with the abdomen divided into nine glowing regions"><div class="a3-sheet" aria-hidden="true" hidden></div>` +
     `<svg viewBox="0 0 ${A3D.w} ${A3D.h}">${a3svg(A3D.front, 0)}</svg><span class="a3-s a3-sr">Patient's right</span><span class="a3-s a3-sl">Patient's left</span></div>` +
     `<label class="a3-turn"><span>Turn</span><input type="range" min="0" max="${A3D.frames.length - 1}" step="1" value="${A3D.front}" data-a3yaw aria-label="Turn the torso"></label>` +
     `<div class="a3-info" aria-live="polite"><p class="hint">Tap a region to light it and see what to think of there.</p></div>` +
     `<figcaption>Schematic regions only, as the handbook (p. 7) draws them: organs and pain can overlap. The glass torso is this guide's own model, made in Blender.</figcaption></figure>`;
 }
 FIGS.abdo3d = abdo3dHTML;
+/* The 26 Nov 2026 procedure scenes (spin3d.py), shown on the steps that name them */
+['nose', 'finger', 'eye'].forEach(k => { FIGS['spin-' + k] = () => spinHTML(k); });
 const a3loaded = new Set();
+/* Shows view i (or, at the front with a region lit, that region's lit view) as its part of a packed picture; data-view says which */
+function a3view(fig, i, on){
+  const sh = fig.querySelector('.a3-sheet'), at = (url, k, cols, rows) => { const c = k % cols, r = Math.floor(k / cols);
+    sh.style.cssText = `background-image:url(${url});background-size:${cols * 100}% ${rows * 100}%;background-position:${(c / (cols - 1) * 100).toFixed(3)}% ${(r / (rows - 1) * 100).toFixed(3)}%`; sh.hidden = false; };
+  if (i === A3D.front && on){ at(A3S.lit, on - 1, A3S.lcols, A3S.lrows); fig.dataset.view = 'lit' + on; return; }
+  if (i === A3D.front && !a3loaded.size){ sh.hidden = true; fig.dataset.view = 'poster'; return; }
+  const s = i < A3S.per ? 0 : 1; at(A3S.f[s], i - s * A3S.per, A3S.cols, A3S.rows); fig.dataset.view = 'f' + i;
+}
 function a3frame(fig, i){
   i = Math.max(0, Math.min(A3D.frames.length - 1, i));
   const on = +fig.dataset.on || 0;
   fig.dataset.i = i;
-  if (!a3loaded.size) A3D.frames.forEach((_, k) => { const im = new Image(); im.src = `abdo3d/f${a3pad(k)}.webp`; a3loaded.add(im); });
-  fig.querySelector('.a3-img').src = i === A3D.front && on ? `abdo3d/front-lit/r${on}.webp` : `abdo3d/f${a3pad(i)}.webp`;
+  if (!a3loaded.size) A3S.f.forEach(u => { const im = new Image(); im.src = u; a3loaded.add(im); });
+  a3view(fig, i, on);
   fig.querySelector('svg').innerHTML = a3svg(i, on);
   const yaw = A3D.frames[i][0], r = fig.querySelector('[data-a3yaw]'); if (+r.value !== i) r.value = i;
   r.setAttribute('aria-valuetext', yaw === 0 ? 'Front view' : Math.abs(yaw) + ' degrees toward the patient\'s ' + (yaw > 0 ? 'left' : 'right'));
@@ -875,7 +891,7 @@ function a3pick(fig, r){
   const i = +fig.dataset.i;
   fig.querySelectorAll('.a3-g').forEach(g => g.classList.toggle('on', +g.dataset.a3r === on));
   fig.classList.toggle('a3-pick', !!on);
-  if (i === A3D.front) fig.querySelector('.a3-img').src = on ? `abdo3d/front-lit/r${on}.webp` : (a3loaded.size ? `abdo3d/f${a3pad(i)}.webp` : 'abdo3d/poster.webp');
+  if (i === A3D.front) a3view(fig, i, on);
   const R = A3_REG[on - 1];
   fig.querySelector('.a3-info').innerHTML = on ? `<h4>${esc(R[0])}</h4><ul>${R[1].map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="links"><a class="pill" href="#abdo-handbook--rg${on}">Open region ${on}${svg('chev')}</a>${R[2].map(l => `<a class="pill" href="#abdo-handbook--${l[0]}">${esc(l[1])}</a>`).join('')}</div>` : '<p class="hint">Tap a region to light it and see what to think of there.</p>';
 }
@@ -902,17 +918,63 @@ const SPIN_INFO = {
     label:i => JOURNEY[i].short, dim:i => !!JOURNEY[i].optional,
     info:i => { const s = JOURNEY[i]; return `<h4>${i + 1}. ${esc(s.title)}</h4><ul>${s.items.slice(0, 3).map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="links"><a class="pill" href="#journey-${i + 1}">Open stop ${i + 1}${svg('chev')}</a></div>`; }}
 };
+/* The 26 Nov 2026 round: the rule of nines on a turnable adult figure, in the burns calculator. Its eight parts are the rows of
+   RULE_OF_NINES (data24.js, the VicBurns poster), in that order; each part's outline on each view is SPIN_REG.burns (traced by
+   spin-pack.py from the ID pass). A tap on a part ticks its row, and a tick in the list lights the part: the list stays the
+   accessible way in, so the outlines are hidden from screen readers. Nothing is stored, as for every calculator. */
+SPIN_INFO.burns = {t:'Rule of nines, in 3D', alt:'A pearl figure of an adult in eight parts, standing on a glass base',
+  hint:'Tap a part to tick it, or drag sideways to turn the figure and see the back.',
+  cap:'Adults only. The parts and their shares are the rule of nines rows below (VicBurns poster): whole regions only, not erythema; add scattered patches by the patient\'s palms. The patient\'s right is on the screen\'s left at the first view. This guide\'s own model, made in Blender.',
+  regions:true, label:j => RULE_OF_NINES[j][0] + ', ' + RULE_OF_NINES[j][1] + '%', on:j => !!(cGet('burns', 'rg') || [])[j],
+  tick:j => { const c = $(`#calcbox input[data-k="rg"][data-i="${j}"]`); if (c) c.click(); }};
+/* The 26 Nov 2026 procedure scenes. Each label says only what its step says, from the source the step names (sources/edu/). */
+const SPIN_STEP = (label, text, href, src) => ({label, info:() => `<h4>${esc(label)}</h4><p>${esc(text)}</p><div class="links"><a class="pill" href="${href}">Open the step${svg('chev')}</a></div><p class="hint">${esc(src)}</p>`}); /* drawn on a tap: esc and svg come later in this file */
+const SPIN_PTS = {
+  nose:[SPIN_STEP('Little\'s area', 'Most nosebleeds start at the front of the septum, Little\'s area (Kiesselbach\'s plexus): about 90% (WikEM) or 95% (RCEM).', '#nosebleed-ent--nbfa', 'WikEM, Epistaxis; RCEMLearning, Acute Epistaxis'),
+        SPIN_STEP('Pinch the soft part', 'Pinch the soft part of the nose firmly, pressing the nostrils together, with the patient sitting up and leaning forward (RCEM).', '#nosebleed-ent--nbfa', 'RCEMLearning, Acute Epistaxis'),
+        SPIN_STEP('The nasal bones', 'Pinch below the hard nasal bones, pressing the sides of the nose against the septum (LITFL; WikEM: over the cartilage, not the bone).', '#nosebleed-ent--nbfa', 'LITFL, A Case of Epistaxis; WikEM, Epistaxis')],
+  finger:[SPIN_STEP('Palm-side nerves', 'Two palmar digital nerves, at 4 and 8 o\'clock, nearer the midline than the back pair (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block'),
+          SPIN_STEP('Back nerves', 'Two dorsal digital nerves, at 10 and 2 o\'clock (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block'),
+          SPIN_STEP('Needle in here', 'At the base of the finger near the knuckle, to one side of the midline; advance around the bone toward the palm, about 1 ml there, then about 1 ml more as you withdraw (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block'),
+          SPIN_STEP('Then the other side', 'Repeat on the other side of the finger; stop if the skin tents (WikEM).', '#wounds--db', 'WikEM, Nerve block: digital block')],
+  eye:[SPIN_STEP('Cornea', 'An abrasion takes up fluorescein and looks green under blue light; take contact lenses out first (RCEM).', '#eye-red--fb', 'RCEMLearning, Corneal Injuries'),
+       SPIN_STEP('The fornices', 'Irrigate the cornea, the conjunctiva, the fornices and the everted lids (RCEM).', '#eye-red--chem', 'RCEMLearning, 24 Hour Ophthalmic Emergencies, part 2'),
+       SPIN_STEP('Lower (inferior) fornix', 'The pH indicator paper goes in the inferior fornix (RCEM).', '#eye-red--chemph', 'RCEMLearning, Chemical Eye Injuries in the ED'),
+       SPIN_STEP('Evert the lid', 'Evert the upper lid to find a subtarsal foreign body, unless a penetrating injury is suspected (RCEM).', '#eye-red--fb', 'RCEMLearning, Corneal Injuries')]
+};
+Object.assign(SPIN_INFO, {
+  nose:{t:'Where it bleeds, in 3D', alt:'A frosted glass face with a glass nose: the hard nasal bones at the top, the septum down the middle with a glowing spot at its front and bottom, and a mint ring around the soft part', home:'Front view',
+    hint:'Drag sideways to see the nose from the side, or tap a number.', cap:'The guide\'s own schematic model, made in Blender: not anatomy to measure from. Each label says only what its step says.',
+    label:i => SPIN_PTS.nose[i].label, info:i => SPIN_PTS.nose[i].info()},
+  finger:{t:'The digital block, in 3D', alt:'A glass finger standing up from the hand, its bones inside, four glowing nerves along its sides and two mint points at its base', home:'Palm side',
+    hint:'Drag sideways to turn the finger round, or tap a number.', cap:'The guide\'s own schematic model, made in Blender: not anatomy to measure from. Each label says only what its step says.',
+    label:i => SPIN_PTS.finger[i].label, info:i => SPIN_PTS.finger[i].info()},
+  eye:{t:'The eye in section, in 3D', alt:'An eye in its lids, cut down the middle: the lining glowing mint from the lid margins into the pockets above and below the eye, which glow amber', home:'Cut view',
+    hint:'Drag sideways to turn from the cut to the front of the eye, or tap a number.', cap:'The guide\'s own schematic model, cut down the middle, made in Blender: not anatomy to measure from. Each label says only what its step says.',
+    label:i => SPIN_PTS.eye[i].label, info:i => SPIN_PTS.eye[i].info()}
+});
 const spinOK = k => typeof SPIN !== 'undefined' && SPIN[k] && SPIN_INFO[k];
+const spinReg = k => typeof SPIN_REG !== 'undefined' && SPIN_REG[k]; /* data34.js, in the page's second part */
+/* The parts' outlines on view i, each lit when its row is ticked; the names of the ticked parts under the figure */
+function spinRegs(fig){
+  const k = fig.dataset.spin, S = SPIN[k], I = SPIN_INFO[k], R = spinReg(k); if (!R) return;
+  const i = +fig.dataset.i, sv = fig.querySelector('.spin-reg');
+  sv.innerHTML = R[i].map(([j, pts]) => `<polygon points="${pts}" data-spin-reg="${j}" class="${I.on(j) ? 'on' : ''}"><title>${esc(I.label(j))}</title></polygon>`).join('');
+  const on = S.regions.map((_, j) => j).filter(I.on);
+  fig.querySelector('.spin-info').innerHTML = on.length ? `<p class="spin-sum">${on.map(j => `<span>${esc(I.label(j))}</span>`).join('')}</p>` : `<p class="hint">${esc(I.hint)}</p>`;
+}
 function spinLabels(k, i, on){
   const S = SPIN[k], I = SPIN_INFO[k];
+  if (I.regions) return '';
   return S.at[i][1].map(([x, y, z], j) => `<button type="button" class="spin-pin${on === j ? ' on' : ''}${I.dim && I.dim(j) ? ' dim' : ''}" data-spin-pin="${j}" style="left:${(x / S.w * 100).toFixed(2)}%;top:${(y / S.h * 100).toFixed(2)}%;z-index:${Math.max(1, Math.round(100 - z * 4))}" aria-pressed="${on === j}" aria-label="${esc((j + 1) + '. ' + I.label(j))}"><i>${j + 1}</i><span>${esc(I.label(j))}</span></button>`).join('');
 }
 function spinHTML(k){
   if (!spinOK(k)) return '';
   const S = SPIN[k], I = SPIN_INFO[k], kb = Math.round(S.bytes / 1024);
-  return `<figure class="fig spin" data-spin="${k}" data-i="0" data-on="-1"><div class="spin-bar"><b>${esc(I.t)}</b><button type="button" class="sm spin-go" data-spin-go>${svg('play')}<span>Turn in 3D</span><small>${kb} KB</small></button></div>` +
-    `<div class="spin-stage" style="aspect-ratio:${S.w}/${S.h}"><img class="spin-img" src="spin/${k}-0.webp" width="${S.w}" height="${S.h}" loading="lazy" decoding="async" alt="${esc(I.alt)}"><div class="spin-sheet" aria-hidden="true"></div><div class="spin-lbl">${spinLabels(k, 0, -1)}</div><span class="spin-wait" aria-hidden="true"></span></div>` +
-    `<label class="spin-turn"><span>Turn</span><input type="range" min="0" max="${S.n - 1}" step="1" value="0" data-spin-yaw aria-label="Turn the model" aria-valuetext="Front view"></label>` +
+  const f0 = S.first || 0;
+  return `<figure class="fig spin${I.regions ? ' spin-parts' : ''}${S.h > S.w ? ' spin-tall' : ''}" data-spin="${k}" data-i="${f0}" data-on="-1"><div class="spin-bar"><b>${esc(I.t)}</b><button type="button" class="sm spin-go" data-spin-go>${svg('play')}<span>Turn in 3D</span><small>${kb} KB</small></button></div>` +
+    `<div class="spin-stage" style="aspect-ratio:${S.w}/${S.h}"><img class="spin-img" src="spin/${k}-0.webp" width="${S.w}" height="${S.h}" loading="lazy" decoding="async" alt="${esc(I.alt)}"><div class="spin-sheet" aria-hidden="true"></div>${I.regions ? `<svg class="spin-reg" viewBox="0 0 ${S.w} ${S.h}" aria-hidden="true"></svg>` : ''}<div class="spin-lbl">${spinLabels(k, f0, -1)}</div><span class="spin-wait" aria-hidden="true"></span></div>` +
+    `<label class="spin-turn"><span>Turn</span><input type="range" min="0" max="${S.n - 1}" step="1" value="${f0}" data-spin-yaw aria-label="Turn the model" aria-valuetext="${esc(I.home || 'Front view')}"></label>` +
     `<div class="spin-info" aria-live="polite"><p class="hint">${esc(I.hint)}</p></div><figcaption>${esc(I.cap)}</figcaption></figure>`;
 }
 const spinReady = new Set(), spinGet = {};
@@ -927,29 +989,36 @@ function spinPaint(fig, i){
   const k = fig.dataset.spin, S = SPIN[k], sh = fig.querySelector('.spin-sheet'), c = i % S.cols, r = Math.floor(i / S.cols);
   if (spinReady.has(k)) sh.style.cssText = `background-image:url(spin/${k}.webp);background-size:${S.cols * 100}% ${S.rows * 100}%;background-position:${S.cols > 1 ? (c / (S.cols - 1) * 100).toFixed(3) : 0}% ${S.rows > 1 ? (r / (S.rows - 1) * 100).toFixed(3) : 0}%`;
   fig.querySelector('.spin-lbl').innerHTML = spinLabels(k, i, +fig.dataset.on);
+  if (S.regions) spinRegs(fig);
   const rg = fig.querySelector('[data-spin-yaw]'); if (+rg.value !== i) rg.value = i;
-  rg.setAttribute('aria-valuetext', i === 0 ? 'Front view' : `Turned ${S.at[i][0]} degrees`);
+  const f0 = S.first || 0;
+  rg.setAttribute('aria-valuetext', i === f0 ? (SPIN_INFO[k].home || 'Front view') : `Turned ${S.at[i][0] - S.at[f0][0]} degrees`);
 }
 function spinTo(fig, pos){
-  const S = SPIN[fig.dataset.spin], i = ((Math.round(pos) % S.n) + S.n) % S.n;
+  const S = SPIN[fig.dataset.spin], i = S.arc ? Math.max(0, Math.min(S.n - 1, Math.round(pos))) : ((Math.round(pos) % S.n) + S.n) % S.n; /* an arc stops at its ends */
   if (+fig.dataset.i === i) return;
   fig.dataset.i = i; spinPaint(fig, i);
 }
-/* Turn in 3D: once around in about 2.6 s, easing in and out; never with reduced motion */
+/* Turn in 3D: once around in about 2.6 s, easing in and out (a scene that turns through an arc swings to one end, back through
+   its first view to the other end, and home); never with reduced motion */
 function spinPlay(fig){
   const S = SPIN[fig.dataset.spin], from = +fig.dataset.i, t0 = performance.now(), dur = 2600, id = (fig._run || 0) + 1;
   fig._run = id;
   const tick = now => { if (fig._run !== id || !fig.isConnected) return; const p = Math.min(1, (now - t0) / dur), e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-    spinTo(fig, from + e * S.n); if (p < 1) requestAnimationFrame(tick); };
+    if (S.arc){ const f0 = S.first || 0, w = Math.sin(2 * Math.PI * e); spinTo(fig, from === f0 ? f0 + w * (w > 0 ? S.n - 1 - f0 : f0) : from + (f0 - from) * e); }
+    else spinTo(fig, from + e * S.n);
+    if (p < 1) requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
 }
 let spinDrag = null;
 document.addEventListener('pointerdown', e => {
   const st = e.target.closest && e.target.closest('.spin-stage'); if (!st || !e.isPrimary || e.target.closest('.spin-pin')) return;
-  const fig = st.closest('[data-spin]'); fig._run = (fig._run || 0) + 1; spinLoad(fig);
+  const fig = st.closest('[data-spin]'); fig._run = (fig._run || 0) + 1; fig._moved = false;
+  if (!SPIN[fig.dataset.spin].regions) spinLoad(fig);
   spinDrag = {fig, x:e.clientX, i:+fig.dataset.i, v:0, lx:e.clientX, lt:e.timeStamp};
 });
 document.addEventListener('pointermove', e => {
+  if (spinDrag && Math.abs(e.clientX - spinDrag.x) > 6 && !spinDrag.fig._moved){ spinDrag.fig._moved = true; spinLoad(spinDrag.fig); }
   if (!spinDrag || !spinReady.has(spinDrag.fig.dataset.spin)) return;
   const d = spinDrag, dt = Math.max(1, e.timeStamp - d.lt); d.v = (e.clientX - d.lx) / dt; d.lx = e.clientX; d.lt = e.timeStamp;
   spinTo(d.fig, d.i - (e.clientX - d.x) / SPIN_PX);
@@ -966,6 +1035,8 @@ document.addEventListener('input', e => { const r = e.target.closest && e.target
 document.addEventListener('click', e => {
   const g = e.target.closest && e.target.closest('[data-spin-go]');
   if (g){ const fig = g.closest('[data-spin]'); spinLoad(fig).then(() => { if (!REDUCED) spinPlay(fig); }); return; }
+  const rp = e.target.closest && e.target.closest('[data-spin-reg]');
+  if (rp){ const fig = rp.closest('[data-spin]'); if (fig._moved) return; SPIN_INFO[fig.dataset.spin].tick(+rp.dataset.spinReg); spinRegs(fig); return; }
   const p = e.target.closest && e.target.closest('[data-spin-pin]'); if (!p) return;
   const fig = p.closest('[data-spin]'), k = fig.dataset.spin, j = +p.dataset.spinPin, on = +fig.dataset.on === j ? -1 : j, I = SPIN_INFO[k];
   fig.dataset.on = on; fig.classList.toggle('spin-pick', on >= 0);
@@ -1065,11 +1136,12 @@ const PROT_IDS = Object.keys(P).filter(id => P[id].sub === 'protocol');
 const CATS = [
   {k:'heart', t:'Heart and vessels', s:'Heart', ic:'heart', c:'c-heart', j:'t-garnet', ids:['acs','acs-cpg','heart-failure','hypertensive-urgency','svt','syncope','dvt','vte-cpg']},
   {k:'breath', t:'Breathing and allergy', s:'Breathing', ic:'lungs', c:'c-breath', j:'t-sapphire', ids:['asthma','asthma-cpg','copd-cpg','pneumonia','sinusitis-cpg','anaphylaxis']},
-  {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','behavioural-disturbance']},
+  {k:'brain', t:'Brain and behaviour', s:'Brain', ic:'brain', c:'c-brain', j:'t-plum', ids:['stroke-tia','mild-tbi','head-injury-cpg','red-flags','behavioural-disturbance']},
   {k:'abdo', t:'Abdomen, kidney and scrotum', s:'Abdomen', ic:'abdomen', c:'c-abdo', j:'t-teal', ids:['abdominal-pain','abdo-handbook','gastroenteritis','biliary','renal-colic','ckd-cpg','scrotal-pain','fb-children-cpg']},
   {k:'infect', t:'Infection and skin', s:'Infection', ic:'virus', c:'c-infect', j:'t-bronze', ids:['dengue','dengue-cpg','cellulitis','sore-throat-cpg']},
   {k:'meta', t:'Sugar, poisoning and pain', s:'Sugar and pain', ic:'droplet', c:'c-meta', j:'t-indigo', ids:['hyperglycaemia','hypoglycaemia','t2dm-cpg','diabetic-foot-cpg','gout-cpg','paracetamol-overdose','snakebite-moh','pain','cancer-pain-cpg']},
-  {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['xray-guide','hip-fracture-cpg','avulsed-tooth-cpg']},
+  {k:'injury', t:'Injuries and teeth', s:'Injuries', ic:'bone', c:'c-injury', j:'t-slate', ids:['wounds','xray-guide','hip-fracture-cpg','avulsed-tooth-cpg']},
+  {k:'eent', t:'Eye, ear and nose', s:'Eye and ENT', ic:'eye', c:'c-breath', j:'t-teal', ids:['eye-red','nosebleed-ent']},
   {k:'scores', t:'Scores and rules', s:'Scores', ic:'scale', c:'c-flow', j:'t-sapphire', ids:['ed-scores']},
   {k:'flow', t:'Green Zone flow and referrals', s:'Flow and referrals', ic:'route', c:'c-flow', j:'t-emerald', ids:FLOW_IDS},
   {k:'prot', t:'Department protocols', s:'Protocols', ic:'prot', c:'c-prot', j:'t-obsidian', ids:PROT_IDS}
@@ -1187,7 +1259,7 @@ const ALIASES = [
   /* Malay */
   ['sakit perut', 'abdominal pain'], ['sakit dada', 'chest pain'], ['sesak nafas', 'breathless'], ['semput', 'asthma'], ['lelah', 'asthma'],
   ['demam denggi', 'dengue'], ['denggi', 'dengue'], ['cirit birit', 'diarrhoea'], ['muntah', 'vomiting'], ['kencing batu', 'renal colic'], ['batu karang', 'renal colic'],
-  ['gigitan anjing', 'dog bite'], ['gigitan kucing', 'cat bite'], ['gigitan ular', 'snake bite'], ['patukan ular', 'snake bite'], ['patah', 'fracture'],
+  ['gigitan anjing', 'dog bite'], ['gigitan kucing', 'cat bite'], ['gigitan ular', 'snake bite'], ['digigit anjing', 'dog bite'], ['digigit kucing', 'cat bite'], ['digigit ular', 'snake bite'], ['patukan ular', 'snake bite'], ['patah', 'fracture'],
   ['kepala terhantuk', 'head injury'], ['kecederaan kepala', 'head injury'], ['pengsan', 'syncope'], ['gula rendah', 'hypoglycaemia'], ['kencing manis', 'diabetes'],
   ['darah tinggi', 'hypertensive'], ['sakit tekak', 'sore throat'], ['resdung', 'rhinosinusitis'], ['gigi tercabut', 'avulsed tooth'], ['tertelan', 'ingestion'],
   ['alahan', 'anaphylaxis'], ['buah zakar', 'scrotal'], ['angin ahmar', 'stroke'], ['strok', 'stroke'], ['serangan jantung', 'acute coronary syndrome'], ['sakit sendi', 'gout'],
@@ -2256,7 +2328,7 @@ function zoneMap(anim){
    for the nine topics, Code Blue and Code Stroke, and the six home tiles (paths, rules, dc, calc, intro, tip). Every key has
    both. A still loads lazily; a loop downloads and plays only while its tile is on screen, Moving tiles is on and motion is
    not reduced, and it pauses offscreen or when the page is hidden. */
-const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir', 'ctbrain', 'antidote', 'abbrev', 'aggress', 'alerts', 'opennow', 'keynums', 'newsband', 'rulesband']);
+const TILE_KEYS = new Set(['all', 'heart', 'breath', 'brain', 'abdo', 'infect', 'meta', 'flow', 'prot', 'codeblue', 'codestroke', 'paths', 'rules', 'dc', 'calc', 'intro', 'tip', 'kids', 'doses', 'scores', 'calm', 'head', 'dengue', 'cardio', 'tox', 'dcpg', 'asthcpg', 'goutcpg', 'fbcpg', 'footcpg', 'acscpg', 'headcpg', 'ckdcpg', 'sinuscpg', 'toothcpg', 'hipcpg', 'paincpg', 't2dmcpg', 'vtecpg', 'copdcpg', 'throatcpg', 'injury', 'interp', 'snakecpg', 'links', 'comms', 'rabies', 'abdohb', 'pharm', 'newhkl', 'prescr', 'dilute', 'whatsnew', 'sources', 'poster', 'extdir', 'ctbrain', 'antidote', 'abbrev', 'aggress', 'alerts', 'opennow', 'keynums', 'newsband', 'rulesband', 'wounds', 'eent', 'entbleed', 'redflag']);
 /* Stills without a loop yet (the 12 Nov 2026 review: Flow Studio stills for What's new, Sources and about, the wall poster
    and the dilution guide): shown like a tile's still, never asked for a video. Move a key to TILE_KEYS once its loop is in tiles/. */
 const STILL_KEYS = new Set([]); /* empty: the four review banners' loops and the ED extension directory's (extdir) went in on 12 Nov 2026 */
@@ -2570,7 +2642,7 @@ function card(n, p){
   }
   if (n.step){
     const obs = n.kind === 'observe';
-    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2 id="${sq}"><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) ? figHTML(n.fig) : ''}
+    return `<div class="stack"><div class="qc step${obs ? ' obs' : ''}"><div class="qh"><span class="ic">${svg(obs ? 'clock' : 'todo')}</span><h2 id="${sq}"><span class="vh">${obs ? 'Observation: ' : 'Do this: '}</span>${esc(n.step)}</h2></div>${obs ? '<p class="hint">Observation</p>' : ''}${n.fig && !memoFig(n) && !/^spin-/.test(n.fig) ? figHTML(n.fig) : ''}${list(n.items)}${memoFig(n) || /^spin-/.test(n.fig || '') ? figHTML(n.fig) : ''}
       <div class="opts"><button type="button" class="opt sugg" data-next><kbd>1</kbd><span>Done, continue</span>${svg('chev', 'gt')}</button></div></div></div>`;
   }
   const sc = n.check === 'score';
@@ -2963,11 +3035,11 @@ function renderDcheck(){
    Checklists and tables come straight from the pathway data, so a calculator cannot drift from its pathway. */
 const CALC_GROUPS = [
   {k:'dengue', t:'Dengue', j:'t-bronze', ic:'droplet', d:'The one-screen assessment, triage vital signs, fluids, the test result, urine output, the shock index and adjusted weight'},
-  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin, asthma prednisolone, kidney function with drug doses, and the rabies vaccine and RIG'},
+  {k:'doses', t:'Doses', j:'t-indigo', ic:'syringe', d:'Analgesia, anticoagulants, insulin, asthma prednisolone, kidney function with drug doses, the rabies vaccine and RIG, and the local anaesthetic maximum'},
   {k:'scores', t:'Scores', j:'t-sapphire', ic:'scale', d:'CURB-65, Wells, McIsaac and the asthma action plan zones; ABCD2, the Ottawa SAH rule, Alvarado, qSOFA, NEWS2, MEWS and CIWA-Ar'},
   {k:'cardio', t:'Heart', j:'t-teal', ic:'heart', d:'Chest pain (Obsess, TIMI, HEART), PE (Wells, PERC, age-adjusted D-dimer), syncope, SVT, blood pressure and AF (CHA2DS2-VASc, HAS-BLED)'},
   {k:'calm', t:'Pain and calm', j:'t-plum', ic:'feather', d:'Pain scales, BARS and RASS, and the cancer pain rescue dose'},
-  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria, the GCS and the Canadian CT Head Rule; the neck (Canadian C-spine, NEXUS); the Ottawa ankle, foot and knee rules; burns'},
+  {k:'head', t:'Injuries', j:'t-garnet', ic:'brain', d:'Head injury criteria, the GCS and the Canadian CT Head Rule; the neck (Canadian C-spine, NEXUS); the Ottawa ankle, foot and knee rules; burns; tetanus after a wound'},
   {k:'tox', t:'Poisoning and allergy', j:'t-obsidian', ic:'flask', d:'Paracetamol overdose and anaphylaxis'},
   {k:'kids', t:'Kids', j:'t-champagne', ic:'kid', d:'Child doses, the dehydration check, weight from age, and heart and breathing rates by age'}
 ];
@@ -4044,7 +4116,7 @@ const CALCS = {
   burns:{t:'Burns: size and fluids', g:'head', src:'VicBurns; RCH Melbourne', path:'#ed-scores--bsz', kw:'burn burns tbsa rule of nines palm parkland fluid resuscitation hartmann urine output scald luka terbakar melecur',
     sub:'TBSA by the rule of nines (adults) or your paediatric chart, then the Parkland volume and starting rate.',
     fields:v => [{k:'who', type:'seg', label:'Patient', re:true, opts:[['adult', 'Adult'], ['child', 'Child under 16']]},
-      ...((v.who || 'adult') === 'adult' ? [{k:'rg', type:'check', label:'Whole regions burnt (rule of nines; not erythema)', pts:true, items:() => RULE_OF_NINES}, ['palms', 'Scattered patches: number of the patient\'s palms', 'palms']]
+      ...((v.who || 'adult') === 'adult' ? [{type:'fig', html:() => spinHTML('burns')}, {k:'rg', type:'check', label:'Whole regions burnt (rule of nines; not erythema)', pts:true, items:() => RULE_OF_NINES}, ['palms', 'Scattered patches: number of the patient\'s palms', 'palms']]
         : [['tbsa', 'TBSA from a paediatric chart (Lund and Browder)', '%']]),
       ['wt', 'Weight', 'kg'], ['hrs', 'Hours since the burn', 'hours'], ['given', 'IV fluid already given', 'ml'],
       {k:'co', type:'seg', label:'Formula', opts:[['3', '3 ml/kg/%TBSA (RCH)'], ['4', '4 ml/kg/%TBSA (VicBurns: inhalation, electrical or other trauma)']]}],
@@ -4063,6 +4135,41 @@ const CALCS = {
       out.push(['Next 16 hours', Math.round(half / 16) + ' ml/hr', 'warn', Math.round(half) + ' ml']);
       out.push(['Urine output target', adult ? fx(0.5 * v.wt) + '\u2013' + fx(v.wt) + ' ml/hr' : fx(v.wt) + ' ml/hr', 'good', adult ? '0.5 to 1 ml/kg/hr (or 30 to 50 ml/hr)' : '1 ml/kg/hr']);
       return {outs:out, verdict:{cls:'stop', h:'Above the threshold: IV fluids and the burns team', p:'Hartmann\'s solution; titrate the rate by urine output, by 10 to 20% at a time (RCH).', href:'#ed-scores--bfx', link:'Open the step'}, gap:'The formulas set the starting rate; the urine output and fluid status set the rest (RCH).'};
+    }},
+  /* The 26 Nov 2026 round (data35.js, wounds): every figure is on the wounds entry's own steps, from the source named there.
+     Where the sources differ the calculator shows each, labelled, and chooses none (the department's choice is under Still to confirm). */
+  lamax:{t:'Local anaesthetic: maximum dose', g:'doses', src:'WikEM; RCEMLearning; CoA and MSA 2024', path:'#wounds--la', kw:'local anaesthetic anesthetic lidocaine lignocaine bupivacaine maximum dose max ml toxic toxicity wound suture digital block',
+    sub:'The most by weight, from each source, in mg and in ml of the strength you hold. The sources differ, so each is shown.',
+    fields:v => [{k:'drug', type:'seg', label:'Drug', re:true, opts:[['lido', 'Lignocaine'], ['bupi', 'Bupivacaine']]},
+      {k:'adr', type:'seg', label:'Adrenaline', opts:[['no', 'Plain'], ['yes', 'With adrenaline']]},
+      ...((v.drug || 'lido') === 'lido' ? [{k:'lc', type:'seg', label:'Strength', opts:[['10', '1% (10 mg/ml)'], ['20', '2% (20 mg/ml)']]}] : []),
+      ['wt', 'Weight (lean body weight, by the Malaysian guideline)', 'kg']],
+    note:'From WikEM (Local anesthetics), RCEMLearning (Surgical Management of Acute Wounds; the Local Anaesthetics module) and the Malaysian Guidelines on Safe Use of Medication in Anaesthesia (College of Anaesthesiologists and MSA, 2024), in the guide\'s own words. 1% lignocaine (lidocaine) is 10 mg/ml, 2% is 20 mg/ml, 0.5% bupivacaine is 5 mg/ml (WikEM). Toxicity can occur even within the maximum dose (RCEM). The department\'s dosing and dilution guide refers local anaesthesia to the LA/RA guide (printed p115).',
+    run(v){
+      if (!v.wt) return null;
+      const bad = badWt(v.wt, 2, 300); if (bad) return bad;
+      const lido = (v.drug || 'lido') === 'lido', adr = v.adr === 'yes', per = lido ? +(v.lc || 10) : 5;
+      const S = lido ? (adr ? [['WikEM', 7, 500], ['RCEM, wounds', 7], ['RCEM, LA module', 7]] : [['WikEM', 5, 300], ['RCEM, wounds', 3], ['RCEM, LA module', 4.5]])
+        : (adr ? [['WikEM', 3, 225], ['RCEM, LA module', 2]] : [['WikEM', 2.5, 175], ['RCEM, LA module', 2]]);
+      const outs = S.map(([s, k, cap]) => { const mg = cap ? Math.min(k * v.wt, cap) : k * v.wt, ml = mg / per;
+        return [s, Math.round(mg) + ' mg = ' + fx(Math.round(ml * 10) / 10) + ' ml', 'warn', k + ' mg/kg' + (cap ? ', max ' + cap + ' mg' + (k * v.wt > cap ? ' (the cap applies)' : '') : '') + ' · ' + (lido ? (per === 10 ? '1%' : '2%') : '0.5%') + ' ' + (lido ? 'lignocaine' : 'bupivacaine') + (adr ? ' with adrenaline' : '')]; });
+      return {outs, gap:'The Malaysian guideline gives the principle, not a figure: the maximum by milligrams per kilogram of lean body weight, and consider dose reductions of 10 to 20% at the extremes of age, in decompensated heart failure, in parturients, in uraemia or acidosis, and in liver disease with heart or kidney disease. No more than 0.5 mg of adrenaline at any one time (RCEM). Which figure the department uses is under Still to confirm.',
+        links:[['#wounds--last', 'Toxicity (LAST)'], ['#antidotes', 'Antidotes: lipid emulsion']]};
+    }},
+  tetanus:{t:'Tetanus after a wound', g:'head', src:'RCEMLearning; LITFL; WikEM', path:'#wounds--tet', kw:'tetanus att tig sero-tet immunoglobulin toxoid vaccine booster wound prone',
+    sub:'The UK rule RCEM gives, from the immunisation history and the wound, with WikEM\'s US rule beside it.',
+    fields:[{k:'hx', type:'pick', label:'Immunisation history', opts:[['in10', 'Adequately primed, last dose within 10 years'], ['over10', 'Adequately primed, last dose more than 10 years ago'], ['no', 'Not adequately primed, or not sure']]},
+      {k:'wd', type:'pick', label:'The wound', opts:[['clean', 'Clean'], ['prone', 'Tetanus-prone', 'For example a puncture in a contaminated setting, a foreign body, a compound fracture, sepsis, certain bites and scratches; surgery delayed over 6 hours (LITFL)'], ['high', 'High risk', 'Heavy contamination with material likely to hold spores, and/or extensive devitalised tissue (LITFL)']]}],
+    note:'RCEMLearning, Surgical Management of Acute Wounds in the ED (its table, adapted from the UK guidance); LITFL, Tetanus Immunoglobulin; WikEM, Tetanus prophylaxis and Laceration repair; in the guide\'s own words. The MOH AMO emergency guideline (2023, Appendix 15) lists tetanus status and tetanus for prophylaxis, with no schedule.',
+    run(v){
+      if (!v.hx || !v.wd) return null;
+      const VAX = 'An immediate reinforcing dose of vaccine', BOTH = VAX + ', and one dose of human tetanus immunoglobulin at a different site';
+      const T = {in10:{clean:'None needed', prone:'None needed', high:'None needed'}, over10:{clean:'None needed', prone:VAX, high:BOTH}, no:{clean:VAX, prone:BOTH, high:BOTH}};
+      const r = T[v.hx][v.wd], outs = [['UK rule (RCEM)', r, r === 'None needed' ? 'good' : 'warn', v.hx === 'no' ? 'Then complete the course: WikEM gives further doses at 1 month and 1 year' : '']];
+      if (r === BOTH){ outs.push(['Sero-Tet in the department\'s guide', '500 units', 'warn', 'Printed for tetanus treatment: IM or around the wound, once, a different site from ATT; not kept in the ED: from the A&E pharmacy, prescription signed by the ID, or the EP with the ID\'s verbal consent (dosing and dilution guide, p213). Its dose for prevention is under Still to confirm']); outs.push(['Educational sources', '250 IU', 'warn', 'WikEM: 250 units with fewer than 3 doses or none known; LITFL: 250 IU, or 500 IU if more than 24 hours have passed, with heavy contamination or after burns']); }
+      if (r !== 'None needed') outs.push(['ATT (the department\'s guide)', '0.5 ml IM', 'warn', 'Once, into the deltoid; kept in the ED fridge (dosing and dilution guide, p214)']);
+      return {outs, lists:[{h:'WikEM\'s US rule, for comparison', rows:[['Fewer than 3 doses, or unknown', 'Vaccine for a clean wound; vaccine and immunoglobulin for a dirty one'], ['3 or more doses', 'Vaccine if the last was over 10 years ago (clean) or over 5 years ago (dirty)']]}],
+        gap:'The department\'s dosing and dilution guide prints Sero-Tet\'s indication as tetanus treatment; which wounds get it, and its dose for prevention, are under Still to confirm.', links:[['#dilution', 'ED dosing and dilution guide']]};
     }},
   wtage:{t:'Child: weight from age', g:'kids', src:'Luscombe and Owens, Arch Dis Child 2007', path:'#ed-scores--wtage', kw:'weight estimate estimation age child apls formula resuscitation broselow',
     sub:'Two formulas for ages 1 to 10, when the child cannot be weighed.',
@@ -4141,6 +4248,9 @@ function bandScore(bands, x, o2){
 }
 /* Every number above must still be in the source text: the test checks each of these phrases against the pathway data */
 const CALC_FACTS = [
+  ['wounds', 'Lignocaine plain: 5 mg/kg, max 300 mg (WikEM); 3 mg/kg (RCEM wounds page); 4.5 mg/kg (RCEM local anaesthetics module)'], ['wounds', 'Lignocaine with adrenaline: 7 mg/kg (all three); max 500 mg (WikEM)'],
+  ['wounds', 'Bupivacaine: 2.5 mg/kg, max 175 mg plain, and 3 mg/kg, max 225 mg with adrenaline (WikEM); 2 mg/kg either way (RCEM module)'], ['wounds', '1% lignocaine (lidocaine) is 10 mg/ml; 2% is 20 mg/ml; 0.5% bupivacaine is 5 mg/ml (WikEM)'], ['wounds', 'IM or infiltrated around the wound, 500 units (2 vials) once'], ['wounds', 'IM 0.5 ml once into the deltoid'],
+  ['wounds', '250 IU, or 500 IU if more than 24 hours have passed, with heavy contamination or after burns (LITFL)'], ['wounds', '250 units with fewer than 3 doses or none known (WikEM)'], ['wounds', 'Adequately primed, last dose within 10 years: none needed, for any wound (RCEM)'],
   ['ed-scores', 'heart rate from 59 studies (143,346 children) and breathing rate from 20 (3,881 children)'], ['ed-scores', 'Web Tables 4 and 5, p12'],
   ['paracetamol-overdose', 'Step 1: 200 mg/kg in 500ml D5% over 4 hours, 125 ml/hr'], ['paracetamol-overdose', 'Step 2: 50 mg/kg in 500ml D5% over 8 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 1: 200 mg/kg in 250ml D5% over 4 hours, 62.5 ml/hr'], ['paracetamol-overdose', 'Step 2: 100 mg/kg in 500ml D5% over 16 hours, 31.25 ml/hr'], ['paracetamol-overdose', 'IV NAC 5000mg/25ml per vial'], ['paracetamol-overdose', 'to a ceiling of 110kg'], ['paracetamol-overdose', 'Fluid restriction OR BW < 40kg'],
   ['snakebite-moh', 'Put 2 ml of freshly drawn venous blood into a small, dry glass tube, new or heat-cleaned'], ['snakebite-moh', 'Leave it undisturbed at room temperature for 20 minutes, then tip it once'], ['snakebite-moh', 'Still liquid: a coagulopathy is possible. Repeat as needed'], ['snakebite-moh', 'a quick bedside test when the bite is unidentified or a pit viper is suspected'], ['snakebite-moh', 'Do not decide antivenom on the 20WBCT alone'], ['snakebite-moh', 'Yet a coagulopathy on the 20WBCT is also listed as an antivenom indication (p66)'], ['snakebite-moh', 'After an adequate dose, clotting usually returns in 3-9 hours (p75)'], ['snakebite-moh', 'Still not clotting, or not clotting again, 6 hours after the infusion ended: repeat the starting dose (p75)'], ['snakebite-moh', 'Not in the guideline: whether a partial clot counts, a schedule for repeat tests, or what to use without a glass tube'], ['snakebite-moh', 'Local envenoming 5-10 vials, systemic 10 vials; next after 1-2 hours'], ['snakebite-moh', '10 vials; next after 1-2 hours'], ['snakebite-moh', '5 vials; next after 1-2 hours'], ['snakebite-moh', 'Red-headed krait 5 vials; next after 1-2 hours. No dose as a second choice'], ['snakebite-moh', '1-3 vials; next after 1-2 hours'], ['snakebite-moh', '4 vials; next at 6 hours'], ['snakebite-moh', '3 vials; next at 6 hours'], ['snakebite-moh', 'Second choice for the pit vipers'], ['snakebite-moh', 'Coral: consider neostigmine with atropine. Those pit vipers: usually not indicated'], ['snakebite-moh', 'Starting dose for an unidentified bite: not in the guideline'], ['snakebite-moh', 'Not in Borneo: the Malayan pit viper, monocled cobra and Malayan krait (p74)'], ['snakebite-moh', 'Printed blank, so ask the EP or an expert: the leaf-nose palm, Sumatran and mountain pit vipers in Table 15 (p71), the Sabah green pit viper in Table 16 (p73)'], ['snakebite-moh', 'Its antivenom is the anti-yamakagashi antivenom, sourced from Japan; no second choice and no dose in the guideline'], ['snakebite-moh', 'Never the Indian polyvalent antivenom'], ['snakebite-moh', 'Elapid antivenoms neutralise less per vial: up to 10 vials to start in confirmed envenoming (p65)'], ['snakebite-moh', 'Adrenaline drawn up before starting: adult 0.5 mg, child 0.01 mg/kg, of 1 mg/ml (1 in 1,000) (p69)'], ['snakebite-moh', 'Reconstitute each vial with the solution supplied or 10 ml water for injection; swirl gently, never shake (p69)'], ['snakebite-moh', 'Dilute: adult 250-500 ml normal saline or D5%; child 5-10 ml/kg'], ['snakebite-moh', 'or give it undiluted'], ['snakebite-moh', 'Run at 1-2 ml/min for 10-15 minutes; with no reaction, faster, to finish within an hour (p69)'], ['snakebite-moh', 'Monitor during the infusion and for at least an hour after'], ['snakebite-moh', 'The same dose at every age, in pregnancy and with comorbidities; no contraindication'], ['snakebite-moh', 'Some severely envenomed children may need a larger volume of antivenom, given their lower volume of distribution'], ['snakebite-moh', 'Repeat the starting dose: still unclotted, or unclotted again, 6 hours after the infusion ended; within 1-2 hours if bleeding stays brisk; after 1-2 hours if paralysis or the circulation worsens, with full support'], ['snakebite-moh', 'No maximum dose or number of repeats is given'], ['anaphylaxis', 'Infusion 1 mcg/min: 1 mg (1 ml of 1:1000) in 500 ml NS at 0.5 ml/min'], ['snakebite-moh', 'Krait and sea snake paralysis does not respond like this'], ['snakebite-moh', 'Table 17 prints 1 microgm/kg/min'],
@@ -4279,7 +4389,7 @@ const itemsOf = f => (typeof f.items === 'function' ? f.items() : f.items).map(x
 function calcVals(id){
   const c = CALCS[id], v = {};
   const read = list => list.forEach(f => {
-    if (f.type === 'h') return;
+    if (f.type === 'h' || f.type === 'fig') return;
     if (Array.isArray(f)){ const [k, , , ch] = f, x = cGet(id, k); v[k] = ch ? (x || ch[0][0]) : (x === '' || x == null ? 0 : parseFloat(x) || 0); return; }
     const x = cGet(id, f.k);
     if (f.type === 'check'){ const a = x || [], it = itemsOf(f); v[f.k] = a; v[f.k + '_set'] = !!x; v[f.k + '_n'] = a.filter(Boolean).length; v[f.k + '_sum'] = it.reduce((s, row, i) => s + (a[i] ? (row[1] != null ? row[1] : 1) : 0), 0); if (f.none) v[f.k + '_none'] = !!cGet(id, f.k + '_none') && !v[f.k + '_n']; }
@@ -4301,6 +4411,7 @@ function fieldHTML(id, f){
     const suf = unit && unit.length <= 6; /* a short unit sits inside the field; a long one ("per minute") stays in the label */
     return `<div class="field${k === 'wt' ? ' wt' : ''}"><label for="cf-${k}">${l}${unit ? (suf ? `<span class="vh"> (${unit})</span>` : ' (' + unit + ')') : ''}</label>${suf ? `<span class="fin" style="--u:${unit.length}">${inp}<i class="fu" aria-hidden="true">${unit}</i></span>` : inp}${k === 'wt' ? '<small>Shared with the other dose calculators. Not saved.</small>' : ''}</div>`;
   }
+  if (f.type === 'fig') return `<div class="cf-full cf-fig">${f.html()}</div>`;
   if (f.type === 'h') return `<h3 class="cf-full cf-h">${f.n ? `<b>${esc(f.n)}</b>` : ''}${esc(f.label)}</h3>`;
   const x = cGet(id, f.k);
   if (f.type === 'time') return `<div class="field"><label for="cf-${f.k}">${esc(f.label)}</label><input id="cf-${f.k}" data-k="${f.k}" type="time" autocomplete="off" value="${esc(x || '')}"></div>`;
@@ -4326,6 +4437,7 @@ function renderCalc(){
   if ($('#cxbar') && 'IntersectionObserver' in window){ cxIO = new IntersectionObserver(es => { es.forEach(en => { cxSeen = en.isIntersecting; }); cxBarDraw(); }, {rootMargin:`-60px 0px -${innerWidth <= 760 ? 112 : 24}px 0px`}); cxIO.observe($('#couts')); }
   calcOut();
   markCxCurrent();
+  $$('#calcbox .spin-parts').forEach(spinRegs);
 }
 /* The 25 Nov 2026 round: a running result in thumb reach. Once a field is filled on this calculator and its result panel is off
    screen, a slim bar above the tab bar (at the foot of the screen elsewhere) carries the figure in mono and the verdict on its own
@@ -4402,7 +4514,7 @@ $('#calcbox').addEventListener('change', e => {
   const el = e.target; if (el.matches('select[data-k], input[type="checkbox"]')) cxUsed = calcTab;
   if (el.matches('select[data-k]')){ cPut(calcTab, el.dataset.k, el.value); calcOut(); }
   else if (el.matches('input[type="checkbox"][data-none]')){ const k = el.dataset.none, n = itemsOf(fieldOf(k)).length; cPut(calcTab, k + '_none', el.checked); if (el.checked){ cPut(calcTab, k, Array(n).fill(false)); el.closest('ul').querySelectorAll('input[data-k]').forEach(i => { i.checked = false; }); } calcOut(); }
-  else if (el.matches('input[type="checkbox"][data-k]')){ const f = fieldOf(el.dataset.k), n = itemsOf(f).length, a = (cGet(calcTab, el.dataset.k) || Array(n).fill(false)).slice(); a[+el.dataset.i] = el.checked; cPut(calcTab, el.dataset.k, a); if (f.none && el.checked){ cPut(calcTab, el.dataset.k + '_none', false); const nb = el.closest('ul').querySelector('input[data-none]'); if (nb) nb.checked = false; } calcOut(); }
+  else if (el.matches('input[type="checkbox"][data-k]')){ const f = fieldOf(el.dataset.k), n = itemsOf(f).length, a = (cGet(calcTab, el.dataset.k) || Array(n).fill(false)).slice(); a[+el.dataset.i] = el.checked; cPut(calcTab, el.dataset.k, a); if (f.none && el.checked){ cPut(calcTab, el.dataset.k + '_none', false); const nb = el.closest('ul').querySelector('input[data-none]'); if (nb) nb.checked = false; } calcOut(); $$('#calcbox .spin-parts').forEach(spinRegs); }
 });
 $('#calcbox').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
@@ -4959,10 +5071,10 @@ function renderAbout(){
     panel('Approved source', 'The ebook', '<i>The Clinical Pathway in Emergency for Medical Officer</i>, Emergency &amp; Trauma Department, Hospital Kuala Lumpur (2025). The 23 pathways are built as written, and page numbers refer to that edition.', ['Outcome colours follow the ebook\'s boxes: red admit, green discharge, yellow observation, blue discharge advice', 'Department notes on a pathway are labelled as not in the ebook, with their source']),
     panel('Department notes', 'Green Zone flow and referrals', 'Memos, SOPs and flow charts from the department. Each entry names its source and date.', lst(FLOW_IDS)),
     panel('MO Drive, department memos and the starter pack', 'Department protocols', 'From the MO Drive (read in full on 7 Nov 2026), the department\'s memos, the triage course and the HKL doctors starter pack. Each entry names its source and date; what went in, what did not and why is listed under What\'s new.', lst(PROT_IDS)),
-    panel('National guidelines and named sources', 'Guidelines, handbook and the X-ray guide', 'National CPGs quoted as printed with their page and acknowledgement, or summarised in the guide\'s own words where their copyright gives no permission; a teaching handbook checked against its sources; and Reading X-rays from named online sources. None replaces the ebook: where they differ is under Still to confirm.', Object.keys(P).filter(id => P[id].grp === 'cpg').map(id => `<a href="#${id}">${esc(P[id].title)}</a>${P[id].src ? ' · ' + esc(P[id].src) : ''}`)),
+    panel('National guidelines and named sources', 'Guidelines, handbook and the X-ray guide', 'National CPGs quoted as printed with their page and acknowledgement, or summarised in the guide\'s own words where their copyright gives no permission; a teaching handbook checked against its sources; Reading X-rays from named online sources; and, since 26 Nov 2026, wounds, the eye, the nose and ear, and red flags from open teaching sites that allow reuse (WikEM, CC BY-SA 4.0; RCEMLearning, CC BY-NC 3.0; LITFL and St Emlyn\'s, CC BY-NC-SA 4.0), as facts in the guide\'s own words, credited on each step; none of them endorses this guide. None replaces the ebook: where they differ is under Still to confirm.', Object.keys(P).filter(id => P[id].grp === 'cpg').map(id => `<a href="#${id}">${esc(P[id].title)}</a>${P[id].src ? ' · ' + esc(P[id].src) : ''}`)),
     panel('Department lists', 'Drug lists and the dilution guide', 'The Emergency Pharmacy\'s drug list (14 Apr 2025) with the MOH formulary categories, and the department\'s dosing and dilution guide (3rd edition, January 2026), each shown as printed.', ['<a href="#pharmacy">ED pharmacy drug list</a>', '<a href="#dilution">ED dosing and dilution guide</a>']),
     panel('Version 7', 'The triage course folder', 'Six documents summarised in the Green Zone workflow map (7 Nov 2026), added as department notes.', V7.map(([f]) => esc(f))),
-    panel('Media', 'Illustrations, clips and narration', 'The illustrations and the eight-second clips are generated artwork and show no real staff or patients. The tour narration is a synthetic voice.', null),
+    panel('Media', 'Illustrations, clips and narration', 'The illustrations and the eight-second clips are generated artwork and show no real staff or patients. The tour narration is a synthetic voice. The 3D models (the route, the abdomen, the rule of nines figure, the finger, the eye and the nose) are the guide\'s own schematic models, made in Blender: not anatomy to measure from.', null),
     panel('Design', 'Why it works this way', 'In Ely and colleagues\' study, family doctors left 64% of their clinical questions unpursued and spent under two minutes on those they did pursue (BMJ 1999;319:358). So every answer here is one search or a few taps away, and the outcome box can be copied straight into the notes. The tour is short, chaptered and captioned, with a transcript and speed control, following guidance on effective educational video (Brame, CBE Life Sci Educ 2016) and accessible video players.', null)
   ].join('');
 }
@@ -5903,7 +6015,7 @@ if (typeof ABX !== 'undefined'){
   IDX.push({href:'#antibiotics', title:'ED antimicrobial guides', kind:'Tool', meta:'Doses by kidney function, and how to give injectable antimicrobials (Feb 2024)', body:'antibiotic antibiotics antimicrobial renal dose crcl creatinine clearance kidney dilution reconstitution reconstitute infusion rate', kw:'antibiotic antibiotics antimicrobial antimicrobials crcl', ic:'pill', c:'c-meta'});
   const seen = new Set(); [...ABX.dose.renal.rows.map(r => r[6]), ...ABX.dose.none.map(r => r[3]), ...ABX.dil.rows.map(r => r[4]), 'Gentamicin', 'Vancomycin'].forEach(g => { const k = g.toLowerCase(); if (seen.has(k)) return; seen.add(k); IDX.push({href:'#antibiotics', title:g + ' (ED antimicrobial guides)', kind:'Antimicrobial', meta:'ED antimicrobial guides: dose by kidney function, dilution and rate', body:g, ic:'pill', c:'c-meta', ab:g}); });
 }
-renderJourney(false); setupTour(); startQuiz(); renderAbout(); renderViewHeroes(); renderPins(); renderAlerts(); remWire();
+renderJourney(false); setupTour(); startQuiz(); renderAbout(); MORE_DO.push(renderAbout); /* the guidelines in the page's second part join its list when they arrive */ renderViewHeroes(); renderPins(); renderAlerts(); remWire();
 
 /* Clicks that open the search or settings from anywhere, and links to the hash already showing */
 document.addEventListener('click', e => {

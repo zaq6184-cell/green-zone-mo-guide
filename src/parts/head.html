@@ -1669,6 +1669,8 @@ details.dgrp summary small{font:700 var(--fs-meta) var(--mono);color:var(--muted
 .a3-bar b{font:850 var(--fs-body)/1.2 var(--display)}
 .a3-stage{position:relative;width:100%;max-width:420px;margin:0 auto;border-radius:var(--r-md);overflow:hidden;background:var(--emerald-3);touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .a3-stage img,.a3-stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.a3-sheet{position:absolute;inset:0;background-repeat:no-repeat}
+.a3-sheet[hidden]{display:none}
 .a3-g{cursor:pointer;outline:none}
 .a3-g polygon{fill:transparent;stroke:transparent;stroke-width:3;vector-effect:non-scaling-stroke;transition:fill .2s,stroke .2s}
 .a3-g text{font:800 34px var(--display);fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(6,61,40,.65);stroke-width:5px;pointer-events:none}
@@ -2698,6 +2700,22 @@ input[type="search"]::-webkit-search-cancel-button:hover{background:var(--ink)}
 .alerts.banded > .al-l,.alerts.banded > .al-sum{position:relative;z-index:1}
 /* On a wide screen the alerts card spans the page: its scene keeps about a phone's scale, centred, its sides fading into the band */
 @media (min-width:1000px){.alerts .tm.band img,.alerts .tm.band video{left:50%;width:min(100%,600px);translate:-50% 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}}
+/* ================= The 26 Nov 2026 round, part 3: the rule of nines in 3D (.spin-parts, spinRegs in engine.js) =================
+   The figure sits on the fixed dark viewer surface, so its colours are literal, as the route scene's pins are. A part's outline is
+   a faint mint line; a ticked part fills in a warm burn colour. Portrait, so the stage keeps to a phone's width on a wide screen. */
+.cf-fig{min-width:0}
+.cf-fig .fig.spin{margin:0}
+.spin-parts .spin-stage,.spin-tall .spin-stage{max-width:300px}
+.spin-reg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.spin-reg polygon{fill:rgba(61,220,151,.001);stroke:rgba(140,235,195,.42);stroke-width:1.6;stroke-linejoin:round;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .18s ease,stroke .18s ease}
+.spin-reg polygon:hover{stroke:rgba(190,255,225,.9);fill:rgba(61,220,151,.12)}
+.spin-reg polygon.on{fill:rgba(255,122,72,.5);stroke:#ffb48f;stroke-width:2}
+.spin-sum{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.spin-sum span{padding:4px 10px;border-radius:var(--r-pill);background:var(--warn-soft,rgba(255,122,72,.14));box-shadow:inset 0 0 0 1px rgba(255,122,72,.4);font:750 var(--fs-meta)/1.3 var(--body);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.spin-reg polygon{transition:none}}
+/* The procedure scenes' points sit close together, so on a wide screen too a pin shows only its number until it is chosen,
+   hovered or focused (the route keeps its names, which have room) */
+@media (min-width:761px){.spin:not([data-spin="route"]) .spin-pin:not(.on):not(:hover):not(:focus-visible) span{display:none}}
 </style>
 
 <div class="boot" id="gzboot" role="progressbar" aria-label="Getting the guide ready"></div>
